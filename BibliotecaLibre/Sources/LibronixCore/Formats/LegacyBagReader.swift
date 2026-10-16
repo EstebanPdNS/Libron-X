@@ -40,9 +40,13 @@ public enum LegacyBagReader {
         let bags = blocks.filter { $0.tag == "BAGS" }, directories = blocks.filter { $0.tag == "bdir" }
         guard bags.count == 1, directories.count == 1 else { throw LegacyBagError.invalidDirectory }
         let group = bags[0], directory = directories[0], files = blocks.filter { $0.tag == "bagf" }
+        // Keep the collection and bounds explicit for Swift 6.2's type checker.
+        let members: [LegacyBlock] = [directory] + files
+        let groupStart = group.offset + 8
+        let groupEnd = group.offset + group.length
         guard directory.length <= 16 * 1_024 * 1_024,
-              [directory] + files == ([directory] + files).filter({
-                  $0.offset >= group.offset + 8 && $0.offset + $0.length <= group.offset + group.length
+              members.allSatisfy({ member in
+                  member.offset >= groupStart && member.offset + member.length <= groupEnd
               }) else { throw LegacyBagError.invalidDirectory }
         return try decodeDirectory(readBlock(url, block: directory), files: files)
     }

@@ -159,7 +159,7 @@
     },
     {
       "path": "BibliotecaLibre/Sources/LibronixCore/Formats/LegacyBagReader.swift",
-      "sha256": "853b09c05de7208333f50ae648633d546926536cb85aa94c404841af82f164d8"
+      "sha256": "43da73142daa1f699191c6ff780d267e2283721d72b0c614c44f5785bb90214a"
     },
     {
       "path": "BibliotecaLibre/Sources/LibronixCore/Formats/LegacyBodyIndex.swift",
@@ -587,7 +587,7 @@
     },
     {
       "path": "BibliotecaLibre/Sources/MacRebuild/Workspace/WorkspaceBibleVersions.swift",
-      "sha256": "6a149845efc5cceaed317e9a4d44a7ea60b73cccb00e630df8425c577318cef8"
+      "sha256": "2032260a59ae643b4a1d26771386daa1b77bd215831136fd8349c2a40030ed42"
     },
     {
       "path": "BibliotecaLibre/Sources/MacRebuild/Workspace/WorkspaceToolbars.swift",
