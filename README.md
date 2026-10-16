@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/images/libron-x-v0.1-hero.png" alt="Libron-X on a MacBook Pro, with two Bible readers side by side" width="1200">
+  <img src="docs/images/libron-x-v0.1-bibles-map.png" alt="Libron-X on a MacBook Pro, with two Bibles, a map and the macOS Dock" width="1200">
 </p>
 
 A native macOS Bible study workspace for local Libronix libraries.
