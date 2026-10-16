@@ -131,16 +131,20 @@ struct OutputFixture {
     }
     func remove() { UserDefaults.standard.removeObject(forKey:"readerPosition.v1."+resource.id); try? FileManager.default.removeItem(at:root) }
     static func typography(duplicate:Bool = false) -> Data {
-        var result = word(1)+word(1)+word(1)+word(8)+Data("Own Text".utf8)+word(5)+Data("Arial".utf8)+word(2)
+        var result = Data()
+        for part in [word(1), word(1), word(1), word(8), Data("Own Text".utf8), word(5), Data("Arial".utf8), word(2)] { result.append(part) }
         for index in 0..<2 {
-            result.append(word(1)+integer(index==1 ? 0x4000000:0)+integer(0)+word(1033)+word(0))
-            result.append(word(index==1 ? 480:240)+word(0)+word(0)+word(0)+word(index==1 ? 700:400))
+            for part in [word(1), integer(index==1 ? 0x4000000:0), integer(0), word(1033), word(0)] { result.append(part) }
+            for part in [word(index==1 ? 480:240), word(0), word(0), word(0), word(index==1 ? 700:400)] { result.append(part) }
             result.append(Data([0,0,0,1,0,0,0,0x20]))
             var family = Data("Arial".utf8); family.append(Data(repeating:0,count:32-family.count)); result.append(family+word(0))
         }
         result.append(word(duplicate ? 2:1))
         for _ in 0..<(duplicate ? 2:1) {
-            result.append(word(1)); for _ in 0..<4 { result.append(word(1)+word(1)+word(0)+word(0)+integer(0)) }
+            result.append(word(1))
+            for _ in 0..<4 {
+                for part in [word(1), word(1), word(0), word(0), integer(0)] { result.append(part) }
+            }
             result.append(integer(0)+integer(0))
             for value:UInt16 in [10000,10000,0,0,0,0,0,0,0,3] { result.append(word(value)) }
             result.append(Data("Own".utf8)+word(5)+word(0)+word(0))
