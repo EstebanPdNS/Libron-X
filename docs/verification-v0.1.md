@@ -11,13 +11,13 @@ Checked on October 16, 2026, on Apple Silicon with macOS 27.2 (26B5086k), Apple 
 | Signature | `codesign --verify --deep --strict` passed; ad-hoc signature, no notarization |
 | Native smoke check | Exact packaged app launched, restored two reading panes and opened Settings |
 | English presentation | Language switched in place; Home and General settings captured from the packaged app |
-| Preservation | Tests preserved; two source expressions simplified for Swift 6.2 compilation; personal language and visible readings restored after checking |
+| Preservation | Tests preserved; two source expressions simplified and SDK 27 input APIs guarded for Swift 6.2 compilation; personal language and visible readings restored after checking |
 | Repository documentation | Relative file links checked within the public tree |
 
 The 28 skipped tests require optional original corpora or explicit performance inputs. No private corpus was enabled for this run. A skipped test is not a successful original-resource comparison. The native restoration smoke check used locally owned resources; none is distributed.
 
 The publication review inventoried all 151 files under `Sources`, checked target dependencies, entry points, resource installation, request ownership and personal-data boundaries, and documented the active workspace separately from the earlier prototype. This is a packaging and architecture review, not an exhaustive proof of every algorithm or complete original workflow parity.
 
-The initial GitHub build exposed a Swift 6.2 type-checker timeout in a BAGS bounds expression. The candidate splits that expression into explicit values and uses equivalent all-member validation. It also parenthesizes an existing optional Bible-group lookup to remove a trailing-closure warning. SwiftPM still reports a deprecation warning for the explicit native build-system flag. Full VoiceOver, translation review, older macOS execution, Intel distribution, extended stability, signing/notarization and complete Libronix compatibility remain open.
+The initial GitHub build exposed a Swift 6.2 type-checker timeout in a BAGS bounds expression. The candidate splits that expression into explicit values and uses equivalent all-member validation. It also parenthesizes an existing optional Bible-group lookup to remove a trailing-closure warning. The macOS 27 text-field branch is compile-time guarded for the paired Swift 6.4/SDK 27 toolchain; older SDKs compile the existing native fallback. SwiftPM still reports a deprecation warning for the explicit native build-system flag. Full VoiceOver, translation review, older macOS execution, Intel distribution, extended stability, signing/notarization and complete Libronix compatibility remain open.
 
 The [source map](source-map.md) and [compatibility guide](compatibility.md) belong to this release. Raw build logs and private research inputs are excluded. GitHub Actions runs the documented test/build gates independently; its result is visible in the repository Actions tab and is not implied by these local results.

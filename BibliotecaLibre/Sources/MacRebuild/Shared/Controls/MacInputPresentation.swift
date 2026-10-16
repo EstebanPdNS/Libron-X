@@ -6,9 +6,20 @@ import SwiftUI
 /// inputs; older supported systems keep their native editing behavior.
 private struct MacInputPresentation: ViewModifier {
     @ViewBuilder func body(content: Content) -> some View {
+        #if compiler(>=6.4)
         if #available(macOS 27, *) {
             content.textFieldStyle(.bordered).textInputBorderShape(.capsule).controlSize(.large)
-        } else if #available(macOS 26, *) {
+        } else {
+            compatibleInput(content)
+        }
+        #else
+        compatibleInput(content)
+        #endif
+    }
+
+    // Runtime availability alone cannot hide SDK 27 symbols from older compilers.
+    @ViewBuilder private func compatibleInput(_ content: Content) -> some View {
+        if #available(macOS 26, *) {
             content.textFieldStyle(.plain).controlSize(.large)
                 .padding(.horizontal, 12).padding(.vertical, 7)
                 .glassEffect(.regular, in: .capsule)

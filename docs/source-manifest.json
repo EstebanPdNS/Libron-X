@@ -559,7 +559,7 @@
     },
     {
       "path": "BibliotecaLibre/Sources/MacRebuild/Shared/Controls/MacInputPresentation.swift",
-      "sha256": "96d15768bec43c71d8ab155e5d5239ac053f33b7b5e62127c6d25a5d87222684"
+      "sha256": "06b76c88e11ba039d842b046e2a8fb946f44277a863bb22596ad9b71cc437536"
     },
     {
       "path": "BibliotecaLibre/Sources/MacRebuild/Shared/Controls/MacToolbarPresentation.swift",
