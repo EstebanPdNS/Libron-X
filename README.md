@@ -12,7 +12,7 @@ A native macOS Bible study workspace for local Libronix libraries.
 
 Read supported books, navigate Bible passages and arrange linked readers in one window. Libron-X is an independent Swift implementation. Compatibility with the original Libronix is incomplete.
 
-![Libron-X with English controls and two Bible readers side by side](docs/images/workspace-en.png)
+![Libron-X with English controls and two Bible readers side by side](docs/images/reading-workspace-v0.1.png)
 
 ## Try the beta
 
