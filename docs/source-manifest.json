@@ -451,7 +451,7 @@
     },
     {
       "path": "BibliotecaLibre/Sources/MacRebuild/Features/Reader/ReaderFindBar.swift",
-      "sha256": "a11c17a6e9d018c1a94a0bfb6e1986b4a81e2647399f4c0aaabcb9508027e3a0"
+      "sha256": "ab5d44548948deff13b747f79a26eaf93abe35008ca95aff52c7dde7e422719a"
     },
     {
       "path": "BibliotecaLibre/Sources/MacRebuild/Features/Reader/ReaderLinkPreview.swift",

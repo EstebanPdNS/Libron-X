@@ -7,7 +7,7 @@ struct ReaderFindBar: View {
     var body: some View {
         HStack(spacing: 8) {
             MacToolbarLabel(L("Buscar"), "magnifyingglass").foregroundStyle(.secondary)
-            TextField(L("Buscar en este recurso"), text: Binding(get: { reader.findQuery }, set: reader.updateFindQuery))
+            TextField(L("Buscar en este recurso"), text: Binding(get: { reader.findQuery }, set: { reader.updateFindQuery($0) }))
                 .macInputStyle().focused($fieldFocused)
                 .foregroundStyle(reader.findStatus == .notFound ? Color.red : Color.primary)
                 .onSubmit { activate(); reader.find(.forward) }
