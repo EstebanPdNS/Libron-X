@@ -118,6 +118,10 @@ struct LibronXCommands: Commands {
             Button("Buscar en libros…") { model?.section = .search; model?.bookSearch.focusRequest += 1 }
                 .keyboardShortcut("s", modifiers: [.command, .shift])
         }
+        readingCommands
+    }
+    // Keep each command builder within Xcode 26's ten-element overloads.
+    @CommandsBuilder private var readingCommands: some Commands {
         CommandMenu("Lectura") {
             Button("Atrás") { model?.reader.goBack() }.keyboardShortcut("[", modifiers: [.command])
                 .disabled(model?.reader.canGoBack != true)

@@ -104,10 +104,10 @@ struct ReaderTextView: NSViewRepresentable {
                 let columns = max(1, Int(source.columnCount), source.rows.map { $0.cells.count }.max() ?? 0)
                 let table = NSTextTable()
                 table.numberOfColumns = columns
-                table.layoutAlgorithm = .fixed
+                table.layoutAlgorithm = .fixedLayoutAlgorithm
                 table.collapsesBorders = true
                 table.hidesEmptyCells = false
-                table.setContentWidth(100, type: .percentage)
+                table.setContentWidth(100, type: .percentageValueType)
                 for (rowIndex, row) in source.rows.enumerated() {
                     for (columnIndex, cell) in row.cells.enumerated() {
                         let range = NSRange(location: cell.characterOffset, length: cell.characterCount)
@@ -115,11 +115,11 @@ struct ReaderTextView: NSViewRepresentable {
                               Range(range, in: text) != nil else { continue }
                         let block = NSTextTableBlock(table: table, startingRow: rowIndex, rowSpan: 1,
                             startingColumn: columnIndex, columnSpan: 1)
-                        block.setContentWidth(100 / CGFloat(columns), type: .percentage)
-                        block.setWidth(8, type: .absolute, for: .padding)
-                        block.setWidth(0.5, type: .absolute, for: .border)
+                        block.setContentWidth(100 / CGFloat(columns), type: .percentageValueType)
+                        block.setWidth(8, type: .absoluteValueType, for: .padding)
+                        block.setWidth(0.5, type: .absoluteValueType, for: .border)
                         block.setBorderColor(NSColor.separatorColor)
-                        block.verticalAlignment = .top
+                        block.verticalAlignment = .topAlignment
                         if rowIndex.isMultiple(of: 2) { block.backgroundColor = NSColor.controlBackgroundColor.withAlphaComponent(0.3) }
                         let style = paragraph.mutableCopy() as! NSMutableParagraphStyle
                         style.lineSpacing = 3; style.paragraphSpacing = 4

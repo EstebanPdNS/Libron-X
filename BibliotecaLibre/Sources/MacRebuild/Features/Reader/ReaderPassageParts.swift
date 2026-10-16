@@ -25,9 +25,14 @@ struct ReaderPassagePartSource {
             guard totalUnits <= 8 * 1_024 * 1_024 else { throw RebuildError.passageReadLimit }
             let begin = ordinal == start.sectionOrdinal ? start.startCharacterOffset : 0
             let finish = ordinal == end.sectionOrdinal ? end.endCharacterOffsetExclusive : content.plainText.utf16.count
-            let reference = ordinal == start.sectionOrdinal ? start.observedReference : content.anchors.compactMap { anchor in
-                anchor.reference.flatMap { LegacyPassageQuery.sourceReference($0)?.displayReference }
-            }.first
+            let reference: String?
+            if ordinal == start.sectionOrdinal {
+                reference = start.observedReference
+            } else {
+                reference = content.anchors.compactMap { anchor -> String? in
+                    anchor.reference.flatMap { LegacyPassageQuery.sourceReference($0)?.displayReference }
+                }.first
+            }
             parts.append(try validatedPart(content: content, start: begin, end: finish, reference: reference))
         }
         return parts

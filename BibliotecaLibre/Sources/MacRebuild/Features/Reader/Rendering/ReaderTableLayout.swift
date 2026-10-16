@@ -20,7 +20,7 @@ import LibronixCore
         let columns = geometric ? edges.count : max(Int(source.columnCount), source.rows.map(\.cells.count).max() ?? 1)
         guard columns > 0, columns <= 256 else { return [] }
         let table = NSTextTable()
-        table.numberOfColumns = columns; table.layoutAlgorithm = geometric ? .fixed : .automatic
+        table.numberOfColumns = columns; table.layoutAlgorithm = geometric ? .fixedLayoutAlgorithm : .automaticLayoutAlgorithm
         table.collapsesBorders = true; table.hidesEmptyCells = false
         table.setContentWidth(100, type: .percentageValueType)
         if !geometric { warnings.insert("Esta tabla usa columnas adaptables; sus medidas originales todavía requieren validación.") }
@@ -32,7 +32,7 @@ import LibronixCore
                 let column = geometric ? previousColumn : cellIndex
                 let block = NSTextTableBlock(table: table, startingRow: rowIndex, rowSpan: 1,
                                             startingColumn: column, columnSpan: max(1, endColumn - column))
-                block.verticalAlignment = .top
+                block.verticalAlignment = .topAlignment
                 if geometric, let total = edges.last {
                     block.setContentWidth(Double(Int(cell.firstField) - previousEdge) * 100 / Double(total), type: .percentageValueType)
                 }

@@ -3,7 +3,7 @@
   "files": [
     {
       "path": "BibliotecaLibre/Sources/BibliotecaMac/App/BibliotecaApp.swift",
-      "sha256": "84df853fc3f9a34bc2e73a19418eff0666ffc2f206a2b9ee50dceeca747f24e9"
+      "sha256": "cd62c9fb5b76fcf0c80d8ebfeb0d035442a62aa94f9724ead4473df888bc14a3"
     },
     {
       "path": "BibliotecaLibre/Sources/BibliotecaMac/Features/Collections/CollectionsExplorer.swift",
@@ -55,7 +55,7 @@
     },
     {
       "path": "BibliotecaLibre/Sources/BibliotecaMac/Features/Reader/ReaderTextView.swift",
-      "sha256": "c2c6b53843a5631cf71a69b0aa356277a3f1eef6a538f215557d07329733ca0d"
+      "sha256": "75a80a68afeb3c5037e0366b1ce7c40203ddfa2f1a05542392f7319d25a8cb5b"
     },
     {
       "path": "BibliotecaLibre/Sources/BibliotecaMac/Features/Reader/ResourceOverview.swift",
@@ -463,7 +463,7 @@
     },
     {
       "path": "BibliotecaLibre/Sources/MacRebuild/Features/Reader/ReaderPassageParts.swift",
-      "sha256": "78ad2547d1647cf403ffbead2ab0f2c13a0b2506be262feaf44e0c5542139039"
+      "sha256": "922585ec54bbeb49fe82f3a7ed3abda9a68c0388785b33be12289f9646f17dfe"
     },
     {
       "path": "BibliotecaLibre/Sources/MacRebuild/Features/Reader/ReaderSession.swift",
@@ -495,7 +495,7 @@
     },
     {
       "path": "BibliotecaLibre/Sources/MacRebuild/Features/Reader/Rendering/ReaderTableLayout.swift",
-      "sha256": "7661ceb6ec486ed9d8c8b01f3719d905334f40b06a54ce279743ff2c8966ce56"
+      "sha256": "9674df7bbe68cfd79f35dc82917f6c09968eb2ee20c728309acec45874d5c51d"
     },
     {
       "path": "BibliotecaLibre/Sources/MacRebuild/Features/Reader/Rendering/ReaderTextView.swift",
