@@ -679,7 +679,7 @@
     },
     {
       "path": "BibliotecaLibre/Tests/LibronixCoreTests/LegacyIndicesReaderTests.swift",
-      "sha256": "525cf885d30618c86e4d10c7182ef5187fa5b9f03b1f087f12a4676a6e620da6"
+      "sha256": "e07f066bf8f18d9dfb5a666ee9236d51f09d6e2aa34bf80f639e3b0fdc59a9c1"
     },
     {
       "path": "BibliotecaLibre/Tests/LibronixCoreTests/LegacyInlineLinksTests.swift",

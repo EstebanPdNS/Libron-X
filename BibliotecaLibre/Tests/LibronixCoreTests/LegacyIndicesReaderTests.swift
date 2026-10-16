@@ -248,9 +248,18 @@ struct LegacyIndicesReaderTests {
         let title: Data
         if badTitle { title = le16(UInt16.max) }
         else {
-            let units: [UInt16] = mixedTitle
-                ? [1, 1033] + Array("First".utf16) + [2] + Array(" / ".utf16) + [1, 513] + Array("Second".utf16) + [2]
-                : Array(firstTitle.utf16)
+            var units: [UInt16] = []
+            if mixedTitle {
+                units.append(contentsOf: [1, 1033])
+                units.append(contentsOf: "First".utf16)
+                units.append(2)
+                units.append(contentsOf: " / ".utf16)
+                units.append(contentsOf: [1, 513])
+                units.append(contentsOf: "Second".utf16)
+                units.append(2)
+            } else {
+                units = Array(firstTitle.utf16)
+            }
             title = le16(UInt16(units.count)) + units.reduce(into: Data()) { $0.append(le16($1)) } + le16(0)
         }
         let secondTitleUnits = Array((secondTitle ?? "Chapter \(secondTitleChapter)").utf16)
