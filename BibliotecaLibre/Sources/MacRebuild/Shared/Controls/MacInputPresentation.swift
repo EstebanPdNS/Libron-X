@@ -62,7 +62,9 @@ struct MacToolbarSearchField: NSViewRepresentable {
         let field = NSSearchField(frame: .zero)
         field.controlSize = .large
         field.font = .systemFont(ofSize: NSFont.systemFontSize(for: .large))
+        #if compiler(>=6.4)
         if #available(macOS 26, *) { field.borderShape = .capsule }
+        #endif
         field.sendsWholeSearchString = true
         field.sendsSearchStringImmediately = false
         field.maximumRecents = 0
