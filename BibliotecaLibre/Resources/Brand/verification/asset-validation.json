@@ -1,0 +1,327 @@
+{
+  "svg": [
+    {
+      "name": "Libron-X-app-icon.svg",
+      "path_count": 2,
+      "font_or_embedded_bitmap": false
+    },
+    {
+      "name": "Libron-X-black.svg",
+      "path_count": 10,
+      "font_or_embedded_bitmap": false
+    },
+    {
+      "name": "Libron-X-color-dark.svg",
+      "path_count": 11,
+      "font_or_embedded_bitmap": false
+    },
+    {
+      "name": "Libron-X-color.svg",
+      "path_count": 11,
+      "font_or_embedded_bitmap": false
+    },
+    {
+      "name": "Libron-X-emblem-black.svg",
+      "path_count": 1,
+      "font_or_embedded_bitmap": false
+    },
+    {
+      "name": "Libron-X-emblem-red-white.svg",
+      "path_count": 2,
+      "font_or_embedded_bitmap": false
+    },
+    {
+      "name": "Libron-X-emblem-red.svg",
+      "path_count": 1,
+      "font_or_embedded_bitmap": false
+    },
+    {
+      "name": "Libron-X-emblem-white.svg",
+      "path_count": 1,
+      "font_or_embedded_bitmap": false
+    },
+    {
+      "name": "Libron-X-white.svg",
+      "path_count": 10,
+      "font_or_embedded_bitmap": false
+    },
+    {
+      "name": "Libron-X-wordmark-black.svg",
+      "path_count": 9,
+      "font_or_embedded_bitmap": false
+    },
+    {
+      "name": "Libron-X-wordmark-white.svg",
+      "path_count": 9,
+      "font_or_embedded_bitmap": false
+    }
+  ],
+  "pdf": [
+    {
+      "name": "Libron-X-app-icon.pdf",
+      "pages": 1,
+      "image_xobjects": 0,
+      "font_resources": 0,
+      "content_stream_bytes": 16596
+    },
+    {
+      "name": "Libron-X-black.pdf",
+      "pages": 1,
+      "image_xobjects": 0,
+      "font_resources": 0,
+      "content_stream_bytes": 24895
+    },
+    {
+      "name": "Libron-X-color-dark.pdf",
+      "pages": 1,
+      "image_xobjects": 0,
+      "font_resources": 0,
+      "content_stream_bytes": 29306
+    },
+    {
+      "name": "Libron-X-color.pdf",
+      "pages": 1,
+      "image_xobjects": 0,
+      "font_resources": 0,
+      "content_stream_bytes": 29330
+    },
+    {
+      "name": "Libron-X-emblem-black.pdf",
+      "pages": 1,
+      "image_xobjects": 0,
+      "font_resources": 0,
+      "content_stream_bytes": 11967
+    },
+    {
+      "name": "Libron-X-emblem-red-white.pdf",
+      "pages": 1,
+      "image_xobjects": 0,
+      "font_resources": 0,
+      "content_stream_bytes": 16077
+    },
+    {
+      "name": "Libron-X-emblem-red.pdf",
+      "pages": 1,
+      "image_xobjects": 0,
+      "font_resources": 0,
+      "content_stream_bytes": 11965
+    },
+    {
+      "name": "Libron-X-emblem-white.pdf",
+      "pages": 1,
+      "image_xobjects": 0,
+      "font_resources": 0,
+      "content_stream_bytes": 11943
+    },
+    {
+      "name": "Libron-X-white.pdf",
+      "pages": 1,
+      "image_xobjects": 0,
+      "font_resources": 0,
+      "content_stream_bytes": 24871
+    },
+    {
+      "name": "Libron-X-wordmark-black.pdf",
+      "pages": 1,
+      "image_xobjects": 0,
+      "font_resources": 0,
+      "content_stream_bytes": 11954
+    },
+    {
+      "name": "Libron-X-wordmark-white.pdf",
+      "pages": 1,
+      "image_xobjects": 0,
+      "font_resources": 0,
+      "content_stream_bytes": 11930
+    }
+  ],
+  "png": [
+    {
+      "name": "Libron-X-app-icon-1024.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGBA",
+      "transparent_corner": true
+    },
+    {
+      "name": "Libron-X-black-1024.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGBA",
+      "transparent_corner": true
+    },
+    {
+      "name": "Libron-X-color-1024.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGBA",
+      "transparent_corner": true
+    },
+    {
+      "name": "Libron-X-color-dark-1024.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGBA",
+      "transparent_corner": true
+    },
+    {
+      "name": "Libron-X-emblem-black-1024.png",
+      "size": [
+        1024,
+        970
+      ],
+      "mode": "RGBA",
+      "transparent_corner": true
+    },
+    {
+      "name": "Libron-X-emblem-red-1024.png",
+      "size": [
+        1024,
+        970
+      ],
+      "mode": "RGBA",
+      "transparent_corner": true
+    },
+    {
+      "name": "Libron-X-emblem-red-white-1024.png",
+      "size": [
+        1024,
+        970
+      ],
+      "mode": "RGBA",
+      "transparent_corner": true
+    },
+    {
+      "name": "Libron-X-emblem-white-1024.png",
+      "size": [
+        1024,
+        970
+      ],
+      "mode": "RGBA",
+      "transparent_corner": true
+    },
+    {
+      "name": "Libron-X-white-1024.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGBA",
+      "transparent_corner": true
+    },
+    {
+      "name": "Libron-X-wordmark-black-1024.png",
+      "size": [
+        1024,
+        211
+      ],
+      "mode": "RGBA",
+      "transparent_corner": true
+    },
+    {
+      "name": "Libron-X-wordmark-white-1024.png",
+      "size": [
+        1024,
+        211
+      ],
+      "mode": "RGBA",
+      "transparent_corner": true
+    }
+  ],
+  "iconset": [
+    {
+      "name": "icon_16x16.png",
+      "size": [
+        16,
+        16
+      ],
+      "build_copy_equal": true
+    },
+    {
+      "name": "icon_16x16@2x.png",
+      "size": [
+        32,
+        32
+      ],
+      "build_copy_equal": true
+    },
+    {
+      "name": "icon_32x32.png",
+      "size": [
+        32,
+        32
+      ],
+      "build_copy_equal": true
+    },
+    {
+      "name": "icon_32x32@2x.png",
+      "size": [
+        64,
+        64
+      ],
+      "build_copy_equal": true
+    },
+    {
+      "name": "icon_128x128.png",
+      "size": [
+        128,
+        128
+      ],
+      "build_copy_equal": true
+    },
+    {
+      "name": "icon_128x128@2x.png",
+      "size": [
+        256,
+        256
+      ],
+      "build_copy_equal": true
+    },
+    {
+      "name": "icon_256x256.png",
+      "size": [
+        256,
+        256
+      ],
+      "build_copy_equal": true
+    },
+    {
+      "name": "icon_256x256@2x.png",
+      "size": [
+        512,
+        512
+      ],
+      "build_copy_equal": true
+    },
+    {
+      "name": "icon_512x512.png",
+      "size": [
+        512,
+        512
+      ],
+      "build_copy_equal": true
+    },
+    {
+      "name": "icon_512x512@2x.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "build_copy_equal": true
+    }
+  ],
+  "icns": {
+    "bytes": 133307,
+    "valid_magic_and_length": true
+  },
+  "comparison_sheet": "Resources/Brand/verification/brand-proof.png",
+  "visual_review_required": "Inspect the sheet and rasterize the vector PDF independently; this script does not certify perceptual identity."
+}

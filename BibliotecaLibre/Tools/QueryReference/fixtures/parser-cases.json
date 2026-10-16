@@ -1,0 +1,4116 @@
+{
+  "schema_version": 1,
+  "synthetic_behavior_records": true,
+  "cases": [
+    {
+      "case_id": "baseline:0",
+      "parser_mode": "QueryParser",
+      "language": "es",
+      "query": "\"En el principio\"",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "term",
+            "attributes": {},
+            "text": "En el principio",
+            "children": []
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 0
+      }
+    },
+    {
+      "case_id": "baseline:1",
+      "parser_mode": "QueryParser",
+      "language": "es",
+      "query": "Dios",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "term",
+            "attributes": {},
+            "text": "Dios",
+            "children": []
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 1
+      }
+    },
+    {
+      "case_id": "baseline:2",
+      "parser_mode": "QueryParser",
+      "language": "es",
+      "query": "Dios AND amor",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "and",
+            "attributes": {},
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "Dios",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "amor",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 2
+      }
+    },
+    {
+      "case_id": "baseline:3",
+      "parser_mode": "QueryParser",
+      "language": "es",
+      "query": "Dios OR amor",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "or",
+            "attributes": {},
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "Dios",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "amor",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 3
+      }
+    },
+    {
+      "case_id": "baseline:4",
+      "parser_mode": "QueryParser",
+      "language": "es",
+      "query": "Dios NOT amor",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "or",
+            "attributes": {},
+            "text": "",
+            "children": [
+              {
+                "tag": "or",
+                "attributes": {},
+                "text": "",
+                "children": [
+                  {
+                    "tag": "term",
+                    "attributes": {},
+                    "text": "Dios",
+                    "children": []
+                  },
+                  {
+                    "tag": "term",
+                    "attributes": {},
+                    "text": "NOT",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "amor",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 4
+      }
+    },
+    {
+      "case_id": "baseline:5",
+      "parser_mode": "QueryParser",
+      "language": "es",
+      "query": "Dios NEAR amor",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "near",
+            "attributes": {},
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "Dios",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "amor",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 5
+      }
+    },
+    {
+      "case_id": "baseline:6",
+      "parser_mode": "QueryParser",
+      "language": "es",
+      "query": "Dios BEFORE amor",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "before",
+            "attributes": {},
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "Dios",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "amor",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 6
+      }
+    },
+    {
+      "case_id": "baseline:7",
+      "parser_mode": "QueryParser",
+      "language": "es",
+      "query": "Dios WITHIN 5 WORDS amor",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 7
+      }
+    },
+    {
+      "case_id": "baseline:8",
+      "parser_mode": "QueryParser",
+      "language": "es",
+      "query": "Dios*",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "term",
+            "attributes": {},
+            "text": "Dios*",
+            "children": []
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 8
+      }
+    },
+    {
+      "case_id": "baseline:9",
+      "parser_mode": "QueryParser",
+      "language": "es",
+      "query": "Dio?",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "term",
+            "attributes": {},
+            "text": "Dio?",
+            "children": []
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 9
+      }
+    },
+    {
+      "case_id": "baseline:10",
+      "parser_mode": "QueryParser",
+      "language": "es",
+      "query": "PH(En el principio)",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 10
+      }
+    },
+    {
+      "case_id": "baseline:11",
+      "parser_mode": "QueryParser",
+      "language": "es",
+      "query": "PHRASE(En el principio)",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 11
+      }
+    },
+    {
+      "case_id": "baseline:12",
+      "parser_mode": "QueryParser",
+      "language": "es",
+      "query": "(",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 12
+      }
+    },
+    {
+      "case_id": "baseline:13",
+      "parser_mode": "QueryParser",
+      "language": "es",
+      "query": "",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 13
+      }
+    },
+    {
+      "case_id": "baseline:14",
+      "parser_mode": "QueryParser",
+      "language": "es",
+      "query": "foo:bar",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 14
+      }
+    },
+    {
+      "case_id": "baseline:15",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "\"En el principio\"",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "term",
+            "attributes": {},
+            "text": "En el principio",
+            "children": []
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 15
+      }
+    },
+    {
+      "case_id": "baseline:16",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "Dios",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "term",
+            "attributes": {},
+            "text": "Dios",
+            "children": []
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 16
+      }
+    },
+    {
+      "case_id": "baseline:17",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "Dios AND amor",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "and",
+            "attributes": {},
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "Dios",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "amor",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 17
+      }
+    },
+    {
+      "case_id": "baseline:18",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "Dios OR amor",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "or",
+            "attributes": {},
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "Dios",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "amor",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 18
+      }
+    },
+    {
+      "case_id": "baseline:19",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "Dios NOT amor",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "or",
+            "attributes": {},
+            "text": "",
+            "children": [
+              {
+                "tag": "or",
+                "attributes": {},
+                "text": "",
+                "children": [
+                  {
+                    "tag": "term",
+                    "attributes": {},
+                    "text": "Dios",
+                    "children": []
+                  },
+                  {
+                    "tag": "term",
+                    "attributes": {},
+                    "text": "NOT",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "amor",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 19
+      }
+    },
+    {
+      "case_id": "baseline:20",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "Dios NEAR amor",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "near",
+            "attributes": {},
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "Dios",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "amor",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 20
+      }
+    },
+    {
+      "case_id": "baseline:21",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "Dios BEFORE amor",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "before",
+            "attributes": {},
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "Dios",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "amor",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 21
+      }
+    },
+    {
+      "case_id": "baseline:22",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "Dios WITHIN 5 WORDS amor",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 22
+      }
+    },
+    {
+      "case_id": "baseline:23",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "Dios*",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "term",
+            "attributes": {},
+            "text": "Dios*",
+            "children": []
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 23
+      }
+    },
+    {
+      "case_id": "baseline:24",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "Dio?",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "term",
+            "attributes": {},
+            "text": "Dio?",
+            "children": []
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 24
+      }
+    },
+    {
+      "case_id": "baseline:25",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "PH(En el principio)",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 25
+      }
+    },
+    {
+      "case_id": "baseline:26",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "PHRASE(En el principio)",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 26
+      }
+    },
+    {
+      "case_id": "baseline:27",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "(",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 27
+      }
+    },
+    {
+      "case_id": "baseline:28",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 28
+      }
+    },
+    {
+      "case_id": "baseline:29",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "foo:bar",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 29
+      }
+    },
+    {
+      "case_id": "baseline:30",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "es",
+      "query": "\"En el principio\"",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "term",
+            "attributes": {
+              "offset": "0",
+              "length": "17"
+            },
+            "text": "En el principio",
+            "children": []
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 30
+      }
+    },
+    {
+      "case_id": "baseline:31",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "es",
+      "query": "Dios",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "term",
+            "attributes": {
+              "offset": "0",
+              "length": "4"
+            },
+            "text": "Dios",
+            "children": []
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 31
+      }
+    },
+    {
+      "case_id": "baseline:32",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "es",
+      "query": "Dios AND amor",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "and",
+            "attributes": {
+              "offset": "5",
+              "length": "3"
+            },
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "0",
+                  "length": "4"
+                },
+                "text": "Dios",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "9",
+                  "length": "4"
+                },
+                "text": "amor",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 32
+      }
+    },
+    {
+      "case_id": "baseline:33",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "es",
+      "query": "Dios OR amor",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "or",
+            "attributes": {
+              "offset": "5",
+              "length": "2"
+            },
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "0",
+                  "length": "4"
+                },
+                "text": "Dios",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "8",
+                  "length": "4"
+                },
+                "text": "amor",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 33
+      }
+    },
+    {
+      "case_id": "baseline:34",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "es",
+      "query": "Dios NOT amor",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "and-not",
+            "attributes": {
+              "offset": "5",
+              "length": "3"
+            },
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "0",
+                  "length": "4"
+                },
+                "text": "Dios",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "9",
+                  "length": "4"
+                },
+                "text": "amor",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 34
+      }
+    },
+    {
+      "case_id": "baseline:35",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "es",
+      "query": "Dios NEAR amor",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "near",
+            "attributes": {
+              "offset": "5",
+              "length": "4"
+            },
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "0",
+                  "length": "4"
+                },
+                "text": "Dios",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "10",
+                  "length": "4"
+                },
+                "text": "amor",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 35
+      }
+    },
+    {
+      "case_id": "baseline:36",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "es",
+      "query": "Dios BEFORE amor",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "before",
+            "attributes": {
+              "offset": "5",
+              "length": "6"
+            },
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "0",
+                  "length": "4"
+                },
+                "text": "Dios",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "12",
+                  "length": "4"
+                },
+                "text": "amor",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 36
+      }
+    },
+    {
+      "case_id": "baseline:37",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "es",
+      "query": "Dios WITHIN 5 WORDS amor",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "within",
+            "attributes": {
+              "offset": "5",
+              "length": "14",
+              "max": "5",
+              "unit": "WORDS"
+            },
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "0",
+                  "length": "4"
+                },
+                "text": "Dios",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "20",
+                  "length": "4"
+                },
+                "text": "amor",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 37
+      }
+    },
+    {
+      "case_id": "baseline:38",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "es",
+      "query": "Dios*",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "term",
+            "attributes": {
+              "offset": "0",
+              "length": "5"
+            },
+            "text": "Dios*",
+            "children": []
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 38
+      }
+    },
+    {
+      "case_id": "baseline:39",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "es",
+      "query": "Dio?",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "term",
+            "attributes": {
+              "offset": "0",
+              "length": "4"
+            },
+            "text": "Dio?",
+            "children": []
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 39
+      }
+    },
+    {
+      "case_id": "baseline:40",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "es",
+      "query": "PH(En el principio)",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 40
+      }
+    },
+    {
+      "case_id": "baseline:41",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "es",
+      "query": "PHRASE(En el principio)",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 41
+      }
+    },
+    {
+      "case_id": "baseline:42",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "es",
+      "query": "(",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 42
+      }
+    },
+    {
+      "case_id": "baseline:43",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "es",
+      "query": "",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 43
+      }
+    },
+    {
+      "case_id": "baseline:44",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "es",
+      "query": "foo:bar",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "term",
+            "attributes": {
+              "offset": "4",
+              "length": "3",
+              "fields": "1",
+              "field1": "foo"
+            },
+            "text": "bar",
+            "children": []
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 44
+      }
+    },
+    {
+      "case_id": "baseline:45",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "\"En el principio\"",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "term",
+            "attributes": {
+              "offset": "0",
+              "length": "17"
+            },
+            "text": "En el principio",
+            "children": []
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 45
+      }
+    },
+    {
+      "case_id": "baseline:46",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "Dios",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "term",
+            "attributes": {
+              "offset": "0",
+              "length": "4"
+            },
+            "text": "Dios",
+            "children": []
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 46
+      }
+    },
+    {
+      "case_id": "baseline:47",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "Dios AND amor",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "and",
+            "attributes": {
+              "offset": "5",
+              "length": "3"
+            },
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "0",
+                  "length": "4"
+                },
+                "text": "Dios",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "9",
+                  "length": "4"
+                },
+                "text": "amor",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 47
+      }
+    },
+    {
+      "case_id": "baseline:48",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "Dios OR amor",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "or",
+            "attributes": {
+              "offset": "5",
+              "length": "2"
+            },
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "0",
+                  "length": "4"
+                },
+                "text": "Dios",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "8",
+                  "length": "4"
+                },
+                "text": "amor",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 48
+      }
+    },
+    {
+      "case_id": "baseline:49",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "Dios NOT amor",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "and-not",
+            "attributes": {
+              "offset": "5",
+              "length": "3"
+            },
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "0",
+                  "length": "4"
+                },
+                "text": "Dios",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "9",
+                  "length": "4"
+                },
+                "text": "amor",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 49
+      }
+    },
+    {
+      "case_id": "baseline:50",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "Dios NEAR amor",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "near",
+            "attributes": {
+              "offset": "5",
+              "length": "4"
+            },
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "0",
+                  "length": "4"
+                },
+                "text": "Dios",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "10",
+                  "length": "4"
+                },
+                "text": "amor",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 50
+      }
+    },
+    {
+      "case_id": "baseline:51",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "Dios BEFORE amor",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "before",
+            "attributes": {
+              "offset": "5",
+              "length": "6"
+            },
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "0",
+                  "length": "4"
+                },
+                "text": "Dios",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "12",
+                  "length": "4"
+                },
+                "text": "amor",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 51
+      }
+    },
+    {
+      "case_id": "baseline:52",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "Dios WITHIN 5 WORDS amor",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "within",
+            "attributes": {
+              "offset": "5",
+              "length": "14",
+              "max": "5",
+              "unit": "WORDS"
+            },
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "0",
+                  "length": "4"
+                },
+                "text": "Dios",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "20",
+                  "length": "4"
+                },
+                "text": "amor",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 52
+      }
+    },
+    {
+      "case_id": "baseline:53",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "Dios*",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "term",
+            "attributes": {
+              "offset": "0",
+              "length": "5"
+            },
+            "text": "Dios*",
+            "children": []
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 53
+      }
+    },
+    {
+      "case_id": "baseline:54",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "Dio?",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "term",
+            "attributes": {
+              "offset": "0",
+              "length": "4"
+            },
+            "text": "Dio?",
+            "children": []
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 54
+      }
+    },
+    {
+      "case_id": "baseline:55",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "PH(En el principio)",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 55
+      }
+    },
+    {
+      "case_id": "baseline:56",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "PHRASE(En el principio)",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 56
+      }
+    },
+    {
+      "case_id": "baseline:57",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "(",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 57
+      }
+    },
+    {
+      "case_id": "baseline:58",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 58
+      }
+    },
+    {
+      "case_id": "baseline:59",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "foo:bar",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "term",
+            "attributes": {
+              "offset": "4",
+              "length": "3",
+              "fields": "1",
+              "field1": "foo"
+            },
+            "text": "bar",
+            "children": []
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+        "recording_row": 59
+      }
+    },
+    {
+      "case_id": "supplement:0",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "Dios amor",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "or",
+            "attributes": {},
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "Dios",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "amor",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 0
+      }
+    },
+    {
+      "case_id": "supplement:1",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "Dios or amor",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "or",
+            "attributes": {},
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "Dios",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "amor",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 1
+      }
+    },
+    {
+      "case_id": "supplement:2",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "Dios AND amor OR fe",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "or",
+            "attributes": {},
+            "text": "",
+            "children": [
+              {
+                "tag": "and",
+                "attributes": {},
+                "text": "",
+                "children": [
+                  {
+                    "tag": "term",
+                    "attributes": {},
+                    "text": "Dios",
+                    "children": []
+                  },
+                  {
+                    "tag": "term",
+                    "attributes": {},
+                    "text": "amor",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "fe",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 2
+      }
+    },
+    {
+      "case_id": "supplement:3",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "Dios OR amor AND fe",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "or",
+            "attributes": {},
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "Dios",
+                "children": []
+              },
+              {
+                "tag": "and",
+                "attributes": {},
+                "text": "",
+                "children": [
+                  {
+                    "tag": "term",
+                    "attributes": {},
+                    "text": "amor",
+                    "children": []
+                  },
+                  {
+                    "tag": "term",
+                    "attributes": {},
+                    "text": "fe",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 3
+      }
+    },
+    {
+      "case_id": "supplement:4",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "(Dios OR amor) AND fe",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "and",
+            "attributes": {},
+            "text": "",
+            "children": [
+              {
+                "tag": "or",
+                "attributes": {},
+                "text": "",
+                "children": [
+                  {
+                    "tag": "term",
+                    "attributes": {},
+                    "text": "Dios",
+                    "children": []
+                  },
+                  {
+                    "tag": "term",
+                    "attributes": {},
+                    "text": "amor",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "fe",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 4
+      }
+    },
+    {
+      "case_id": "supplement:5",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "NOT Dios",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "or",
+            "attributes": {},
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "NOT",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "Dios",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 5
+      }
+    },
+    {
+      "case_id": "supplement:6",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "Dios NOT amor OR fe",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 6
+      }
+    },
+    {
+      "case_id": "supplement:7",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "Dios AND NOT amor",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "and-not",
+            "attributes": {},
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "Dios",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "amor",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 7
+      }
+    },
+    {
+      "case_id": "supplement:8",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "Dios OR NOT amor",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 8
+      }
+    },
+    {
+      "case_id": "supplement:9",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "Dios WITHIN 0 WORDS amor",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 9
+      }
+    },
+    {
+      "case_id": "supplement:10",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "Dios WITHIN 2 CHARS amor",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 10
+      }
+    },
+    {
+      "case_id": "supplement:11",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "foo:\"a b\"",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 11
+      }
+    },
+    {
+      "case_id": "supplement:12",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "\"a b\" amor",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "or",
+            "attributes": {},
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "a b",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "amor",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 12
+      }
+    },
+    {
+      "case_id": "supplement:13",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "Dios AND",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 13
+      }
+    },
+    {
+      "case_id": "supplement:14",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "\"unfinished",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 14
+      }
+    },
+    {
+      "case_id": "supplement:15",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "Dios)",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 15
+      }
+    },
+    {
+      "case_id": "supplement:16",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "\"\ud83d\ude00\" AND x",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "and",
+            "attributes": {},
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "\ud83d\ude00",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "x",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 16
+      }
+    },
+    {
+      "case_id": "supplement:17",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "\"cafe\u0301\" AND x",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "and",
+            "attributes": {},
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "cafe\u0301",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "x",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 17
+      }
+    },
+    {
+      "case_id": "supplement:18",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "\"caf\u00e9\" AND x",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "and",
+            "attributes": {},
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "caf\u00e9",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "x",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 18
+      }
+    },
+    {
+      "case_id": "supplement:19",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "\u05e9\u05b8\u05c1\u05dc\u05d5\u05b9\u05dd AND x",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "and",
+            "attributes": {},
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "\u05e9\u05b8\u05c1\u05dc\u05d5\u05b9\u05dd",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "x",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 19
+      }
+    },
+    {
+      "case_id": "supplement:20",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "\"\ud835\udd18\" AND x",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "and",
+            "attributes": {},
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "\ud835\udd18",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "x",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 20
+      }
+    },
+    {
+      "case_id": "supplement:21",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "foo:\"\ud83d\ude00\"",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 21
+      }
+    },
+    {
+      "case_id": "supplement:22",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "\"\ud83d\ude00\" AND",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 22
+      }
+    },
+    {
+      "case_id": "supplement:23",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "\"cafe\u0301\" AND",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 23
+      }
+    },
+    {
+      "case_id": "supplement:24",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "Dios OR amor NEAR fe",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "or",
+            "attributes": {},
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "Dios",
+                "children": []
+              },
+              {
+                "tag": "near",
+                "attributes": {},
+                "text": "",
+                "children": [
+                  {
+                    "tag": "term",
+                    "attributes": {},
+                    "text": "amor",
+                    "children": []
+                  },
+                  {
+                    "tag": "term",
+                    "attributes": {},
+                    "text": "fe",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 24
+      }
+    },
+    {
+      "case_id": "supplement:25",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "Dios NEAR amor OR fe",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "or",
+            "attributes": {},
+            "text": "",
+            "children": [
+              {
+                "tag": "near",
+                "attributes": {},
+                "text": "",
+                "children": [
+                  {
+                    "tag": "term",
+                    "attributes": {},
+                    "text": "Dios",
+                    "children": []
+                  },
+                  {
+                    "tag": "term",
+                    "attributes": {},
+                    "text": "amor",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "fe",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 25
+      }
+    },
+    {
+      "case_id": "supplement:26",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "Dios AND amor NEAR fe",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "near",
+            "attributes": {},
+            "text": "",
+            "children": [
+              {
+                "tag": "and",
+                "attributes": {},
+                "text": "",
+                "children": [
+                  {
+                    "tag": "term",
+                    "attributes": {},
+                    "text": "Dios",
+                    "children": []
+                  },
+                  {
+                    "tag": "term",
+                    "attributes": {},
+                    "text": "amor",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "fe",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 26
+      }
+    },
+    {
+      "case_id": "supplement:27",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "Dios NEAR amor AND fe",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "and",
+            "attributes": {},
+            "text": "",
+            "children": [
+              {
+                "tag": "near",
+                "attributes": {},
+                "text": "",
+                "children": [
+                  {
+                    "tag": "term",
+                    "attributes": {},
+                    "text": "Dios",
+                    "children": []
+                  },
+                  {
+                    "tag": "term",
+                    "attributes": {},
+                    "text": "amor",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "fe",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 27
+      }
+    },
+    {
+      "case_id": "supplement:28",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "Dios XOR amor",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 28
+      }
+    },
+    {
+      "case_id": "supplement:29",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "\"a\\\"b\"",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "term",
+            "attributes": {},
+            "text": "a\\\"b",
+            "children": []
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 29
+      }
+    },
+    {
+      "case_id": "supplement:30",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "Dios NEAR/3 amor",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "or",
+            "attributes": {},
+            "text": "",
+            "children": [
+              {
+                "tag": "or",
+                "attributes": {},
+                "text": "",
+                "children": [
+                  {
+                    "tag": "term",
+                    "attributes": {},
+                    "text": "Dios",
+                    "children": []
+                  },
+                  {
+                    "tag": "term",
+                    "attributes": {},
+                    "text": "NEAR/3",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "amor",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 30
+      }
+    },
+    {
+      "case_id": "supplement:31",
+      "parser_mode": "QueryParser",
+      "language": "en",
+      "query": "Dios BEFORE/3 amor",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {
+          "type": "lbx-xml"
+        },
+        "text": "",
+        "children": [
+          {
+            "tag": "or",
+            "attributes": {},
+            "text": "",
+            "children": [
+              {
+                "tag": "or",
+                "attributes": {},
+                "text": "",
+                "children": [
+                  {
+                    "tag": "term",
+                    "attributes": {},
+                    "text": "Dios",
+                    "children": []
+                  },
+                  {
+                    "tag": "term",
+                    "attributes": {},
+                    "text": "BEFORE/3",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "tag": "term",
+                "attributes": {},
+                "text": "amor",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 31
+      }
+    },
+    {
+      "case_id": "supplement:32",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "Dios amor",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "natural",
+            "attributes": {},
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "0",
+                  "length": "4"
+                },
+                "text": "Dios",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "5",
+                  "length": "4"
+                },
+                "text": "amor",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 32
+      }
+    },
+    {
+      "case_id": "supplement:33",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "Dios or amor",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "or",
+            "attributes": {
+              "offset": "5",
+              "length": "2"
+            },
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "0",
+                  "length": "4"
+                },
+                "text": "Dios",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "8",
+                  "length": "4"
+                },
+                "text": "amor",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 33
+      }
+    },
+    {
+      "case_id": "supplement:34",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "Dios AND amor OR fe",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "or",
+            "attributes": {
+              "offset": "14",
+              "length": "2"
+            },
+            "text": "",
+            "children": [
+              {
+                "tag": "and",
+                "attributes": {
+                  "offset": "5",
+                  "length": "3"
+                },
+                "text": "",
+                "children": [
+                  {
+                    "tag": "term",
+                    "attributes": {
+                      "offset": "0",
+                      "length": "4"
+                    },
+                    "text": "Dios",
+                    "children": []
+                  },
+                  {
+                    "tag": "term",
+                    "attributes": {
+                      "offset": "9",
+                      "length": "4"
+                    },
+                    "text": "amor",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "17",
+                  "length": "2"
+                },
+                "text": "fe",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 34
+      }
+    },
+    {
+      "case_id": "supplement:35",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "Dios OR amor AND fe",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "or",
+            "attributes": {
+              "offset": "5",
+              "length": "2"
+            },
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "0",
+                  "length": "4"
+                },
+                "text": "Dios",
+                "children": []
+              },
+              {
+                "tag": "and",
+                "attributes": {
+                  "offset": "13",
+                  "length": "3"
+                },
+                "text": "",
+                "children": [
+                  {
+                    "tag": "term",
+                    "attributes": {
+                      "offset": "8",
+                      "length": "4"
+                    },
+                    "text": "amor",
+                    "children": []
+                  },
+                  {
+                    "tag": "term",
+                    "attributes": {
+                      "offset": "17",
+                      "length": "2"
+                    },
+                    "text": "fe",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 35
+      }
+    },
+    {
+      "case_id": "supplement:36",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "(Dios OR amor) AND fe",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "and",
+            "attributes": {
+              "offset": "15",
+              "length": "3"
+            },
+            "text": "",
+            "children": [
+              {
+                "tag": "or",
+                "attributes": {
+                  "offset": "6",
+                  "length": "2"
+                },
+                "text": "",
+                "children": [
+                  {
+                    "tag": "term",
+                    "attributes": {
+                      "offset": "1",
+                      "length": "4"
+                    },
+                    "text": "Dios",
+                    "children": []
+                  },
+                  {
+                    "tag": "term",
+                    "attributes": {
+                      "offset": "9",
+                      "length": "4"
+                    },
+                    "text": "amor",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "19",
+                  "length": "2"
+                },
+                "text": "fe",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 36
+      }
+    },
+    {
+      "case_id": "supplement:37",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "NOT Dios",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "not",
+            "attributes": {
+              "offset": "0",
+              "length": "3"
+            },
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "4",
+                  "length": "4"
+                },
+                "text": "Dios",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 37
+      }
+    },
+    {
+      "case_id": "supplement:38",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "Dios NOT amor OR fe",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "or",
+            "attributes": {
+              "offset": "14",
+              "length": "2"
+            },
+            "text": "",
+            "children": [
+              {
+                "tag": "and-not",
+                "attributes": {
+                  "offset": "5",
+                  "length": "3"
+                },
+                "text": "",
+                "children": [
+                  {
+                    "tag": "term",
+                    "attributes": {
+                      "offset": "0",
+                      "length": "4"
+                    },
+                    "text": "Dios",
+                    "children": []
+                  },
+                  {
+                    "tag": "term",
+                    "attributes": {
+                      "offset": "9",
+                      "length": "4"
+                    },
+                    "text": "amor",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "17",
+                  "length": "2"
+                },
+                "text": "fe",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 38
+      }
+    },
+    {
+      "case_id": "supplement:39",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "Dios AND NOT amor",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "and",
+            "attributes": {
+              "offset": "5",
+              "length": "3"
+            },
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "0",
+                  "length": "4"
+                },
+                "text": "Dios",
+                "children": []
+              },
+              {
+                "tag": "not",
+                "attributes": {
+                  "offset": "9",
+                  "length": "3"
+                },
+                "text": "",
+                "children": [
+                  {
+                    "tag": "term",
+                    "attributes": {
+                      "offset": "13",
+                      "length": "4"
+                    },
+                    "text": "amor",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 39
+      }
+    },
+    {
+      "case_id": "supplement:40",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "Dios OR NOT amor",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "or",
+            "attributes": {
+              "offset": "5",
+              "length": "2"
+            },
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "0",
+                  "length": "4"
+                },
+                "text": "Dios",
+                "children": []
+              },
+              {
+                "tag": "not",
+                "attributes": {
+                  "offset": "8",
+                  "length": "3"
+                },
+                "text": "",
+                "children": [
+                  {
+                    "tag": "term",
+                    "attributes": {
+                      "offset": "12",
+                      "length": "4"
+                    },
+                    "text": "amor",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 40
+      }
+    },
+    {
+      "case_id": "supplement:41",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "Dios WITHIN 0 WORDS amor",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "within",
+            "attributes": {
+              "offset": "5",
+              "length": "14",
+              "max": "0",
+              "unit": "WORDS"
+            },
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "0",
+                  "length": "4"
+                },
+                "text": "Dios",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "20",
+                  "length": "4"
+                },
+                "text": "amor",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 41
+      }
+    },
+    {
+      "case_id": "supplement:42",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "Dios WITHIN 2 CHARS amor",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "within",
+            "attributes": {
+              "offset": "5",
+              "length": "14",
+              "max": "2",
+              "unit": "CHARS"
+            },
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "0",
+                  "length": "4"
+                },
+                "text": "Dios",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "20",
+                  "length": "4"
+                },
+                "text": "amor",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 42
+      }
+    },
+    {
+      "case_id": "supplement:43",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "foo:\"a b\"",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "term",
+            "attributes": {
+              "offset": "4",
+              "length": "5",
+              "fields": "1",
+              "field1": "foo"
+            },
+            "text": "a b",
+            "children": []
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 43
+      }
+    },
+    {
+      "case_id": "supplement:44",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "\"a b\" amor",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "natural",
+            "attributes": {},
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "0",
+                  "length": "5"
+                },
+                "text": "a b",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "6",
+                  "length": "4"
+                },
+                "text": "amor",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 44
+      }
+    },
+    {
+      "case_id": "supplement:45",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "Dios AND",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 45
+      }
+    },
+    {
+      "case_id": "supplement:46",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "\"unfinished",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 46
+      }
+    },
+    {
+      "case_id": "supplement:47",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "Dios)",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 47
+      }
+    },
+    {
+      "case_id": "supplement:48",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "\"\ud83d\ude00\" AND x",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "and",
+            "attributes": {
+              "offset": "5",
+              "length": "3"
+            },
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "0",
+                  "length": "4"
+                },
+                "text": "\ud83d\ude00",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "9",
+                  "length": "1"
+                },
+                "text": "x",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 48
+      }
+    },
+    {
+      "case_id": "supplement:49",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "\"cafe\u0301\" AND x",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "and",
+            "attributes": {
+              "offset": "8",
+              "length": "3"
+            },
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "0",
+                  "length": "7"
+                },
+                "text": "cafe\u0301",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "12",
+                  "length": "1"
+                },
+                "text": "x",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 49
+      }
+    },
+    {
+      "case_id": "supplement:50",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "\"caf\u00e9\" AND x",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "and",
+            "attributes": {
+              "offset": "7",
+              "length": "3"
+            },
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "0",
+                  "length": "6"
+                },
+                "text": "caf\u00e9",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "11",
+                  "length": "1"
+                },
+                "text": "x",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 50
+      }
+    },
+    {
+      "case_id": "supplement:51",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "\u05e9\u05b8\u05c1\u05dc\u05d5\u05b9\u05dd AND x",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "and",
+            "attributes": {
+              "offset": "8",
+              "length": "3"
+            },
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "0",
+                  "length": "7"
+                },
+                "text": "\u05e9\u05b8\u05c1\u05dc\u05d5\u05b9\u05dd",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "12",
+                  "length": "1"
+                },
+                "text": "x",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 51
+      }
+    },
+    {
+      "case_id": "supplement:52",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "\"\ud835\udd18\" AND x",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "and",
+            "attributes": {
+              "offset": "5",
+              "length": "3"
+            },
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "0",
+                  "length": "4"
+                },
+                "text": "\ud835\udd18",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "9",
+                  "length": "1"
+                },
+                "text": "x",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 52
+      }
+    },
+    {
+      "case_id": "supplement:53",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "foo:\"\ud83d\ude00\"",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "term",
+            "attributes": {
+              "offset": "4",
+              "length": "4",
+              "fields": "1",
+              "field1": "foo"
+            },
+            "text": "\ud83d\ude00",
+            "children": []
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 53
+      }
+    },
+    {
+      "case_id": "supplement:54",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "\"\ud83d\ude00\" AND",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 54
+      }
+    },
+    {
+      "case_id": "supplement:55",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "\"cafe\u0301\" AND",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 55
+      }
+    },
+    {
+      "case_id": "supplement:56",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "Dios OR amor NEAR fe",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "or",
+            "attributes": {
+              "offset": "5",
+              "length": "2"
+            },
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "0",
+                  "length": "4"
+                },
+                "text": "Dios",
+                "children": []
+              },
+              {
+                "tag": "near",
+                "attributes": {
+                  "offset": "13",
+                  "length": "4"
+                },
+                "text": "",
+                "children": [
+                  {
+                    "tag": "term",
+                    "attributes": {
+                      "offset": "8",
+                      "length": "4"
+                    },
+                    "text": "amor",
+                    "children": []
+                  },
+                  {
+                    "tag": "term",
+                    "attributes": {
+                      "offset": "18",
+                      "length": "2"
+                    },
+                    "text": "fe",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 56
+      }
+    },
+    {
+      "case_id": "supplement:57",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "Dios NEAR amor OR fe",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "or",
+            "attributes": {
+              "offset": "15",
+              "length": "2"
+            },
+            "text": "",
+            "children": [
+              {
+                "tag": "near",
+                "attributes": {
+                  "offset": "5",
+                  "length": "4"
+                },
+                "text": "",
+                "children": [
+                  {
+                    "tag": "term",
+                    "attributes": {
+                      "offset": "0",
+                      "length": "4"
+                    },
+                    "text": "Dios",
+                    "children": []
+                  },
+                  {
+                    "tag": "term",
+                    "attributes": {
+                      "offset": "10",
+                      "length": "4"
+                    },
+                    "text": "amor",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "18",
+                  "length": "2"
+                },
+                "text": "fe",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 57
+      }
+    },
+    {
+      "case_id": "supplement:58",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "Dios AND amor NEAR fe",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "and",
+            "attributes": {
+              "offset": "5",
+              "length": "3"
+            },
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "0",
+                  "length": "4"
+                },
+                "text": "Dios",
+                "children": []
+              },
+              {
+                "tag": "near",
+                "attributes": {
+                  "offset": "14",
+                  "length": "4"
+                },
+                "text": "",
+                "children": [
+                  {
+                    "tag": "term",
+                    "attributes": {
+                      "offset": "9",
+                      "length": "4"
+                    },
+                    "text": "amor",
+                    "children": []
+                  },
+                  {
+                    "tag": "term",
+                    "attributes": {
+                      "offset": "19",
+                      "length": "2"
+                    },
+                    "text": "fe",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 58
+      }
+    },
+    {
+      "case_id": "supplement:59",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "Dios NEAR amor AND fe",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "and",
+            "attributes": {
+              "offset": "15",
+              "length": "3"
+            },
+            "text": "",
+            "children": [
+              {
+                "tag": "near",
+                "attributes": {
+                  "offset": "5",
+                  "length": "4"
+                },
+                "text": "",
+                "children": [
+                  {
+                    "tag": "term",
+                    "attributes": {
+                      "offset": "0",
+                      "length": "4"
+                    },
+                    "text": "Dios",
+                    "children": []
+                  },
+                  {
+                    "tag": "term",
+                    "attributes": {
+                      "offset": "10",
+                      "length": "4"
+                    },
+                    "text": "amor",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "19",
+                  "length": "2"
+                },
+                "text": "fe",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 59
+      }
+    },
+    {
+      "case_id": "supplement:60",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "Dios XOR amor",
+      "expected_accepted": false,
+      "expected_ast": null,
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 60
+      }
+    },
+    {
+      "case_id": "supplement:61",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "\"a\\\"b\"",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "term",
+            "attributes": {
+              "offset": "0",
+              "length": "6"
+            },
+            "text": "a\\\"b",
+            "children": []
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 61
+      }
+    },
+    {
+      "case_id": "supplement:62",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "Dios NEAR/3 amor",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "natural",
+            "attributes": {},
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "0",
+                  "length": "4"
+                },
+                "text": "Dios",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "5",
+                  "length": "6"
+                },
+                "text": "NEAR/3",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "12",
+                  "length": "4"
+                },
+                "text": "amor",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 62
+      }
+    },
+    {
+      "case_id": "supplement:63",
+      "parser_mode": "AdvancedQueryParser",
+      "language": "en",
+      "query": "Dios BEFORE/3 amor",
+      "expected_accepted": true,
+      "expected_ast": {
+        "tag": "query",
+        "attributes": {},
+        "text": "",
+        "children": [
+          {
+            "tag": "natural",
+            "attributes": {},
+            "text": "",
+            "children": [
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "0",
+                  "length": "4"
+                },
+                "text": "Dios",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "5",
+                  "length": "8"
+                },
+                "text": "BEFORE/3",
+                "children": []
+              },
+              {
+                "tag": "term",
+                "attributes": {
+                  "offset": "14",
+                  "length": "4"
+                },
+                "text": "amor",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "provenance": {
+        "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+        "recording_row": 63
+      }
+    }
+  ]
+}

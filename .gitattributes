@@ -1,0 +1,3 @@
+# Preserve the exact bytes of recorded compatibility fixtures.
+BibliotecaLibre/Tools/QueryReference/**/*.json -text
+BibliotecaLibre/Tools/QueryReference/PROVENANCE.json -text

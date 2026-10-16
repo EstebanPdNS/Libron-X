@@ -1,0 +1,21 @@
+name: macOS
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: macos-15
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.3.app/Contents/Developer
+    steps:
+      - uses: actions/checkout@v4
+      - name: Toolchain
+        run: swift --version
+      - name: Test
+        working-directory: BibliotecaLibre
+        run: scripts/test.sh
+      - name: Build current workspace
+        working-directory: BibliotecaLibre
+        run: scripts/build-rebuild-app.sh

@@ -1,0 +1,941 @@
+{
+  "version": "v0.1",
+  "files": [
+    {
+      "path": "BibliotecaLibre/Sources/BibliotecaMac/App/BibliotecaApp.swift",
+      "sha256": "84df853fc3f9a34bc2e73a19418eff0666ffc2f206a2b9ee50dceeca747f24e9"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/BibliotecaMac/Features/Collections/CollectionsExplorer.swift",
+      "sha256": "921870c8e1e985e6883e1ed04b20e5b87caa5dc61e48b364007ac47cc42e8648"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/BibliotecaMac/Features/Library/FavoritesWorkspace.swift",
+      "sha256": "9a803172bd0b25fdf9b854b55b646cdeed909ba1fedd252eed79f7ca13a79226"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/BibliotecaMac/Features/Library/LibraryModel.swift",
+      "sha256": "b7af7048500ec40dc85d0daf604ba9ed3520f6c8b43e690448d41b9e8c7fbb19"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/BibliotecaMac/Features/Library/LibraryStore.swift",
+      "sha256": "f6e610abbcef228d76eaba5ce88a729344c39e590f2d8eafe62137db089c5942"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/BibliotecaMac/Features/Library/LibraryWorkspace.swift",
+      "sha256": "5766d47e11347de20122a5e7ab7709a972004d20033787aca80ec241402b8f08"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/BibliotecaMac/Features/Library/PersonalLibraryStore.swift",
+      "sha256": "9d3f1e9539f3d4a95b7898f3d2eaa7fcbff64b64c978229e4253be2b5fdba6a9"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/BibliotecaMac/Features/Library/StudyDocumentsStore.swift",
+      "sha256": "ad9efe3471e2a8287254928d74faeceb66909755010b06caee521c412476e662"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/BibliotecaMac/Features/Library/StudyDocumentsWorkspace.swift",
+      "sha256": "ac25b52afaff04d475e8c7a830e6fcfa7b54bcd5951485f8392011633b926650"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/BibliotecaMac/Features/Reader/BibleCopyModel.swift",
+      "sha256": "d822e0bbd1916958f761a7e020cbc1dacc4c1f555f602d0d6512052efc40a7d0"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/BibliotecaMac/Features/Reader/BibleCopyWorkspace.swift",
+      "sha256": "38fdf8b2db7d3389fe01af0a73de86b3870bfb63e19022af576b12fc2b96e056"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/BibliotecaMac/Features/Reader/ReaderOutputModel.swift",
+      "sha256": "e2a781e93a165812f95fe25c69cd80f0c65dda3f135394ff4a866e283e17b589"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/BibliotecaMac/Features/Reader/ReaderOutputWorkspace.swift",
+      "sha256": "274450023d50805865e7329226b86f51014ffe0b826cae85c7668b42ffa181d4"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/BibliotecaMac/Features/Reader/ReaderTextView.swift",
+      "sha256": "c2c6b53843a5631cf71a69b0aa356277a3f1eef6a538f215557d07329733ca0d"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/BibliotecaMac/Features/Reader/ResourceOverview.swift",
+      "sha256": "976b9b842f3b0633e66afa31844ed0b2ce07e5777b10a52470d487ea18404fb5"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/BibliotecaMac/Features/Reader/ResourceReaderModel.swift",
+      "sha256": "3e28fb8adf3f02b8de576dd882de3f4175ef27bb0bf24a673b31bdb7bb196bc2"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/BibliotecaMac/Features/Reader/ResourceWorkspace.swift",
+      "sha256": "cc3544503239a7c3f85de6fde591420420e12e39a8a71197d261c1c041ed1cea"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/BibliotecaMac/Features/Search/LibrarySearchModel.swift",
+      "sha256": "33a37021c2350343eec8d509493c1c4807e7c28e7b7395c8e45f914f989de374"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/BibliotecaMac/Features/Search/LibrarySearchWorkspace.swift",
+      "sha256": "23da5c5be40b2979416353ad25b1c86425701bddfadc52f5533d647bad721501"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/CLibronxCompression/blast.c",
+      "sha256": "ebe6ec1b37dbd2b03959f453a5eab298621dcb6e593954bf22fe88d1abcfa72e"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/CLibronxCompression/blast.h",
+      "sha256": "2b99276c3b40fd231a09df942a95a7cf007858e6bdf0a051fe29719316cc58a7"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/CLibronxCompression/include/LibronxCompression.h",
+      "sha256": "7bcd52d5824449ba5566d722c26e27e2dc5df71b36a0b40aac8c90a6e6ca2ef5"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/CLibronxCompression/wrapper.c",
+      "sha256": "3bfa3cc85544e4b5607f9509698b4b13a784dbfa67404f662607cea15bbab46d"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Domain/BibleCopyOutputStyle.swift",
+      "sha256": "1f17cbb5e89e335758fd3442847f3d02706af4fb37ca563a26ec182dfcc1cd08"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Domain/BibleCopyPassage.swift",
+      "sha256": "96e0601b8351d7bbf201c3482d6ee2e5bf42698f284f890d9c74ea2a1eca47a2"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Domain/BibleCopyPersonalState.swift",
+      "sha256": "1a34ceaacf3da17a6b81e569f3d0f1723022569366ab38a14409a970fa4a64a9"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Domain/BibleCopyRenderIdentity.swift",
+      "sha256": "68024263bf70077a1c0ed64709f8b7ca74f7cc3e5540461beab2663c835bc5fe"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Domain/CatalogQuery.swift",
+      "sha256": "5e11372f49f6dd31dde871f10137abd3a5bbfc841bec501e41264898a72499f2"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Domain/LibraryResource.swift",
+      "sha256": "8866ee929af9d75a834aa2e0c63ed5174c45161de1f8deb349d86419bc0f659e"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Domain/PersonalLibraryState.swift",
+      "sha256": "a7838d0ff8973a3014175c3e34c8c6edaf9a833a7172592f5ff047ed04762f1c"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Domain/ReaderOutputDocument.swift",
+      "sha256": "771ec2ec7ad4d976724577f59c4fa253b0f565d0e2a92f9814524697ada52eb8"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Domain/ReaderPrintSettings.swift",
+      "sha256": "b464a2ca57fe014d08a32043b8aee92d0584c77227070a0fcfb75f8d6beb69e5"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Domain/ReadingHistory.swift",
+      "sha256": "07edb91a34fe2a91d6b5780e600aa5f806cb5f2b4967abe53984a35b651e6f8b"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Domain/StudyDocument.swift",
+      "sha256": "e6caf13564351f03a7c08b9f9383870ba4375cf485bd001a100ce04de7ed2479"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Domain/WorkspaceDocument.swift",
+      "sha256": "4154d61867b21e14098737452ddfb0d0934e791b8597d1876f3b9dba1265ee6d"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Formats/BibleCopyFormatter.swift",
+      "sha256": "a479415b487533c85bd543282b8ff6ad36151ff84187b302233ecafa12bd7529"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Formats/BibleCopyScriptProjection.swift",
+      "sha256": "100d4ced91051486c6d27288558960cf6a85e5dc9a2014ad4b53befb9333ef85"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Formats/BibleCopyTransliterator.swift",
+      "sha256": "47dba6fcd3e91ef749179239d5e8bb80ab843e53aa473af1d196b31b176173d2"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Formats/LTESContainerReader.swift",
+      "sha256": "bc8f1d20f3ca1a78da70217ece1f097246675d6be566c950123f83c3544fb78c"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Formats/LegacyBagReader.swift",
+      "sha256": "853b09c05de7208333f50ae648633d546926536cb85aa94c404841af82f164d8"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Formats/LegacyBodyIndex.swift",
+      "sha256": "8df8cee355932a17252f05d21f7fa7f99442b4a04b755e619bf1b22e2c254fa3"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Formats/LegacyCompactPostingsReader.swift",
+      "sha256": "fa529492bdfec109755bd3840fd55633e52c738fc9e10479f2fccb6286f0bfc9"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Formats/LegacyContentReader.swift",
+      "sha256": "cb96bf80550671f5b0aaba47d7b6cbd7faaa5566615eeee36515a9b50ec09edd"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Formats/LegacyDictionaryReader.swift",
+      "sha256": "bd455643dce4a1e8a51cb6b77b138befda560abd8bb568cb828b80a241c716b4"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Formats/LegacyDocumentDecoder.swift",
+      "sha256": "85ef167e86cad15c6dca317d110e9b721f0783edd2f7b7d8da1412bcf195738a"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Formats/LegacyIndicesReader.swift",
+      "sha256": "14a3c9b06eeda7948eb646c361729278ef4dbcc85bc1fd6cccb9ad28e91a1879"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Formats/LegacyInlineLinks.swift",
+      "sha256": "7fcf2f86fd9d41d9bb31ce35eccaac2bc32f005c55495ea55944522a792a079f"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Formats/LegacyInterlinear.swift",
+      "sha256": "57b6bdd1039ae65f6a2a0b481866697f2977d32a37e7ccf49285452e3632e3ed"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Formats/LegacyJumpDestination.swift",
+      "sha256": "f2dde439bece74fbc0d07ea1cb7c5c136e025b7e2853264586d8e5d634f792e1"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Formats/LegacyLanguageProfileReader.swift",
+      "sha256": "abe232a58b0a6af3139754bf621fc26ba135a1803ea806bbcaf1ac105d4e8a20"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Formats/LegacyLocator.swift",
+      "sha256": "9ded5b7f6ebb0517be9f37d75baddb98c91cbf2360d84a674fbff2f6d73c053a"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Formats/LegacyLocatorResolution.swift",
+      "sha256": "c1a2ce9d1398b6b11058c9bc534d9c14f05ba4b5e523d5f482cc806939325eb4"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Formats/LegacyNavigation.swift",
+      "sha256": "21ed4a599950c3d2afcce6162b64624c6181143e28f7400de3573c9196130e95"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Formats/LegacyPostingsReader.swift",
+      "sha256": "59f1efd9c4bc31ae3886a4b844aa4395adee6c925cf98a1d23c867fba5a46c26"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Formats/LegacyReferenceMapReader.swift",
+      "sha256": "036213ab44221229647b9d599add9838530d62792e155f87035d17f8a4122b54"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Formats/LegacyResourceReader.swift",
+      "sha256": "b7eabd93fca15b320159428b27e5ff793610a52aa63a3b41e7414e7f4f52842b"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Formats/LegacyTypography.swift",
+      "sha256": "9a51a306338fb95ad7aa2ea071cc880fa3ec64b7b8be7f2d52d0097ffb614104"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Formats/LibronixBookArchive.swift",
+      "sha256": "45db44350b9a90f10219a734c374006874ee9ab47bbfa024a6008d73ea39c2f3"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Formats/LibronixOEB.swift",
+      "sha256": "d9abe8d910f1e2bcb8d176136eaa243ec8275fe1dac7cce92d017bd1bef698b4"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Formats/LibronixTopicIndexReader.swift",
+      "sha256": "8a8f9bb5d1a6bdd676432dd5ae8185c8fc7beb3813bd45cde04e69dee7eb0692"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Formats/ReaderOutputEncoder.swift",
+      "sha256": "55d8dfa788b2f2866fe4076ef396637260281e2b2332608b83210df4e68491dc"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Formats/SCSUDecoder.swift",
+      "sha256": "13759e3b27310c670188eb0991b7a3e4571baec748a0e33a49435ea71cfaae13"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Import/BibleCopyService.swift",
+      "sha256": "f77fbd46eb3444d7e024996e9c6743a6771c3c4c8a707c6da9663ff2775c5c0a"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Import/BibleCopyStyleFileService.swift",
+      "sha256": "20234a1c07055d671694dff4422278fcbbb72f4857eff528f97bd403fd431a3f"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Import/LegacyContentService.swift",
+      "sha256": "3fd4ad04747e503b0474c5e6f4ec79dd52be8c7ce6e7be25209a3865ff818760"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Import/LegacyGraphicsService.swift",
+      "sha256": "2af14f7ced28cab099de9cea0fd0a0df86a873d6ace3eb3c2085eedc3af63a74"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Import/LibraryImporter.swift",
+      "sha256": "7b624c38cc3c5183b63a0a3828aa475463baa6df41f1f33cea03a3e5cdd10682"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Import/LibronixBookService.swift",
+      "sha256": "c9d1330a206ebc60f33144eddf8b46a5e476f6015afb2b9b27fa7c81e69aa53b"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Import/LibronixTopicCatalogService.swift",
+      "sha256": "b0a2efe5e9ccb1e7393acf5303b09378c6095ce46641c3ac788160c2359529b8"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Import/MetadataService.swift",
+      "sha256": "9b79c067c525159ad303793faaddcb05f427930237e6f3094e27378d84aebef0"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Import/ReaderOutputService.swift",
+      "sha256": "4f96657b7631db35b586d05abdb8fbce920650e5c103e2223ecd86d7f668e080"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Import/ResourceDirectoryEnumerator.swift",
+      "sha256": "7d5c6045cfc3ce66394a26546088d505fe83576147720c9d153e983533d2e734"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Metadata/LibronixTopicIndexDeclaration.swift",
+      "sha256": "85fe160efaf8fbfb306b6d9b8eddaab94e73f3194883cc07c3e9a2a8c55c8728"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Metadata/MetadataImporter.swift",
+      "sha256": "61073f4a777a430d317e9a896e3d492be883afde7321a881a07f1bc0687056f7"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Metadata/MetadataModels.swift",
+      "sha256": "07cfb7b2541366b3de7bcc40b25b2ae38de83c4a431b12615607c3ec279befbc"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Metadata/XMLNode.swift",
+      "sha256": "cff28c28d62fc34ef0189caca4c5eef753cb91412dd49bd568d64950e203f887"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Search/BibleVerseText.swift",
+      "sha256": "2032edb0440facdadd6a52fefba1e4cc6b9b23234ac68fdbd6e3549699af4296"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Search/LegacyQueryParser.swift",
+      "sha256": "1decc421779f527fd1a5633f014cce3e06b8c3a55d5147301ae3a4eb2f45ab68"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Search/LibrarySearchModels.swift",
+      "sha256": "d744ff35005a3e1d9da790dab0247bf926932f453056b94d14f48b0d46025895"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Search/LibrarySearchReader.swift",
+      "sha256": "a809c006d9a3f331fb22b377ccc5abedd0acaa88a275a034208ee6b60f662569"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Search/LibrarySearchService.swift",
+      "sha256": "ff7b8d2328e70b05f170e6722ea45b74754f4f0aa0585af387c279d028f6f876"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Search/SearchQuery.swift",
+      "sha256": "d1df4ceffa361bc4f4a63889eef7126a0c956d2662ee0c169e54c5ab6f80d902"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixCore/Search/TextSearchEngine.swift",
+      "sha256": "2af1858b06d3b569d64eacfe158935bd1cd001ec42c3643d247f17216f37feec"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixInspect/DocumentInspection.swift",
+      "sha256": "dc754ac45d50e0100370e16d927b9b9501c773de05f2b8df5275f2e068fea328"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixInspect/InspectCommand.swift",
+      "sha256": "203a3fb4eaa65a43cab87f1f789411d85db9583742beb569b2ca6e6b0309e1e4"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixInspect/LanguageInspection.swift",
+      "sha256": "d17fb03d7faf7332d6830c88cbea7f614bc268a884a164f626ef2da1e82021d4"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixInspect/LocatorInspection.swift",
+      "sha256": "94f5e781444440df1d4fd3e35e06ca14f3daa3b3c288fa43861ac7f4811e21ad"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixInspect/OutputInspection.swift",
+      "sha256": "21c59c0e138aa140e7072fa46bf18e8ac34a72dd096fa4ed6e5670c50afc23a8"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixInspect/PostingsInspection.swift",
+      "sha256": "ba9beb3262d543f175c93037c00bd1c97a3940ebb58e5f653a64dc9d2c50959e"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixInspect/ResourceFormatInspection.swift",
+      "sha256": "332f9762b63459d9ec2d265767cbad9d04c3233a730fffdc317c2d7a2bb00e33"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixInspect/SearchInspection.swift",
+      "sha256": "db1ff548e579c069b24b1812a74f3c2b4d94c33a1ed325f6c646fdd6bc35b3e5"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixInspect/TopicInspection.swift",
+      "sha256": "95b927f507e4e133e0de0bcdbd7c5b5d84d3d3982de815ea0bc957a4563b07bb"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixOutputMac/NativeBibleCopyOutput.swift",
+      "sha256": "dd310c8a9b07571de196816ccfb5e28c0b4c4f780d7aa21be5c76f7e4a94277f"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/LibronixOutputMac/NativeReaderOutput.swift",
+      "sha256": "30da6daf174b337b35688354f160013ec645a3febd0ec56be1927e152e95f0c9"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/App/AppIconPreferences.swift",
+      "sha256": "9cab31278c3586bc59ba0d218405b673960bc5d82175f173bc14502388723ae5"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/App/AppLanguage.swift",
+      "sha256": "83d0aa4369d8536d553500e69f2fc83e33b9c57926c25f821c1f316135616fae"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/App/AppPreferences.swift",
+      "sha256": "5d7d8275e866cc1f44155c462082292619af1fba33648d1c334996234ee68a9f"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/App/MacApplicationIdentity.swift",
+      "sha256": "8815a1370a59f8c597e9b8b4de1caaa0b06de18118fe9a5a68dc94a08cab4d96"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/App/RebuildApp.swift",
+      "sha256": "afbb324853e4f3e6a82ba8aa082b059553f2717659d33ce9be38665743c95923"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/App/StudyRootView.swift",
+      "sha256": "a48a96bea62ee4b7df357c4f9df22510142f10902b923b47b73596cf8bdb15ea"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Features/BibleCopy/BibleCopyToolView.swift",
+      "sha256": "4ef0e53c6378cd91622a9c14fc054d1d1a1d024609ee7680ec23bea583bd307f"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Features/Documents/WorkspaceDocumentsView.swift",
+      "sha256": "94aae0839f91fdeb36f0777ea7f707fb0017c779fbea9b35c0f98f0fa64ed95a"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Features/Library/LibraryChooser.swift",
+      "sha256": "e6f3cea57c6e2f880132a3c5b2fbcf4e0057c16f8a4a9d96ab66e81d6ea7bdb8"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Features/Reader/OEB/ReaderOEBFind.swift",
+      "sha256": "d873754c4713c5e809be7f80a4c77756802c9f7212da353a012a77b2b21c9f14"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Features/Reader/OEB/ReaderOEBOutput.swift",
+      "sha256": "10e0cf631e03327c10db479c130c15fbd9c3f44e94c162948fd4a0f3ffbf9bbe"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Features/Reader/OEB/ReaderOEBTextSource.swift",
+      "sha256": "1c6b51bffbb947baa7737d050418fe0d8c69b80fd979851c01a69dbda11b2a9c"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Features/Reader/OEB/ReaderOEBView.swift",
+      "sha256": "ac9e74e5bd412278ac3bceeb4e019680447320e0972bc668418acc8589030f5d"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Features/Reader/Output/ReaderOutputActions.swift",
+      "sha256": "6bff98ade4775579e17e81355456f56997c5c0632b29d6ee3fa3a7fd0edb4ee2"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Features/Reader/ReaderArticleFlow.swift",
+      "sha256": "6f5cf6f76237039de93ff410040df60870892dc86274071612249796ba6942f9"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Features/Reader/ReaderBibleIndex.swift",
+      "sha256": "3e309e9677ca9b224a54e447f6d1c20967f258fd3427c2052fa101044c162cac"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Features/Reader/ReaderError.swift",
+      "sha256": "e791cc372570ae776c3297bf98cf56502d07bafdd85ed6323379091ad60938c3"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Features/Reader/ReaderFind.swift",
+      "sha256": "dee6e7b5763e2ca0b929cd07f0f25ca0655ecc6dec1ebefdb972cd1d2475a670"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Features/Reader/ReaderFindBar.swift",
+      "sha256": "a11c17a6e9d018c1a94a0bfb6e1986b4a81e2647399f4c0aaabcb9508027e3a0"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Features/Reader/ReaderLinkPreview.swift",
+      "sha256": "8cacfc956bf10f65893b98279302ae9460e7c40859c0dd01a6782a9a5c46b404"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Features/Reader/ReaderLinkRouting.swift",
+      "sha256": "9d1a54df641b5dc4c09fb78feec9225e134856c91ea9c1113bec717696d47486"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Features/Reader/ReaderPassageParts.swift",
+      "sha256": "78ad2547d1647cf403ffbead2ab0f2c13a0b2506be262feaf44e0c5542139039"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Features/Reader/ReaderSession.swift",
+      "sha256": "3d7063c55c04e6164e2a4d58a0a658ca1c8e32d3e4389c3332a342206b0a82ec"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Features/Reader/Rendering/MapPreview.swift",
+      "sha256": "e84b33a8239b8c8f3c01d7d312a5adc09bdaeb81b5dd4d07e7d0951e9967ae27"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Features/Reader/Rendering/ReaderArticleFlowView.swift",
+      "sha256": "35cf7983dc99dfa1d80044034890399858e2e3f5a8292e61a722ec43d0da6163"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Features/Reader/Rendering/ReaderImageRenderer.swift",
+      "sha256": "4777ffae5d500d009b3c982668feba3a6497c59ffd4b76b7f75c33ff70851b4d"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Features/Reader/Rendering/ReaderInterlinearLayout.swift",
+      "sha256": "22513da7870e7514d48e715288ec358455f69d71f7cededddeafe5286d449b51"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Features/Reader/Rendering/ReaderLayoutManager.swift",
+      "sha256": "021192face8954ad95fa6a9a471fed609edd2b6801d2b1504a59a3e6a9db8bbf"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Features/Reader/Rendering/ReaderResourceFonts.swift",
+      "sha256": "2152e92b07702051a02c8c3d2de7b4f1057f5d8c7ba6601a06260dd8649c1589"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Features/Reader/Rendering/ReaderTableLayout.swift",
+      "sha256": "7661ceb6ec486ed9d8c8b01f3719d905334f40b06a54ce279743ff2c8966ce56"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Features/Reader/Rendering/ReaderTextView.swift",
+      "sha256": "bacf98ed3943f325d337f6d397d2399eaac7cdd1ba8f9e03847ca38a0794db71"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Features/Reader/Rendering/ReaderTypography.swift",
+      "sha256": "1cfc2b88c62ea1d75c8e7aa203ed9799f1765aabfc737444ff0724de423829dc"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Features/Search/WorkspaceSearchController.swift",
+      "sha256": "8bd424b99d6c80deb95006a5a46d3c4bfb0632a711cd281d20317efbb3b5d982"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Features/Settings/AppSettingsView.swift",
+      "sha256": "7f5e30f7e9bb1c2196963be2e61726485100dba48b257e63fd72dea0851fb672"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Features/Settings/LibrarySettingsView.swift",
+      "sha256": "f02807bf08f1e3f23e84e9e128c999d8f6a81d99a2546a1d0375eba851369b48"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Features/Settings/ParallelBibleSettingsView.swift",
+      "sha256": "88357874323d2a8fdf424c080a6b4acb556716a7d1a6a4b0373fa4f735873397"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Features/Topics/TopicBrowserView.swift",
+      "sha256": "767529dc6ae5795cf4317a4e46ccba971a01db5d6739999d297789c67bd016b6"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Features/Topics/TopicSearchController.swift",
+      "sha256": "88b303776607d3566e5c464250596351bbf1b0add05bb3c9f533fe7f564106b4"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Persistence/LibraryResourceVisibility.swift",
+      "sha256": "afabc001b361476f74ee644f97c4647f894bb9582471e358a428f8dd167bce9f"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Persistence/ParallelBibleSets.swift",
+      "sha256": "cba5712deb5cb63a1d7f65cb9ee9491fe60537f1fc3dc1a9c4f0542fd8cc4a31"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Persistence/RecentWorkspaces.swift",
+      "sha256": "4af389b8f61871c785a6ed9a650bc3200689cf1f1181f70ae18085ab07f6400a"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Persistence/WorkspaceFiles.swift",
+      "sha256": "dff8dab565c57dc4b8761238274da0da21af4dc7509a22d4176a2cde263aa08f"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Persistence/WorkspacePersonalState.swift",
+      "sha256": "b22e7ba5851f37e87a8383c813d7c03003fc082330bf18f193dca5a904e7dc74"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Persistence/WorkspaceStartup.swift",
+      "sha256": "60a9d8c53807d261d7e536de8a9d674770e0fad832cf6308b1b7ffd63eaa7c73"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Resources/Interface.json",
+      "sha256": "480a17aa94f96882530246b48c4e58869937412b9e777e26087d7c8648515325"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Shared/Controls/MacInputPresentation.swift",
+      "sha256": "96d15768bec43c71d8ab155e5d5239ac053f33b7b5e62127c6d25a5d87222684"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Shared/Controls/MacToolbarPresentation.swift",
+      "sha256": "be4be3629c7ce03cfd14c857ca6add9701b8c36acc92c740ac239b92c196de53"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Workspace/BibleVersionKeyboardRouting.swift",
+      "sha256": "f04e966a39e6e30a5745da7c436f26b41471065c8c7f950a8f2789e531a63c39"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Workspace/ParallelBibleMenu.swift",
+      "sha256": "947329bc677318157830894239a2c2878e61b2c810feec03c357c8cb4bfb95a5"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Workspace/StudyDesktop.swift",
+      "sha256": "5c19c1c4df0c9d2369cac887e1465613f53b31c9bf8762f65c603838f97707f2"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Workspace/StudyWorkspace.swift",
+      "sha256": "515d3ca420a0541690d2eda3fd5ebca5a997b36121064fbffc084cb11835aab5"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Workspace/WorkspaceActions.swift",
+      "sha256": "be47709675bf4881aeccfd4c88c06a3debb6e9efb5c687f478f2bcfd7682ace3"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Workspace/WorkspaceBibleVersions.swift",
+      "sha256": "6a149845efc5cceaed317e9a4d44a7ea60b73cccb00e630df8425c577318cef8"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Workspace/WorkspaceToolbars.swift",
+      "sha256": "8945be2d56cb09ef61439a12d82161ceb251d596890dba9dd749c941ce4542d3"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Workspace/WorkspaceToolsView.swift",
+      "sha256": "f590c22c30100f17b33c770fd0e11a145c164dab1c349d89452008a5abbcf57e"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Workspace/WorkspaceWindowSelection.swift",
+      "sha256": "08f9fc7a128fca2ca717d9f0015cb7fee6a4775099735db90e92dbf5baf8f682"
+    },
+    {
+      "path": "BibliotecaLibre/Sources/MacRebuild/Workspace/WorkspaceWindowsView.swift",
+      "sha256": "ede757f56212d1e87dfb46cba4638632fa3932d9dcdecedb516389196823ff04"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/BibliotecaMacTests/BibleCopyOutputTests.swift",
+      "sha256": "9f9b3cbe676aa5d0d727f0730c7147b2b96b3ad9b97e5ae105970fdb0518b5c5"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/BibliotecaMacTests/BibleCopyTests.swift",
+      "sha256": "1d8411cb44768a7947fb6b5e2c6544940cbf6d90a847a57892f8d0e18b113ed6"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/BibliotecaMacTests/OriginalLocatorNavigationTests.swift",
+      "sha256": "2c408bfd6ff451777342b39a4060b4ace0a37035b21e4ecb666de9e98dfe3f46"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/BibliotecaMacTests/PersonalWorkspaceTests.swift",
+      "sha256": "3182b64bb0644ef70b01f77c9079a021a968ecb821f694e94e90e667dfe2ca14"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/BibliotecaMacTests/ReaderOutputTests.swift",
+      "sha256": "1a1db63f7eb67cd52288584d202b971b268d797da1391bfb48fb397e4cbc4170"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/BibliotecaMacTests/StudyDocumentsTests.swift",
+      "sha256": "30e35310458adf543c04b85cdffa750620a5872f70f3a4340a51a65f82044c12"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/BibliotecaMacTests/WindowAndReaderStateTests.swift",
+      "sha256": "6dd74c4739da42c3c8555c2d0b2c00fa4422baa7ac25eb961615ab15b2fc94b5"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/CompressionContract/compression_contract.c",
+      "sha256": "b19f4f5f12ff952de86f1c47fc64519fb09d6468f25d345ba3659d0d1e1e699e"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/CatalogImportTests.swift",
+      "sha256": "1d46f670a8d9a5a432e73bf536903cd2cdbe0fa4bb69c716f86cc8b64198907e"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/LTESContainerReaderTests.swift",
+      "sha256": "59b6ea2f029946a03fd48f0059e9873e666f45be8be8f982eb3e5744e6dc8888"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/LegacyBagReaderTests.swift",
+      "sha256": "55384fa9ab69bdf1d6027b0986fea3522d06dfd689326a6dbbfe55935c92080d"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/LegacyBibleReferenceTests.swift",
+      "sha256": "b436c35052d33c610cead52a208a49fc377c5548994684319d0bb11adea05a5e"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/LegacyCompactPostingsReaderTests.swift",
+      "sha256": "f1b774264c18f4fe2e1e5c8be497a9508c1d09970fb619000e1e4464a086f35e"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/LegacyCompoundDocumentTests.swift",
+      "sha256": "06e4942157c1425e24a44bb0f2d1e1d609b93dea543913164e89e93ddb12ea3e"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/LegacyContentReaderTests.swift",
+      "sha256": "875a4164b2713bbada67cf394cebbda61148b49373405026657d654abce3af1e"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/LegacyDictionaryReaderTests.swift",
+      "sha256": "f03de6e14fe65de72bae314eb5b2f3426aa62d53d679c055c7ca2153cba65660"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/LegacyEmptyRunTests.swift",
+      "sha256": "0026c59987f41201fcf1ca92a3ef19c4f109f3be061df0fab57ba7d0695cefdb"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/LegacyExtendedAttributeTests.swift",
+      "sha256": "4f2c94ef4a290c571b52a468858223ebd97b1fe481e9574b66fdd0459b90c589"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/LegacyIndicesReaderTests.swift",
+      "sha256": "525cf885d30618c86e4d10c7182ef5187fa5b9f03b1f087f12a4676a6e620da6"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/LegacyInlineLinksTests.swift",
+      "sha256": "34cb5953a07b021a1dbe451ee5e952a7bc6b01278b527a0de528d3111557480a"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/LegacyInterlinearTests.swift",
+      "sha256": "62d7250c230c743dfea694e7e6c02258a755c3c33e74a2d4c7afde63099a46ec"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/LegacyLanguageProfileReaderTests.swift",
+      "sha256": "043c3360995507e79e35a230ea2033020637e8592712775d351b6cd56ae87ba8"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/LegacyLocatorTests.swift",
+      "sha256": "4b790d9a2cf77be2028f96c9c8d4a5c19ab029adb707405a05941c983a96fe29"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/LegacyPendingFormatProbeTests.swift",
+      "sha256": "511d7267b89bb9009208f5d62b0071482aaf81be0a2deca9e3a5def0de863128"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/LegacyPostingsReaderTests.swift",
+      "sha256": "6ae7231de08e65cc7cd7c7cc8408c77e5a44237c8b072b9cac3d62fdb4f06d5f"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/LegacyQueryParserTests.swift",
+      "sha256": "d472ec3e2a9327784d9013d65ba5bbe6cfa3c73bcccb0250599ad1742ec4152e"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/LegacyReferenceMapReaderTests.swift",
+      "sha256": "c05669f6cc4960788dd50585cf17ca2af46ef8b12ab0f83972f91153dbee486c"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/LegacyReferenceRun2Tests.swift",
+      "sha256": "cba78adc8af7ab366bdfc10fe9ff06693d40208e0a8cb2c4c24a76645ed202b2"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/LegacyResourceReaderTests.swift",
+      "sha256": "a7fe6eb704ce80a960cbccaf9a8e2cec521ea1ad8dc1fa21baf1bf2b9112ce4e"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/LegacyStructuredAnchorTests.swift",
+      "sha256": "3cde1e384ed18d159b741ad0d3c6176b086ea5bca6164dd32ea3e7ac54e35ebf"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/LegacyTableReaderTests.swift",
+      "sha256": "03206a5ac307fd43859adff681d782507d36637895da3082562a8c376aba9658"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/LibrarySearchServiceTests.swift",
+      "sha256": "e6194f97c405f6e1e0ef3b6d03b1f9dc5c9c9003cb53b1e76e69e763167b41eb"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/LibronixBookArchiveTests.swift",
+      "sha256": "5d63bba80c107514115598e3db39e2359b8826cd6b4a1a98b843a03b4161357a"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/LibronixOEBTests.swift",
+      "sha256": "e4f8c151cc433da3b6b32af8a6c0123ee770444425e45c4be5a74123bc1eb103"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/LibronixTopicIndexDeclarationTests.swift",
+      "sha256": "10108c62a73c2f45a22b8274ab78e10a556b6ea8cf02e60e7ad81598bce2f9ea"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/LibronixTopicIndexReaderTests.swift",
+      "sha256": "7360a4827029d900b9782f6339d4438505659018fc32d6b8a9ac8e20c33fc9e7"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/MetadataTests.swift",
+      "sha256": "ce7d30725329fdfca65198a698caa31db6ff32185d3f765316a39d26acce6229"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/OEBSourceProbeTests.swift",
+      "sha256": "a60418cc6f6a474adf56cfcd36ffbad8848bc743be414d420eb5a88c66e7d744"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/PersonalLibraryStateTests.swift",
+      "sha256": "d9ac9d2f9eed3295e8280ae68a910e7e8f0c39d0f976f6649dd4680af5e06996"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/PortableDigestContractTests.swift",
+      "sha256": "0a7bafdd087e112115cb4b8ae53bd66925dddaccf9099608470ba19c9ec95d0f"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/ReadingHistoryTests.swift",
+      "sha256": "9b58a9e19ff33af8e3061f8df14516b52336c7ca6eafcb7860b44ffecd749208"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/ResourceDirectoryEnumeratorTests.swift",
+      "sha256": "c88d514808de534b5d2d582e11aac9ee660e68e3c13f3bde43518fc1917eeafa"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/SCSUDecoderTests.swift",
+      "sha256": "4aa2b17f44423867116a9e1d7f838a523d007ce830ee6ce6757fe63b0e063743"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/SearchQueryParserTests.swift",
+      "sha256": "6975a5de3aa7934e268083dc4457856fc4198f7a2060ef9de1c69cd39b676f41"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/StudyDocumentTests.swift",
+      "sha256": "a947ceb4c75f888f17fb170f75e544b0dbf07eba8a047ac6261b47f90a69db75"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/LibronixCoreTests/TextSearchEngineTests.swift",
+      "sha256": "1ac902504cf221d89c0d7d4522fb1dab37a256dda47da932693a11b7a25a8584"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/MacRebuildTests/AppIconPreferencesTests.swift",
+      "sha256": "af462ead97397393a80cab6d01f9e7a168d6e506b3301a58071e27cad4bfe77a"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/MacRebuildTests/AppLanguageTests.swift",
+      "sha256": "b061abf669fffc5b6b9b65619b2a28fa91a37c88516e0b78507ff76099369879"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/MacRebuildTests/AppPreferencesTests.swift",
+      "sha256": "170df77d6e2d614a44a98f485a429d3a148646ff968fdc6e2d6cda7dde393db2"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/MacRebuildTests/AssociatedTopicSearchTests.swift",
+      "sha256": "7735c34faf290ece005d39689562afc4b62d5681eaad2937b4b2d011bcddbd4a"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/MacRebuildTests/AuthoredOEBFixture.swift",
+      "sha256": "934ce52e5651128a724dee3f4b7464d3666b2156ec067d4d0bf2fb6a1f5c90a7"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/MacRebuildTests/AuthoredReaderFixture.swift",
+      "sha256": "d009e51b37b9e31cfec226e89451b66aa1827168d5dd02e065c4ee7e19fb5002"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/MacRebuildTests/BibleSwitchTests.swift",
+      "sha256": "0269a44bc749c5d2c95f291fbc519c0d4be0d2d4ec545c021addc4f4680ff3a2"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/MacRebuildTests/BibleSynchronizationTests.swift",
+      "sha256": "c8c62df1a6bda9f3aa4d9d15f36a1197cc6ab74e55f54ab9232f1aa6a4d034d8"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/MacRebuildTests/LibraryResourceVisibilityTests.swift",
+      "sha256": "5e61099db790c95580cfeab2592d9b726f3ab0921923dc9bca1dbed250d53fac"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/MacRebuildTests/LibronixBookCorpusTests.swift",
+      "sha256": "5bfc1f703a5c93efc6eba110939e16d0348617374cd7498dadfc8ef2d3b6dde1"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/MacRebuildTests/ParallelBibleSetsTests.swift",
+      "sha256": "5edabad50e775216a5c0b0cbb3d9ddcb90da26e497a3a7a9345578e92f95071b"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/MacRebuildTests/ReaderArticleFlowTests.swift",
+      "sha256": "4c0450f08afee1621c86cef1e44d8724656fac63954b3793fc133863e10fa501"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/MacRebuildTests/ReaderErrorLocalizationTests.swift",
+      "sha256": "8e8ce5b7662ef53c883d650112e898328ee128251f819ba120f02b00a88ffc85"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/MacRebuildTests/ReaderFindTests.swift",
+      "sha256": "fba3355fca61d2fa2367d8bd0f493a714f1a28ca097c82450cf1b97f4189bde8"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/MacRebuildTests/ReaderFormattingCorpusTests.swift",
+      "sha256": "fdc84f2a184348e8d8ff5a8a59166ba058bda353fb27102697767e9b20bf5722"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/MacRebuildTests/ReaderInterlinearCorpusTests.swift",
+      "sha256": "41bb78bbd1ec14344c42532536d52431714dae27544af784d8eb2303ea9658aa"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/MacRebuildTests/ReaderInterlinearStateTests.swift",
+      "sha256": "7a16867a2bce72d56ee7832bfcf4a61cc2258eaa67f39d78b0608163d0a659d6"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/MacRebuildTests/ReaderLinkCorpusTests.swift",
+      "sha256": "c86427ed87f166bb0197eb996980448dd84fc19e2ae8c7d471fa24882756d31e"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/MacRebuildTests/ReaderLinkPreviewTests.swift",
+      "sha256": "3495e8a640de4cad64d2677475571f14d3a9a942eaa046457072848993e00461"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/MacRebuildTests/ReaderLinkRoutingTests.swift",
+      "sha256": "5e012d76f98d4e520324e845c80babd54e178594e6e631138f68b831aece2d9c"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/MacRebuildTests/ReaderOEBCorpusTests.swift",
+      "sha256": "97d7075af34abecc2be4ec50985cba8cd62f48c7dff3d5c3c7bc232bbe39d6e7"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/MacRebuildTests/ReaderOEBFindCorpusTests.swift",
+      "sha256": "be1441ea6ac38a58391ccf184bb7446afae5c27b98083091cbdd02fdfab08c1b"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/MacRebuildTests/ReaderOEBFindTests.swift",
+      "sha256": "55797e0a5704bc2ea28d831bdf6ef095ff72f1dd5fcc7717474bed274f21255e"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/MacRebuildTests/ReaderPassagePartsTests.swift",
+      "sha256": "73d20ed1ab7528c08a56544a99bd7e0450f7e321c64fcb9f2eba99cd17905c8c"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/MacRebuildTests/ReaderPresentationTests.swift",
+      "sha256": "3d77d5b51c2d4bada0b470100eed415a90a6d451ffdf84c85773c5cf85ea0ac8"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/MacRebuildTests/ReaderScrollPerformanceTests.swift",
+      "sha256": "e3b72576d0da60b2e828707410c758bab00d67eb80610aee60dd5327622c91c9"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/MacRebuildTests/RecentWorkspaceTests.swift",
+      "sha256": "ecfce5cf3ad7372056902d14d8cce95bef3dc85094cc990239caca0796574eca"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/MacRebuildTests/ToolbarActionsTests.swift",
+      "sha256": "c0aca5f7c423eb719586e8f5406012a0673e0f41960c67cf5051335fb3fe43c8"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/MacRebuildTests/ToolbarSearchTests.swift",
+      "sha256": "cb36d446416787b64fc2b44e92332939781136d0dfe342a6f0f891bb7597a64c"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/MacRebuildTests/TopicGroupTests.swift",
+      "sha256": "28fd850e4adadf8bcef14d0f9a9becef5f8e8ab42553f5e9cf91e53641334701"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/MacRebuildTests/TopicSearchTests.swift",
+      "sha256": "1d89c18ffe1c2593ad54bc532b7c18ed67839c80c5835d6ff3f73280b596d23d"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/MacRebuildTests/WindowCommandsTests.swift",
+      "sha256": "fecf1d0048a2bd2b31852dbf844b19b99604a741e410b3bb132294b6c0e85bf7"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/MacRebuildTests/WindowLinkCommandTests.swift",
+      "sha256": "2c44434cd3ff17fa6cee697ffc3f008491ccc41e72a50e761d1285d21f085f22"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/MacRebuildTests/WorkspaceOrderPersistenceTests.swift",
+      "sha256": "24915ce54383494c0b02fb325336b0fbdba7ada6bbd76c126e117b918c04a425"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/MacRebuildTests/WorkspaceStartupTests.swift",
+      "sha256": "756da48719a2f2c55f2db25436da72a859d7331e72bd78181dd0a8f2ea0d2aca"
+    },
+    {
+      "path": "BibliotecaLibre/Tests/MacRebuildTests/WorkspaceTests.swift",
+      "sha256": "48c1f99f8a596dce5cc5916368a7b62da46d18fb857735d2b185dffc34f1151f"
+    },
+    {
+      "path": "BibliotecaLibre/Localization/Interface.tsv",
+      "sha256": "6a97b0f0afec29ea42e60b973f07d7ad30c5ce5807c1e4b115b17a2472530a67"
+    }
+  ]
+}

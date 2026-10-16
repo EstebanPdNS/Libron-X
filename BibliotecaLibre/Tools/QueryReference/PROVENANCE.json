@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "implementation": "Independent code written from bounded observed behavior; no original source or scripts incorporated",
+  "recordings": [
+    {
+      "recording_id": "baseline",
+      "recording_sha256": "3cabb08bf8421a44ecaa2225d9a503594753df24ef79b3ff8b5cdb365d648f9b",
+      "recorded_utc": "2026-10-12T19:23:03.5385734Z",
+      "synthetic_inputs_only": true
+    },
+    {
+      "recording_id": "supplement",
+      "recording_sha256": "144f4eb27f52eefc53a8b539fb4c8125232089ba5d834e26b217d179e415058d",
+      "recorded_utc": "2026-10-14T09:02:30.4093379Z",
+      "synthetic_inputs_only": true
+    },
+    {
+      "recording_id": "translation",
+      "recording_sha256": "fe8924f5d6b38ce3d3ad3593c4d8eac334188a78a6d125019c9da4301560af4a",
+      "recorded_utc": "2026-10-14T09:08:50.9171439Z",
+      "synthetic_inputs_only": true
+    }
+  ],
+  "excluded": [
+    "Original binaries",
+    "Original scripts",
+    "Decompiled code",
+    "Book contents",
+    "Private paths",
+    "User metadata",
+    "Credentials"
+  ],
+  "fixture_scope": {
+    "parser_cases": 124,
+    "accepted_ast_cases": 86,
+    "translation_cases": 47,
+    "successful_translations": 37
+  },
+  "full_grammar_verified": false,
+  "search_evaluation_verified": false
+}

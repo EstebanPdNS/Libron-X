@@ -1,0 +1,191 @@
+import LibronixCore
+import SwiftUI
+
+struct StudyDesktop: View {
+    @Bindable var workspace: StudyWorkspace
+    @Environment(\.openWindow) private var openWindow
+    var body: some View {
+        VStack(spacing: 0) {
+            GeometryReader { geometry in
+                ZStack(alignment: .topLeading) {
+                    Color(nsColor: .underPageBackgroundColor)
+                    if workspace.showsHome {
+                        VStack(spacing: 14) {
+                            Image(systemName: "books.vertical").font(.system(size: 36)).foregroundStyle(.secondary)
+                            Text(L("Espacio de trabajo")).font(.title2)
+                            Button(L("Abrir Mi biblioteca")) { openWindow(id: "library") }
+                            Text(L("Abre libros y organízalos dentro de esta ventana.")).foregroundStyle(.secondary)
+                        }.frame(maxWidth: .infinity, maxHeight: .infinity)
+                    }
+                    ForEach(workspace.showsHome ? [] : workspace.presentedReaders) { reader in
+                        let frame = reader.isMaximized ? PaneFrame(x: 0, y: 0, width: 1, height: 1) : reader.frame
+                        InternalReaderPane(reader: reader, workspace: workspace, canvas: geometry.size)
+                            .modifier(AppInterfaceLanguage())
+                            .frame(width: max(1, frame.width * geometry.size.width), height: max(1, frame.height * geometry.size.height))
+                            .offset(x: frame.x * geometry.size.width, y: frame.y * geometry.size.height)
+                            .zIndex(workspace.stackingLevel(of: reader))
+                    }
+                }.clipped()
+            }.environment(\.layoutDirection, .leftToRight)
+            if workspace.readers.contains(where: \.isMinimized) {
+                HStack {
+                    ForEach(workspace.readers.filter(\.isMinimized)) { reader in
+                        Button(reader.resource.title) { workspace.activate(reader) }.lineLimit(1)
+                    }; Spacer()
+                }.padding(5).background(.bar)
+            }
+            Divider()
+            HStack {
+                Text(workspace.activeReader?.resource.title ?? L("Listo")).lineLimit(1)
+                Spacer()
+                Text(LF("{panes} paneles · {resources} recursos", ["panes": String(workspace.readers.count), "resources": String(workspace.resources.count)]))
+            }.font(.system(size: 11)).foregroundStyle(.secondary).padding(.horizontal, 10).frame(height: 23)
+        }
+        .background(BibleVersionKeyboardRouting(workspace: workspace))
+        .task(id: workspace.availableResources + workspace.bibleReaders.map(\.resource)) {
+            await workspace.refreshBibleVersionChoices()
+        }
+        .toolbar { MainWorkspaceToolbar(workspace: workspace) }
+        .toolbarRole(.editor)
+        .modifier(MacWorkspaceTitlePresentation())
+        .sheet(item: $workspace.activeTool) { tool in WorkspaceToolsView(tool: tool, workspace: workspace) }
+        .alert("Libron-X", isPresented: Binding(get: { workspace.error != nil }, set: { if !$0 { workspace.error = nil } })) {
+            Button(L("Aceptar")) { workspace.error = nil }
+        } message: { Text(workspace.error ?? "") }
+    }
+}
+
+struct InternalReaderPane: View {
+    @Bindable var reader: ReaderSession
+    let workspace: StudyWorkspace
+    let canvas: CGSize
+    @RebuildViewState private var dragOrigin: PaneFrame?
+    @RebuildViewState private var resizeOrigin: PaneFrame?
+    @RebuildViewState private var showsWarnings = false
+    var body: some View {
+        VStack(spacing: 0) {
+            titleBar
+            ResourceReaderToolbar(reader: reader, workspace: workspace)
+            Divider()
+            if reader.showsLocator {
+                HStack {
+                    Text(reader.currentReference ?? reader.page.map { LF("Artículo {number}", ["number": String($0.destination.ordinal + 1)]) } ?? L("Sin ubicación")).font(.caption)
+                    Spacer()
+                    Button(L("Inicio")) { workspace.activate(reader); reader.load(.init(ordinal: 0)) }.disabled(reader.page == nil)
+                    Button(L("Final")) { workspace.activate(reader); if let page = reader.page { reader.load(.init(ordinal: page.sectionCount - 1)) } }.disabled(reader.page == nil)
+                }.padding(7).background(.bar)
+                Divider()
+            }
+            if reader.showsFind { ReaderFindBar(reader: reader, activate: { workspace.activate(reader) }); Divider() }
+            if let error = reader.error {
+                HStack { MacToolbarLabel(L("Error de lectura"), "exclamationmark.triangle"); Text(error).textSelection(.enabled); Spacer() }
+                    .font(.callout).padding(10).background(Color.orange.opacity(0.12))
+            }
+            HSplitView {
+                if reader.showsContents {
+                    ScrollView {
+                        LazyVStack(alignment: .leading, spacing: 2) {
+                            ForEach(reader.page?.entries ?? []) { entry in
+                                Button { workspace.activate(reader); reader.load(.init(ordinal: entry.ordinal)) } label: {
+                                    Text(entry.title).font(.system(size: 12)).frame(maxWidth: .infinity, alignment: .leading).padding(4).padding(.leading, CGFloat(entry.depth) * 12)
+                                }.buttonStyle(.plain)
+                            }
+                        }
+                    }.frame(minWidth: 120, idealWidth: 180, maxWidth: 280)
+                }
+                if let oeb = reader.page?.oeb {
+                    ReaderOEBView(reader: reader, page: oeb, activate: { workspace.activate(reader) }).frame(minWidth: 50)
+                } else {
+                    ReaderArticleFlowView(reader: reader, workspace: workspace,
+                        pages: reader.readingFlowPages, selectionRevision: reader.selectionRequest,
+                        scale: reader.renderingScale, fontsRevision: reader.sourceFontsRevision,
+                        highlights: reader.highlights, visibleLines: reader.visibleInterlinearLines)
+                    .frame(minWidth: 50)
+                }
+            }
+            HStack(spacing: 8) {
+                Button { workspace.activate(reader); reader.previousArticle() } label: { MacToolbarLabel(L("Artículo anterior"), "chevron.up") }
+                    .disabled(!reader.canGoToPreviousArticle).help(L("Artículo anterior"))
+                Button { workspace.activate(reader); reader.nextArticle() } label: { MacToolbarLabel(L("Artículo siguiente"), "chevron.down") }
+                    .disabled(!reader.canGoToNextArticle).help(L("Artículo siguiente"))
+                if reader.isLoading { ProgressView().controlSize(.mini); Button(L("Cancelar"), action: reader.cancel) }
+                else if let page = reader.page { Text(page.articlePositionLabel(language: AppPreferences.shared.language)).font(.system(size: 11)) }
+                Spacer()
+                if reader.page?.warning != nil || !reader.presentationWarnings.isEmpty {
+                    Button { showsWarnings.toggle() } label: { MacToolbarLabel(L("Detalles de lectura y formato"), "exclamationmark.circle") }.help(L("Detalles de lectura y formato"))
+                        .popover(isPresented: $showsWarnings) {
+                            ScrollView {
+                                Text(([reader.page?.warning].compactMap { $0 } + reader.presentationWarnings).joined(separator: "\n\n"))
+                                    .font(.callout).textSelection(.enabled).padding().frame(width: 380, alignment: .leading)
+                            }.frame(maxHeight: 320)
+                        }
+                }
+                Image(systemName: "arrow.up.left.and.arrow.down.right").font(.system(size: 10)).padding(4)
+                    .gesture(DragGesture().onChanged { value in
+                        guard !reader.isMaximized, canvas.width > 0, canvas.height > 0 else { return }
+                        if resizeOrigin == nil { resizeOrigin = reader.frame }
+                        guard var frame = resizeOrigin else { return }
+                        frame.width = min(1 - frame.x, max(0.2, frame.width + value.translation.width / canvas.width))
+                        frame.height = min(1 - frame.y, max(0.2, frame.height + value.translation.height / canvas.height))
+                        reader.frame = frame
+                    }.onEnded { _ in resizeOrigin = nil })
+                    .accessibilityLabel(L("Cambiar tamaño del panel"))
+            }.buttonStyle(.borderless).padding(.leading, 8).frame(height: 26).background(.bar)
+        }
+        .background(Color(nsColor: .textBackgroundColor))
+        .clipShape(paneShape)
+        .overlay(paneShape.strokeBorder(Color.gray.opacity(workspace.activeID == reader.id ? 0.45 : 0.25), lineWidth: 1))
+        .shadow(color: .black.opacity(workspace.activeID == reader.id ? 0.16 : 0.08), radius: 5, y: 2)
+        .accessibilityElement(children: .contain).accessibilityLabel(reader.resource.title)
+    }
+    private var paneShape: RoundedRectangle { RoundedRectangle(cornerRadius: 12, style: .continuous) }
+    private var titleBar: some View {
+        HStack(spacing: 8) {
+            HStack(spacing: 2) {
+                MacPanelControl(label: "Cerrar panel", color: Color(red: 1, green: 0.37, blue: 0.34), symbol: "xmark") { workspace.close(reader) }
+                MacPanelControl(label: "Minimizar panel", color: Color(red: 1, green: 0.74, blue: 0.18), symbol: "minus") { workspace.minimize(reader) }
+                MacPanelControl(label: "Ampliar o restaurar panel", color: Color(red: 0.16, green: 0.79, blue: 0.26), symbol: "plus") {
+                    workspace.activate(reader); reader.isMaximized.toggle()
+                }
+            }
+            MacToolbarLabel(L("Recurso"), "book.closed").foregroundStyle(.secondary)
+            Text(reader.resource.title).font(.system(size: 12, weight: .medium)).lineLimit(1)
+                .frame(maxWidth: .infinity, alignment: .center)
+                .contentShape(Rectangle())
+                .onTapGesture(count: 2) { workspace.activate(reader); reader.isMaximized.toggle() }
+                .gesture(DragGesture().onChanged { value in
+                    guard !reader.isMaximized, canvas.width > 0, canvas.height > 0 else { return }
+                    if dragOrigin == nil { dragOrigin = reader.frame; workspace.activate(reader) }
+                    guard var frame = dragOrigin else { return }
+                    frame.x += value.translation.width / canvas.width; frame.y += value.translation.height / canvas.height
+                    reader.frame = frame.constrained()
+                }.onEnded { _ in dragOrigin = nil })
+            Color.clear.frame(width: 76, height: 1)
+        }.padding(.horizontal, 7).frame(height: 34)
+            .background(.regularMaterial)
+            .simultaneousGesture(TapGesture().onEnded {
+                workspace.activate(reader)
+                NSApplication.shared.keyWindow?.makeFirstResponder(nil)
+            })
+    }
+}
+
+/// macOS-style traffic lights operate on the embedded panel, not the application window.
+private struct MacPanelControl: View {
+    let label: String
+    let color: Color
+    let symbol: String
+    let action: () -> Void
+    @RebuildViewState private var hovering = false
+    var body: some View {
+        Button(action: action) {
+            Circle().fill(color)
+                .overlay(Circle().stroke(.black.opacity(0.12), lineWidth: 0.5))
+                .overlay {
+                    if hovering { Image(systemName: symbol).font(.system(size: 7, weight: .bold)).foregroundStyle(.black.opacity(0.65)) }
+                }
+                .frame(width: 12, height: 12).frame(width: 18, height: 22)
+                .contentShape(Rectangle())
+        }.buttonStyle(.plain).onHover { hovering = $0 }.accessibilityLabel(L(label)).help(L(label))
+    }
+}

@@ -1,0 +1,327 @@
+{
+  "artwork_author": "Esteban",
+  "artwork_license": "No open artwork license asserted; tool/code licenses are separate",
+  "reference": "Resources/Brand/reference/Libron-X-official-Esteban.png",
+  "reference_sha256": "9851739ea9c77379e3bd4a3b64eae2faf452f73eec0668be1d87e44ec4cd26b8",
+  "source_size": [
+    1254,
+    1254
+  ],
+  "palette": {
+    "red": "#ec0812",
+    "ink": "#121212",
+    "white": "#ffffff"
+  },
+  "trace_options": {
+    "colormode": "binary",
+    "mode": "spline",
+    "filter_speckle": 4,
+    "corner_threshold": 55,
+    "length_threshold": 3.5,
+    "max_iterations": 20,
+    "splice_threshold": 45,
+    "path_precision": 3
+  },
+  "thresholds": {
+    "red_difference": 110,
+    "ink_max_channel": 130
+  },
+  "metrics": {
+    "emblem": {
+      "intersection_over_union": 0.9955679903115904,
+      "different_mask_pixels": 1215,
+      "source_bbox": [
+        295,
+        183,
+        959,
+        811
+      ],
+      "path_count": 1,
+      "compound_subpaths": 3
+    },
+    "wordmark": {
+      "intersection_over_union": 0.9865586742510024,
+      "different_mask_pixels": 1009,
+      "source_bbox": [
+        182,
+        881,
+        1076,
+        1059
+      ],
+      "path_count": 9,
+      "compound_subpaths": 11
+    }
+  },
+  "lettering": "Traced paths only, no font replacement",
+  "texture": "Flattened to median colors",
+  "icon_fit": {
+    "canvas": 1024,
+    "width": 880,
+    "aspect_ratio_preserved": true
+  },
+  "generator_package": "vtracer 0.6.15; embedded generator identifies engine 0.6.12",
+  "renderer": "CairoSVG 2.8.2",
+  "pixel_identical_claim": false,
+  "files": [
+    {
+      "path": "Resources/Brand/iconset/LibronX.iconset/icon_128x128.png",
+      "bytes": 4209,
+      "sha256": "698c6c5fd863a1ca03fb3139daef402694f4ec6a2958c25d6dbb7e1af23cb998"
+    },
+    {
+      "path": "Resources/Brand/iconset/LibronX.iconset/icon_128x128@2x.png",
+      "bytes": 8553,
+      "sha256": "ae99284b86cd9d417179fa3486b508642b778bc71dbdee080325c059eb3c2ea8"
+    },
+    {
+      "path": "Resources/Brand/iconset/LibronX.iconset/icon_16x16.png",
+      "bytes": 566,
+      "sha256": "a4b87679f010dde469560b80c395820cec01a10a649ee4c2737350c5c972b788"
+    },
+    {
+      "path": "Resources/Brand/iconset/LibronX.iconset/icon_16x16@2x.png",
+      "bytes": 1062,
+      "sha256": "97c3a97732c9dd55f3332d8ab7971d87b2c2043a9e1444924e8cb007d95bf578"
+    },
+    {
+      "path": "Resources/Brand/iconset/LibronX.iconset/icon_256x256.png",
+      "bytes": 8553,
+      "sha256": "ae99284b86cd9d417179fa3486b508642b778bc71dbdee080325c059eb3c2ea8"
+    },
+    {
+      "path": "Resources/Brand/iconset/LibronX.iconset/icon_256x256@2x.png",
+      "bytes": 18280,
+      "sha256": "a3fa6500fb4dceb1ce2ba18cf0166a023ab53b606279b3f1eba4614ca2b099a8"
+    },
+    {
+      "path": "Resources/Brand/iconset/LibronX.iconset/icon_32x32.png",
+      "bytes": 1062,
+      "sha256": "97c3a97732c9dd55f3332d8ab7971d87b2c2043a9e1444924e8cb007d95bf578"
+    },
+    {
+      "path": "Resources/Brand/iconset/LibronX.iconset/icon_32x32@2x.png",
+      "bytes": 2113,
+      "sha256": "39ab22af9b839faba7919ebfdcf8117d35720ba91cd85598ec36ff9698a294a4"
+    },
+    {
+      "path": "Resources/Brand/iconset/LibronX.iconset/icon_512x512.png",
+      "bytes": 18280,
+      "sha256": "a3fa6500fb4dceb1ce2ba18cf0166a023ab53b606279b3f1eba4614ca2b099a8"
+    },
+    {
+      "path": "Resources/Brand/iconset/LibronX.iconset/icon_512x512@2x.png",
+      "bytes": 39518,
+      "sha256": "d5f270d988821d6974e73078b3770d9d9a9c7b7b4d782227d8fd76c3d78a0d05"
+    },
+    {
+      "path": "Resources/Brand/pdf/Libron-X-app-icon.pdf",
+      "bytes": 6251,
+      "sha256": "2564c4e6b8d6f5d1c58d78a6b44455f18b621724e5bb843fd91409923d0e97f9"
+    },
+    {
+      "path": "Resources/Brand/pdf/Libron-X-black.pdf",
+      "bytes": 10919,
+      "sha256": "f6d0d0278d95b60455e7d005f9fb0786c3422f0b6a66678126e4fe15c757aa57"
+    },
+    {
+      "path": "Resources/Brand/pdf/Libron-X-color-dark.pdf",
+      "bytes": 11000,
+      "sha256": "eace63b7dab4252be0452cf42db4a8bdf0e8df50301b3d089ea3d988e515e51b"
+    },
+    {
+      "path": "Resources/Brand/pdf/Libron-X-color.pdf",
+      "bytes": 11008,
+      "sha256": "d498520c42a8d534ec6ffba3bfa2c995eeb0335da4e62fbad4f48b66f82b279e"
+    },
+    {
+      "path": "Resources/Brand/pdf/Libron-X-emblem-black.pdf",
+      "bytes": 5969,
+      "sha256": "2e51bab53e409116b891ffac070abe5e7018797212c1c94d9b9dc36c065c5058"
+    },
+    {
+      "path": "Resources/Brand/pdf/Libron-X-emblem-red-white.pdf",
+      "bytes": 6039,
+      "sha256": "6a5761f8fb34e4b0995cbcfbd5a507ad3ad44475c37f5e9d79d9960beaa28ccc"
+    },
+    {
+      "path": "Resources/Brand/pdf/Libron-X-emblem-red.pdf",
+      "bytes": 5978,
+      "sha256": "50c65dde8b437169cfca876fa008e2bdf06d9b524e00f78769f54ff14e4e0de5"
+    },
+    {
+      "path": "Resources/Brand/pdf/Libron-X-emblem-white.pdf",
+      "bytes": 5962,
+      "sha256": "c81c17ca9868130c91d5e23090d6d717e9cc884f98d8b5c022a5742b5b078697"
+    },
+    {
+      "path": "Resources/Brand/pdf/Libron-X-white.pdf",
+      "bytes": 10913,
+      "sha256": "7bd65c81a83247759a3df772eb212a1dff4e1e1d15ba025a72a343ee41f35c4b"
+    },
+    {
+      "path": "Resources/Brand/pdf/Libron-X-wordmark-black.pdf",
+      "bytes": 5865,
+      "sha256": "7979020ae2b857909d3ef7da7a9c8f72a2a1520248391ad1a3cd4c3c3641f021"
+    },
+    {
+      "path": "Resources/Brand/pdf/Libron-X-wordmark-white.pdf",
+      "bytes": 5860,
+      "sha256": "73281f93da54242a4d71853bafa9e72c7966335feadd67ffc63a9a72104acd09"
+    },
+    {
+      "path": "Resources/Brand/raster/Libron-X-app-icon-1024.png",
+      "bytes": 39518,
+      "sha256": "d5f270d988821d6974e73078b3770d9d9a9c7b7b4d782227d8fd76c3d78a0d05"
+    },
+    {
+      "path": "Resources/Brand/raster/Libron-X-black-1024.png",
+      "bytes": 39355,
+      "sha256": "2070a929f11cdaa1d3b564a0c2873be0b3c31ae6d969b0bb187c9ba30606ecb7"
+    },
+    {
+      "path": "Resources/Brand/raster/Libron-X-color-1024.png",
+      "bytes": 42124,
+      "sha256": "60b0f79725e37e54f6943867233e65ce22904b38631f06998ccb2cd97cec4c71"
+    },
+    {
+      "path": "Resources/Brand/raster/Libron-X-color-dark-1024.png",
+      "bytes": 39113,
+      "sha256": "dafd8598f5073a31f212fea2acf4efb567b75c98b3c9f643446bfbd44d34ff2a"
+    },
+    {
+      "path": "Resources/Brand/raster/Libron-X-emblem-black-1024.png",
+      "bytes": 38854,
+      "sha256": "76a7e115bc834746a68acceeb64fc533296d7aa1381e5e85978935410cef8914"
+    },
+    {
+      "path": "Resources/Brand/raster/Libron-X-emblem-red-1024.png",
+      "bytes": 39664,
+      "sha256": "b481235cc16c3578be8fe927094b926d560ac85986d396567bf248cc5a9a36f7"
+    },
+    {
+      "path": "Resources/Brand/raster/Libron-X-emblem-red-white-1024.png",
+      "bytes": 43590,
+      "sha256": "99e74974fe92f0fe0ab968f81900d9538c900addab18fb8f2e66d2cc5f248106"
+    },
+    {
+      "path": "Resources/Brand/raster/Libron-X-emblem-white-1024.png",
+      "bytes": 32561,
+      "sha256": "33fe3eb781df863af10a03b358c88137f8d8cd09ae192c28521727ac0c8c42a2"
+    },
+    {
+      "path": "Resources/Brand/raster/Libron-X-white-1024.png",
+      "bytes": 32783,
+      "sha256": "5cd6c911e76df6c7d3d40dde2f19c2704d05a7b91d8cdcdf7873071b590517e4"
+    },
+    {
+      "path": "Resources/Brand/raster/Libron-X-wordmark-black-1024.png",
+      "bytes": 21823,
+      "sha256": "c14202bfea6b8e168e9e5d5b1bbfa5de77a638fb239e575321f16aaa4b778817"
+    },
+    {
+      "path": "Resources/Brand/raster/Libron-X-wordmark-white-1024.png",
+      "bytes": 17529,
+      "sha256": "a8b68ec3e3f7efb2a28a922f987bd1bec3f372f645b5e19d9f6cd01237ae1c4b"
+    },
+    {
+      "path": "Resources/Brand/reference/Libron-X-official-Esteban.png",
+      "bytes": 970561,
+      "sha256": "9851739ea9c77379e3bd4a3b64eae2faf452f73eec0668be1d87e44ec4cd26b8"
+    },
+    {
+      "path": "Resources/Brand/vector/Libron-X-app-icon.svg",
+      "bytes": 16782,
+      "sha256": "3add1c44949feb2c6507db0610c24cca92501696fe99234c5347778cf9eab16a"
+    },
+    {
+      "path": "Resources/Brand/vector/Libron-X-black.svg",
+      "bytes": 23755,
+      "sha256": "47c450428fda3114b77aba2493f7f55f930dcd41ef25f8d83d6ea4e65288ba07"
+    },
+    {
+      "path": "Resources/Brand/vector/Libron-X-color-dark.svg",
+      "bytes": 27995,
+      "sha256": "abf931db76293605ef4dd85c77c51c89b55d7b91edd41c6e71dced0fddb1848c"
+    },
+    {
+      "path": "Resources/Brand/vector/Libron-X-color.svg",
+      "bytes": 27990,
+      "sha256": "1de058e4417dd554b098f8e41fba5007b7b43e91e6171bffa997283c9b321cb9"
+    },
+    {
+      "path": "Resources/Brand/vector/Libron-X-emblem-black.svg",
+      "bytes": 12439,
+      "sha256": "75b905f8be6661649ed9100407bf0e9904d8296bcf90db8a770b0f92c33957c8"
+    },
+    {
+      "path": "Resources/Brand/vector/Libron-X-emblem-red-white.svg",
+      "bytes": 16678,
+      "sha256": "25bde76e41f299ecaf9971bade8485b081a80e7c39461ffb8905d5e676d592d9"
+    },
+    {
+      "path": "Resources/Brand/vector/Libron-X-emblem-red.svg",
+      "bytes": 12437,
+      "sha256": "2505acf418f2fd27c24541497897bdd5db10a3c6c4f2ff5ce6fd17c1de496219"
+    },
+    {
+      "path": "Resources/Brand/vector/Libron-X-emblem-white.svg",
+      "bytes": 12439,
+      "sha256": "6f34a4ae0228e7e1f5bb29708695f2451a53a76ff717a0331e595774f59be742"
+    },
+    {
+      "path": "Resources/Brand/vector/Libron-X-white.svg",
+      "bytes": 23755,
+      "sha256": "9d9971d3e03b234b40c7f7561607aef0de3f46c9c18063f8dcd4ec31f7cbef77"
+    },
+    {
+      "path": "Resources/Brand/vector/Libron-X-wordmark-black.svg",
+      "bytes": 11812,
+      "sha256": "234c8a9e000bb52a2bd692f63c4bb0c441b7fb63f0ffb1c8abe461179cadcc51"
+    },
+    {
+      "path": "Resources/Brand/vector/Libron-X-wordmark-white.svg",
+      "bytes": 11812,
+      "sha256": "79ff8f7806575fb81521dcb8117c1a4e0ad61b6b012d86dcfeb9685dd3111afe"
+    },
+    {
+      "path": "Resources/Brand/vector/traced-emblem.svg",
+      "bytes": 12048,
+      "sha256": "6fcccebac75bf6f60eeae22ba9c0f9933a61e9e5ebdaf16a639a328952cf9419"
+    },
+    {
+      "path": "Resources/Brand/vector/traced-wordmark.svg",
+      "bytes": 11412,
+      "sha256": "aac1f2115e8a3238069760272cff67bdfe911f54010f1f0b05dccaf9e345e389"
+    },
+    {
+      "path": "Resources/Brand/verification/brand-proof.png",
+      "bytes": 380570,
+      "sha256": "ff1f4675f577a16b56651ca764bcf2bd41cc1120699c7af947387076f8af31bb"
+    },
+    {
+      "path": "Resources/Brand/verification/emblem-binary.png",
+      "bytes": 7666,
+      "sha256": "a62f395c93b8d135ebd148bde0b1d8940e933e8827a38fb64fc68eda2c9d0ab9"
+    },
+    {
+      "path": "Resources/Brand/verification/emblem-vector.png",
+      "bytes": 23819,
+      "sha256": "2ecc5ec351765182b1039123f4dff672f555b1690fbbcdd2db7ff6a0aff71bfa"
+    },
+    {
+      "path": "Resources/Brand/verification/pdf-color-render.png",
+      "bytes": 44898,
+      "sha256": "335bd92512784ef8acd67f0ac55ad87b22305f01453f4d39c25ce57e3ef3b4c8"
+    },
+    {
+      "path": "Resources/Brand/verification/wordmark-binary.png",
+      "bytes": 6537,
+      "sha256": "9f9402a23cdcfb2fbf808970d260b69001cbc5e37ff7b26b5c5c148cba559760"
+    },
+    {
+      "path": "Resources/Brand/verification/wordmark-vector.png",
+      "bytes": 20329,
+      "sha256": "c20f6ecf85eb340611629c4a6479f2ba9200fe442d079032d1dad94301b3abfb"
+    }
+  ]
+}
