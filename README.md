@@ -1,9 +1,5 @@
 <p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="BibliotecaLibre/Resources/Brand/vector/Libron-X-color-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="BibliotecaLibre/Resources/Brand/vector/Libron-X-color.svg">
-    <img alt="Libron-X" src="BibliotecaLibre/Resources/Brand/vector/Libron-X-color.svg" width="240">
-  </picture>
+  <img src="docs/images/libron-x-v0.1-hero.png" alt="Libron-X on a MacBook Pro, with two Bible readers side by side" width="1200">
 </p>
 
 A native macOS Bible study workspace for local Libronix libraries.
@@ -11,8 +7,6 @@ A native macOS Bible study workspace for local Libronix libraries.
 **v0.1 beta · Apple Silicon · macOS 14+**
 
 Read supported books, navigate Bible passages and arrange linked readers in one window. Libron-X is an independent Swift implementation. Compatibility with the original Libronix is incomplete.
-
-![Libron-X with English controls and two Bible readers side by side](docs/images/reading-workspace-v0.1.png)
 
 ## Try the beta
 
