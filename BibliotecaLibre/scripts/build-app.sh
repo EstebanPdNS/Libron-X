@@ -5,7 +5,7 @@ project_dir=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 cd "$project_dir"
 swift build --build-system native -c release --product LibronX
 binary_dir=$(swift build --build-system native -c release --show-bin-path)
-bundle_dir="$project_dir/dist/Libron-X.app"
+bundle_dir="$project_dir/dist/prototype/Libron-X.app"
 mkdir -p "$bundle_dir/Contents/MacOS" "$bundle_dir/Contents/Resources"
 cp "$binary_dir/LibronX" "$bundle_dir/Contents/MacOS/LibronX"
 cat > "$bundle_dir/Contents/Info.plist" <<'PLIST'

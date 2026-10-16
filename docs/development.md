@@ -21,7 +21,7 @@ The app builder compiles `LibronXRebuild` in release mode, installs its translat
 LIBRONX_BUILD_DIR="$PWD/.build/alternate" LIBRONX_APP_PATH="$PWD/dist/Libron-X-candidate.app"   scripts/build-rebuild-app.sh
 ```
 
-`swift build --product LibronX` and `scripts/build-app.sh` belong to the earlier prototype. Use `LibronXRebuild` for the current workspace.
+`swift build --product LibronX` and `scripts/build-app.sh` belong to the earlier prototype; its builder writes to `dist/prototype/Libron-X.app`. Use `LibronXRebuild` for the current workspace.
 
 ## Checks
 
