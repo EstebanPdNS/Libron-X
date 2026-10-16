@@ -10,7 +10,7 @@ Checked on October 16, 2026, on Apple Silicon with macOS 27.2 (26B5086k), Apple 
 | Bundle | Translation resource bundle, two approved icons and retained legal notices installed |
 | Signature | `codesign --verify --deep --strict` passed; ad-hoc signature, no notarization |
 | Native smoke check | Exact packaged app launched, restored two reading panes and opened Settings |
-| English presentation | Language switched in place; Home and General settings captured from the packaged app |
+| English presentation | Language switched in place; General settings captured from the packaged app; the main reader screenshot was supplied by the maintainer and included unchanged |
 | Preservation | Tests preserved; Source adapted for Swift 6.2 and SDK 26 compilation; existing expected test outcomes preserved; personal language and visible readings restored after checking |
 | Repository documentation | Relative file links checked within the public tree |
 
