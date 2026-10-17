@@ -1,14 +1,14 @@
 # Getting started
 
-## Install v0.2
+## Install v0.3
 
 The supplied app is built for Apple Silicon. Its deployment target is macOS 14; the release was checked on the development Mac, not every supported macOS version. Intel binaries are not included.
 
-1. Download `Libron-X-v0.2.zip` from the [v0.2 release](https://github.com/EstebanPdNS/Libron-X/releases/tag/v0.2).
+1. Download `Libron-X-v0.3.zip` from the [v0.3 release](https://github.com/EstebanPdNS/Libron-X/releases/tag/v0.3).
 2. Extract the ZIP and move `Libron-X.app` to Applications.
 3. Open it. The app is ad-hoc signed, without Developer ID signing or notarization. If macOS blocks it, review the source and Apple's [instructions for opening apps](https://support.apple.com/en-us/102445), or build it yourself. Do not disable system protections.
 
-The checksum file in the release identifies the uploaded ZIP. Compare it with `shasum -a 256 Libron-X-v0.2.zip`.
+The checksum file in the release identifies the uploaded ZIP. Compare it with `shasum -a 256 Libron-X-v0.3.zip`.
 
 ## Open a library
 

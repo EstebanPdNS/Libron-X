@@ -63,9 +63,9 @@ cat > "$bundle_dir/Contents/Info.plist" <<'PLIST'
 <key>CFBundleName</key><string>Libron-X</string>
 <key>CFBundleDisplayName</key><string>Libron-X</string>
 <key>CFBundleIdentifier</key><string>org.libronx.mac.rebuild</string>
-<key>CFBundleVersion</key><string>24</string>
-<key>CFBundleShortVersionString</key><string>0.2.0</string>
-<key>LibronXReleaseVersion</key><string>0.2</string>
+<key>CFBundleVersion</key><string>25</string>
+<key>CFBundleShortVersionString</key><string>0.3.0</string>
+<key>LibronXReleaseVersion</key><string>0.3</string>
 <key>LibronXUpdateChannel</key><string>beta</string>
 <key>CFBundleExecutable</key><string>LibronXRebuild</string>
 <key>CFBundleDevelopmentRegion</key><string>es</string>

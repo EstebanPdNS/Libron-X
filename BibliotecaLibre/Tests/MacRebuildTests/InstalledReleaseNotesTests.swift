@@ -4,7 +4,7 @@ import Testing
 
 struct InstalledReleaseNotesTests {
     @Test func bundledNotesMatchOnlyTheirExactInstalledVersionAndHaveAllTranslations() throws {
-        let notes = try #require(InstalledReleaseNotes.current(version: "0.2"))
+        let notes = try #require(InstalledReleaseNotes.current(version: "0.3"))
         #expect(notes.changes.count >= 7)
         #expect(Set(notes.changes).count == notes.changes.count)
         for key in notes.changes {

@@ -16,19 +16,19 @@ open /Applications/Libron-X.app
 The test wrapper supplies Swift Testing macro paths for Command Line Tools installations. It disables XCTest because the suites use Swift Testing. Corpus checks skip unless their explicitly named `LIBRONX_*` environment variables point to owner-supplied local inputs. Do not treat skipped checks as corpus acceptance.
 
 The app builder compiles `LibronXRebuild` in release mode, installs translations,
-approved icons and offline dictionaries, writes v0.2 metadata and ad-hoc signs the
+approved icons and offline dictionaries, writes v0.3 metadata and ad-hoc signs the
 bundle. Close Libron-X before building. It preserves source snapshots and replaces
 `/Applications/Libron-X.app`, moving the previous bundle to Trash.
 
 The large dictionary packages are distributed in the release ZIP, rather than Git.
-Before a source build, extract the v0.2 app and copy its attributed packages into
+Before a source build, extract the v0.3 app and copy its attributed packages into
 the checkout:
 
 ```sh
 cp -R /Applications/Libron-X.app/Contents/Resources/BundledDictionaries/ Resources/BundledDictionaries/
 ```
 
-Alternatively, use the same directory from an extracted v0.2 app in another path.
+Alternatively, use the same directory from an extracted v0.3 app in another path.
 Each package includes exact source data, notices and conversion code. The catalog
 records dataset and payload hashes. `scripts/vendor-dictionaries.py` rebuilds the
 packages when its exact source inputs and notices have been restored under

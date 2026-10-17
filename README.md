@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/EstebanPdNS/Libron-X/releases/tag/v0.2"><img src="docs/images/badges/prerelease.svg" alt="Prerelease: v0.2" height="22"></a>
+  <a href="https://github.com/EstebanPdNS/Libron-X/releases/tag/v0.3"><img src="docs/images/badges/prerelease.svg" alt="Prerelease: v0.3" height="22"></a>
   <a href="docs/getting-started.md"><img src="docs/images/badges/macos.svg" alt="macOS 14+ · Apple Silicon" height="22"></a>
   <a href="https://github.com/EstebanPdNS/Libron-X/commits/main/"><img src="docs/images/badges/development.svg" alt="Development: active" height="22"></a>
   <a href="LICENSE"><img src="docs/images/badges/license.svg" alt="License: MIT" height="22"></a>
@@ -45,15 +45,15 @@
 
 ## Download
 
-<a href="https://github.com/EstebanPdNS/Libron-X/releases/download/v0.2/Libron-X-v0.2.zip"><img src="docs/images/download-beta.svg" alt="Download macOS beta" width="238" height="46"></a>
+<a href="https://github.com/EstebanPdNS/Libron-X/releases/download/v0.3/Libron-X-v0.3.zip"><img src="docs/images/download-beta.svg" alt="Download macOS beta" width="238" height="46"></a>
 
-**v0.2 is a prerelease in active development.** Requires macOS 14+ and Apple Silicon.
+**v0.3 is a prerelease in active development.** Requires macOS 14+ and Apple Silicon.
 
 1. Download the ZIP and move **Libron-X.app** to Applications.
 2. Follow the [installation guide](docs/getting-started.md) to open the app.
 3. Choose your local library and open your first books.
 
-[Release notes](https://github.com/EstebanPdNS/Libron-X/releases/tag/v0.2) · [Installation guide](docs/getting-started.md)
+[Release notes](https://github.com/EstebanPdNS/Libron-X/releases/tag/v0.3) · [Installation guide](docs/getting-started.md)
 
 ## Documentation
 
@@ -76,7 +76,7 @@ scripts/build-rebuild-app.sh
 open /Applications/Libron-X.app
 ```
 
-Restore the bundled dictionary packages from the v0.2 app before building; see the [development guide](docs/development.md). The first build downloads pinned Swift package dependencies. See the [development guide](docs/development.md) for details.
+Restore the bundled dictionary packages from the v0.3 app before building; see the [development guide](docs/development.md). The first build downloads pinned Swift package dependencies.
 
 </details>
 

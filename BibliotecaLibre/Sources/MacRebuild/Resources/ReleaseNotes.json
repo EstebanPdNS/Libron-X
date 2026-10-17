@@ -1,6 +1,6 @@
 [
   {
-    "version": "0.2",
+    "version": "0.3",
     "changes": [
       "Formato .libron con metadatos, procedencia y copias opcionales en backup.",
       "Importación y lectura de recursos e-Sword y EPUB compatibles.",
@@ -15,6 +15,16 @@
       "Acceso al directorio de recursos desde la biblioteca.",
       "Versión y registro de cambios integrados en Ajustes.",
       "Ayuda contextual con «¿Qué es esto?» y ajustes más compactos."
+    ]
+  },
+  {
+    "version": "0.2",
+    "changes": [
+      "Formato .libron con metadatos, procedencia y copias opcionales en backup.",
+      "Importación y lectura de recursos e-Sword y EPUB compatibles.",
+      "Columnas, filtros, búsqueda por idioma y grupos automáticos de Biblias.",
+      "Fuentes del sistema y consulta de diccionarios al seleccionar una palabra.",
+      "Ayudas visuales de importación y diccionarios en los diez idiomas."
     ]
   },
   {
