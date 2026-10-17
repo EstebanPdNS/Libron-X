@@ -20,6 +20,7 @@ struct ParallelBibleSet: Codable, Identifiable, Equatable {
     var id = UUID()
     var name: String
     var members: [ParallelBibleMember] = []
+    var automaticLanguage: String? = nil
 }
 struct ParallelBibleSetsSnapshot: Codable {
     var schemaVersion = 1

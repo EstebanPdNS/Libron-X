@@ -15,6 +15,7 @@ struct LegacyDocumentDecoder {
     private var tableCount = 0
     private var cellCount = 0
     private var labels = 0
+    private var recoveredClosingReferences = 0
 
     init(data: Data, section: LegacySectionDescriptor) {
         self.data = data; self.section = section
@@ -48,6 +49,9 @@ struct LegacyDocumentDecoder {
         guard cursor == data.count else { throw LegacyContentError.characterCountMismatch }
         let paragraphs = documents.flatMap { document in document.paragraphs.map { projected($0, by: document.projectedCharacterBase) } }
         var warnings: [String] = []
+        if recoveredClosingReferences > 0 {
+            warnings.append("Recovered malformed closing reference metadata: \(recoveredClosingReferences). The raw marker, complete following text and checked paragraph extents are retained; no reference target is invented.")
+        }
         for document in documents where !document.hasEmptyExtentSentinel &&
             UInt64(document.projectedCharacterCount) != UInt64(document.declaredCharacterExtentBits) {
             warnings.append("El documento conserva su extensión original (\(document.declaredCharacterExtentBits)) y todo su texto (\(document.projectedCharacterCount) unidades). La proyección plana es incompatible; las posiciones nativas requieren su conversión específica.")
@@ -124,7 +128,8 @@ struct LegacyDocumentDecoder {
     private func projected(_ graphic: LegacyGraphicRun, by base: Int) -> LegacyGraphicRun {
         LegacyGraphicRun(sourceRunFlags: graphic.sourceRunFlags, attribute: graphic.attribute, reference: graphic.reference,
             characterOffset: graphic.characterOffset + base, decodedOffset: graphic.decodedOffset, fileOffset: graphic.fileOffset, rawHeaderHex: graphic.rawHeaderHex,
-            extendedAttributes: graphic.extendedAttributes)
+            extendedAttributes: graphic.extendedAttributes, embeddedData:graphic.embeddedData,embeddedFormat:graphic.embeddedFormat,
+            intrinsicWidth:graphic.intrinsicWidth,intrinsicHeight:graphic.intrinsicHeight)
     }
     private func projected(_ unit: LegacyInterlinearRun, by base: Int) -> LegacyInterlinearRun {
         LegacyInterlinearRun(token: unit.token, sourceRunFlags: unit.sourceRunFlags, attribute: unit.attribute,
@@ -351,25 +356,56 @@ struct LegacyDocumentDecoder {
                 return (token, "")
             }
             if type == 8 {
-                let schemeLength = Int(Int16(bitPattern: try word()))
-                guard (1...20).contains(schemeLength) else { throw unsupported(begin) }
-                let scheme = try bytes(schemeLength)
-                let componentCount = Int(Int16(bitPattern: try word()))
-                guard (1...64).contains(componentCount) else { throw unsupported(begin) }
-                try ensure(componentCount * 4)
-                var components: [UInt32] = []
-                components.reserveCapacity(componentCount)
-                for _ in 0..<componentCount { components.append(try integer()) }
-                if capture { anchors.append(LegacyReferenceAnchor(reference: nil, flags: flags, dataTypeCode: type,
-                    characterOffset: offset, decodedOffset: UInt64(begin),
-                    structuredReference: LegacyStructuredReference(schemeBytes: scheme, componentBits: components))) }
-                return (token, "")
+                let payloadStart = cursor
+                do {
+                    let schemeLength = Int(Int16(bitPattern: try word()))
+                    guard (1...20).contains(schemeLength) else { throw unsupported(begin) }
+                    let scheme = try bytes(schemeLength)
+                    let componentCount = Int(Int16(bitPattern: try word()))
+                    guard (1...64).contains(componentCount) else { throw unsupported(begin) }
+                    try ensure(componentCount * 4)
+                    var components: [UInt32] = []
+                    components.reserveCapacity(componentCount)
+                    for _ in 0..<componentCount { components.append(try integer()) }
+                    if capture { anchors.append(LegacyReferenceAnchor(reference:nil,flags:flags,dataTypeCode:type,
+                        characterOffset:offset,decodedOffset:UInt64(begin),structuredReference:LegacyStructuredReference(schemeBytes:scheme,componentBits:components))) }
+                    return (token, "")
+                } catch {
+                    let failure = error
+                    cursor = payloadStart
+                    // A damaged closing marker may lack its serialized CScr.
+                    // Recover only a fully checked following text run. The outer
+                    // run count, paragraph extent and complete document cursor
+                    // still have to agree; no printable-text scanning is used.
+                    guard flags & 0x80 != 0, cursor <= data.count-2,
+                          [0x11,0x12,0x13].contains(value16(cursor)) else { throw failure }
+                    var probe = self
+                    guard let next = try? probe.readRun(offset:offset,capture:false,depth:depth+1), !next.text.isEmpty else { throw failure }
+                    recoveredClosingReferences += 1
+                    if capture { anchors.append(LegacyReferenceAnchor(reference:nil,flags:flags,dataTypeCode:type,
+                        characterOffset:offset,decodedOffset:UInt64(begin),serializedReference:data.subdata(in:begin..<payloadStart))) }
+                    return (token, "")
+                }
             }
             let length = Int(try word())
             let reference = LegacyResourceReader.decodeCP1252(try bytes(length))
             if capture { anchors.append(LegacyReferenceAnchor(reference: reference, flags: flags, dataTypeCode: type,
                 characterOffset: offset, decodedOffset: UInt64(begin))) }
             return (token, "")
+        case 0x31:
+            // CWMFRun stream constructor 0x14131f0e: shared attributes,
+            // signed x/y extents, byte count, then the exact metafile bytes.
+            let (flags,attribute,extended) = try sharedAttributes()
+            let width = Int(Int16(bitPattern:try word())), height = Int(Int16(bitPattern:try word()))
+            let length = Int(try integer()), headerEnd = cursor
+            guard length > 0, length <= 16*1024*1024 else { throw LegacyContentError.contentLimitExceeded }
+            let embedded = try bytes(length)
+            let graphic = LegacyGraphicRun(sourceRunFlags:flags,attribute:attribute,reference:"!embedded-\(section.ordinal)-\(begin).wmf",
+                characterOffset:offset,decodedOffset:UInt64(begin),fileOffset:physical(begin),
+                rawHeaderHex:data[begin..<headerEnd].map { String(format:"%02x",$0) }.joined(),extendedAttributes:extended,
+                embeddedData:embedded,embeddedFormat:"wmf",intrinsicWidth:width,intrinsicHeight:height)
+            if capture { graphics.append(graphic) }
+            return (token,graphic.logicalText)
         case 0x61:
             try ensureHeader(6, at: begin)
             let (flags, attribute, extended) = try sharedAttributes()

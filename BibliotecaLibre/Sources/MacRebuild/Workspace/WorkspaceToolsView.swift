@@ -23,7 +23,7 @@ struct WorkspaceToolsView: View {
             case .windows: WorkspaceWindowsView(workspace: workspace)
             case .parallelSets: ParallelBibleSettingsView(workspace: workspace)
             }
-        }.frame(minWidth: 680, idealWidth: 820, minHeight: 520, idealHeight: 620)
+        }.frame(minWidth: tool == .information ? 700 : 680, idealWidth: tool == .information ? 700 : 820, minHeight: tool == .information ? nil : 520, idealHeight: tool == .information ? nil : 620)
             .modifier(MacPanelControlPresentation())
     }
     private var title: String {
@@ -95,33 +95,124 @@ struct WorkspaceSearchView: View {
 
 struct ResourceInformationView: View {
     let reader: ReaderSession?
+    @RebuildViewState private var contentHeight: CGFloat = 480
+    @RebuildViewState private var indexCount: Int?
+    @RebuildViewState private var normalization: LibronNormalizationReceipt?
+    @RebuildViewState private var indexError: String?
+    @RebuildViewState private var detailsExpanded = false
+    private let fields: [LibraryField] = [.author, .language, .type, .category, .subcategory, .year,
+        .publisher, .edition, .collection, .origin, .tags, .coverage]
     var body: some View {
         ScrollView {
-            if let reader {
-                Grid(alignment: .leading, horizontalSpacing: 20, verticalSpacing: 14) {
-                    row("Título", reader.resource.title)
-                    row("Autor", reader.resource.author ?? "")
-                    row("Idiomas", reader.resource.languages.joined(separator: ", "))
-                    row("Formato", reader.resource.format.displayName)
-                    row("Archivo", reader.resource.location.path)
-                    row("Tamaño", ByteCountFormatter.string(fromByteCount: reader.resource.byteCount, countStyle: .file))
-                    if let page = reader.page {
-                        row("Ubicación", reader.currentReference ?? "Artículo \(page.destination.ordinal + 1)")
-                        row("Artículos", String(page.sectionCount))
-                        row("Imágenes del artículo", String(page.graphics.count))
+            VStack(alignment: .leading, spacing: 18) {
+                if let reader {
+                    let resource = reader.resource
+                    let metadata = LibronMetadata.deriving(resource)
+                    HStack(alignment: .top, spacing: 14) {
+                        Image(systemName: reader.isDictionary ? "character.book.closed" : "book.closed")
+                            .font(.system(size: 28)).foregroundStyle(.tint).frame(width: 44, height: 48)
+                            .background(.quaternary, in: RoundedRectangle(cornerRadius: 10))
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text(metadata.title).font(.title2.weight(.semibold)).fixedSize(horizontal: false, vertical: true)
+                            if let subtitle = metadata.subtitle, !subtitle.isEmpty { Text(subtitle).foregroundStyle(.secondary) }
+                            Text(resource.packageLocation == nil ? resource.format.displayName : ".libron")
+                                .font(.caption.weight(.medium)).foregroundStyle(.secondary)
+                        }
                     }
-                }.textSelection(.enabled).padding(20)
-            } else { Text(L("Abre un recurso para ver sus propiedades.")).padding() }
+                    LazyVGrid(columns: [GridItem(.flexible(), alignment: .topLeading), GridItem(.flexible(), alignment: .topLeading)], alignment: .leading, spacing: 14) {
+                        ForEach(fields) { field in
+                            VStack(alignment: .leading, spacing: 3) {
+                                Text(L(field.title)).font(.caption).foregroundStyle(.secondary)
+                                let value = field.value(resource)
+                                Text(value.isEmpty ? "—" : value).frame(maxWidth: .infinity, alignment: .leading)
+                            }.fixedSize(horizontal: false, vertical: true)
+                        }
+                    }
+                    if reader.isDictionary {
+                        Divider()
+                        HStack {
+                            Label(L("Índice de palabras"), systemImage: "text.book.closed")
+                            Spacer()
+                            if let indexCount { Text(LF("{count} entradas", ["count": indexCount.formatted()])).foregroundStyle(.secondary) }
+                            else if let indexError { Text(indexError).font(.caption).foregroundStyle(.secondary) }
+                            else { ProgressView().controlSize(.small) }
+                        }
+                    }
+                    if let page = reader.page {
+                        Divider()
+                        HStack(alignment: .top, spacing: 24) {
+                            statistic("Ubicación", reader.currentReference ?? LF("Artículo {number}", ["number": String(page.destination.ordinal + 1)]))
+                            statistic("Artículos", page.sectionCount.formatted())
+                            statistic("Imágenes del artículo", page.graphics.count.formatted())
+                        }
+                    }
+                    Divider()
+                    DisclosureGroup(L("Detalles del archivo"), isExpanded: $detailsExpanded) {
+                        Grid(alignment: .leading, horizontalSpacing: 16, verticalSpacing: 10) {
+                            detail("Formato original", resource.format.displayName)
+                            if let normalization {
+                                detail("Estado de conversión", L(normalization.state == "complete" ? "Contenido nativo verificado" : "Conversión pendiente"))
+                                detail("Secciones verificadas", "\(normalization.checkedSections) / \(normalization.sections)")
+                                if !normalization.warnings.isEmpty { detail("Advertencias de conversión",normalization.warnings.joined(separator:"\n")) }
+                            }
+
+                            detail("Tamaño", ByteCountFormatter.string(fromByteCount: resource.byteCount, countStyle: .file))
+                            if let package = resource.packageLocation { detail("Paquete .libron", package.path) }
+                            detail("Archivo", resource.location.path)
+                            ForEach([LibraryField.contributors, .originalYear]) { field in
+                                let value = field.value(resource)
+                                if !value.isEmpty { detail(field.title, value) }
+                            }
+                            if let abbreviation = metadata.abbreviation { detail("Abreviatura", abbreviation) }
+                            if let originalTitle = metadata.originalTitle { detail("Título original", originalTitle) }
+                            ForEach(Array(metadata.evidence.filter { ["license", "source"].contains($0.field) }.enumerated()), id: \.offset) { _, evidence in
+                                detail(evidence.field == "license" ? "Licencia" : "Origen", evidence.value)
+                            }
+                        }.padding(.top, 10)
+                    }
+                } else { Text(L("Abre un recurso para ver sus propiedades.")) }
+            }.textSelection(.enabled).padding(22)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .onGeometryChange(for: CGFloat.self) { $0.size.height } action: { contentHeight = $0 }
+        }.frame(width: 700, height: min(contentHeight, max(320, (NSScreen.main?.visibleFrame.height ?? 900) * 0.72)))
+            .task(id: reader?.resource.id) {
+                indexCount = nil; indexError = nil; normalization = nil
+                if let package = reader?.resource.packageLocation,
+                   let data = try? Data(contentsOf:package.appendingPathComponent("normalized/conversion.json")) {
+                    normalization = try? JSONDecoder().decode(LibronNormalizationReceipt.self,from:data)
+                }
+                guard let reader, reader.isDictionary else { return }
+                do {
+                    if reader.resource.format == .libronDictionary { indexCount = try LibronDictionaryDatabase.count(reader.resource.location) }
+                    else { indexCount = try await LibronDictionaryIndexService.shared.index(reader.resource).entries.count }
+                }
+                catch { indexError = error.localizedDescription }
+            }
+    }
+    private func statistic(_ label: String, _ value: String) -> some View {
+        VStack(alignment: .leading, spacing: 3) {
+            Text(L(label)).font(.caption).foregroundStyle(.secondary)
+            Text(value).font(.callout).lineLimit(2)
         }.frame(maxWidth: .infinity, alignment: .leading)
     }
-    private func row(_ label: String, _ value: String) -> some View { GridRow { Text(L(label)).foregroundStyle(.secondary); Text(value).frame(maxWidth: .infinity, alignment: .leading) } }
+    private func detail(_ label: String, _ value: String) -> some View {
+        GridRow(alignment: .top) {
+            Text(L(label)).foregroundStyle(.secondary)
+            Text(value).frame(maxWidth: .infinity, alignment: .leading).fixedSize(horizontal: false, vertical: true)
+        }.font(.callout)
+    }
 }
 
 struct ResourceManagerView: View {
     @Bindable var workspace: StudyWorkspace
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            HStack { Text(LF("{count} recursos", ["count": String(workspace.resources.count)])).font(.headline); Spacer(); Button(L("Agregar carpeta…"), action: workspace.chooseLibrary) }
+            HStack {
+                Text(LF("{count} recursos", ["count": String(workspace.resources.count)])).font(.headline)
+                Spacer()
+                ResourceDirectoryButton(workspace: workspace)
+                Button(L("Agregar carpeta…"), action: workspace.chooseLibrary)
+            }
             Text(L("Los recursos LSF disponibles se abren localmente. Los formatos que aún requieren un lector y los servicios de licencias que no están disponibles se indican en cada recurso."))
                 .font(.callout).foregroundStyle(.secondary)
             List(workspace.resources) { resource in

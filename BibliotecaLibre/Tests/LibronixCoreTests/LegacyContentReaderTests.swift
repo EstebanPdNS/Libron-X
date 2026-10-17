@@ -544,6 +544,21 @@ struct LegacyContentReaderTests {
         return output
     }
 
+    @Test func malformedClosingReferenceKeepsFollowingTextAndRequiresCompleteStructuralAgreement() throws {
+        let original = payload([(Data("317".utf8),1033,0,0)])
+        let marker = Data([0x51,0,0x80,0,8,0])
+        var data = original.prefix(36)+marker+original.dropFirst(36)
+        put16(2,&data,24);put32(UInt32(data.count),&data,0)
+        let content = try LegacyContentReader.decodeSimpleLatinRuns(data,section:section(length:data.count))
+        #expect(content.plainText == "317")
+        #expect(content.anchors.first?.reference == nil && content.anchors.first?.serializedReference == marker)
+        #expect(content.warnings.contains { $0.hasPrefix("Recovered malformed closing reference metadata:") })
+        var opening = data;put16(0,&opening,38)
+        #expect(throws:(any Error).self) { try LegacyContentReader.decodeSimpleLatinRuns(opening,section:section(length:opening.count)) }
+        var wrongExtent = data;put16(9,&wrongExtent,32)
+        #expect(throws:(any Error).self) { try LegacyContentReader.decodeSimpleLatinRuns(wrongExtent,section:section(length:wrongExtent.count)) }
+    }
+
     private func section(length: Int) -> LegacySectionDescriptor {
         LegacySectionDescriptor(ordinal: 0, headerOffset: 94, payloadOffset: 100,
                                 storedLength: UInt32(length), decodedLength: UInt32(length), mode: 0, codecWord: nil)

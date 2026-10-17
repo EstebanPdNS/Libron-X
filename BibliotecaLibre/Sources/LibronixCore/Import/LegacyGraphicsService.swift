@@ -10,7 +10,7 @@ public struct LegacyGraphicSourceStamp: Sendable, Equatable {
     public let modified: Date
     public let fileNumber: UInt64?
 }
-public struct LegacyGraphicAsset: Sendable {
+public struct LegacyGraphicAsset: Codable, Sendable {
     public let graphic: LegacyGraphicRun
     public let name: String
     public let data: Data
@@ -41,22 +41,36 @@ public actor LegacyGraphicsService {
         guard maximumTotalBytes > 0, maximumTotalBytes <= 128 * 1_024 * 1_024 else { throw LegacyBagError.assetLimit }
         guard try Self.fileStamp(url) == expectedSource else { throw LegacyIndicesError.sourceChanged }
         guard !graphics.isEmpty else { return .init(assets: [], warnings: []) }
-        let catalog: LegacyBagCatalog
+        var catalog: LegacyBagCatalog?
+        var catalogWarnings: [String] = []
         do {
             if let cache, cache.url == url, cache.stamp == expectedSource { catalog = cache.catalog }
             else {
-                catalog = try LegacyBagReader.inspect(url)
-                cache = (url, expectedSource, catalog)
+                let inspected = try LegacyBagReader.inspect(url)
+                catalog = inspected
+                cache = (url, expectedSource, inspected)
             }
         } catch is CancellationError { throw CancellationError() }
         catch {
             guard try Self.fileStamp(url) == expectedSource else { throw LegacyIndicesError.sourceChanged }
-            return .init(assets: [], warnings: ["Las imágenes del artículo no pudieron abrirse: \(error.localizedDescription)"])
+            catalogWarnings.append("Las imágenes del artículo no pudieron abrirse: \(error.localizedDescription)")
         }
-        var loaded: [String: (Data, String)] = [:], assets: [LegacyGraphicAsset] = [], warnings: [String] = []
+        var loaded: [String: (Data, String)] = [:], assets: [LegacyGraphicAsset] = [], warnings: [String] = catalogWarnings
         var total = 0
         for graphic in graphics {
             try Task.checkCancellation()
+            if let embedded = graphic.embeddedData {
+                guard embedded.count <= maximumTotalBytes-total else { throw LegacyBagError.assetLimit }
+                let bitmap = graphic.embeddedFormat == "wmf" ? LegacyWMF.rasterBitmap(embedded) : nil
+                let data = bitmap ?? embedded
+                guard data.count <= maximumTotalBytes-total else { throw LegacyBagError.assetLimit }
+                total += data.count
+                let name = (graphic.assetName ?? "embedded.wmf").replacingOccurrences(of:".wmf",with:bitmap == nil ? ".wmf" : ".bmp")
+                assets.append(.init(graphic:graphic,name:name,data:data,sha256:SHA256.hash(data:data).map { String(format:"%02x",$0) }.joined()))
+                if bitmap == nil { warnings.append("El gráfico incrustado conserva su metafile original y requiere un renderizador compatible.") }
+                continue
+            }
+            guard let catalog else { continue }
             guard let name = graphic.assetName else {
                 warnings.append("La referencia gráfica en la posición \(graphic.objectCharacterOffset) no pertenece al subconjunto de imágenes internas compatible.")
                 continue

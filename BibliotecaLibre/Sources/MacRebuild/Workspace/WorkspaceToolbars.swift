@@ -16,6 +16,8 @@ struct MainWorkspaceToolbar: ToolbarContent {
                 Button(L("Documento de estudio…"), action: workspace.openDocument)
                 Button(L("Área de trabajo…"), action: workspace.openWorkspace)
                 Button(L("Carpeta de recursos…"), action: workspace.chooseLibrary)
+                Button(L("Abrir directorio actual")) { workspace.openCurrentResourceDirectory() }
+                    .disabled(workspace.currentResourceDirectory == nil)
             } label: { MacToolbarMenuLabel(L("Abrir"), "folder") }.help(L("Abrir"))
             MacToolbarButton(L("Cargar área de trabajo"), "rectangle.stack", action: workspace.openWorkspace)
             MacToolbarButton(L("Guardar área de trabajo"), "square.and.arrow.down", action: workspace.saveWorkspace)
@@ -23,7 +25,6 @@ struct MainWorkspaceToolbar: ToolbarContent {
         if #available(macOS 26, *) { ToolbarSpacer(.fixed) }
         ToolbarItemGroup {
             ReaderZoomMenu(reader: workspace.activeReader)
-            ReaderMarkupMenu(workspace: workspace)
             Menu {
                 Button(L("Agregar ubicación actual"), action: workspace.addFavorite).disabled(workspace.activeReader?.page == nil)
                 Button(L("Organizar favoritos…")) { workspace.activeTool = .favorites }
@@ -39,19 +40,12 @@ struct MainWorkspaceToolbar: ToolbarContent {
                 if let reader = workspace.activeReader { workspace.duplicate(reader) }
             }.disabled(workspace.activeReader?.page == nil)
             BibleSynchronizationMenu(workspace: workspace, reader: workspace.activeReader.flatMap { $0.canSynchronizeBible ? $0 : nil } ?? workspace.bibleReaders.first)
-            Menu {
-                Button(L("Cascada")) { workspace.arrange(.cascade) }
-                Button(L("Mosaico vertical")) { workspace.arrange(.vertical) }
-                Button(L("Mosaico horizontal")) { workspace.arrange(.horizontal) }
-                Divider()
-                Button(L("Siguiente lectura")) { workspace.cycleReader() }
-                Button(L("Lectura anterior")) { workspace.cycleReader(backwards: true) }
-                Divider()
-                Button(L("Cerrar todo y abrir Inicio")) { workspace.closeAll(); workspace.showsHome = true }
-            } label: { MacToolbarMenuLabel(L("Organizar ventanas"), "rectangle.split.2x1") }.help(L("Organizar ventanas"))
+            PaneLayoutPicker(workspace: workspace)
         }
         if #available(macOS 26, *) { ToolbarSpacer(.fixed) }
         ToolbarItemGroup {
+            MacToolbarButton(L("Diccionarios"), "character.book.closed") { workspace.dictionary.openInside(workspace: workspace) }
+            MacToolbarButton(L("Buscar actualizaciones"), "arrow.down.circle") { AppUpdater.shared.check() }
             MacToolbarButton(L("Administrar recursos y licencias"), "lock.open") { workspace.activeTool = .resources }
             MacToolbarButton(L("Propiedades del recurso"), "info.circle") { workspace.activeTool = .information }
                 .disabled(workspace.activeReader == nil)
@@ -100,29 +94,80 @@ struct MainWorkspaceToolbar: ToolbarContent {
 struct ReaderZoomMenu: View {
     var reader: ReaderSession?
     var activate: () -> Void = {}
-    static let scales = [0.5,0.75,1,1.25,1.5,1.75,2,2.5,3]
+    @RebuildViewState private var expanded = false
     var body: some View {
-        Menu {
-            ForEach(Self.scales, id: \.self) { scale in
-                Button("\(reader?.textScale == scale ? "✓ " : "")\(Int(scale * 100)) %") { activate(); reader?.textScale = scale }
+        Button { activate(); expanded.toggle() } label: { MacToolbarLabel(L("Zoom del texto"), "textformat.size") }
+            .help(L("Zoom del texto")).disabled(reader == nil)
+            .macToolbarPopover(isPresented: $expanded, size: NSSize(width: 332, height: 145)) {
+                if let reader { ReaderZoomSlider(reader: reader) }
             }
-        } label: { MacToolbarLabel(L("Zoom del texto"), "textformat.size") }
-            .help(L("Zoom del texto")).disabled(reader == nil).menuIndicator(.hidden)
+    }
+}
+struct ReaderZoomSlider: View {
+    @Bindable var reader: ReaderSession
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                Text(L("Zoom del texto")).font(.headline)
+                HelpButton(topic: .zoom)
+                Spacer()
+                Text("\(Int((reader.textScale * 100).rounded())) %").monospacedDigit()
+            }
+            Slider(value: Binding(get: { reader.textScale * 100 }, set: {
+                if let scale = ReaderZoom.sliderScale(for: $0) { reader.textScale = scale }
+            }), in: 0...300, step: 5)
+                .accessibilityLabel(L("Zoom del texto"))
+                .accessibilityValue("\(Int((reader.textScale * 100).rounded())) %")
+            HStack {
+                Text("0 %").font(.caption).foregroundStyle(.secondary)
+                Spacer()
+                Button("100 %") { reader.textScale = 1 }.controlSize(.small).help(L("Restaurar tamaño del texto"))
+                Spacer()
+                Text("300 %").font(.caption).foregroundStyle(.secondary)
+            }
+        }.padding(16).frame(width: 300).modifier(MacPanelControlPresentation()).featureHelpTarget(.reading)
     }
 }
 struct ReaderMarkupMenu: View {
     @Bindable var workspace: StudyWorkspace
+    var reader: ReaderSession? = nil
+    @RebuildViewState private var expanded = false
+    private var target: ReaderSession? { reader ?? workspace.activeReader }
+    private let colors: [(String, Color, String)] = [
+        ("yellow", .yellow, "Resaltar en amarillo"),
+        ("green", .green, "Resaltar en verde"),
+        ("blue", .blue, "Resaltar en azul"),
+        ("pink", .pink, "Resaltar en rosa")
+    ]
     var body: some View {
-        Menu {
-            Button(L("Resaltar en amarillo")) { workspace.addHighlight("yellow") }
-            Button(L("Resaltar en verde")) { workspace.addHighlight("green") }
-            Button(L("Resaltar en azul")) { workspace.addHighlight("blue") }
-            Button(L("Resaltar en rosa")) { workspace.addHighlight("pink") }
-            Divider()
-            Button(L("Borrar marcación seleccionada"), action: workspace.eraseHighlight)
-        } label: { MacToolbarLabel(L("Marcación visual"), "highlighter") }
-            .help(L("Marcación visual")).menuIndicator(.hidden)
-            .disabled((workspace.activeReader?.selectedRange.length ?? 0) == 0)
+        Button {
+            if let target { workspace.activate(target) }
+            expanded.toggle()
+        } label: { MacToolbarLabel("Marcación visual", "highlighter") }
+            .help(L("Marcación visual"))
+            .disabled((target?.selectedRange.length ?? 0) == 0)
+            .macToolbarPopover(isPresented: $expanded, size: NSSize(width: 235, height: 58)) {
+                HStack(spacing: 8) {
+                    ForEach(colors, id: \.0) { key, color, title in
+                        Button {
+                            if let target { workspace.activate(target) }
+                            workspace.addHighlight(key); expanded = false
+                        } label: {
+                            RoundedRectangle(cornerRadius: 5).fill(color)
+                                .overlay(RoundedRectangle(cornerRadius: 5).strokeBorder(.primary.opacity(0.22), lineWidth: 1))
+                                .frame(width: 25, height: 25).frame(width: 33, height: 34)
+                        }.buttonStyle(.borderless).help(L(title)).accessibilityLabel(L(title))
+                            .featureHelpTarget(.marks)
+                    }
+                    Divider().frame(height: 25)
+                    Button {
+                        if let target { workspace.activate(target) }
+                        workspace.eraseHighlight(); expanded = false
+                    } label: { Image(systemName: "trash").font(.system(size: 17)).frame(width: 33, height: 34) }
+                        .buttonStyle(.borderless).help(L("Borrar marcación seleccionada"))
+                        .accessibilityLabel(L("Borrar marcación seleccionada")).featureHelpTarget(.marks)
+                }.padding(12).featureHelpTarget(.marks)
+            }
     }
 }
 
@@ -130,94 +175,160 @@ struct ResourceReaderToolbar: View {
     @Bindable var reader: ReaderSession
     @Bindable var workspace: StudyWorkspace
     @Environment(\.openWindow) private var openWindow
-    @FocusState private var referenceFocused: Bool
+    @RebuildViewState private var referenceDraft: String?
+    @RebuildViewState private var chapterBooks: [BibleChapterBook] = []
     var body: some View {
-        MacReaderToolbarSurface {
-            ViewThatFits(in: .horizontal) {
-                fullControls.fixedSize(horizontal: true, vertical: false)
-                compactControls
-                minimalControls
-            }
+        GeometryReader { geometry in
+            MacReaderToolbarSurface {
+                if reader.isDictionary { DictionaryReaderToolbar(reader: reader, workspace: workspace) }
+                else {
+                    HStack(spacing: 8) {
+                        referenceField.frame(width: geometry.size.width >= 620 ? 120 : 90)
+                        Spacer(minLength: 4)
+                        // Use the actual pane width, not competing mounted
+                        // popover anchors in ViewThatFits. Zooming must never
+                        // move a live popover between alternate toolbar trees.
+                        if geometry.size.width >= 820 { compactControls }
+                        else if geometry.size.width >= 620 { mediumControls }
+                        else if geometry.size.width >= 400 { minimalControls }
+                        else { essentialControls }
+                    }
+                }
+            }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, 8).frame(height: 44)
         .background(.bar)
         .transaction { $0.animation = nil }
-        .onChange(of: referenceFocused) { if referenceFocused { workspace.activate(reader) } }
-    }
-    private var fullControls: some View {
-        HStack(spacing: 8) {
-            referenceField.frame(width: 180)
-            MacReaderControlGroup {
-                icon("Ir a la referencia", "arrow.right", reader.goToReference)
-                referenceMenu
-                locatorMenu
-            }
-            MacReaderControlGroup {
-                referenceTargetButton
-                BibleSynchronizationMenu(workspace: workspace, reader: reader)
-                ParallelBibleMenu(workspace: workspace, reader: reader)
-            }
-            MacReaderControlGroup {
-                icon("Artículo anterior", "chevron.up", reader.previousArticle).disabled(!reader.canGoToPreviousArticle)
-                icon("Artículo siguiente", "chevron.down", reader.nextArticle).disabled(!reader.canGoToNextArticle)
-            }
-            navigationControls
-            MacReaderControlGroup {
-                icon("Contenido", "sidebar.left") { reader.showsContents.toggle() }
-                icon("Panel localizador", "rectangle.topthird.inset.filled") { reader.showsLocator.toggle() }
-                interlinearMenu
-            }
-            MacReaderControlGroup {
-                icon("Buscar en este recurso", "magnifyingglass") { reader.showFind() }
-                zoomMenu
-                graphicsMenu
-                actionsMenu(expanded: false)
-            }
+        // A committed navigation (including linked-pane navigation) supersedes
+        // an old editor draft; viewport-only updates must not erase typing.
+        .onChange(of: reader.selectionRequest) { referenceDraft = nil }
+        .task(id: reader.resource) {
+            chapterBooks = []
+            guard !reader.isDictionary else { return }
+            chapterBooks = (try? await BibleChapterCatalog.shared.books(in: reader.resource)) ?? []
         }
     }
     private var compactControls: some View {
         HStack(spacing: 8) {
-            referenceField.frame(minWidth: 100, idealWidth: 160, maxWidth: .infinity)
+            bookChapterControls()
+            versionControls
+            MacReaderControlGroup { referenceTargetButton }
             MacReaderControlGroup {
-                icon("Ir a la referencia", "arrow.right", reader.goToReference)
-                icon("Atrás", "chevron.left", reader.goBack).disabled(!reader.canGoBack)
-                icon("Adelante", "chevron.right", reader.goForward).disabled(!reader.canGoForward)
-            }
-            MacReaderControlGroup {
-                referenceTargetButton
-                BibleSynchronizationMenu(workspace: workspace, reader: reader)
-                icon("Contenido", "sidebar.left") { reader.showsContents.toggle() }
                 icon("Buscar en este recurso", "magnifyingglass") { reader.showFind() }
+                icon("Contenido", "sidebar.left") { reader.showsContents.toggle() }
                 zoomMenu
+                noteButton
+                ReaderMarkupMenu(workspace: workspace, reader: reader)
                 actionsMenu(expanded: true)
             }
+        }
+    }
+    private var mediumControls: some View {
+        HStack(spacing: 8) {
+            versionControls
+            MacReaderControlGroup { referenceTargetButton }
+            MacReaderControlGroup {
+                icon("Buscar en este recurso", "magnifyingglass") { reader.showFind() }
+                icon("Contenido", "sidebar.left") { reader.showsContents.toggle() }
+                zoomMenu
+                noteButton
+                ReaderMarkupMenu(workspace: workspace, reader: reader)
+                actionsMenu(expanded: true)
+            }
+        }
+    }
+    private var essentialControls: some View {
+        MacReaderControlGroup {
+            zoomMenu
+            noteButton
+            ReaderMarkupMenu(workspace: workspace, reader: reader)
+            actionsMenu(expanded: true)
         }
     }
     private var minimalControls: some View {
         HStack(spacing: 6) {
-            referenceField.frame(minWidth: 40, maxWidth: .infinity)
+            if reader.canSynchronizeBible { versionControls }
             MacReaderControlGroup {
-                BibleSynchronizationMenu(workspace: workspace, reader: reader)
+                zoomMenu
+                noteButton
+                ReaderMarkupMenu(workspace: workspace, reader: reader)
                 actionsMenu(expanded: true)
             }
         }
     }
+    private var noteButton: some View {
+        icon("Agregar nota", "square.and.pencil") { workspace.addNoteForSelection(reader) }
+            .featureHelpTarget(.documents)
+    }
     private var referenceField: some View {
-        TextField(L(reader.locatorIsArticle ? "Artículo" : "Referencia"), text: $reader.locator)
-            .onSubmit { workspace.activate(reader); reader.goToReference() }
-            .focused($referenceFocused)
-            .macInputStyle()
+        MacToolbarSearchField(text: Binding(get: { referenceDraft ?? reader.locator }, set: { referenceDraft = $0 }),
+            prompt: L(reader.locatorIsArticle ? "Artículo" : "Referencia"),
+            onSubmit: {
+                if let referenceDraft { reader.locator = referenceDraft }
+                referenceDraft = nil
+                NSApplication.shared.keyWindow?.makeFirstResponder(nil)
+                perform(reader.goToReference)
+            }, onEditingBegan: {
+                workspace.activate(reader)
+            }, onEditingEnded: {
+                if let referenceDraft { reader.locator = referenceDraft }
+                referenceDraft = nil
+            })
+            .frame(height: 32).modifier(MacToolbarSearchSurface())
             .help(reader.locatorIsArticle ? L("Número de artículo") : "Génesis 4:1 · Gen 4.1 · Gn 4,1 · Génesis 4")
             .environment(\.layoutDirection, .leftToRight)
+    }
+    private var currentChapter: LegacyPassageQuery? {
+        reader.currentReference.flatMap(LegacyPassageQuery.navigationInput)
+    }
+    @ViewBuilder private func bookChapterControls(inMenu: Bool = false) -> some View {
+        if !chapterBooks.isEmpty {
+            let selected = chapterBooks.first { $0.id == currentChapter?.sourceBookKey } ?? chapterBooks.first!
+            if inMenu {
+                bookMenu(selected, inMenu: true)
+                chapterMenu(selected, inMenu: true)
+            } else {
+                MacReaderControlGroup {
+                    bookMenu(selected, inMenu: false)
+                    Divider().frame(height: 16)
+                    chapterMenu(selected, inMenu: false)
+                }
+            }
+        }
+    }
+    private func bookMenu(_ selected: BibleChapterBook, inMenu: Bool) -> some View {
+        Menu {
+            ForEach(chapterBooks) { book in
+                Button(book.title(language: AppLanguage.saved())) { navigate(book, chapter: book.chapters.first ?? 1) }
+            }
+        } label: {
+            Text(inMenu ? L("Libro") : selected.title(language: AppLanguage.saved())).lineLimit(1).frame(maxWidth: inMenu ? nil : 112)
+        }.help(L("Libro")).accessibilityLabel(L("Libro")).featureHelpTarget(.bibleReading)
+    }
+    private func chapterMenu(_ selected: BibleChapterBook, inMenu: Bool) -> some View {
+        Menu {
+            ForEach(selected.chapters, id: \.self) { chapter in
+                Button(String(chapter)) { navigate(selected, chapter: chapter) }
+            }
+        } label: {
+            Text(inMenu ? L("Capítulo") : L("Capítulo") + " " + String(currentChapter?.chapter ?? selected.chapters.first ?? 1)).monospacedDigit()
+        }.help(L("Capítulo")).accessibilityLabel(L("Capítulo")).featureHelpTarget(.bibleReading)
+    }
+    private func navigate(_ book: BibleChapterBook, chapter: Int) {
+        perform {
+            reader.changeLocatorMode(false)
+            reader.locator = book.reference(chapter: chapter)
+            reader.goToReference()
+        }
     }
     private var referenceMenu: some View {
         Menu {
             ForEach(references, id: \.self) { reference in
                 Button(reference) { perform { reader.changeLocatorMode(false); reader.locator = reference; reader.goToReference() } }
             }
-        } label: { MacToolbarLabel(L("Ubicaciones de referencia"), "list.bullet") }
-            .menuIndicator(.hidden).help(L("Ubicaciones de referencia")).disabled(references.isEmpty)
+        } label: { MacToolbarLabel(L("Versículo"), "list.bullet") }
+            .menuIndicator(.hidden).help(L("Versículo")).disabled(references.isEmpty)
     }
     private var locatorMenu: some View {
         Menu {
@@ -237,14 +348,21 @@ struct ResourceReaderToolbar: View {
             } label: { MacToolbarLabel(L("Líneas del interlineal"), "text.alignleft") }.help(L("Líneas del interlineal")).menuIndicator(.hidden)
         }
     }
-    private var navigationControls: some View {
-        MacReaderControlGroup {
-            icon("Atrás", "chevron.left", reader.goBack).disabled(!reader.canGoBack)
-            icon("Adelante", "chevron.right", reader.goForward).disabled(!reader.canGoForward)
-            Menu { historyItems } label: { MacToolbarLabel(L("Historial de lectura"), "clock.arrow.circlepath") }
-                .menuIndicator(.hidden).help(L("Historial de lectura")).disabled(reader.history.count < 2)
+    @ViewBuilder private var versionControls: some View {
+        if reader.canSynchronizeBible {
+            MacReaderControlGroup {
+                icon("Versión anterior", "chevron.left") { workspace.cycleBibleVersion(reader, backwards: true) }.disabled(reader.isLoading)
+                ParallelBibleMenu(workspace: workspace, reader: reader)
+                icon("Versión siguiente", "chevron.right") { workspace.cycleBibleVersion(reader) }.disabled(reader.isLoading)
+            }
+        } else {
+            MacReaderControlGroup {
+                icon("Atrás", "chevron.left", reader.goBack).disabled(!reader.canGoBack)
+                icon("Adelante", "chevron.right", reader.goForward).disabled(!reader.canGoForward)
+            }
         }
     }
+    private var navigationControls: some View { versionControls }
     @ViewBuilder private var graphicsMenu: some View {
         if let assets = reader.page?.graphics, !assets.isEmpty {
             Menu {
@@ -257,8 +375,8 @@ struct ResourceReaderToolbar: View {
     private func actionsMenu(expanded: Bool) -> some View {
         Menu {
             if expanded {
-                Button(L("Ir a la referencia")) { perform(reader.goToReference) }
-                Menu(L("Ubicaciones de referencia")) {
+                bookChapterControls(inMenu: true)
+                Menu(L("Versículo")) {
                     ForEach(references, id: \.self) { reference in
                         Button(reference) { perform { reader.changeLocatorMode(false); reader.locator = reference; reader.goToReference() } }
                     }
@@ -277,9 +395,8 @@ struct ResourceReaderToolbar: View {
                 Toggle(L("Destino de las referencias"), isOn: Binding(
                     get: { workspace.referenceTargetID == reader.id },
                     set: { selected in perform { workspace.setReferenceTarget(selected, for: reader) } }))
-                ParallelBibleMenu(workspace: workspace, reader: reader)
+                ParallelBibleMenu(workspace: workspace, reader: reader, toolbarPresentation: false)
                 Button(L("Buscar en este recurso")) { perform(reader.showFind) }
-                zoomMenu
                 interlinearMenu
                 graphicsMenu
                 Divider()
@@ -292,20 +409,7 @@ struct ResourceReaderToolbar: View {
         } label: { MacToolbarLabel(L("Acciones de lectura"), "ellipsis") }
             .menuIndicator(.hidden).help(L("Acciones de lectura"))
     }
-    @ViewBuilder private var outputItems: some View {
-        Button(L("Copiar selección o artículo")) { workspace.activate(reader); ReaderOutputActions.copy(reader, workspace: workspace) }
-        Button(L("Agregar a favoritos")) { workspace.activate(reader); workspace.addFavorite() }
-        Button(L("Agregar nota sobre la selección")) { perform { workspace.addNoteForSelection(reader) } }
-        Divider()
-        Menu(L("Exportar")) {
-            Button(L("Texto…")) { perform { ReaderOutputActions.export(reader, type: "txt", workspace: workspace) } }
-            Button(L("Texto con imágenes (RTFD)…")) { perform { ReaderOutputActions.export(reader, type: "rtfd", workspace: workspace) } }.disabled(reader.page?.oeb != nil)
-            Button(L("HTML…")) { perform { ReaderOutputActions.export(reader, type: "html", workspace: workspace) } }
-            Button(L("PDF…")) { perform { ReaderOutputActions.export(reader, type: "pdf", workspace: workspace) } }
-            if reader.page?.oeb != nil { Button(L("Archivo web…")) { perform { ReaderOutputActions.export(reader, type: "webarchive", workspace: workspace) } } }
-        }
-        Button(L("Imprimir…")) { perform { ReaderOutputActions.printReader(reader, workspace: workspace) } }
-    }
+    private var outputItems: some View { ReaderOutputMenuItems(reader: reader, workspace: workspace) }
     @ViewBuilder private var historyItems: some View {
         ForEach(Array(reader.history.indices.reversed()), id: \.self) { index in
             let destination = reader.history[index]

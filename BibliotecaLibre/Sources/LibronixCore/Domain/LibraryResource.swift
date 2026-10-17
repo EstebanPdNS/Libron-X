@@ -3,10 +3,14 @@ import Foundation
 /// The physical format detected at the import boundary. Format is independent
 /// from permission to use a work and from whether its content decoder exists.
 public enum ResourceFormat: String, Codable, CaseIterable, Sendable {
-    case libronixLLS, libronixOEB, legacyLSF
+    case libronixLLS, libronixOEB, legacyLSF, eSwordSQLite, epub, logosModern, libronDictionary
 
     public var displayName: String {
         switch self {
+        case .libronDictionary: ".libron"
+        case .eSwordSQLite: "e-Sword"
+        case .epub: "EPUB"
+        case .logosModern: "Logos"
         case .libronixLLS: "Libronix LLS"
         case .libronixOEB: "Libronix OEB"
         case .legacyLSF: "Logos LSF"
@@ -28,6 +32,8 @@ public enum MetadataProvenance: String, Codable, Sendable {
 /// never transfers ownership or writes to that URL.
 public struct LibraryResource: Identifiable, Codable, Hashable, Sendable {
     public let id: String
+    public let libron: LibronMetadata?
+    public let packageLocation: URL?
     public let location: URL
     public let indexLocation: URL?
     public let title: String
@@ -45,8 +51,10 @@ public struct LibraryResource: Identifiable, Codable, Hashable, Sendable {
                 author: String? = nil, languages: [String] = [], byteCount: Int64,
                 format: ResourceFormat, support: ResourceSupport,
                 provenance: MetadataProvenance, legacyIdentifier: String? = nil,
-                isHelp: Bool = false, warnings: [String] = []) {
-        self.id = location.standardizedFileURL.path
+                isHelp: Bool = false, warnings: [String] = [], libron: LibronMetadata? = nil,
+                packageLocation: URL? = nil, stableID: String? = nil) {
+        self.id = stableID ?? location.standardizedFileURL.path
+        self.libron = libron; self.packageLocation = packageLocation
         self.location = location
         self.indexLocation = indexLocation
         self.title = title
@@ -61,7 +69,7 @@ public struct LibraryResource: Identifiable, Codable, Hashable, Sendable {
         self.warnings = warnings
     }
 
-    public var fileName: String { location.lastPathComponent }
+    public var fileName: String { (packageLocation ?? location).lastPathComponent }
 }
 
 public struct ImportProgress: Sendable {

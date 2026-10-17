@@ -9,6 +9,7 @@ import LibronixCore
         return flowPages.contains(where: { $0.destination.ordinal == page.destination.ordinal }) ? flowPages : [page]
     }
     func startReadingFlow() {
+        guard !isDictionary else { flowEnabled = false; flowPages = page.map { [$0] } ?? []; return }
         flowEnabled = true
         if flowPages.isEmpty, let page { flowPages = [page] }
         fillReadingFlow()

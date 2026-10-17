@@ -31,6 +31,9 @@ struct WorkspaceDocumentsView: View {
             if let error = personal.loadError { Text(error).foregroundStyle(.red).font(.caption) }
             Text(L("Los cambios se guardan en los datos propios de esta aplicación.")).font(.caption).foregroundStyle(.secondary)
         }.padding(16)
+            .onAppear {
+                if let id = workspace.pendingNoteID { selectedNote = id; workspace.pendingNoteID = nil }
+            }
             .onChange(of: personal.documents) { personal.scheduleSave() }
             .onChange(of: personal.selectedDocumentID) { selectedNote = nil }
     }

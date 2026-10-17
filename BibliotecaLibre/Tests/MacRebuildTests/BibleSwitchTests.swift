@@ -93,7 +93,7 @@ import Testing
             #expect(!BibleVersionKeyboardRouting.KeyView.accepts(try key(124, flags), responder: reading))
         }
         let editing = NSTextView(); editing.isEditable = true
-        for responder: NSResponder in [editing, NSTextField(), NSSearchField(), NSComboBox()] {
+        for responder: NSResponder in [editing, NSTextField(), NSSearchField(), NSComboBox(), NSSlider(), NSButton()] {
             #expect(!BibleVersionKeyboardRouting.KeyView.accepts(try key(124), responder: responder))
         }
         #expect(!BibleVersionKeyboardRouting.KeyView.accepts(try key(125), responder: reading))

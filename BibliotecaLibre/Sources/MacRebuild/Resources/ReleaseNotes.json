@@ -1,0 +1,39 @@
+[
+  {
+    "version": "0.2",
+    "changes": [
+      "Formato .libron con metadatos, procedencia y copias opcionales en backup.",
+      "Importación y lectura de recursos e-Sword y EPUB compatibles.",
+      "Columnas, filtros, búsqueda por idioma y grupos automáticos de Biblias.",
+      "Fuentes del sistema y consulta de diccionarios al seleccionar una palabra.",
+      "Ayudas visuales de importación y diccionarios en los diez idiomas.",
+      "Redimensionado desde los bordes y esquinas y ajuste de ventanas por arrastre.",
+      "Selector de distribución por ventana y cursores de redimensionado.",
+      "Actualizaciones desde GitHub con canales Stable y Beta.",
+      "Zoom de lectura de 0 a 300 % y sincronización desde la barra principal.",
+      "Iconos Red y Dark y ajustes reorganizados.",
+      "Acceso al directorio de recursos desde la biblioteca.",
+      "Versión y registro de cambios integrados en Ajustes.",
+      "Ayuda contextual con «¿Qué es esto?» y ajustes más compactos."
+    ]
+  },
+  {
+    "version": "0.1.1-beta.1",
+    "changes": [
+      "Redimensionado desde los bordes y esquinas y ajuste de ventanas por arrastre.",
+      "Selector de distribución por ventana y cursores de redimensionado.",
+      "Actualizaciones desde GitHub con canales Stable y Beta.",
+      "Zoom de lectura de 0 a 300 % y sincronización desde la barra principal.",
+      "Iconos Red y Dark y ajustes reorganizados.",
+      "Acceso al directorio de recursos desde la biblioteca.",
+      "Versión y registro de cambios integrados en Ajustes.",
+      "Ayuda contextual con «¿Qué es esto?» y ajustes más compactos."
+    ]
+  },
+  {
+    "version": "0.1",
+    "changes": [
+      "Primera beta pública."
+    ]
+  }
+]

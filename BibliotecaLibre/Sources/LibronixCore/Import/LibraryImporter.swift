@@ -30,7 +30,18 @@ public actor LibraryImporter {
             let ext = url.pathExtension.lowercased()
             let stem = url.deletingPathExtension().lastPathComponent
             let isHelp = stem.lowercased().hasPrefix("help-") || helpStems.contains(stem.uppercased())
-            if ext == "lsf" {
+            if ext == "libron" {
+                result.append(try LibronPackage.read(url).1)
+            } else if ESwordResource.extensions.contains(ext) {
+                result.append(try ESwordResource.inspect(url))
+            } else if ext == "epub" {
+                let archive = try EPUBArchive(url), m = archive.metadata
+                result.append(LibraryResource(location: url, title: m.title, author: m.authors.first, languages: m.languages,
+                    byteCount: size, format: .epub, support: .metadataOnly, provenance: .libronixMetadata, libron: m))
+            } else if ext.hasPrefix("logos") {
+                result.append(LibraryResource(location: url, title: stem, byteCount: size,
+                    format: ext == "epub" ? .epub : .logosModern, support: .opaqueContainer, provenance: .fileName))
+            } else if ext == "lsf" {
                 let index = legacyIndexes[pairKey(url)]
                 do {
                     let inspected = try LegacyResourceReader.inspect(lsfURL: url, lixURL: index)
@@ -81,7 +92,7 @@ public actor LibraryImporter {
         guard manager.fileExists(atPath: root.path, isDirectory: &directory), directory.boolValue else {
             throw LibraryImportError.notDirectory
         }
-        let keys: Set<URLResourceKey> = [.isRegularFileKey, .isSymbolicLinkKey, .fileSizeKey]
+        let keys: Set<URLResourceKey> = [.isRegularFileKey, .isDirectoryKey, .isSymbolicLinkKey, .fileSizeKey]
         guard let iterator = ResourceDirectoryEnumerator(root: root, keys: Array(keys)) else {
             throw LibraryImportError.enumerationFailed
         }
@@ -91,9 +102,14 @@ public actor LibraryImporter {
         while let url = try iterator.nextURL() {
             try Task.checkCancellation()
             let values = try url.resourceValues(forKeys: keys)
-            guard values.isRegularFile == true, values.isSymbolicLink != true else { continue }
+            guard values.isSymbolicLink != true else { iterator.skipDescendants(); continue }
             let ext = url.pathExtension.lowercased()
-            guard ["lbxlls", "lbxoeb", "lsf", "lix"].contains(ext) else { continue }
+            if values.isDirectory == true {
+                if url.lastPathComponent.lowercased() == "backup" { iterator.skipDescendants(); continue }
+                if ext == "libron" { candidates.append((url, 0)); discoveredFiles += 1; iterator.skipDescendants() }
+                continue
+            }
+            guard values.isRegularFile == true, LibronPackage.sourceExtensions.union(["lix"]).contains(ext) else { continue }
             discoveredFiles += 1
             guard discoveredFiles <= 100_000 else { throw LibraryImportError.tooManyFiles }
             if ext == "lix" {

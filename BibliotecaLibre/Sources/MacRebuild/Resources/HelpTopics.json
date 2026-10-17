@@ -1,0 +1,20 @@
+{
+  "help.appearance": "Automático sigue la apariencia de macOS; Claro y Oscuro fijan una apariencia. Red y Dark cambian el icono del Dock. Ambas preferencias se conservan al volver a abrir la aplicación.",
+  "help.bibleCopy": "Elige una Biblia, escribe un pasaje y selecciona el formato de copia. Revisa la vista previa antes de copiar a otra aplicación. El texto de los versículos procede del recurso original.",
+  "help.changelog": "Despliega Cambios de esta versión para leer las notas incluidas en la versión instalada. Funcionan sin conexión y describen esa versión, en lugar de la última publicada en GitHub.",
+  "help.directory": "Agregar carpeta permite elegir una carpeta de recursos para importarla. Abrir directorio muestra en Finder la carpeta real del recurso seleccionado; sin selección, abre la carpeta de la biblioteca actual.",
+  "help.documents": "Crea o abre un archivo de notas o una lista de versículos. Dale un título, edita su contenido y guárdalo como documento personal, separado de los libros importados.",
+  "help.favorites": "Guarda la ubicación de lectura como favorito para volver después. Puedes organizar los favoritos en carpetas. Al abrir uno, vuelves al recurso y a la ubicación guardados.",
+  "help.maps": "Abre una imagen del recurso actual. Ajústala a la ventana o cambia el zoom para inspeccionarla. El visor modifica el tamaño de visualización, sin editar la imagen original.",
+  "help.marks": "Selecciona texto antes de aplicar un resaltado o agregar una nota personal. Las marcas pertenecen a tus datos de estudio y no reescriben el libro original.",
+  "help.notes": "Activa esta opción para previsualizar las notas del recurso al mantener el puntero sobre su llamada. Cambia la previsualización, sin modificar el texto del recurso ni tus notas personales.",
+  "help.output": "Copia el texto seleccionado o el artículo si no hay selección. Exportar e imprimir usan la lectura actual; los formatos dependen del recurso. Elige el destino en el diálogo del sistema.",
+  "help.reading": "Aplicar a las lecturas abiertas cambia las lecturas que ya existen. La A ajusta solo su lectura de 0 a 300 %. En 0 % el contenido queda oculto; el botón 100 % lo recupera.",
+  "help.search": "Busca una palabra, una frase entre comillas o una consulta AND / OR. Abre un resultado para ir al pasaje encontrado. Los recursos ocultos se excluyen de las nuevas búsquedas.",
+  "help.startup": "Elige si Libron-X abre Inicio, restaura las lecturas anteriores o carga un área de trabajo guardada. El área guardada recupera sus recursos, lecturas y posiciones de ventanas.",
+  "help.synchronization": "Elige qué Biblias abiertas pertenecen al mismo grupo de vínculo. Al navegar a un versículo, las otras lecturas vinculadas siguen esa referencia. Los grupos de versiones y el destino de referencias son opciones independientes.",
+  "help.topics": "Busca un tema y abre una entrada disponible para ir a su recurso. Los resultados dependen de los índices de los libros importados. Los recursos ocultos quedan excluidos.",
+  "help.updates": "La búsqueda automática consulta las versiones de GitHub. La instalación automática descarga y verifica una versión nueva y la instala al cerrar. Cambiar de canal no instala una versión anterior a la actual.",
+  "help.workspace": "Arrastra una lectura por su título para moverla y sus bordes o esquinas para cambiar su tamaño. Llévala a un lado o esquina para ajustarla. El clic derecho en el título permite elegir una posición para esa lectura.",
+  "help.navigation": "Usa Atrás, Adelante e Historial para volver a ubicaciones visitadas. Contenido abre el índice del recurso; Artículo cambia el modo del campo de referencia."
+}

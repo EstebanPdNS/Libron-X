@@ -11,19 +11,21 @@ struct AppSettingsView: View {
         TabView {
             Form {
                 Section {
-                    Picker(L("Idioma de la interfaz"), selection: $preferences.language) {
-                        ForEach(AppLanguage.allCases) { language in
-                            Text(language.nativeName).tag(language)
-                        }
+                    HStack(alignment: .center) {
+                        Text(L("Idioma de la interfaz"))
+                        Spacer(minLength: 16)
+                        Picker(L("Idioma de la interfaz"), selection: $preferences.language) {
+                            ForEach(AppLanguage.allCases) { language in Text(language.nativeName).tag(language) }
+                        }.labelsHidden().fixedSize().featureHelpTarget(.language)
                     }
-                    Text(L("El idioma cambia la interfaz. Los libros conservan su texto original."))
-                        .font(.callout).foregroundStyle(.secondary)
-                    Text(L("Los menús del sistema adoptan el idioma al volver a abrir la aplicación."))
-                        .font(.callout).foregroundStyle(.secondary)
                 }
                 Section(L("Al abrir Libron-X")) {
-                    Picker(L("Abrir"), selection: $preferences.startup) {
-                        ForEach(AppStartup.allCases) { mode in Text(L(mode.title)).tag(mode) }
+                    HStack(alignment: .center) {
+                        Text(L("Abrir"))
+                        Spacer(minLength: 16)
+                        Picker(L("Abrir"), selection: $preferences.startup) {
+                            ForEach(AppStartup.allCases) { mode in Text(L(mode.title)).tag(mode) }
+                        }.labelsHidden().fixedSize().featureHelpTarget(.startup)
                     }
                     if preferences.startup == .workspace {
                         HStack {
@@ -39,35 +41,51 @@ struct AppSettingsView: View {
                     Picker(L("Aspecto"), selection: $preferences.appearance) {
                         ForEach(AppAppearance.allCases) { appearance in Text(L(appearance.title)).tag(appearance) }
                     }.pickerStyle(.radioGroup)
-                    Text(L("Automático sigue la apariencia de macOS.")).foregroundStyle(.secondary)
+                    AppIconSettingsView().featureHelpTarget(.appearance)
                 }
-            }.formStyle(.grouped)
+            }.formStyle(.grouped).featureHelpTarget(.appearance)
                 .tabItem { Label(L("General"), systemImage: "gearshape") }
             Form {
                 Section(L("Texto de los recursos")) {
-                    Picker(L("Tamaño predeterminado"), selection: $preferences.readingScale) {
-                        ForEach([0.5, 0.75, 1, 1.25, 1.5, 2, 2.5, 3], id: \.self) { scale in
-                            Text("\(Int(scale * 100)) %").tag(scale)
-                        }
+                    HStack(alignment: .center) {
+                        Text(L("Fuente")); Spacer(minLength: 16)
+                        Picker(L("Fuente"), selection: $preferences.readingFont) {
+                            Text(L("Predeterminada (Times New Roman)")).tag("")
+                            ForEach(NSFontManager.shared.availableFontFamilies.sorted(), id: \.self) { font in Text(font).tag(font) }
+                        }.labelsHidden().frame(maxWidth: 300).featureHelpTarget(.reading)
                     }
-                    Text(L("Se aplica a las nuevas lecturas. El 100 % conserva el tamaño de lectura ampliado; los estilos del archivo original no se modifican."))
-                        .font(.callout).foregroundStyle(.secondary)
+                    HStack(alignment: .center) {
+                        Text(L("Tamaño predeterminado"))
+                        Spacer(minLength: 16)
+                        Picker(L("Tamaño predeterminado"), selection: $preferences.readingScale) {
+                            ForEach([0.5, 0.75, 1, 1.25, 1.5, 2, 2.5, 3], id: \.self) { scale in
+                                Text("\(Int(scale * 100)) %").tag(scale)
+                            }
+                        }.labelsHidden().fixedSize().featureHelpTarget(.reading)
+                    }
                     Button(L("Aplicar a las lecturas abiertas")) {
                         for reader in workspace.readers { reader.textScale = preferences.readingScale }
                     }.disabled(workspace.readers.isEmpty)
                 }
                 Section(L("Notas y referencias")) {
-                    Toggle(L("Mostrar notas al mantener el puntero"), isOn: $preferences.hoverNotes)
-                    Text(L("También puedes abrirlas haciendo clic en su llamada.")).font(.callout).foregroundStyle(.secondary)
+                    HStack(alignment: .center) {
+                        Text(L("Mostrar notas al mantener el puntero"))
+                        Spacer(minLength: 16)
+                        Toggle(L("Mostrar notas al mantener el puntero"), isOn: $preferences.hoverNotes)
+                            .labelsHidden().toggleStyle(.switch).fixedSize()
+                            .featureHelpTarget(.hoverNotes)
+                    }
                 }
-            }.formStyle(.grouped)
+            }.formStyle(.grouped).featureHelpTarget(.reading)
                 .tabItem { Label(L("Lectura"), systemImage: "book") }
-            ParallelBibleSettingsView(workspace: workspace)
-                .tabItem { Label(L("Paralelos"), systemImage: "books.vertical") }
-            AppIconSettingsView()
-                .tabItem { Label(L("Icono"), systemImage: "app") }
             LibrarySettingsView(workspace: workspace)
                 .tabItem { Label(L("Biblioteca"), systemImage: "books.vertical") }
+            ParallelBibleSettingsView(workspace: workspace)
+                .tabItem { Label(L("Grupos"), systemImage: "rectangle.split.2x1") }
+            UpdateSettingsView()
+                .tabItem { Label(L("Actualizaciones"), systemImage: "arrow.down.circle") }
+            AppInformationSettingsView()
+                .tabItem { Label(L("Información"), systemImage: "info.circle") }
         }.frame(width: 700, height: 580).modifier(MacPanelControlPresentation())
     }
     private func chooseStartupWorkspace() {

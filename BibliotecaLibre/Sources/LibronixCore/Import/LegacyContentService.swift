@@ -19,6 +19,7 @@ public actor LegacyContentService {
         let lsfStamp: FileStamp
         let lixStamp: FileStamp
         let index: LegacyIndicesInspection
+        let linkLookup: LegacyNamedPositionLookup
         let allowUnavailableIndexBlocks: Bool
     }
     private var sectionCache: CachedSections?
@@ -60,7 +61,7 @@ public actor LegacyContentService {
                             allowUnavailableIndexBlocks: Bool = false) throws -> LegacyInlineLinkResolution {
         let index = try indices(url, indexURL: indexURL, allowUnavailableIndexBlocks: allowUnavailableIndexBlocks)
         try Task.checkCancellation()
-        return LegacyInlineLinks.resolve(content: content, namedPositions: index.namedPositions)
+        return LegacyInlineLinks.resolve(content: content, lookup: indicesCache?.linkLookup ?? LegacyNamedPositionLookup(index.namedPositions))
     }
 
     /// `directoryRow` identifies an AIDX source row, never a physical article ID.
@@ -80,6 +81,15 @@ public actor LegacyContentService {
         try Task.checkCancellation()
         guard try stamp(url) == before else { throw LegacyIndicesError.sourceChanged }
         return result
+    }
+
+    public func navigationArticles(_ url: URL, indexURL: URL? = nil, allowUnavailableIndexBlocks: Bool = false) throws -> [Int] {
+        let index = try indices(url,indexURL:indexURL,allowUnavailableIndexBlocks:allowUnavailableIndexBlocks)
+        return (index.articleReferenceRanges.isEmpty ? index.articles.map(\.articleID) : index.articleReferenceRanges.map(\.articleID)).map(Int.init)
+    }
+
+    public func referencePositions(_ url: URL, indexURL: URL? = nil, allowUnavailableIndexBlocks: Bool = false) throws -> [LegacyReferencePosition] {
+        try indices(url,indexURL:indexURL,allowUnavailableIndexBlocks:allowUnavailableIndexBlocks).referencePositions
     }
 
     public func clearCache() {
@@ -141,7 +151,7 @@ public actor LegacyContentService {
         let result = try LegacyIndicesReader.inspect(lsfURL: url, lixURL: lix, allowUnavailableIndexBlocks: allowUnavailableIndexBlocks)
         try Task.checkCancellation()
         guard try stamp(url) == lsfStamp, try stamp(lix) == lixStamp else { throw LegacyIndicesError.sourceChanged }
-        indicesCache = CachedIndices(lsfURL: url, lixURL: lix, lsfStamp: lsfStamp, lixStamp: lixStamp, index: result,
+        indicesCache = CachedIndices(lsfURL: url, lixURL: lix, lsfStamp: lsfStamp, lixStamp: lixStamp, index: result, linkLookup: LegacyNamedPositionLookup(result.namedPositions),
                                     allowUnavailableIndexBlocks: allowUnavailableIndexBlocks)
         sectionCache = CachedSections(url: url, stamp: lsfStamp, index: result.sections)
         return result

@@ -10,37 +10,66 @@ struct ParallelBibleSettingsView: View {
     @RebuildViewState private var loading = false
     @RebuildViewState private var error: String?
     private var sets: ParallelBibleSets { workspace.parallelBibleSets }
-    private var selected: ParallelBibleSet? { sets.sets.first { $0.id == selectedSetID } }
+    private var selected: ParallelBibleSet? { workspace.bibleGroups.first { $0.id == selectedSetID } }
     private var resources: [LibraryResource] { workspace.availableResources }
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text(L("Grupos de Biblias paralelas")).font(.headline)
-            Text(L("Elige las Biblias y su orden. Las flechas recorren el grupo elegido en cada lectura y conservan el versículo."))
-                .font(.callout).foregroundStyle(.secondary)
+            VStack(alignment: .leading, spacing: 12) {
+                Text(L("Grupos de Biblias paralelas")).font(.headline)
+            }.padding(.horizontal, 20)
+            DisclosureGroup(L("Grupo de diccionarios")) {
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 4) {
+                        ForEach(workspace.dictionaryGroup) { resource in Text(resource.title).frame(maxWidth: .infinity, alignment: .leading) }
+                    }
+                }.frame(maxHeight: 120)
+            }.padding(.horizontal, 20)
             HSplitView {
-                VStack(spacing: 8) {
-                    List(sets.sets, selection: $selectedSetID) { set in
+                VStack(alignment: .leading, spacing: 8) {
+                    List(workspace.bibleGroups, selection: $selectedSetID) { set in
                         VStack(alignment: .leading) {
                             Text(set.name)
                             Text(LF("{count} recursos", ["count": String(set.members.count)])).font(.caption).foregroundStyle(.secondary)
-                        }.tag(set.id)
-                    }.accessibilityLabel(L("Grupos de Biblias paralelas"))
-                    HStack {
-                        Button(L("Nuevo grupo"), systemImage: "plus") {
-                            perform { selectedSetID = try sets.create() }
-                        }
-                        Button(L("Eliminar grupo"), systemImage: "minus") {
-                            if let id = selectedSetID { perform { try sets.remove(id); selectedSetID = sets.sets.first?.id } }
-                        }.labelStyle(.iconOnly).help(L("Eliminar grupo")).disabled(selected == nil)
-                    }.controlSize(.small)
-                }.frame(minWidth: 160, idealWidth: 190, maxWidth: 230)
+                        }.frame(maxWidth: .infinity, alignment: .leading)
+                            .listRowInsets(EdgeInsets(top: 6, leading: 10, bottom: 6, trailing: 10))
+                            .tag(set.id)
+                            .contextMenu {
+                                Button(L("Eliminar grupo"), systemImage: "trash", role: .destructive) { removeGroup(set.id) }.disabled(set.automaticLanguage != nil)
+                            }
+                    }
+                    .listStyle(.inset)
+                    .contentMargins(.horizontal, 0, for: .scrollContent)
+                    .accessibilityLabel(L("Grupos de Biblias paralelas"))
+                    Button {
+                        perform { selectedSetID = try sets.create() }
+                    } label: {
+                        Label(L("Nuevo grupo"), systemImage: "plus.circle")
+                            .frame(maxWidth: .infinity, alignment: .center)
+                    }
+                    .labelStyle(.titleAndIcon).controlSize(.small)
+                    .padding(.bottom, 8)
+                }
+                // The sidebar spans from the window edge to its divider. Both
+                // controls share symmetric insets, independent of header margins.
+                .padding(.horizontal, 8)
+                .frame(minWidth: 180, idealWidth: 200, maxWidth: 230)
+
                 VStack(alignment: .leading, spacing: 10) {
                     if let selected {
                         HStack {
+                            Text(L("Nombre del grupo")).font(.headline)
+                            Spacer()
+                            Menu {
+                                Button(L("Eliminar grupo"), systemImage: "trash", role: .destructive) { removeGroup(selected.id) }.disabled(selected.automaticLanguage != nil)
+                            } label: { Label(L("Acciones del grupo"), systemImage: "ellipsis.circle") }
+                                .labelStyle(.iconOnly).menuIndicator(.hidden).controlSize(.small)
+                                .help(L("Acciones del grupo"))
+                        }
+                        HStack {
                             TextField(L("Nombre del grupo"), text: $name).macInputStyle()
-                                .onSubmit { perform { try sets.rename(selected.id, to: name) } }
+                                .onSubmit { perform { try sets.rename(selected.id, to: name) } }.disabled(selected.automaticLanguage != nil)
                             Button(L("Guardar")) { perform { try sets.rename(selected.id, to: name) } }
-                                .disabled(name == selected.name)
+                                .disabled(name == selected.name || selected.automaticLanguage != nil)
                         }
                         List(selected.members, selection: $selectedMemberID) { member in
                             VStack(alignment: .leading) {
@@ -55,32 +84,30 @@ struct ParallelBibleSettingsView: View {
                                     Button(parallelBibleMenuTitle(resource, in: available)) { perform { try sets.add(resource, to: selected.id); selectedMemberID = resource.id } }
                                 }
                             } label: { Label(L("Agregar Biblia"), systemImage: "plus") }
-                                .disabled(loading || available.allSatisfy { resource in selected.members.contains { $0.id == resource.id } })
-                            Button(L("Quitar del grupo"), systemImage: "minus") {
+                                .disabled(selected.automaticLanguage != nil || loading || available.allSatisfy { resource in selected.members.contains { $0.id == resource.id } })
+                            Button(L("Quitar del grupo"), systemImage: "trash") {
                                 if let member = selectedMemberID { perform { try sets.removeMember(member, from: selected.id); selectedMemberID = nil } }
-                            }.labelStyle(.iconOnly).help(L("Quitar del grupo")).disabled(selectedMemberID == nil)
+                            }.labelStyle(.iconOnly).help(L("Quitar del grupo")).disabled(selectedMemberID == nil || selected.automaticLanguage != nil)
                             Spacer()
                             Button(L("Subir"), systemImage: "chevron.up") { move(-1) }.labelStyle(.iconOnly).help(L("Subir")).disabled(!canMove(-1))
                             Button(L("Bajar"), systemImage: "chevron.down") { move(1) }.labelStyle(.iconOnly).help(L("Bajar")).disabled(!canMove(1))
                         }.controlSize(.small)
-                        Text(L("Los cambios de orden se guardan al instante. Quitar un recurso del grupo no borra su archivo."))
-                            .font(.caption).foregroundStyle(.secondary)
                     } else {
                         Text(L("Crea un grupo para elegir sus Biblias.")).foregroundStyle(.secondary)
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
                 }.padding(.leading, 10).frame(minWidth: 350)
-            }
-            if loading { ProgressView(L("Leyendo las Biblias disponibles…")).controlSize(.small) }
+            }.padding(.trailing, 20)
+            if loading { ProgressView(L("Leyendo las Biblias disponibles…")).controlSize(.small).padding(.horizontal, 20) }
             if let error = error ?? sets.loadError {
                 HStack {
                     Text(error).foregroundStyle(.red).font(.callout).textSelection(.enabled)
                     Spacer()
                     Button(L("Volver a cargar")) { perform { try sets.reload() } }
-                }
+                }.padding(.horizontal, 20)
             }
-        }.padding(20)
-        .onAppear { selectedSetID = selectedSetID ?? sets.sets.first?.id; name = selected?.name ?? "" }
+        }.padding(.vertical, 20).featureHelpTarget(.groups)
+        .onAppear { selectedSetID = selectedSetID ?? workspace.bibleGroups.first?.id; name = selected?.name ?? "" }
         .onChange(of: selectedSetID) { name = selected?.name ?? ""; selectedMemberID = nil }
         .task(id: resources.map(\.id)) {
             loading = true
@@ -92,8 +119,14 @@ struct ParallelBibleSettingsView: View {
             catch { self.error = error.localizedDescription }
         }
     }
+    private func removeGroup(_ id: UUID) {
+        perform {
+            try sets.remove(id)
+            if selectedSetID == id { selectedSetID = workspace.bibleGroups.first?.id }
+        }
+    }
     private func canMove(_ delta: Int) -> Bool {
-        guard let selected, let index = selected.members.firstIndex(where: { $0.id == selectedMemberID }) else { return false }
+        guard let selected, selected.automaticLanguage == nil, let index = selected.members.firstIndex(where: { $0.id == selectedMemberID }) else { return false }
         return selected.members.indices.contains(index + delta)
     }
     private func move(_ delta: Int) {

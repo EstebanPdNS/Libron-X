@@ -29,6 +29,7 @@ struct ReaderTextView: NSViewRepresentable {
         var selectionRequest = -1
         var highlights: [ReaderHighlight] = []
         var visibleInterlinearLines: Set<Int>?
+        var chosenFont = ""
         var sourceFontsRevision = -1
         var inlineLinks: [LegacyInlineLink] = []
         var isApplying = false
@@ -126,7 +127,7 @@ struct ReaderTextView: NSViewRepresentable {
         coordinator.onSelection = onSelection
         coordinator.onVisiblePosition = onVisiblePosition
         let pageChanged = context.coordinator.text != text || context.coordinator.identity != identity
-        let renderChanged = pageChanged || coordinator.scale != scale || coordinator.graphicHashes != graphics.map(\.sha256) || coordinator.highlights != highlights || coordinator.visibleInterlinearLines != visibleInterlinearLines || coordinator.sourceFontsRevision != sourceFontsRevision || coordinator.inlineLinks != inlineLinks
+        let renderChanged = pageChanged || coordinator.scale != scale || coordinator.graphicHashes != graphics.map(\.sha256) || coordinator.highlights != highlights || coordinator.visibleInterlinearLines != visibleInterlinearLines || coordinator.chosenFont != AppPreferences.shared.readingFont || coordinator.sourceFontsRevision != sourceFontsRevision || coordinator.inlineLinks != inlineLinks
         let selectionChanged = coordinator.selectionRequest != selectionRequest
         guard renderChanged || selectionChanged else { return }
         coordinator.cancelViewportObservation()
@@ -144,6 +145,7 @@ struct ReaderTextView: NSViewRepresentable {
         context.coordinator.graphicHashes = graphics.map(\.sha256)
         coordinator.highlights = highlights
         coordinator.visibleInterlinearLines = visibleInterlinearLines
+        coordinator.chosenFont = AppPreferences.shared.readingFont
         coordinator.sourceFontsRevision = sourceFontsRevision
         coordinator.inlineLinks = inlineLinks
         view.sourceLinks = inlineLinks
@@ -246,7 +248,39 @@ final class ReaderScroller: NSScroller {
     override func mouseDown(with event: NSEvent) { super.mouseDown(with: event); onUserScroll?() }
 }
 final class ActiveTextView: NSTextView {
+    var contextHelpTopic: FeatureHelpTopic = .navigation
     let linkPreview = ReaderLinkPreviewController()
+    var lookupWord: ((String) -> Void)?
+    var quickLookupWord: ((String, NSView, NSRect) -> Void)?
+    private var dictionaryPressureActive = false
+    override func quickLook(with event: NSEvent) {
+        guard let layout = layoutManager, let container = textContainer else { return }
+        var point = convert(event.locationInWindow, from: nil)
+        point.x -= textContainerOrigin.x; point.y -= textContainerOrigin.y
+        let glyph = layout.glyphIndex(for: point, in: container)
+        guard glyph < layout.numberOfGlyphs,
+              layout.boundingRect(forGlyphRange: NSRange(location: glyph, length: 1), in: container).contains(point) else { return }
+        let range = selectionRange(forProposedRange: NSRange(location: layout.characterIndexForGlyph(at: glyph), length: 0), granularity: .selectByWord)
+        presentDictionary(range)
+    }
+    override func quickLookPreviewItems(_ sender: Any?) { presentDictionary(selectedRange()) }
+    override func pressureChange(with event: NSEvent) {
+        if event.stage < 2 { dictionaryPressureActive = false }
+        if event.stage >= 2, !dictionaryPressureActive {
+            dictionaryPressureActive = true; quickLook(with: event)
+        }
+    }
+    private func presentDictionary(_ range: NSRange) {
+        guard let swiftRange = Range(range, in: string), let word = DictionaryController.singleWord(String(string[swiftRange])) else { return }
+        activate?(); setSelectedRange(range)
+        var rect = NSRect.zero
+        if let layout = layoutManager, let container = textContainer {
+            rect = layout.boundingRect(forGlyphRange: layout.glyphRange(forCharacterRange: range, actualCharacterRange: nil), in: container)
+        }
+        rect.origin.x += textContainerOrigin.x; rect.origin.y += textContainerOrigin.y
+        if let quickLookupWord { quickLookupWord(word, self, rect) } else { lookupWord?(word) }
+    }
+    private var dictionaryMenuWord: String?
     var sourceLinks: [LegacyInlineLink] = []
     private var sourceTrackingArea: NSTrackingArea?
     override func updateTrackingAreas() {
@@ -352,13 +386,23 @@ final class ActiveTextView: NSTextView {
     private struct LinkMenuAction { let link: LegacyInlineLink; let newReader: Bool }
     override func menu(for event: NSEvent) -> NSMenu? {
         let nativeMenu = super.menu(for: event)
-        guard let layout = layoutManager, let container = textContainer, !isReplacingDocument else { return nativeMenu }
+        var range = selectedRange()
+        if range.length == 0, let layout = layoutManager, let container = textContainer {
+            var point = convert(event.locationInWindow, from: nil)
+            point.x -= textContainerOrigin.x; point.y -= textContainerOrigin.y
+            let glyph = layout.glyphIndex(for: point, in: container)
+            if glyph < layout.numberOfGlyphs {
+                range = selectionRange(forProposedRange: .init(location: layout.characterIndexForGlyph(at: glyph), length: 0), granularity: .selectByWord)
+            }
+        }
+        dictionaryMenuWord = Range(range, in: string).flatMap { DictionaryController.singleWord(String(string[$0])) }
+        guard let layout = layoutManager, let container = textContainer, !isReplacingDocument else { return enhancedMenu(nativeMenu) }
         var point = convert(event.locationInWindow, from: nil)
         point.x -= textContainerOrigin.x; point.y -= textContainerOrigin.y
         let glyph = layout.glyphIndex(for: point, in: container)
         guard glyph < layout.numberOfGlyphs,
               layout.boundingRect(forGlyphRange: NSRange(location: glyph, length: 1), in: container).contains(point),
-              let link = sourceLinks.first(where: { NSLocationInRange(layout.characterIndexForGlyph(at: glyph), $0.range) }) else { return nativeMenu }
+              let link = sourceLinks.first(where: { NSLocationInRange(layout.characterIndexForGlyph(at: glyph), $0.range) }) else { return enhancedMenu(nativeMenu) }
         activate?(); linkPreview.cancelHover()
         // The system's Open/Copy Link entries refer to our private renderer URL.
         // Resource links instead receive typed local actions and standard text
@@ -376,7 +420,27 @@ final class ActiveTextView: NSTextView {
         copy.target = self; copy.isEnabled = selectedRange().length > 0; menu.addItem(copy)
         let select = NSMenuItem(title: L("Seleccionar todo"), action: #selector(NSText.selectAll(_:)), keyEquivalent: "")
         select.target = self; select.isEnabled = !string.isEmpty; menu.addItem(select)
+        return enhancedMenu(menu)
+    }
+    private func enhancedMenu(_ native: NSMenu?) -> NSMenu {
+        let menu = native ?? NSMenu()
+        if lookupWord != nil {
+            menu.addItem(.separator())
+            let lookup = NSMenuItem(title: L("Buscar en diccionario"), action: #selector(lookupDictionaryWord), keyEquivalent: "")
+            lookup.target = self; lookup.isEnabled = dictionaryMenuWord != nil; menu.addItem(lookup)
+        }
+        FeatureHelp.shared.addItem(to: menu, topic: contextHelpTopic)
         return menu
+    }
+    @objc private func lookupDictionaryWord() {
+        if selectedRange().length > 0 { presentDictionary(selectedRange()) }
+        else if let word = dictionaryMenuWord {
+            if let quickLookupWord { quickLookupWord(word, self, visibleRect.insetBy(dx: visibleRect.width / 3, dy: visibleRect.height / 3)) }
+            else { lookupWord?(word) }
+        }
+    }
+    @objc private func showLibronContextHelp(_ item: NSMenuItem) {
+        FeatureHelp.shared.show(contextHelpTopic)
     }
     @objc private func openLinkFromMenu(_ item: NSMenuItem) {
         guard let action = item.representedObject as? LinkMenuAction else { return }

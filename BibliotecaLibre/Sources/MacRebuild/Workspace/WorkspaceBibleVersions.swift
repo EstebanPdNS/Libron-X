@@ -12,6 +12,10 @@ actor BibleVersionCatalog {
                 if let stamp = try? LegacyGraphicsService.fileStamp(resource.location) { cache[resource.location] = (stamp, true) }
                 result.append(resource); continue
             }
+            if resource.format == .eSwordSQLite {
+                if resource.libron?.resourceType == "Biblia" { result.append(resource) }
+                continue
+            }
             guard resource.format != .libronixOEB, !resource.isHelp,
                   let stamp = try? LegacyGraphicsService.fileStamp(resource.location) else { continue }
             let isBible: Bool
@@ -56,9 +60,19 @@ actor BibleVersionCatalog {
               reader.canSynchronizeBible, let reference = reader.currentReference else { return }
         bibleVersionTask?.cancel()
         let resources = availableResources, observed = Set(bibleReaders.map { $0.resource.id })
-        let originalID = reader.resource.id, groupID = reader.parallelSetID
-        let group = groupID.flatMap { id in parallelBibleSets.sets.first { $0.id == id } }
-        if groupID != nil, group == nil { reader.error = L("El grupo de Biblias ya no está disponible."); return }
+        let originalID = reader.resource.id
+        // A saved workspace may reference a removed group. Recover only to a
+        // verified automatic group in this Bible's language, never unrelated books.
+        if let id = reader.parallelSetID, !bibleGroups.contains(where: { $0.id == id }) {
+            let languages = LibronMetadata.deriving(reader.resource).languages.map(LibraryLanguages.canonical)
+            guard let replacement = bibleGroups.first(where: {
+                $0.automaticLanguage.map(languages.contains) == true && $0.members.contains { $0.resourceID == originalID }
+            }) else { reader.error = L("El grupo de Biblias ya no está disponible."); return }
+            reader.parallelSetID = replacement.id
+            reader.error = nil
+        }
+        let groupID = reader.parallelSetID
+        let group = groupID.flatMap { id in bibleGroups.first { $0.id == id } }
         bibleVersionTask = Task { [weak self, weak reader, bibleVersionCatalog] in
             do {
                 let versions: [LibraryResource]
@@ -66,7 +80,7 @@ actor BibleVersionCatalog {
                 else { versions = try await bibleVersionCatalog.versions(in: resources, observed: observed) }
                 guard let self, let reader, !Task.isCancelled, self.readers.contains(where: { $0 === reader }),
                       reader.resource.id == originalID, reader.parallelSetID == groupID,
-                      groupID.flatMap({ id in self.parallelBibleSets.sets.first { $0.id == id } }) == group,
+                      groupID.flatMap { id in self.bibleGroups.first { $0.id == id } } == group,
                       reader.currentReference == reference, !reader.isLoading,
                       versions.count > 1, let index = versions.firstIndex(where: { $0.id == originalID }) else { return }
                 let candidates = (1..<versions.count).map { offset in

@@ -1,4 +1,16 @@
 {
+  ".libron": {
+    "ar": ".libron",
+    "bn": ".libron",
+    "en": ".libron",
+    "es": ".libron",
+    "fr": ".libron",
+    "hi": ".libron",
+    "id": ".libron",
+    "pt": ".libron",
+    "ur": ".libron",
+    "zh-Hans": ".libron"
+  },
   "100 %": {
     "ar": "100 %",
     "bn": "100 %",
@@ -10,6 +22,18 @@
     "pt": "100 %",
     "ur": "100 %",
     "zh-Hans": "100 %"
+  },
+  "Aa": {
+    "ar": "أب",
+    "bn": "অআ",
+    "en": "Aa",
+    "es": "Aa",
+    "fr": "Aa",
+    "hi": "अआ",
+    "id": "Aa",
+    "pt": "Aa",
+    "ur": "اب",
+    "zh-Hans": "文字"
   },
   "Abre libros y organízalos dentro de esta ventana.": {
     "ar": "افتح الكتب ورتبها داخل هذه النافذة.",
@@ -46,6 +70,30 @@
     "pt": "Abra uma Bíblia e escolha-a como destino das referências para seguir este link.",
     "ur": "اس ربط پر جانے کے لیے بائبل کھولیں اور اسے حوالوں کی منزل منتخب کریں۔",
     "zh-Hans": "请打开一本圣经并将其设为经文跳转目标，以跟随此链接。"
+  },
+  "Abre una imagen del recurso actual. Ajústala a la ventana o cambia el zoom para inspeccionarla. El visor modifica el tamaño de visualización, sin editar la imagen original.": {
+    "ar": "افتح صورة من المورد الحالي. لائمها مع النافذة أو غيّر التكبير لفحصها. لا يعدّل العارض الصورة الأصلية.",
+    "bn": "বর্তমান রিসোর্সের ছবি খুলুন। উইন্ডোতে মানানসই করুন বা বিস্তারিত দেখতে জুম বদলান। মূল ছবি সম্পাদিত হয় না।",
+    "en": "Open an image supplied by the current resource. Fit it to the window or adjust its zoom for closer inspection. The viewer changes display size without editing the original image.",
+    "es": "Abre una imagen del recurso actual. Ajústala a la ventana o cambia el zoom para inspeccionarla. El visor modifica el tamaño de visualización, sin editar la imagen original.",
+    "fr": "Ouvrez une image de la ressource actuelle. Adaptez-la à la fenêtre ou zoomez pour l’examiner. L’image originale n’est pas modifiée.",
+    "hi": "वर्तमान संसाधन की तस्वीर खोलें। विंडो में फ़िट करें या पास से देखने के लिए ज़ूम बदलें। मूल तस्वीर संपादित नहीं होती।",
+    "id": "Buka gambar dari sumber daya saat ini. Sesuaikan ke jendela atau ubah zoom untuk melihat detail. Gambar asli tidak diedit.",
+    "pt": "Abra uma imagem do recurso atual. Ajuste à janela ou altere o zoom para inspecioná-la. O visualizador não edita a imagem original.",
+    "ur": "موجودہ وسیلے کی تصویر کھولیں۔ ونڈو کے مطابق کریں یا تفصیل کے لیے زوم بدلیں۔ اصل تصویر کی تدوین نہیں ہوتی۔",
+    "zh-Hans": "打开当前资源中的图片。可适应窗口或调整缩放以查看细节。查看器只改变显示大小，不会编辑原始图片。"
+  },
+  "Abreviatura": {
+    "ar": "الاختصار",
+    "bn": "সংক্ষিপ্ত নাম",
+    "en": "Abbreviation",
+    "es": "Abreviatura",
+    "fr": "Abréviation",
+    "hi": "संक्षिप्त नाम",
+    "id": "Singkatan",
+    "pt": "Abreviatura",
+    "ur": "مخفف",
+    "zh-Hans": "缩写"
   },
   "Abrir": {
     "ar": "فتح",
@@ -106,6 +154,42 @@
     "pt": "Abrir pasta…",
     "ur": "فولڈر کھولیں…",
     "zh-Hans": "打开文件夹…"
+  },
+  "Abrir dentro de Libron-X": {
+    "ar": "فتح داخل Libron-X",
+    "bn": "Libron-X-এর ভিতরে খুলুন",
+    "en": "Open inside Libron-X",
+    "es": "Abrir dentro de Libron-X",
+    "fr": "Ouvrir dans Libron-X",
+    "hi": "Libron-X में खोलें",
+    "id": "Buka di dalam Libron-X",
+    "pt": "Abrir no Libron-X",
+    "ur": "Libron-X کے اندر کھولیں",
+    "zh-Hans": "在 Libron-X 内打开"
+  },
+  "Abrir directorio": {
+    "ar": "فتح المجلد",
+    "bn": "ফোল্ডার খুলুন",
+    "en": "Open folder",
+    "es": "Abrir directorio",
+    "fr": "Ouvrir le dossier",
+    "hi": "फ़ोल्डर खोलें",
+    "id": "Buka direktori",
+    "pt": "Abrir diretório",
+    "ur": "فولڈر کھولیں",
+    "zh-Hans": "打开目录"
+  },
+  "Abrir directorio actual": {
+    "ar": "فتح المجلد الحالي",
+    "bn": "বর্তমান ফোল্ডার খুলুন",
+    "en": "Open current folder",
+    "es": "Abrir directorio actual",
+    "fr": "Ouvrir le dossier actuel",
+    "hi": "वर्तमान फ़ोल्डर खोलें",
+    "id": "Buka folder saat ini",
+    "pt": "Abrir pasta atual",
+    "ur": "موجودہ فولڈر کھولیں",
+    "zh-Hans": "打开当前文件夹"
   },
   "Abrir documento…": {
     "ar": "فتح مستند…",
@@ -191,6 +275,18 @@
     "ur": "کھولیں…",
     "zh-Hans": "打开…"
   },
+  "Acceso al directorio de recursos desde la biblioteca.": {
+    "ar": "الوصول إلى مجلد الموارد من المكتبة.",
+    "bn": "লাইব্রেরি থেকে রিসোর্সের ফোল্ডার খুলুন।",
+    "en": "Open the resource folder from the library.",
+    "es": "Acceso al directorio de recursos desde la biblioteca.",
+    "fr": "Accès au dossier des ressources depuis la bibliothèque.",
+    "hi": "लाइब्रेरी से संसाधनों का फ़ोल्डर खोलें।",
+    "id": "Akses folder sumber daya dari perpustakaan.",
+    "pt": "Acesso à pasta de recursos pela biblioteca.",
+    "ur": "لائبریری سے وسائل کا فولڈر کھولیں۔",
+    "zh-Hans": "从资料库访问资源文件夹。"
+  },
   "Acciones de lectura": {
     "ar": "إجراءات القراءة",
     "bn": "পাঠের কাজ",
@@ -202,6 +298,18 @@
     "pt": "Ações de leitura",
     "ur": "مطالعے کے اقدامات",
     "zh-Hans": "阅读操作"
+  },
+  "Acciones del grupo": {
+    "ar": "إجراءات المجموعة",
+    "bn": "গোষ্ঠীর কার্যক্রম",
+    "en": "Group Actions",
+    "es": "Acciones del grupo",
+    "fr": "Actions du groupe",
+    "hi": "समूह की कार्रवाइयाँ",
+    "id": "Tindakan Grup",
+    "pt": "Ações do grupo",
+    "ur": "گروپ کی کارروائیاں",
+    "zh-Hans": "分组操作"
   },
   "Aceptar": {
     "ar": "موافق",
@@ -227,6 +335,30 @@
     "ur": "فعال",
     "zh-Hans": "活动"
   },
+  "Activa esta opción para previsualizar las notas del recurso al mantener el puntero sobre su llamada. Cambia la previsualización, sin modificar el texto del recurso ni tus notas personales.": {
+    "ar": "فعّل الخيار لمعاينة ملاحظات المصدر عند إبقاء المؤشر فوق علامتها. يغير المعاينة دون تعديل النص أو ملاحظاتك الشخصية.",
+    "bn": "নোটের চিহ্নের ওপর পয়েন্টার রাখলে উৎসের নোটের পূর্বরূপ দেখায়। এটি রিসোর্সের লেখা বা ব্যক্তিগত নোট বদলায় না।",
+    "en": "Enable this option to preview source notes while holding the pointer over their callout. It changes preview behavior, without changing the resource text or your personal notes.",
+    "es": "Activa esta opción para previsualizar las notas del recurso al mantener el puntero sobre su llamada. Cambia la previsualización, sin modificar el texto del recurso ni tus notas personales.",
+    "fr": "Activez cette option pour afficher les notes de la source au survol de leur appel. Elle change l’aperçu sans modifier le texte ni vos notes personnelles.",
+    "hi": "नोट के संकेत पर पॉइंटर रखने से स्रोत नोट देखने के लिए इसे चालू करें। इससे केवल पूर्वावलोकन बदलता है, संसाधन या निजी नोट नहीं।",
+    "id": "Aktifkan untuk melihat catatan sumber dengan menahan penunjuk di tandanya. Ini hanya mengubah pratinjau, bukan teks sumber atau catatan pribadi.",
+    "pt": "Ative para pré-visualizar notas do recurso mantendo o ponteiro sobre a chamada. Isso altera a prévia, sem modificar o texto nem suas notas pessoais.",
+    "ur": "اشارے پر پوائنٹر رکھ کر ماخذ کے نوٹس کا پیش منظر دیکھنے کے لیے اسے فعال کریں۔ اس سے اصل متن یا ذاتی نوٹس تبدیل نہیں ہوتے۔",
+    "zh-Hans": "启用后，将指针停在注释标记上即可预览原文注释。此选项只更改预览行为，不会修改资源文本或个人笔记。"
+  },
+  "Activa este botón para que esta lectura reciba las referencias abiertas desde otros recursos. El botón resaltado identifica la ventana de destino. Vuelve a pulsarlo para desactivarlo; la sincronización de Biblias se configura por separado.": {
+    "ar": "فعّل هذا الزر لتستقبل هذه القراءة المراجع المفتوحة من الموارد الأخرى. يحدد الزر المميز نافذة الوجهة. اضغط عليه مجددًا لإيقافه؛ تُضبط مزامنة ترجمات الكتاب المقدس بشكل منفصل.",
+    "bn": "অন্য সংস্থান থেকে খোলা রেফারেন্স এই পাঠে দেখাতে বোতামটি চালু করুন। হাইলাইট করা বোতামটি গন্তব্য উইন্ডো চিহ্নিত করে। বন্ধ করতে আবার চাপুন; বাইবেল সমন্বয় আলাদাভাবে নির্ধারণ করা হয়।",
+    "en": "Turn on this button to make this reader receive references opened from other resources. The highlighted button identifies the destination window. Click it again to turn it off; Bible synchronization is configured separately.",
+    "es": "Activa este botón para que esta lectura reciba las referencias abiertas desde otros recursos. El botón resaltado identifica la ventana de destino. Vuelve a pulsarlo para desactivarlo; la sincronización de Biblias se configura por separado.",
+    "fr": "Activez ce bouton pour recevoir dans cette lecture les références ouvertes depuis d’autres ressources. Le bouton en surbrillance indique la fenêtre de destination. Cliquez de nouveau pour le désactiver ; la synchronisation des Bibles se règle séparément.",
+    "hi": "इस बटन को चालू करें ताकि दूसरे संसाधनों से खोले गए संदर्भ इस पठन में दिखाई दें। हाइलाइट किया गया बटन लक्ष्य विंडो बताता है। बंद करने के लिए फिर दबाएँ; बाइबल का समन्वयन अलग से सेट किया जाता है।",
+    "id": "Aktifkan tombol ini agar pembaca ini menerima referensi yang dibuka dari sumber lain. Tombol yang disorot menunjukkan jendela tujuan. Klik lagi untuk menonaktifkannya; sinkronisasi Alkitab diatur secara terpisah.",
+    "pt": "Ative este botão para que esta leitura receba referências abertas de outros recursos. O botão destacado identifica a janela de destino. Clique novamente para desativar; a sincronização de Bíblias é configurada separadamente.",
+    "ur": "یہ بٹن فعال کریں تاکہ دوسرے وسائل سے کھولے گئے حوالے اس مطالعے میں دکھائی دیں۔ نمایاں بٹن منزل کی ونڈو بتاتا ہے۔ غیر فعال کرنے کے لیے دوبارہ دبائیں؛ بائبل کی ہم وقت سازی الگ سے ترتیب دی جاتی ہے۔",
+    "zh-Hans": "启用此按钮后，从其他资源打开的经文位置将显示在此阅读窗口中。高亮按钮表示目标窗口。再次点击可关闭；圣经同步需单独设置。"
+  },
   "Activado": {
     "ar": "مفعّل",
     "bn": "চালু",
@@ -251,6 +383,54 @@
     "ur": "فعال کریں",
     "zh-Hans": "激活"
   },
+  "Actualizaciones": {
+    "ar": "التحديثات",
+    "bn": "আপডেট",
+    "en": "Updates",
+    "es": "Actualizaciones",
+    "fr": "Mises à jour",
+    "hi": "अपडेट",
+    "id": "Pembaruan",
+    "pt": "Atualizações",
+    "ur": "اپ ڈیٹس",
+    "zh-Hans": "更新"
+  },
+  "Actualizaciones de Libron-X": {
+    "ar": "تحديثات Libron-X",
+    "bn": "Libron-X আপডেট",
+    "en": "Libron-X Updates",
+    "es": "Actualizaciones de Libron-X",
+    "fr": "Mises à jour de Libron-X",
+    "hi": "Libron-X अपडेट",
+    "id": "Pembaruan Libron-X",
+    "pt": "Atualizações do Libron-X",
+    "ur": "Libron-X اپ ڈیٹس",
+    "zh-Hans": "Libron-X 更新"
+  },
+  "Actualizaciones desde GitHub con canales Stable y Beta.": {
+    "ar": "تحديثات من GitHub عبر قناتي Stable وBeta.",
+    "bn": "Stable ও Beta চ্যানেলে GitHub আপডেট।",
+    "en": "GitHub updates with Stable and Beta channels.",
+    "es": "Actualizaciones desde GitHub con canales Stable y Beta.",
+    "fr": "Mises à jour depuis GitHub avec les canaux Stable et Beta.",
+    "hi": "Stable और Beta चैनलों से GitHub अपडेट।",
+    "id": "Pembaruan dari GitHub dengan kanal Stable dan Beta.",
+    "pt": "Atualizações do GitHub com canais Stable e Beta.",
+    "ur": "Stable اور Beta چینلز کے ذریعے GitHub سے اپ ڈیٹس۔",
+    "zh-Hans": "通过 Stable 和 Beta 通道从 GitHub 更新。"
+  },
+  "Actualización cancelada.": {
+    "ar": "أُلغي التحديث.",
+    "bn": "আপডেট বাতিল হয়েছে।",
+    "en": "Update cancelled.",
+    "es": "Actualización cancelada.",
+    "fr": "Mise à jour annulée.",
+    "hi": "अपडेट रद्द किया गया।",
+    "id": "Pembaruan dibatalkan.",
+    "pt": "Atualização cancelada.",
+    "ur": "اپ ڈیٹ منسوخ ہو گئی۔",
+    "zh-Hans": "更新已取消。"
+  },
   "Adelante": {
     "ar": "تقدم",
     "bn": "সামনে",
@@ -274,6 +454,18 @@
     "pt": "Gerenciar recursos e licenças",
     "ur": "وسائل اور لائسنس کا انتظام",
     "zh-Hans": "管理资源和许可证"
+  },
+  "Advertencias de conversión": {
+    "ar": "تنبيهات التحويل",
+    "bn": "রূপান্তরের সতর্কতা",
+    "en": "Conversion warnings",
+    "es": "Advertencias de conversión",
+    "fr": "Avertissements de conversion",
+    "hi": "रूपांतरण चेतावनियाँ",
+    "id": "Peringatan konversi",
+    "pt": "Avisos de conversão",
+    "ur": "تبدیلی کے انتباہات",
+    "zh-Hans": "转换警告"
   },
   "Agregar": {
     "ar": "إضافة",
@@ -310,6 +502,30 @@
     "pt": "Adicionar aos favoritos",
     "ur": "پسندیدہ میں شامل کریں",
     "zh-Hans": "添加到收藏夹"
+  },
+  "Agregar carpeta": {
+    "ar": "إضافة مجلد",
+    "bn": "ফোল্ডার যোগ করুন",
+    "en": "Add folder",
+    "es": "Agregar carpeta",
+    "fr": "Ajouter un dossier",
+    "hi": "फ़ोल्डर जोड़ें",
+    "id": "Tambah folder",
+    "pt": "Adicionar pasta",
+    "ur": "فولڈر شامل کریں",
+    "zh-Hans": "添加文件夹"
+  },
+  "Agregar carpeta permite elegir una carpeta de recursos para importarla. Abrir directorio muestra en Finder la carpeta real del recurso seleccionado; sin selección, abre la carpeta de la biblioteca actual.": {
+    "ar": "تتيح إضافة مجلد استيراد مجلد موارد. يفتح فتح المجلد موقع المورد المحدد في Finder، أو مجلد المكتبة الحالي عند عدم التحديد.",
+    "bn": "ফোল্ডার যোগ করুন দিয়ে রিসোর্স আমদানি করুন। ফোল্ডার খুলুন নির্বাচিত রিসোর্সের প্রকৃত ফোল্ডার Finder-এ খোলে; নির্বাচন না থাকলে লাইব্রেরির ফোল্ডার খোলে।",
+    "en": "Add Folder lets you choose a resource folder to import. Open Folder opens the selected resource’s actual folder in Finder; with no selection, it opens the current library folder.",
+    "es": "Agregar carpeta permite elegir una carpeta de recursos para importarla. Abrir directorio muestra en Finder la carpeta real del recurso seleccionado; sin selección, abre la carpeta de la biblioteca actual.",
+    "fr": "Ajouter un dossier permet d’importer des ressources. Ouvrir le dossier affiche le dossier réel du document sélectionné dans le Finder, ou celui de la bibliothèque sans sélection.",
+    "hi": "फ़ोल्डर जोड़ें से संसाधन फ़ोल्डर आयात करें। फ़ोल्डर खोलें से चयनित संसाधन का असली फ़ोल्डर Finder में खुलता है; चयन न होने पर लाइब्रेरी का फ़ोल्डर खुलता है।",
+    "id": "Tambah folder mengimpor folder sumber daya. Buka direktori membuka lokasi asli sumber daya terpilih di Finder; tanpa pilihan, folder perpustakaan saat ini dibuka.",
+    "pt": "Adicionar pasta permite importar uma pasta de recursos. Abrir diretório mostra a pasta real do recurso selecionado no Finder; sem seleção, abre a pasta da biblioteca.",
+    "ur": "فولڈر شامل کریں سے وسائل درآمد کریں۔ فولڈر کھولیں منتخب وسیلے کا اصل فولڈر Finder میں کھولتا ہے؛ انتخاب نہ ہو تو موجودہ لائبریری کا فولڈر کھلتا ہے۔",
+    "zh-Hans": "添加文件夹可选择要导入的资源文件夹。打开目录会在访达中打开所选资源的实际文件夹；未选择资源时打开当前资料库文件夹。"
   },
   "Agregar carpeta…": {
     "ar": "إضافة مجلد…",
@@ -431,6 +647,18 @@
     "ur": "کھلے مطالعوں پر لاگو کریں",
     "zh-Hans": "应用于已打开的阅读"
   },
+  "Aplicar a las lecturas abiertas cambia las lecturas que ya existen. La A ajusta solo su lectura de 0 a 300 %. En 0 % el contenido queda oculto; el botón 100 % lo recupera.": {
+    "ar": "يغير التطبيق على القراءات المفتوحة أحجامها. يضبط زر A قراءته فقط من 0 إلى 300%. يخفي 0% المحتوى؛ ويعيده زر 100%.",
+    "bn": "খোলা পাঠে প্রয়োগ করলে বর্তমান পাঠের আকার বদলায়। A বোতাম তার পাঠের আকার ০–৩০০% করে। ০% লেখাকে লুকায়; ১০০% দিয়ে ফেরান।",
+    "en": "Apply to Open Readings changes the size of existing readings. The A button adjusts only its reading from 0 to 300%. At 0% the content is hidden; use the 100% button to restore it.",
+    "es": "Aplicar a las lecturas abiertas cambia las lecturas que ya existen. La A ajusta solo su lectura de 0 a 300 %. En 0 % el contenido queda oculto; el botón 100 % lo recupera.",
+    "fr": "Appliquer aux lectures ouvertes modifie les lectures existantes. Le bouton A règle sa lecture de 0 à 300 %. À 0 %, le contenu est masqué ; 100 % le rétablit.",
+    "hi": "खुले पठन पर लागू करें से मौजूदा पठन का आकार बदलता है। A बटन अपने पठन को 0–300% बदलता है। 0% पर सामग्री छिपती है; 100% से लौटाएँ।",
+    "id": "Terapkan ke Bacaan Terbuka mengubah bacaan yang ada. Tombol A mengatur bacaannya saja dari 0–300%. Pada 0% konten tersembunyi; tombol 100% memulihkannya.",
+    "pt": "Aplicar às leituras abertas altera as leituras existentes. O botão A ajusta sua leitura de 0 a 300%. Em 0% o conteúdo fica oculto; 100% restaura sua exibição.",
+    "ur": "کھلے مطالعوں پر لاگو کریں سے موجودہ مطالعوں کا سائز بدلتا ہے۔ A بٹن اپنے مطالعے کو 0–300% کرتا ہے۔ 0% پر مواد چھپتا ہے؛ 100% سے واپس لائیں۔",
+    "zh-Hans": "应用到已打开的阅读窗口可调整现有阅读。A 按钮仅调整对应窗口，范围为 0 至 300%。0% 隐藏内容；点按 100% 可恢复。"
+  },
   "Archivo": {
     "ar": "الملف",
     "bn": "ফাইল",
@@ -466,6 +694,18 @@
     "pt": "Arquivo web…",
     "ur": "ویب آرکائیو…",
     "zh-Hans": "网页归档…"
+  },
+  "Arrastra una lectura por su título para moverla y sus bordes o esquinas para cambiar su tamaño. Llévala a un lado o esquina para ajustarla. El clic derecho en el título permite elegir una posición para esa lectura.": {
+    "ar": "اسحب القراءة من عنوانها لنقلها ومن حوافها لتغيير حجمها. اسحبها إلى جانب أو زاوية لمحاذاتها. انقر بالزر الأيمن على العنوان لاختيار موضعها.",
+    "bn": "শিরোনাম ধরে পাঠ সরান এবং প্রান্ত ধরে আকার বদলান। পাশ বা কোণে টেনে স্ন্যাপ করুন। নির্দিষ্ট অবস্থান বেছে নিতে শিরোনামে ডান-ক্লিক করুন।",
+    "en": "Drag a reading by its title to move it. Drag any edge or corner to resize it. Drag to a side or corner to snap it. Right-click its title to choose a position for that reading.",
+    "es": "Arrastra una lectura por su título para moverla y sus bordes o esquinas para cambiar su tamaño. Llévala a un lado o esquina para ajustarla. El clic derecho en el título permite elegir una posición para esa lectura.",
+    "fr": "Déplacez une lecture par son titre et redimensionnez-la par ses bords. Glissez vers un côté ou un coin pour l’ancrer. Un clic droit sur le titre permet de choisir sa position.",
+    "hi": "पठन को शीर्षक से खींचकर ले जाएँ और किनारे से आकार बदलें। किनारे या कोने पर खींचकर स्नैप करें। शीर्षक पर राइट-क्लिक करके उसकी जगह चुनें।",
+    "id": "Seret judul bacaan untuk memindahkan dan tepinya untuk mengubah ukuran. Seret ke sisi atau sudut untuk menatanya. Klik kanan judul untuk memilih posisinya.",
+    "pt": "Arraste a leitura pelo título para movê-la e pelas bordas para redimensioná-la. Arraste para um lado ou canto para encaixá-la. Clique com o botão direito no título para escolher sua posição.",
+    "ur": "مطالعے کو عنوان سے کھینچ کر منتقل کریں اور کناروں سے سائز بدلیں۔ کنارے یا کونے پر کھینچ کر ترتیب دیں۔ جگہ منتخب کرنے کے لیے عنوان پر دایاں کلک کریں۔",
+    "zh-Hans": "拖动阅读窗口标题以移动窗口，拖动边缘或角落以调整大小。拖到侧边或角落可贴靠。右键点按标题可选择该阅读窗口的位置。"
   },
   "Artículo": {
     "ar": "مقال",
@@ -563,6 +803,18 @@
     "ur": "ظاہری شکل",
     "zh-Hans": "外观"
   },
+  "Atlas": {
+    "ar": "أطلس",
+    "bn": "মানচিত্রাবলি",
+    "en": "Atlas",
+    "es": "Atlas",
+    "fr": "Atlas",
+    "hi": "मानचित्र संग्रह",
+    "id": "Atlas",
+    "pt": "Atlas",
+    "ur": "اٹلس",
+    "zh-Hans": "地图集"
+  },
   "Atrás": {
     "ar": "رجوع",
     "bn": "পিছনে",
@@ -599,6 +851,18 @@
     "ur": "خودکار وضع macOS کی ظاہری شکل اپناتی ہے۔",
     "zh-Hans": "自动模式遵循 macOS 的外观设置。"
   },
+  "Automático sigue la apariencia de macOS; Claro y Oscuro fijan una apariencia. Red y Dark cambian el icono del Dock. Ambas preferencias se conservan al volver a abrir la aplicación.": {
+    "ar": "يتبع الوضع التلقائي مظهر macOS، بينما يثبت الفاتح والداكن المظهر. يغير Red وDark أيقونة Dock. تُحفظ التفضيلات.",
+    "bn": "স্বয়ংক্রিয় চেহারা macOS অনুসরণ করে; হালকা ও গাঢ় চেহারা স্থির থাকে। Red ও Dark দিয়ে Dock আইকন বদলায়। পছন্দগুলো সংরক্ষিত থাকে।",
+    "en": "Automatic follows the macOS appearance; Light and Dark choose a fixed appearance. Red and Dark change the app’s Dock icon. Both preferences are saved for the next launch.",
+    "es": "Automático sigue la apariencia de macOS; Claro y Oscuro fijan una apariencia. Red y Dark cambian el icono del Dock. Ambas preferencias se conservan al volver a abrir la aplicación.",
+    "fr": "Automatique suit macOS ; Clair et Sombre fixent l’apparence. Red et Dark changent l’icône du Dock. Ces préférences sont conservées.",
+    "hi": "स्वचालित रूप macOS का अनुसरण करता है; हल्का और गहरा रूप स्थिर रहता है। Red और Dark से Dock का आइकन बदलता है। दोनों विकल्प सहेजे जाते हैं।",
+    "id": "Otomatis mengikuti tampilan macOS; Terang dan Gelap menetapkan tampilan tetap. Red dan Dark mengubah ikon Dock. Kedua pilihan disimpan.",
+    "pt": "Automático segue o macOS; Claro e Escuro fixam a aparência. Red e Dark alteram o ícone no Dock. As duas preferências ficam salvas.",
+    "ur": "خودکار وضع macOS کی ظاہری شکل اپناتی ہے؛ ہلکی اور گہری وضع مستقل رہتی ہے۔ Red اور Dark سے Dock کا آئیکن بدلتا ہے۔ دونوں ترجیحات محفوظ ہوتی ہیں۔",
+    "zh-Hans": "自动模式跟随 macOS 外观；浅色和深色模式固定外观。Red 和 Dark 可更改程序坞图标。两项设置都会保存。"
+  },
   "Autor": {
     "ar": "المؤلف",
     "bn": "লেখক",
@@ -610,6 +874,66 @@
     "pt": "Autor",
     "ur": "مصنف",
     "zh-Hans": "作者"
+  },
+  "Ayuda contextual con «¿Qué es esto?» y ajustes más compactos.": {
+    "ar": "مساعدة سياقية عبر «ما هذا؟» وإعدادات أكثر اختصارًا.",
+    "bn": "“এটি কী?” প্রাসঙ্গিক সহায়তা এবং আরও সংক্ষিপ্ত সেটিংস।",
+    "en": "Contextual help with “What is this?” and more compact settings.",
+    "es": "Ayuda contextual con «¿Qué es esto?» y ajustes más compactos.",
+    "fr": "Aide contextuelle « Qu’est-ce que c’est ? » et réglages plus compacts.",
+    "hi": "“यह क्या है?” संदर्भ सहायता और अधिक संक्षिप्त सेटिंग्स।",
+    "id": "Bantuan kontekstual “Apa ini?” dan pengaturan lebih ringkas.",
+    "pt": "Ajuda contextual com “O que é isto?” e ajustes mais compactos.",
+    "ur": "“یہ کیا ہے؟” سیاقی مدد اور زیادہ مختصر سیٹنگز۔",
+    "zh-Hans": "新增“这是什么？”上下文帮助，并精简设置界面。"
+  },
+  "Ayuda de software": {
+    "ar": "مساعدة البرنامج",
+    "bn": "সফটওয়্যার সহায়তা",
+    "en": "Software help",
+    "es": "Ayuda de software",
+    "fr": "Aide du logiciel",
+    "hi": "सॉफ़्टवेयर सहायता",
+    "id": "Bantuan perangkat lunak",
+    "pt": "Ajuda do software",
+    "ur": "سافٹ ویئر کی مدد",
+    "zh-Hans": "软件帮助"
+  },
+  "Ayudas visuales de importación y diccionarios en los diez idiomas.": {
+    "ar": "مساعدة مرئية للاستيراد والقواميس باللغات العشر.",
+    "bn": "দশটি ভাষায় আমদানি ও অভিধানের দৃশ্য সহায়িকা।",
+    "en": "Visual import and dictionary help in all ten languages.",
+    "es": "Ayudas visuales de importación y diccionarios en los diez idiomas.",
+    "fr": "Aide visuelle pour l’importation et les dictionnaires dans les dix langues.",
+    "hi": "दस भाषाओं में आयात और शब्दकोश की दृश्य सहायता।",
+    "id": "Bantuan visual impor dan kamus dalam sepuluh bahasa.",
+    "pt": "Ajuda visual de importação e dicionários nos dez idiomas.",
+    "ur": "دس زبانوں میں درآمد اور لغت کی بصری مدد۔",
+    "zh-Hans": "十种语言的导入和词典图示帮助。"
+  },
+  "Año": {
+    "ar": "السنة",
+    "bn": "বছর",
+    "en": "Year",
+    "es": "Año",
+    "fr": "Année",
+    "hi": "वर्ष",
+    "id": "Tahun",
+    "pt": "Ano",
+    "ur": "سال",
+    "zh-Hans": "年份"
+  },
+  "Año original": {
+    "ar": "سنة النشر الأصلية",
+    "bn": "মূল প্রকাশের বছর",
+    "en": "Original publication year",
+    "es": "Año original",
+    "fr": "Année de publication originale",
+    "hi": "मूल प्रकाशन वर्ष",
+    "id": "Tahun terbit asli",
+    "pt": "Ano da obra original",
+    "ur": "اصل اشاعت کا سال",
+    "zh-Hans": "原作出版年"
   },
   "Bajar": {
     "ar": "نقل لأسفل",
@@ -623,6 +947,18 @@
     "ur": "نیچے منتقل کریں",
     "zh-Hans": "下移"
   },
+  "Barra de herramientas": {
+    "ar": "شريط الأدوات",
+    "bn": "টুলবার",
+    "en": "Toolbar",
+    "es": "Barra de herramientas",
+    "fr": "Barre d’outils",
+    "hi": "टूलबार",
+    "id": "Bilah alat",
+    "pt": "Barra de ferramentas",
+    "ur": "ٹول بار",
+    "zh-Hans": "工具栏"
+  },
   "Biblia": {
     "ar": "الكتاب المقدس",
     "bn": "বাইবেল",
@@ -635,6 +971,18 @@
     "ur": "بائبل",
     "zh-Hans": "圣经"
   },
+  "Biblias y texto bíblico": {
+    "ar": "الكتاب المقدس ونصوصه",
+    "bn": "বাইবেল ও বাইবেলের পাঠ",
+    "en": "Bibles and biblical text",
+    "es": "Biblias y texto bíblico",
+    "fr": "Bibles et texte biblique",
+    "hi": "बाइबल और बाइबलीय पाठ",
+    "id": "Alkitab dan teks Alkitab",
+    "pt": "Bíblias e texto bíblico",
+    "ur": "بائبل اور بائبلی متن",
+    "zh-Hans": "圣经与经文"
+  },
   "Biblioteca": {
     "ar": "المكتبة",
     "bn": "লাইব্রেরি",
@@ -646,6 +994,78 @@
     "pt": "Biblioteca",
     "ur": "لائبریری",
     "zh-Hans": "书库"
+  },
+  "Biblioteca de estudio bíblico con lecturas en paralelo, búsqueda y documentos personales.": {
+    "ar": "مكتبة لدراسة الكتاب المقدس مع قراءة متوازية وبحث ومستندات شخصية.",
+    "bn": "সমান্তরাল পাঠ, অনুসন্ধান ও ব্যক্তিগত নথিসহ বাইবেল অধ্যয়নের লাইব্রেরি।",
+    "en": "Bible study library with parallel readings, search and personal documents.",
+    "es": "Biblioteca de estudio bíblico con lecturas en paralelo, búsqueda y documentos personales.",
+    "fr": "Bibliothèque d’étude biblique avec lectures parallèles, recherche et documents personnels.",
+    "hi": "समानांतर पठन, खोज और निजी दस्तावेज़ों वाली बाइबल अध्ययन लाइब्रेरी।",
+    "id": "Perpustakaan studi Alkitab dengan bacaan paralel, pencarian, dan dokumen pribadi.",
+    "pt": "Biblioteca de estudo bíblico com leituras paralelas, pesquisa e documentos pessoais.",
+    "ur": "متوازی مطالعے، تلاش اور ذاتی دستاویزات کے ساتھ بائبل کے مطالعے کی لائبریری۔",
+    "zh-Hans": "支持平行阅读、搜索和个人文档的圣经研读资料库。"
+  },
+  "Borde derecho": {
+    "ar": "الحافة اليمنى",
+    "bn": "ডান প্রান্ত",
+    "en": "Right Edge",
+    "es": "Borde derecho",
+    "fr": "Bord droit",
+    "hi": "दायाँ किनारा",
+    "id": "Tepi Kanan",
+    "pt": "Borda direita",
+    "ur": "دایاں کنارہ",
+    "zh-Hans": "右边缘"
+  },
+  "Borde inferior": {
+    "ar": "الحافة السفلية",
+    "bn": "নিচের প্রান্ত",
+    "en": "Bottom Edge",
+    "es": "Borde inferior",
+    "fr": "Bord inférieur",
+    "hi": "निचला किनारा",
+    "id": "Tepi Bawah",
+    "pt": "Borda inferior",
+    "ur": "نچلا کنارہ",
+    "zh-Hans": "下边缘"
+  },
+  "Borde izquierdo": {
+    "ar": "الحافة اليسرى",
+    "bn": "বাম প্রান্ত",
+    "en": "Left Edge",
+    "es": "Borde izquierdo",
+    "fr": "Bord gauche",
+    "hi": "बायाँ किनारा",
+    "id": "Tepi Kiri",
+    "pt": "Borda esquerda",
+    "ur": "بایاں کنارہ",
+    "zh-Hans": "左边缘"
+  },
+  "Borde superior": {
+    "ar": "الحافة العلوية",
+    "bn": "উপরের প্রান্ত",
+    "en": "Top Edge",
+    "es": "Borde superior",
+    "fr": "Bord supérieur",
+    "hi": "ऊपरी किनारा",
+    "id": "Tepi Atas",
+    "pt": "Borda superior",
+    "ur": "اوپری کنارہ",
+    "zh-Hans": "上边缘"
+  },
+  "Borrar": {
+    "ar": "مسح",
+    "bn": "মুছুন",
+    "en": "Clear",
+    "es": "Borrar",
+    "fr": "Effacer",
+    "hi": "साफ़ करें",
+    "id": "Bersihkan",
+    "pt": "Limpar",
+    "ur": "صاف کریں",
+    "zh-Hans": "清除"
   },
   "Borrar marcación seleccionada": {
     "ar": "إزالة التمييز المحدّد",
@@ -683,6 +1103,42 @@
     "ur": "مضامین کے عنوانات تلاش کرتا ہے۔ متعلقہ موضوعاتی اشاریوں کو پڑھنے کی سہولت ابھی زیرِ ترقی ہے۔",
     "zh-Hans": "搜索文章标题。关联主题索引的读取功能仍在开发中。"
   },
+  "Busca un tema y abre una entrada disponible para ir a su recurso. Los resultados dependen de los índices de los libros importados. Los recursos ocultos quedan excluidos.": {
+    "ar": "ابحث عن موضوع وافتح إدخالًا متاحًا. تعتمد النتائج على فهارس الكتب المستوردة وتستبعد الموارد المخفية.",
+    "bn": "বিষয় খুঁজে উপলব্ধ এন্ট্রি খুলুন। ফলাফল আমদানি করা বইয়ের সূচির ওপর নির্ভর করে। লুকানো রিসোর্স বাদ থাকে।",
+    "en": "Look up a subject and choose an available entry to open its resource. Topic results depend on the indexes supplied by your imported books. Hidden resources are excluded.",
+    "es": "Busca un tema y abre una entrada disponible para ir a su recurso. Los resultados dependen de los índices de los libros importados. Los recursos ocultos quedan excluidos.",
+    "fr": "Recherchez un sujet et ouvrez une entrée disponible. Les résultats dépendent des index des livres importés. Les ressources masquées sont exclues.",
+    "hi": "विषय खोजें और उपलब्ध प्रविष्टि खोलें। परिणाम आयात की गई पुस्तकों के सूचकांकों पर निर्भर हैं। छिपे संसाधन शामिल नहीं हैं।",
+    "id": "Cari topik dan buka entri yang tersedia. Hasil bergantung pada indeks buku yang diimpor. Sumber daya tersembunyi dikecualikan.",
+    "pt": "Procure um assunto e abra uma entrada disponível. Os resultados dependem dos índices dos livros importados. Recursos ocultos ficam de fora.",
+    "ur": "موضوع تلاش کرکے دستیاب اندراج کھولیں۔ نتائج درآمد کردہ کتابوں کی فہرستوں پر منحصر ہیں۔ پوشیدہ وسائل شامل نہیں ہوتے۔",
+    "zh-Hans": "查询主题并打开可用条目。结果取决于已导入书籍提供的索引，不包含隐藏资源。"
+  },
+  "Busca una palabra, una frase entre comillas o una consulta AND / OR. Abre un resultado para ir al pasaje encontrado. Los recursos ocultos se excluyen de las nuevas búsquedas.": {
+    "ar": "ابحث عن كلمة أو عبارة بين علامتي اقتباس أو استعلام AND / OR. افتح النتيجة للانتقال إلى المقطع المطابق. تُستبعد الموارد المخفية من البحث الجديد.",
+    "bn": "শব্দ, উদ্ধৃত বাক্যাংশ বা AND / OR প্রশ্ন দিয়ে খুঁজুন। ফলাফল খুলে মিল পাওয়া অংশে যান। নতুন অনুসন্ধানে লুকানো রিসোর্স বাদ থাকে।",
+    "en": "Search the library for a word, a quoted phrase or an AND / OR query. Choose a result to open its resource at the matching passage. Hidden resources are excluded from new searches.",
+    "es": "Busca una palabra, una frase entre comillas o una consulta AND / OR. Abre un resultado para ir al pasaje encontrado. Los recursos ocultos se excluyen de las nuevas búsquedas.",
+    "fr": "Recherchez un mot, une expression entre guillemets ou une requête AND / OR. Ouvrez un résultat pour lire le passage trouvé. Les ressources masquées sont exclues.",
+    "hi": "शब्द, उद्धरण में वाक्यांश या AND / OR क्वेरी खोजें। परिणाम खोलकर संबंधित अंश पढ़ें। नई खोजों में छिपे संसाधन नहीं आते।",
+    "id": "Cari kata, frasa berpetik, atau kueri AND / OR. Buka hasil untuk menuju bagian yang cocok. Sumber daya tersembunyi tidak masuk pencarian baru.",
+    "pt": "Pesquise uma palavra, uma frase entre aspas ou uma consulta AND / OR. Abra um resultado para ir ao trecho encontrado. Recursos ocultos ficam fora de novas pesquisas.",
+    "ur": "لفظ، اقتباس میں فقرہ یا AND / OR تلاش لکھیں۔ نتیجہ کھول کر متعلقہ حصے پر جائیں۔ نئی تلاش میں پوشیدہ وسائل شامل نہیں ہوتے۔",
+    "zh-Hans": "可搜索单词、引号中的短语或 AND / OR 查询。打开结果可跳转到匹配段落。新的搜索不包含已隐藏的资源。"
+  },
+  "Buscando actualizaciones…": {
+    "ar": "جارٍ التحقق من التحديثات…",
+    "bn": "আপডেট খোঁজা হচ্ছে…",
+    "en": "Checking for updates…",
+    "es": "Buscando actualizaciones…",
+    "fr": "Recherche de mises à jour…",
+    "hi": "अपडेट जाँचे जा रहे हैं…",
+    "id": "Memeriksa pembaruan…",
+    "pt": "Verificando atualizações…",
+    "ur": "اپ ڈیٹس چیک ہو رہی ہیں…",
+    "zh-Hans": "正在检查更新…"
+  },
   "Buscando…": {
     "ar": "جارٍ البحث…",
     "bn": "খোঁজা হচ্ছে…",
@@ -707,6 +1163,42 @@
     "ur": "تلاش",
     "zh-Hans": "搜索"
   },
+  "Buscar actualizaciones": {
+    "ar": "التحقق من التحديثات",
+    "bn": "আপডেট দেখুন",
+    "en": "Check for Updates",
+    "es": "Buscar actualizaciones",
+    "fr": "Rechercher des mises à jour",
+    "hi": "अपडेट जाँचें",
+    "id": "Periksa Pembaruan",
+    "pt": "Verificar atualizações",
+    "ur": "اپ ڈیٹس چیک کریں",
+    "zh-Hans": "检查更新"
+  },
+  "Buscar actualizaciones automáticamente": {
+    "ar": "التحقق تلقائيًا من التحديثات",
+    "bn": "স্বয়ংক্রিয়ভাবে আপডেট দেখুন",
+    "en": "Automatically check for updates",
+    "es": "Buscar actualizaciones automáticamente",
+    "fr": "Rechercher automatiquement les mises à jour",
+    "hi": "स्वतः अपडेट जाँचें",
+    "id": "Periksa pembaruan secara otomatis",
+    "pt": "Verificar atualizações automaticamente",
+    "ur": "خودکار طور پر اپ ڈیٹس چیک کریں",
+    "zh-Hans": "自动检查更新"
+  },
+  "Buscar actualizaciones…": {
+    "ar": "التحقق من التحديثات…",
+    "bn": "আপডেট দেখুন…",
+    "en": "Check for Updates…",
+    "es": "Buscar actualizaciones…",
+    "fr": "Rechercher des mises à jour…",
+    "hi": "अपडेट जाँचें…",
+    "id": "Periksa Pembaruan…",
+    "pt": "Verificar atualizações…",
+    "ur": "اپ ڈیٹس چیک کریں…",
+    "zh-Hans": "检查更新…"
+  },
   "Buscar anterior": {
     "ar": "بحث عن السابق",
     "bn": "আগেরটি খুঁজুন",
@@ -730,6 +1222,18 @@
     "pt": "Buscar em",
     "ur": "اس میں تلاش کریں",
     "zh-Hans": "搜索范围"
+  },
+  "Buscar en diccionario": {
+    "ar": "البحث في القاموس",
+    "bn": "অভিধানে খুঁজুন",
+    "en": "Look up in dictionary",
+    "es": "Buscar en diccionario",
+    "fr": "Chercher dans le dictionnaire",
+    "hi": "शब्दकोश में खोजें",
+    "id": "Cari di kamus",
+    "pt": "Buscar no dicionário",
+    "ur": "لغت میں تلاش کریں",
+    "zh-Hans": "查词典"
   },
   "Buscar en este recurso": {
     "ar": "بحث في هذا المورد",
@@ -803,6 +1307,18 @@
     "ur": "عنوان، مصنف یا فائل تلاش کریں",
     "zh-Hans": "搜索标题、作者或文件"
   },
+  "Buscar título, autor, idioma o archivo": {
+    "ar": "البحث بالعنوان أو المؤلف أو اللغة أو الملف",
+    "bn": "শিরোনাম, লেখক, ভাষা বা ফাইল খুঁজুন",
+    "en": "Search title, author, language or file",
+    "es": "Buscar título, autor, idioma o archivo",
+    "fr": "Rechercher un titre, auteur, langue ou fichier",
+    "hi": "शीर्षक, लेखक, भाषा या फ़ाइल खोजें",
+    "id": "Cari judul, penulis, bahasa, atau berkas",
+    "pt": "Buscar título, autor, idioma ou arquivo",
+    "ur": "عنوان، مصنف، زبان یا فائل تلاش کریں",
+    "zh-Hans": "搜索标题、作者、语言或文件"
+  },
   "Búsqueda básica…": {
     "ar": "بحث أساسي…",
     "bn": "সাধারণ অনুসন্ধান…",
@@ -863,6 +1379,30 @@
     "ur": "پینل کا سائز بدلیں",
     "zh-Hans": "调整面板大小"
   },
+  "Cambios de esta versión": {
+    "ar": "التغييرات في هذا الإصدار",
+    "bn": "এই সংস্করণের পরিবর্তন",
+    "en": "Changes in this version",
+    "es": "Cambios de esta versión",
+    "fr": "Modifications de cette version",
+    "hi": "इस संस्करण में बदलाव",
+    "id": "Perubahan dalam versi ini",
+    "pt": "Alterações desta versão",
+    "ur": "اس نسخے میں تبدیلیاں",
+    "zh-Hans": "此版本的更改"
+  },
+  "Canal de actualizaciones": {
+    "ar": "قناة التحديث",
+    "bn": "আপডেট চ্যানেল",
+    "en": "Update channel",
+    "es": "Canal de actualizaciones",
+    "fr": "Canal de mise à jour",
+    "hi": "अपडेट चैनल",
+    "id": "Saluran pembaruan",
+    "pt": "Canal de atualizações",
+    "ur": "اپ ڈیٹ چینل",
+    "zh-Hans": "更新通道"
+  },
   "Cancelar": {
     "ar": "إلغاء",
     "bn": "বাতিল",
@@ -874,6 +1414,18 @@
     "pt": "Cancelar",
     "ur": "منسوخ کریں",
     "zh-Hans": "取消"
+  },
+  "Capítulo": {
+    "ar": "الإصحاح",
+    "bn": "অধ্যায়",
+    "en": "Chapter",
+    "es": "Capítulo",
+    "fr": "Chapitre",
+    "hi": "अध्याय",
+    "id": "Pasal",
+    "pt": "Capítulo",
+    "ur": "باب",
+    "zh-Hans": "章"
   },
   "Cargar área de trabajo": {
     "ar": "تحميل مساحة العمل",
@@ -934,6 +1486,18 @@
     "pt": "Cascata",
     "ur": "تہہ دار",
     "zh-Hans": "层叠"
+  },
+  "Categoría": {
+    "ar": "الفئة",
+    "bn": "বিভাগ",
+    "en": "Category",
+    "es": "Categoría",
+    "fr": "Catégorie",
+    "hi": "श्रेणी",
+    "id": "Kategori",
+    "pt": "Categoria",
+    "ur": "زمرہ",
+    "zh-Hans": "分类"
   },
   "Cerrar": {
     "ar": "إغلاق",
@@ -1067,6 +1631,18 @@
     "ur": "ہلکا",
     "zh-Hans": "浅色"
   },
+  "Cobertura bíblica": {
+    "ar": "نطاق الأسفار",
+    "bn": "বাইবেলের পরিসর",
+    "en": "Bible coverage",
+    "es": "Cobertura bíblica",
+    "fr": "Livres bibliques couverts",
+    "hi": "बाइबल का दायरा",
+    "id": "Cakupan Alkitab",
+    "pt": "Abrangência bíblica",
+    "ur": "بائبلی دائرہ",
+    "zh-Hans": "圣经范围"
+  },
   "Coincidencia anterior": {
     "ar": "التطابق السابق",
     "bn": "আগের মিল",
@@ -1115,6 +1691,102 @@
     "ur": "اگلا مماثل نتیجہ (⌘G)",
     "zh-Hans": "下一个匹配项 (⌘G)"
   },
+  "Colaboradores": {
+    "ar": "المساهمون",
+    "bn": "সহযোগী",
+    "en": "Contributors",
+    "es": "Colaboradores",
+    "fr": "Collaborateurs",
+    "hi": "योगदानकर्ता",
+    "id": "Kontributor",
+    "pt": "Colaboradores",
+    "ur": "معاونین",
+    "zh-Hans": "贡献者"
+  },
+  "Colección": {
+    "ar": "المجموعة المنشورة",
+    "bn": "সংকলন",
+    "en": "Collection",
+    "es": "Colección",
+    "fr": "Collection",
+    "hi": "संग्रह",
+    "id": "Koleksi",
+    "pt": "Coleção",
+    "ur": "مجموعہ",
+    "zh-Hans": "丛书"
+  },
+  "Columna amplia": {
+    "ar": "عمود عريض",
+    "bn": "প্রশস্ত কলাম",
+    "en": "Wide Column",
+    "es": "Columna amplia",
+    "fr": "Colonne large",
+    "hi": "चौड़ा स्तंभ",
+    "id": "Kolom Lebar",
+    "pt": "Coluna larga",
+    "ur": "چوڑا کالم",
+    "zh-Hans": "宽列"
+  },
+  "Columnas": {
+    "ar": "الأعمدة",
+    "bn": "কলাম",
+    "en": "Columns",
+    "es": "Columnas",
+    "fr": "Colonnes",
+    "hi": "स्तंभ",
+    "id": "Kolom",
+    "pt": "Colunas",
+    "ur": "کالم",
+    "zh-Hans": "列"
+  },
+  "Columnas, filtros, búsqueda por idioma y grupos automáticos de Biblias.": {
+    "ar": "أعمدة وعوامل تصفية وبحث باللغة ومجموعات كتاب مقدس تلقائية.",
+    "bn": "কলাম, ফিল্টার, ভাষায় অনুসন্ধান ও স্বয়ংক্রিয় বাইবেল গোষ্ঠী।",
+    "en": "Columns, filters, language search and automatic Bible groups.",
+    "es": "Columnas, filtros, búsqueda por idioma y grupos automáticos de Biblias.",
+    "fr": "Colonnes, filtres, recherche par langue et groupes de Bibles automatiques.",
+    "hi": "स्तंभ, फ़िल्टर, भाषा खोज और स्वचालित बाइबल समूह।",
+    "id": "Kolom, filter, pencarian bahasa dan grup Alkitab otomatis.",
+    "pt": "Colunas, filtros, busca por idioma e grupos automáticos de Bíblias.",
+    "ur": "کالم، فلٹر، زبان سے تلاش اور خودکار بائبل گروپ۔",
+    "zh-Hans": "可配置列、筛选、按语言搜索及自动圣经组。"
+  },
+  "Comentario bíblico": {
+    "ar": "تفسير كتابي",
+    "bn": "বাইবেলের ভাষ্য",
+    "en": "Bible commentary",
+    "es": "Comentario bíblico",
+    "fr": "Commentaire biblique",
+    "hi": "बाइबल टीका",
+    "id": "Tafsiran Alkitab",
+    "pt": "Comentário bíblico",
+    "ur": "بائبل کی تفسیر",
+    "zh-Hans": "圣经注释"
+  },
+  "Compilación": {
+    "ar": "البنية",
+    "bn": "বিল্ড",
+    "en": "Build",
+    "es": "Compilación",
+    "fr": "Compilation",
+    "hi": "बिल्ड",
+    "id": "Build",
+    "pt": "Compilação",
+    "ur": "بلڈ",
+    "zh-Hans": "构建版本"
+  },
+  "Concordancia": {
+    "ar": "فهرس ألفاظ",
+    "bn": "শব্দসূচি",
+    "en": "Concordance",
+    "es": "Concordancia",
+    "fr": "Concordance",
+    "hi": "शब्दानुक्रमणिका",
+    "id": "Konkordansi",
+    "pt": "Concordância",
+    "ur": "کشف الالفاظ",
+    "zh-Hans": "经文索引"
+  },
   "Configurar grupos…": {
     "ar": "إعداد المجموعات…",
     "bn": "গোষ্ঠী কনফিগার করুন…",
@@ -1126,6 +1798,18 @@
     "pt": "Configurar grupos…",
     "ur": "گروپ ترتیب دیں…",
     "zh-Hans": "配置分组…"
+  },
+  "Consejería y cuidado pastoral": {
+    "ar": "الإرشاد والرعاية الرعوية",
+    "bn": "পরামর্শ ও পালকীয় যত্ন",
+    "en": "Counseling and pastoral care",
+    "es": "Consejería y cuidado pastoral",
+    "fr": "Conseil et accompagnement pastoral",
+    "hi": "परामर्श और पादरी देखभाल",
+    "id": "Konseling dan pendampingan pastoral",
+    "pt": "Aconselhamento e cuidado pastoral",
+    "ur": "مشاورت اور پاسبانی",
+    "zh-Hans": "辅导与牧养"
   },
   "Contenido": {
     "ar": "المحتويات",
@@ -1139,6 +1823,18 @@
     "ur": "فہرست مضامین",
     "zh-Hans": "目录"
   },
+  "Contenido nativo verificado": {
+    "ar": "محتوى أصلي تم التحقق منه",
+    "bn": "যাচাইকৃত নেটিভ বিষয়বস্তু",
+    "en": "Verified native content",
+    "es": "Contenido nativo verificado",
+    "fr": "Contenu natif vérifié",
+    "hi": "सत्यापित मूल सामग्री",
+    "id": "Konten native terverifikasi",
+    "pt": "Conteúdo nativo verificado",
+    "ur": "تصدیق شدہ مقامی مواد",
+    "zh-Hans": "已验证的原生内容"
+  },
   "Continuar desde el inicio o el final": {
     "ar": "متابعة من البداية أو النهاية",
     "bn": "শুরু বা শেষ থেকে চালিয়ে যান",
@@ -1150,6 +1846,54 @@
     "pt": "Continuar pelo início ou fim",
     "ur": "شروع یا آخر سے جاری رکھیں",
     "zh-Hans": "从开头或末尾继续"
+  },
+  "Conversión pendiente": {
+    "ar": "التحويل قيد الانتظار",
+    "bn": "রূপান্তর বাকি",
+    "en": "Conversion pending",
+    "es": "Conversión pendiente",
+    "fr": "Conversion en attente",
+    "hi": "रूपांतरण लंबित",
+    "id": "Konversi tertunda",
+    "pt": "Conversão pendente",
+    "ur": "تبدیلی زیر التوا",
+    "zh-Hans": "待转换"
+  },
+  "Convertir": {
+    "ar": "تحويل",
+    "bn": "রূপান্তর",
+    "en": "Convert",
+    "es": "Convertir",
+    "fr": "Convertir",
+    "hi": "बदलें",
+    "id": "Konversi",
+    "pt": "Converter",
+    "ur": "تبدیل کریں",
+    "zh-Hans": "转换"
+  },
+  "Convertir a .libron": {
+    "ar": "التحويل إلى .libron",
+    "bn": ".libron-এ রূপান্তর করুন",
+    "en": "Convert to .libron",
+    "es": "Convertir a .libron",
+    "fr": "Convertir en .libron",
+    "hi": ".libron में बदलें",
+    "id": "Konversi ke .libron",
+    "pt": "Converter para .libron",
+    "ur": ".libron میں تبدیل کریں",
+    "zh-Hans": "转换为 .libron"
+  },
+  "Copia el texto seleccionado o el artículo si no hay selección. Exportar e imprimir usan la lectura actual; los formatos dependen del recurso. Elige el destino en el diálogo del sistema.": {
+    "ar": "انسخ النص المحدد أو المقالة عند عدم التحديد. يستخدم التصدير والطباعة القراءة الحالية، وتعتمد الصيغ على المورد. اختر الوجهة في حوار النظام.",
+    "bn": "নির্বাচিত লেখা কপি করুন, নির্বাচন না থাকলে নিবন্ধ। রপ্তানি ও মুদ্রণ বর্তমান পাঠ ব্যবহার করে; বিন্যাস রিসোর্সভেদে বদলায়। সিস্টেম সংলাপে গন্তব্য বাছুন।",
+    "en": "Copy the selected text, or the article when there is no selection. Export or print uses the current reading; available formats depend on its resource type. Choose the destination in the system dialog.",
+    "es": "Copia el texto seleccionado o el artículo si no hay selección. Exportar e imprimir usan la lectura actual; los formatos dependen del recurso. Elige el destino en el diálogo del sistema.",
+    "fr": "Copiez la sélection, ou l’article sans sélection. L’exportation et l’impression utilisent la lecture actuelle ; les formats dépendent de la ressource. Choisissez la destination dans le dialogue système.",
+    "hi": "चुना पाठ कॉपी करें, या चयन न होने पर लेख। निर्यात और प्रिंट वर्तमान पठन का उपयोग करते हैं; प्रारूप संसाधन पर निर्भर हैं। सिस्टम संवाद में गंतव्य चुनें।",
+    "id": "Salin teks terpilih, atau artikel jika tidak ada pilihan. Ekspor dan cetak memakai bacaan saat ini; format bergantung pada sumber daya. Pilih tujuan di dialog sistem.",
+    "pt": "Copie a seleção ou o artigo quando não houver seleção. Exportar e imprimir usam a leitura atual; os formatos dependem do recurso. Escolha o destino no diálogo do sistema.",
+    "ur": "منتخب متن نقل کریں، یا انتخاب نہ ہونے پر مضمون۔ برآمد اور پرنٹ موجودہ مطالعے کو استعمال کرتے ہیں؛ فارمیٹ وسیلے پر منحصر ہیں۔ سسٹم مکالمے میں منزل منتخب کریں۔",
+    "zh-Hans": "复制所选文本；未选择文本时复制文章。导出和打印使用当前阅读内容，可用格式取决于资源类型。请在系统对话框中选择目标。"
   },
   "Copiar": {
     "ar": "نسخ",
@@ -1223,6 +1967,18 @@
     "ur": "بائبل کی آیات نقل کریں…",
     "zh-Hans": "复制圣经经文…"
   },
+  "Crea o abre un archivo de notas o una lista de versículos. Dale un título, edita su contenido y guárdalo como documento personal, separado de los libros importados.": {
+    "ar": "أنشئ دفتر ملاحظات أو قائمة آيات أو افتحها. أضف عنوانًا وعدّل المحتوى واحفظه مستندًا شخصيًا منفصلًا عن الكتب المستوردة.",
+    "bn": "নোটবুক বা পদের তালিকা তৈরি বা খুলুন। শিরোনাম দিন, সম্পাদনা করুন এবং ব্যক্তিগত নথি হিসেবে রাখুন। এগুলো আমদানি করা বই থেকে আলাদা।",
+    "en": "Create or open a notebook or verse list for your study. Give it a title, edit its contents and save it as a personal document. These documents are separate from the imported books.",
+    "es": "Crea o abre un archivo de notas o una lista de versículos. Dale un título, edita su contenido y guárdalo como documento personal, separado de los libros importados.",
+    "fr": "Créez ou ouvrez un carnet ou une liste de versets. Donnez-lui un titre, modifiez son contenu et enregistrez-le séparément des livres importés.",
+    "hi": "अध्ययन के लिए नोटबुक या पदों की सूची बनाएँ या खोलें। शीर्षक दें, संपादित करें और निजी दस्तावेज़ के रूप में सहेजें। ये आयात की गई पुस्तकों से अलग हैं।",
+    "id": "Buat atau buka buku catatan atau daftar ayat. Beri judul, edit isinya, dan simpan sebagai dokumen pribadi yang terpisah dari buku impor.",
+    "pt": "Crie ou abra um caderno de notas ou lista de versículos. Dê um título, edite e salve como documento pessoal, separado dos livros importados.",
+    "ur": "نوٹ بک یا آیات کی فہرست بنائیں یا کھولیں۔ عنوان دیں، تدوین کریں اور درآمد کردہ کتابوں سے الگ ذاتی دستاویز کے طور پر محفوظ کریں۔",
+    "zh-Hans": "创建或打开笔记本或经文列表，添加标题、编辑内容并保存为个人文档。这些文档与导入的书籍分开保存。"
+  },
   "Crea o abre un documento de estudio.": {
     "ar": "أنشئ مستند دراسة أو افتحه.",
     "bn": "অধ্যয়নের নথি তৈরি করুন বা খুলুন।",
@@ -1259,6 +2015,54 @@
     "ur": "اس متن سے قابل ترمیم نوٹ بنائیں",
     "zh-Hans": "用此文本创建可编辑笔记"
   },
+  "Créditos y fuentes": {
+    "ar": "الإسناد والمصادر",
+    "bn": "স্বীকৃতি ও উৎস",
+    "en": "Credits and sources",
+    "es": "Créditos y fuentes",
+    "fr": "Crédits et sources",
+    "hi": "श्रेय और स्रोत",
+    "id": "Kredit dan sumber",
+    "pt": "Créditos e fontes",
+    "ur": "انتساب اور ماخذ",
+    "zh-Hans": "鸣谢与来源"
+  },
+  "Cuadrícula de cuatro": {
+    "ar": "شبكة من أربع نوافذ",
+    "bn": "চার ঘরের গ্রিড",
+    "en": "Four-Pane Grid",
+    "es": "Cuadrícula de cuatro",
+    "fr": "Grille de quatre",
+    "hi": "चार खानों की ग्रिड",
+    "id": "Kisi Empat Panel",
+    "pt": "Grade de quatro",
+    "ur": "چار خانوں کی گرڈ",
+    "zh-Hans": "四宫格"
+  },
+  "Definiciones y sinónimos": {
+    "ar": "تعريفات ومترادفات",
+    "bn": "সংজ্ঞা ও সমার্থক শব্দ",
+    "en": "Definitions and synonyms",
+    "es": "Definiciones y sinónimos",
+    "fr": "Définitions et synonymes",
+    "hi": "परिभाषाएँ और पर्यायवाची",
+    "id": "Definisi dan sinonim",
+    "pt": "Definições e sinônimos",
+    "ur": "تعریفیں اور مترادفات",
+    "zh-Hans": "释义与同义词"
+  },
+  "Definición": {
+    "ar": "التعريف",
+    "bn": "সংজ্ঞা",
+    "en": "Definition",
+    "es": "Definición",
+    "fr": "Définition",
+    "hi": "परिभाषा",
+    "id": "Definisi",
+    "pt": "Definição",
+    "ur": "تعریف",
+    "zh-Hans": "释义"
+  },
   "Del original": {
     "ar": "من الأصل",
     "bn": "মূল থেকে",
@@ -1271,6 +2075,18 @@
     "ur": "اصل سے",
     "zh-Hans": "遵循原文"
   },
+  "Derecha": {
+    "ar": "يمين",
+    "bn": "ডান",
+    "en": "Right",
+    "es": "Derecha",
+    "fr": "Droite",
+    "hi": "दायाँ",
+    "id": "Kanan",
+    "pt": "Direita",
+    "ur": "دائیں",
+    "zh-Hans": "右侧"
+  },
   "Desactivado": {
     "ar": "معطّل",
     "bn": "বন্ধ",
@@ -1282,6 +2098,66 @@
     "pt": "Desativado",
     "ur": "غیر فعال",
     "zh-Hans": "关闭"
+  },
+  "Desarrollador": {
+    "ar": "المطوّر",
+    "bn": "ডেভেলপার",
+    "en": "Developer",
+    "es": "Desarrollador",
+    "fr": "Développeur",
+    "hi": "डेवलपर",
+    "id": "Pengembang",
+    "pt": "Desenvolvedor",
+    "ur": "ڈویلپر",
+    "zh-Hans": "开发者"
+  },
+  "Descargando y verificando la actualización…": {
+    "ar": "جارٍ تنزيل التحديث والتحقق منه…",
+    "bn": "আপডেট ডাউনলোড ও যাচাই করা হচ্ছে…",
+    "en": "Downloading and verifying the update…",
+    "es": "Descargando y verificando la actualización…",
+    "fr": "Téléchargement et vérification de la mise à jour…",
+    "hi": "अपडेट डाउनलोड और सत्यापित किया जा रहा है…",
+    "id": "Mengunduh dan memverifikasi pembaruan…",
+    "pt": "Baixando e verificando a atualização…",
+    "ur": "اپ ڈیٹ ڈاؤن لوڈ اور تصدیق ہو رہی ہے…",
+    "zh-Hans": "正在下载并验证更新…"
+  },
+  "Descargar actualización": {
+    "ar": "تنزيل التحديث",
+    "bn": "আপডেট ডাউনলোড করুন",
+    "en": "Download Update",
+    "es": "Descargar actualización",
+    "fr": "Télécharger la mise à jour",
+    "hi": "अपडेट डाउनलोड करें",
+    "id": "Unduh Pembaruan",
+    "pt": "Baixar atualização",
+    "ur": "اپ ڈیٹ ڈاؤن لوڈ کریں",
+    "zh-Hans": "下载更新"
+  },
+  "Descargar e instalar automáticamente al cerrar": {
+    "ar": "التنزيل والتثبيت تلقائيًا عند الإغلاق",
+    "bn": "বন্ধ করার সময় স্বয়ংক্রিয়ভাবে ডাউনলোড ও ইনস্টল করুন",
+    "en": "Automatically download and install on quit",
+    "es": "Descargar e instalar automáticamente al cerrar",
+    "fr": "Télécharger et installer automatiquement à la fermeture",
+    "hi": "स्वतः डाउनलोड करें और बंद करते समय इंस्टॉल करें",
+    "id": "Unduh otomatis dan instal saat keluar",
+    "pt": "Baixar e instalar automaticamente ao sair",
+    "ur": "خودکار ڈاؤن لوڈ اور بند کرتے وقت انسٹال کریں",
+    "zh-Hans": "自动下载并在退出时安装"
+  },
+  "Despliega Cambios de esta versión para leer las notas incluidas en la versión instalada. Funcionan sin conexión y describen esa versión, en lugar de la última publicada en GitHub.": {
+    "ar": "وسّع التغييرات في هذا الإصدار لقراءة الملاحظات المرفقة بالإصدار المثبت. تعمل دون اتصال وتصف نسختك، لا أحدث إصدار على GitHub.",
+    "bn": "এই সংস্করণের পরিবর্তন খুলে ইনস্টল করা সংস্করণের নোট পড়ুন। এগুলো অফলাইনে চলে এবং আপনার সংস্করণটি বর্ণনা করে, GitHub-এর সর্বশেষটি নয়।",
+    "en": "Expand Changes in This Version to read the notes bundled with your installed version. These notes work offline and describe that version, rather than the latest release on GitHub.",
+    "es": "Despliega Cambios de esta versión para leer las notas incluidas en la versión instalada. Funcionan sin conexión y describen esa versión, en lugar de la última publicada en GitHub.",
+    "fr": "Développez Modifications de cette version pour lire les notes incluses dans la version installée. Elles fonctionnent hors ligne et ne décrivent pas la dernière version GitHub.",
+    "hi": "इस संस्करण में बदलाव खोलकर इंस्टॉल किए गए संस्करण के नोट पढ़ें। ये ऑफ़लाइन चलते हैं और इसी संस्करण का विवरण देते हैं, GitHub के नवीनतम का नहीं।",
+    "id": "Buka Perubahan dalam versi ini untuk membaca catatan versi terinstal. Catatan tersedia luring dan menjelaskan versi ini, bukan rilis GitHub terbaru.",
+    "pt": "Expanda Alterações desta versão para ler as notas incluídas na versão instalada. Elas funcionam sem internet e descrevem essa versão, não a versão mais recente do GitHub.",
+    "ur": "اس نسخے میں تبدیلیاں کھول کر نصب شدہ نسخے کے نوٹس پڑھیں۔ یہ آف لائن دستیاب ہیں اور اسی نسخے کی وضاحت کرتے ہیں، GitHub کے تازہ ترین کی نہیں۔",
+    "zh-Hans": "展开此版本的更改可阅读已安装版本附带的说明。这些说明可离线使用，描述的是本机版本，而不是 GitHub 上的最新版本。"
   },
   "Destino de las referencias": {
     "ar": "وجهة المراجع",
@@ -1354,6 +2230,162 @@
     "pt": "Detalhes de leitura e formato",
     "ur": "مطالعہ اور فارمیٹ کی تفصیلات",
     "zh-Hans": "阅读和格式详情"
+  },
+  "Detalles del archivo": {
+    "ar": "تفاصيل الملف",
+    "bn": "ফাইলের বিবরণ",
+    "en": "File details",
+    "es": "Detalles del archivo",
+    "fr": "Détails du fichier",
+    "hi": "फ़ाइल विवरण",
+    "id": "Detail berkas",
+    "pt": "Detalhes do arquivo",
+    "ur": "فائل کی تفصیلات",
+    "zh-Hans": "文件详细信息"
+  },
+  "Devocional": {
+    "ar": "قراءات تعبدية",
+    "bn": "ভক্তিমূলক পাঠ",
+    "en": "Devotional",
+    "es": "Devocional",
+    "fr": "Méditations",
+    "hi": "भक्ति पाठ",
+    "id": "Renungan",
+    "pt": "Devocional",
+    "ur": "عبادتی مطالعہ",
+    "zh-Hans": "灵修"
+  },
+  "Diccionario": {
+    "ar": "القاموس",
+    "bn": "অভিধান",
+    "en": "Dictionary",
+    "es": "Diccionario",
+    "fr": "Dictionnaire",
+    "hi": "शब्दकोश",
+    "id": "Kamus",
+    "pt": "Dicionário",
+    "ur": "لغت",
+    "zh-Hans": "词典"
+  },
+  "Diccionario anterior": {
+    "ar": "القاموس السابق",
+    "bn": "আগের অভিধান",
+    "en": "Previous dictionary",
+    "es": "Diccionario anterior",
+    "fr": "Dictionnaire précédent",
+    "hi": "पिछला शब्दकोश",
+    "id": "Kamus sebelumnya",
+    "pt": "Dicionário anterior",
+    "ur": "پچھلی لغت",
+    "zh-Hans": "上一本词典"
+  },
+  "Diccionario bilingüe": {
+    "ar": "قاموس ثنائي اللغة",
+    "bn": "দ্বিভাষিক অভিধান",
+    "en": "Bilingual dictionary",
+    "es": "Diccionario bilingüe",
+    "fr": "Dictionnaire bilingue",
+    "hi": "द्विभाषी शब्दकोश",
+    "id": "Kamus dwibahasa",
+    "pt": "Dicionário bilíngue",
+    "ur": "دو لسانی لغت",
+    "zh-Hans": "双语词典"
+  },
+  "Diccionario bíblico": {
+    "ar": "قاموس الكتاب المقدس",
+    "bn": "বাইবেল অভিধান",
+    "en": "Bible dictionary",
+    "es": "Diccionario bíblico",
+    "fr": "Dictionnaire biblique",
+    "hi": "बाइबल शब्दकोश",
+    "id": "Kamus Alkitab",
+    "pt": "Dicionário bíblico",
+    "ur": "بائبلی لغت",
+    "zh-Hans": "圣经词典"
+  },
+  "Diccionario de sinónimos": {
+    "ar": "قاموس المترادفات",
+    "bn": "সমার্থক শব্দের অভিধান",
+    "en": "Thesaurus",
+    "es": "Diccionario de sinónimos",
+    "fr": "Dictionnaire des synonymes",
+    "hi": "पर्यायवाची शब्दकोश",
+    "id": "Tesaurus",
+    "pt": "Dicionário de sinônimos",
+    "ur": "مترادفات کی لغت",
+    "zh-Hans": "同义词词典"
+  },
+  "Diccionario general": {
+    "ar": "قاموس عام",
+    "bn": "সাধারণ অভিধান",
+    "en": "General dictionary",
+    "es": "Diccionario general",
+    "fr": "Dictionnaire général",
+    "hi": "सामान्य शब्दकोश",
+    "id": "Kamus umum",
+    "pt": "Dicionário geral",
+    "ur": "عام لغت",
+    "zh-Hans": "通用词典"
+  },
+  "Diccionario o enciclopedia": {
+    "ar": "قاموس أو موسوعة",
+    "bn": "অভিধান বা বিশ্বকোষ",
+    "en": "Dictionary or encyclopedia",
+    "es": "Diccionario o enciclopedia",
+    "fr": "Dictionnaire ou encyclopédie",
+    "hi": "शब्दकोश या विश्वकोश",
+    "id": "Kamus atau ensiklopedia",
+    "pt": "Dicionário ou enciclopédia",
+    "ur": "لغت یا دائرۃ المعارف",
+    "zh-Hans": "词典或百科全书"
+  },
+  "Diccionario siguiente": {
+    "ar": "القاموس التالي",
+    "bn": "পরের অভিধান",
+    "en": "Next dictionary",
+    "es": "Diccionario siguiente",
+    "fr": "Dictionnaire suivant",
+    "hi": "अगला शब्दकोश",
+    "id": "Kamus berikutnya",
+    "pt": "Próximo dicionário",
+    "ur": "اگلی لغت",
+    "zh-Hans": "下一本词典"
+  },
+  "Diccionarios": {
+    "ar": "القواميس",
+    "bn": "অভিধানসমূহ",
+    "en": "Dictionaries",
+    "es": "Diccionarios",
+    "fr": "Dictionnaires",
+    "hi": "शब्दकोश",
+    "id": "Kamus",
+    "pt": "Dicionários",
+    "ur": "لغات",
+    "zh-Hans": "词典"
+  },
+  "Diccionarios incluidos": {
+    "ar": "القواميس المضمنة",
+    "bn": "অন্তর্ভুক্ত অভিধান",
+    "en": "Included dictionaries",
+    "es": "Diccionarios incluidos",
+    "fr": "Dictionnaires inclus",
+    "hi": "शामिल शब्दकोश",
+    "id": "Kamus bawaan",
+    "pt": "Dicionários incluídos",
+    "ur": "شامل لغات",
+    "zh-Hans": "内置词典"
+  },
+  "Diccionarios y enciclopedias": {
+    "ar": "القواميس والموسوعات",
+    "bn": "অভিধান ও বিশ্বকোষ",
+    "en": "Dictionaries and encyclopedias",
+    "es": "Diccionarios y enciclopedias",
+    "fr": "Dictionnaires et encyclopédies",
+    "hi": "शब्दकोश और विश्वकोश",
+    "id": "Kamus dan ensiklopedia",
+    "pt": "Dicionários e enciclopédias",
+    "ur": "لغات اور دائرۃ المعارف",
+    "zh-Hans": "词典与百科全书"
   },
   "Disponible": {
     "ar": "متاح",
@@ -1439,6 +2471,30 @@
     "ur": "مطالعے کی دستاویزات…",
     "zh-Hans": "研读文档…"
   },
+  "Dos a la izquierda y una a la derecha": {
+    "ar": "اثنتان يسارًا وواحدة يمينًا",
+    "bn": "বামে দুটি, ডানে একটি",
+    "en": "Two Left, One Right",
+    "es": "Dos a la izquierda y una a la derecha",
+    "fr": "Deux à gauche, une à droite",
+    "hi": "बाएँ दो, दाएँ एक",
+    "id": "Dua Kiri, Satu Kanan",
+    "pt": "Duas à esquerda e uma à direita",
+    "ur": "بائیں دو، دائیں ایک",
+    "zh-Hans": "左二右一"
+  },
+  "Dos columnas": {
+    "ar": "عمودان",
+    "bn": "দুই কলাম",
+    "en": "Two Columns",
+    "es": "Dos columnas",
+    "fr": "Deux colonnes",
+    "hi": "दो स्तंभ",
+    "id": "Dua Kolom",
+    "pt": "Duas colunas",
+    "ur": "دو کالم",
+    "zh-Hans": "两列"
+  },
   "Duplicar lectura": {
     "ar": "تكرار القراءة",
     "bn": "পাঠের প্রতিলিপি",
@@ -1450,6 +2506,42 @@
     "pt": "Duplicar leitura",
     "ur": "مطالعہ کی نقل بنائیں",
     "zh-Hans": "复制阅读窗口"
+  },
+  "Edición": {
+    "ar": "الطبعة",
+    "bn": "সংস্করণ",
+    "en": "Edition",
+    "es": "Edición",
+    "fr": "Édition",
+    "hi": "संस्करण",
+    "id": "Edisi",
+    "pt": "Edição",
+    "ur": "ایڈیشن",
+    "zh-Hans": "版本"
+  },
+  "Editar": {
+    "ar": "تحرير",
+    "bn": "সম্পাদনা",
+    "en": "Edit",
+    "es": "Editar",
+    "fr": "Modifier",
+    "hi": "संपादित करें",
+    "id": "Edit",
+    "pt": "Editar",
+    "ur": "تدوین کریں",
+    "zh-Hans": "编辑"
+  },
+  "Editorial": {
+    "ar": "الناشر",
+    "bn": "প্রকাশক",
+    "en": "Publisher",
+    "es": "Editorial",
+    "fr": "Éditeur",
+    "hi": "प्रकाशक",
+    "id": "Penerbit",
+    "pt": "Editora",
+    "ur": "ناشر",
+    "zh-Hans": "出版社"
   },
   "El archivo del área de trabajo ya no está disponible.": {
     "ar": "لم يعد ملف مساحة العمل متاحًا.",
@@ -1583,6 +2675,18 @@
     "ur": "Dock کے لیے Libron-X کا آئیکن منتخب کریں۔",
     "zh-Hans": "选择 Libron-X 在程序坞中的图标。"
   },
+  "Elige la posición de la lectura activa.": {
+    "ar": "اختر موضع نافذة القراءة النشطة.",
+    "bn": "সক্রিয় পাঠের অবস্থান বেছে নিন।",
+    "en": "Choose a position for the active reader.",
+    "es": "Elige la posición de la lectura activa.",
+    "fr": "Choisissez la position de la lecture active.",
+    "hi": "सक्रिय पाठक की स्थिति चुनें।",
+    "id": "Pilih posisi bacaan aktif.",
+    "pt": "Escolha a posição da leitura ativa.",
+    "ur": "فعال مطالعے کی جگہ منتخب کریں۔",
+    "zh-Hans": "选择当前阅读窗口的位置。"
+  },
   "Elige las Biblias y su orden. Las flechas recorren el grupo elegido en cada lectura y conservan el versículo.": {
     "ar": "اختر الترجمات وترتيبها. تتنقل مفاتيح الأسهم ضمن المجموعة المحددة لكل نافذة مع الاحتفاظ بالآية.",
     "bn": "বাইবেল ও তাদের ক্রম বাছুন। তীরচিহ্নের কীগুলি প্রতিটি পাঠকের নির্বাচিত গোষ্ঠীতে পদ অক্ষুণ্ণ রেখে সংস্করণ বদলায়।",
@@ -1595,6 +2699,42 @@
     "ur": "بائبل اور ان کی ترتیب منتخب کریں۔ تیر کی کلیدیں آیت برقرار رکھتے ہوئے ہر قاری کے منتخب گروپ میں نسخہ بدلتی ہیں۔",
     "zh-Hans": "选择圣经及顺序。方向键按各阅读窗口所选分组切换，并保留当前经节。"
   },
+  "Elige las columnas que deseas ver, ordena por título, autor o idioma y usa Grupo para limitar la lista. Busca español para encontrar recursos en ese idioma.": {
+    "ar": "اختر الأعمدة ورتّب حسب العنوان أو المؤلف أو اللغة، واستخدم المجموعة لتحديد القائمة. ابحث عن español للموارد الإسبانية.",
+    "bn": "কলাম বেছে শিরোনাম, লেখক বা ভাষা অনুযায়ী সাজান এবং গোষ্ঠী দিয়ে তালিকা সীমিত করুন। স্প্যানিশ রিসোর্স পেতে español খুঁজুন।",
+    "en": "Choose visible columns, sort by title, author or language, and use Group to narrow the list. Search español to find Spanish resources.",
+    "es": "Elige las columnas que deseas ver, ordena por título, autor o idioma y usa Grupo para limitar la lista. Busca español para encontrar recursos en ese idioma.",
+    "fr": "Choisissez les colonnes, triez par titre, auteur ou langue et utilisez Groupe pour limiter la liste. Recherchez español pour les ressources en espagnol.",
+    "hi": "स्तंभ चुनें, शीर्षक, लेखक या भाषा से क्रम लगाएँ और समूह से सूची सीमित करें। स्पेनी संसाधनों के लिए español खोजें।",
+    "id": "Pilih kolom, urutkan menurut judul, penulis atau bahasa, dan gunakan Grup untuk membatasi daftar. Cari español untuk sumber berbahasa Spanyol.",
+    "pt": "Escolha as colunas, ordene por título, autor ou idioma e use Grupo para limitar a lista. Busque español para encontrar recursos em espanhol.",
+    "ur": "کالم منتخب کریں، عنوان، مصنف یا زبان سے ترتیب دیں اور گروپ سے فہرست محدود کریں۔ ہسپانوی وسائل کے لیے español تلاش کریں۔",
+    "zh-Hans": "选择显示列，按标题、作者或语言排序，用组筛选列表。搜索 español 可查找西班牙语资源。"
+  },
+  "Elige qué Biblias abiertas pertenecen al mismo grupo de vínculo. Al navegar a un versículo, las otras lecturas vinculadas siguen esa referencia. Los grupos de versiones y el destino de referencias son opciones independientes.": {
+    "ar": "اختر القراءات المرتبطة في مجموعة واحدة. الانتقال إلى آية يحرك القراءات المرتبطة إلى المرجع نفسه. مجموعات الترجمات ووجهات المراجع خيارات منفصلة.",
+    "bn": "একই লিংক গোষ্ঠীতে খোলা বাইবেলগুলো বাছুন। একটিতে পদে গেলে অন্যগুলো একই নির্দেশে যায়। সংস্করণ গোষ্ঠী ও নির্দেশের গন্তব্য আলাদা বিকল্প।",
+    "en": "Choose which open Bibles belong to the same link group. Navigating to a verse in one linked reading moves the others to that reference. Grouped Bible versions and reference targets are separate options.",
+    "es": "Elige qué Biblias abiertas pertenecen al mismo grupo de vínculo. Al navegar a un versículo, las otras lecturas vinculadas siguen esa referencia. Los grupos de versiones y el destino de referencias son opciones independientes.",
+    "fr": "Choisissez les Bibles liées. Aller à un verset dans l’une déplace les autres vers cette référence. Les groupes de versions et les destinations de références restent distincts.",
+    "hi": "खुली बाइबलों को एक लिंक समूह में चुनें। एक जुड़े पठन में पद पर जाने से बाकी भी उसी संदर्भ पर जाते हैं। संस्करण समूह और संदर्भ लक्ष्य अलग विकल्प हैं।",
+    "id": "Pilih Alkitab terbuka dalam grup tautan yang sama. Menuju ayat di satu bacaan memindahkan bacaan tertaut ke referensi itu. Grup versi dan tujuan referensi merupakan pilihan terpisah.",
+    "pt": "Escolha quais Bíblias abertas pertencem ao mesmo grupo de vínculo. Navegar a um versículo move as leituras vinculadas para a mesma referência. Grupos de versões e destinos de referências são opções distintas.",
+    "ur": "کھلی بائبلوں کا ایک لنک گروپ منتخب کریں۔ ایک مطالعے میں آیت پر جانے سے باقی مربوط مطالعے بھی وہیں جاتے ہیں۔ نسخوں کے گروپ اور حوالوں کی منزلیں الگ اختیارات ہیں۔",
+    "zh-Hans": "选择要加入同一联动组的已打开圣经。在其中一个窗口导航到经文时，其他联动窗口会跟随到同一引用。译本分组和引用目标是独立选项。"
+  },
+  "Elige si Libron-X abre Inicio, restaura las lecturas anteriores o carga un área de trabajo guardada. El área guardada recupera sus recursos, lecturas y posiciones de ventanas.": {
+    "ar": "اختر فتح البداية أو استعادة القراءات السابقة أو تحميل مساحة محفوظة. تستعيد المساحة مواقع الموارد والقراءات والنوافذ.",
+    "bn": "হোম খুলবেন, আগের পাঠ ফিরিয়ে আনবেন নাকি সংরক্ষিত কর্মক্ষেত্র লোড করবেন তা বাছুন। কর্মক্ষেত্র রিসোর্স, পাঠ ও উইন্ডোর অবস্থান ফিরিয়ে আনে।",
+    "en": "Choose whether Libron-X opens Home, restores previous readings or loads a saved workspace. A saved workspace restores its resource locations, readings and window positions.",
+    "es": "Elige si Libron-X abre Inicio, restaura las lecturas anteriores o carga un área de trabajo guardada. El área guardada recupera sus recursos, lecturas y posiciones de ventanas.",
+    "fr": "Choisissez d’ouvrir l’accueil, de restaurer les lectures ou de charger un espace enregistré. Celui-ci restaure les ressources, lectures et positions des fenêtres.",
+    "hi": "चुनें कि ऐप होम खोले, पिछला पठन बहाल करे या सहेजा कार्यक्षेत्र लोड करे। कार्यक्षेत्र संसाधन, पठन और विंडो की जगह बहाल करता है।",
+    "id": "Pilih membuka Beranda, memulihkan bacaan, atau memuat ruang kerja tersimpan. Ruang kerja memulihkan lokasi sumber daya, bacaan, dan posisi jendela.",
+    "pt": "Escolha abrir o Início, restaurar leituras anteriores ou carregar uma área salva. A área salva recupera recursos, leituras e posições das janelas.",
+    "ur": "ہوم کھولنے، پچھلا مطالعہ بحال کرنے یا محفوظ کام کی جگہ لوڈ کرنے کا انتخاب کریں۔ کام کی جگہ وسائل، مطالعے اور ونڈوز کی جگہ بحال کرتی ہے۔",
+    "zh-Hans": "选择启动时打开主页、恢复上次阅读或载入保存的工作区。保存的工作区可恢复资源位置、阅读内容和窗口位置。"
+  },
   "Elige un archivo local de área de trabajo.": {
     "ar": "اختر ملف مساحة عمل محليًا.",
     "bn": "একটি স্থানীয় কর্মক্ষেত্রের ফাইল বেছে নিন।",
@@ -1606,6 +2746,30 @@
     "pt": "Escolha um arquivo local de área de trabalho.",
     "ur": "کام کی جگہ کی مقامی فائل منتخب کریں۔",
     "zh-Hans": "请选择本地工作区文件。"
+  },
+  "Elige una Biblia, escribe un pasaje y selecciona el formato de copia. Revisa la vista previa antes de copiar a otra aplicación. El texto de los versículos procede del recurso original.": {
+    "ar": "اختر ترجمة وأدخل المقطع وحدد تنسيق النسخ. راجع المعاينة قبل النسخ إلى تطبيق آخر. يأتي نص الآيات من المورد الأصلي.",
+    "bn": "বাইবেল, অংশ ও কপির বিন্যাস বাছুন। অন্য অ্যাপে কপি করার আগে পূর্বরূপ দেখুন। পদের লেখা মূল রিসোর্স থেকে আসে।",
+    "en": "Choose a Bible, enter a passage and select the copy format. Preview the result before copying it into another application. The source resource supplies the verse text.",
+    "es": "Elige una Biblia, escribe un pasaje y selecciona el formato de copia. Revisa la vista previa antes de copiar a otra aplicación. El texto de los versículos procede del recurso original.",
+    "fr": "Choisissez une Bible, un passage et un format de copie. Vérifiez l’aperçu avant de copier dans une autre application. Le texte provient de la ressource originale.",
+    "hi": "बाइबल चुनें, अंश लिखें और कॉपी का प्रारूप चुनें। दूसरे ऐप में कॉपी करने से पहले परिणाम देखें। पदों का पाठ स्रोत से आता है।",
+    "id": "Pilih Alkitab, masukkan bagian, dan pilih format salinan. Tinjau hasil sebelum menyalin ke aplikasi lain. Teks ayat berasal dari sumber aslinya.",
+    "pt": "Escolha uma Bíblia, informe o trecho e o formato de cópia. Confira a prévia antes de copiar para outro aplicativo. O texto dos versículos vem do recurso original.",
+    "ur": "بائبل، حصہ اور نقل کا انداز منتخب کریں۔ دوسری ایپ میں نقل کرنے سے پہلے نتیجہ دیکھیں۔ آیات کا متن اصل وسیلے سے آتا ہے۔",
+    "zh-Hans": "选择圣经译本、输入段落并选择复制格式。先预览结果，再复制到其他应用。经文来自原始资源。"
+  },
+  "Elige una fuente instalada en el sistema o conserva la opción predeterminada para respetar los estilos originales. Times New Roman es la fuente de reserva.": {
+    "ar": "اختر خطًا مثبتًا أو أبقِ الإعداد الافتراضي للحفاظ على الأنماط الأصلية. الخط الاحتياطي هو Times New Roman.",
+    "bn": "সিস্টেমের ফন্ট বেছে নিন অথবা মূল শৈলী রাখতে ডিফল্ট রাখুন। বিকল্প ফন্ট Times New Roman।",
+    "en": "Choose an installed system font or keep the default to preserve original styles. Times New Roman is the fallback font.",
+    "es": "Elige una fuente instalada en el sistema o conserva la opción predeterminada para respetar los estilos originales. Times New Roman es la fuente de reserva.",
+    "fr": "Choisissez une police installée ou gardez le réglage par défaut pour préserver les styles d’origine. Times New Roman est la police de secours.",
+    "hi": "स्थापित फ़ॉन्ट चुनें या मूल शैलियाँ रखने के लिए डिफ़ॉल्ट रखें। Times New Roman वैकल्पिक फ़ॉन्ट है।",
+    "id": "Pilih font sistem atau pertahankan bawaan untuk menjaga gaya asli. Font cadangannya Times New Roman.",
+    "pt": "Escolha uma fonte instalada ou mantenha o padrão para preservar os estilos originais. Times New Roman é a fonte de reserva.",
+    "ur": "سسٹم کا فونٹ منتخب کریں یا اصل انداز برقرار رکھنے کے لیے طے شدہ اختیار رکھیں۔ متبادل فونٹ Times New Roman ہے۔",
+    "zh-Hans": "选择系统字体，或保留默认选项以保留原始样式。备用字体为 Times New Roman。"
   },
   "Eliminar favorito": {
     "ar": "حذف المفضلة",
@@ -1703,6 +2867,78 @@
     "ur": "کام کی جگہ",
     "zh-Hans": "工作区"
   },
+  "Esquina inferior derecha": {
+    "ar": "الزاوية السفلية اليمنى",
+    "bn": "নিচের ডান কোণ",
+    "en": "Bottom Right Corner",
+    "es": "Esquina inferior derecha",
+    "fr": "Coin inférieur droit",
+    "hi": "निचला दायाँ कोना",
+    "id": "Sudut Kanan Bawah",
+    "pt": "Canto inferior direito",
+    "ur": "نچلا دایاں کونا",
+    "zh-Hans": "右下角"
+  },
+  "Esquina inferior izquierda": {
+    "ar": "الزاوية السفلية اليسرى",
+    "bn": "নিচের বাম কোণ",
+    "en": "Bottom Left Corner",
+    "es": "Esquina inferior izquierda",
+    "fr": "Coin inférieur gauche",
+    "hi": "निचला बायाँ कोना",
+    "id": "Sudut Kiri Bawah",
+    "pt": "Canto inferior esquerdo",
+    "ur": "نچلا بایاں کونا",
+    "zh-Hans": "左下角"
+  },
+  "Esquina superior derecha": {
+    "ar": "الزاوية العلوية اليمنى",
+    "bn": "উপরের ডান কোণ",
+    "en": "Top Right Corner",
+    "es": "Esquina superior derecha",
+    "fr": "Coin supérieur droit",
+    "hi": "ऊपरी दायाँ कोना",
+    "id": "Sudut Kanan Atas",
+    "pt": "Canto superior direito",
+    "ur": "اوپری دایاں کونا",
+    "zh-Hans": "右上角"
+  },
+  "Esquina superior izquierda": {
+    "ar": "الزاوية العلوية اليسرى",
+    "bn": "উপরের বাম কোণ",
+    "en": "Top Left Corner",
+    "es": "Esquina superior izquierda",
+    "fr": "Coin supérieur gauche",
+    "hi": "ऊपरी बायाँ कोना",
+    "id": "Sudut Kiri Atas",
+    "pt": "Canto superior esquerdo",
+    "ur": "اوپری بایاں کونا",
+    "zh-Hans": "左上角"
+  },
+  "Esquinas": {
+    "ar": "الزوايا",
+    "bn": "কোণ",
+    "en": "Corners",
+    "es": "Esquinas",
+    "fr": "Coins",
+    "hi": "कोने",
+    "id": "Sudut",
+    "pt": "Cantos",
+    "ur": "کونے",
+    "zh-Hans": "四角"
+  },
+  "Esta ventana muestra una Biblia. Escribe una referencia y pulsa Intro, o elige libro y capítulo. Las flechas junto al icono de Biblia cambian de versión conservando el versículo; el icono permite elegir una Biblia o cambiar de grupo. Usa el zoom para ajustar el texto y el menú de acciones para las demás herramientas.": {
+    "ar": "تعرض هذه النافذة الكتاب المقدس. اكتب مرجعًا واضغط على مفتاح الإدخال، أو اختر السفر والإصحاح. تغيّر الأسهم بجانب أيقونة الكتاب المقدس الترجمة مع الاحتفاظ بالآية؛ وتتيح الأيقونة اختيار ترجمة أو تغيير المجموعة. استخدم التكبير لضبط النص وقائمة الإجراءات لبقية الأدوات.",
+    "bn": "এই উইন্ডোতে বাইবেল দেখানো হয়। একটি রেফারেন্স লিখে এন্টার চাপুন, অথবা বই ও অধ্যায় বেছে নিন। বাইবেলের আইকনের পাশের তীর দিয়ে একই পদ রেখে সংস্করণ বদলানো যায়; আইকন থেকে বাইবেল বা দল বেছে নিতে পারেন। লেখার আকারের জন্য জুম এবং অন্য সরঞ্জামের জন্য কাজের মেনু ব্যবহার করুন।",
+    "en": "This window displays a Bible. Enter a reference and press Return, or choose a book and chapter. The arrows beside the Bible icon switch versions while keeping the verse; the icon lets you choose a Bible or change groups. Use zoom to adjust the text and the actions menu for other tools.",
+    "es": "Esta ventana muestra una Biblia. Escribe una referencia y pulsa Intro, o elige libro y capítulo. Las flechas junto al icono de Biblia cambian de versión conservando el versículo; el icono permite elegir una Biblia o cambiar de grupo. Usa el zoom para ajustar el texto y el menú de acciones para las demás herramientas.",
+    "fr": "Cette fenêtre affiche une Bible. Saisissez une référence et appuyez sur Entrée, ou choisissez un livre et un chapitre. Les flèches près de l’icône de Bible changent de version en conservant le verset ; l’icône permet de choisir une Bible ou un autre groupe. Réglez le texte avec le zoom et accédez aux autres outils dans le menu d’actions.",
+    "hi": "यह विंडो बाइबल दिखाती है। संदर्भ लिखकर एंटर दबाएँ, या पुस्तक और अध्याय चुनें। बाइबल चिह्न के पास के तीर पद को बनाए रखते हुए संस्करण बदलते हैं; चिह्न से बाइबल या समूह चुन सकते हैं। पाठ का आकार बदलने के लिए ज़ूम और अन्य उपकरणों के लिए क्रिया मेनू का उपयोग करें।",
+    "id": "Jendela ini menampilkan Alkitab. Masukkan referensi lalu tekan Enter, atau pilih kitab dan pasal. Panah di samping ikon Alkitab mengganti versi dengan mempertahankan ayat; ikon tersebut memungkinkan Anda memilih Alkitab atau mengganti grup. Gunakan zoom untuk menyesuaikan teks dan menu tindakan untuk alat lainnya.",
+    "pt": "Esta janela mostra uma Bíblia. Digite uma referência e pressione Enter, ou escolha o livro e o capítulo. As setas ao lado do ícone da Bíblia mudam a versão mantendo o versículo; o ícone permite escolher uma Bíblia ou mudar de grupo. Use o zoom para ajustar o texto e o menu de ações para as outras ferramentas.",
+    "ur": "یہ ونڈو بائبل دکھاتی ہے۔ حوالہ لکھ کر انٹر دبائیں، یا کتاب اور باب منتخب کریں۔ بائبل کے نشان کے ساتھ تیر آیت برقرار رکھتے ہوئے ترجمہ بدلتے ہیں؛ نشان سے بائبل یا گروپ منتخب کر سکتے ہیں۔ متن کا حجم بدلنے کے لیے زوم اور دوسرے اوزار کے لیے کارروائیوں کا مینو استعمال کریں۔",
+    "zh-Hans": "此窗口显示圣经。输入经文位置并按回车，或选择书卷和章节。圣经图标旁的箭头可在保留当前经节的同时切换版本；点击图标可选择圣经或切换分组。使用缩放调整文字，其他工具位于操作菜单中。"
+  },
   "Estado": {
     "ar": "الحالة",
     "bn": "অবস্থা",
@@ -1715,6 +2951,18 @@
     "ur": "حالت",
     "zh-Hans": "状态"
   },
+  "Estado de conversión": {
+    "ar": "حالة التحويل",
+    "bn": "রূপান্তরের অবস্থা",
+    "en": "Conversion status",
+    "es": "Estado de conversión",
+    "fr": "État de conversion",
+    "hi": "रूपांतरण की स्थिति",
+    "id": "Status konversi",
+    "pt": "Estado da conversão",
+    "ur": "تبدیلی کی حالت",
+    "zh-Hans": "转换状态"
+  },
   "Este tramo es demasiado grande para continuar automáticamente. Usa Artículo siguiente.": {
     "ar": "هذا الجزء كبير جدًا للمتابعة تلقائيًا. استخدم المقال التالي.",
     "bn": "এই অংশ স্বয়ংক্রিয়ভাবে চালিয়ে যাওয়ার জন্য খুব বড়। পরের নিবন্ধ ব্যবহার করুন।",
@@ -1726,6 +2974,30 @@
     "pt": "Este trecho é grande demais para continuar automaticamente. Use Artigo seguinte.",
     "ur": "یہ حصہ خودکار طور پر جاری رکھنے کے لیے بہت بڑا ہے۔ اگلا مضمون استعمال کریں۔",
     "zh-Hans": "此部分过大，无法自动继续。请使用“下一篇”。"
+  },
+  "Estudios bíblicos": {
+    "ar": "الدراسات الكتابية",
+    "bn": "বাইবেল অধ্যয়ন",
+    "en": "Biblical studies",
+    "es": "Estudios bíblicos",
+    "fr": "Études bibliques",
+    "hi": "बाइबल अध्ययन",
+    "id": "Studi Alkitab",
+    "pt": "Estudos bíblicos",
+    "ur": "بائبلی مطالعہ",
+    "zh-Hans": "圣经研究"
+  },
+  "Etiquetas": {
+    "ar": "الوسوم",
+    "bn": "ট্যাগ",
+    "en": "Tags",
+    "es": "Etiquetas",
+    "fr": "Étiquettes",
+    "hi": "टैग",
+    "id": "Tag",
+    "pt": "Etiquetas",
+    "ur": "ٹیگ",
+    "zh-Hans": "标签"
   },
   "Explorador temático": {
     "ar": "متصفح المواضيع",
@@ -1799,6 +3071,18 @@
     "ur": "پسندیدہ",
     "zh-Hans": "收藏夹"
   },
+  "Filtrar por": {
+    "ar": "تصفية حسب",
+    "bn": "ছাঁকুন",
+    "en": "Filter by",
+    "es": "Filtrar por",
+    "fr": "Filtrer par",
+    "hi": "इसके अनुसार छाँटें",
+    "id": "Filter menurut",
+    "pt": "Filtrar por",
+    "ur": "اس کے مطابق چھانٹیں",
+    "zh-Hans": "筛选依据"
+  },
   "Final": {
     "ar": "النهاية",
     "bn": "শেষ",
@@ -1823,6 +3107,54 @@
     "ur": "فارمیٹ",
     "zh-Hans": "格式"
   },
+  "Formato .libron con metadatos, procedencia y copias opcionales en backup.": {
+    "ar": "يتضمن تنسيق .libron البيانات الوصفية والمصدر ونسخ backup الاختيارية.",
+    "bn": ".libron বিন্যাসে মেটাডেটা, উৎস ও ঐচ্ছিক backup অনুলিপি রয়েছে।",
+    "en": "The .libron format includes metadata, source information and optional backup copies.",
+    "es": "Formato .libron con metadatos, procedencia y copias opcionales en backup.",
+    "fr": "Le format .libron inclut métadonnées, provenance et copies facultatives dans backup.",
+    "hi": ".libron में मेटाडेटा, स्रोत और वैकल्पिक backup प्रतियाँ हैं।",
+    "id": "Format .libron mencakup metadata, asal, dan salinan backup opsional.",
+    "pt": "O formato .libron inclui metadados, origem e cópias opcionais em backup.",
+    "ur": ".libron میں میٹاڈیٹا، ماخذ اور اختیاری backup نقول شامل ہیں۔",
+    "zh-Hans": ".libron 格式包含元数据、来源及可选的 backup 副本。"
+  },
+  "Formato original": {
+    "ar": "التنسيق الأصلي",
+    "bn": "মূল বিন্যাস",
+    "en": "Original format",
+    "es": "Formato original",
+    "fr": "Format d’origine",
+    "hi": "मूल प्रारूप",
+    "id": "Format asli",
+    "pt": "Formato original",
+    "ur": "اصل فارمیٹ",
+    "zh-Hans": "原始格式"
+  },
+  "Fuente": {
+    "ar": "الخط",
+    "bn": "ফন্ট",
+    "en": "Font",
+    "es": "Fuente",
+    "fr": "Police",
+    "hi": "फ़ॉन्ट",
+    "id": "Font",
+    "pt": "Fonte",
+    "ur": "فونٹ",
+    "zh-Hans": "字体"
+  },
+  "Fuentes del sistema y consulta de diccionarios al seleccionar una palabra.": {
+    "ar": "خطوط النظام والبحث في القواميس عن الكلمات المحددة.",
+    "bn": "সিস্টেম ফন্ট ও নির্বাচিত শব্দের অভিধান অনুসন্ধান।",
+    "en": "System fonts and dictionary lookup for selected words.",
+    "es": "Fuentes del sistema y consulta de diccionarios al seleccionar una palabra.",
+    "fr": "Polices du système et consultation du dictionnaire pour les mots sélectionnés.",
+    "hi": "सिस्टम फ़ॉन्ट और चयनित शब्दों की शब्दकोश खोज।",
+    "id": "Font sistem dan pencarian kamus untuk kata terpilih.",
+    "pt": "Fontes do sistema e consulta de palavras selecionadas nos dicionários.",
+    "ur": "سسٹم فونٹس اور منتخب الفاظ کے لیے لغت تلاش۔",
+    "zh-Hans": "系统字体和选词查词典。"
+  },
   "General": {
     "ar": "عام",
     "bn": "সাধারণ",
@@ -1834,6 +3166,30 @@
     "pt": "Geral",
     "ur": "عمومی",
     "zh-Hans": "通用"
+  },
+  "Gramática": {
+    "ar": "قواعد اللغة",
+    "bn": "ব্যাকরণ",
+    "en": "Grammar",
+    "es": "Gramática",
+    "fr": "Grammaire",
+    "hi": "व्याकरण",
+    "id": "Tata bahasa",
+    "pt": "Gramática",
+    "ur": "قواعد",
+    "zh-Hans": "语法"
+  },
+  "Grupo": {
+    "ar": "المجموعة",
+    "bn": "গোষ্ঠী",
+    "en": "Group",
+    "es": "Grupo",
+    "fr": "Groupe",
+    "hi": "समूह",
+    "id": "Grup",
+    "pt": "Grupo",
+    "ur": "گروپ",
+    "zh-Hans": "组"
   },
   "Grupo de Biblias": {
     "ar": "مجموعة الترجمات",
@@ -1847,6 +3203,18 @@
     "ur": "بائبل کا گروپ",
     "zh-Hans": "圣经分组"
   },
+  "Grupo de diccionarios": {
+    "ar": "مجموعة القواميس",
+    "bn": "অভিধান গোষ্ঠী",
+    "en": "Dictionary group",
+    "es": "Grupo de diccionarios",
+    "fr": "Groupe de dictionnaires",
+    "hi": "शब्दकोश समूह",
+    "id": "Grup kamus",
+    "pt": "Grupo de dicionários",
+    "ur": "لغات کا گروپ",
+    "zh-Hans": "词典组"
+  },
   "Grupo {group}": {
     "ar": "المجموعة {group}",
     "bn": "গ্রুপ {group}",
@@ -1859,6 +3227,18 @@
     "ur": "گروپ {group}",
     "zh-Hans": "组 {group}"
   },
+  "Grupos": {
+    "ar": "المجموعات",
+    "bn": "গোষ্ঠী",
+    "en": "Groups",
+    "es": "Grupos",
+    "fr": "Groupes",
+    "hi": "समूह",
+    "id": "Grup",
+    "pt": "Grupos",
+    "ur": "گروپس",
+    "zh-Hans": "分组"
+  },
   "Grupos de Biblias paralelas": {
     "ar": "مجموعات ترجمات الكتاب المقدس المتوازية",
     "bn": "সমান্তরাল বাইবেল গোষ্ঠী",
@@ -1870,6 +3250,18 @@
     "pt": "Grupos de Bíblias paralelas",
     "ur": "متوازی بائبل کے گروپ",
     "zh-Hans": "平行圣经分组"
+  },
+  "Guarda la ubicación de lectura como favorito para volver después. Puedes organizar los favoritos en carpetas. Al abrir uno, vuelves al recurso y a la ubicación guardados.": {
+    "ar": "احفظ موضع القراءة في المفضلة للعودة إليه. نظّم المفضلة في مجلدات. يفتح كل عنصر المورد والموضع المحفوظين.",
+    "bn": "পরে ফেরার জন্য বর্তমান স্থান প্রিয়তে রাখুন। ফোল্ডারে প্রিয়গুলো সাজান। খুললে সংরক্ষিত রিসোর্স ও অবস্থানে যায়।",
+    "en": "Save the current reading location as a favorite to return to it later. You can organize favorites into folders. Opening one navigates to its saved resource and location.",
+    "es": "Guarda la ubicación de lectura como favorito para volver después. Puedes organizar los favoritos en carpetas. Al abrir uno, vuelves al recurso y a la ubicación guardados.",
+    "fr": "Enregistrez l’emplacement actuel en favori pour y revenir. Organisez les favoris en dossiers. Un favori ouvre la ressource et l’emplacement enregistrés.",
+    "hi": "बाद में लौटने के लिए वर्तमान स्थान को पसंदीदा में सहेजें। पसंदीदा को फ़ोल्डरों में रखें। खोलने पर सहेजा संसाधन और स्थान खुलता है।",
+    "id": "Simpan lokasi bacaan sebagai favorit agar dapat kembali. Atur favorit dalam folder. Membukanya menuju sumber daya dan lokasi tersimpan.",
+    "pt": "Salve a localização atual como favorito para voltar depois. Organize favoritos em pastas. Abrir um favorito leva ao recurso e à localização salvos.",
+    "ur": "بعد میں واپس آنے کے لیے موجودہ جگہ کو پسندیدہ میں محفوظ کریں۔ پسندیدہ کو فولڈروں میں ترتیب دیں۔ کھولنے پر محفوظ وسیلہ اور جگہ کھلتی ہے۔",
+    "zh-Hans": "将当前阅读位置保存为收藏以便返回。可使用文件夹整理收藏。打开收藏会跳转到保存的资源和位置。"
   },
   "Guardar": {
     "ar": "حفظ",
@@ -1894,6 +3286,18 @@
     "pt": "Salvar como…",
     "ur": "دوسرے نام سے محفوظ کریں…",
     "zh-Hans": "另存为…"
+  },
+  "Guardar originales en backup": {
+    "ar": "نسخ الأصول إلى backup",
+    "bn": "মূল ফাইল backup-এ কপি করুন",
+    "en": "Copy originals to backup",
+    "es": "Guardar originales en backup",
+    "fr": "Copier les originaux dans backup",
+    "hi": "मूल फ़ाइलें backup में कॉपी करें",
+    "id": "Salin berkas asli ke backup",
+    "pt": "Copiar originais para backup",
+    "ur": "اصل فائلیں backup میں نقل کریں",
+    "zh-Hans": "将原件复制到 backup"
   },
   "Guardar área de trabajo": {
     "ar": "حفظ مساحة العمل",
@@ -1931,6 +3335,18 @@
     "ur": "HTML…",
     "zh-Hans": "HTML…"
   },
+  "Hay una actualización disponible.": {
+    "ar": "يتوفر تحديث.",
+    "bn": "একটি আপডেট পাওয়া গেছে।",
+    "en": "An update is available.",
+    "es": "Hay una actualización disponible.",
+    "fr": "Une mise à jour est disponible.",
+    "hi": "एक अपडेट उपलब्ध है।",
+    "id": "Pembaruan tersedia.",
+    "pt": "Há uma atualização disponível.",
+    "ur": "ایک اپ ڈیٹ دستیاب ہے۔",
+    "zh-Hans": "有可用更新。"
+  },
   "Herramientas": {
     "ar": "أدوات",
     "bn": "সরঞ্জাম",
@@ -1942,6 +3358,30 @@
     "pt": "Ferramentas",
     "ur": "اوزار",
     "zh-Hans": "工具"
+  },
+  "Historia del cristianismo": {
+    "ar": "تاريخ المسيحية",
+    "bn": "খ্রিষ্টধর্মের ইতিহাস",
+    "en": "History of Christianity",
+    "es": "Historia del cristianismo",
+    "fr": "Histoire du christianisme",
+    "hi": "मसीही धर्म का इतिहास",
+    "id": "Sejarah Kekristenan",
+    "pt": "História do cristianismo",
+    "ur": "مسیحیت کی تاریخ",
+    "zh-Hans": "基督教历史"
+  },
+  "Historia y contexto bíblico": {
+    "ar": "التاريخ والسياق الكتابي",
+    "bn": "বাইবেলের ইতিহাস ও প্রেক্ষাপট",
+    "en": "Biblical history and context",
+    "es": "Historia y contexto bíblico",
+    "fr": "Histoire et contexte bibliques",
+    "hi": "बाइबलीय इतिहास और संदर्भ",
+    "id": "Sejarah dan konteks Alkitab",
+    "pt": "História e contexto bíblico",
+    "ur": "بائبلی تاریخ اور پس منظر",
+    "zh-Hans": "圣经历史与背景"
   },
   "Historial de lectura": {
     "ar": "سجل القراءة",
@@ -1979,6 +3419,30 @@
     "ur": "ایپ کا آئیکن",
     "zh-Hans": "应用图标"
   },
+  "Iconos Red y Dark y ajustes reorganizados.": {
+    "ar": "أيقونتا Red وDark وإعدادات معاد تنظيمها.",
+    "bn": "Red ও Dark আইকন এবং পুনর্বিন্যস্ত সেটিংস।",
+    "en": "Red and Dark icons and reorganized settings.",
+    "es": "Iconos Red y Dark y ajustes reorganizados.",
+    "fr": "Icônes Red et Dark et réglages réorganisés.",
+    "hi": "Red और Dark आइकन और पुनर्व्यवस्थित सेटिंग्स।",
+    "id": "Ikon Red dan Dark serta pengaturan yang ditata ulang.",
+    "pt": "Ícones Red e Dark e ajustes reorganizados.",
+    "ur": "Red اور Dark آئیکن اور نئی ترتیب والی سیٹنگز۔",
+    "zh-Hans": "Red 和 Dark 图标以及重新整理的设置。"
+  },
+  "Idioma": {
+    "ar": "اللغة",
+    "bn": "ভাষা",
+    "en": "Language",
+    "es": "Idioma",
+    "fr": "Langue",
+    "hi": "भाषा",
+    "id": "Bahasa",
+    "pt": "Idioma",
+    "ur": "زبان",
+    "zh-Hans": "语言"
+  },
   "Idioma de la interfaz": {
     "ar": "لغة الواجهة",
     "bn": "ইন্টারফেসের ভাষা",
@@ -2002,6 +3466,30 @@
     "pt": "Idiomas",
     "ur": "زبانیں",
     "zh-Hans": "语言"
+  },
+  "Importación y lectura de recursos e-Sword y EPUB compatibles.": {
+    "ar": "استيراد موارد e-Sword وEPUB المتوافقة وقراءتها.",
+    "bn": "সামঞ্জস্যপূর্ণ e-Sword ও EPUB রিসোর্স আমদানি ও পড়ুন।",
+    "en": "Import and read compatible e-Sword and EPUB resources.",
+    "es": "Importación y lectura de recursos e-Sword y EPUB compatibles.",
+    "fr": "Importez et lisez les ressources e-Sword et EPUB compatibles.",
+    "hi": "संगत e-Sword और EPUB संसाधन आयात करें और पढ़ें।",
+    "id": "Impor dan baca sumber e-Sword dan EPUB yang kompatibel.",
+    "pt": "Importe e leia recursos compatíveis de e-Sword e EPUB.",
+    "ur": "مطابقت رکھنے والے e-Sword اور EPUB وسائل درآمد کریں اور پڑھیں۔",
+    "zh-Hans": "导入并阅读兼容的 e-Sword 和 EPUB 资源。"
+  },
+  "Importar recursos": {
+    "ar": "استيراد الموارد",
+    "bn": "রিসোর্স আমদানি করুন",
+    "en": "Import resources",
+    "es": "Importar recursos",
+    "fr": "Importer des ressources",
+    "hi": "संसाधन आयात करें",
+    "id": "Impor sumber",
+    "pt": "Importar recursos",
+    "ur": "وسائل درآمد کریں",
+    "zh-Hans": "导入资源"
   },
   "Imprimir lectura…": {
     "ar": "طباعة القراءة…",
@@ -2039,6 +3527,54 @@
     "ur": "مضمون کی تصاویر",
     "zh-Hans": "文章图片"
   },
+  "Inferior": {
+    "ar": "أسفل",
+    "bn": "নিচে",
+    "en": "Bottom",
+    "es": "Inferior",
+    "fr": "Bas",
+    "hi": "नीचे",
+    "id": "Bawah",
+    "pt": "Inferior",
+    "ur": "نیچے",
+    "zh-Hans": "底部"
+  },
+  "Inferior derecha": {
+    "ar": "أسفل اليمين",
+    "bn": "নিচে ডানে",
+    "en": "Bottom right",
+    "es": "Inferior derecha",
+    "fr": "En bas à droite",
+    "hi": "नीचे दायाँ",
+    "id": "Kanan bawah",
+    "pt": "Inferior direito",
+    "ur": "نیچے دائیں",
+    "zh-Hans": "右下角"
+  },
+  "Inferior izquierda": {
+    "ar": "أسفل اليسار",
+    "bn": "নিচে বাঁয়ে",
+    "en": "Bottom left",
+    "es": "Inferior izquierda",
+    "fr": "En bas à gauche",
+    "hi": "नीचे बायाँ",
+    "id": "Kiri bawah",
+    "pt": "Inferior esquerdo",
+    "ur": "نیچے بائیں",
+    "zh-Hans": "左下角"
+  },
+  "Información": {
+    "ar": "معلومات",
+    "bn": "তথ্য",
+    "en": "Information",
+    "es": "Información",
+    "fr": "Informations",
+    "hi": "जानकारी",
+    "id": "Informasi",
+    "pt": "Informações",
+    "ur": "معلومات",
+    "zh-Hans": "信息"
+  },
   "Inicio": {
     "ar": "الرئيسية",
     "bn": "প্রথম পাতা",
@@ -2062,6 +3598,42 @@
     "pt": "Início do tema",
     "ur": "موضوع کا آغاز",
     "zh-Hans": "主题开头"
+  },
+  "Instalar": {
+    "ar": "تثبيت",
+    "bn": "ইনস্টল",
+    "en": "Install",
+    "es": "Instalar",
+    "fr": "Installer",
+    "hi": "इंस्टॉल करें",
+    "id": "Instal",
+    "pt": "Instalar",
+    "ur": "نصب کریں",
+    "zh-Hans": "安装"
+  },
+  "Instalar y reiniciar": {
+    "ar": "التثبيت وإعادة التشغيل",
+    "bn": "ইনস্টল করে পুনরায় চালু করুন",
+    "en": "Install and Relaunch",
+    "es": "Instalar y reiniciar",
+    "fr": "Installer et relancer",
+    "hi": "इंस्टॉल करें और पुनः शुरू करें",
+    "id": "Instal dan Buka Ulang",
+    "pt": "Instalar e reiniciar",
+    "ur": "انسٹال کریں اور دوبارہ شروع کریں",
+    "zh-Hans": "安装并重新启动"
+  },
+  "Interpretación bíblica": {
+    "ar": "تفسير الكتاب المقدس",
+    "bn": "বাইবেলের ব্যাখ্যা",
+    "en": "Biblical interpretation",
+    "es": "Interpretación bíblica",
+    "fr": "Interprétation biblique",
+    "hi": "बाइबल की व्याख्या",
+    "id": "Penafsiran Alkitab",
+    "pt": "Interpretação bíblica",
+    "ur": "بائبلی تشریح",
+    "zh-Hans": "圣经诠释"
   },
   "Ir": {
     "ar": "انتقال",
@@ -2087,6 +3659,54 @@
     "ur": "حوالے پر جائیں",
     "zh-Hans": "前往经文"
   },
+  "Izquierda": {
+    "ar": "يسار",
+    "bn": "বাম",
+    "en": "Left",
+    "es": "Izquierda",
+    "fr": "Gauche",
+    "hi": "बायाँ",
+    "id": "Kiri",
+    "pt": "Esquerda",
+    "ur": "بائیں",
+    "zh-Hans": "左侧"
+  },
+  "La actualización está lista para instalar.": {
+    "ar": "التحديث جاهز للتثبيت.",
+    "bn": "আপডেট ইনস্টলের জন্য প্রস্তুত।",
+    "en": "The update is ready to install.",
+    "es": "La actualización está lista para instalar.",
+    "fr": "La mise à jour est prête à être installée.",
+    "hi": "अपडेट इंस्टॉल करने के लिए तैयार है।",
+    "id": "Pembaruan siap diinstal.",
+    "pt": "A atualização está pronta para instalar.",
+    "ur": "اپ ڈیٹ انسٹال کرنے کے لیے تیار ہے۔",
+    "zh-Hans": "更新已准备好安装。"
+  },
+  "La actualización se instalará al cerrar Libron-X.": {
+    "ar": "سيُثبّت التحديث عند إغلاق Libron-X.",
+    "bn": "Libron-X বন্ধ করলে আপডেট ইনস্টল হবে।",
+    "en": "The update will be installed when you quit Libron-X.",
+    "es": "La actualización se instalará al cerrar Libron-X.",
+    "fr": "La mise à jour sera installée à la fermeture de Libron-X.",
+    "hi": "Libron-X बंद करने पर अपडेट इंस्टॉल होगा।",
+    "id": "Pembaruan akan diinstal saat Libron-X ditutup.",
+    "pt": "A atualização será instalada ao sair do Libron-X.",
+    "ur": "Libron-X بند کرنے پر اپ ڈیٹ انسٹال ہو گی۔",
+    "zh-Hans": "退出 Libron-X 时将安装更新。"
+  },
+  "La barra de herramientas permite abrir Inicio y Biblioteca, buscar, crear documentos y acceder a las acciones de estudio. Los botones que no caben aparecen en el menú de desbordamiento. Haz clic derecho sobre un botón para conocer su función.": {
+    "ar": "يتيح شريط الأدوات فتح الصفحة الرئيسية والمكتبة والبحث وإنشاء المستندات والوصول إلى أدوات الدراسة. تظهر الأزرار التي لا تتسع لها المساحة في قائمة إضافية. انقر بزر الفأرة الأيمن على زر لمعرفة وظيفته.",
+    "bn": "টুলবার থেকে মূল পাতা ও লাইব্রেরি খুলতে, অনুসন্ধান করতে, নথি তৈরি করতে এবং অধ্যয়নের সরঞ্জাম ব্যবহার করতে পারেন। জায়গায় না কুলানো বোতামগুলো অতিরিক্ত মেনুতে দেখা যায়। কোনো বোতামের কাজ জানতে সেটিতে ডান-ক্লিক করুন।",
+    "en": "The toolbar lets you open Home and Library, search, create documents and access study tools. Buttons that do not fit appear in the overflow menu. Right-click a button to learn what it does.",
+    "es": "La barra de herramientas permite abrir Inicio y Biblioteca, buscar, crear documentos y acceder a las acciones de estudio. Los botones que no caben aparecen en el menú de desbordamiento. Haz clic derecho sobre un botón para conocer su función.",
+    "fr": "La barre d’outils permet d’ouvrir l’accueil et la bibliothèque, de rechercher, de créer des documents et d’accéder aux outils d’étude. Les boutons qui ne tiennent pas apparaissent dans le menu de débordement. Faites un clic droit sur un bouton pour connaître sa fonction.",
+    "hi": "टूलबार से आप मुखपृष्ठ और पुस्तकालय खोल सकते हैं, खोज सकते हैं, दस्तावेज़ बना सकते हैं और अध्ययन के उपकरण खोल सकते हैं। जो बटन जगह में नहीं आते, वे अतिरिक्त मेनू में दिखते हैं। किसी बटन का काम जानने के लिए उस पर दायाँ क्लिक करें।",
+    "id": "Bilah alat memungkinkan Anda membuka Beranda dan Pustaka, mencari, membuat dokumen, dan mengakses alat studi. Tombol yang tidak muat muncul di menu tambahan. Klik kanan tombol untuk mengetahui fungsinya.",
+    "pt": "A barra de ferramentas permite abrir Início e Biblioteca, pesquisar, criar documentos e acessar as ferramentas de estudo. Os botões que não cabem aparecem no menu de opções adicionais. Clique com o botão direito em um botão para conhecer sua função.",
+    "ur": "ٹول بار سے آپ مرکزی صفحہ اور لائبریری کھول سکتے ہیں، تلاش کر سکتے ہیں، دستاویزات بنا سکتے ہیں اور مطالعے کے اوزار استعمال کر سکتے ہیں۔ جو بٹن جگہ میں نہیں آتے وہ اضافی مینو میں دکھائی دیتے ہیں۔ کسی بٹن کا کام جاننے کے لیے اس پر دایاں کلک کریں۔",
+    "zh-Hans": "工具栏可打开主页和书库、搜索、创建文档以及访问研读工具。放不下的按钮会出现在溢出菜单中。右键单击按钮可了解其功能。"
+  },
   "La biblioteca cambió. Vuelve a buscar.": {
     "ar": "تغيّرت المكتبة. ابحث مجددًا.",
     "bn": "লাইব্রেরি বদলেছে। আবার খুঁজুন।",
@@ -2110,6 +3730,18 @@
     "pt": "A busca atingiu o limite de artigos antes de encontrar a referência. A passagem pode existir neste recurso.",
     "ur": "حوالہ ملنے سے پہلے تلاش مضامین کی حد تک پہنچ گئی۔ عبارت اس وسیلے میں موجود ہو سکتی ہے۔",
     "zh-Hans": "搜索在找到经文之前已达到文章数量限制。该经文可能仍存在于此资源中。"
+  },
+  "La búsqueda automática consulta las versiones de GitHub. La instalación automática descarga y verifica una versión nueva y la instala al cerrar. Cambiar de canal no instala una versión anterior a la actual.": {
+    "ar": "تبحث الفحوص التلقائية عن إصدارات GitHub. ينزّل التثبيت التلقائي إصدارًا أحدث ويتحقق منه ثم يثبته عند الخروج. تغيير القناة لا يخفض الإصدار المثبت.",
+    "bn": "স্বয়ংক্রিয় পরীক্ষা GitHub-এ সংস্করণ খোঁজে। স্বয়ংক্রিয় ইনস্টল নতুন সংস্করণ নামিয়ে যাচাই করে অ্যাপ বন্ধের সময় ইনস্টল করে। চ্যানেল বদলালে পুরোনো সংস্করণ ইনস্টল হয় না।",
+    "en": "Automatic checks look for releases on GitHub. Automatic installation downloads and verifies a newer release, then installs it when you quit. Changing the channel does not downgrade the installed version.",
+    "es": "La búsqueda automática consulta las versiones de GitHub. La instalación automática descarga y verifica una versión nueva y la instala al cerrar. Cambiar de canal no instala una versión anterior a la actual.",
+    "fr": "La recherche automatique consulte GitHub. L’installation automatique télécharge et vérifie une nouvelle version, puis l’installe à la fermeture. Changer de canal ne rétrograde pas l’application.",
+    "hi": "स्वचालित जाँच GitHub पर नए संस्करण खोजती है। स्वचालित इंस्टॉल नया संस्करण डाउनलोड और सत्यापित करके ऐप बंद होने पर लगाता है। चैनल बदलने से पुराना संस्करण नहीं लगता।",
+    "id": "Pemeriksaan otomatis mencari rilis di GitHub. Instalasi otomatis mengunduh dan memverifikasi rilis baru lalu memasangnya saat keluar. Mengganti kanal tidak menurunkan versi terinstal.",
+    "pt": "As verificações automáticas buscam versões no GitHub. A instalação automática baixa e verifica uma versão nova e a instala ao sair. Trocar o canal não rebaixa a versão instalada.",
+    "ur": "خودکار جانچ GitHub پر نئے نسخے تلاش کرتی ہے۔ خودکار تنصیب نیا نسخہ ڈاؤن لوڈ اور تصدیق کرکے ایپ بند ہونے پر نصب کرتی ہے۔ چینل بدلنے سے پرانا نسخہ نصب نہیں ہوتا۔",
+    "zh-Hans": "自动检查会查询 GitHub 版本。自动安装会下载并验证新版本，在退出时安装。切换通道不会降级已安装的版本。"
   },
   "La búsqueda continuó desde el otro extremo del recurso.": {
     "ar": "استمر البحث من الطرف الآخر للمورد.",
@@ -2195,6 +3827,18 @@
     "ur": "پچھلا مطالعہ",
     "zh-Hans": "上一个阅读窗口"
   },
+  "Lectura bíblica": {
+    "ar": "قراءة الكتاب المقدس",
+    "bn": "বাইবেল পাঠ",
+    "en": "Bible reading",
+    "es": "Lectura bíblica",
+    "fr": "Lecture biblique",
+    "hi": "बाइबल पठन",
+    "id": "Pembacaan Alkitab",
+    "pt": "Leitura bíblica",
+    "ur": "بائبل کا مطالعہ",
+    "zh-Hans": "圣经阅读"
+  },
   "Lecturas abiertas": {
     "ar": "نوافذ القراءة المفتوحة",
     "bn": "খোলা পাঠের উইন্ডো",
@@ -2207,6 +3851,18 @@
     "ur": "کھلی مطالعے کی ونڈوز",
     "zh-Hans": "打开的阅读窗口"
   },
+  "Lenguas bíblicas": {
+    "ar": "اللغات الكتابية",
+    "bn": "বাইবেলের ভাষা",
+    "en": "Biblical languages",
+    "es": "Lenguas bíblicas",
+    "fr": "Langues bibliques",
+    "hi": "बाइबलीय भाषाएँ",
+    "id": "Bahasa Alkitab",
+    "pt": "Línguas bíblicas",
+    "ur": "بائبلی زبانیں",
+    "zh-Hans": "圣经语言"
+  },
   "Leyendo las Biblias disponibles…": {
     "ar": "جارٍ قراءة الترجمات المتاحة…",
     "bn": "উপলব্ধ বাইবেল পড়া হচ্ছে…",
@@ -2218,6 +3874,54 @@
     "pt": "Lendo as Bíblias disponíveis…",
     "ur": "دستیاب بائبل پڑھی جا رہی ہیں…",
     "zh-Hans": "正在读取可用圣经…"
+  },
+  "Libro": {
+    "ar": "السفر",
+    "bn": "পুস্তক",
+    "en": "Book",
+    "es": "Libro",
+    "fr": "Livre",
+    "hi": "पुस्तक",
+    "id": "Kitab",
+    "pt": "Livro",
+    "ur": "کتاب",
+    "zh-Hans": "书卷"
+  },
+  "Libron-X está actualizado en este canal.": {
+    "ar": "Libron-X محدّث في هذه القناة.",
+    "bn": "এই চ্যানেলে Libron-X হালনাগাদ আছে।",
+    "en": "Libron-X is up to date on this channel.",
+    "es": "Libron-X está actualizado en este canal.",
+    "fr": "Libron-X est à jour sur ce canal.",
+    "hi": "इस चैनल पर Libron-X अद्यतित है।",
+    "id": "Libron-X sudah terbaru di saluran ini.",
+    "pt": "O Libron-X está atualizado neste canal.",
+    "ur": "اس چینل پر Libron-X تازہ ترین ہے۔",
+    "zh-Hans": "Libron-X 在此通道已是最新版本。"
+  },
+  "Licencia": {
+    "ar": "الترخيص",
+    "bn": "লাইসেন্স",
+    "en": "License",
+    "es": "Licencia",
+    "fr": "Licence",
+    "hi": "लाइसेंस",
+    "id": "Lisensi",
+    "pt": "Licença",
+    "ur": "لائسنس",
+    "zh-Hans": "许可证"
+  },
+  "Licencia del código": {
+    "ar": "ترخيص الشيفرة",
+    "bn": "কোডের লাইসেন্স",
+    "en": "Code license",
+    "es": "Licencia del código",
+    "fr": "Licence du code",
+    "hi": "कोड का लाइसेंस",
+    "id": "Lisensi kode",
+    "pt": "Licença do código",
+    "ur": "کوڈ کا لائسنس",
+    "zh-Hans": "代码许可证"
   },
   "Lista de versículos": {
     "ar": "قائمة آيات",
@@ -2242,6 +3946,18 @@
     "pt": "Pronto",
     "ur": "تیار",
     "zh-Hans": "就绪"
+  },
+  "Los archivos se convertirán a .libron. ¿Deseas guardar una copia del original en la carpeta backup de la biblioteca?": {
+    "ar": "ستُحوّل الملفات إلى .libron. هل تريد حفظ نسخة من الأصل في مجلد backup بالمكتبة؟",
+    "bn": "ফাইলগুলি .libron-এ রূপান্তরিত হবে। লাইব্রেরির backup ফোল্ডারে মূল ফাইলের অনুলিপি রাখবেন কি?",
+    "en": "Files will be converted to .libron. Would you like to save a copy of the original in the library's backup folder?",
+    "es": "Los archivos se convertirán a .libron. ¿Deseas guardar una copia del original en la carpeta backup de la biblioteca?",
+    "fr": "Les fichiers seront convertis en .libron. Voulez-vous conserver une copie de l’original dans le dossier backup de la bibliothèque ?",
+    "hi": "फ़ाइलें .libron में बदलेंगी। क्या आप लाइब्रेरी के backup फ़ोल्डर में मूल फ़ाइल की प्रति सहेजना चाहते हैं?",
+    "id": "Berkas akan dikonversi ke .libron. Simpan salinan berkas asli di folder backup pustaka?",
+    "pt": "Os arquivos serão convertidos para .libron. Deseja salvar uma cópia do original na pasta backup da biblioteca?",
+    "ur": "فائلیں .libron میں تبدیل ہوں گی۔ کیا آپ لائبریری کے backup فولڈر میں اصل کی نقل محفوظ کرنا چاہتے ہیں؟",
+    "zh-Hans": "文件将转换为 .libron。是否在书库的 backup 文件夹中保存原件副本？"
   },
   "Los cambios de orden se guardan al instante. Quitar un recurso del grupo no borra su archivo.": {
     "ar": "تُحفظ تغييرات الترتيب فورًا. إزالة مورد من المجموعة لا تحذف ملفه.",
@@ -2315,6 +4031,18 @@
     "ur": "پوشیدہ وسائل میری لائبریری، نئی تلاش، موضوعات اور آیات کی نقل میں نظر نہیں آتے۔ فائلیں محفوظ رہتی ہیں۔ کھلے مطالعے اور دستاویزات دستیاب رہتے ہیں۔",
     "zh-Hans": "隐藏的资源不会显示在“我的书库”、新搜索、主题浏览或经文复制中。文件会保留，已打开的阅读和您的文档仍可使用。"
   },
+  "Léxico": {
+    "ar": "معجم",
+    "bn": "শব্দকোষ",
+    "en": "Lexicon",
+    "es": "Léxico",
+    "fr": "Lexique",
+    "hi": "शब्दावली",
+    "id": "Leksikon",
+    "pt": "Léxico",
+    "ur": "فرہنگ",
+    "zh-Hans": "词汇集"
+  },
   "Líneas del interlineal": {
     "ar": "أسطر النص بين السطور",
     "bn": "আন্তঃপঙ্‌ক্তির লাইন",
@@ -2351,6 +4079,18 @@
     "ur": "کھلا رکھیں",
     "zh-Hans": "保持打开"
   },
+  "Manual o curso": {
+    "ar": "دليل أو دورة",
+    "bn": "সহায়িকা বা কোর্স",
+    "en": "Handbook or course",
+    "es": "Manual o curso",
+    "fr": "Manuel ou cours",
+    "hi": "पुस्तिका या पाठ्यक्रम",
+    "id": "Buku panduan atau kursus",
+    "pt": "Manual ou curso",
+    "ur": "رہنما کتاب یا کورس",
+    "zh-Hans": "手册或课程"
+  },
   "Mapas e imágenes": {
     "ar": "الخرائط والصور",
     "bn": "মানচিত্র ও ছবি",
@@ -2386,6 +4126,18 @@
     "pt": "Diferenciar maiúsculas",
     "ur": "بڑے چھوٹے حروف میں فرق",
     "zh-Hans": "区分大小写"
+  },
+  "Metadatos": {
+    "ar": "البيانات الوصفية",
+    "bn": "মেটাডেটা",
+    "en": "Metadata",
+    "es": "Metadatos",
+    "fr": "Métadonnées",
+    "hi": "मेटाडेटा",
+    "id": "Metadata",
+    "pt": "Metadados",
+    "ur": "میٹاڈیٹا",
+    "zh-Hans": "元数据"
   },
   "Mi biblioteca": {
     "ar": "مكتبتي",
@@ -2435,6 +4187,42 @@
     "ur": "پینل چھوٹا کریں",
     "zh-Hans": "最小化面板"
   },
+  "Ministerio e iglesia": {
+    "ar": "الخدمة والكنيسة",
+    "bn": "পরিচর্যা ও মণ্ডলী",
+    "en": "Ministry and church",
+    "es": "Ministerio e iglesia",
+    "fr": "Ministère et Église",
+    "hi": "सेवकाई और कलीसिया",
+    "id": "Pelayanan dan gereja",
+    "pt": "Ministério e igreja",
+    "ur": "خدمت اور کلیسیا",
+    "zh-Hans": "事工与教会"
+  },
+  "Misiones y evangelización": {
+    "ar": "الإرساليات والتبشير",
+    "bn": "মিশন ও সুসমাচার প্রচার",
+    "en": "Missions and evangelism",
+    "es": "Misiones y evangelización",
+    "fr": "Missions et évangélisation",
+    "hi": "मिशन और सुसमाचार प्रचार",
+    "id": "Misi dan penginjilan",
+    "pt": "Missões e evangelização",
+    "ur": "مشن اور بشارت",
+    "zh-Hans": "宣教与福音传播"
+  },
+  "Monografía": {
+    "ar": "دراسة متخصصة",
+    "bn": "একক বিষয়ের গ্রন্থ",
+    "en": "Monograph",
+    "es": "Monografía",
+    "fr": "Monographie",
+    "hi": "एकल विषय ग्रंथ",
+    "id": "Monograf",
+    "pt": "Monografia",
+    "ur": "یک موضوعی کتاب",
+    "zh-Hans": "专著"
+  },
   "Mosaico horizontal": {
     "ar": "تجانب أفقي",
     "bn": "অনুভূমিক বিন্যাস",
@@ -2483,6 +4271,18 @@
     "ur": "تمام سطریں دکھائیں",
     "zh-Hans": "显示所有行"
   },
+  "Más opciones": {
+    "ar": "المزيد من الخيارات",
+    "bn": "আরও বিকল্প",
+    "en": "More options",
+    "es": "Más opciones",
+    "fr": "Plus d’options",
+    "hi": "और विकल्प",
+    "id": "Opsi lainnya",
+    "pt": "Mais opções",
+    "ur": "مزید اختیارات",
+    "zh-Hans": "更多选项"
+  },
   "Negro y rojo": {
     "ar": "أسود وأحمر",
     "bn": "কালো ও লাল",
@@ -2506,6 +4306,42 @@
     "pt": "Nenhuma área selecionada",
     "ur": "کوئی کام کی جگہ منتخب نہیں",
     "zh-Hans": "未选择工作区"
+  },
+  "No": {
+    "ar": "لا",
+    "bn": "না",
+    "en": "No",
+    "es": "No",
+    "fr": "Non",
+    "hi": "नहीं",
+    "id": "Tidak",
+    "pt": "Não",
+    "ur": "نہیں",
+    "zh-Hans": "否"
+  },
+  "No hay diccionarios disponibles.": {
+    "ar": "لا توجد قواميس متاحة.",
+    "bn": "কোনো অভিধান উপলব্ধ নেই।",
+    "en": "No dictionaries are available.",
+    "es": "No hay diccionarios disponibles.",
+    "fr": "Aucun dictionnaire disponible.",
+    "hi": "कोई शब्दकोश उपलब्ध नहीं है।",
+    "id": "Tidak ada kamus tersedia.",
+    "pt": "Não há dicionários disponíveis.",
+    "ur": "کوئی لغت دستیاب نہیں ہے۔",
+    "zh-Hans": "没有可用词典。"
+  },
+  "No hay un registro de cambios incluido para esta versión.": {
+    "ar": "لا يتضمن هذا الإصدار سجل تغييرات.",
+    "bn": "এই সংস্করণে পরিবর্তনের বিবরণ অন্তর্ভুক্ত নেই।",
+    "en": "No changelog is bundled for this version.",
+    "es": "No hay un registro de cambios incluido para esta versión.",
+    "fr": "Aucun journal des modifications n’est inclus pour cette version.",
+    "hi": "इस संस्करण में बदलावों का विवरण शामिल नहीं है।",
+    "id": "Tidak ada catatan perubahan yang disertakan untuk versi ini.",
+    "pt": "Não há um registro de alterações incluído nesta versão.",
+    "ur": "اس نسخے کے ساتھ تبدیلیوں کی فہرست شامل نہیں ہے۔",
+    "zh-Hans": "此版本未附带更新日志。"
   },
   "No hay áreas de trabajo recientes.": {
     "ar": "لا توجد مساحات عمل حديثة.",
@@ -2531,6 +4367,18 @@
     "ur": "یہ حوالہ وسیلے میں نہیں ملا۔",
     "zh-Hans": "在此资源中找不到该经文。"
   },
+  "No se encontró una definición en este diccionario.": {
+    "ar": "لم يُعثر على تعريف في هذا القاموس.",
+    "bn": "এই অভিধানে সংজ্ঞা পাওয়া যায়নি।",
+    "en": "No definition was found in this dictionary.",
+    "es": "No se encontró una definición en este diccionario.",
+    "fr": "Aucune définition trouvée dans ce dictionnaire.",
+    "hi": "इस शब्दकोश में परिभाषा नहीं मिली।",
+    "id": "Definisi tidak ditemukan dalam kamus ini.",
+    "pt": "Nenhuma definição foi encontrada neste dicionário.",
+    "ur": "اس لغت میں تعریف نہیں ملی۔",
+    "zh-Hans": "此词典中未找到释义。"
+  },
   "No se ha podido cargar este icono. Se conserva la elección anterior.": {
     "ar": "تعذّر تحميل هذه الأيقونة. يُحتفظ بالاختيار السابق.",
     "bn": "এই আইকন লোড করা যায়নি। আগের পছন্দ রাখা হয়েছে।",
@@ -2555,6 +4403,18 @@
     "ur": "بائبل کے گروپ پڑھے نہیں جا سکے۔",
     "zh-Hans": "无法读取圣经分组。"
   },
+  "No se pudo abrir el directorio en Finder.": {
+    "ar": "تعذر فتح المجلد في Finder.",
+    "bn": "Finder-এ ফোল্ডার খোলা যায়নি।",
+    "en": "Could not open the folder in Finder.",
+    "es": "No se pudo abrir el directorio en Finder.",
+    "fr": "Impossible d’ouvrir le dossier dans le Finder.",
+    "hi": "Finder में फ़ोल्डर नहीं खोला जा सका।",
+    "id": "Tidak dapat membuka folder di Finder.",
+    "pt": "Não foi possível abrir a pasta no Finder.",
+    "ur": "Finder میں فولڈر نہیں کھولا جا سکا۔",
+    "zh-Hans": "无法在访达中打开文件夹。"
+  },
   "No se pudo leer la lista de áreas recientes.": {
     "ar": "تعذرت قراءة قائمة مساحات العمل الأخيرة.",
     "bn": "সাম্প্রতিক কর্মক্ষেত্রের তালিকা পড়া যায়নি।",
@@ -2566,6 +4426,18 @@
     "pt": "Não foi possível ler a lista de áreas recentes.",
     "ur": "حالیہ کام کی جگہوں کی فہرست پڑھی نہیں جا سکی۔",
     "zh-Hans": "无法读取最近工作区列表。"
+  },
+  "No volver a preguntar": {
+    "ar": "عدم السؤال مجددًا",
+    "bn": "আবার জিজ্ঞাসা করবেন না",
+    "en": "Don't ask again",
+    "es": "No volver a preguntar",
+    "fr": "Ne plus demander",
+    "hi": "दोबारा न पूछें",
+    "id": "Jangan tanya lagi",
+    "pt": "Não perguntar novamente",
+    "ur": "دوبارہ نہ پوچھیں",
+    "zh-Hans": "不再询问"
   },
   "Nombre del documento": {
     "ar": "اسم المستند",
@@ -2699,6 +4571,18 @@
     "ur": "مضمون نمبر",
     "zh-Hans": "文章编号"
   },
+  "Número interno para distinguir revisiones de la misma versión.": {
+    "ar": "رقم داخلي لتمييز مراجعات الإصدار نفسه.",
+    "bn": "একই সংস্করণের সংশোধন আলাদা করার অভ্যন্তরীণ নম্বর।",
+    "en": "Internal number that distinguishes revisions of the same version.",
+    "es": "Número interno para distinguir revisiones de la misma versión.",
+    "fr": "Numéro interne permettant de distinguer les révisions d’une même version.",
+    "hi": "एक ही संस्करण के संशोधनों को अलग पहचानने वाला आंतरिक नंबर।",
+    "id": "Nomor internal untuk membedakan revisi dari versi yang sama.",
+    "pt": "Número interno para distinguir revisões da mesma versão.",
+    "ur": "ایک ہی نسخے کی مختلف نظرثانیوں کی شناخت کے لیے اندرونی نمبر۔",
+    "zh-Hans": "用于区分同一版本不同修订的内部编号。"
+  },
   "Ocultar recurso": {
     "ar": "إخفاء المورد",
     "bn": "রিসোর্স লুকান",
@@ -2807,6 +4691,30 @@
     "ur": "ونڈوز ترتیب دیں",
     "zh-Hans": "排列窗口"
   },
+  "Origen": {
+    "ar": "المصدر",
+    "bn": "উৎস",
+    "en": "Source",
+    "es": "Origen",
+    "fr": "Origine",
+    "hi": "स्रोत",
+    "id": "Asal",
+    "pt": "Origem",
+    "ur": "ماخذ",
+    "zh-Hans": "来源"
+  },
+  "Original": {
+    "ar": "الأصل",
+    "bn": "মূল",
+    "en": "Original",
+    "es": "Original",
+    "fr": "Original",
+    "hi": "मूल",
+    "id": "Asli",
+    "pt": "Original",
+    "ur": "اصل",
+    "zh-Hans": "原件"
+  },
   "Oscuro": {
     "ar": "داكن",
     "bn": "গাঢ়",
@@ -2830,6 +4738,18 @@
     "pt": "PDF…",
     "ur": "PDF…",
     "zh-Hans": "PDF…"
+  },
+  "Palabra": {
+    "ar": "الكلمة",
+    "bn": "শব্দ",
+    "en": "Word",
+    "es": "Palabra",
+    "fr": "Mot",
+    "hi": "शब्द",
+    "id": "Kata",
+    "pt": "Palavra",
+    "ur": "لفظ",
+    "zh-Hans": "词语"
   },
   "Palabra, frase entre comillas o consulta AND / OR": {
     "ar": "كلمة أو عبارة بين علامتي اقتباس أو استعلام AND / OR",
@@ -2866,6 +4786,18 @@
     "pt": "Painel de localização",
     "ur": "مقام کا پینل",
     "zh-Hans": "定位面板"
+  },
+  "Paquete .libron": {
+    "ar": "حزمة .libron",
+    "bn": ".libron প্যাকেজ",
+    "en": ".libron package",
+    "es": "Paquete .libron",
+    "fr": "Paquet .libron",
+    "hi": ".libron पैकेज",
+    "id": "Paket .libron",
+    "pt": "Pacote .libron",
+    "ur": ".libron پیکیج",
+    "zh-Hans": ".libron 包"
   },
   "Paralelos": {
     "ar": "المتوازيات",
@@ -2938,6 +4870,78 @@
     "pt": "Por versículo",
     "ur": "ہر آیت",
     "zh-Hans": "按经文"
+  },
+  "Posición {number}": {
+    "ar": "الموضع {number}",
+    "bn": "অবস্থান {number}",
+    "en": "Position {number}",
+    "es": "Posición {number}",
+    "fr": "Position {number}",
+    "hi": "स्थान {number}",
+    "id": "Posisi {number}",
+    "pt": "Posição {number}",
+    "ur": "مقام {number}",
+    "zh-Hans": "位置 {number}"
+  },
+  "Predeterminada (Times New Roman)": {
+    "ar": "الافتراضي (Times New Roman)",
+    "bn": "ডিফল্ট (Times New Roman)",
+    "en": "Default (Times New Roman)",
+    "es": "Predeterminada (Times New Roman)",
+    "fr": "Par défaut (Times New Roman)",
+    "hi": "डिफ़ॉल्ट (Times New Roman)",
+    "id": "Bawaan (Times New Roman)",
+    "pt": "Padrão (Times New Roman)",
+    "ur": "طے شدہ (Times New Roman)",
+    "zh-Hans": "默认（Times New Roman）"
+  },
+  "Predicación y comunicación": {
+    "ar": "الوعظ والتواصل",
+    "bn": "প্রচার ও যোগাযোগ",
+    "en": "Preaching and communication",
+    "es": "Predicación y comunicación",
+    "fr": "Prédication et communication",
+    "hi": "उपदेश और संचार",
+    "id": "Khotbah dan komunikasi",
+    "pt": "Pregação e comunicação",
+    "ur": "وعظ اور ابلاغ",
+    "zh-Hans": "讲道与传播"
+  },
+  "Preguntar antes de convertir a .libron": {
+    "ar": "السؤال قبل التحويل إلى .libron",
+    "bn": ".libron-এ রূপান্তরের আগে জিজ্ঞাসা করুন",
+    "en": "Ask before converting to .libron",
+    "es": "Preguntar antes de convertir a .libron",
+    "fr": "Demander avant de convertir en .libron",
+    "hi": ".libron में बदलने से पहले पूछें",
+    "id": "Tanyakan sebelum mengonversi ke .libron",
+    "pt": "Perguntar antes de converter para .libron",
+    "ur": ".libron میں تبدیلی سے پہلے پوچھیں",
+    "zh-Hans": "转换为 .libron 前询问"
+  },
+  "Primera beta pública.": {
+    "ar": "أول إصدار تجريبي عام.",
+    "bn": "প্রথম সর্বজনীন বিটা।",
+    "en": "Initial public beta.",
+    "es": "Primera beta pública.",
+    "fr": "Première bêta publique.",
+    "hi": "पहला सार्वजनिक बीटा।",
+    "id": "Beta publik pertama.",
+    "pt": "Primeira beta pública.",
+    "ur": "پہلا عوامی بیٹا۔",
+    "zh-Hans": "首个公开测试版。"
+  },
+  "Procesador": {
+    "ar": "المعالج",
+    "bn": "প্রসেসর",
+    "en": "Processor",
+    "es": "Procesador",
+    "fr": "Processeur",
+    "hi": "प्रोसेसर",
+    "id": "Prosesor",
+    "pt": "Processador",
+    "ur": "پروسیسر",
+    "zh-Hans": "处理器"
   },
   "Propiedades del recurso": {
     "ar": "خصائص المورد",
@@ -3083,6 +5087,18 @@
     "ur": "وسائل اور لائسنس…",
     "zh-Hans": "资源和许可证…"
   },
+  "Redimensionado desde los bordes y esquinas y ajuste de ventanas por arrastre.": {
+    "ar": "تغيير الحجم من الحواف والزوايا ومحاذاة النوافذ بالسحب.",
+    "bn": "প্রান্ত ও কোণ থেকে আকার পরিবর্তন এবং টেনে উইন্ডো স্ন্যাপ করা।",
+    "en": "Resize from edges and corners and snap windows by dragging.",
+    "es": "Redimensionado desde los bordes y esquinas y ajuste de ventanas por arrastre.",
+    "fr": "Redimensionnement par les bords et les coins et ancrage des fenêtres par glissement.",
+    "hi": "किनारों और कोनों से आकार बदलें और खींचकर विंडो स्नैप करें।",
+    "id": "Ubah ukuran dari tepi dan sudut serta tata jendela dengan menyeret.",
+    "pt": "Redimensionamento pelas bordas e cantos e ajuste de janelas ao arrastar.",
+    "ur": "کناروں اور کونوں سے سائز تبدیل کریں اور کھینچ کر ونڈوز ترتیب دیں۔",
+    "zh-Hans": "从边缘和角落调整大小，并通过拖动贴靠窗口。"
+  },
   "Referencia": {
     "ar": "المرجع",
     "bn": "সূত্র",
@@ -3106,6 +5122,54 @@
     "pt": "Referência bíblica",
     "ur": "بائبل کا حوالہ",
     "zh-Hans": "圣经经文"
+  },
+  "Referencia general": {
+    "ar": "المراجع العامة",
+    "bn": "সাধারণ তথ্যসূত্র",
+    "en": "General reference",
+    "es": "Referencia general",
+    "fr": "Référence générale",
+    "hi": "सामान्य संदर्भ",
+    "id": "Referensi umum",
+    "pt": "Referência geral",
+    "ur": "عمومی مراجع",
+    "zh-Hans": "综合参考"
+  },
+  "Rellenar y ordenar": {
+    "ar": "ملء وترتيب",
+    "bn": "পূরণ ও বিন্যাস",
+    "en": "Fill and arrange",
+    "es": "Rellenar y ordenar",
+    "fr": "Remplir et organiser",
+    "hi": "भरें और व्यवस्थित करें",
+    "id": "Isi dan susun",
+    "pt": "Preencher e organizar",
+    "ur": "بھریں اور ترتیب دیں",
+    "zh-Hans": "填充和排列"
+  },
+  "Reportar un problema": {
+    "ar": "الإبلاغ عن مشكلة",
+    "bn": "সমস্যা জানান",
+    "en": "Report an issue",
+    "es": "Reportar un problema",
+    "fr": "Signaler un problème",
+    "hi": "समस्या की सूचना दें",
+    "id": "Laporkan masalah",
+    "pt": "Relatar um problema",
+    "ur": "مسئلہ رپورٹ کریں",
+    "zh-Hans": "报告问题"
+  },
+  "Requisitos": {
+    "ar": "المتطلبات",
+    "bn": "প্রয়োজনীয়তা",
+    "en": "Requirements",
+    "es": "Requisitos",
+    "fr": "Configuration requise",
+    "hi": "आवश्यकताएँ",
+    "id": "Persyaratan",
+    "pt": "Requisitos",
+    "ur": "تقاضے",
+    "zh-Hans": "系统要求"
   },
   "Resaltar en amarillo": {
     "ar": "تمييز بالأصفر",
@@ -3179,6 +5243,30 @@
     "ur": "اصل سطریں بحال کریں",
     "zh-Hans": "恢复原始行"
   },
+  "Restaurar tamaño del texto": {
+    "ar": "إعادة ضبط حجم النص",
+    "bn": "লেখার আকার রিসেট করুন",
+    "en": "Reset text size",
+    "es": "Restaurar tamaño del texto",
+    "fr": "Rétablir la taille du texte",
+    "hi": "पाठ का आकार रीसेट करें",
+    "id": "Atur ulang ukuran teks",
+    "pt": "Restaurar tamanho do texto",
+    "ur": "متن کا سائز بحال کریں",
+    "zh-Hans": "还原文字大小"
+  },
+  "Revisión interna": {
+    "ar": "المراجعة الداخلية",
+    "bn": "অভ্যন্তরীণ সংশোধন",
+    "en": "Internal revision",
+    "es": "Revisión interna",
+    "fr": "Révision interne",
+    "hi": "आंतरिक संशोधन",
+    "id": "Revisi internal",
+    "pt": "Revisão interna",
+    "ur": "اندرونی نظرثانی",
+    "zh-Hans": "内部修订号"
+  },
   "Rojo": {
     "ar": "أحمر",
     "bn": "লাল",
@@ -3226,6 +5314,42 @@
     "pt": "São mostradas as primeiras {count} entradas; há resultados ou recursos por consultar.",
     "ur": "پہلے {count} اندراجات دکھائے گئے ہیں؛ مزید نتائج یا وسائل باقی ہیں۔",
     "zh-Hans": "显示前 {count} 个条目；还有结果或资源未查询。"
+  },
+  "Secciones verificadas": {
+    "ar": "الأقسام التي تم التحقق منها",
+    "bn": "যাচাইকৃত বিভাগ",
+    "en": "Verified sections",
+    "es": "Secciones verificadas",
+    "fr": "Sections vérifiées",
+    "hi": "सत्यापित अनुभाग",
+    "id": "Bagian terverifikasi",
+    "pt": "Seções verificadas",
+    "ur": "تصدیق شدہ حصے",
+    "zh-Hans": "已验证章节"
+  },
+  "Selecciona archivos o agrega una carpeta. Se crearán paquetes .libron con metadatos y contenido. Elige Sí para copiar los originales a backup o No para omitir esa copia. Puedes volver a activar la pregunta en Biblioteca.": {
+    "ar": "اختر ملفات أو أضف مجلدًا. ستُنشأ حزم .libron بالبيانات الوصفية والمحتوى. اختر نعم لنسخ الأصول إلى backup أو لا لتخطي النسخ. يمكنك تفعيل السؤال مجددًا في المكتبة.",
+    "bn": "ফাইল বাছুন বা ফোল্ডার যোগ করুন। মেটাডেটা ও বিষয়বস্তুসহ .libron প্যাকেজ তৈরি হবে। backup-এ মূল কপি রাখতে হ্যাঁ, না রাখতে না বাছুন। লাইব্রেরিতে প্রশ্নটি আবার চালু করতে পারবেন।",
+    "en": "Select files or add a folder. Packages in .libron format will contain metadata and content. Choose Yes to copy originals to backup or No to skip that copy. You can restore the question in Library.",
+    "es": "Selecciona archivos o agrega una carpeta. Se crearán paquetes .libron con metadatos y contenido. Elige Sí para copiar los originales a backup o No para omitir esa copia. Puedes volver a activar la pregunta en Biblioteca.",
+    "fr": "Sélectionnez des fichiers ou ajoutez un dossier. Les paquets .libron contiendront métadonnées et contenu. Choisissez Oui pour copier les originaux dans backup, ou Non pour ignorer la copie. Réactivez la question dans Bibliothèque.",
+    "hi": "फ़ाइलें चुनें या फ़ोल्डर जोड़ें। मेटाडेटा और सामग्री वाले .libron पैकेज बनेंगे। मूल फ़ाइलें backup में कॉपी करने के लिए हाँ, नहीं करने के लिए नहीं चुनें। लाइब्रेरी में प्रश्न फिर चालू कर सकते हैं।",
+    "id": "Pilih berkas atau tambahkan folder. Paket .libron akan berisi metadata dan konten. Pilih Ya untuk menyalin berkas asli ke backup atau Tidak untuk melewatinya. Aktifkan kembali pertanyaan di Pustaka.",
+    "pt": "Selecione arquivos ou adicione uma pasta. Os pacotes .libron terão metadados e conteúdo. Escolha Sim para copiar originais para backup ou Não para não copiar. Reative a pergunta em Biblioteca.",
+    "ur": "فائلیں چنیں یا فولڈر شامل کریں۔ میٹاڈیٹا اور مواد والے .libron پیکج بنیں گے۔ اصل کو backup میں نقل کرنے کے لیے ہاں، ورنہ نہیں چنیں۔ لائبریری میں سوال دوبارہ فعال کر سکتے ہیں۔",
+    "zh-Hans": "选择文件或添加文件夹。系统将创建含元数据和内容的 .libron 包。选择“是”将原件复制到 backup，选择“否”跳过副本。可在书库设置中重新启用询问。"
+  },
+  "Selecciona texto antes de aplicar un resaltado o agregar una nota personal. Las marcas pertenecen a tus datos de estudio y no reescriben el libro original.": {
+    "ar": "حدد النص قبل تمييزه أو إضافة ملاحظة شخصية. تُحفظ العلامات ضمن بيانات دراستك ولا تعيد كتابة الكتاب الأصلي.",
+    "bn": "হাইলাইট বা ব্যক্তিগত নোট যোগের আগে লেখা বাছুন। চিহ্নগুলো ব্যক্তিগত অধ্যয়নের ডেটায় থাকে, মূল বই বদলায় না।",
+    "en": "Select text in a reading before applying a highlight or adding a personal note. Markings belong to your personal study data; they do not rewrite the source book.",
+    "es": "Selecciona texto antes de aplicar un resaltado o agregar una nota personal. Las marcas pertenecen a tus datos de estudio y no reescriben el libro original.",
+    "fr": "Sélectionnez du texte avant de le surligner ou d’ajouter une note. Les annotations sont enregistrées dans vos données d’étude sans réécrire le livre original.",
+    "hi": "हाइलाइट या निजी नोट जोड़ने से पहले पाठ चुनें। चिह्न आपके निजी अध्ययन डेटा में रहते हैं और मूल पुस्तक को नहीं बदलते।",
+    "id": "Pilih teks sebelum menyorot atau menambah catatan. Penandaan disimpan dalam data studi pribadi dan tidak menulis ulang buku sumber.",
+    "pt": "Selecione texto antes de destacar ou adicionar uma nota. As marcações pertencem aos seus dados pessoais de estudo e não reescrevem o livro original.",
+    "ur": "نمایاں کرنے یا ذاتی نوٹ شامل کرنے سے پہلے متن منتخب کریں۔ نشانات ذاتی مطالعے کے ڈیٹا میں محفوظ ہوتے ہیں، اصل کتاب تبدیل نہیں ہوتی۔",
+    "zh-Hans": "先选中文本，再高亮或添加个人笔记。标记保存在个人研读数据中，不会改写原始书籍。"
   },
   "Selecciona un documento": {
     "ar": "اختر مستندًا",
@@ -3299,6 +5423,18 @@
     "ur": "نوٹ منتخب کریں۔",
     "zh-Hans": "选择笔记。"
   },
+  "Selecciona una palabra y elige Buscar en diccionario con el clic derecho. Cambia de diccionario en el selector. Mantén la ventana de diccionarios abierta para consultar automáticamente nuevas palabras; las frases no se consultan.": {
+    "ar": "حدّد كلمة وانقر بزر الفأرة الأيمن ثم اختر البحث في القاموس. بدّل القاموس من المحدّد. أبقِ النافذة مفتوحة للبحث التلقائي عن الكلمات المحدّدة؛ تُتجاهل العبارات.",
+    "bn": "একটি শব্দ নির্বাচন করে ডান ক্লিকে অভিধানে খুঁজুন বেছে নিন। তালিকা থেকে অভিধান বদলান। নতুন নির্বাচিত শব্দ স্বয়ংক্রিয়ভাবে খুঁজতে জানালা খোলা রাখুন; বাক্যাংশ উপেক্ষিত হয়।",
+    "en": "Select one word and right-click Look up in dictionary. Switch dictionaries with the selector. Keep the dictionary window open to look up new selections automatically; phrases are ignored.",
+    "es": "Selecciona una palabra y elige Buscar en diccionario con el clic derecho. Cambia de diccionario en el selector. Mantén la ventana de diccionarios abierta para consultar automáticamente nuevas palabras; las frases no se consultan.",
+    "fr": "Sélectionnez un mot puis faites un clic droit et choisissez Chercher dans le dictionnaire. Changez de dictionnaire dans le sélecteur. Gardez la fenêtre ouverte pour consulter les mots sélectionnés ; les phrases sont ignorées.",
+    "hi": "एक शब्द चुनकर दायाँ क्लिक करें और शब्दकोश में खोजें चुनें। चयनक से शब्दकोश बदलें। नई चयनित शब्दों को स्वतः खोजने के लिए विंडो खुली रखें; वाक्यांश अनदेखे होते हैं।",
+    "id": "Pilih satu kata, klik kanan lalu Cari di kamus. Ganti kamus melalui pemilih. Biarkan jendela terbuka untuk mencari kata terpilih otomatis; frasa diabaikan.",
+    "pt": "Selecione uma palavra e clique com o botão direito em Buscar no dicionário. Troque no seletor. Mantenha a janela aberta para consultar novas palavras automaticamente; frases são ignoradas.",
+    "ur": "ایک لفظ منتخب کر کے دایاں کلک کریں اور لغت میں تلاش کریں چنیں۔ منتخب فہرست سے لغت بدلیں۔ نئے منتخب الفاظ خودکار تلاش کرنے کے لیے کھڑکی کھلی رکھیں؛ فقرے نظرانداز ہوں گے۔",
+    "zh-Hans": "选中一个词，右键选择“查词典”。用选择器切换词典。保持词典窗口打开可自动查询新选中的词；短语将被忽略。"
+  },
   "Seleccionado": {
     "ar": "محدّد",
     "bn": "বাছাই করা",
@@ -3322,6 +5458,30 @@
     "pt": "Selecionar tudo",
     "ur": "سب منتخب کریں",
     "zh-Hans": "全选"
+  },
+  "Selector de distribución por ventana y cursores de redimensionado.": {
+    "ar": "محدد تخطيط لكل نافذة ومؤشرات لتغيير الحجم.",
+    "bn": "প্রতি উইন্ডোর বিন্যাস নির্বাচন ও আকার পরিবর্তনের কার্সর।",
+    "en": "Per-window layout picker and resize cursors.",
+    "es": "Selector de distribución por ventana y cursores de redimensionado.",
+    "fr": "Sélecteur de disposition par fenêtre et curseurs de redimensionnement.",
+    "hi": "हर विंडो के लिए लेआउट चयन और आकार बदलने वाले कर्सर।",
+    "id": "Pemilih tata letak per jendela dan kursor pengubah ukuran.",
+    "pt": "Seletor de disposição por janela e cursores de redimensionamento.",
+    "ur": "ہر ونڈو کے لیے ترتیب کا انتخاب اور سائز تبدیل کرنے والے کرسر۔",
+    "zh-Hans": "每个窗口的布局选择器和大小调整光标。"
+  },
+  "Sermonario o bosquejos": {
+    "ar": "عظات أو مخططات",
+    "bn": "ধর্মোপদেশ বা রূপরেখা",
+    "en": "Sermons or outlines",
+    "es": "Sermonario o bosquejos",
+    "fr": "Sermons ou plans",
+    "hi": "उपदेश या रूपरेखाएँ",
+    "id": "Khotbah atau kerangka",
+    "pt": "Sermões ou esboços",
+    "ur": "وعظ یا خاکے",
+    "zh-Hans": "讲章或提纲"
   },
   "Siguiente lectura": {
     "ar": "القراءة التالية",
@@ -3455,6 +5615,30 @@
     "ur": "صرف پوشیدہ",
     "zh-Hans": "仅显示隐藏资源"
   },
+  "Stable recibe versiones estables. Beta incluye también versiones de prueba.": {
+    "ar": "تستقبل Stable الإصدارات المستقرة. وتشمل Beta الإصدارات التجريبية أيضًا.",
+    "bn": "Stable-এ স্থিতিশীল সংস্করণ পাওয়া যায়। Beta-তে পরীক্ষামূলক সংস্করণও থাকে।",
+    "en": "Stable receives stable releases. Beta also includes test releases.",
+    "es": "Stable recibe versiones estables. Beta incluye también versiones de prueba.",
+    "fr": "Stable reçoit les versions stables. Beta inclut aussi les versions de test.",
+    "hi": "Stable में स्थिर संस्करण मिलते हैं। Beta में परीक्षण संस्करण भी शामिल हैं।",
+    "id": "Stable menerima rilis stabil. Beta juga mencakup rilis uji coba.",
+    "pt": "Stable recebe versões estáveis. Beta também inclui versões de teste.",
+    "ur": "Stable میں مستحکم نسخے ملتے ہیں۔ Beta میں آزمائشی نسخے بھی شامل ہیں۔",
+    "zh-Hans": "Stable 接收稳定版。Beta 也包含测试版。"
+  },
+  "Subcategorías": {
+    "ar": "الفئات الفرعية",
+    "bn": "উপবিভাগ",
+    "en": "Subcategories",
+    "es": "Subcategorías",
+    "fr": "Sous-catégories",
+    "hi": "उपश्रेणियाँ",
+    "id": "Subkategori",
+    "pt": "Subcategorias",
+    "ur": "ذیلی زمرے",
+    "zh-Hans": "子分类"
+  },
   "Subir": {
     "ar": "نقل لأعلى",
     "bn": "উপরে সরান",
@@ -3466,6 +5650,66 @@
     "pt": "Mover para cima",
     "ur": "اوپر منتقل کریں",
     "zh-Hans": "上移"
+  },
+  "Subtítulo": {
+    "ar": "العنوان الفرعي",
+    "bn": "উপশিরোনাম",
+    "en": "Subtitle",
+    "es": "Subtítulo",
+    "fr": "Sous-titre",
+    "hi": "उपशीर्षक",
+    "id": "Subjudul",
+    "pt": "Subtítulo",
+    "ur": "ذیلی عنوان",
+    "zh-Hans": "副标题"
+  },
+  "Superior": {
+    "ar": "أعلى",
+    "bn": "উপরে",
+    "en": "Top",
+    "es": "Superior",
+    "fr": "Haut",
+    "hi": "ऊपर",
+    "id": "Atas",
+    "pt": "Superior",
+    "ur": "اوپر",
+    "zh-Hans": "顶部"
+  },
+  "Superior derecha": {
+    "ar": "أعلى اليمين",
+    "bn": "উপরে ডানে",
+    "en": "Top right",
+    "es": "Superior derecha",
+    "fr": "En haut à droite",
+    "hi": "ऊपर दायाँ",
+    "id": "Kanan atas",
+    "pt": "Superior direito",
+    "ur": "اوپر دائیں",
+    "zh-Hans": "右上角"
+  },
+  "Superior izquierda": {
+    "ar": "أعلى اليسار",
+    "bn": "উপরে বাঁয়ে",
+    "en": "Top left",
+    "es": "Superior izquierda",
+    "fr": "En haut à gauche",
+    "hi": "ऊपर बायाँ",
+    "id": "Kiri atas",
+    "pt": "Superior esquerdo",
+    "ur": "اوپر بائیں",
+    "zh-Hans": "左上角"
+  },
+  "Sí": {
+    "ar": "نعم",
+    "bn": "হ্যাঁ",
+    "en": "Yes",
+    "es": "Sí",
+    "fr": "Oui",
+    "hi": "हाँ",
+    "id": "Ya",
+    "pt": "Sim",
+    "ur": "ہاں",
+    "zh-Hans": "是"
   },
   "Tamaño": {
     "ar": "الحجم",
@@ -3527,6 +5771,18 @@
     "ur": "متعلقہ موضوعات",
     "zh-Hans": "关联主题"
   },
+  "Teología": {
+    "ar": "اللاهوت",
+    "bn": "ধর্মতত্ত্ব",
+    "en": "Theology",
+    "es": "Teología",
+    "fr": "Théologie",
+    "hi": "धर्मशास्त्र",
+    "id": "Teologi",
+    "pt": "Teologia",
+    "ur": "الٰہیات",
+    "zh-Hans": "神学"
+  },
   "Texto con imágenes (RTFD)…": {
     "ar": "نص مع صور (RTFD)…",
     "bn": "ছবিসহ পাঠ (RTFD)…",
@@ -3538,6 +5794,18 @@
     "pt": "Texto com imagens (RTFD)…",
     "ur": "تصاویر کے ساتھ متن (RTFD)…",
     "zh-Hans": "带图片的文本 (RTFD)…"
+  },
+  "Texto de ejemplo": {
+    "ar": "نص تجريبي",
+    "bn": "উদাহরণ লেখা",
+    "en": "Sample text",
+    "es": "Texto de ejemplo",
+    "fr": "Exemple de texte",
+    "hi": "उदाहरण पाठ",
+    "id": "Teks contoh",
+    "pt": "Texto de exemplo",
+    "ur": "نمونہ متن",
+    "zh-Hans": "示例文字"
   },
   "Texto de los recursos": {
     "ar": "نصوص الموارد",
@@ -3563,6 +5831,18 @@
     "ur": "متن…",
     "zh-Hans": "文本…"
   },
+  "Tipo": {
+    "ar": "النوع",
+    "bn": "ধরন",
+    "en": "Type",
+    "es": "Tipo",
+    "fr": "Type",
+    "hi": "प्रकार",
+    "id": "Jenis",
+    "pt": "Tipo",
+    "ur": "قسم",
+    "zh-Hans": "类型"
+  },
   "Tipo de búsqueda": {
     "ar": "نوع البحث",
     "bn": "অনুসন্ধানের ধরন",
@@ -3574,6 +5854,18 @@
     "pt": "Tipo de busca",
     "ur": "تلاش کی قسم",
     "zh-Hans": "搜索类型"
+  },
+  "Tipo de versión": {
+    "ar": "نوع الإصدار",
+    "bn": "সংস্করণের ধরন",
+    "en": "Release type",
+    "es": "Tipo de versión",
+    "fr": "Type de version",
+    "hi": "संस्करण का प्रकार",
+    "id": "Jenis versi",
+    "pt": "Tipo de versão",
+    "ur": "نسخے کی قسم",
+    "zh-Hans": "版本类型"
   },
   "Toda la biblioteca": {
     "ar": "المكتبة بأكملها",
@@ -3598,6 +5890,78 @@
     "pt": "Todas as Bíblias",
     "ur": "تمام بائبل",
     "zh-Hans": "所有圣经"
+  },
+  "Todavía no hay versiones Stable publicadas.": {
+    "ar": "لم تُنشر إصدارات Stable بعد.",
+    "bn": "এখনও কোনো Stable সংস্করণ প্রকাশিত হয়নি।",
+    "en": "No Stable releases have been published yet.",
+    "es": "Todavía no hay versiones Stable publicadas.",
+    "fr": "Aucune version Stable n’a encore été publiée.",
+    "hi": "अभी कोई Stable संस्करण प्रकाशित नहीं हुआ है।",
+    "id": "Belum ada rilis Stable yang diterbitkan.",
+    "pt": "Ainda não há versões Stable publicadas.",
+    "ur": "ابھی کوئی Stable نسخہ شائع نہیں ہوا۔",
+    "zh-Hans": "尚未发布 Stable 版本。"
+  },
+  "Todos": {
+    "ar": "الكل",
+    "bn": "সব",
+    "en": "All",
+    "es": "Todos",
+    "fr": "Tous",
+    "hi": "सभी",
+    "id": "Semua",
+    "pt": "Todos",
+    "ur": "سب",
+    "zh-Hans": "全部"
+  },
+  "Todos los recursos": {
+    "ar": "جميع الموارد",
+    "bn": "সব রিসোর্স",
+    "en": "All resources",
+    "es": "Todos los recursos",
+    "fr": "Toutes les ressources",
+    "hi": "सभी संसाधन",
+    "id": "Semua sumber",
+    "pt": "Todos os recursos",
+    "ur": "تمام وسائل",
+    "zh-Hans": "全部资源"
+  },
+  "Trasladar y redimensionar": {
+    "ar": "نقل وتغيير الحجم",
+    "bn": "সরান ও আকার বদলান",
+    "en": "Move and resize",
+    "es": "Trasladar y redimensionar",
+    "fr": "Déplacer et redimensionner",
+    "hi": "स्थानांतरित करें और आकार बदलें",
+    "id": "Pindahkan dan ubah ukuran",
+    "pt": "Mover e redimensionar",
+    "ur": "منتقل کریں اور سائز بدلیں",
+    "zh-Hans": "移动和调整大小"
+  },
+  "Tres columnas": {
+    "ar": "ثلاثة أعمدة",
+    "bn": "তিন কলাম",
+    "en": "Three Columns",
+    "es": "Tres columnas",
+    "fr": "Trois colonnes",
+    "hi": "तीन स्तंभ",
+    "id": "Tiga Kolom",
+    "pt": "Três colunas",
+    "ur": "تین کالم",
+    "zh-Hans": "三列"
+  },
+  "Tus lecturas se guardan antes de instalar. La versión anterior se conserva como copia de seguridad.": {
+    "ar": "تُحفظ قراءاتك قبل التثبيت، ويُحتفظ بالإصدار السابق كنسخة احتياطية.",
+    "bn": "ইনস্টলের আগে আপনার পাঠ সংরক্ষিত হয়। আগের সংস্করণ ব্যাকআপ হিসেবে রাখা হয়।",
+    "en": "Your workspace is saved before installation. The previous app is kept as a backup.",
+    "es": "Tus lecturas se guardan antes de instalar. La versión anterior se conserva como copia de seguridad.",
+    "fr": "Vos lectures sont enregistrées avant l’installation. La version précédente est conservée en sauvegarde.",
+    "hi": "इंस्टॉल करने से पहले आपका कार्यक्षेत्र सहेजा जाता है। पिछला संस्करण बैकअप के रूप में रखा जाता है।",
+    "id": "Ruang kerja disimpan sebelum instalasi. Versi sebelumnya disimpan sebagai cadangan.",
+    "pt": "Suas leituras são salvas antes da instalação. A versão anterior é mantida como cópia de segurança.",
+    "ur": "انسٹال کرنے سے پہلے مطالعہ محفوظ کیا جاتا ہے۔ پچھلا نسخہ بیک اپ کے طور پر رکھا جاتا ہے۔",
+    "zh-Hans": "安装前会保存阅读工作区，并保留旧版本作为备份。"
   },
   "Título": {
     "ar": "العنوان",
@@ -3635,6 +5999,18 @@
     "ur": "نوٹ کا عنوان",
     "zh-Hans": "笔记标题"
   },
+  "Título original": {
+    "ar": "العنوان الأصلي",
+    "bn": "মূল শিরোনাম",
+    "en": "Original title",
+    "es": "Título original",
+    "fr": "Titre original",
+    "hi": "मूल शीर्षक",
+    "id": "Judul asli",
+    "pt": "Título original",
+    "ur": "اصل عنوان",
+    "zh-Hans": "原始标题"
+  },
   "Ubicaciones de referencia": {
     "ar": "مواقع المراجع",
     "bn": "সূত্রের অবস্থান",
@@ -3671,6 +6047,18 @@
     "ur": "ایک پیراگراف",
     "zh-Hans": "单一段落"
   },
+  "Una a la izquierda y dos a la derecha": {
+    "ar": "واحدة يسارًا واثنتان يمينًا",
+    "bn": "বামে একটি, ডানে দুটি",
+    "en": "One Left, Two Right",
+    "es": "Una a la izquierda y dos a la derecha",
+    "fr": "Une à gauche, deux à droite",
+    "hi": "बाएँ एक, दाएँ दो",
+    "id": "Satu Kiri, Dua Kanan",
+    "pt": "Uma à esquerda e duas à direita",
+    "ur": "بائیں ایک، دائیں دو",
+    "zh-Hans": "左一右二"
+  },
   "Una parte del pasaje no conserva una referencia o un intervalo de texto válido.": {
     "ar": "لا يحتفظ جزء من المقطع بمرجع أو نطاق نص صالح.",
     "bn": "পাঠাংশের কোনো ভাগে বৈধ সূত্র বা পাঠের পরিসর নেই।",
@@ -3683,6 +6071,18 @@
     "ur": "عبارت کا ایک حصہ درست حوالہ یا متن کی حد برقرار نہیں رکھتا۔",
     "zh-Hans": "某部分经文没有保留有效的经文引用或文本范围。"
   },
+  "Usa Atrás, Adelante e Historial para volver a ubicaciones visitadas. Contenido abre el índice del recurso; Artículo cambia el modo del campo de referencia.": {
+    "ar": "استخدم السابق والتالي والسجل للعودة إلى المواضع السابقة. يفتح المحتوى فهرس المورد ويغير المقال وضع حقل المرجع.",
+    "bn": "পেছনে, সামনে ও ইতিহাস দিয়ে দেখা স্থানে ফিরুন। বিষয়বস্তু রিসোর্সের সূচি খোলে; নিবন্ধ নির্দেশের ঘরের মোড বদলায়।",
+    "en": "Use Back, Forward and History to revisit locations. Contents opens the resource index; Article changes the reference field mode.",
+    "es": "Usa Atrás, Adelante e Historial para volver a ubicaciones visitadas. Contenido abre el índice del recurso; Artículo cambia el modo del campo de referencia.",
+    "fr": "Utilisez Précédent, Suivant et Historique pour revenir aux emplacements visités. Sommaire ouvre l’index ; Article change le mode du champ de référence.",
+    "hi": "पीछे, आगे और इतिहास से देखे गए स्थानों पर लौटें। विषय-सूची संसाधन का सूचकांक खोलती है; लेख से संदर्भ फ़ील्ड का मोड बदलता है।",
+    "id": "Gunakan Kembali, Maju, dan Riwayat untuk mengunjungi lokasi sebelumnya. Daftar Isi membuka indeks; Artikel mengganti mode kolom referensi.",
+    "pt": "Use Voltar, Avançar e Histórico para rever locais. Conteúdo abre o índice do recurso; Artigo muda o modo do campo de referência.",
+    "ur": "پیچھے، آگے اور تاریخ سے دیکھی ہوئی جگہوں پر واپس جائیں۔ مندرجات وسیلے کی فہرست کھولتا ہے؛ مضمون سے حوالہ خانے کی وضع بدلتی ہے۔",
+    "zh-Hans": "使用后退、前进和历史记录返回访问过的位置。目录打开资源索引；文章切换引用输入框的模式。"
+  },
   "Vaciar lista": {
     "ar": "مسح القائمة",
     "bn": "তালিকা খালি করুন",
@@ -3694,6 +6094,18 @@
     "pt": "Limpar lista",
     "ur": "فہرست صاف کریں",
     "zh-Hans": "清除列表"
+  },
+  "Valor": {
+    "ar": "القيمة",
+    "bn": "মান",
+    "en": "Value",
+    "es": "Valor",
+    "fr": "Valeur",
+    "hi": "मान",
+    "id": "Nilai",
+    "pt": "Valor",
+    "ur": "قدر",
+    "zh-Hans": "值"
   },
   "Ventana vacía": {
     "ar": "نافذة فارغة",
@@ -3743,6 +6155,54 @@
     "ur": "منظر",
     "zh-Hans": "显示"
   },
+  "Ver proyecto en GitHub": {
+    "ar": "عرض المشروع على GitHub",
+    "bn": "GitHub-এ প্রকল্প দেখুন",
+    "en": "View project on GitHub",
+    "es": "Ver proyecto en GitHub",
+    "fr": "Voir le projet sur GitHub",
+    "hi": "GitHub पर प्रोजेक्ट देखें",
+    "id": "Lihat proyek di GitHub",
+    "pt": "Ver projeto no GitHub",
+    "ur": "GitHub پر پروجیکٹ دیکھیں",
+    "zh-Hans": "在 GitHub 上查看项目"
+  },
+  "Ver versiones en GitHub": {
+    "ar": "عرض الإصدارات على GitHub",
+    "bn": "GitHub-এ সংস্করণ দেখুন",
+    "en": "View Releases on GitHub",
+    "es": "Ver versiones en GitHub",
+    "fr": "Voir les versions sur GitHub",
+    "hi": "GitHub पर संस्करण देखें",
+    "id": "Lihat Rilis di GitHub",
+    "pt": "Ver versões no GitHub",
+    "ur": "GitHub پر نسخے دیکھیں",
+    "zh-Hans": "在 GitHub 查看版本"
+  },
+  "Verificar": {
+    "ar": "تحقق",
+    "bn": "যাচাই",
+    "en": "Verify",
+    "es": "Verificar",
+    "fr": "Vérifier",
+    "hi": "सत्यापित करें",
+    "id": "Verifikasi",
+    "pt": "Verificar",
+    "ur": "تصدیق کریں",
+    "zh-Hans": "验证"
+  },
+  "Versión anterior": {
+    "ar": "الترجمة السابقة",
+    "bn": "আগের সংস্করণ",
+    "en": "Previous version",
+    "es": "Versión anterior",
+    "fr": "Version précédente",
+    "hi": "पिछला संस्करण",
+    "id": "Versi sebelumnya",
+    "pt": "Versão anterior",
+    "ur": "پچھلا ترجمہ",
+    "zh-Hans": "上一版本"
+  },
   "Versión de Biblia anterior": {
     "ar": "ترجمة الكتاب المقدس السابقة",
     "bn": "বাইবেলের পূর্ববর্তী সংস্করণ",
@@ -3767,6 +6227,42 @@
     "ur": "بائبل کا اگلا نسخہ",
     "zh-Hans": "下一圣经版本"
   },
+  "Versión instalada": {
+    "ar": "الإصدار المثبت",
+    "bn": "ইনস্টল করা সংস্করণ",
+    "en": "Installed version",
+    "es": "Versión instalada",
+    "fr": "Version installée",
+    "hi": "इंस्टॉल किया गया संस्करण",
+    "id": "Versi terinstal",
+    "pt": "Versão instalada",
+    "ur": "انسٹال شدہ نسخہ",
+    "zh-Hans": "已安装版本"
+  },
+  "Versión siguiente": {
+    "ar": "الترجمة التالية",
+    "bn": "পরবর্তী সংস্করণ",
+    "en": "Next version",
+    "es": "Versión siguiente",
+    "fr": "Version suivante",
+    "hi": "अगला संस्करण",
+    "id": "Versi berikutnya",
+    "pt": "Próxima versão",
+    "ur": "اگلا ترجمہ",
+    "zh-Hans": "下一版本"
+  },
+  "Versión y registro de cambios integrados en Ajustes.": {
+    "ar": "معلومات الإصدار وسجل التغييرات في الإعدادات.",
+    "bn": "সেটিংসে সংস্করণের তথ্য ও পরিবর্তনের বিবরণ।",
+    "en": "Version information and changelog in Settings.",
+    "es": "Versión y registro de cambios integrados en Ajustes.",
+    "fr": "Version et journal des modifications intégrés aux Réglages.",
+    "hi": "सेटिंग्स में संस्करण की जानकारी और बदलावों का विवरण।",
+    "id": "Informasi versi dan catatan perubahan di Pengaturan.",
+    "pt": "Versão e registro de alterações nos Ajustes.",
+    "ur": "سیٹنگز میں نسخے کی معلومات اور تبدیلیوں کی فہرست۔",
+    "zh-Hans": "设置中集成版本信息和更新日志。"
+  },
   "Versículos bíblicos": {
     "ar": "آيات الكتاب المقدس",
     "bn": "বাইবেলের পদ",
@@ -3778,6 +6274,18 @@
     "pt": "Versículos bíblicos",
     "ur": "بائبل کی آیات",
     "zh-Hans": "圣经经文"
+  },
+  "Vida cristiana y espiritualidad": {
+    "ar": "الحياة المسيحية والروحانية",
+    "bn": "খ্রিষ্টীয় জীবন ও আধ্যাত্মিকতা",
+    "en": "Christian life and spirituality",
+    "es": "Vida cristiana y espiritualidad",
+    "fr": "Vie chrétienne et spiritualité",
+    "hi": "मसीही जीवन और आध्यात्मिकता",
+    "id": "Kehidupan Kristen dan kerohanian",
+    "pt": "Vida cristã e espiritualidade",
+    "ur": "مسیحی زندگی اور روحانیت",
+    "zh-Hans": "基督徒生活与灵修"
   },
   "Vista previa": {
     "ar": "معاينة",
@@ -3827,6 +6335,18 @@
     "ur": "روابط",
     "zh-Hans": "联动"
   },
+  "Zoom de lectura de 0 a 300 % y sincronización desde la barra principal.": {
+    "ar": "تكبير القراءة من 0 إلى 300% والمزامنة من شريط الأدوات الرئيسي.",
+    "bn": "০ থেকে ৩০০% পড়ার জুম এবং মূল টুলবার থেকে সমন্বয়।",
+    "en": "Reading zoom from 0 to 300% and synchronization from the main toolbar.",
+    "es": "Zoom de lectura de 0 a 300 % y sincronización desde la barra principal.",
+    "fr": "Zoom de lecture de 0 à 300 % et synchronisation depuis la barre principale.",
+    "hi": "0 से 300% तक पढ़ने का ज़ूम और मुख्य टूलबार से सिंक।",
+    "id": "Zoom bacaan 0 hingga 300% dan sinkronisasi dari bilah utama.",
+    "pt": "Zoom de leitura de 0 a 300% e sincronização na barra principal.",
+    "ur": "پڑھنے کا زوم 0 سے 300% تک اور مرکزی ٹول بار سے ہم آہنگی۔",
+    "zh-Hans": "0 至 300% 阅读缩放，以及主工具栏中的同步。"
+  },
   "Zoom del texto": {
     "ar": "تكبير النص",
     "bn": "পাঠের জুম",
@@ -3838,6 +6358,18 @@
     "pt": "Zoom do texto",
     "ur": "متن کا زوم",
     "zh-Hans": "文本缩放"
+  },
+  "macOS mínimo": {
+    "ar": "الحد الأدنى من macOS",
+    "bn": "ন্যূনতম macOS",
+    "en": "Minimum macOS",
+    "es": "macOS mínimo",
+    "fr": "Version minimale de macOS",
+    "hi": "न्यूनतम macOS",
+    "id": "macOS minimum",
+    "pt": "macOS mínimo",
+    "ur": "کم از کم macOS",
+    "zh-Hans": "最低 macOS 版本"
   },
   "{count} artículos examinados": {
     "ar": "المقالات المفحوصة: {count}",
@@ -3959,6 +6491,18 @@
     "ur": "نتائج: {results} · جانچے گئے مضامین: {articles}",
     "zh-Hans": "结果：{results} · 已检查文章：{articles}"
   },
+  "¿Qué es esto?": {
+    "ar": "ما هذا؟",
+    "bn": "এটি কী?",
+    "en": "What is this?",
+    "es": "¿Qué es esto?",
+    "fr": "Qu’est-ce que c’est ?",
+    "hi": "यह क्या है?",
+    "id": "Apa ini?",
+    "pt": "O que é isto?",
+    "ur": "یہ کیا ہے؟",
+    "zh-Hans": "这是什么？"
+  },
   "Área de trabajo guardada": {
     "ar": "مساحة عمل محفوظة",
     "bn": "সংরক্ষিত কর্মক্ষেত্র",
@@ -4006,5 +6550,41 @@
     "pt": "Índice ativo",
     "ur": "فعال اشاریہ",
     "zh-Hans": "当前索引"
+  },
+  "Índice de palabras": {
+    "ar": "فهرس الكلمات",
+    "bn": "শব্দসূচি",
+    "en": "Word index",
+    "es": "Índice de palabras",
+    "fr": "Index des mots",
+    "hi": "शब्द सूचकांक",
+    "id": "Indeks kata",
+    "pt": "Índice de palavras",
+    "ur": "الفاظ کا اشاریہ",
+    "zh-Hans": "词条索引"
+  },
+  "Última comprobación": {
+    "ar": "آخر تحقق",
+    "bn": "সর্বশেষ পরীক্ষা",
+    "en": "Last checked",
+    "es": "Última comprobación",
+    "fr": "Dernière vérification",
+    "hi": "अंतिम जाँच",
+    "id": "Terakhir diperiksa",
+    "pt": "Última verificação",
+    "ur": "آخری جانچ",
+    "zh-Hans": "上次检查"
+  },
+  "Versículo": {
+    "en": "Verse",
+    "zh-Hans": "节",
+    "hi": "पद",
+    "es": "Versículo",
+    "ar": "آية",
+    "fr": "Verset",
+    "bn": "পদ",
+    "pt": "Versículo",
+    "id": "Ayat",
+    "ur": "آیت"
   }
 }

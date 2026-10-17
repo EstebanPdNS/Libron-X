@@ -1,0 +1,221 @@
+{
+  "schemaVersion": 1,
+  "dictionaries": [
+    {
+      "id": "org.libronx.bundled.es-wiktionary",
+      "package": "es-wiktionary.libron",
+      "title": "Wikcionario — Español",
+      "language": "es",
+      "entries": 837661,
+      "source": "https://kaikki.org/dictionary/rawdata.html",
+      "sources": [
+        {
+          "file": "es-extract.jsonl.gz",
+          "sha256": "fb5b5b8520912d1d1a398f2b8bf2569c11911b4c26bad6b8c066a84f5e3d34ed"
+        }
+      ],
+      "payloadSHA256": "1e9f53dce8997fa8cecbe6d8932f1c57b4f30a807d82dfe182338060f698934a",
+      "license": "CC BY-SA 4.0",
+      "licenseURL": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "subtype": "Diccionario general"
+    },
+    {
+      "id": "org.libronx.bundled.es-spa-wordnet",
+      "package": "es-spa-wordnet.libron",
+      "title": "WordNet español — MCR",
+      "language": "es",
+      "entries": 70166,
+      "source": "https://github.com/omwn/omw-data/tree/main/wns/mcr",
+      "sources": [
+        {
+          "file": "wn-data-spa.tab",
+          "sha256": "0ec37ce94ee2acc63ad6b120e1051f9841d172778cc24adc0023fb8dccf0a7cd"
+        }
+      ],
+      "payloadSHA256": "01df822219b7a3d32090068ca8b45cf74d41815768932d35eec39ad6e66e69b1",
+      "license": "CC BY 3.0",
+      "licenseURL": "https://creativecommons.org/licenses/by/3.0/",
+      "subtype": "Definiciones y sinónimos"
+    },
+    {
+      "id": "org.libronx.bundled.es-thesaurus",
+      "package": "es-thesaurus.libron",
+      "title": "OpenThesaurus — Sinónimos en español",
+      "language": "es",
+      "entries": 21846,
+      "source": "https://github.com/LibreOffice/dictionaries/tree/master/es",
+      "sources": [
+        {
+          "file": "es-thesaurus.dat",
+          "sha256": "ee0b7ad7dfede636aa5d5509cbbcbab59bef4cb8cbdff01f9528b15bd139b889"
+        }
+      ],
+      "payloadSHA256": "0af7d2a70bb68f0f5812b43ebc3fc37a59517a5f827cccb2c3cd0724658efdfc",
+      "license": "LGPL-2.1",
+      "licenseURL": "https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html",
+      "subtype": "Diccionario de sinónimos"
+    },
+    {
+      "id": "org.libronx.bundled.simple-wiktionary",
+      "package": "simple-wiktionary.libron",
+      "title": "Simple English Wiktionary",
+      "language": "en",
+      "entries": 53805,
+      "source": "https://kaikki.org/dictionary/rawdata.html",
+      "sources": [
+        {
+          "file": "simple-extract.jsonl.gz",
+          "sha256": "855cc4c307972c7bda162086135a462977dffc9165a167e54c8d06871317879a"
+        }
+      ],
+      "payloadSHA256": "d18cf5036139a2618ee066223d180f47275458b92c078789f9a7e70b53cb1e3d",
+      "license": "CC BY-SA 4.0",
+      "licenseURL": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "subtype": "Diccionario general"
+    },
+    {
+      "id": "org.libronx.bundled.en-easton",
+      "package": "en-easton.libron",
+      "title": "Easton's Bible Dictionary — 1897",
+      "language": "en",
+      "entries": 3962,
+      "source": "https://github.com/neuu-org/bible-dictionary-dataset",
+      "sources": [
+        {
+          "file": "easton.xml",
+          "sha256": "10e3f432e38ee8197c30a613576dc363af3f29fa4aa90ebd0782533df906e5f1"
+        }
+      ],
+      "payloadSHA256": "42a0479945d05a25066a7f52d68b7379986e8c6addc6d7b0d421c2e58ce38527",
+      "license": "CC BY 4.0",
+      "licenseURL": "https://creativecommons.org/licenses/by/4.0/",
+      "subtype": "Diccionario bíblico"
+    },
+    {
+      "id": "org.libronx.bundled.en-smith",
+      "package": "en-smith.libron",
+      "title": "Smith's Bible Dictionary — 1863",
+      "language": "en",
+      "entries": 4488,
+      "source": "https://github.com/neuu-org/bible-dictionary-dataset",
+      "sources": [
+        {
+          "file": "smith.xml",
+          "sha256": "f0aa85b544f70384e24715dcb172ea0b687f8d5646994335e84c8dc44e5aca43"
+        }
+      ],
+      "payloadSHA256": "eb4a13af7808405fa89ce52442d17a13b860f51bd48e7c3079232f3ea1ed3b3a",
+      "license": "CC BY 4.0",
+      "licenseURL": "https://creativecommons.org/licenses/by/4.0/",
+      "subtype": "Diccionario bíblico"
+    },
+    {
+      "id": "org.libronx.bundled.pt-wiktionary",
+      "package": "pt-wiktionary.libron",
+      "title": "Wikcionário — Português",
+      "language": "pt",
+      "entries": 380255,
+      "source": "https://kaikki.org/dictionary/rawdata.html",
+      "sources": [
+        {
+          "file": "pt-extract.jsonl.gz",
+          "sha256": "43e39480cbe11bf9999565774811ffb125f26f5b42a04b121bac5fa35e649024"
+        }
+      ],
+      "payloadSHA256": "a295e2b3b7b0e02dccb7048b9c7a0a9fd86cc459dbc92bd65cd18692968291ee",
+      "license": "CC BY-SA 4.0",
+      "licenseURL": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "subtype": "Diccionario general"
+    },
+    {
+      "id": "org.libronx.bundled.pt-dicaberto",
+      "package": "pt-dicaberto.libron",
+      "title": "Dicionário Aberto — Cândido de Figueiredo",
+      "language": "pt",
+      "entries": 125277,
+      "source": "https://github.com/ambs/Dicionario-Aberto/tree/master/Resources",
+      "sources": [
+        {
+          "file": "dicaberto-xmls.zip",
+          "sha256": "f7e8ca35715a22a5e9e7fdd9c795d367e3e41182d5366b257fe7d78b15412a38"
+        }
+      ],
+      "payloadSHA256": "181e83887646d3097ff218ad246f5b7994d85f8b099c9c1eb44b0d0832bc2d67",
+      "license": "CC BY-SA 2.5 PT",
+      "licenseURL": "https://creativecommons.org/licenses/by-sa/2.5/pt/",
+      "subtype": "Diccionario general"
+    },
+    {
+      "id": "org.libronx.bundled.pt-por-wordnet",
+      "package": "pt-por-wordnet.libron",
+      "title": "OpenWordnet-PT — Sinônimos",
+      "language": "pt",
+      "entries": 31344,
+      "source": "https://github.com/omwn/omw-data/tree/main/wns/por",
+      "sources": [
+        {
+          "file": "wn-data-por.tab",
+          "sha256": "0ba180e2d2a5317e61b4ebe94a7e969e68eea2d9e60705e1e9053c6e2ac5e684"
+        }
+      ],
+      "payloadSHA256": "98c51a56989c900ca8cb0ca81eb169921fae6e8f35188bc5f4f55ef420031348",
+      "license": "CC BY-SA 3.0",
+      "licenseURL": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "subtype": "Diccionario de sinónimos"
+    },
+    {
+      "id": "org.libronx.bundled.it-wiktionary",
+      "package": "it-wiktionary.libron",
+      "title": "Wikizionario — Italiano",
+      "language": "it",
+      "entries": 540130,
+      "source": "https://kaikki.org/dictionary/rawdata.html",
+      "sources": [
+        {
+          "file": "it-extract.jsonl.gz",
+          "sha256": "1935f76d7b2d93d695fe3109f51a1d5a274497d9ad1371a50a6445d73424af7d"
+        }
+      ],
+      "payloadSHA256": "b49cc9262c63a2dfd8fb7f14f42d0cbcbccc3dca15ccee3da83a1c7f6267bd69",
+      "license": "CC BY-SA 4.0",
+      "licenseURL": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "subtype": "Diccionario general"
+    },
+    {
+      "id": "org.libronx.bundled.it-ita-wordnet",
+      "package": "it-ita-wordnet.libron",
+      "title": "MultiWordNet — Italiano",
+      "language": "it",
+      "entries": 30400,
+      "source": "https://github.com/omwn/omw-data/tree/main/wns/ita",
+      "sources": [
+        {
+          "file": "wn-data-ita.tab",
+          "sha256": "251ac0097ef81a7ed0d283f6852953106a37dbb8c1b9f93d87079641c271eafa"
+        }
+      ],
+      "payloadSHA256": "80b10898f3746848b6aacc7302778a9adab29db64403965bf6e03a7d6fe62611",
+      "license": "CC BY 3.0",
+      "licenseURL": "https://creativecommons.org/licenses/by/3.0/",
+      "subtype": "Definiciones y sinónimos"
+    },
+    {
+      "id": "org.libronx.bundled.it-thesaurus",
+      "package": "it-thesaurus.libron",
+      "title": "Thesaurus italiano",
+      "language": "it",
+      "entries": 25850,
+      "source": "https://github.com/LibreOffice/dictionaries/tree/master/it_IT",
+      "sources": [
+        {
+          "file": "it-thesaurus.dat",
+          "sha256": "96af44562d73ec56dbaacce04588f6a3b7569d581542d9518f64b7c5b1926bcf"
+        }
+      ],
+      "payloadSHA256": "953f0af35bb94b61d37f4635364d2731299438cbdca866f57fbe41799f2e5835",
+      "license": "GPL-3.0",
+      "licenseURL": "https://www.gnu.org/licenses/gpl-3.0.html",
+      "subtype": "Diccionario de sinónimos"
+    }
+  ]
+}

@@ -15,6 +15,17 @@ struct ReaderHighlight: Identifiable, Codable, Equatable {
 
 @MainActor extension StudyWorkspace {
     func connect(_ reader: ReaderSession) {
+        reader.onDictionaryLookup = { [weak self] word in
+            guard let self else { return }; self.dictionary.show(word, workspace: self)
+        }
+        reader.onQuickDictionaryLookup = { [weak self, weak reader] word, view, rect in
+            guard let self, let reader else { return }
+            self.activate(reader); self.dictionary.show(word, workspace: self, anchor: view, rect: rect)
+        }
+        reader.onTextSelection = { [weak self, weak reader] text in
+            guard let self, reader?.isDictionary == false else { return }
+            self.dictionary.selectionChanged(text, workspace: self)
+        }
         reader.highlights = personal.highlights.filter { $0.resourceID == reader.resource.id }
         reader.onReferenceNavigation = { [weak self, weak reader] reference in
             guard let self, let reader, reader.linkGroup != .none else { return }
@@ -155,6 +166,7 @@ struct ReaderHighlight: Identifiable, Codable, Equatable {
                              anchor: .init(kind: selection == nil ? .nativeReference : .nativeSelection, location: location, selection: selection))
         note.sourceContentType = "text/plain"; note.sourceBody = reader.selectedText
         personal.documents[index].notes.append(note); personal.selectedDocumentID = personal.documents[index].id
+        pendingNoteID = note.id
         savePersonal(); activeTool = .documents
     }
     func openSearchResult(_ result: LibrarySearchResult) {

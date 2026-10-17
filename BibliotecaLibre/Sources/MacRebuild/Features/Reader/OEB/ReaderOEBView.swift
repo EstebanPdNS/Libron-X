@@ -21,7 +21,8 @@ struct ReaderOEBView: NSViewRepresentable {
     }
     static func makeWebView(reader: ReaderSession, coordinator: Coordinator) -> WKWebView {
         let config = configuration(source: coordinator, selectionHandler: coordinator)
-        let view = WKWebView(frame: .zero, configuration: config)
+        let view = DictionaryWebView(frame: .zero, configuration: config)
+        view.reader = reader
         view.navigationDelegate = coordinator
         view.appearance = NSAppearance(named: .aqua)
         reader.oebWebView = view
@@ -43,6 +44,10 @@ struct ReaderOEBView: NSViewRepresentable {
         view.pageZoom = reader.renderingScale
         if coordinator.pageID != page.id {
             coordinator.begin(page, in: view)
+        }
+        if coordinator.ready {
+            view.callAsyncJavaScript("let s=document.getElementById('libron-font-override'); if(!s){s=document.createElement('style');s.id='libron-font-override';document.head.appendChild(s);} s.textContent=font ? 'body,body *{font-family:'+JSON.stringify(font)+' !important}' : '';",
+                arguments: ["font": AppPreferences.shared.readingFont], in: nil, in: .defaultClient) { _ in }
         }
         if coordinator.ready, coordinator.selectionRequest != reader.selectionRequest {
             coordinator.selectionRequest = reader.selectionRequest
@@ -231,5 +236,64 @@ enum ReaderOEBHTML {
               let head = html.range(of: #"<head\b[^>]*>"#, options: [.regularExpression, .caseInsensitive]) else { throw LibronixBookError.unsupportedArchive }
         html.insert(contentsOf: "<meta http-equiv=\"Content-Security-Policy\" content=\"\(policy)\">", at: head.upperBound)
         return Data(html.utf8)
+    }
+}
+
+/// Append the owned lookup action while retaining WebKit's native editing menu.
+@MainActor final class DictionaryWebView: WKWebView {
+    weak var reader: ReaderSession?
+    private var pressureMonitor: Any?
+    private var pressureActive = false
+    override func viewDidMoveToWindow() {
+        super.viewDidMoveToWindow()
+        if let pressureMonitor { NSEvent.removeMonitor(pressureMonitor); self.pressureMonitor = nil }
+        guard window != nil else { return }
+        pressureMonitor = NSEvent.addLocalMonitorForEvents(matching: .pressure) { [weak self] event in
+            let handled = MainActor.assumeIsolated {
+                guard let self, self.window === event.window,
+                      self.visibleRect.contains(self.convert(event.locationInWindow, from: nil)) else { return false }
+                if event.stage < 2 { self.pressureActive = false }
+                if event.stage >= 2, !self.pressureActive { self.pressureActive = true; self.quickLook(with: event) }
+                return true
+            }
+            return handled ? nil : event
+        }
+    }
+    override func quickLook(with event: NSEvent) {
+        let point = convert(event.locationInWindow, from: nil)
+        let y = isFlipped ? point.y : bounds.height - point.y
+        let original = url
+        callAsyncJavaScript("""
+        const range = document.caretRangeFromPoint(x, y);
+        if (!range) return null;
+        const selection = window.getSelection();
+        selection.removeAllRanges(); selection.addRange(range);
+        selection.modify('move', 'backward', 'word'); selection.modify('extend', 'forward', 'word');
+        const box = selection.getRangeAt(0).getBoundingClientRect();
+        return {word: selection.toString(), x: box.x, y: box.y, width: box.width, height: box.height};
+        """, arguments: ["x": point.x, "y": y], in: nil, in: .defaultClient) { [weak self] result in
+            guard let self, self.url == original, case let .success(value) = result,
+                  let data = value as? [String: Any], let text = data["word"] as? String,
+                  let word = DictionaryController.singleWord(text), let x = data["x"] as? Double,
+                  let top = data["y"] as? Double, let width = data["width"] as? Double, let height = data["height"] as? Double else { return }
+            let rect = NSRect(x: x, y: self.isFlipped ? top : self.bounds.height - top - height, width: width, height: height)
+            self.reader?.onQuickDictionaryLookup?(word, self, rect)
+        }
+    }
+    override func quickLookPreviewItems(_ sender: Any?) { lookupSelectedWord() }
+    override func menu(for event: NSEvent) -> NSMenu? {
+        let menu = super.menu(for: event) ?? NSMenu()
+        let item = NSMenuItem(title: L("Buscar en diccionario"), action: #selector(lookupSelectedWord), keyEquivalent: "")
+        item.target = self; item.isEnabled = selectedWord != nil
+        menu.addItem(.separator()); menu.addItem(item)
+        FeatureHelp.shared.addItem(to: menu, topic: reader?.isDictionary == true ? .dictionary : .navigation)
+        return menu
+    }
+    private var selectedWord: String? {
+        guard let reader, let text = reader.page?.text, let range = Range(reader.selectedRange, in: text) else { return nil }
+        return DictionaryController.singleWord(String(text[range]))
+    }
+    @objc private func lookupSelectedWord() {
+        if let word = selectedWord { reader?.onQuickDictionaryLookup?(word, self, visibleRect.insetBy(dx: 40, dy: 40)) }
     }
 }

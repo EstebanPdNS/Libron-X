@@ -7,6 +7,14 @@ import LibronixCore
     static func main() async {
         let args = Array(CommandLine.arguments.dropFirst())
         do {
+            if args.first == "import-audit", args.count == 2 {
+                let report = try ESwordResource.audit(URL(fileURLWithPath: args[1]))
+                let encoder = JSONEncoder(); encoder.outputFormatting = [.prettyPrinted,.sortedKeys]
+                FileHandle.standardOutput.write(try encoder.encode(report)); return
+            }
+            if args.first == "libron" {
+                FileHandle.standardOutput.write(try await LibronInspection.run(Array(args.dropFirst()))); return
+            }
             if args.first == "topic-audit", args.count >= 2 {
                 var files = Set<String>(), at = 2, decodeTrees = false, verifyDestinations = false
                 while at < args.count {

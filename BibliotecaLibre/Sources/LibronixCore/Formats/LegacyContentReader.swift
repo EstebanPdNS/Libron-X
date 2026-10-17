@@ -228,6 +228,10 @@ public struct LegacyGraphicRun: Sendable, Codable, Equatable {
     public let fileOffset: UInt64?
     public let rawHeaderHex: String
     public var extendedAttributes: LegacyRunAttributes? = nil
+    public var embeddedData: Data? = nil
+    public var embeddedFormat: String? = nil
+    public var intrinsicWidth: Int? = nil
+    public var intrinsicHeight: Int? = nil
     public var hasLeadingSoftBreak: Bool { sourceRunFlags & 0x20 != 0 }
     public var characterWidth: Int { 1 + (hasLeadingSoftBreak ? 1 : 0) }
     public var objectCharacterOffset: Int { characterOffset + (hasLeadingSoftBreak ? 1 : 0) }
@@ -301,6 +305,15 @@ public struct LegacySectionRangeEntry: Sendable, Codable, Equatable {
 }
 
 public struct LegacySectionContent: Sendable, Codable, Equatable {
+    public var richTextRTF: Data? = nil
+    public static func imported(text: String, ordinal: Int, anchors: [LegacyReferenceAnchor], rtf: Data?) -> Self {
+        var content = Self(descriptor: .init(ordinal: ordinal, headerOffset: 0, payloadOffset: 0, storedLength: 0,
+            decodedLength: UInt32(text.utf16.count), mode: 0, codecWord: nil), plainText: text, runs: [],
+            expectedCharacterCount: UInt32(text.utf16.count), recognizedFormat: "libron-import-v1", paragraphs: [],
+            anchors: anchors, markers: [], graphics: [], warnings: [], paragraphDocuments: nil)
+        content.richTextRTF = rtf
+        return content
+    }
     public let descriptor: LegacySectionDescriptor
     public let plainText: String
     public let runs: [LegacyTextRun]
@@ -454,8 +467,8 @@ public enum LegacyContentReader {
         return try readSectionPayload(lsfURL: lsfURL, descriptor: index.sections[ordinal], tartEnd: index.tartOffset + index.tartLength)
     }
     private static func readSectionPayload(lsfURL: URL, descriptor section: LegacySectionDescriptor, tartEnd: UInt64) throws -> Data {
-        guard section.storedLength > 0, section.storedLength <= 1024 * 1024,
-              section.decodedLength >= 20, section.decodedLength <= 1024 * 1024 else {
+        guard section.storedLength > 0, section.storedLength <= 8 * 1024 * 1024,
+              section.decodedLength >= 20, section.decodedLength <= 8 * 1024 * 1024 else {
             throw LegacyContentError.contentLimitExceeded
         }
         let stream = try FileHandle(forReadingFrom: lsfURL)
@@ -487,8 +500,8 @@ public enum LegacyContentReader {
 
     /// The C wrapper uses the attributed upstream blast decoder with bounded I/O.
     static func decompressDCL(_ input: Data, expectedLength: Int) throws -> Data {
-        guard expectedLength > 0, expectedLength <= 1024 * 1024,
-              !input.isEmpty, input.count <= 1024 * 1024 else { throw LegacyContentError.contentLimitExceeded }
+        guard expectedLength > 0, expectedLength <= 8 * 1024 * 1024,
+              !input.isEmpty, input.count <= 8 * 1024 * 1024 else { throw LegacyContentError.contentLimitExceeded }
         #if canImport(CLibronxCompression)
         var output = Data(count: expectedLength)
         var written = 0

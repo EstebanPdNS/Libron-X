@@ -17,6 +17,7 @@ struct MacToolbarLabel: View {
         }
         .labelStyle(.iconOnly)
         .accessibilityLabel(L(title))
+        .featureHelpTarget(.resolve(labels: [L(title)], windowTitle: "", language: AppLanguage.saved()))
     }
 }
 struct MacToolbarButton: View {
@@ -29,7 +30,7 @@ struct MacToolbarButton: View {
     }
     var body: some View {
         Button(action: action) { MacToolbarLabel(title, symbol).padding(.horizontal, horizontalInset) }
-            .help(L(title)).accessibilityLabel(L(title))
+            .help(L(title)).accessibilityLabel(L(title)).featureHelpTarget(.resolve(labels: [L(title)], windowTitle: "", language: AppLanguage.saved()))
     }
 }
 

@@ -29,7 +29,52 @@ enum ReaderFindStatus: Equatable { case idle, searching, found(wrapped: Bool), n
 /// ranges in the decoded visible body, never inferred native AOL coordinates.
 enum ReaderFindSource {
     static func find(_ resource: LibraryResource, _ request: ReaderFindRequest) async throws -> ReaderFindMatch? {
-        if resource.format == .libronixOEB { return try await ReaderOEBFind.find(resource, request) }
+        if let header = try await LibronNativeReader.shared.header(resource) {
+            guard !request.query.isEmpty else { return nil }
+            if header.profile == "html" {
+                let page = try await LibronNativeReader.shared.read(resource,.init(ordinal:request.ordinal))
+                guard let html = page.oeb else { throw RebuildError.unsupportedFormat }
+                return try await ReaderOEBFind.find(book:html.book,request:request) { book,path,viewport in
+                    try await ReaderOEBTextSource.shared.read(book:book,path:path,viewport:viewport)
+                }
+            }
+            guard (0..<header.sectionCount).contains(request.ordinal) else { throw RebuildError.referenceNotFound }
+            let forward = request.direction == .forward
+            let current = try await LibronNativeReader.shared.read(resource,.init(ordinal:request.ordinal))
+            let position = min(max(0,request.position),current.text.utf16.count)
+            func search(_ page: ReaderPage, from: Int, to: Int, wrapped: Bool) throws -> ReaderFindMatch? {
+                guard let range = try match(page.text,query:request.query,range:.init(location:from,length:to-from),direction:request.direction,options:request.options) else { return nil }
+                return .init(ordinal:page.destination.ordinal,range:range,fingerprint:LibrarySearchService.textFingerprint(page.text),wrapped:wrapped)
+            }
+            if let found = try search(current,from:forward ? position : 0,to:forward ? current.text.utf16.count : position,wrapped:false) { return found }
+            let first = forward ? Array((request.ordinal+1)..<header.sectionCount) : Array((0..<request.ordinal).reversed())
+            for ordinal in first {
+                try Task.checkCancellation()
+                let page = try await LibronNativeReader.shared.read(resource,.init(ordinal:ordinal))
+                if let found = try search(page,from:0,to:page.text.utf16.count,wrapped:false) { return found }
+            }
+            guard request.options.wraps else { return nil }
+            let second = forward ? Array(0..<request.ordinal) : Array(((request.ordinal+1)..<header.sectionCount).reversed())
+            for ordinal in second {
+                try Task.checkCancellation()
+                let page = try await LibronNativeReader.shared.read(resource,.init(ordinal:ordinal))
+                if let found = try search(page,from:0,to:page.text.utf16.count,wrapped:true) { return found }
+            }
+            return try search(current,from:forward ? 0 : position,to:forward ? position : current.text.utf16.count,wrapped:true)
+        }
+        if resource.format == .libronixOEB || resource.format == .epub { return try await ReaderOEBFind.find(resource, request) }
+        if resource.format == .libronDictionary {
+            let page = try LibronDictionaryDatabase.page(resource.location, ordinal: request.ordinal)
+            let length = page.body.utf16.count, position = min(max(0, request.position), length)
+            let forward = request.direction == .forward
+            func search(_ from: Int, _ to: Int, wrapped: Bool) throws -> ReaderFindMatch? {
+                guard let range = try match(page.body, query: request.query, range: .init(location: from, length: to - from), direction: request.direction, options: request.options) else { return nil }
+                return .init(ordinal: page.ordinal, range: range, fingerprint: LibrarySearchService.textFingerprint(page.body), wrapped: wrapped)
+            }
+            if let result = try search(forward ? position : 0, forward ? length : position, wrapped: false) { return result }
+            return request.options.wraps ? try search(forward ? 0 : position, forward ? position : length, wrapped: true) : nil
+        }
+        if resource.format == .eSwordSQLite { return try await ESwordReader.find(resource, request) }
         if resource.format == .libronixLLS {
             let before = try LegacyGraphicsService.fileStamp(resource.location)
             let inner = try await LibronixBookService.shared.prepare(resource)

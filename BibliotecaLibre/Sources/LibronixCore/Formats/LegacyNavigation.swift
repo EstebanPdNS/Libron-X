@@ -141,6 +141,16 @@ public struct LegacyPassageQuery: Sendable, Codable, Equatable {
     // Spellings only: these lists contain no protected book content, verse text,
     // verse counts, translation tables, or guessed numeric reference identifiers.
     private static let aliasGroups: [(String, [String])] = [
+        ("tob", ["tob", "tobit", "tobias", "tobías"]),
+        ("jdt", ["jdt", "judit", "judith"]),
+        ("wis", ["wis", "wisdom", "sab", "sabiduría", "sabedoria"]),
+        ("sir", ["sir", "sirach", "eclesiástico", "eclesiastico"]),
+        ("bar", ["bar", "baruch", "baruc"]),
+        ("1ma", ["1ma", "1mac", "1macc", "1maccabees", "1macabeos"]),
+        ("2ma", ["2ma", "2mac", "2macc", "2maccabees", "2macabeos"]),
+        ("1esd", ["1esd", "1esdras"]),
+        ("2esd", ["2esd", "2esdras"]),
+        ("prman", ["prman", "prayer of manasseh", "oración de manasés"]),
         ("ge", ["ge", "gen", "gn", "genesis", "génesis"]),
         ("ex", ["ex", "exo", "exod", "exodus", "éxodo"]),
         ("le", ["le", "lev", "lv", "leviticus", "levítico"]),

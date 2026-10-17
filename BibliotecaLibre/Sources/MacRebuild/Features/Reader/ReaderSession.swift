@@ -13,7 +13,7 @@ struct ReaderDestination: Equatable, Sendable, Codable {
     var requiredEdition: String? = nil
     var passageStartReference: String? = nil
 }
-struct ReaderEntry: Identifiable, Sendable {
+struct ReaderEntry: Codable, Identifiable, Sendable {
     var id: Int
     var ordinal: Int
     var title: String
@@ -50,6 +50,18 @@ struct ReaderPage: Sendable {
     }
     private(set) var hasObservedBible = false
     @ObservationIgnored private var bibleIndex = ReaderBibleIndex(anchors: [])
+    var isDictionary: Bool { LibronDictionaryIndex.supports(resource) }
+    var dictionaryWord = ""
+    func clearDictionaryDefinition() {
+        cancel(); page = nil; flowPages = []; dictionaryWord = ""; error = nil
+    }
+    func showDictionary(_ replacement: LibraryResource, word: String, page result: ReaderPage?) {
+        cancel(); resource = replacement; history = []; historyIndex = -1
+        flowPages = []; dictionaryWord = word
+        if let result { commit(result); error = nil }
+        else { page = nil; error = L("No se encontró una definición en este diccionario.") }
+        locator = word
+    }
     var locator = ""
     var showsContents = false
     var isLoading = false
@@ -58,10 +70,13 @@ struct ReaderPage: Sendable {
     var historyIndex = -1
     var isMinimized = false
     var isMaximized = false
-    var textScale = 1.0
+    var unsnappedFrame: PaneFrame?
+    var textScale = 1.0 {
+        didSet { if !ReaderZoom.isValid(textScale) { textScale = oldValue } }
+    }
     /// Reader zoom is relative to the new comfortable default. Resource styles
     /// and exported documents retain their original point sizes.
-    var renderingScale: Double { textScale * 1.5 }
+    var renderingScale: Double { _ = AppPreferences.shared.readingFont; return ReaderZoom.renderingScale(textScale) }
     var presentationWarnings: [String] = []
     var sourceFontsRevision = 0
     var visibleInterlinearLines: Set<Int>? = nil
@@ -85,7 +100,15 @@ struct ReaderPage: Sendable {
     var findOptions = ReaderFindOptions()
     var findStatus = ReaderFindStatus.idle
     var findFocusRequest = 0
-    var selectedRange = NSRange(location: 0, length: 0)
+    var onQuickDictionaryLookup: ((String, NSView, NSRect) -> Void)?
+    var onDictionaryLookup: ((String) -> Void)?
+    var onTextSelection: ((String) -> Void)?
+    var selectedRange = NSRange(location: 0, length: 0) {
+        didSet {
+            guard !isLoading, let text = page?.text, let range = Range(selectedRange, in: text) else { return }
+            onTextSelection?(String(text[range]))
+        }
+    }
     var visibleBibleReference: String?
     var viewportCharacterOffset: Int?
     var selectionRequest = 0
@@ -138,6 +161,13 @@ struct ReaderPage: Sendable {
             error = L("Escribe una referencia como Génesis 4:1, Gen 4.1 o Gn 4,1. También puedes escribir solo el libro y capítulo."); return
         }
         load(.init(ordinal: page?.destination.ordinal ?? 0, reference: reference.displayReference))
+    }
+    func readingPositionLabel(language: AppLanguage) -> String {
+        guard let page else { return "" }
+        let article = page.articlePositionLabel(language: language)
+        guard resource.libron?.resourceType == "Biblia" || canSynchronizeBible,
+              let reference = currentReference, !reference.isEmpty else { return article }
+        return "\(reference) · \(article)"
     }
     var currentReference: String? {
         visibleBibleReference ?? page?.destination.reference ?? bibleReference(at: selectedRange.location)
@@ -456,10 +486,22 @@ struct ReaderPage: Sendable {
         }
     }
     nonisolated static func read(_ resource: LibraryResource, _ requested: ReaderDestination) async throws -> ReaderPage {
+        if let edition = requested.requiredEdition, resource.location.deletingPathExtension().lastPathComponent.caseInsensitiveCompare(edition) != .orderedSame { throw RebuildError.referenceEditionUnavailable(edition) }
+        if LibronNativeReader.location(resource) != nil { return try await LibronNativeReader.shared.read(resource,requested) }
+        return try await readOriginal(resource,requested)
+    }
+    nonisolated static func readOriginal(_ resource: LibraryResource, _ requested: ReaderDestination) async throws -> ReaderPage {
         if let edition = requested.requiredEdition,
            resource.location.deletingPathExtension().lastPathComponent.caseInsensitiveCompare(edition) != .orderedSame {
             throw RebuildError.referenceEditionUnavailable(edition)
         }
+        if resource.format == .libronDictionary {
+            let source = try LibronDictionaryDatabase.page(resource.location, ordinal: requested.ordinal)
+            let content = LegacySectionContent.imported(text: source.body, ordinal: source.ordinal, anchors: [], rtf: nil)
+            return ReaderPage(destination: .init(ordinal: source.ordinal), text: source.body, sectionCount: source.count, content: content)
+        }
+        if resource.format == .eSwordSQLite { return try await ESwordReader.read(resource, requested) }
+        if resource.format == .epub { return try await EPUBReader.read(resource, requested) }
         if resource.format == .libronixOEB {
             let book = try await LibronixOEBService.shared.prepare(resource.location)
             var ordinal = requested.ordinal

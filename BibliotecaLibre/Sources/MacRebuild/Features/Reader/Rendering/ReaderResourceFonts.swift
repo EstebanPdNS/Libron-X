@@ -12,8 +12,12 @@ actor ReaderResourceFonts {
         await shared.load(near: resource)
     }
     private func load(near resource: URL) -> Int {
-        let directory = resource.deletingLastPathComponent().deletingLastPathComponent()
-            .appendingPathComponent("Setup/Fonts", isDirectory: true)
+        let parent = resource.deletingLastPathComponent().deletingLastPathComponent()
+        let directories = [parent.appendingPathComponent("Setup/Fonts", isDirectory: true),
+                           parent.deletingLastPathComponent().appendingPathComponent("Setup/Fonts", isDirectory: true)]
+        guard let directory = directories.first(where: { url in
+            var candidate = stat(); return lstat(url.path, &candidate) == 0 && candidate.st_mode & S_IFMT == S_IFDIR
+        }) else { return 0 }
         var info = stat()
         guard lstat(directory.path, &info) == 0, info.st_mode & S_IFMT == S_IFDIR else { return 0 }
         let modified = Int64(info.st_mtimespec.tv_sec)

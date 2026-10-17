@@ -107,6 +107,49 @@ import Testing
         #expect(reader.currentReference == "Ge 3:5" && sets.sets[0].members.count == 3)
         workspace.shutdown()
     }
+    @Test func switchingToAnotherGroupCommitsOnlyWithAReadableVerse() async throws {
+        let fixture = try AuthoredReaderFixture(documents: [["One"], ["Two"], ["Three"]]); defer { fixture.remove() }
+        let sets = groupStore(fixture), old = try sets.create(), next = try sets.create(), unavailable = try sets.create()
+        try sets.add(fixture.resources[0], to: old); try sets.add(fixture.resources[1], to: next); try sets.add(fixture.resources[2], to: unavailable)
+        let workspace = workspace(fixture, sets: sets), page = try samplePage(fixture)
+        let rejected = fixture.resources[2].id
+        let reader = ReaderSession(resource: fixture.resources[0], loader: { resource, destination in
+            #expect(destination.reference == "Ge 3:5")
+            if resource.id == rejected { throw RebuildError.referenceNotFound }
+            return page
+        })
+        reader.page = page; reader.parallelSetID = old
+        workspace.readers = [reader]; workspace.readerOrder = [reader.id]; workspace.activeID = reader.id
+        defer { workspace.shutdown() }
+        workspace.switchParallelBibleGroup(next, for: reader)
+        #expect(reader.parallelSetID == old)
+        try await waitFor { !reader.isLoading }
+        #expect(reader.parallelSetID == next && reader.resource.id == fixture.resources[1].id && reader.currentReference == "Ge 3:5")
+        workspace.switchParallelBibleGroup(unavailable, for: reader)
+        try await waitFor { !reader.isLoading }
+        #expect(reader.parallelSetID == next && reader.resource.id == fixture.resources[1].id && reader.error != nil)
+    }
+    @Test func staleSavedGroupRecoversToTheSameLanguageAndCyclesBothDirections() async throws {
+        let fixture = try AuthoredReaderFixture(documents: [["One"], ["Two"], ["Other language"]]); defer { fixture.remove() }
+        let sets = groupStore(fixture), workspace = workspace(fixture, sets: sets)
+        workspace.resources = fixture.resources.enumerated().map { index, resource in
+            var metadata = LibronMetadata.deriving(resource)
+            metadata.resourceType = "Biblia"; metadata.languages = [index == 2 ? "en" : "es"]
+            return LibraryResource(location: resource.location, title: resource.title, byteCount: resource.byteCount,
+                format: resource.format, support: resource.support, provenance: resource.provenance, libron: metadata)
+        }
+        let page = try samplePage(fixture)
+        let reader = ReaderSession(resource: workspace.resources[0], loader: { _, _ in page })
+        reader.page = page; reader.parallelSetID = UUID()
+        workspace.readers = [reader]; workspace.readerOrder = [reader.id]; workspace.activeID = reader.id; workspace.connect(reader)
+        workspace.cycleBibleVersion(reader)
+        try await waitFor { reader.resource.id == workspace.resources[1].id && !reader.isLoading }
+        #expect(reader.error == nil && reader.parallelSetID == workspace.bibleGroups.first { $0.automaticLanguage == "es" }?.id)
+        workspace.cycleBibleVersion(reader, backwards: true)
+        try await waitFor { reader.resource.id == workspace.resources[0].id && !reader.isLoading }
+        #expect(reader.currentReference == "Ge 3:5")
+        workspace.shutdown()
+    }
     @Test func deletedSetDoesNotFallBackToUnrelatedBibles() throws {
         let fixture = try AuthoredReaderFixture(documents: [["One"], ["Two"]]); defer { fixture.remove() }
         let sets = groupStore(fixture), id = try sets.create(), workspace = workspace(fixture, sets: sets)

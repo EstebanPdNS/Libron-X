@@ -2,7 +2,7 @@ import AppKit
 import SwiftUI
 
 /// Scoped to the workspace window. Editing fields, sheets, dialogs and modified
-/// arrows retain their system behavior; bare arrows cycle only the active Bible.
+/// arrows retain their system behavior; bare arrows cycle the active Bible or dictionary.
 struct BibleVersionKeyboardRouting: NSViewRepresentable {
     let workspace: StudyWorkspace
     func makeNSView(context: Context) -> KeyView { KeyView(workspace: workspace) }
@@ -20,11 +20,13 @@ struct BibleVersionKeyboardRouting: NSViewRepresentable {
                 let handled = MainActor.assumeIsolated {
                     guard let self, let window = self.window, window.isKeyWindow,
                           window.attachedSheet == nil, event.window === window,
+                          window.childWindows?.contains(where: { $0.isVisible }) != true,
                           self.workspace.activeTool == nil, self.workspace.error == nil,
                           !self.workspace.showsHome,
                           Self.accepts(event, responder: window.firstResponder),
-                          let reader = self.workspace.activeReader, reader.canSynchronizeBible else { return false }
-                    self.workspace.cycleBibleVersion(reader, backwards: event.keyCode == 123)
+                          let reader = self.workspace.activeReader, reader.canSynchronizeBible || reader.isDictionary else { return false }
+                    if reader.isDictionary { self.workspace.cycleDictionary(reader, backwards: event.keyCode == 123) }
+                    else { self.workspace.cycleBibleVersion(reader, backwards: event.keyCode == 123) }
                     return true
                 }
                 return handled ? nil : event
@@ -34,7 +36,7 @@ struct BibleVersionKeyboardRouting: NSViewRepresentable {
             let modifiers = event.modifierFlags.intersection(.deviceIndependentFlagsMask).subtracting([.capsLock, .numericPad, .function])
             guard modifiers.isEmpty, [123, 124].contains(event.keyCode) else { return false }
             if let text = responder as? NSTextView, text.isEditable { return false }
-            if responder is NSTextField || responder is NSSearchField || responder is NSComboBox { return false }
+            if responder is NSControl { return false }
             return true
         }
         func stop() { if let monitor { NSEvent.removeMonitor(monitor); self.monitor = nil } }

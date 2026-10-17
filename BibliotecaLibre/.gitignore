@@ -1,0 +1,11 @@
+
+# Local source revisions retained before installed-app updates.
+.source-versions/
+
+# Reproducible download cache; exact TEI sources are preserved in package gzip members.
+Resources/BundledDictionaries/sources/
+
+Resources/BundledDictionaries/candidates/
+
+# Released dictionaries include exact sources and notices in the application ZIP.
+Resources/BundledDictionaries/Packages/

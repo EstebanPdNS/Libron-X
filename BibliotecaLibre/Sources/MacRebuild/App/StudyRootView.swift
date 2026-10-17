@@ -7,9 +7,9 @@ struct StudyRootView: View {
     var body: some View {
         StudyDesktop(workspace: workspace)
             .frame(minWidth: 800, minHeight: 500)
-            .onAppear {
+            .task {
                 lifecycle.workspace = workspace
-                if lifecycle.startup.launch(workspace, preferences: .shared) { openWindow(id: "library") }
+                if await lifecycle.startup.launch(workspace, preferences: .shared) { openWindow(id: "library") }
             }
     }
 }

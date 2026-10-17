@@ -2,7 +2,7 @@ import Foundation
 
 /// A measured legacy =r destination. The complete address comes from the
 /// attribute, including when the visible label is only a verse number.
-public struct LegacyBibleLinkReference: Sendable, Equatable {
+public struct LegacyBibleLinkReference: Codable, Sendable, Equatable {
     public let passage: BibleCopyPassage
     public let edition: String?
     public static func parse(_ attribute: String) -> Self? {
@@ -23,7 +23,7 @@ public struct LegacyBibleLinkReference: Sendable, Equatable {
     }
 }
 
-public enum LegacyInlineLinkTarget: Sendable, Equatable {
+public enum LegacyInlineLinkTarget: Codable, Sendable, Equatable {
     case article(Int)
     case bible(LegacyBibleLinkReference)
 }
@@ -32,7 +32,7 @@ public enum LegacyInlineLinkTarget: Sendable, Equatable {
 /// The destination is a physical article in the same resource, never a command,
 /// URL or an offset copied from another edition. Bible addresses require their
 /// explicit serialized =r destination; label text is never inferred.
-public struct LegacyInlineLink: Sendable, Equatable {
+public struct LegacyInlineLink: Codable, Sendable, Equatable {
     public let range: NSRange
     public let label: String
     public let sourceName: String
@@ -51,9 +51,17 @@ public struct LegacyInlineLinkResolution: Sendable, Equatable {
     public let unresolvedAttributedRuns: Int
 }
 
+public struct LegacyNamedPositionLookup: Sendable {
+    fileprivate let positions: [String:[LegacyNamedPosition]]
+    public init(_ positions: [LegacyNamedPosition]) { self.positions = Dictionary(grouping:positions,by:\.label) }
+}
+
 public enum LegacyInlineLinks {
     public static func resolve(content: LegacySectionContent, namedPositions: [LegacyNamedPosition]) -> LegacyInlineLinkResolution {
-        let named = Dictionary(grouping: namedPositions, by: \.label)
+        resolve(content:content,lookup:LegacyNamedPositionLookup(namedPositions))
+    }
+    public static func resolve(content: LegacySectionContent, lookup: LegacyNamedPositionLookup) -> LegacyInlineLinkResolution {
+        let named = lookup.positions
         let source = content.plainText as NSString
         var links: [LegacyInlineLink] = [], unresolved = 0
         for run in content.runs {

@@ -68,3 +68,37 @@ The verification receipt records the resolved transitive Swift ASN.1 version;
 the core uses `Crypto`, not `CryptoExtras`, and does not build Swift ASN.1 for
 this target. This source snapshot does not bundle toolchain, SDK, MSVC, zlib, or
 package-manager cache files.
+
+
+## Bundled offline dictionaries
+
+Libron-X includes twelve monolingual definition or synonym datasets, three per
+language. The application code license does not replace these data licenses.
+Each package includes `ATTRIBUTION.txt`, exact downloaded source data, upstream
+notices, the conversion script and file hashes. Converted entries and indexes
+remain under their respective source licenses. No endorsement is implied.
+
+| Language | Dataset | Data license |
+| --- | --- | --- |
+| Spanish | Wikcionario (native Spanish edition, via Kaikki) | CC BY-SA 4.0 |
+| Spanish | Spanish WordNet / MCR | CC BY 3.0 |
+| Spanish | OpenThesaurus Spanish (LibreOffice distribution) | LGPL 2.1 |
+| English | Simple English Wiktionary (via Kaikki) | CC BY-SA 4.0 |
+| English | Easton's Bible Dictionary (1897) | Original public domain; electronic dataset CC BY 4.0 |
+| English | Smith's Bible Dictionary (1863) | Original public domain; electronic dataset CC BY 4.0 |
+| Portuguese | Wikcionário (native Portuguese edition, via Kaikki) | CC BY-SA 4.0 |
+| Portuguese | Dicionário Aberto / Cândido de Figueiredo (1913) | CC BY-SA 2.5 Portugal |
+| Portuguese | OpenWordnet-PT (synonyms) | CC BY-SA 3.0 |
+| Italian | Wikizionario (native Italian edition, via Kaikki) | CC BY-SA 4.0 |
+| Italian | MultiWordNet Italian | CC BY 3.0 |
+| Italian | Italian thesaurus (Davide Prina and contributors, LibreOffice) | GPL 3.0 |
+
+Wiktionary contributors are credited in each derived entry through its source
+page. Source edition downloads: https://kaikki.org/dictionary/rawdata.html .
+WordNet notices: https://github.com/omwn/omw-data/tree/main/wns .
+Thesaurus sources and licenses: https://github.com/LibreOffice/dictionaries .
+Dicionário Aberto resources: https://dicionario-aberto.net/recursos .
+Biblical electronic sources: https://github.com/neuu-org/bible-dictionary-dataset .
+
+Synonym datasets are labeled as such; they are not represented as full prose
+definition dictionaries. No private imported resource is included in this set.

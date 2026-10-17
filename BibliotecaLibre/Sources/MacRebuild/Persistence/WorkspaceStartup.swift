@@ -27,27 +27,56 @@ import LibronixCore
 @MainActor final class WorkspaceStartupCoordinator {
     let store: WorkspaceStartupStore
     private var started = false
-    init(store: WorkspaceStartupStore = WorkspaceStartupStore()) { self.store = store }
+    private var completed = false
+    private let managedCatalog: @Sendable (URL) async throws -> LibronCatalog?
+
+    init(store: WorkspaceStartupStore = WorkspaceStartupStore(),
+         managedCatalog: @escaping @Sendable (URL) async throws -> LibronCatalog? = { root in
+             try await Task.detached(priority:.userInitiated) {
+                 guard FileManager.default.fileExists(atPath:root.appendingPathComponent("catalog.json").path) else { return nil as LibronCatalog? }
+                 return try LibronCatalog.load(from:root)
+             }.value
+         }) { self.store = store; self.managedCatalog = managedCatalog }
     /// Returns a request to open the native library scene. The coordinator
     /// itself never opens windows, making startup effects explicit and testable.
     @discardableResult func launch(_ workspace: StudyWorkspace, preferences: AppPreferences,
-                                   arguments: [String] = CommandLine.arguments) -> Bool {
+                                   arguments: [String] = CommandLine.arguments) async -> Bool {
         guard !started else { return false }
         started = true
-        let previous: WorkspaceArchive?
+        workspace.includeBundledDictionaries()
+        defer { workspace.includeBundledDictionaries(); completed = !Task.isCancelled }
+        var previous: WorkspaceArchive?
         do { previous = try store.load() }
         catch { previous = nil; workspace.error = error.localizedDescription }
-        if let index = arguments.firstIndex(of: "--library"), index + 1 < arguments.count {
-            workspace.importLibrary(URL(fileURLWithPath: arguments[index + 1])); return false
+        if let index = arguments.firstIndex(of:"--library"), index+1 < arguments.count {
+            workspace.importLibrary(URL(fileURLWithPath:arguments[index+1]));return false
         }
+        let managedRoot = LibraryPreferences.shared.directory
+        do {
+            if let managed = try await managedCatalog(managedRoot) {
+                guard !Task.isCancelled else { return false }
+                if var saved = previous {
+                    let byID = Dictionary(uniqueKeysWithValues:managed.resources.map { ($0.id,$0) })
+                    saved.resources = managed.resources;saved.libraryRoot = managedRoot
+                    for index in saved.panes.indices {
+                        if let resource = byID[saved.panes[index].resource.id] { saved.panes[index].resource = resource }
+                    }
+                    previous = saved
+                } else { workspace.resources = managed.resources;workspace.libraryRoot = managedRoot }
+            }
+        } catch { workspace.error = error.localizedDescription }
+        guard !Task.isCancelled else { return false }
+        // A reader opened while permission was pending belongs to the user.
+        // Keep it instead of replacing it with the automatic recovery layout.
+        let hasNewReaders = !workspace.readers.isEmpty
         if let previous {
             workspace.resources = previous.resources; workspace.libraryRoot = previous.libraryRoot
         }
         do {
             switch preferences.startup {
             case .restorePrevious:
-                if let previous { try workspace.restore(previous) }
-                else { workspace.showsHome = true }
+                if let previous, !hasNewReaders { try workspace.restore(previous) }
+                else if !hasNewReaders { workspace.showsHome = true }
             case .blank: workspace.showsHome = false
             case .home: workspace.showsHome = true
             case .library: return true
@@ -60,5 +89,8 @@ import LibronixCore
         } catch { workspace.error = error.localizedDescription }
         return false
     }
-    func save(_ workspace: StudyWorkspace) throws { try store.save(workspace.archive()) }
+    func save(_ workspace: StudyWorkspace) throws {
+        guard completed else { return }
+        try store.save(workspace.archive())
+    }
 }

@@ -1,6 +1,6 @@
 import Foundation
 
-public struct LibronixOEBArticle: Sendable, Equatable {
+public struct LibronixOEBArticle: Codable, Sendable, Equatable {
     public let ordinal: Int
     public let sourceID: UInt32
     public let fileIndex: Int
@@ -16,11 +16,17 @@ public struct LibronixOEBArticle: Sendable, Equatable {
 /// Native OebResourceFileData.cpp and OebResourceArticleData.cpp, version 1.0.
 /// File-table rows are in reading order; the third word is a separate name-sort
 /// permutation. Article +4 indexes the physical row, not that permutation.
-public struct LibronixOEBDirectory: Sendable {
+public struct LibronixOEBDirectory: Codable, Sendable {
     public let files: [String]
     public let nameOrder: [Int]
     public let articles: [LibronixOEBArticle]
 
+    public init(files: [String], titles: [String]) throws {
+        guard !files.isEmpty, files.count == titles.count, files.allSatisfy(Self.validPath) else { throw LibronixBookError.invalidDirectory }
+        self.files = files; self.nameOrder = Array(files.indices)
+        self.articles = files.enumerated().map { i, path in .init(ordinal: i, sourceID: UInt32(i), fileIndex: i, parent: nil,
+            nextSibling: i + 1 < files.count ? i + 1 : nil, depth: 0, sourceHeadingLevel: 1, title: titles[i], fragment: "", path: path) }
+    }
     public init(fileTable: Data, articleTable: Data) throws {
         func word(_ data: Data, _ offset: Int) throws -> Int {
             guard offset >= 0, offset <= data.count, 4 <= data.count - offset else { throw LibronixBookError.invalidDirectory }
@@ -123,7 +129,7 @@ public struct LibronixOEBBook: Sendable {
     }
     public static func mimeType(_ path: String) -> String {
         switch (path as NSString).pathExtension.lowercased() {
-        case "html", "htm": "text/html"
+        case "html", "htm", "xhtml": "text/html"
         case "css": "text/css"
         case "bmp": "image/bmp"
         case "png": "image/png"

@@ -57,6 +57,11 @@ int libronx_explode_exact(const uint8_t *input, size_t length,
 int libronx_inflate_zlib(const uint8_t *input, size_t length,
                         uint8_t *output, size_t capacity, size_t *written);
 
+int libronx_deflate_zlib(const uint8_t *input, size_t length, uint8_t *output, size_t capacity, size_t *written);
+
+int libronx_inflate_zip(const uint8_t *input, size_t length, uint8_t *output, size_t capacity, uint32_t expected_crc);
+uint32_t libronx_crc32(const uint8_t *bytes, size_t length);
+
 #ifdef __cplusplus
 }
 #endif

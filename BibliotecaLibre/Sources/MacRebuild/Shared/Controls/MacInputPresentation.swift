@@ -50,59 +50,31 @@ struct MacToolbarSearchSurface: ViewModifier {
     }
 }
 
-/// A genuine AppKit search field, permanently laid out as a field in the
-/// leading toolbar. It never changes into an icon-only search item.
-struct MacToolbarSearchField: NSViewRepresentable {
+/// Shared native text editing inside one Glass surface. The icon and clear
+/// action participate in layout, including while AppKit's field editor is open.
+struct MacToolbarSearchField: View {
     @Binding var text: String
     let prompt: String
     let onSubmit: () -> Void
-
-    func makeCoordinator() -> Coordinator { Coordinator(self) }
-    func makeNSView(context: Context) -> NSSearchField {
-        let field = NSSearchField(frame: .zero)
-        field.controlSize = .large
-        field.font = .systemFont(ofSize: NSFont.systemFontSize(for: .large))
-        #if compiler(>=6.4)
-        if #available(macOS 26, *) { field.borderShape = .capsule }
-        #endif
-        field.sendsWholeSearchString = true
-        field.sendsSearchStringImmediately = false
-        field.maximumRecents = 0
-        field.delegate = context.coordinator
-        field.target = context.coordinator
-        field.action = #selector(Coordinator.submit(_:))
-        field.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        configure(field, context: context)
-        return field
-    }
-    func updateNSView(_ field: NSSearchField, context: Context) {
-        context.coordinator.parent = self
-        configure(field, context: context)
-    }
-    private func configure(_ field: NSSearchField, context: Context) {
-        field.placeholderString = prompt
-        field.setAccessibilityLabel(prompt)
-        field.isEnabled = context.environment.isEnabled
-        field.userInterfaceLayoutDirection = context.environment.layoutDirection == .rightToLeft ? .rightToLeft : .leftToRight
-        // Progress updates must not replace an active field editor or disturb
-        // selection, undo, or an unfinished input-method composition.
-        if field.stringValue != text, (field.currentEditor() as? NSTextView)?.hasMarkedText() != true { field.stringValue = text }
-    }
-    func sizeThatFits(_ proposal: ProposedViewSize, nsView: NSSearchField, context: Context) -> CGSize? {
-        CGSize(width: proposal.width ?? 240, height: nsView.intrinsicContentSize.height)
-    }
-
-    @MainActor final class Coordinator: NSObject, NSSearchFieldDelegate {
-        var parent: MacToolbarSearchField
-        init(_ parent: MacToolbarSearchField) { self.parent = parent }
-        func controlTextDidChange(_ notification: Notification) {
-            guard let field = notification.object as? NSSearchField else { return }
-            parent.text = field.stringValue
+    var onEditingBegan: () -> Void = {}
+    var onEditingEnded: () -> Void = {}
+    var body: some View {
+        HStack(spacing: 7) {
+            Button(action: submit) { Image(systemName: "magnifyingglass").foregroundStyle(.secondary) }
+                .buttonStyle(.plain).accessibilityLabel(L("Buscar"))
+            TextField(prompt, text: $text, onEditingChanged: { editing in if editing { onEditingBegan() } else { onEditingEnded() } })
+                .textFieldStyle(.plain).font(.system(size: 13))
+                .onSubmit(submit).accessibilityLabel(prompt)
+            if !text.isEmpty {
+                Button { text = "" } label: { Image(systemName: "xmark.circle.fill").foregroundStyle(.secondary) }
+                    .buttonStyle(.plain).accessibilityLabel(L("Borrar"))
+            }
         }
-        @objc func submit(_ field: NSSearchField) {
-            parent.text = field.stringValue
-            guard !field.stringValue.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
-            parent.onSubmit()
-        }
+        .padding(.horizontal, 11)
+        .frame(maxWidth: .infinity, minHeight: 32)
+    }
+    private func submit() {
+        guard !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
+        onSubmit()
     }
 }
