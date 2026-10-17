@@ -1,16 +1,32 @@
 #!/bin/sh
-# New application; does not replace the preserved prototype or regenerate branding.
+# Build one installed application; preserve source revisions before replacement.
 set -eu
 project_dir=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 cd "$project_dir"
+destination="${LIBRONX_APP_PATH:-/Applications/Libron-X.app}"
+if pgrep -x LibronXRebuild >/dev/null 2>&1; then
+    printf 'Close Libron-X before updating its installed application.\n' >&2
+    exit 1
+fi
+if [ -e "$destination" ]; then
+    identifier=$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIdentifier' "$destination/Contents/Info.plist")
+    [ "$identifier" = 'org.libronx.mac.rebuild' ] || { printf 'Refusing to replace a different application.\n' >&2; exit 1; }
+fi
+archive_dir="${LIBRONX_SOURCE_ARCHIVES:-$project_dir/.source-versions}"
+mkdir -p "$archive_dir"
+source_revision=$(date -u +%Y%m%dT%H%M%SZ)-$$
+tar -czf "$archive_dir/Libron-X-source-$source_revision.tar.gz" Package.swift Sources Tests Resources Localization scripts docs LICENSE THIRD_PARTY_NOTICES.md
+if git rev-parse --git-dir >/dev/null 2>&1; then
+    git rev-parse HEAD > "$archive_dir/Libron-X-source-$source_revision.git-head.txt"
+    git diff --binary > "$archive_dir/Libron-X-source-$source_revision.patch"
+fi
 cache_dir="${LIBRONX_BUILD_DIR:-$project_dir/.build/macos-app}"
 swift build --scratch-path "$cache_dir" --build-system native -c release --product LibronXRebuild
 binary_dir=$(swift build --scratch-path "$cache_dir" --build-system native -c release --show-bin-path)
-bundle_dir="${LIBRONX_APP_PATH:-$project_dir/dist/Libron-X.app}"
-if [ -e "$bundle_dir" ]; then
-    printf 'Refusing to replace an existing bundle: %s\nChoose a fresh LIBRONX_APP_PATH.\n' "$bundle_dir" >&2
-    exit 1
-fi
+mkdir -p "$(dirname -- "$destination")"
+staging_dir=$(mktemp -d "$(dirname -- "$destination")/.libron-x-stage.XXXXXX")
+trap 'rm -rf "$staging_dir"' EXIT HUP INT TERM
+bundle_dir="$staging_dir/Libron-X.app"
 mkdir -p "$bundle_dir/Contents/MacOS" "$bundle_dir/Contents/Resources"
 # Install the exact resource bundle built with this binary. AppStrings first
 # resolves Contents/Resources, so an installed app never needs a build checkout.
@@ -30,8 +46,10 @@ cat > "$bundle_dir/Contents/Info.plist" <<'PLIST'
 <key>CFBundleName</key><string>Libron-X</string>
 <key>CFBundleDisplayName</key><string>Libron-X</string>
 <key>CFBundleIdentifier</key><string>org.libronx.mac.rebuild</string>
-<key>CFBundleVersion</key><string>1</string>
-<key>CFBundleShortVersionString</key><string>0.1</string>
+<key>CFBundleVersion</key><string>4</string>
+<key>CFBundleShortVersionString</key><string>0.2.0</string>
+<key>LibronXReleaseVersion</key><string>0.2</string>
+<key>LibronXUpdateChannel</key><string>beta</string>
 <key>CFBundleExecutable</key><string>LibronXRebuild</string>
 <key>CFBundleDevelopmentRegion</key><string>es</string>
 <key>CFBundleLocalizations</key><array>
@@ -39,6 +57,16 @@ cat > "$bundle_dir/Contents/Info.plist" <<'PLIST'
 <string>fr</string><string>bn</string><string>pt</string><string>id</string><string>ur</string>
 </array>
 <key>CFBundleIconFile</key><string>LibronX-Red.icns</string>
+<key>UTExportedTypeDeclarations</key><array><dict>
+<key>UTTypeIdentifier</key><string>org.libron.resource</string>
+<key>UTTypeDescription</key><string>Libron resource</string>
+<key>UTTypeConformsTo</key><array><string>com.apple.package</string></array>
+<key>UTTypeTagSpecification</key><dict><key>public.filename-extension</key><array><string>libron</string></array></dict>
+</dict></array>
+<key>CFBundleDocumentTypes</key><array><dict>
+<key>CFBundleTypeName</key><string>Libron resource</string><key>CFBundleTypeRole</key><string>Viewer</string>
+<key>LSItemContentTypes</key><array><string>org.libron.resource</string></array><key>LSTypeIsPackage</key><true/>
+</dict></array>
 <key>CFBundlePackageType</key><string>APPL</string>
 <key>LSMinimumSystemVersion</key><string>14.0</string>
 <key>NSHighResolutionCapable</key><true/>
@@ -50,4 +78,8 @@ cp "$project_dir/LICENSE" "$bundle_dir/Contents/Resources/Notices/LICENSE"
 cp "$project_dir/THIRD_PARTY_NOTICES.md" "$bundle_dir/Contents/Resources/Notices/THIRD_PARTY_NOTICES.md"
 cp "$project_dir/Sources/CLibronxCompression/blast.h" "$bundle_dir/Contents/Resources/Notices/blast.h"
 codesign --force --sign - "$bundle_dir"
-printf '%s\n' "$bundle_dir"
+codesign --verify --deep --strict "$bundle_dir"
+if [ -e "$destination" ]; then /usr/bin/trash "$destination"; fi
+mv "$bundle_dir" "$destination"
+codesign --verify --deep --strict "$destination"
+printf '%s\n' "$destination"

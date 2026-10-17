@@ -6,7 +6,7 @@ struct ParallelBibleMenu: View {
     let reader: ReaderSession?
     var toolbarPresentation = true
     private var selected: ParallelBibleSet? {
-        reader?.parallelSetID.flatMap { id in workspace.parallelBibleSets.sets.first { $0.id == id } }
+        reader?.parallelSetID.flatMap { id in workspace.bibleGroups.first { $0.id == id } }
     }
     private var choices: [LibraryResource] {
         if reader?.parallelSetID != nil { return selected?.members.compactMap { $0.resolve(in: workspace.availableResources) } ?? [] }
@@ -17,7 +17,7 @@ struct ParallelBibleMenu: View {
             if let reader, reader.canSynchronizeBible {
                 Menu(L("Grupo de Biblias")) {
                     Toggle(L("Todas las Biblias"), isOn: Binding(get: { reader.parallelSetID == nil }, set: { if $0 { workspace.selectParallelBibleGroup(nil, for: reader) } }))
-                    ForEach(workspace.parallelBibleSets.sets) { group in
+                    ForEach(workspace.bibleGroups) { group in
                         Toggle(group.name, isOn: Binding(get: { reader.parallelSetID == group.id }, set: { if $0 { workspace.selectParallelBibleGroup(group.id, for: reader) } }))
                             .disabled(!group.members.contains { $0.resolve(in: workspace.availableResources)?.id == reader.resource.id })
                     }
@@ -58,7 +58,7 @@ struct ParallelBibleMenu: View {
     func selectParallelBibleGroup(_ groupID: UUID?, for reader: ReaderSession) {
         guard readers.contains(where: { $0 === reader }) else { return }
         if let groupID {
-            guard let group = parallelBibleSets.sets.first(where: { $0.id == groupID }),
+            guard let group = bibleGroups.first(where: { $0.id == groupID }),
                   group.members.contains(where: { $0.resolve(in: availableResources)?.id == reader.resource.id }) else { return }
         }
         activate(reader); reader.parallelSetID = groupID
@@ -68,7 +68,7 @@ struct ParallelBibleMenu: View {
         guard readers.contains(where: { $0 === reader }), reader.canSynchronizeBible, !reader.isLoading,
               let reference = reader.currentReference, availableResources.contains(where: { $0 == resource }) else { return }
         if let groupID = reader.parallelSetID {
-            guard let group = parallelBibleSets.sets.first(where: { $0.id == groupID }),
+            guard let group = bibleGroups.first(where: { $0.id == groupID }),
                   group.members.contains(where: { $0.resolve(in: availableResources)?.id == resource.id }) else { return }
         }
         if newReader {

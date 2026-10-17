@@ -10,11 +10,12 @@
   <a href="#features">Features</a> ·
   <a href="docs/README.md">Documentation</a> ·
   <a href="CHANGELOG.md">Changelog</a> ·
-  <a href="CONTRIBUTING.md">Contribute</a>
+  <a href="CONTRIBUTING.md">Contribute</a> ·
+  <a href="#bug-reports">Bug reports</a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/EstebanPdNS/Libron-X/releases/tag/v0.1"><img src="docs/images/badges/prerelease.svg" alt="Prerelease: v0.1 beta" height="22"></a>
+  <a href="https://github.com/EstebanPdNS/Libron-X/releases/tag/v0.2"><img src="docs/images/badges/prerelease.svg" alt="Prerelease: v0.2" height="22"></a>
   <a href="docs/getting-started.md"><img src="docs/images/badges/macos.svg" alt="macOS 14+ · Apple Silicon" height="22"></a>
   <a href="https://github.com/EstebanPdNS/Libron-X/commits/main/"><img src="docs/images/badges/development.svg" alt="Development: active" height="22"></a>
   <a href="LICENSE"><img src="docs/images/badges/license.svg" alt="License: MIT" height="22"></a>
@@ -37,22 +38,22 @@
     <td width="50%" valign="top"><strong>Make room for study</strong><br>Arrange linked readers, save workspaces and restore your study sessions.</td>
   </tr>
   <tr>
-    <td width="50%" valign="top"><strong>Find &amp; collect</strong><br>Search your library and organize notes, verse lists and favorites.</td>
+    <td width="50%" valign="top"><strong>Find &amp; collect</strong><br>Filter .libron resources by metadata, query local dictionaries and collect notes and highlights.</td>
     <td width="50%" valign="top"><strong>Feel at home on Mac</strong><br>Native controls, copying, printing and export, with ten interface languages.</td>
   </tr>
 </table>
 
 ## Download
 
-<a href="https://github.com/EstebanPdNS/Libron-X/releases/download/v0.1/Libron-X-v0.1.zip"><img src="docs/images/download-beta.svg" alt="Download macOS beta" width="238" height="46"></a>
+<a href="https://github.com/EstebanPdNS/Libron-X/releases/download/v0.2/Libron-X-v0.2.zip"><img src="docs/images/download-beta.svg" alt="Download macOS beta" width="238" height="46"></a>
 
-**v0.1 is a beta prerelease in active development.** Requires macOS 14+ and Apple Silicon.
+**v0.2 is a prerelease in active development.** Requires macOS 14+ and Apple Silicon.
 
 1. Download the ZIP and move **Libron-X.app** to Applications.
 2. Follow the [installation guide](docs/getting-started.md) to open the app.
 3. Choose your local library and open your first books.
 
-[Release notes](https://github.com/EstebanPdNS/Libron-X/releases/tag/v0.1) · [Installation guide](docs/getting-started.md)
+[Release notes](https://github.com/EstebanPdNS/Libron-X/releases/tag/v0.2) · [Installation guide](docs/getting-started.md)
 
 ## Documentation
 
@@ -72,12 +73,16 @@ git clone https://github.com/EstebanPdNS/Libron-X.git
 cd Libron-X/BibliotecaLibre
 scripts/test.sh
 scripts/build-rebuild-app.sh
-open dist/Libron-X.app
+open /Applications/Libron-X.app
 ```
 
 The first build downloads pinned Swift package dependencies. See the [development guide](docs/development.md) for details.
 
 </details>
+
+## Bug reports
+
+[Open an issue](https://github.com/EstebanPdNS/Libron-X/issues/new?template=bug_report.md) with the app version, macOS version, reproduction steps and a screenshot or available logs. Remove private paths and personal content. Do not attach books or license files.
 
 ## Contributing
 

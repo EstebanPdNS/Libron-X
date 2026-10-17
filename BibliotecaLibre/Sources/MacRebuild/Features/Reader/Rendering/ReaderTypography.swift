@@ -12,9 +12,28 @@ struct RenderedReaderText {
 @MainActor enum ReaderTypography {
     static func render(text: String, content: LegacySectionContent?, typography: LegacyTypography?, scale: Double = 1,
                        visibleInterlinearLines: Set<Int>? = nil) -> RenderedReaderText {
-        let scale = min(4.5, max(0.5, scale))
-        let fallback = NSFont(name: "Times New Roman", size: 12 * scale) ?? NSFont.systemFont(ofSize: 12 * scale)
+        let scale = scale.isFinite ? min(4.5, max(0.015, scale)) : 1
+        let fallback = NSFont(name: AppPreferences.shared.readingFont.isEmpty ? "Times New Roman" : AppPreferences.shared.readingFont, size: 12 * scale) ?? NSFont.systemFont(ofSize: 12 * scale)
         let result = NSMutableAttributedString(string: text, attributes: [.font: fallback, .foregroundColor: NSColor.textColor])
+        func applyChosenFont(_ text: NSMutableAttributedString) {
+            let family = AppPreferences.shared.readingFont
+            guard !family.isEmpty else { return }
+            text.enumerateAttribute(.font, in: NSRange(location: 0, length: text.length)) { value, range, _ in
+                let original = value as? NSFont ?? fallback
+                let chosen = NSFontManager.shared.convert(original, toFamily: family)
+                text.addAttribute(.font, value: chosen, range: range)
+            }
+        }
+        defer { applyChosenFont(result) }
+        if let rtf = content?.richTextRTF,
+           let imported = try? NSMutableAttributedString(data: rtf, options: [.documentType: NSAttributedString.DocumentType.rtf], documentAttributes: nil),
+           imported.string == text {
+            imported.enumerateAttribute(.font, in: NSRange(location: 0, length: imported.length)) { value, range, _ in
+                if let font = value as? NSFont { imported.addAttribute(.font, value: NSFontManager.shared.convert(font, toSize: font.pointSize * scale), range: range) }
+            }
+            applyChosenFont(imported)
+            return .init(text: imported, warnings: [])
+        }
         guard let content, let typography else { return .init(text: result, warnings: []) }
         guard content.plainText == text else {
             return .init(text: result, warnings: ["Los estilos no coinciden con el texto mostrado."])

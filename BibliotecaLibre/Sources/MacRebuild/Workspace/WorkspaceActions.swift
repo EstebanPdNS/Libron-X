@@ -15,6 +15,13 @@ struct ReaderHighlight: Identifiable, Codable, Equatable {
 
 @MainActor extension StudyWorkspace {
     func connect(_ reader: ReaderSession) {
+        reader.onDictionaryLookup = { [weak self] word in
+            guard let self else { return }; self.dictionary.show(word, workspace: self)
+        }
+        reader.onTextSelection = { [weak self] text in
+            guard let self else { return }
+            self.dictionary.selectionChanged(text, workspace: self)
+        }
         reader.highlights = personal.highlights.filter { $0.resourceID == reader.resource.id }
         reader.onReferenceNavigation = { [weak self, weak reader] reference in
             guard let self, let reader, reader.linkGroup != .none else { return }

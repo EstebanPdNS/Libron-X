@@ -16,6 +16,8 @@ struct MainWorkspaceToolbar: ToolbarContent {
                 Button(L("Documento de estudio…"), action: workspace.openDocument)
                 Button(L("Área de trabajo…"), action: workspace.openWorkspace)
                 Button(L("Carpeta de recursos…"), action: workspace.chooseLibrary)
+                Button(L("Abrir directorio actual")) { workspace.openCurrentResourceDirectory() }
+                    .disabled(workspace.currentResourceDirectory == nil)
             } label: { MacToolbarMenuLabel(L("Abrir"), "folder") }.help(L("Abrir"))
             MacToolbarButton(L("Cargar área de trabajo"), "rectangle.stack", action: workspace.openWorkspace)
             MacToolbarButton(L("Guardar área de trabajo"), "square.and.arrow.down", action: workspace.saveWorkspace)
@@ -39,19 +41,12 @@ struct MainWorkspaceToolbar: ToolbarContent {
                 if let reader = workspace.activeReader { workspace.duplicate(reader) }
             }.disabled(workspace.activeReader?.page == nil)
             BibleSynchronizationMenu(workspace: workspace, reader: workspace.activeReader.flatMap { $0.canSynchronizeBible ? $0 : nil } ?? workspace.bibleReaders.first)
-            Menu {
-                Button(L("Cascada")) { workspace.arrange(.cascade) }
-                Button(L("Mosaico vertical")) { workspace.arrange(.vertical) }
-                Button(L("Mosaico horizontal")) { workspace.arrange(.horizontal) }
-                Divider()
-                Button(L("Siguiente lectura")) { workspace.cycleReader() }
-                Button(L("Lectura anterior")) { workspace.cycleReader(backwards: true) }
-                Divider()
-                Button(L("Cerrar todo y abrir Inicio")) { workspace.closeAll(); workspace.showsHome = true }
-            } label: { MacToolbarMenuLabel(L("Organizar ventanas"), "rectangle.split.2x1") }.help(L("Organizar ventanas"))
+            PaneLayoutPicker(workspace: workspace)
         }
         if #available(macOS 26, *) { ToolbarSpacer(.fixed) }
         ToolbarItemGroup {
+            MacToolbarButton(L("Diccionarios"), "character.book.closed") { workspace.dictionary.openInside(workspace: workspace) }
+            MacToolbarButton(L("Buscar actualizaciones"), "arrow.down.circle") { AppUpdater.shared.check() }
             MacToolbarButton(L("Administrar recursos y licencias"), "lock.open") { workspace.activeTool = .resources }
             MacToolbarButton(L("Propiedades del recurso"), "info.circle") { workspace.activeTool = .information }
                 .disabled(workspace.activeReader == nil)
@@ -100,14 +95,38 @@ struct MainWorkspaceToolbar: ToolbarContent {
 struct ReaderZoomMenu: View {
     var reader: ReaderSession?
     var activate: () -> Void = {}
-    static let scales = [0.5,0.75,1,1.25,1.5,1.75,2,2.5,3]
+    @RebuildViewState private var expanded = false
     var body: some View {
-        Menu {
-            ForEach(Self.scales, id: \.self) { scale in
-                Button("\(reader?.textScale == scale ? "✓ " : "")\(Int(scale * 100)) %") { activate(); reader?.textScale = scale }
+        Button { activate(); expanded.toggle() } label: { MacToolbarLabel(L("Zoom del texto"), "textformat.size") }
+            .help(L("Zoom del texto")).disabled(reader == nil)
+            .popover(isPresented: $expanded, arrowEdge: .bottom) {
+                if let reader { ReaderZoomSlider(reader: reader) }
             }
-        } label: { MacToolbarLabel(L("Zoom del texto"), "textformat.size") }
-            .help(L("Zoom del texto")).disabled(reader == nil).menuIndicator(.hidden)
+    }
+}
+struct ReaderZoomSlider: View {
+    @Bindable var reader: ReaderSession
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                Text(L("Zoom del texto")).font(.headline)
+                HelpButton(topic: .zoom)
+                Spacer()
+                Text("\(Int((reader.textScale * 100).rounded())) %").monospacedDigit()
+            }
+            // A discrete native Slider draws 301 tick marks below its track.
+            // Keep the track continuous and round the bound percentage instead.
+            Slider(value: Binding(get: { reader.textScale * 100 }, set: { reader.textScale = $0.rounded() / 100 }), in: 0...300)
+                .accessibilityLabel(L("Zoom del texto"))
+                .accessibilityValue("\(Int((reader.textScale * 100).rounded())) %")
+            HStack {
+                Text("0 %").font(.caption).foregroundStyle(.secondary)
+                Spacer()
+                Button("100 %") { reader.textScale = 1 }.controlSize(.small).help(L("Restaurar tamaño del texto"))
+                Spacer()
+                Text("300 %").font(.caption).foregroundStyle(.secondary)
+            }
+        }.padding(16).frame(width: 300).modifier(MacPanelControlPresentation()).featureHelpTarget(.reading)
     }
 }
 struct ReaderMarkupMenu: View {
@@ -155,7 +174,6 @@ struct ResourceReaderToolbar: View {
             }
             MacReaderControlGroup {
                 referenceTargetButton
-                BibleSynchronizationMenu(workspace: workspace, reader: reader)
                 ParallelBibleMenu(workspace: workspace, reader: reader)
             }
             MacReaderControlGroup {
@@ -186,7 +204,6 @@ struct ResourceReaderToolbar: View {
             }
             MacReaderControlGroup {
                 referenceTargetButton
-                BibleSynchronizationMenu(workspace: workspace, reader: reader)
                 icon("Contenido", "sidebar.left") { reader.showsContents.toggle() }
                 icon("Buscar en este recurso", "magnifyingglass") { reader.showFind() }
                 zoomMenu
@@ -198,7 +215,7 @@ struct ResourceReaderToolbar: View {
         HStack(spacing: 6) {
             referenceField.frame(minWidth: 40, maxWidth: .infinity)
             MacReaderControlGroup {
-                BibleSynchronizationMenu(workspace: workspace, reader: reader)
+                zoomMenu
                 actionsMenu(expanded: true)
             }
         }
@@ -279,7 +296,6 @@ struct ResourceReaderToolbar: View {
                     set: { selected in perform { workspace.setReferenceTarget(selected, for: reader) } }))
                 ParallelBibleMenu(workspace: workspace, reader: reader)
                 Button(L("Buscar en este recurso")) { perform(reader.showFind) }
-                zoomMenu
                 interlinearMenu
                 graphicsMenu
                 Divider()

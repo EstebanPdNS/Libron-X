@@ -5,7 +5,7 @@ import SwiftUI
 enum AppIconVariant: String, CaseIterable, Identifiable {
     case red, black
     var id: String { rawValue }
-    var title: String { self == .red ? "Rojo" : "Negro y rojo" }
+    var title: String { self == .red ? "Red" : "Dark" }
     var resourceName: String { self == .red ? "LibronX-Red" : "LibronX-Black" }
 }
 
@@ -51,25 +51,27 @@ struct AppIconSettingsView: View {
     private let preferences: AppIconPreferences
     init(preferences: AppIconPreferences = .shared) { self.preferences = preferences }
     var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            Text(L("Icono de la aplicación")).font(.title2.weight(.semibold))
-            Text(L("Elige el icono de Libron X para el Dock.")).foregroundStyle(.secondary)
-            HStack(spacing: 20) {
+        VStack(alignment: .leading, spacing: 6) {
+            HStack {
+                Text(L("Icono de la aplicación"))
+                Spacer()
                 ForEach(AppIconVariant.allCases) { variant in
-                    VStack(spacing: 10) {
-                        if let image = preferences.image(for: variant) {
-                            Image(nsImage: image).resizable().interpolation(.high).frame(width: 120, height: 120)
+                    Button { preferences.select(variant) } label: {
+                        HStack(spacing: 6) {
+                            if let image = preferences.image(for: variant) {
+                                Image(nsImage: image).resizable().interpolation(.high).frame(width: 28, height: 28)
+                            }
+                            Text(verbatim: variant.title).font(.callout)
+                            Image(systemName: "checkmark").font(.caption.weight(.semibold))
+                                .opacity(preferences.selected == variant ? 1 : 0)
                         }
-                        Button { preferences.select(variant) } label: {
-                            Label(L(variant.title), systemImage: preferences.selected == variant ? "checkmark.circle.fill" : "circle")
-                        }
-                        .accessibilityLabel(L(variant.title))
+                    }.controlSize(.small)
+                        .help(variant.title)
+                        .accessibilityLabel(variant.title)
                         .accessibilityValue(L(preferences.selected == variant ? "Seleccionado" : "Sin seleccionar"))
-                    }.frame(maxWidth: .infinity)
                 }
             }
-            Text(preferences.message ?? L("Rojo es el icono predeterminado. Tu elección se guarda para la próxima apertura."))
-                .font(.callout).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
-        }.padding(24).frame(width: 460)
+            if let message = preferences.message { Text(message).font(.caption).foregroundStyle(.secondary) }
+        }
     }
 }

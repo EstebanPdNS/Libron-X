@@ -16,19 +16,22 @@ typealias RebuildViewState<Value> = SwiftUI.State<Value>
         .windowToolbarStyle(.unified)
         .commands { RebuildCommands(workspace: workspace) }
         Window(L("Mi biblioteca"), id: "library") {
-            LibraryChooser(workspace: workspace).frame(minWidth: 540, minHeight: 420).modifier(AppInterfaceLanguage())
-        }.defaultSize(width: 660, height: 560)
+            LibraryChooser(workspace: workspace).frame(minWidth: 820, minHeight: 520).modifier(AppInterfaceLanguage())
+        }.defaultSize(width: 1160, height: 780)
         Settings { AppSettingsView(workspace: workspace).modifier(AppInterfaceLanguage()) }
     }
 }
 @MainActor final class RebuildLifecycle: NSObject, NSApplicationDelegate {
     weak var workspace: StudyWorkspace?
     let startup = WorkspaceStartupCoordinator()
+    private var canInstallUpdate = false
     func applicationDidFinishLaunching(_ notification: Notification) {
         NSApplication.shared.setActivationPolicy(.regular)
         NSApplication.shared.activate(ignoringOtherApps: true)
         AppPreferences.shared.applySavedAppearance()
         AppIconPreferences.shared.applySavedSelection()
+        AppUpdater.shared.startMonitoring()
+        FeatureHelp.shared.start()
         NotificationCenter.default.addObserver(self, selector: #selector(menuTrackingBegan(_:)), name: NSMenu.didBeginTrackingNotification, object: nil)
     }
     @objc private func menuTrackingBegan(_ notification: Notification) {
@@ -38,8 +41,9 @@ typealias RebuildViewState<Value> = SwiftUI.State<Value>
         try? workspace?.recentWorkspaces.refreshPruningMissingFiles()
     }
     func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
+        canInstallUpdate = false
         guard let workspace else { return .terminateNow }
-        do { try startup.save(workspace); return .terminateNow }
+        do { try startup.save(workspace); try workspace.personal.save(); canInstallUpdate = true; return .terminateNow }
         catch {
             let alert = NSAlert()
             alert.messageText = "No se pudo guardar el área de trabajo"
@@ -51,6 +55,8 @@ typealias RebuildViewState<Value> = SwiftUI.State<Value>
     }
     func applicationWillTerminate(_ notification: Notification) {
         NotificationCenter.default.removeObserver(self, name: NSMenu.didBeginTrackingNotification, object: nil)
+        if canInstallUpdate { AppUpdater.shared.willTerminate() }
+        FeatureHelp.shared.stop()
         workspace?.shutdown()
     }
 }
@@ -59,6 +65,9 @@ struct RebuildCommands: Commands {
     @Bindable var workspace: StudyWorkspace
     @Environment(\.openWindow) private var openWindow
     var body: some Commands {
+        CommandGroup(after: .appInfo) {
+            Button(L("Buscar actualizaciones…")) { AppUpdater.shared.check() }
+        }
         CommandGroup(replacing: .newItem) {
             Button(L("Nuevo archivo de notas")) { workspace.newDocument(.notebook) }.keyboardShortcut("n")
             Button(L("Nueva lista de versículos")) { workspace.newDocument(.verseList) }
@@ -148,6 +157,7 @@ struct RebuildCommands: Commands {
             Button(L("Organizar favoritos…")) { workspace.activeTool = .favorites }
         }
         CommandMenu(L("Herramientas")) {
+            Button(L("Diccionarios")) { workspace.dictionary.openInside(workspace: workspace) }
             Button(L("Copiar versículos bíblicos…")) { workspace.activeTool = .bibleCopy }
             Button(L("Documentos de estudio…")) { workspace.activeTool = .documents }
             Button(L("Recursos y licencias…")) { workspace.activeTool = .resources }

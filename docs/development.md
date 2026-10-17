@@ -10,16 +10,15 @@ From the repository root:
 cd BibliotecaLibre
 scripts/test.sh
 scripts/build-rebuild-app.sh
-open dist/Libron-X.app
+open /Applications/Libron-X.app
 ```
 
 The test wrapper supplies Swift Testing macro paths for Command Line Tools installations. It disables XCTest because the suites use Swift Testing. Corpus checks skip unless their explicitly named `LIBRONX_*` environment variables point to owner-supplied local inputs. Do not treat skipped checks as corpus acceptance.
 
-The app builder compiles `LibronXRebuild` in release mode, installs its translation bundle and approved icons, writes version 0.1 metadata and ad-hoc signs the bundle. It refuses to replace an existing app. Move the previous output aside or choose a fresh output path:
-
-```sh
-LIBRONX_BUILD_DIR="$PWD/.build/alternate" LIBRONX_APP_PATH="$PWD/dist/Libron-X-candidate.app"   scripts/build-rebuild-app.sh
-```
+The app builder compiles `LibronXRebuild` in release mode, installs translations,
+approved icons, writes v0.2 metadata and ad-hoc signs the
+bundle. Close Libron-X before building. It preserves source snapshots and replaces
+`/Applications/Libron-X.app`, moving the previous bundle to Trash.
 
 `swift build --product LibronX` and `scripts/build-app.sh` belong to the earlier prototype; its builder writes to `dist/prototype/Libron-X.app`. Use `LibronXRebuild` for the current workspace.
 

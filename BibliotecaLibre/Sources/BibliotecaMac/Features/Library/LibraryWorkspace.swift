@@ -276,6 +276,7 @@ struct BookCover: View {
         switch resource.format {
         case .legacyLSF: Color(red: 0.25, green: 0.41, blue: 0.36)
         case .libronixLLS: Color(red: 0.30, green: 0.35, blue: 0.43)
+        case .eSwordSQLite, .epub, .logosModern: Color.gray
         case .libronixOEB: Color(red: 0.51, green: 0.37, blue: 0.29)
         }
     }

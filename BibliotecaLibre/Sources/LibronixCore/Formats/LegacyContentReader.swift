@@ -301,6 +301,15 @@ public struct LegacySectionRangeEntry: Sendable, Codable, Equatable {
 }
 
 public struct LegacySectionContent: Sendable, Codable, Equatable {
+    public var richTextRTF: Data? = nil
+    public static func imported(text: String, ordinal: Int, anchors: [LegacyReferenceAnchor], rtf: Data?) -> Self {
+        var content = Self(descriptor: .init(ordinal: ordinal, headerOffset: 0, payloadOffset: 0, storedLength: 0,
+            decodedLength: UInt32(text.utf16.count), mode: 0, codecWord: nil), plainText: text, runs: [],
+            expectedCharacterCount: UInt32(text.utf16.count), recognizedFormat: "libron-import-v1", paragraphs: [],
+            anchors: anchors, markers: [], graphics: [], warnings: [], paragraphDocuments: nil)
+        content.richTextRTF = rtf
+        return content
+    }
     public let descriptor: LegacySectionDescriptor
     public let plainText: String
     public let runs: [LegacyTextRun]

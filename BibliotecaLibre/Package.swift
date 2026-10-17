@@ -7,14 +7,16 @@ var products: [Product] = [
     .library(name: "LibronixCore", targets: ["LibronixCore"])
 ]
 var targets: [Target] = [
+    .systemLibrary(name: "CSQLite"),
     .target(name: "CLibronxCompression", publicHeadersPath: "include",
             linkerSettings: [.linkedLibrary("z")]),
     .target(name: "LibronixCore", dependencies: [
         "CLibronxCompression",
+        .target(name: "CSQLite", condition: .when(platforms: [.macOS, .linux])),
         .product(name: "Crypto", package: "swift-crypto",
                  condition: .when(platforms: [.linux, .windows]))
     ]),
-    .testTarget(name: "LibronixCoreTests", dependencies: ["LibronixCore"])
+    .testTarget(name: "LibronixCoreTests", dependencies: ["LibronixCore"], resources: [.copy("Fixtures")])
 ]
 var inspectDependencies: [Target.Dependency] = [
     "LibronixCore",

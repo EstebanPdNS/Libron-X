@@ -12,6 +12,10 @@ actor BibleVersionCatalog {
                 if let stamp = try? LegacyGraphicsService.fileStamp(resource.location) { cache[resource.location] = (stamp, true) }
                 result.append(resource); continue
             }
+            if resource.format == .eSwordSQLite {
+                if resource.libron?.resourceType == "Biblia" { result.append(resource) }
+                continue
+            }
             guard resource.format != .libronixOEB, !resource.isHelp,
                   let stamp = try? LegacyGraphicsService.fileStamp(resource.location) else { continue }
             let isBible: Bool
@@ -57,7 +61,7 @@ actor BibleVersionCatalog {
         bibleVersionTask?.cancel()
         let resources = availableResources, observed = Set(bibleReaders.map { $0.resource.id })
         let originalID = reader.resource.id, groupID = reader.parallelSetID
-        let group = groupID.flatMap { id in parallelBibleSets.sets.first { $0.id == id } }
+        let group = groupID.flatMap { id in bibleGroups.first { $0.id == id } }
         if groupID != nil, group == nil { reader.error = L("El grupo de Biblias ya no está disponible."); return }
         bibleVersionTask = Task { [weak self, weak reader, bibleVersionCatalog] in
             do {
@@ -66,7 +70,7 @@ actor BibleVersionCatalog {
                 else { versions = try await bibleVersionCatalog.versions(in: resources, observed: observed) }
                 guard let self, let reader, !Task.isCancelled, self.readers.contains(where: { $0 === reader }),
                       reader.resource.id == originalID, reader.parallelSetID == groupID,
-                      groupID.flatMap({ id in self.parallelBibleSets.sets.first { $0.id == id } }) == group,
+                      groupID.flatMap { id in self.bibleGroups.first { $0.id == id } } == group,
                       reader.currentReference == reference, !reader.isLoading,
                       versions.count > 1, let index = versions.firstIndex(where: { $0.id == originalID }) else { return }
                 let candidates = (1..<versions.count).map { offset in

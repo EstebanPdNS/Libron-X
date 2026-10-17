@@ -29,7 +29,8 @@ enum ReaderFindStatus: Equatable { case idle, searching, found(wrapped: Bool), n
 /// ranges in the decoded visible body, never inferred native AOL coordinates.
 enum ReaderFindSource {
     static func find(_ resource: LibraryResource, _ request: ReaderFindRequest) async throws -> ReaderFindMatch? {
-        if resource.format == .libronixOEB { return try await ReaderOEBFind.find(resource, request) }
+        if resource.format == .libronixOEB || resource.format == .epub { return try await ReaderOEBFind.find(resource, request) }
+        if resource.format == .eSwordSQLite { return try await ESwordReader.find(resource, request) }
         if resource.format == .libronixLLS {
             let before = try LegacyGraphicsService.fileStamp(resource.location)
             let inner = try await LibronixBookService.shared.prepare(resource)

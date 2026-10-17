@@ -177,3 +177,21 @@ int libronx_inflate_zlib(const uint8_t *input, size_t length,
         return LIBRONX_COMPRESSION_TRAILING_DATA;
     return status;
 }
+
+/* EPUB ZIP uses raw DEFLATE and an independent CRC-32. */
+int libronx_inflate_zip(const uint8_t *input, size_t length,
+                       uint8_t *output, size_t capacity, uint32_t expected_crc) {
+    if (!input || !output || length > UINT_MAX || capacity > UINT_MAX) return -100;
+    z_stream stream = {0};
+    stream.next_in = (Bytef *)input; stream.avail_in = (uInt)length;
+    stream.next_out = output; stream.avail_out = (uInt)capacity;
+    if (inflateInit2(&stream, -MAX_WBITS) != Z_OK) return -101;
+    int status = inflate(&stream, Z_FINISH);
+    int valid = status == Z_STREAM_END && stream.total_in == length && stream.total_out == capacity;
+    inflateEnd(&stream);
+    if (!valid) return -102;
+    return crc32(0, output, (uInt)capacity) == expected_crc ? 0 : -103;
+}
+uint32_t libronx_crc32(const uint8_t *bytes, size_t length) {
+    return (uint32_t)crc32(0, bytes, (uInt)length);
+}

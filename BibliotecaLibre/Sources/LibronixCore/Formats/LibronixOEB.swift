@@ -21,6 +21,12 @@ public struct LibronixOEBDirectory: Sendable {
     public let nameOrder: [Int]
     public let articles: [LibronixOEBArticle]
 
+    public init(files: [String], titles: [String]) throws {
+        guard !files.isEmpty, files.count == titles.count, files.allSatisfy(Self.validPath) else { throw LibronixBookError.invalidDirectory }
+        self.files = files; self.nameOrder = Array(files.indices)
+        self.articles = files.enumerated().map { i, path in .init(ordinal: i, sourceID: UInt32(i), fileIndex: i, parent: nil,
+            nextSibling: i + 1 < files.count ? i + 1 : nil, depth: 0, sourceHeadingLevel: 1, title: titles[i], fragment: "", path: path) }
+    }
     public init(fileTable: Data, articleTable: Data) throws {
         func word(_ data: Data, _ offset: Int) throws -> Int {
             guard offset >= 0, offset <= data.count, 4 <= data.count - offset else { throw LibronixBookError.invalidDirectory }
@@ -123,7 +129,7 @@ public struct LibronixOEBBook: Sendable {
     }
     public static func mimeType(_ path: String) -> String {
         switch (path as NSString).pathExtension.lowercased() {
-        case "html", "htm": "text/html"
+        case "html", "htm", "xhtml": "text/html"
         case "css": "text/css"
         case "bmp": "image/bmp"
         case "png": "image/png"

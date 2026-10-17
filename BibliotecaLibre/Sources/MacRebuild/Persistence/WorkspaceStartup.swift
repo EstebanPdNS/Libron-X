@@ -34,9 +34,23 @@ import LibronixCore
                                    arguments: [String] = CommandLine.arguments) -> Bool {
         guard !started else { return false }
         started = true
-        let previous: WorkspaceArchive?
+        var previous: WorkspaceArchive?
         do { previous = try store.load() }
         catch { previous = nil; workspace.error = error.localizedDescription }
+        let managedRoot = LibraryPreferences.shared.directory
+        if FileManager.default.fileExists(atPath: managedRoot.appendingPathComponent("catalog.json").path) {
+            do {
+                let managed = try LibronCatalog.load(from: managedRoot)
+                if var saved = previous {
+                    let byID = Dictionary(uniqueKeysWithValues: managed.resources.map { ($0.id, $0) })
+                    saved.resources = managed.resources; saved.libraryRoot = managedRoot
+                    for index in saved.panes.indices {
+                        if let resource = byID[saved.panes[index].resource.id] { saved.panes[index].resource = resource }
+                    }
+                    previous = saved
+                } else { workspace.resources = managed.resources; workspace.libraryRoot = managedRoot }
+            } catch { workspace.error = error.localizedDescription }
+        }
         if let index = arguments.firstIndex(of: "--library"), index + 1 < arguments.count {
             workspace.importLibrary(URL(fileURLWithPath: arguments[index + 1])); return false
         }

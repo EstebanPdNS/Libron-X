@@ -53,6 +53,9 @@ enum AppStartup: String, CaseIterable, Identifiable {
             defaults.set(readingScale, forKey: Self.readingScaleKey)
         }
     }
+    var readingFont: String {
+        didSet { defaults.set(readingFont, forKey: "mac.reading.font.v1") }
+    }
     var hoverNotes: Bool { didSet { defaults.set(hoverNotes, forKey: Self.hoverNotesKey) } }
     @ObservationIgnored private let defaults: UserDefaults
     @ObservationIgnored private let applyAppearance: (AppAppearance) -> Void
@@ -64,6 +67,7 @@ enum AppStartup: String, CaseIterable, Identifiable {
         }
     }) {
         self.defaults = defaults; self.applyAppearance = applyAppearance
+        readingFont = defaults.string(forKey: "mac.reading.font.v1") ?? ""
         language = AppLanguage.resolve(defaults.string(forKey: Self.languageKey))
         startup = AppStartup(rawValue: defaults.string(forKey: Self.startupKey) ?? "") ?? .restorePrevious
         let workspaceURL = defaults.string(forKey: Self.startupWorkspaceKey).flatMap(URL.init(string:))

@@ -17,6 +17,7 @@ struct MacToolbarLabel: View {
         }
         .labelStyle(.iconOnly)
         .accessibilityLabel(L(title))
+        .featureHelpTarget(.resolve(labels: [L(title)], windowTitle: "", language: AppLanguage.saved()))
     }
 }
 struct MacToolbarButton: View {
@@ -27,9 +28,15 @@ struct MacToolbarButton: View {
     init(_ title: String, _ symbol: String, horizontalInset: CGFloat = 0, action: @escaping () -> Void) {
         self.title = title; self.symbol = symbol; self.horizontalInset = horizontalInset; self.action = action
     }
+    private var helpTopic: HelpTopic {
+        if title.contains("biblioteca") || title.contains("recurso") { return .library }
+        if title.contains("Diccionario") { return .dictionary }
+        if title.contains("actualiz") { return .updates }
+        return .windows
+    }
     var body: some View {
         Button(action: action) { MacToolbarLabel(title, symbol).padding(.horizontal, horizontalInset) }
-            .help(L(title)).accessibilityLabel(L(title))
+            .help(L(title)).accessibilityLabel(L(title)).contextHelp(helpTopic)
     }
 }
 

@@ -6,7 +6,7 @@ import LibronixCore
 enum ReaderOEBFind {
     typealias Projection = @Sendable (LibronixOEBBook, String, ReaderOEBViewport) async throws -> ReaderOEBTextPage
     static func find(_ resource: LibraryResource, _ request: ReaderFindRequest) async throws -> ReaderFindMatch? {
-        let book = try await LibronixOEBService.shared.prepare(resource.location)
+        let book = resource.format == .epub ? try await EPUBReader.shared.prepare(resource.location).book : try await LibronixOEBService.shared.prepare(resource.location)
         return try await find(book: book, request: request) { book, path, viewport in
             try await ReaderOEBTextSource.shared.read(book: book, path: path, viewport: viewport)
         }

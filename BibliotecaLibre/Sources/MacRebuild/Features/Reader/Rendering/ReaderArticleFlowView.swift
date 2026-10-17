@@ -90,6 +90,8 @@ struct ReaderArticleFlowView: NSViewRepresentable {
         var selectionRequest = -1
         var observation: Task<Void, Never>?
         var isLayingOut = false
+        var layoutDirty = true
+        var layoutSize = CGSize.zero
         var trailingPadding: CGFloat = 0
         var isDismantled = false
         init(reader: ReaderSession, workspace: StudyWorkspace) { self.reader = reader; self.workspace = workspace }
@@ -98,8 +100,10 @@ struct ReaderArticleFlowView: NSViewRepresentable {
             let anchor = viewportAnchor()
             let pages = reader.readingFlowPages, ordinals = pages.map { $0.destination.ordinal }
             for id in Set(order).subtracting(ordinals) {
+                layoutDirty = true
                 surfaces[id]?.view.linkPreview.dismiss(); surfaces.removeValue(forKey: id)?.view.removeFromSuperview()
             }
+            if order != ordinals { layoutDirty = true }
             order = ordinals
             for page in pages {
                 let id = page.destination.ordinal
@@ -107,6 +111,9 @@ struct ReaderArticleFlowView: NSViewRepresentable {
                 if surfaces[id] == nil { surfaces[id] = surface; document.addSubview(surface.view) }
                 surface.page = page
                 surface.view.activate = { [weak self] in guard let self else { return }; self.workspace.activate(self.reader) }
+                surface.view.lookupWord = { [weak workspace] word in
+                    guard let workspace else { return }; workspace.dictionary.show(word, workspace: workspace)
+                }
                 surface.view.onKeyboardScroll = { [weak self] in self?.userScrolled() }
                 surface.view.linkPreview.resource = reader.resource
                 surface.view.linkPreview.resolveResource = { [weak workspace] source, link in
@@ -149,11 +156,12 @@ struct ReaderArticleFlowView: NSViewRepresentable {
         private func render(_ surface: Surface) {
             let page = surface.page, delegate = surface.delegate
             let marks = reader.highlights.filter { $0.ordinal == page.destination.ordinal }
-            let revision = String(reader.renderingScale) + ":" + String(reader.sourceFontsRevision) + ":" +
+            let revision = AppPreferences.shared.readingFont + ":" + String(reader.renderingScale) + ":" + String(reader.sourceFontsRevision) + ":" +
                 String(describing: reader.visibleInterlinearLines) + ":" + String(describing: marks)
             let graphicHashes = page.graphics.map(\.sha256)
             guard delegate.text != page.text || delegate.identity != page.destination || surface.revision != revision ||
                   surface.sourceStamp != page.sourceStamp || surface.graphicHashes != graphicHashes || delegate.inlineLinks != page.inlineLinks else { return }
+            layoutDirty = true
             delegate.isApplying = true
             defer { delegate.isApplying = false }
             let selected = surface.view.selectedRange()
@@ -186,8 +194,20 @@ struct ReaderArticleFlowView: NSViewRepresentable {
         }
         func layoutArticles() {
             guard !isLayingOut, let document, let scroll else { return }
+            let contentSize = scroll.contentSize
+            if !layoutDirty && abs(layoutSize.width - contentSize.width) <= 0.5 {
+                if layoutSize.height != contentSize.height {
+                    let extent = order.compactMap { surfaces[$0]?.view.frame.maxY }.max() ?? 0
+                    document.setFrameSize(.init(width: contentSize.width, height: max(contentSize.height, extent + trailingPadding)))
+                    layoutSize = contentSize
+                    if extent - scroll.contentView.bounds.minY < contentSize.height * 1.5 {
+                        Task { @MainActor [weak reader] in reader?.extendReadingFlowForViewport() }
+                    }
+                }
+                return
+            }
             isLayingOut = true
-            defer { isLayingOut = false }
+            defer { isLayingOut = false; layoutDirty = false; layoutSize = contentSize }
             let width = scroll.contentSize.width
             guard width > 1 else { return }
             var y: CGFloat = 0

@@ -21,7 +21,8 @@ struct ReaderOEBView: NSViewRepresentable {
     }
     static func makeWebView(reader: ReaderSession, coordinator: Coordinator) -> WKWebView {
         let config = configuration(source: coordinator, selectionHandler: coordinator)
-        let view = WKWebView(frame: .zero, configuration: config)
+        let view = DictionaryWebView(frame: .zero, configuration: config)
+        view.reader = reader
         view.navigationDelegate = coordinator
         view.appearance = NSAppearance(named: .aqua)
         reader.oebWebView = view
@@ -43,6 +44,10 @@ struct ReaderOEBView: NSViewRepresentable {
         view.pageZoom = reader.renderingScale
         if coordinator.pageID != page.id {
             coordinator.begin(page, in: view)
+        }
+        if coordinator.ready {
+            view.callAsyncJavaScript("let s=document.getElementById('libron-font-override'); if(!s){s=document.createElement('style');s.id='libron-font-override';document.head.appendChild(s);} s.textContent=font ? 'body,body *{font-family:'+JSON.stringify(font)+' !important}' : '';",
+                arguments: ["font": AppPreferences.shared.readingFont], in: nil, in: .defaultClient) { _ in }
         }
         if coordinator.ready, coordinator.selectionRequest != reader.selectionRequest {
             coordinator.selectionRequest = reader.selectionRequest
@@ -232,4 +237,22 @@ enum ReaderOEBHTML {
         html.insert(contentsOf: "<meta http-equiv=\"Content-Security-Policy\" content=\"\(policy)\">", at: head.upperBound)
         return Data(html.utf8)
     }
+}
+
+/// Append the owned lookup action while retaining WebKit's native editing menu.
+@MainActor final class DictionaryWebView: WKWebView {
+    weak var reader: ReaderSession?
+    override func menu(for event: NSEvent) -> NSMenu? {
+        let menu = super.menu(for: event) ?? NSMenu()
+        let item = NSMenuItem(title: L("Buscar en diccionario"), action: #selector(lookupSelectedWord), keyEquivalent: "")
+        item.target = self; item.isEnabled = selectedWord != nil
+        menu.addItem(.separator()); menu.addItem(item)
+        FeatureHelp.shared.addItem(to: menu, topic: .dictionary)
+        return menu
+    }
+    private var selectedWord: String? {
+        guard let reader, let text = reader.page?.text, let range = Range(reader.selectedRange, in: text) else { return nil }
+        return DictionaryController.singleWord(String(text[range]))
+    }
+    @objc private func lookupSelectedWord() { if let word = selectedWord { reader?.onDictionaryLookup?(word) } }
 }

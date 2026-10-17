@@ -24,6 +24,10 @@ enum PaneArrangement { case cascade, horizontal, vertical }
     var librarySelection: String?
     var keepLibraryOpen = false
     var librarySortByAuthor = false
+    var librarySortField = LibraryField.title
+    var libraryGroup = "all"
+    var libraryFacet = LibraryField.category
+    var libraryFacetValue = ""
     var isImporting = false
     var importProgress = ""
     var error: String?
@@ -32,6 +36,8 @@ enum PaneArrangement { case cascade, horizontal, vertical }
     var pendingLibraryReference: String?
     var activeTool: WorkspaceTool?
     var showsHome = false
+    var snapPreview: PaneFrame?
+    var dictionary = DictionaryController()
     var search = WorkspaceSearchController()
     var personal: WorkspacePersonalState
     var resourceVisibility: LibraryResourceVisibility
@@ -70,13 +76,58 @@ enum PaneArrangement { case cascade, horizontal, vertical }
         Double(readers.firstIndex { $0 === reader } ?? 0)
     }
     var filteredResources: [LibraryResource] {
-        availableResources.filter { libraryQuery.isEmpty || ($0.title + " " + ($0.author ?? "") + " " + $0.fileName).localizedStandardContains(libraryQuery) }
-            .sorted { lhs, rhs in
-                let a = librarySortByAuthor ? lhs.author ?? "" : lhs.title
-                let b = librarySortByAuthor ? rhs.author ?? "" : rhs.title
-                let order = a.localizedStandardCompare(b)
-                return order == .orderedSame ? lhs.id < rhs.id : order == .orderedAscending
-            }
+        availableResources.filter { resource in
+            let m = LibronMetadata.deriving(resource)
+            let queryMatches = libraryQuery.isEmpty || (m.searchText + " " + resource.fileName + " " + resource.location.lastPathComponent + " " + (resource.legacyIdentifier ?? "") + " " + LibraryLanguages.searchNames(m.languages)).localizedStandardContains(libraryQuery)
+            let groupMatches: Bool
+            if libraryGroup.hasPrefix("language:") { groupMatches = m.languages.map(LibraryLanguages.canonical).contains(String(libraryGroup.dropFirst(9))) }
+            else if libraryGroup.hasPrefix("personal:"), let uuid = UUID(uuidString: String(libraryGroup.dropFirst(9))) {
+                groupMatches = parallelBibleSets.sets.first { $0.id == uuid }?.members.contains { $0.resolve(in: [resource]) != nil } == true
+            } else { groupMatches = true }
+            return queryMatches && groupMatches && (libraryFacetValue.isEmpty || libraryFacet.value(resource) == libraryFacetValue)
+        }.sorted { lhs, rhs in
+            let field = librarySortByAuthor ? LibraryField.author : librarySortField
+            let order = field.value(lhs).localizedStandardCompare(field.value(rhs))
+            return order == .orderedSame ? lhs.id < rhs.id : order == .orderedAscending
+        }
+    }
+    var bibleGroups: [ParallelBibleSet] {
+        let bibles = availableResources.filter { LibronMetadata.deriving($0).resourceType == "Biblia" }
+        let languages = Set(bibles.flatMap { LibronMetadata.deriving($0).languages }.map(LibraryLanguages.canonical)).sorted()
+        let automatic = languages.map { code -> ParallelBibleSet in
+            let hash = LibrarySearchService.textFingerprint("libron-language-group:" + code)
+            let h = Array(hash.prefix(32))
+            let uuid = UUID(uuidString: String(h[0..<8]) + "-" + String(h[8..<12]) + "-" + String(h[12..<16]) + "-" + String(h[16..<20]) + "-" + String(h[20..<32]))!
+            return ParallelBibleSet(id: uuid, name: LibraryLanguages.name(code), members: bibles.filter {
+                LibronMetadata.deriving($0).languages.map(LibraryLanguages.canonical).contains(code)
+            }.sorted { $0.title.localizedStandardCompare($1.title) == .orderedAscending }.map(ParallelBibleMember.init), automaticLanguage: code)
+        }
+        return automatic + parallelBibleSets.sets
+    }
+    var libraryLanguages: [String] {
+        Set(availableResources.flatMap { LibronMetadata.deriving($0).languages }.map(LibraryLanguages.canonical)).sorted { LibraryLanguages.name($0).localizedStandardCompare(LibraryLanguages.name($1)) == .orderedAscending }
+    }
+
+    /// Resolve real imported locations, including selected hidden resources in Settings.
+    func resourceDirectory(for resourceID: String?) -> URL? {
+        let location = resources.first { $0.id == resourceID }.map { $0.packageLocation ?? $0.location }
+            ?? resourceVisibility.hidden.first { $0.id == resourceID }.map { URL(fileURLWithPath: $0.id) }
+        guard let directory = location?.deletingLastPathComponent() ?? libraryRoot,
+              directory.isFileURL else { return nil }
+        var isDirectory: ObjCBool = false
+        guard FileManager.default.fileExists(atPath: directory.path, isDirectory: &isDirectory),
+              isDirectory.boolValue else { return nil }
+        return directory.standardizedFileURL
+    }
+    var currentResourceDirectory: URL? {
+        resourceDirectory(for: filteredResources.first { $0.id == librarySelection }?.id)
+    }
+    func openResourceDirectory(for resourceID: String?, using opener: (URL) -> Bool = { NSWorkspace.shared.open($0) }) {
+        guard let directory = resourceDirectory(for: resourceID) else { return }
+        if !opener(directory) { error = L("No se pudo abrir el directorio en Finder.") }
+    }
+    func openCurrentResourceDirectory(using opener: (URL) -> Bool = { NSWorkspace.shared.open($0) }) {
+        openResourceDirectory(for: filteredResources.first { $0.id == librarySelection }?.id, using: opener)
     }
     func hideLibraryResources(_ ids: Set<String>) throws {
         let selected = resources.filter { ids.contains($0.id) }
@@ -127,7 +178,7 @@ enum PaneArrangement { case cascade, horizontal, vertical }
         let panes = visibleReaders
         guard !panes.isEmpty else { return }
         for (index, reader) in panes.enumerated() {
-            reader.isMaximized = false
+            reader.isMaximized = false; reader.unsnappedFrame = nil
             let n = Double(panes.count), i = Double(index)
             switch arrangement {
             case .vertical: reader.frame = .init(x: i / n, y: 0, width: 1 / n, height: 1)
@@ -138,12 +189,46 @@ enum PaneArrangement { case cascade, horizontal, vertical }
             }
         }
     }
-    func chooseLibrary() {
+    func chooseLibrary() { chooseResources(foldersOnly: true) }
+    func chooseResources(foldersOnly: Bool = false) {
         let panel = NSOpenPanel()
-        panel.title = L("Abrir carpeta de recursos…"); panel.canChooseDirectories = true
-        panel.canChooseFiles = false; panel.allowsMultipleSelection = false
+        panel.title = L("Importar recursos")
+        panel.canChooseDirectories = true; panel.canChooseFiles = !foldersOnly; panel.allowsMultipleSelection = true
         panel.begin { [weak self] response in
-            if response == .OK, let url = panel.url { self?.importLibrary(url) }
+            guard response == .OK, !panel.urls.isEmpty else { return }
+            self?.confirmResourceConversion(panel.urls)
+        }
+    }
+    func confirmResourceConversion(_ urls: [URL]) {
+        let preferences = LibraryPreferences.shared
+        var backup = preferences.backupOriginals
+        if preferences.askBeforeConversion {
+            let alert = NSAlert(); alert.messageText = L("Convertir a .libron")
+            alert.informativeText = L("Los archivos se convertirán a .libron. ¿Deseas guardar una copia del original en la carpeta backup de la biblioteca?")
+            alert.addButton(withTitle: L("Sí")); alert.addButton(withTitle: L("No")); alert.addButton(withTitle: L("Cancelar"))
+            alert.showsSuppressionButton = true; alert.suppressionButton?.title = L("No volver a preguntar")
+            let answer = alert.runModal()
+            guard answer != .alertThirdButtonReturn else { return }
+            backup = answer == .alertFirstButtonReturn
+            preferences.backupOriginals = backup
+            preferences.askBeforeConversion = alert.suppressionButton?.state != .on
+        }
+        convertResources(urls, backup: backup)
+    }
+    func convertResources(_ urls: [URL], backup: Bool) {
+        importTask?.cancel(); importGeneration += 1
+        let token = importGeneration, destination = LibraryPreferences.shared.directory
+        for url in urls where url.startAccessingSecurityScopedResource() { accessURLs.append(url) }
+        isImporting = true; error = nil
+        importTask = Task { [weak self] in
+            do {
+                let resources = try await LibronLibrary().convert(urls, to: destination, backup: backup) { [weak self] in await self?.updateProgress($0, token: token) }
+                guard let self, self.importGeneration == token, !Task.isCancelled else { return }
+                self.resources = resources; self.libraryRoot = destination; self.isImporting = false
+            } catch {
+                guard let self, self.importGeneration == token else { return }
+                self.error = error.localizedDescription; self.isImporting = false
+            }
         }
     }
     func importLibrary(_ url: URL) {

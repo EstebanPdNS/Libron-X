@@ -121,7 +121,12 @@ struct ResourceManagerView: View {
     @Bindable var workspace: StudyWorkspace
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            HStack { Text(LF("{count} recursos", ["count": String(workspace.resources.count)])).font(.headline); Spacer(); Button(L("Agregar carpeta…"), action: workspace.chooseLibrary) }
+            HStack {
+                Text(LF("{count} recursos", ["count": String(workspace.resources.count)])).font(.headline)
+                Spacer()
+                ResourceDirectoryButton(workspace: workspace)
+                Button(L("Agregar carpeta…"), action: workspace.chooseLibrary)
+            }
             Text(L("Los recursos LSF disponibles se abren localmente. Los formatos que aún requieren un lector y los servicios de licencias que no están disponibles se indican en cada recurso."))
                 .font(.callout).foregroundStyle(.secondary)
             List(workspace.resources) { resource in

@@ -58,10 +58,13 @@ struct ReaderPage: Sendable {
     var historyIndex = -1
     var isMinimized = false
     var isMaximized = false
-    var textScale = 1.0
+    var unsnappedFrame: PaneFrame?
+    var textScale = 1.0 {
+        didSet { if !ReaderZoom.isValid(textScale) { textScale = oldValue } }
+    }
     /// Reader zoom is relative to the new comfortable default. Resource styles
     /// and exported documents retain their original point sizes.
-    var renderingScale: Double { textScale * 1.5 }
+    var renderingScale: Double { _ = AppPreferences.shared.readingFont; return ReaderZoom.renderingScale(textScale) }
     var presentationWarnings: [String] = []
     var sourceFontsRevision = 0
     var visibleInterlinearLines: Set<Int>? = nil
@@ -85,7 +88,14 @@ struct ReaderPage: Sendable {
     var findOptions = ReaderFindOptions()
     var findStatus = ReaderFindStatus.idle
     var findFocusRequest = 0
-    var selectedRange = NSRange(location: 0, length: 0)
+    var onDictionaryLookup: ((String) -> Void)?
+    var onTextSelection: ((String) -> Void)?
+    var selectedRange = NSRange(location: 0, length: 0) {
+        didSet {
+            guard !isLoading, let text = page?.text, let range = Range(selectedRange, in: text) else { return }
+            onTextSelection?(String(text[range]))
+        }
+    }
     var visibleBibleReference: String?
     var viewportCharacterOffset: Int?
     var selectionRequest = 0
@@ -460,6 +470,8 @@ struct ReaderPage: Sendable {
            resource.location.deletingPathExtension().lastPathComponent.caseInsensitiveCompare(edition) != .orderedSame {
             throw RebuildError.referenceEditionUnavailable(edition)
         }
+        if resource.format == .eSwordSQLite { return try await ESwordReader.read(resource, requested) }
+        if resource.format == .epub { return try await EPUBReader.read(resource, requested) }
         if resource.format == .libronixOEB {
             let book = try await LibronixOEBService.shared.prepare(resource.location)
             var ordinal = requested.ordinal

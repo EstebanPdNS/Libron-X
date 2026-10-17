@@ -36,7 +36,7 @@ struct WorkspaceArchive: Codable {
     func validate() throws {
         guard schemaVersion == 1 else { throw PersonalStateError.futureVersion }
         guard libraryRoot?.isFileURL != false, panes.count <= 100, resources.count <= 50_000, Set(resources.map(\.id)).count == resources.count,
-              resources.allSatisfy({ $0.location.isFileURL && $0.id == $0.location.standardizedFileURL.path }),
+              resources.allSatisfy({ $0.location.isFileURL && ($0.id == $0.location.standardizedFileURL.path || ($0.packageLocation?.isFileURL == true && !$0.id.isEmpty)) }),
               activeIndex.map({ panes.indices.contains($0) }) ?? true,
               referenceTargetIndex.map({ panes.indices.contains($0) }) ?? true,
               openingOrder.map({ $0.count == panes.count && Set($0) == Set(panes.indices) }) ?? true
@@ -48,7 +48,7 @@ struct WorkspaceArchive: Codable {
             guard pane.resource.location.isFileURL, pane.destination.map({ $0.ordinal >= 0 }) ?? true,
                   [f.x,f.y,f.width,f.height,pane.scale].allSatisfy(\.isFinite),
                   f.x >= 0, f.y >= 0, f.width > 0, f.height > 0, f.x + f.width <= 1.000001, f.y + f.height <= 1.000001,
-                  (0.5...3).contains(pane.scale), pane.history.count <= 10_000,
+                  ReaderZoom.isValid(pane.scale), pane.history.count <= 10_000,
                   (-1..<pane.history.count).contains(pane.historyIndex), pane.history.allSatisfy({ $0.ordinal >= 0 }),
                   pane.selection.location >= 0, pane.selection.length >= 0,
                   pane.selection.location <= Int.max - pane.selection.length,
