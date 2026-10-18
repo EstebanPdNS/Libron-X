@@ -113,7 +113,7 @@ public actor PersistentLibrarySearchProvider: LibrarySearchContentProvider {
         #if canImport(CSQLite)
         // Verse mode must still inspect anchors, including on non-Bible books,
         // so incompatible verse scopes cannot masquerade as complete no-hits.
-        if unit == .article, let index = indexes[resource.id] {
+        if unit == .article, !query.expression.requiresVerseContext, let index = indexes[resource.id] {
             do {
                 if let selected = try index.candidates(query.expression, articles: prepared.articles) {
                     try await source.verifyUnchanged(resource, prepared: prepared)
@@ -319,7 +319,7 @@ private final class SearchIndexDatabase {
                       operand.text.utf8.allSatisfy({ $0 >= 32 && $0 < 127 }) else { return nil }
                 let literal = "\"" + operand.text.lowercased().replacingOccurrences(of: "\"", with: "\"\"") + "\""
                 return try ordinals("SELECT rowid-1 FROM terms WHERE terms MATCH ?", value: literal)
-            case .conjunction(let lhs, let rhs):
+            case .conjunction(let lhs, let rhs), .proximity(_, let lhs, let rhs):
                 let left = try possible(lhs), right = try possible(rhs)
                 if let left, let right { return left.intersection(right) }
                 return left ?? right

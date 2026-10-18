@@ -76,3 +76,29 @@ Result navigation is bound to the captured resource and source location. A still
 Installed v0.3.0 build 41 was checked in the current Spanish dark native interface: overlapping collections, explicit missing-member warnings, manual selection across filters, empty-selection errors, two open resources including a minimized reader, and reference search within collections. Two real resources produced 16 scanned articles; the literal query returned the expected 16 matches in one article and the passage query returned its expected explicit citation. The full suite passes 712 tests in 118 suites, including nine new scope workflow tests covering identity conflicts, external-reader reopening, supersession and Bible-range composition. Light/RTL and older macOS rendering were not manually inspected in this checkpoint. Original engine/RPOS and cross-versification equivalence retain separate acceptance gates.
 
 Rule-based collections use bounded metadata conditions and calculate membership from the current catalog. See [the collection persistence and rule contract](../BibliotecaLibre/docs/manual-resource-collections.md). Running searches retain immutable evaluated source snapshots.
+
+
+## Advanced positional queries
+
+The independent product evaluator executes proximity and ordering. The recorded original compatibility parser remains a separate API; this does not claim identical original engine matching, RPOS units, ordering or advanced receiver behavior.
+
+| Form | Product contract |
+| --- | --- |
+| `a NEAR b` | Either direction; maximum gap 48 original UTF-16 code units |
+| `a NEAR/n b` | Either direction; at most n intervening lexical words |
+| `a BEFORE b`, `a AFTER b` | Directional, without a distance cap, inside the current search unit |
+| `a BEFORE/n b`, `a AFTER/n b` | Directional with at most n intervening lexical words |
+| `a WITHIN n WORDS b` | Either direction; at most n intervening lexical words |
+| `a WITHIN n CHARACTERS b` | Either direction; gap measured in original UTF-16 code units |
+| `a WITHIN n VERSES b` | Either direction; actual source verse-number difference within the same chapter and edition |
+| `a BEFORE n VERSES b`, `a AFTER n CHARACTERS b` | Directional explicit-unit variants; all three units are supported |
+
+Distances are integers from 0 through 1000000. `WORDS` counts fully intervening lexical tokens in the reader projection, including numeric tokens; internal apostrophes join a word. Adjacent words have distance zero. `VERSES` uses the actual numbered anchors rather than counting available rows, so missing verse numbers do not shorten a distance. It requires verified intervals covering both operands. Different chapters/editions need an explicit source versification map and are reported as unsupported rather than guessed. Articles without compatible anchors produce partial coverage for verse-distance queries.
+
+Precedence is unary NOT, proximity/order, AND, then OR; operators are uppercase and positional chains associate left to right. Proximity operands may be terms, quoted phrases, positive OR alternatives or nested proximity. Keep AND/NOT outside the positional expression, e.g. `(a BEFORE b) AND NOT c` or `NOT (a BEFORE b)`. Quote numeric literals immediately following a bare directional operator to distinguish them from explicit distances. Fields, wildcards and other unsupported syntax remain explicit errors.
+
+Each pair needs distinct, nonoverlapping spans. Nested expressions carry the full extent and original positive evidence of their actual witnesses; unmatched occurrences are not highlighted. Boolean and negative-only behavior remains unchanged. Every physical article, resource or selected Bible verse retains its scope: cross-verse proximity is available in article mode; verse mode cannot join separate verses, even when its requested verse distance is greater than zero. Custom Bible ranges still restrict the evaluated verses.
+
+Pair work, witness counts and cancellation use explicit evaluator budgets. Exhaustion throws an error and cannot return a complete truncated result. Persistent indexes only prune conservative operand candidates; proximity stays in the evaluator. Verse-distance queries inspect source intervals instead of pruning away articles that might lack compatible anchors. Source/result UTF-16 coordinates and stored cache projections remain unchanged.
+
+Acceptance: 735 tests in 122 suites, including 15 new positional-query tests, pass in both maintained and public source trees. Native build 43 verifies word/character thresholds, reversed ordering, nesting, actual verse distances, partial-coverage diagnostics and exact source selection on real installed resources. A separate read-only SQL oracle identifies the sole expected Ge1:1/Ge1:2 pair. Final build 44 repeats positive/negative word-distance controls after deferring unused word-coordinate preparation. Ten original state files were restored byte for byte; 1099 integrity checks across 521 managed resource packages passed. Native visual evidence covers Spanish dark appearance only.

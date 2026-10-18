@@ -7642,5 +7642,29 @@
     "pt": "Restaurar",
     "id": "Atur ulang",
     "ur": "دوبارہ ترتیب دیں"
+  },
+  "Operadores de búsqueda": {
+    "es": "Operadores de búsqueda",
+    "en": "Search operators",
+    "zh-Hans": "搜索运算符",
+    "hi": "खोज ऑपरेटर",
+    "ar": "عوامل البحث",
+    "fr": "Opérateurs de recherche",
+    "bn": "অনুসন্ধান অপারেটর",
+    "pt": "Operadores de pesquisa",
+    "id": "Operator pencarian",
+    "ur": "تلاش کے آپریٹرز"
+  },
+  "NEAR usa 48 unidades UTF-16. WORDS cuenta palabras intermedias. VERSES usa referencias reales del mismo capítulo. Cada artículo o versículo conserva su ámbito.": {
+    "es": "NEAR usa 48 unidades UTF-16. WORDS cuenta palabras intermedias. VERSES usa referencias reales del mismo capítulo. Cada artículo o versículo conserva su ámbito.",
+    "en": "NEAR uses 48 UTF-16 units. WORDS counts intervening words. VERSES uses actual references in the same chapter. Each article or verse keeps its own scope.",
+    "zh-Hans": "NEAR 使用 48 个 UTF-16 单位。WORDS 计算中间单词。VERSES 使用同一章的实际经节引用。每篇文章或经节保留各自的范围。",
+    "hi": "NEAR में 48 UTF-16 इकाइयाँ हैं। WORDS बीच के शब्द गिनता है। VERSES एक ही अध्याय के वास्तविक संदर्भ उपयोग करता है। प्रत्येक लेख या पद का अपना दायरा रहता है।",
+    "ar": "يستخدم NEAR مقدار 48 وحدة UTF-16. يحسب WORDS الكلمات الفاصلة. يستخدم VERSES المراجع الفعلية في الإصحاح نفسه. يحتفظ كل مقال أو آية بنطاقه.",
+    "fr": "NEAR utilise 48 unités UTF-16. WORDS compte les mots intermédiaires. VERSES utilise les références réelles du même chapitre. Chaque article ou verset conserve son périmètre.",
+    "bn": "NEAR ৪৮টি UTF-16 একক ব্যবহার করে। WORDS মাঝের শব্দ গোনে। VERSES একই অধ্যায়ের প্রকৃত উদ্ধৃতি ব্যবহার করে। প্রতিটি নিবন্ধ বা পদ নিজস্ব পরিসর রাখে।",
+    "pt": "NEAR usa 48 unidades UTF-16. WORDS conta as palavras intermediárias. VERSES usa referências reais do mesmo capítulo. Cada artigo ou versículo mantém seu âmbito.",
+    "id": "NEAR memakai 48 unit UTF-16. WORDS menghitung kata di antaranya. VERSES memakai referensi nyata dalam pasal yang sama. Setiap artikel atau ayat mempertahankan lingkupnya.",
+    "ur": "NEAR میں 48 UTF-16 اکائیاں ہیں۔ WORDS درمیانی الفاظ گنتا ہے۔ VERSES ایک ہی باب کے حقیقی حوالوں کو استعمال کرتا ہے۔ ہر مضمون یا آیت کا اپنا دائرہ رہتا ہے۔"
   }
 }

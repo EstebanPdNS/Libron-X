@@ -26,7 +26,7 @@ public actor LibrarySearchService {
         guard bibleRange == nil || unit == .bibleVerse else { throw BibleSearchRangeError.requiresVerseMode }
         try Task.checkCancellation()
         // Validate evaluator options before classifying any source as a failed read.
-        _ = try TextSearchEngine.search(query: query, in: "", options: options)
+        _ = try TextSearchEngine.search(query: query, in: "", options: options, verses: query.expression.requiresVerseContext ? [] : nil)
         var ids = Set<String>()
         for resource in resources {
             guard ids.insert(resource.id).inserted else { throw LibrarySearchError.duplicateResourceID(resource.id) }
@@ -144,7 +144,7 @@ public actor LibrarySearchService {
                     resourceReports[index].articlesDecoded += 1
                     if elapsed() >= budget.maximumDurationSeconds { limit = .duration; break resourceLoop }
                     let verses: [LibrarySearchBibleVerse]
-                    if unit == .bibleVerse {
+                    if unit == .bibleVerse || query.expression.requiresVerseContext {
                         let observed = content.referenceAnchors.isEmpty ? content.bibleVerses
                             : try BibleVerseText.intervals(text: content.text, anchors: content.referenceAnchors)
                         try BibleVerseText.validate(observed, in: content.text)
@@ -168,6 +168,7 @@ public actor LibrarySearchService {
                             }
                         } else { verses = logical }
                     } else { verses = [] }
+                    if unit == .article, query.expression.requiresVerseContext, verses.isEmpty { throw TextSearchError.verseContextRequired }
                     let intervals: [LibrarySearchBibleVerse?] = unit == .article ? [nil] : verses.map { Optional($0) }
                     var articleMatched = false
                     var fingerprint: String?
@@ -180,7 +181,15 @@ public actor LibrarySearchService {
                         }
                         let scopeRange = verse?.range ?? content.searchRange
                         let evaluationText = scopeRange.map { (content.text as NSString).substring(with: $0.nsRange) } ?? content.text
-                        let match = try TextSearchEngine.search(query: query, in: evaluationText, options: options)
+                        let verseContext: [LibrarySearchBibleVerse]?
+                        if query.expression.requiresVerseContext {
+                            let origin = scopeRange?.location ?? 0
+                            verseContext = (verse.map { [$0] } ?? verses).map { source in
+                                .init(reference: source.reference, normalizedReference: source.normalizedReference,
+                                      range: .init(location: source.range.location - origin, length: source.range.length))
+                            }
+                        } else { verseContext = nil }
+                        let match = try TextSearchEngine.search(query: query, in: evaluationText, options: options, verses: verseContext)
                         if elapsed() >= budget.maximumDurationSeconds { limit = .duration; break resourceLoop }
                         if match.matchesQuery {
                             if !articleMatched {
@@ -226,7 +235,7 @@ public actor LibrarySearchService {
             }
             if resourceReports[index].articlesExamined == articles.count {
                 resourceReports[index].status = resourceReports[index].articlesFailed == 0 ? .complete : .partial
-                if unit == .bibleVerse && !hasVerseIntervals && resourceReports[index].articlesFailed == 0 {
+                if (unit == .bibleVerse || query.expression.requiresVerseContext) && !hasVerseIntervals && resourceReports[index].articlesFailed == 0 {
                     resourceReports[index].status = .incompatible
                     resourceReports[index].warnings.append("El contenido leído no contiene intervalos de versículos compatibles; no permite afirmar ausencia de coincidencias bíblicas.")
                     counters.resourcesIncompatible += 1

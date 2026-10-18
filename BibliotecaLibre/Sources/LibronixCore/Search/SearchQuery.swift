@@ -25,12 +25,38 @@ public struct SearchTextOperand: Hashable, Sendable {
 
 /// Independent, deliberately limited grammar. Original-engine textual grammar
 /// and precedence still require recorded fixtures; this AST does not claim them.
+public struct SearchProximity: Hashable, Sendable {
+    public enum Direction: String, Hashable, Sendable { case either, before, after }
+    public enum Unit: String, Hashable, Sendable { case characters, words, verses }
+    public let direction: Direction
+    public let maximumDistance: Int?
+    public let unit: Unit
+    public let sourceRange: SearchTextRange
+}
+
 public indirect enum SearchExpression: Hashable, Sendable {
     case term(SearchTextOperand)
     case phrase(SearchTextOperand)
     case conjunction(SearchExpression, SearchExpression)
     case disjunction(SearchExpression, SearchExpression)
     case negation(SearchExpression)
+    case proximity(SearchProximity, SearchExpression, SearchExpression)
+
+    var hasPositionalWitnesses: Bool {
+        switch self {
+        case .term, .phrase: true
+        case .disjunction(let a, let b), .proximity(_, let a, let b): a.hasPositionalWitnesses && b.hasPositionalWitnesses
+        case .conjunction, .negation: false
+        }
+    }
+    public var requiresVerseContext: Bool {
+        switch self {
+        case .proximity(let op, let a, let b): op.unit == .verses || a.requiresVerseContext || b.requiresVerseContext
+        case .conjunction(let a, let b), .disjunction(let a, let b): a.requiresVerseContext || b.requiresVerseContext
+        case .negation(let a): a.requiresVerseContext
+        case .term, .phrase: false
+        }
+    }
 }
 
 public struct SearchQuery: Hashable, Sendable {
@@ -67,6 +93,7 @@ public struct SearchQueryError: Error, LocalizedError, Equatable, Sendable {
         case unexpectedClosingParenthesis, unclosedParenthesis
         case unterminatedPhrase, invalidEscape, emptyPhrase, unsupportedSyntax
         case sourceLimit, operandLimit, nodeLimit, nestingLimit, invalidLimits
+        case invalidDistance, invalidProximityOperand
     }
     public let code: Code
     public let range: SearchTextRange
@@ -104,6 +131,7 @@ public enum SearchQueryParser {
 
     private enum TokenKind: Equatable {
         case term(String), phrase(String), and, or, not, left, right, end
+        case proximity(SearchProximity.Direction, Int?, SearchProximity.Unit), within
     }
     private struct Token {
         let kind: TokenKind
@@ -156,13 +184,28 @@ public enum SearchQueryParser {
                     case "AND": kind = .and
                     case "OR": kind = .or
                     case "NOT": kind = .not
+                    case "WITHIN": kind = .within
+                    case "NEAR": kind = .proximity(.either, 48, .characters)
+                    case "BEFORE": kind = .proximity(.before, nil, .characters)
+                    case "AFTER": kind = .proximity(.after, nil, .characters)
                     default:
                         let operatorHead = text.split(separator: "/", maxSplits: 1).first.map(String.init) ?? text
-                        let unsupported = ["NEAR", "WITHIN", "BEFORE", "AFTER", "FOLLOWEDBY", "PRECEDEDBY", "FOLLOWED-BY", "PRECEDED-BY", "XOR", "IMPLIES", "IFF", "ANDNOT", "AND-NOT"]
+                        if ["NEAR", "BEFORE", "AFTER"].contains(operatorHead), text.contains("/") {
+                            let pieces = text.split(separator: "/", omittingEmptySubsequences: false)
+                            guard pieces.count == 2, !pieces[1].isEmpty, pieces[1].allSatisfy({ $0.isASCII && $0.isNumber }),
+                                  let distance = Int(pieces[1]), distance <= 1_000_000 else {
+                                throw SearchQueryError(.invalidDistance, range: range(start, cursor), "Proximity distance must be an integer from 0 to 1000000.")
+                            }
+                            let direction: SearchProximity.Direction = operatorHead == "BEFORE" ? .before : operatorHead == "AFTER" ? .after : .either
+                            tokens.append(.init(kind: .proximity(direction, distance, .words), range: range(start, cursor)))
+                            guard tokens.count <= limits.maximumNodes * 3 else { throw SearchQueryError(.nodeLimit, range: range(start, cursor), "Query exceeds the token budget.") }
+                            continue
+                        }
+                        let unsupported = ["FOLLOWEDBY", "PRECEDEDBY", "FOLLOWED-BY", "PRECEDED-BY", "XOR", "IMPLIES", "IFF", "ANDNOT", "AND-NOT"]
                         guard !unsupported.contains(operatorHead),
                               scalars[start..<cursor].allSatisfy({ Self.isTermScalar($0) }) else {
                             throw SearchQueryError(.unsupportedSyntax, range: range(start, cursor),
-                                "Unsupported query syntax. Proximity, fields, wildcards and other advanced operators require verified contracts; quote literal punctuation.")
+                                "Unsupported query syntax. Quote literal punctuation; fields, wildcards and other unsupported operators are not evaluated as text.")
                         }
                         guard range(start, cursor).length <= limits.maximumOperandUTF16 else {
                             throw SearchQueryError(.operandLimit, range: range(start, cursor),
@@ -267,12 +310,58 @@ public enum SearchQueryParser {
         }
 
         mutating func parseAnd(depth: Int) throws -> SearchExpression {
-            var expression = try parseUnary(depth: depth)
+            var expression = try parseProximity(depth: depth)
             while current.kind == .and {
                 let op = current; cursor += 1
-                expression = try node(.conjunction(expression, parseUnary(depth: depth)), at: op.range)
+                expression = try node(.conjunction(expression, parseProximity(depth: depth)), at: op.range)
             }
             return expression
+        }
+
+        mutating func parseProximity(depth: Int) throws -> SearchExpression {
+            var expression = try parseUnary(depth: depth)
+            while true {
+                let token = current
+                var direction: SearchProximity.Direction
+                var distance: Int?
+                var unit: SearchProximity.Unit
+                switch token.kind {
+                case .within: direction = .either; distance = nil; unit = .words
+                case .proximity(let d, let n, let u): direction = d; distance = n; unit = u
+                default: return expression
+                }
+                cursor += 1
+                // WITHIN requires a distance and unit. BEFORE/AFTER also accept
+                // the explicit distance form; bare NEAR retains 48 UTF-16 units.
+                if token.kind == .within || ((direction == .before || direction == .after) && distance == nil && numericToken(current)) {
+                    let number = current
+                    guard case .term(let text) = number.kind, !text.isEmpty,
+                          text.allSatisfy({ $0.isASCII && $0.isNumber }),
+                          let value = Int(text), value <= 1_000_000 else {
+                        throw SearchQueryError(.invalidDistance, range: number.range, "Expected an integer distance from 0 to 1000000.")
+                    }
+                    distance = value; cursor += 1
+                    switch current.kind {
+                    case .term("WORDS"): unit = .words
+                    case .term("CHARACTERS"): unit = .characters
+                    case .term("VERSES"): unit = .verses
+                    default: throw SearchQueryError(.invalidDistance, range: current.range, "Expected WORDS, CHARACTERS or VERSES after the distance.")
+                    }
+                    cursor += 1
+                }
+                let operatorEnd = tokens[cursor - 1].range.upperBound
+                let right = try parseUnary(depth: depth)
+                guard expression.hasPositionalWitnesses, right.hasPositionalWitnesses else {
+                    throw SearchQueryError(.invalidProximityOperand, range: token.range,
+                        "Proximity operands must be terms, phrases, OR alternatives or nested proximity expressions. Keep AND/NOT outside the positional expression.")
+                }
+                expression = try node(.proximity(.init(direction: direction, maximumDistance: distance, unit: unit,
+                    sourceRange: .init(location: token.range.location, length: operatorEnd - token.range.location)), expression, right), at: token.range)
+            }
+        }
+        func numericToken(_ token: Token) -> Bool {
+            guard case .term(let text) = token.kind else { return false }
+            return text.first?.isNumber == true
         }
 
         mutating func parseUnary(depth: Int) throws -> SearchExpression {

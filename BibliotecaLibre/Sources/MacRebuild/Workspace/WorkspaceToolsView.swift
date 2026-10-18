@@ -92,6 +92,12 @@ struct WorkspaceSearchView: View {
                 Toggle(L("Palabras completas"), isOn: $search.wholeWords)
                 Toggle(L("Versículos bíblicos"), isOn: $search.bibleVerses)
             }.disabled(search.isSearching)
+            DisclosureGroup(L("Operadores de búsqueda")) {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(verbatim: "a NEAR b · a NEAR/2 b · a BEFORE b · a AFTER b\na WITHIN 2 WORDS b · a BEFORE 2 CHARACTERS b\na WITHIN 1 VERSES b · (a OR b) BEFORE/0 c")
+                    Text(L("NEAR usa 48 unidades UTF-16. WORDS cuenta palabras intermedias. VERSES usa referencias reales del mismo capítulo. Cada artículo o versículo conserva su ámbito."))
+                }.font(.caption).textSelection(.enabled)
+            }
             if let message = search.error { Text(message).foregroundStyle(.red).textSelection(.enabled) }
             if search.report == nil, let scope = search.scopeSnapshot, !scope.complete {
                 DisclosureGroup(L("La búsqueda tiene resultados parciales o recursos pendientes")) {

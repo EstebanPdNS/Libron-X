@@ -100,7 +100,9 @@ import Testing
         #expect(error("a b c d e", .basic, .init(maximumASTDepth: 3))?.code == .astDepthLimit)
         #expect(error("a", .advanced, .init(maximumTokens: Int.max))?.code == .invalidLimits)
         #expect(throws: SearchQueryError.self) { try SearchQueryParser.parse("Dios amor") }
-        #expect(throws: SearchQueryError.self) { try SearchQueryParser.parse("Dios NEAR amor") }
+        let independent = try SearchQueryParser.parse("Dios NEAR amor")
+        guard case .proximity(let op, _, _) = independent.expression else { Issue.record("Missing independent proximity operator"); return }
+        #expect(op.maximumDistance == 48 && op.unit == .characters)
         #expect(throws: SearchQueryError.self) { try SearchQueryParser.parse("foo:bar") }
     }
 }

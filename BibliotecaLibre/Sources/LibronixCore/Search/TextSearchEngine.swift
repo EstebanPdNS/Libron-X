@@ -49,6 +49,7 @@ public struct TextSearchDocumentResult: Hashable, Sendable {
 
 public enum TextSearchError: Error, LocalizedError, Equatable, Sendable {
     case invalidLimits, textLimit, hitLimit, workLimit, documentLimit, duplicateDocumentID(String)
+    case verseContextRequired, unsupportedVerseBoundary
 
     public var errorDescription: String? {
         switch self {
@@ -57,6 +58,8 @@ public enum TextSearchError: Error, LocalizedError, Equatable, Sendable {
         case .hitLimit: "Search exceeds the hit budget; no incomplete result is returned."
         case .workLimit: "Search exceeds the match-attempt budget; no incomplete result is returned."
         case .documentLimit: "Search exceeds the document budget."
+        case .verseContextRequired: "Verse distance requires verified source verse intervals covering the operands."
+        case .unsupportedVerseBoundary: "Verse distance across different chapters or editions requires an explicit source versification map."
         case let .duplicateDocumentID(id): "Search received a repeated document identity: \(id)."
         }
     }
@@ -67,13 +70,15 @@ public enum TextSearchError: Error, LocalizedError, Equatable, Sendable {
 public enum TextSearchEngine {
     public static func search(query: SearchQuery, in text: String,
                               options: TextSearchOptions = TextSearchOptions(),
+                              verses: [LibrarySearchBibleVerse]? = nil,
                               checkCancellation: (@Sendable () throws -> Void)? = nil) throws -> TextSearchResult {
         try validate(options)
         let length = text.utf16.count
         guard length <= options.maximumTextUTF16 else { throw TextSearchError.textLimit }
         try Task.checkCancellation()
         try checkCancellation?()
-        var evaluator = try Evaluator(text: text, options: options, checkCancellation: checkCancellation)
+        if query.expression.requiresVerseContext, verses == nil || (verses?.isEmpty == true && !text.isEmpty) { throw TextSearchError.verseContextRequired }
+        var evaluator = try Evaluator(text: text, options: options, verses: verses, checkCancellation: checkCancellation)
         let outcome = try evaluator.evaluate(query.expression)
         let hits = outcome.matches ? try evaluator.makeHits(outcome.evidence) : []
         return TextSearchResult(matchesQuery: outcome.matches, hits: hits, textUTF16Count: length)
@@ -115,6 +120,15 @@ public enum TextSearchEngine {
         let range: SearchTextRange
         let operand: SearchTextOperand
     }
+    private struct PositionalSpan: Hashable {
+        let range: SearchTextRange
+        let evidence: Set<Evidence>
+    }
+    private struct VerseCoordinate {
+        let range: SearchTextRange
+        let group: String
+        let number: Int
+    }
     private struct Outcome {
         let matches: Bool
         // Evidence for the actual boolean outcome. Inversion can recover the
@@ -127,10 +141,14 @@ public enum TextSearchEngine {
         let checkCancellation: (@Sendable () throws -> Void)?
         let wordStarts: Set<Int>
         let wordEnds: Set<Int>
+        var sortedWordStarts: [Int] = []
+        var sortedWordEnds: [Int] = []
+        var wordCoordinatesReady = false
+        let verseCoordinates: [VerseCoordinate]
         var attempts = 0
         var cache: [String: [SearchTextRange]] = [:]
 
-        init(text source: String, options: TextSearchOptions,
+        init(text source: String, options: TextSearchOptions, verses: [LibrarySearchBibleVerse]?,
              checkCancellation: (@Sendable () throws -> Void)?) throws {
             text = source as NSString
             self.options = options
@@ -138,6 +156,19 @@ public enum TextSearchEngine {
             let boundaries = try Self.wordBoundaries(source, checkCancellation: checkCancellation)
             wordStarts = boundaries.starts
             wordEnds = boundaries.ends
+            if let verses {
+                try BibleVerseText.validate(verses, in: source)
+                var previous: [String:Int] = [:]
+                verseCoordinates = try verses.map { verse in
+                    guard let reference = LegacyPassageQuery.parse(verse.reference) else { throw LibrarySearchError.invalidVerseDirectory }
+                    let raw = verse.reference.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+                    let edition = raw.hasPrefix("bible+") ? String(raw.split(separator: ".")[0]) : "bible"
+                    let group = edition + ":" + reference.sourceBookKey + ":" + String(reference.chapter)
+                    if let last = previous[group], last >= reference.verse { throw LibrarySearchError.invalidVerseDirectory }
+                    previous[group] = reference.verse
+                    return VerseCoordinate(range: verse.range, group: group, number: reference.verse)
+                }
+            } else { verseCoordinates = [] }
         }
 
         mutating func evaluate(_ expression: SearchExpression) throws -> Outcome {
@@ -165,10 +196,87 @@ public enum TextSearchEngine {
                 if left.matches == matched { evidence.formUnion(left.evidence) }
                 if right.matches == matched { evidence.formUnion(right.evidence) }
                 return Outcome(matches: matched, evidence: evidence)
+            case .proximity:
+                let spans = try positionalSpans(expression)
+                return Outcome(matches: !spans.isEmpty, evidence: spans.reduce(into: Set<Evidence>()) { $0.formUnion($1.evidence) })
             case let .negation(child):
                 let result = try evaluate(child)
                 return Outcome(matches: !result.matches, evidence: result.evidence)
             }
+        }
+
+        mutating func positionalSpans(_ expression: SearchExpression) throws -> [PositionalSpan] {
+            try Task.checkCancellation(); try checkCancellation?()
+            switch expression {
+            case .term(let operand), .phrase(let operand):
+                return try find(operand.text).map { .init(range: $0, evidence: [.init(range: $0, operand: operand)]) }
+            case .disjunction(let a, let b):
+                let left = try positionalSpans(a), right = try positionalSpans(b)
+                let result = Set(left + right)
+                guard result.count <= options.maximumHits else { throw TextSearchError.hitLimit }
+                return result.sorted { $0.range.location == $1.range.location ? $0.range.length < $1.range.length : $0.range.location < $1.range.location }
+            case .proximity(let op, let a, let b):
+                let left = try positionalSpans(a), right = try positionalSpans(b)
+                var result = Set<PositionalSpan>()
+                for lhs in left {
+                    for rhs in right {
+                        try Task.checkCancellation(); try checkCancellation?()
+                        attempts += 1
+                        guard attempts <= options.maximumMatchAttempts else { throw TextSearchError.workLimit }
+                        // Distinct, nonoverlapping witnesses: one occurrence can
+                        // never satisfy both sides of a repeated operand.
+                        let forward = lhs.range.upperBound <= rhs.range.location
+                        let backward = rhs.range.upperBound <= lhs.range.location
+                        guard forward || backward else { continue }
+                        guard op.direction == .either || (op.direction == .before && forward) || (op.direction == .after && backward) else { continue }
+                        let first = forward ? lhs : rhs, last = forward ? rhs : lhs
+                        if let maximum = op.maximumDistance {
+                            let distance: Int
+                            switch op.unit {
+                            case .characters: distance = last.range.location - first.range.upperBound
+                            case .words:
+                                if !wordCoordinatesReady {
+                                    sortedWordStarts = wordStarts.sorted(); sortedWordEnds = wordEnds.sorted()
+                                    wordCoordinatesReady = true
+                                }
+                                distance = max(0, Self.upperBound(sortedWordEnds, last.range.location) - Self.lowerBound(sortedWordStarts, first.range.upperBound))
+                            case .verses:
+                                guard let firstStart = verse(at: first.range.location), let x = verse(at: first.range.upperBound - 1),
+                                      let y = verse(at: last.range.location), let lastEnd = verse(at: last.range.upperBound - 1) else { throw TextSearchError.verseContextRequired }
+                                guard firstStart.group == x.group, x.group == y.group, y.group == lastEnd.group else { throw TextSearchError.unsupportedVerseBoundary }
+                                distance = y.number - x.number
+                                guard distance >= 0 else { throw LibrarySearchError.invalidVerseDirectory }
+                            }
+                            guard distance <= maximum else { continue }
+                        }
+                        result.insert(.init(range: .init(location: first.range.location, length: last.range.upperBound - first.range.location), evidence: lhs.evidence.union(rhs.evidence)))
+                        guard result.count <= options.maximumHits else { throw TextSearchError.hitLimit }
+                    }
+                }
+                return result.sorted { $0.range.location == $1.range.location ? $0.range.length < $1.range.length : $0.range.location < $1.range.location }
+            case .conjunction, .negation:
+                throw SearchQueryError(.invalidProximityOperand, range: .init(location:0,length:0), "A positional operand cannot be AND or NOT.")
+            }
+        }
+        func verse(at position: Int) -> VerseCoordinate? {
+            var low = 0, high = verseCoordinates.count
+            while low < high {
+                let mid = low + (high - low) / 2
+                if verseCoordinates[mid].range.location <= position { low = mid + 1 } else { high = mid }
+            }
+            let index = low - 1
+            guard verseCoordinates.indices.contains(index), position < verseCoordinates[index].range.upperBound else { return nil }
+            return verseCoordinates[index]
+        }
+        static func lowerBound(_ values: [Int], _ target: Int) -> Int {
+            var low = 0, high = values.count
+            while low < high { let mid = low + (high - low) / 2; if values[mid] < target { low = mid + 1 } else { high = mid } }
+            return low
+        }
+        static func upperBound(_ values: [Int], _ target: Int) -> Int {
+            var low = 0, high = values.count
+            while low < high { let mid = low + (high - low) / 2; if values[mid] <= target { low = mid + 1 } else { high = mid } }
+            return low
         }
 
         mutating func find(_ needle: String) throws -> [SearchTextRange] {

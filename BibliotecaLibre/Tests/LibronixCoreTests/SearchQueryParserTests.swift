@@ -60,8 +60,7 @@ import Testing
         #expect(error("\"😀\" OR )")?.range == SearchTextRange(location: 8, length: 1))
     }
 
-    @Test(arguments: ["faith NEAR hope", "faith NEAR/2 hope", "faith BEFORE hope", "faith WITHIN hope",
-                       "faith XOR hope", "lemma:λόγος", "faith*", "faith?", "a && b", "a-b", "[field]", "“faith”"])
+    @Test(arguments: ["faith XOR hope", "lemma:λόγος", "faith*", "faith?", "a && b", "a-b", "[field]", "“faith”"])
     func unverifiedAdvancedSyntaxIsNeverSilentlySearchedAsText(source: String) {
         #expect(error(source)?.code == .unsupportedSyntax)
     }

@@ -23,7 +23,7 @@ A feature counts only when its complete behavior is implemented and verified. Ea
 - [x] Configurable Bible search ranges.
 - [x] Collection and open-resource search scopes.
 - [x] Rule-based collections.
-- [ ] Advanced query execution.
+- [x] Advanced query execution.
 - [ ] Resource field search.
 - [ ] Fuzzy search.
 - [ ] Search result views.
