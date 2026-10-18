@@ -220,6 +220,7 @@ public struct LibrarySearchPreparedResource: Sendable, Codable {
 }
 
 public struct LibrarySearchDecodedArticle: Sendable, Codable {
+    public let referenceLinks: [BibleReferenceSourceLink]?
     public let text: String
     /// Article extent within a shared rendered page. Coordinates and the hash
     /// remain relative to the complete visible page, including preceding articles.
@@ -228,7 +229,9 @@ public struct LibrarySearchDecodedArticle: Sendable, Codable {
     public let bibleVerses: [LibrarySearchBibleVerse]
     public let referenceAnchors: [LegacyReferenceAnchor]
     public init(text: String, warnings: [String] = [], bibleVerses: [LibrarySearchBibleVerse] = [],
-                referenceAnchors: [LegacyReferenceAnchor] = [], searchRange: SearchTextRange? = nil) {
+                referenceAnchors: [LegacyReferenceAnchor] = [], searchRange: SearchTextRange? = nil,
+                referenceLinks: [BibleReferenceSourceLink]? = nil) {
+        self.referenceLinks = referenceLinks
         self.text = text; self.warnings = warnings; self.bibleVerses = bibleVerses; self.referenceAnchors = referenceAnchors
         self.searchRange = searchRange
     }

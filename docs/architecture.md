@@ -59,3 +59,5 @@ Persistent global search uses a rebuildable, source-bound local index. See [pers
 Manual resource collections use separate validated, atomic app-owned state. See [the collection contract](../BibliotecaLibre/docs/manual-resource-collections.md) for identity, filtering, persistence and acceptance limits.
 
 Resource priorities keep promoted order, enabled flags and per-datatype opening counts in independent owned state. See [key-link resolution and persistence](../BibliotecaLibre/docs/resource-priorities.md).
+
+Reference-mention extraction and search are being integrated. See [the core contract and remaining native gates](../BibliotecaLibre/docs/reference-mention-search.md); the feature is still unchecked.

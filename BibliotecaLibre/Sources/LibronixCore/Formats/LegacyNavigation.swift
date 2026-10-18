@@ -116,7 +116,7 @@ public struct LegacyPassageQuery: Sendable, Codable, Equatable {
               let verse = Int(trimmed[trimmed.index(after: split)...]), (1...65535).contains(verse),
               let observed = LegacyObservedBibleReference.parse(String(trimmed[..<split]) + " 1:\(verse)"),
               case let parsed = observedQuery(observed),
-              ["ob", "phm", "2jn", "3jn", "jud"].contains(parsed.sourceBookKey) else { return nil }
+              referenceSingleChapterBooks.contains(parsed.sourceBookKey) else { return nil }
         return parsed
     }
 
@@ -218,6 +218,16 @@ public struct LegacyPassageQuery: Sendable, Codable, Equatable {
         ("jud", ["jud", "jude", "judas"]),
         ("re", ["re", "rev", "revelation", "ap", "apo", "apoc", "apocalipsis"])
     ]
+    // Shared spelling vocabulary for reference extraction; it contains no
+    // verse counts or edition-specific versification conversion.
+    static let referenceSingleChapterBooks: Set<String> = ["ob", "phm", "2jn", "3jn", "jud"]
+    static var referenceBookNames: [String] { aliasGroups.flatMap { $0.1 } }
+    static var referenceRangeBooks: Set<String> { Set(serializedBooks.values.map { $0.lowercased() }) }
+    static var referenceBookOrder: [String] {
+        let base = serializedBooks.keys.sorted().compactMap { serializedBooks[$0]?.lowercased() }
+        return base + aliasGroups.map(\.0).filter { !base.contains($0) }
+    }
+
     private static let aliases: [String: String] = {
         var result: [String: String] = [:]
         for (key, names) in aliasGroups {
