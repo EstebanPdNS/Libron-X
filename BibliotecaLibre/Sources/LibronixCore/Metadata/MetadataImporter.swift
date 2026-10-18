@@ -72,6 +72,32 @@ public struct MetadataImporter: Sendable {
             palettes: palettes, copyStyles: copyStyles, opaqueFileCount: opaqueFileCount, warnings: warnings)
     }
 
+    /// Read one selected declarative association without scanning its directory.
+    public static func readAssociation(at source: URL) throws -> ResourceAssociationDocument {
+        guard source.isFileURL else { throw MetadataReadError.notDirectory }
+        let values = try source.resourceValues(forKeys: [.isRegularFileKey, .isSymbolicLinkKey, .fileSizeKey])
+        guard values.isRegularFile == true, values.isSymbolicLink != true else { throw MetadataReadError.notDirectory }
+        guard (values.fileSize ?? 0) <= MetadataXMLReader.maximumFileBytes else { throw MetadataReadError.fileTooLarge }
+        let before = try LibrarySearchFileStamp.capture(source)
+        let handle = try FileHandle(forReadingFrom: source); defer { try? handle.close() }
+        let bytes = try handle.read(upToCount: MetadataXMLReader.maximumFileBytes + 1) ?? Data()
+        try LibrarySearchFileStamp.verify([before])
+        return try associationDocument(data: bytes, source: source)
+    }
+    /// Also validates retained source bytes when restoring owned import provenance.
+    public static func associationDocument(data: Data, source: URL) throws -> ResourceAssociationDocument {
+        let root = try MetadataXMLReader.parse(data)
+        guard root.name == "lbx-resource-association" else { throw MetadataReadError.unsupportedDocument(root.name) }
+        for group in root.children(named: "association") {
+            guard group.children(named: "resource").allSatisfy({
+                guard let guid = $0.attributes["guid"] else { return false }
+                return !guid.isEmpty && guid.utf8.count <= 1024 && !guid.unicodeScalars.contains(where: CharacterSet.controlCharacters.contains)
+            }) else { throw MetadataReadError.unsupportedDocument("Invalid association resource GUID") }
+        }
+        let definition = association(root, identity(for: root, source: source))
+        return ResourceAssociationDocument(source: source, data: data, definition: definition)
+    }
+
     private static func identity(for node: XMLNode, source: URL) -> MetadataIdentity {
         let name = node.attributes["name"] ?? source.deletingPathExtension().lastPathComponent
         let category = node.attributes["category"]

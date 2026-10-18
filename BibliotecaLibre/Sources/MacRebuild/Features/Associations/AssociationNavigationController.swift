@@ -15,7 +15,7 @@ enum AssociationDestinationMode: String, CaseIterable, Identifiable, Sendable {
 }
 
 @MainActor @Observable final class AssociationNavigationController {
-    typealias Lookup = @Sendable (LibraryResource, AssociationResourceScope, AssociationDestinationMode, String) async throws -> KeyLinkMatch?
+    typealias Lookup = @Sendable (LibraryResource, ResourceAssociationSet, AssociationDestinationMode, String) async throws -> KeyLinkMatch?
     var groupID: UUID? { didSet { if oldValue != groupID { cancel() } } }
     var mode = AssociationDestinationMode.start { didSet { if oldValue != mode { cancel() } } }
     var query = "" { didSet { if oldValue != query { cancel() } } }
@@ -28,9 +28,17 @@ enum AssociationDestinationMode: String, CaseIterable, Identifiable, Sendable {
     init(lookup: @escaping Lookup = AssociationNavigationController.resolve) { self.lookup = lookup }
     func begin(groupID: UUID?, source: ReaderSession?) {
         cancel(); self.sourceID = source?.id; self.groupID = groupID
-        if let reference = source?.currentReference { mode = .reference; query = reference }
+        if let reference = source.flatMap(Self.contextReference) { mode = .reference; query = reference }
         else if let source, source.isDictionary, !source.dictionaryWord.isEmpty { mode = .headword; query = source.dictionaryWord }
         else { mode = .start; query = "" }
+    }
+    /// Commentary directory titles are source reference declarations, not Bible anchors.
+    private static func contextReference(_ source: ReaderSession) -> String? {
+        if let reference = source.currentReference { return reference }
+        guard KeyLinkKind.commentary.supports(source.resource), let page = source.committedPage,
+              let title = page.entries.first(where: { $0.ordinal == page.destination.ordinal })?.title,
+              (try? BibleCopyPassage.parse(title)) != nil else { return nil }
+        return title
     }
     func cancel() { generation += 1; task?.cancel(); task = nil; isLoading = false; error = nil }
     func open(_ member: LibraryCollectionMember, workspace: StudyWorkspace, newReader: Bool = false) {
@@ -52,14 +60,14 @@ enum AssociationDestinationMode: String, CaseIterable, Identifiable, Sendable {
         }
         let token = generation, mode = mode, query = self.query
         let sourceResource = source?.resource, sourceGeneration = source?.associationGeneration
-        let sourceReference = source?.currentReference
+        let sourceReference = source.flatMap(Self.contextReference)
         let create = newReader || group.relation == .companions || source == nil
         guard create || sourceResource?.id != resource.id else { return }
         isLoading = true
         task = Task { [weak self, weak workspace, weak source, lookup] in
             defer { if let self, self.generation == token { self.isLoading = false; self.task = nil } }
             do {
-                guard let match = try await lookup(resource, group.scope, mode, input) else { throw RebuildError.referenceNotFound }
+                guard let match = try await lookup(resource, group, mode, input) else { throw RebuildError.referenceNotFound }
                 try Task.checkCancellation()
                 guard let self, let workspace, self.generation == token, self.mode == mode, self.query == query else { return }
                 guard workspace.resourceAssociations.sets.first(where: { $0.id == group.id }) == group,
@@ -69,7 +77,7 @@ enum AssociationDestinationMode: String, CaseIterable, Identifiable, Sendable {
                 if let sourceID = self.sourceID {
                     guard let source, workspace.readers.contains(where: { $0 === source && $0.id == sourceID }),
                           source.resource == sourceResource, source.associationGeneration == sourceGeneration,
-                          source.currentReference == sourceReference, !source.isLoading else {
+                          Self.contextReference(source) == sourceReference, !source.isLoading else {
                         throw PersonalStateError.invalid(L("La lectura de origen cambió. Vuelve a abrir los recursos asociados."))
                     }
                 }
@@ -97,10 +105,19 @@ enum AssociationDestinationMode: String, CaseIterable, Identifiable, Sendable {
             }
         }
     }
+    nonisolated static func resolve(_ resource: LibraryResource, scope group: ResourceAssociationSet,
+                                    mode: AssociationDestinationMode, query: String) async throws -> KeyLinkMatch? {
+        guard group.supports(resource) else { throw RebuildError.unsupportedFormat }
+        return try await resolveEligible(resource,scope:group.scope,mode:mode,query:query)
+    }
     nonisolated static func resolve(_ resource: LibraryResource, scope: AssociationResourceScope,
                                     mode: AssociationDestinationMode, query: String) async throws -> KeyLinkMatch? {
-        try Task.checkCancellation()
         guard scope.supports(resource) else { throw RebuildError.unsupportedFormat }
+        return try await resolveEligible(resource,scope:scope,mode:mode,query:query)
+    }
+    nonisolated private static func resolveEligible(_ resource: LibraryResource, scope: AssociationResourceScope,
+                                                   mode: AssociationDestinationMode, query: String) async throws -> KeyLinkMatch? {
+        try Task.checkCancellation()
         if mode != .start {
             let kinds: [KeyLinkKind] = mode == .reference ? [.bible,.commentary] : [.dictionary,.lexicon]
             guard let kind = kinds.first(where: { $0.supports(resource) }) else { throw RebuildError.unsupportedFormat }
@@ -124,12 +141,13 @@ enum AssociationDestinationMode: String, CaseIterable, Identifiable, Sendable {
 @MainActor extension StudyWorkspace {
     func beginAssociatedResources(groupID: UUID? = nil, source: ReaderSession? = nil) {
         let source = source ?? activeReader
+        let catalog = ResourceAssociationCatalog(resources:availableResources)
         let eligible = resourceAssociations.sets.filter { group in
-            source.map { reader in group.members.contains { group.resolve($0, in: availableResources) == reader.resource } } ?? true
+            source.map { reader in group.members.contains { group.resolve($0, using: catalog) == reader.resource } } ?? true
         }
         let selected = groupID.flatMap { id in resourceAssociations.sets.first { $0.id == id } } ?? eligible.first
         let memberSource = source.flatMap { reader in
-            selected?.members.contains { selected?.resolve($0, in: availableResources) == reader.resource } == true ? reader : nil
+            selected?.members.contains { selected?.resolve($0, using: catalog) == reader.resource } == true ? reader : nil
         }
         associationNavigation.begin(groupID: selected?.id, source: memberSource)
         activeTool = .associationLinks

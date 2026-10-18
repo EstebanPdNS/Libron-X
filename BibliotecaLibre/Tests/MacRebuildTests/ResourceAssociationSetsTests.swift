@@ -94,7 +94,7 @@ import Testing
         let url = fixture.root.appendingPathComponent("associations.json"), member = LibraryCollectionMember(typed(fixture.resources[0]))
         var unsafe = member; unsafe.resourceID = "/tmp/../book"
         let set = ResourceAssociationSet(name:"a",members:[member])
-        let invalid = [ResourceAssociationSetsSnapshot(schemaVersion:2),.init(sets:[set,set]),
+        let invalid = [ResourceAssociationSetsSnapshot(schemaVersion:3),.init(sets:[set,set]),
                        .init(sets:[.init(name:"a",members:[member,member])]),.init(sets:[.init(name:"a",members:[unsafe])]),
                        .init(sets:[.init(name:"a",scope:.init(kind:.series))]),
                        .init(sets:[.init(name:"a",scope:.init(language:"spa"))])]

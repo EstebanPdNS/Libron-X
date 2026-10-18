@@ -29,7 +29,7 @@ A feature counts only when its complete behavior is implemented and verified. Ea
 - [x] Search result views.
 - [x] Long-running search control.
 - [x] Resource association manager.
-- [ ] General resource associations.
+- [x] General resource associations.
 - [ ] Bibliography reports.
 - [ ] Citation styles.
 - [ ] Copy resource citation.

@@ -4,15 +4,16 @@ import LibronixCore
 struct AssociatedResourcesView: View {
     @Bindable var workspace: StudyWorkspace
     @Bindable var controller: AssociationNavigationController
+    @RebuildViewState private var catalog = ResourceAssociationCatalog(resources: [])
     @RebuildViewState private var selectionID: String?
     private var selectedMember: LibraryCollectionMember? { group?.members.first { $0.id == selectionID } }
-    private var selectedResource: LibraryResource? { selectedMember.flatMap { group?.resolve($0, in: workspace.availableResources) } }
+    private var selectedResource: LibraryResource? { selectedMember.flatMap { group?.resolve($0, using: catalog) } }
     private var canOpen: Bool { selectedResource != nil && !controller.isLoading && !(group?.relation == .alternatives && selectedResource == source?.resource) }
     private var source: ReaderSession? { workspace.readers.first { $0.id == controller.sourceID } }
     private var groups: [ResourceAssociationSet] {
         workspace.resourceAssociations.sets.filter { group in
             guard controller.sourceID != nil else { return true }
-            return source.map { reader in group.members.contains { group.resolve($0, in: workspace.availableResources) == reader.resource } } ?? false
+            return source.map { reader in group.members.contains { group.resolve($0, using: catalog) == reader.resource } } ?? false
         }
     }
     private var group: ResourceAssociationSet? { groups.first { $0.id == controller.groupID } }
@@ -46,10 +47,10 @@ struct AssociatedResourcesView: View {
                         .font(.caption).foregroundStyle(.secondary)
                 }
                 List(group.members, selection: $selectionID) { member in
-                    let resource = group.resolve(member, in: workspace.availableResources)
+                    let resource = group.resolve(member, using: catalog)
                     VStack(alignment: .leading) {
                         Text(resource?.title ?? member.title)
-                        Text(resource?.fileName ?? L("Recurso no disponible o incompatible"))
+                        Text(resource?.fileName ?? L(group.isAmbiguous(member,using:catalog) ? "Varias ediciones coinciden; elige una." : "Recurso no disponible o incompatible"))
                             .font(.caption).foregroundStyle(resource == nil ? .orange : .secondary)
                     }.padding(.vertical, 4).tag(member.id)
                 }.accessibilityLabel(L("Recursos asociados"))
@@ -69,12 +70,13 @@ struct AssociatedResourcesView: View {
             if controller.isLoading { HStack { ProgressView().controlSize(.small); Button(L("Cancelar")) { controller.cancel() } } }
             if let error = controller.error { Text(error).foregroundStyle(.red).font(.callout).textSelection(.enabled) }
         }.padding(16)
-            .onAppear { selectFirst() }
+            .onAppear { catalog = .init(resources:workspace.availableResources); selectFirst() }
+            .onChange(of: workspace.availableResources) { catalog = .init(resources:workspace.availableResources) }
             .onChange(of: controller.groupID) { selectFirst() }
             .onDisappear { controller.cancel() }
     }
     private func selectFirst() {
-        selectionID = group?.members.first(where: { group?.resolve($0, in: workspace.availableResources) != source?.resource })?.id ?? group?.members.first?.id
+        selectionID = group?.members.first(where: { group?.resolve($0, using: catalog) != source?.resource })?.id ?? group?.members.first?.id
     }
     private func openSelection(newReader: Bool = false) {
         guard let member = selectedMember else { return }

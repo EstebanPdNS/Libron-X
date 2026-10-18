@@ -42,6 +42,13 @@ public struct ResourceAssociation: Identifiable, Codable, Hashable, Sendable {
     public var resourceIDs: [String] { groups.flatMap(\.resourceIDs) }
 }
 
+/// A bounded source document retained as evidence, never executed or rewritten.
+public struct ResourceAssociationDocument: Sendable {
+    public let source: URL
+    public let data: Data
+    public let definition: ResourceAssociation
+}
+
 /// Only declared operators are interpreted. Unknown nodes remain round-trip
 /// data and must not silently match every resource or become an empty filter.
 public indirect enum ResourceFilter: Codable, Hashable, Sendable {

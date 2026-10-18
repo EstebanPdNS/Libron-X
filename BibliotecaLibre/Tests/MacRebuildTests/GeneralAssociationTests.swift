@@ -88,7 +88,9 @@ private actor AssociationMatchGate {
         #expect(source.page?.text.contains("Target Ge1:2") == true && source.page?.destination.ordinal == 1)
         #expect(source.page?.content?.anchors.isEmpty == true && source.canSynchronizeBible == false)
         let text = source.page?.text, history = source.history
-        w.beginAssociatedResources(groupID:g.id,source:source); w.associationNavigation.mode = .reference; w.associationNavigation.query = "Ge 9:99"
+        w.beginAssociatedResources(groupID:g.id,source:source);
+        #expect(w.associationNavigation.mode == .reference)
+         w.associationNavigation.mode = .reference; w.associationNavigation.query = "Ge 9:99"
         w.associationNavigation.open(g.members[0],workspace:w); try await ready { !w.associationNavigation.isLoading }
         #expect(w.associationNavigation.error != nil && source.page?.text == text && source.history == history)
     }

@@ -378,9 +378,9 @@ Static examination of the 53 supplied original association files finds 49 groups
 and 1116 ordered member references, mostly without an explicit relation type.
 That establishes ordered membership and priority declarations, including absent
 resources, but does not establish a runtime alternative/companion contract.
-This editor records the user's chosen relation explicitly. Import of original
-association definitions and resource navigation are separate integration work;
-this manager alone does not close the original Parallel Resources workflow.
+This editor records the user's chosen relation explicitly. Original definition
+import and resource navigation are described in the following sections. The
+original Parallel Resources workflow retains a separate parity gate.
 
 Acceptance: 803 tests in 134 suites pass, including eight new test definitions.
 Installed build 54 verifies creation, Unicode naming, language filtering, adding
@@ -393,7 +393,7 @@ exactly; the new test-only state is archived. Catalog/entry set and all 53 origi
 association definitions remain unchanged; 1099 package integrity checks pass.
 Native visual evidence covers observed Spanish dark appearance only.
 
-## General association navigation (original import pending)
+## General association navigation
 
 Owned association groups now open resources through Tools > Associated resources,
 the reader Actions menu, or the association editor. A native selectable list,
@@ -428,7 +428,66 @@ explicit beginning navigation between two ELA volumes. Independent read-only
 SQLite oracles match Ryrie ordinal 66, Matthew Henry ordinal 1255, and H1 ordinal
 0 in both lexicons. Native visual evidence covers observed Spanish dark appearance.
 
-The general-associations checklist feature remains pending until original
-association definition import is integrated, including order, provenance and
-unresolved/ambiguous GUID references. This navigation checkpoint alone does not
-claim the original Parallel Resources workflow is complete.
+Original definitions and their restoration are integrated below. Navigation is
+bounded by each reader's verified coordinate capabilities; the original Parallel
+Resources workflow has a separate, still-open parity gate.
+
+## Original association definitions and restoration
+
+The native editor imports one selected .lbxras document through a bounded,
+read-only XML reader, then previews its group/member counts. Users choose the
+relation and kind explicitly; an unspecified original type never silently becomes
+a proven alternative/companion runtime contract. Empty/obsolete definitions stay
+visible in preview with import disabled. Each group retains the exact original
+bytes, SHA-256, source URL, identity, group index, ordered GUID references,
+priority spelling and attributes. These are owned copies; original files are
+never rewritten. Reimporting the same source hash/group reuses the existing group
+without overwriting user edits or edition bindings. A changed source creates a
+separate version, with a distinct name and identity.
+
+Schema 1 owned groups remain readable and unchanged. Imported groups use schema
+2, validated by recomputing the source hash, reparsing its retained bytes and
+matching cached group data. Original member identities derive from source hash,
+group index and reference position, preserving duplicate references and user
+reordering/removal. Missing references remain in the definition. Importing all
+file groups is atomic under the existing 128-group/256-member and bounded-state
+limits; concurrent writers must reload. Removing imported groups allows the
+remaining owned state to return to schema 1.
+
+Resolution indexes exact declared commerce/alternate GUIDs once per catalog
+revision. An imported series uses its original membership declaration rather
+than requiring inferred collection metadata. Typed kind/language scopes still
+restrict eligibility. A unique candidate resolves automatically; multiple
+editions remain ambiguous until explicitly selected. A binding records exact
+catalog path/format/legacy identity and never silently switches editions if its
+chosen resource disappears. Users can return to automatic resolution. Added own
+members remain exact identities; missing, ambiguous and incompatible members
+cannot open. The index is session state, not copied book text or new source data.
+
+Acceptance: 826 tests in 137 suites pass in maintained/public trees. The complete
+general-associations feature adds 23 test definitions over the prior 803-test
+manager checkpoint, including source/schema/provenance mutation, aliases,
+ambiguity/binding, no-original-file restoration, stale import, remove/re-add and
+actual imported-member navigation. A separate private final-source probe imports
+all 53 supplied definitions: four are inactive; 49 groups retain all 1116
+references and restore exactly. An independent Python XML/catalog-alias oracle
+agrees: 25 references resolve in the present catalog, 1091 remain absent and none
+are ambiguous in this particular corpus. Authored cases independently exercise
+ambiguous editions.
+
+Installed build 58 verifies original Mundo Hispano import with 18 members,
+provenance, an explicit edition binding retained after restart, and same-pane
+navigation from Genesis to Exodus. Be Series retains 28 members including 27
+absent ones, blocks missing-member opening, and opens its one installed member.
+An obsolete definition disables import; repeating Be Series import retains two
+existing groups and the first group's edition binding. All original definition
+hashes, catalog/entry set and ten user-state files remain intact; all 1099
+integrity checks across 521 packages pass. Created test state is archived.
+
+A known reader boundary remains explicit: Ge 1:1 in the original CBMH Genesis
+resource is unresolved by both the current normalized and direct original
+reference readers. The failed association lookup preserves the Exodus pane.
+Content-title/book hints are not used to invent a verse destination. Supported
+reference/headword cases are verified separately; full original Parallel
+Resources/index/versification parity remains open. Native visual evidence covers
+observed Spanish dark appearance only.

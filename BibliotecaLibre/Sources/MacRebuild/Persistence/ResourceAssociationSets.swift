@@ -66,22 +66,72 @@ struct ResourceAssociationSet: Codable, Identifiable, Equatable, Sendable {
     var relation: AssociationRelation = .alternatives
     var scope = AssociationResourceScope()
     var members: [LibraryCollectionMember] = []
-    func resolve(_ member: LibraryCollectionMember, in resources: [LibraryResource]) -> LibraryResource? {
-        guard let resource = member.resolve(in: resources), scope.supports(resource) else { return nil }
-        return resource
+    var original: ImportedResourceAssociation? = nil
+    var originalBindings: [String: LibraryCollectionMember]? = nil
+    func supports(_ resource: LibraryResource) -> Bool {
+        if scope.supports(resource) { return true }
+        guard scope.kind == .series, let original,
+              !resource.isHelp, resource.format != .logosModern, resource.support != .invalidFile else { return false }
+        let aliases = ImportedResourceAssociation.identifiers(resource)
+        guard original.group.resourceIDs.contains(where: { aliases.contains($0.lowercased()) }) else { return false }
+        return scope.language.isEmpty || LibronMetadata.deriving(resource).languages.map(LibraryLanguages.canonical).contains(scope.language)
     }
+    func supports(_ resource: LibraryResource, using catalog: ResourceAssociationCatalog) -> Bool {
+        if scope.supports(resource) { return true }
+        guard scope.kind == .series, let original, !resource.isHelp, resource.format != .logosModern, resource.support != .invalidFile,
+              original.group.resourceIDs.contains(where: { catalog.legacyIDs[$0.lowercased()]?.contains(resource) == true }) else { return false }
+        return scope.language.isEmpty || LibronMetadata.deriving(resource).languages.map(LibraryLanguages.canonical).contains(scope.language)
+    }
+    func candidates(for member: LibraryCollectionMember, using catalog: ResourceAssociationCatalog) -> [LibraryResource] {
+        guard let guid = original?.guid(for:member) else {
+            return member.resolve(in:catalog.resources).flatMap { supports($0,using:catalog) ? [$0] : nil } ?? []
+        }
+        return (catalog.legacyIDs[guid.lowercased()] ?? []).filter { resource in
+            if scope.supports(resource) { return true }
+            guard scope.kind == .series, !resource.isHelp, resource.format != .logosModern, resource.support != .invalidFile else { return false }
+            return scope.language.isEmpty || LibronMetadata.deriving(resource).languages.map(LibraryLanguages.canonical).contains(scope.language)
+        }
+    }
+    func candidates(for member: LibraryCollectionMember, in resources: [LibraryResource]) -> [LibraryResource] {
+        candidates(for:member,using:.init(resources:resources))
+    }
+    func resolve(_ member: LibraryCollectionMember, using catalog: ResourceAssociationCatalog) -> LibraryResource? {
+        let choices = candidates(for:member,using:catalog)
+        if let bound = originalBindings?[member.id] { return bound.resolve(in:choices) }
+        return choices.count == 1 ? choices.first : nil
+    }
+    func resolve(_ member: LibraryCollectionMember, in resources: [LibraryResource]) -> LibraryResource? {
+        if original == nil { return member.resolve(in:resources).flatMap { scope.supports($0) ? $0 : nil } }
+        return resolve(member,using:.init(resources:resources))
+    }
+    func isAmbiguous(_ member: LibraryCollectionMember, using catalog: ResourceAssociationCatalog) -> Bool {
+        original?.guid(for:member) != nil && originalBindings?[member.id] == nil && candidates(for:member,using:catalog).count > 1
+    }
+
 }
 struct ResourceAssociationSetsSnapshot: Codable {
     var schemaVersion = 1
     var sets: [ResourceAssociationSet] = []
     @MainActor func validate() throws {
-        guard schemaVersion == 1 else { throw PersonalStateError.futureVersion }
+        guard schemaVersion == 1 || schemaVersion == 2 else { throw PersonalStateError.futureVersion }
         guard sets.count <= 128 else { throw PersonalStateError.invalid(L("Demasiadas asociaciones de recursos.")) }
         // Reuse the established identity/path/name validation, without accepting rule collections.
         try LibraryCollectionsSnapshot(sets: sets.map { .init(id: $0.id, name: $0.name, members: $0.members) }).validate()
         for set in sets {
             guard set.members.count <= 256 else { throw PersonalStateError.invalid(L("Demasiados recursos en la asociación.")) }
             try set.scope.validate()
+            if let original = set.original {
+                guard schemaVersion == 2 else { throw PersonalStateError.futureVersion }
+                try original.validate()
+            }
+            for member in set.members where ImportedResourceAssociation.isReserved(member) {
+                guard set.original?.guid(for:member) != nil else { throw LegacyIndicesError.sourceChanged }
+            }
+            for (id,binding) in set.originalBindings ?? [:] {
+                guard schemaVersion == 2, let member = set.members.first(where: { $0.id == id }),
+                      set.original?.guid(for:member) != nil, !ImportedResourceAssociation.isReserved(binding) else { throw LegacyIndicesError.sourceChanged }
+                try LibraryCollectionsSnapshot(sets:[.init(name:"Binding",members:[binding])]).validate()
+            }
         }
     }
 }
@@ -116,9 +166,8 @@ struct ResourceAssociationSetsSnapshot: Codable {
         try edit(id) { value in
             // Missing or newly incompatible members must remain visible, never silently discarded.
             if value.scope != scope {
-                guard value.members.allSatisfy({ member in
-                    member.resolve(in: resources).map(scope.supports) == true
-                }) else { throw PersonalStateError.invalid(L("Quita los recursos no disponibles o incompatibles antes de cambiar el tipo, idioma o serie.")) }
+                var prospective = value; prospective.scope = scope
+                guard value.members.allSatisfy({ prospective.resolve($0,in:resources) != nil }) else { throw PersonalStateError.invalid(L("Quita los recursos no disponibles o incompatibles antes de cambiar el tipo, idioma o serie.")) }
             }
             value.name = name.trimmingCharacters(in: .whitespacesAndNewlines)
             value.relation = relation; value.scope = scope
@@ -126,15 +175,20 @@ struct ResourceAssociationSetsSnapshot: Codable {
     }
     func add(_ resources: [LibraryResource], to id: UUID) throws {
         try edit(id) { value in
-            guard resources.allSatisfy(value.scope.supports) else {
+            guard resources.allSatisfy(value.supports) else {
                 throw PersonalStateError.invalid(L("El recurso no es compatible con esta asociación."))
             }
             var known = Set(value.members.map(\.id))
-            for resource in resources where known.insert(resource.id).inserted { value.members.append(.init(resource)) }
+            for resource in resources where known.insert(resource.id).inserted {
+                let aliases = ImportedResourceAssociation.identifiers(resource)
+                if !value.members.contains(where: { member in value.original?.guid(for:member).map { aliases.contains($0.lowercased()) } == true }) {
+                    value.members.append(.init(resource))
+                }
+            }
         }
     }
     func removeMember(_ resourceID: String, from id: UUID) throws {
-        try edit(id) { $0.members.removeAll { $0.id == resourceID } }
+        try edit(id) { $0.members.removeAll { $0.id == resourceID }; $0.originalBindings?[resourceID] = nil }
     }
     func moveMember(_ resourceID: String, in id: UUID, by delta: Int) throws {
         guard delta == -1 || delta == 1 else { return }
@@ -142,6 +196,49 @@ struct ResourceAssociationSetsSnapshot: Codable {
             guard let index = value.members.firstIndex(where: { $0.id == resourceID }), value.members.indices.contains(index + delta) else { return }
             value.members.swapAt(index, index + delta)
         }
+    }
+    func bind(_ memberID: String, in id: UUID, to resource: LibraryResource?, resources: [LibraryResource]) throws {
+        try edit(id) { value in
+            guard let member = value.members.first(where: { $0.id == memberID }), value.original?.guid(for:member) != nil else { throw LegacyIndicesError.sourceChanged }
+            if let resource {
+                guard value.candidates(for:member,in:resources).contains(resource) else { throw RebuildError.unsupportedFormat }
+                if value.originalBindings == nil { value.originalBindings = [:] }
+                value.originalBindings?[memberID] = .init(resource)
+            } else { value.originalBindings?[memberID] = nil }
+        }
+    }
+    @discardableResult func importOriginal(_ document: ResourceAssociationDocument, relation: AssociationRelation,
+                                           kind: AssociationResourceKind = .series, language: String = "",
+                                           resources: [LibraryResource]) throws -> [UUID] {
+        let definition = document.definition
+        guard !definition.groups.isEmpty else { throw PersonalStateError.invalid(L("La definición no contiene asociaciones activas.")) }
+        guard definition.groups.count <= 128, document.data.count <= 8 * 1024 * 1024 / definition.groups.count else { throw PersonalStateError.tooLarge }
+        var next = sets, ids: [UUID] = []
+        let catalog = ResourceAssociationCatalog(resources:resources)
+        for index in definition.groups.indices {
+            let original = ImportedResourceAssociation(document:document,groupIndex:index)
+            if let existing = next.first(where: { $0.original?.identity == original.identity }) { ids.append(existing.id); continue }
+            var base = ""
+            for character in definition.title {
+                guard base.utf16.count + String(character).utf16.count <= 140 else { break }; base.append(character)
+            }
+            if base.trimmingCharacters(in:.whitespacesAndNewlines).isEmpty { base = L("Nueva asociación") }
+            if definition.groups.count > 1 { base += " · " + String(index + 1) }
+            var name = base, counter = 2
+            while next.contains(where: { $0.name == name }) { name = base + " (" + String(counter) + ")"; counter += 1 }
+            let scope = AssociationResourceScope(kind:kind,language:LibraryLanguages.canonical(language),series:kind == .series ? base : "")
+            var value = ResourceAssociationSet(name:name,relation:relation,scope:scope,original:original)
+            for (position,guid) in original.group.resourceIDs.enumerated() {
+                let placeholder = LibraryResource(location:URL(fileURLWithPath:original.memberID(position)),title:guid,
+                    byteCount:0,format:.libronixLLS,support:.metadataOnly,provenance:.fileName,legacyIdentifier:guid)
+                var member = LibraryCollectionMember(placeholder)
+                let choices = value.candidates(for:member,using:catalog)
+                if choices.count == 1 { member.title = choices[0].title }
+                value.members.append(member)
+            }
+            next.append(value); ids.append(value.id)
+        }
+        try commit(next); return ids
     }
     func remove(_ id: UUID) throws { try commit(sets.filter { $0.id != id }) }
     private func edit(_ id: UUID, _ action: (inout ResourceAssociationSet) throws -> Void) throws {
@@ -151,7 +248,7 @@ struct ResourceAssociationSetsSnapshot: Codable {
     private func commit(_ next: [ResourceAssociationSet]) throws {
         guard canSave else { throw PersonalStateError.invalid(loadError ?? L("No se pudieron leer las asociaciones.")) }
         guard next != sets else { return }
-        let snapshot = ResourceAssociationSetsSnapshot(sets: next); try snapshot.validate(); try file.save(snapshot)
+        let snapshot = ResourceAssociationSetsSnapshot(schemaVersion: next.contains { $0.original != nil } ? 2 : 1, sets: next); try snapshot.validate(); try file.save(snapshot)
         sets = next; loadError = nil
     }
 }

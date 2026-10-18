@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Import original resource associations with source provenance, ordered missing members and explicit edition resolution.
+
 - Open owned association members as alternatives or companions with verified passage, headword or explicit beginning destinations.
 
 - Manage ordered alternative and companion resource associations with compatibility filters and safe restoration.

@@ -3,6 +3,8 @@ import LibronixCore
 
 struct ResourceAssociationSettingsView: View {
     @Bindable var workspace: StudyWorkspace
+    @RebuildViewState private var catalog = ResourceAssociationCatalog(resources: [])
+    @RebuildViewState private var showsImport = false
     @RebuildViewState private var selectedID: UUID?
     @RebuildViewState private var selectedMemberID: String?
     @RebuildViewState private var selectedCandidateID: String?
@@ -25,9 +27,9 @@ struct ResourceAssociationSettingsView: View {
     }
     private var candidates: [LibraryResource] {
         guard let selected else { return [] }
-        let known = Set(selected.members.map(\.id))
+        let known = Set(selected.members.map(\.id) + selected.members.flatMap { selected.candidates(for:$0,using:catalog).map(\.id) })
         return resources.filter {
-            !known.contains($0.id) && selected.scope.supports($0) &&
+            !known.contains($0.id) && selected.supports($0,using:catalog) &&
             (query.isEmpty || ($0.title + " " + $0.fileName).localizedStandardContains(query))
         }.sorted { a, b in
             let c = a.title.localizedStandardCompare(b.title)
@@ -47,6 +49,7 @@ struct ResourceAssociationSettingsView: View {
                 Button(L("Nueva asociación"), systemImage: "plus") {
                     perform { selectedID = try store.create() }
                 }.frame(maxWidth: .infinity)
+                Button(L("Importar asociación original…"),systemImage:"square.and.arrow.down") { showsImport = true }.frame(maxWidth:.infinity)
             }.frame(minWidth: 170, idealWidth: 200, maxWidth: 240).padding(10)
             VStack(alignment: .leading, spacing: 10) {
                 if let selected {
@@ -56,9 +59,9 @@ struct ResourceAssociationSettingsView: View {
                         .font(.caption).foregroundStyle(.secondary)
                     List(selected.members, selection: $selectedMemberID) { member in
                         VStack(alignment: .leading, spacing: 3) {
-                            Text(selected.resolve(member, in: resources)?.title ?? member.title).lineLimit(2)
-                            Text(selected.resolve(member, in: resources)?.fileName ?? L("Recurso no disponible o incompatible"))
-                                .font(.caption).foregroundStyle(selected.resolve(member, in: resources) == nil ? .orange : .secondary)
+                            Text(selected.resolve(member, using: catalog)?.title ?? member.title).lineLimit(2)
+                            Text(selected.resolve(member, using: catalog)?.fileName ?? L(selected.isAmbiguous(member,using:catalog) ? "Varias ediciones coinciden; elige una." : "Recurso no disponible o incompatible"))
+                                .font(.caption).foregroundStyle(selected.resolve(member, using: catalog) == nil ? .orange : .secondary)
                         }.tag(member.id)
                     }.frame(minHeight: 100).accessibilityLabel(L("Orden de recursos asociados"))
                     HStack {
@@ -69,6 +72,7 @@ struct ResourceAssociationSettingsView: View {
                         Button(L("Subir"), systemImage: "chevron.up") { move(-1) }.disabled(!canMove(-1))
                         Button(L("Bajar"), systemImage: "chevron.down") { move(1) }.disabled(!canMove(1))
                     }.controlSize(.small)
+                    originalMemberControls(selected)
                     candidatePicker(selected)
                     Text(L("Las asociaciones conservan su orden y los recursos ausentes. Los grupos de Biblias se administran por separado."))
                         .font(.caption).foregroundStyle(.secondary)
@@ -88,7 +92,11 @@ struct ResourceAssociationSettingsView: View {
                 }.controlSize(.small)
             }.padding(14).frame(minWidth: 430)
         }
-        .onAppear { selectValidGroup(); loadDraft() }
+        .onAppear { catalog = .init(resources:resources); selectValidGroup(); loadDraft() }
+        .onChange(of: resources) { catalog = .init(resources:resources) }
+        .sheet(isPresented:$showsImport) {
+            ResourceAssociationImportView(workspace:workspace) { id in selectedID = id }
+        }
         .onChange(of: selectedID) { loadDraft(); selectedMemberID = nil; selectedCandidateID = nil; query = ""; error = nil }
     }
     @ViewBuilder private func profile(_ selected: ResourceAssociationSet) -> some View {
@@ -127,6 +135,34 @@ struct ResourceAssociationSettingsView: View {
                     perform { try store.add([resource], to: selected.id); selectedMemberID = resource.id; selectedCandidateID = nil }
                 }.disabled(edited || !candidates.contains { $0.id == selectedCandidateID })
                 if edited { Text(L("Guarda los cambios antes de agregar recursos.")).font(.caption).foregroundStyle(.secondary) }
+            }
+        }
+    }
+    @ViewBuilder private func originalMemberControls(_ selected: ResourceAssociationSet) -> some View {
+        if let original = selected.original {
+            DisclosureGroup(L("Procedencia de la asociación")) {
+                VStack(alignment:.leading,spacing:4) {
+                    Text(original.definitionTitle).font(.caption)
+                    Text(original.sourceURL.lastPathComponent).font(.caption)
+                    Text("SHA-256: " + original.sha256).font(.caption2).textSelection(.enabled)
+                    Text(LF("Grupo original: {number} · Prioridad: {priority} · Tipo: {type}",[
+                        "number":String(original.groupIndex + 1),"priority":original.group.priorityText ?? "—","type":original.group.type ?? "—"]))
+                        .font(.caption)
+                }
+            }
+            if let member = selected.members.first(where: { $0.id == selectedMemberID }), original.guid(for:member) != nil {
+                HStack {
+                    Menu(L("Elegir edición")) {
+                        ForEach(selected.candidates(for:member,using:catalog)) { resource in
+                            Button(parallelBibleMenuTitle(resource,in:resources)) {
+                                perform { try store.bind(member.id,in:selected.id,to:resource,resources:resources) }
+                            }
+                        }
+                    }.disabled(selected.candidates(for:member,using:catalog).isEmpty)
+                    if selected.originalBindings?[member.id] != nil {
+                        Button(L("Resolución automática")) { perform { try store.bind(member.id,in:selected.id,to:nil,resources:resources) } }
+                    }
+                }.controlSize(.small)
             }
         }
     }
