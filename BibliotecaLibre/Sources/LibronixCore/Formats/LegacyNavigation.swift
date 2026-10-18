@@ -213,8 +213,8 @@ public struct LegacyPassageQuery: Sendable, Codable, Equatable {
         ("1pe", ["1pe", "1pet", "1peter", "1pedro", "i pedro"]),
         ("2pe", ["2pe", "2pet", "2peter", "2pedro", "ii pedro"]),
         ("1jn", ["1jn", "1jo", "1john", "1juan", "i juan"]),
-        ("2jn", ["2jn", "2john", "2juan", "ii juan"]),
-        ("3jn", ["3jn", "3john", "3juan", "iii juan"]),
+        ("2jn", ["2jn", "2jo", "2john", "2juan", "ii juan"]),
+        ("3jn", ["3jn", "3jo", "3john", "3juan", "iii juan"]),
         ("jud", ["jud", "jude", "judas"]),
         ("re", ["re", "rev", "revelation", "ap", "apo", "apoc", "apocalipsis"])
     ]

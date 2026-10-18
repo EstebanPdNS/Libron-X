@@ -30,7 +30,7 @@ actor WorkspaceSearchReader: LibrarySearchContentProvider {
         for entry in first.entries where titles[entry.ordinal] == nil { titles[entry.ordinal] = entry.title }
         let result = LibrarySearchPreparedResource(articles: (0..<first.sectionCount).map {
             .init(sectionOrdinal: $0, title: titles[$0] ?? resource.title + " · " + String($0 + 1))
-        }, sourceStamps: stamps, warnings: [], projectionVersion: "workspace-reference-links-v2")
+        }, sourceStamps: stamps, warnings: [], projectionVersion: "workspace-bible-intervals-v3")
         try await verifyUnchanged(resource, prepared: result)
         return result
     }

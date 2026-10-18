@@ -51,6 +51,7 @@ public struct LibrarySearchCounters: Hashable, Sendable {
     /// Source-anchored verse intervals evaluated/accepted in bibleVerse mode.
     public var versesExamined = 0
     public var matchingVerses = 0
+    public var versesExcludedByRange = 0
     /// Positive text ranges found in examined articles, before report truncation.
     public var occurrencesObserved = 0
     public var occurrencesReturned = 0
@@ -60,6 +61,7 @@ public struct LibrarySearchCounters: Hashable, Sendable {
 }
 
 public struct LibrarySearchResourceReport: Hashable, Sendable, Identifiable {
+    public var versesExcludedByRange = 0
     public var articlesRuledOutByIndex = 0
     public let resourceID: String
     public let resourceTitle: String
@@ -140,6 +142,7 @@ public struct LibrarySearchProgress: Sendable {
 }
 
 public struct LibrarySearchReport: Sendable {
+    public var bibleRange: BibleSearchRange? = nil
     public let unit: LibrarySearchUnit
     public let results: [LibrarySearchResult]
     public let resourceReports: [LibrarySearchResourceReport]

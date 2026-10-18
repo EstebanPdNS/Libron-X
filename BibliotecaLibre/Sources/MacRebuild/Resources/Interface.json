@@ -7042,5 +7042,101 @@
     "pt": "{results} resultados · {articles} artigos · {fields} campos pessoais",
     "ur": "{results} نتائج · {articles} مضامین · {fields} ذاتی خانے",
     "zh-Hans": "{results} 个结果 · {articles} 篇文章 · {fields} 个个人字段"
+  },
+  "Rango bíblico": {
+    "es": "Rango bíblico",
+    "en": "Bible range",
+    "zh-Hans": "圣经范围",
+    "hi": "बाइबल का दायरा",
+    "ar": "نطاق الكتاب المقدس",
+    "fr": "Plage biblique",
+    "bn": "বাইবেলের পরিসর",
+    "pt": "Intervalo bíblico",
+    "id": "Rentang Alkitab",
+    "ur": "بائبل کا دائرہ"
+  },
+  "Todos los versículos": {
+    "es": "Todos los versículos",
+    "en": "All verses",
+    "zh-Hans": "所有经文",
+    "hi": "सभी पद",
+    "ar": "كل الآيات",
+    "fr": "Tous les versets",
+    "bn": "সব পদ",
+    "pt": "Todos os versículos",
+    "id": "Semua ayat",
+    "ur": "تمام آیات"
+  },
+  "Pasajes o libros": {
+    "es": "Pasajes o libros",
+    "en": "Passages or books",
+    "zh-Hans": "经文或书卷",
+    "hi": "अंश या पुस्तकें",
+    "ar": "مقاطع أو أسفار",
+    "fr": "Passages ou livres",
+    "bn": "অংশ বা বই",
+    "pt": "Passagens ou livros",
+    "id": "Bagian atau kitab",
+    "ur": "عبارات یا کتابیں"
+  },
+  "Lista guardada": {
+    "es": "Lista guardada",
+    "en": "Saved list",
+    "zh-Hans": "已保存的列表",
+    "hi": "सहेजी गई सूची",
+    "ar": "قائمة محفوظة",
+    "fr": "Liste enregistrée",
+    "bn": "সংরক্ষিত তালিকা",
+    "pt": "Lista salva",
+    "id": "Daftar tersimpan",
+    "ur": "محفوظ فہرست"
+  },
+  "Pasajes, por ejemplo Gn 1–3; Juan 3:16–18; Romanos": {
+    "es": "Pasajes, por ejemplo Gn 1–3; Juan 3:16–18; Romanos",
+    "en": "Passages, e.g. Gen 1–3; John 3:16–18; Romans",
+    "zh-Hans": "经文，例如 Gen 1–3; John 3:16–18; Romans",
+    "hi": "अंश, जैसे Gen 1–3; John 3:16–18; Romans",
+    "ar": "مقاطع، مثل Gen 1–3; John 3:16–18; Romans",
+    "fr": "Passages, par ex. Gen 1–3; John 3:16–18; Romans",
+    "bn": "অংশ, যেমন Gen 1–3; John 3:16–18; Romans",
+    "pt": "Passagens, por exemplo Gn 1–3; João 3:16–18; Romanos",
+    "id": "Bagian, misalnya Gen 1–3; John 3:16–18; Romans",
+    "ur": "عبارات، مثلاً Gen 1–3; John 3:16–18; Romans"
+  },
+  "Selecciona una lista de versículos": {
+    "es": "Selecciona una lista de versículos",
+    "en": "Select a verse list",
+    "zh-Hans": "选择经文列表",
+    "hi": "पदों की सूची चुनें",
+    "ar": "اختر قائمة آيات",
+    "fr": "Sélectionnez une liste de versets",
+    "bn": "একটি পদের তালিকা নির্বাচন করুন",
+    "pt": "Selecione uma lista de versículos",
+    "id": "Pilih daftar ayat",
+    "ur": "آیات کی فہرست منتخب کریں"
+  },
+  "Rango: {range}": {
+    "es": "Rango: {range}",
+    "en": "Range: {range}",
+    "zh-Hans": "范围：{range}",
+    "hi": "दायरा: {range}",
+    "ar": "النطاق: {range}",
+    "fr": "Plage : {range}",
+    "bn": "পরিসর: {range}",
+    "pt": "Intervalo: {range}",
+    "id": "Rentang: {range}",
+    "ur": "دائرہ: {range}"
+  },
+  "{selected} versículos examinados · {excluded} fuera del rango": {
+    "es": "{selected} versículos examinados · {excluded} fuera del rango",
+    "en": "{selected} verses examined · {excluded} outside the range",
+    "zh-Hans": "已检查 {selected} 节经文 · {excluded} 节在范围外",
+    "hi": "{selected} पद जाँचे गए · {excluded} दायरे से बाहर",
+    "ar": "تم فحص {selected} آيات · {excluded} خارج النطاق",
+    "fr": "{selected} versets examinés · {excluded} hors de la plage",
+    "bn": "{selected} পদ পরীক্ষা করা হয়েছে · {excluded} পরিসরের বাইরে",
+    "pt": "{selected} versículos examinados · {excluded} fora do intervalo",
+    "id": "{selected} ayat diperiksa · {excluded} di luar rentang",
+    "ur": "{selected} آیات کی جانچ ہوئی · {excluded} دائرے سے باہر"
   }
 }

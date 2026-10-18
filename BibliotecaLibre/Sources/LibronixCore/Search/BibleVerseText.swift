@@ -15,15 +15,17 @@ public struct LibrarySearchBibleVerse: Hashable, Sendable, Codable {
 
 enum BibleVerseText {
     static func intervals(text: String, anchors: [LegacyReferenceAnchor]) throws -> [LibrarySearchBibleVerse] {
-        // The observed Bible anchors in the reference resources use datatype 2.
-        // Non-Bible labels and other datatypes remain outside this subset.
+        // LSF textual Bible anchors use datatype 2. Observed LLS 0x52 anchors
+        // use datatype 16 with an explicit serialized Bible scheme. Keep their
+        // original datatype; ordinary type-16 labels must never become verses.
         let length = text.utf16.count
         var observed: [(reference: String, key: String, start: Int)] = []
         var previousSourceStart = 0
         var keys = Set<String>()
-        for anchor in anchors where anchor.dataTypeCode == 2 {
+        for anchor in anchors {
             try Task.checkCancellation()
             guard let sourceReference = anchor.reference,
+                  anchor.dataTypeCode == 2 || (anchor.dataTypeCode == 16 && serializedBibleScheme(sourceReference)),
                   let reference = LegacyPassageQuery.parse(sourceReference) else { continue }
             let start = anchor.characterOffset
             guard start >= previousSourceStart, start <= length,
@@ -33,7 +35,13 @@ enum BibleVerseText {
             previousSourceStart = start
             if let previous = observed.last {
                 guard start >= previous.start else { throw LibrarySearchError.invalidVerseDirectory }
-                if reference.normalizedKey == previous.key { continue }
+                if reference.normalizedKey == previous.key {
+                    // Repeated markers may be aliases of one source verse.
+                    // Distinct explicit editions cannot be merged into a single
+                    // interval and attributed to the first edition's label.
+                    guard edition(sourceReference) == edition(previous.reference) else { throw LibrarySearchError.invalidVerseDirectory }
+                    continue
+                }
                 guard start > previous.start else { throw LibrarySearchError.invalidVerseDirectory }
             }
             guard keys.insert(reference.normalizedKey).inserted else { throw LibrarySearchError.invalidVerseDirectory }
@@ -48,6 +56,16 @@ enum BibleVerseText {
             }
             return .init(reference: item.reference, normalizedReference: item.key, range: range)
         }
+    }
+
+    private static func serializedBibleScheme(_ reference: String) -> Bool {
+        let value = reference.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        return (value.hasPrefix("bible.") || value.hasPrefix("bible+")) && LegacyPassageQuery.sourceReference(value) != nil
+    }
+    private static func edition(_ reference: String) -> String? {
+        let value = reference.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        guard value.hasPrefix("bible+"), let scheme = value.split(separator: ".").first else { return nil }
+        return String(scheme.dropFirst(6))
     }
 
     static func validate(_ intervals: [LibrarySearchBibleVerse], in text: String) throws {

@@ -113,7 +113,7 @@ struct ReaderHighlight: Identifiable, Codable, Equatable {
     func submitToolbarSearch() {
         guard !search.query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
         beginSearch()
-        search.run(availableResources)
+        search.run(availableResources, documents: personal.documents)
     }
     func addHighlight(_ color: String) {
         guard let reader = activeReader, let page = reader.page, reader.selectedRange.length > 0 else { return }
@@ -180,7 +180,7 @@ struct ReaderHighlight: Identifiable, Codable, Equatable {
 
 @MainActor extension ReaderSession {
     func loadSearchResult(_ result: LibrarySearchResult) {
-        load(.init(ordinal: result.sectionOrdinal), selection: result.hits.first?.range.nsRange,
+        load(.init(ordinal: result.sectionOrdinal), selection: result.hits.first?.range.nsRange ?? result.verseRange?.nsRange,
              expectedFingerprint: result.decodedTextSHA256, expectedSourceStamps: result.sourceStamps)
     }
 }

@@ -20,7 +20,7 @@ A feature counts only when its complete behavior is implemented and verified. Ea
 - [x] General resource collections.
 - [x] Resource priorities and key links.
 - [x] Bible reference search.
-- [ ] Configurable Bible search ranges.
+- [x] Configurable Bible search ranges.
 - [ ] Collection and open-resource search scopes.
 - [ ] Rule-based collections.
 - [ ] Advanced query execution.

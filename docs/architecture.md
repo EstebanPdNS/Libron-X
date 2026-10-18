@@ -61,3 +61,5 @@ Manual resource collections use separate validated, atomic app-owned state. See 
 Resource priorities keep promoted order, enabled flags and per-datatype opening counts in independent owned state. See [key-link resolution and persistence](../BibliotecaLibre/docs/resource-priorities.md).
 
 Reference-mention search spans reader projections and personal documents. See [the query, projection and native acceptance contract](../BibliotecaLibre/docs/reference-mention-search.md); original-engine equivalence remains a separate gate.
+
+Bible text search supports compiled passage/book unions and immutable saved-list scopes. See [the range and verse-boundary contract](../BibliotecaLibre/docs/bible-search-ranges.md).

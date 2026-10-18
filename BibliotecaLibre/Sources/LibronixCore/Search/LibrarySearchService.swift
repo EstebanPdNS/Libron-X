@@ -19,9 +19,11 @@ public actor LibrarySearchService {
     public func search(resources: [LibraryResource], query: SearchQuery,
                        options: TextSearchOptions = TextSearchOptions(),
                        unit: LibrarySearchUnit = .article,
+                       bibleRange: BibleSearchRange? = nil,
                        budget: LibrarySearchBudget = LibrarySearchBudget(),
                        onProgress: (@Sendable (LibrarySearchProgress) async -> Void)? = nil) async throws -> LibrarySearchReport {
         try validate(budget)
+        guard bibleRange == nil || unit == .bibleVerse else { throw BibleSearchRangeError.requiresVerseMode }
         try Task.checkCancellation()
         // Validate evaluator options before classifying any source as a failed read.
         _ = try TextSearchEngine.search(query: query, in: "", options: options)
@@ -74,6 +76,8 @@ public actor LibrarySearchService {
             if let reached = budgetLimit() { limit = reached; break }
             let resource = resources[index]
             counters.resourcesExamined += 1
+            var hasVerseIntervals = false
+            let rangePredicate = bibleRange?.bind(to: resource)
             let prepared: LibrarySearchPreparedResource
             do {
                 prepared = try await provider.prepare(resource)
@@ -141,9 +145,28 @@ public actor LibrarySearchService {
                     if elapsed() >= budget.maximumDurationSeconds { limit = .duration; break resourceLoop }
                     let verses: [LibrarySearchBibleVerse]
                     if unit == .bibleVerse {
-                        verses = content.referenceAnchors.isEmpty ? content.bibleVerses
+                        let observed = content.referenceAnchors.isEmpty ? content.bibleVerses
                             : try BibleVerseText.intervals(text: content.text, anchors: content.referenceAnchors)
-                        try BibleVerseText.validate(verses, in: content.text)
+                        try BibleVerseText.validate(observed, in: content.text)
+                        let logical = try observed.filter { verse in
+                            guard let extent = content.searchRange else { return true }
+                            let intersection = NSIntersectionRange(extent.nsRange, verse.range.nsRange)
+                            guard intersection.length > 0 else { return false }
+                            guard intersection == verse.range.nsRange else { throw LibrarySearchError.invalidVerseDirectory }
+                            return true
+                        }
+                        hasVerseIntervals = hasVerseIntervals || !logical.isEmpty
+                        if let rangePredicate {
+                            verses = try logical.filter { verse in
+                                try Task.checkCancellation()
+                                let included = try rangePredicate.contains(verse)
+                                if !included {
+                                    counters.versesExcludedByRange += 1
+                                    resourceReports[index].versesExcludedByRange += 1
+                                }
+                                return included
+                            }
+                        } else { verses = logical }
                     } else { verses = [] }
                     let intervals: [LibrarySearchBibleVerse?] = unit == .article ? [nil] : verses.map { Optional($0) }
                     var articleMatched = false
@@ -203,7 +226,7 @@ public actor LibrarySearchService {
             }
             if resourceReports[index].articlesExamined == articles.count {
                 resourceReports[index].status = resourceReports[index].articlesFailed == 0 ? .complete : .partial
-                if unit == .bibleVerse && resourceReports[index].versesExamined == 0 && resourceReports[index].articlesFailed == 0 {
+                if unit == .bibleVerse && !hasVerseIntervals && resourceReports[index].articlesFailed == 0 {
                     resourceReports[index].status = .incompatible
                     resourceReports[index].warnings.append("El contenido leído no contiene intervalos de versículos compatibles; no permite afirmar ausencia de coincidencias bíblicas.")
                     counters.resourcesIncompatible += 1
@@ -222,7 +245,7 @@ public actor LibrarySearchService {
         }
         let complete = limit == nil && counters.resourcesCompleted == counters.resourcesTotal
             && counters.articlesFailed == 0
-        return .init(unit: unit, results: results, resourceReports: resourceReports, counters: counters,
+        return .init(bibleRange: bibleRange, unit: unit, results: results, resourceReports: resourceReports, counters: counters,
             limitReason: limit, elapsedSeconds: elapsed(), coverageComplete: complete,
             scopeDescription: unit == .article
                 ? "Búsqueda lineal por artículo, sobre el texto del lector compatible. Las páginas HTML compartidas se evalúan por artículo. Los rangos UTF-16 y el hash pertenecen al texto completo del lector; no son offsets de índices legados ni búsqueda de lemas/Strong."

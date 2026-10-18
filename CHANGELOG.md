@@ -6,6 +6,7 @@
 - Organize mixed resources in persistent manual collections.
 - Configure resource priorities and resolve Bible, commentary and word links.
 - Find edition-aware Bible references in resources and personal study documents.
+- Limit Bible text searches to passages, books or saved verse lists.
 
 ## v0.3 — 2026-10-17
 

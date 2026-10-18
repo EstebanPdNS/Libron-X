@@ -99,7 +99,12 @@ public final class LibronNativeDatabase {
         try execute("INSERT OR IGNORE INTO bible_v1 VALUES(?,?,?,?,?,?)",values:[q.sourceBookKey,String(q.chapter),String(q.verse),String(ordinal),String(offset),q.displayReference])
     }
     public func resolve(_ reference: String) throws -> (ordinal: Int, offset: Int, reference: String)? {
-        guard let q = LegacyPassageQuery.navigationInput(reference), let row = try rows("SELECT ordinal,offset,reference FROM bible_v1 WHERE book=? AND chapter=? AND verse=? ORDER BY ordinal,offset LIMIT 1",values:[q.sourceBookKey,String(q.chapter),String(q.verse)]).first,
+        guard let q = LegacyPassageQuery.navigationInput(reference) else { return nil }
+        // Previously normalized e-Sword books retained the observed 2Jo/3Jo
+        // spelling as their key. Read those immutable stores after canonical
+        // spelling normalization without rewriting the user's database.
+        let previous = ["2jn": "2jo", "3jn": "3jo"][q.sourceBookKey] ?? q.sourceBookKey
+        guard let row = try rows("SELECT ordinal,offset,reference FROM bible_v1 WHERE (book=? OR book=?) AND chapter=? AND verse=? ORDER BY CASE WHEN book=? THEN 0 ELSE 1 END,ordinal,offset LIMIT 1",values:[q.sourceBookKey,previous,String(q.chapter),String(q.verse),q.sourceBookKey]).first,
               row.count == 3, let ordinal = Int(row[0]), let offset = Int(row[1]) else { return nil }
         return (ordinal,offset,row[2])
     }

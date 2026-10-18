@@ -1,6 +1,6 @@
 # Reference mention search
 
-Status: native product implementation for `study-expansion-search-07`, verified on macOS in installed v0.3.0 build 37. The search is available from **Search → Find Bible references**. It is the fifth verified feature assigned to v0.4; no new release is published until that version’s full feature gate passes.
+Status: native product implementation for `study-expansion-search-07`, initially verified on macOS in installed v0.3.0 build 37. Subsequent Bible-range integration advances the workspace projection contract to v3, with the mention-search regression cases retained in the current suite. The search is available from **Search → Find Bible references**. It is the fifth verified feature assigned to v0.4; no new release is published until that version’s full feature gate passes.
 
 ## Extraction and query contract
 
@@ -24,7 +24,7 @@ Personal snapshots are examined first and report their field progress separately
 
 The portable legacy adapter and the native workspace adapter supply checked `LegacyInlineLinkTarget.bible` destinations. Conversion uses the typed destination rather than `sourceName` or display text; this preserves references stored in an extended attribute after a different first attribute. Local article links do not become Bible references based on their labels.
 
-The HTML bridge collects raw `href` and `lbxrt:xref` attributes across the same visible DOM text nodes used for reader selection. Hidden nodes have no coordinates, labels split by inline formatting retain one span, and external URLs are rejected by reference parsing. The source attributes remain inert. Shared-page article ownership still applies. The workspace projection version is `workspace-reference-links-v2`; the portable legacy version is `core-legacy-reference-links-v1`.
+The HTML bridge collects raw `href` and `lbxrt:xref` attributes across the same visible DOM text nodes used for reader selection. Hidden nodes have no coordinates, labels split by inline formatting retain one span, and external URLs are rejected by reference parsing. The source attributes remain inert. Shared-page article ownership still applies. The workspace projection version is `workspace-bible-intervals-v3`; the portable legacy version is `core-legacy-reference-links-v1`.
 
 ## Native interaction and verification
 

@@ -5,6 +5,28 @@ import Testing
 import CSQLite
 
 struct LibronNativeDatabaseTests {
+    @Test func previouslyStoredJoKeysRemainReadableWithoutMutatingNormalizedBytes() throws {
+        let url = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString + ".sqlite")
+        defer { try? FileManager.default.removeItem(at: url) }
+        do {
+            let db = try LibronNativeDatabase(url, create: true)
+            try db.add(reference: "2Jo1:1", ordinal: 17, offset: 3)
+            try db.add(reference: "3Jo1:2", ordinal: 18, offset: 7)
+            try db.add(reference: "Ge1:1", ordinal: 0, offset: 0)
+            try db.finish()
+        }
+        var db: OpaquePointer?
+        #expect(sqlite3_open(url.path, &db) == SQLITE_OK)
+        #expect(sqlite3_exec(db, "UPDATE bible_v1 SET book='2jo' WHERE book='2jn'; UPDATE bible_v1 SET book='3jo' WHERE book='3jn'", nil, nil, nil) == SQLITE_OK)
+        sqlite3_close(db)
+        let before = try Data(contentsOf: url), reader = try LibronNativeDatabase(url)
+        #expect(try reader.resolve("2 John1:1")?.ordinal == 17)
+        #expect(try reader.resolve("2Jo1:1")?.offset == 3)
+        #expect(try reader.resolve("3 Juan1:2")?.ordinal == 18)
+        #expect(try reader.resolve("Ge1:1")?.ordinal == 0)
+        #expect(try reader.resolve("2 John1:2") == nil)
+        #expect(try Data(contentsOf: url) == before)
+    }
     @Test func compressedRecordsCanonicalReferencesAndWordsRoundTrip() throws {
         let url = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString+".sqlite")
         defer { try? FileManager.default.removeItem(at:url) }

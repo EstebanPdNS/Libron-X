@@ -48,13 +48,14 @@ struct WorkspaceToolsView: View {
 struct WorkspaceSearchView: View {
     @Bindable var workspace: StudyWorkspace
     @Bindable var search: WorkspaceSearchController
+    private func run() { search.run(workspace.availableResources, documents: workspace.personal.documents) }
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 TextField(L("Palabra, frase entre comillas o consulta AND / OR"), text: $search.query).macInputStyle()
-                    .onSubmit { search.run(workspace.availableResources) }
+                    .onSubmit(run)
                 if search.isSearching { Button(L("Cancelar"), action: search.cancel) }
-                else { Button(L("Buscar")) { search.run(workspace.availableResources) }.disabled(search.query.isEmpty) }
+                else { Button(L("Buscar"), action: run).disabled(search.query.isEmpty) }
             }
             HStack {
                 Toggle(L("Toda la biblioteca"), isOn: $search.allResources)
@@ -63,6 +64,26 @@ struct WorkspaceSearchView: View {
                     ForEach(workspace.availableResources) { resource in Text(resource.title).tag(resource.id) }
                 }.disabled(search.allResources)
             }.disabled(search.isSearching)
+            if search.bibleVerses {
+                VStack(alignment: .leading, spacing: 8) {
+                    Picker(L("Rango bíblico"), selection: $search.bibleRangeMode) {
+                        Text(L("Todos los versículos")).tag(WorkspaceBibleRangeMode.all)
+                        Text(L("Pasajes o libros")).tag(WorkspaceBibleRangeMode.custom)
+                        Text(L("Lista guardada")).tag(WorkspaceBibleRangeMode.savedList)
+                    }
+                    if search.bibleRangeMode == .custom {
+                        TextField(L("Pasajes, por ejemplo Gn 1–3; Juan 3:16–18; Romanos"), text: $search.customBibleRange)
+                            .macInputStyle().onSubmit(run)
+                    } else if search.bibleRangeMode == .savedList {
+                        Picker(L("Lista de versículos"), selection: $search.referenceListID) {
+                            Text(L("Selecciona una lista de versículos")).tag(Optional<UUID>.none)
+                            ForEach(workspace.personal.documents.filter { $0.kind == .verseList }) {
+                                Text($0.title).tag(Optional($0.id))
+                            }
+                        }
+                    }
+                }.disabled(search.isSearching)
+            }
             HStack {
                 Toggle(L("Mayúsculas"), isOn: $search.caseSensitive)
                 Toggle(L("Palabras completas"), isOn: $search.wholeWords)
@@ -83,6 +104,10 @@ struct WorkspaceSearchView: View {
                 }.contentShape(Rectangle()).onTapGesture(count: 2) { workspace.openSearchResult(result) }
             }
             if let report = search.report {
+                if report.unit == .bibleVerse {
+                    Text(LF("Rango: {range}", ["range": report.bibleRange?.description ?? L("Todos los versículos")])).font(.caption)
+                    Text(LF("{selected} versículos examinados · {excluded} fuera del rango", ["selected": String(report.counters.versesExamined), "excluded": String(report.counters.versesExcludedByRange)])).font(.caption)
+                }
                 Text(LF("{results} resultados · {articles} artículos examinados", ["results": String(report.counters.resultsReturned), "articles": String(report.counters.articlesExamined)])).font(.caption)
                 if !report.coverageComplete {
                     DisclosureGroup(L("La búsqueda tiene resultados parciales o recursos pendientes")) {
