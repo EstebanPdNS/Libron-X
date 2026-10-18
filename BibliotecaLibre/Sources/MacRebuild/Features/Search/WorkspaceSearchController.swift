@@ -21,7 +21,8 @@ enum WorkspaceBibleRangeMode: String, CaseIterable, Sendable { case all, custom,
     var customBibleRange = ""
     var referenceListID: UUID?
     var isSearching = false
-    var report: LibrarySearchReport?
+    let presentation = WorkspaceSearchResultsController()
+    var report: LibrarySearchReport? { didSet { presentation.setResults(report?.results ?? []) } }
     var progress: LibrarySearchProgress?
     var error: String?
     @ObservationIgnored private var task: Task<Void, Never>?

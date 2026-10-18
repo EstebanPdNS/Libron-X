@@ -29,6 +29,7 @@ public actor LibrarySearchService {
         _ = try TextSearchEngine.search(query: query, in: "", options: options, verses: query.expression.requiresVerseContext ? [] : nil,
             fields: .init(regions: Dictionary(uniqueKeysWithValues: query.expression.requiredFields.map { ($0, []) })))
         let requiresBibleDirectory = query.expression.requiresVerseContext || query.expression.requiredFields.contains(.bibleText)
+        var contextRemaining = budget.maximumContextUTF16
         var ids = Set<String>()
         for resource in resources {
             guard ids.insert(resource.id).inserted else { throw LibrarySearchError.duplicateResourceID(resource.id) }
@@ -241,6 +242,20 @@ public actor LibrarySearchService {
                             }
                             let externalRetained = Array(match.externalHits.prefix(max(0, remaining - retained.count)))
                             let retainedCount = retained.count + externalRetained.count
+                            var contexts: [LibrarySearchOccurrenceContext] = []
+                            let contextSource = evaluationText as NSString, origin = scopeRange?.location ?? 0
+                            for hit in retained {
+                                if contextRemaining == 0 { break }
+                                try Task.checkCancellation()
+                                if elapsed() >= budget.maximumDurationSeconds { limit = .duration; break resourceLoop }
+                                let local = TextSearchHit(range: .init(location: hit.range.location - origin, length: hit.range.length), operands: hit.operands)
+                                let snippet = Self.snippetText(contextSource, hits: [local], maximumUTF16: min(budget.snippetUTF16, contextRemaining))
+                                guard !snippet.highlightRanges.isEmpty else { continue }
+                                contextRemaining -= snippet.text.utf16.count
+                                contexts.append(.init(range: hit.range, snippet: .init(text: snippet.text,
+                                    rangeInArticle: .init(location: origin + snippet.rangeInArticle.location, length: snippet.rangeInArticle.length),
+                                    highlightRanges: snippet.highlightRanges, omittedPrefix: snippet.omittedPrefix, omittedSuffix: snippet.omittedSuffix)))
+                            }
                             if fingerprint == nil { fingerprint = Self.textFingerprint(content.text) }
                             results.append(.init(resourceID: resource.id, resourceTitle: resource.title,
                                 sectionOrdinal: article.sectionOrdinal, articleTitle: verse?.reference ?? article.title,
@@ -248,7 +263,7 @@ public actor LibrarySearchService {
                                 snippet: Self.snippet(content.text, hits: retained, maximumUTF16: budget.snippetUTF16, within: scopeRange),
                                 decodedTextSHA256: fingerprint!, sourceStamps: prepared.sourceStamps,
                                 presentationWarnings: content.warnings,
-                                bibleReference: verse?.normalizedReference, verseRange: verse?.range, externalHits: externalRetained))
+                                bibleReference: verse?.normalizedReference, verseRange: verse?.range, externalHits: externalRetained, contexts: contexts))
                             counters.resultsReturned += 1
                             counters.occurrencesReturned += retainedCount
                             resourceReports[index].resultsReturned += 1
@@ -309,6 +324,7 @@ public actor LibrarySearchService {
               budget.maximumResults > 0, budget.maximumResults <= 10_000,
               budget.maximumOccurrences > 0, budget.maximumOccurrences <= 1_000_000,
               budget.snippetUTF16 > 0, budget.snippetUTF16 <= 4_096,
+              budget.maximumContextUTF16 >= 0, budget.maximumContextUTF16 <= 64 * 1024 * 1024,
               budget.progressBatchSize > 0, budget.progressBatchSize <= 10_000 else {
             throw LibrarySearchError.invalidBudget
         }
@@ -346,7 +362,9 @@ public actor LibrarySearchService {
                 rangeInArticle: .init(location: local.rangeInArticle.location + interval.location, length: local.rangeInArticle.length),
                 highlightRanges: local.highlightRanges, omittedPrefix: local.omittedPrefix, omittedSuffix: local.omittedSuffix)
         }
-        let text = source as NSString
+        return snippetText(source as NSString, hits: hits, maximumUTF16: maximumUTF16)
+    }
+    private static func snippetText(_ text: NSString, hits: [TextSearchHit], maximumUTF16: Int) -> LibrarySearchSnippet {
         let length = text.length
         guard length > 0 else {
             return .init(text: "", rangeInArticle: .init(location: 0, length: 0),

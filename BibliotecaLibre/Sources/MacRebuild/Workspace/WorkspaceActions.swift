@@ -169,14 +169,15 @@ struct ReaderHighlight: Identifiable, Codable, Equatable {
         pendingNoteID = note.id
         savePersonal(); activeTool = .documents
     }
-    func openSearchResult(_ result: LibrarySearchResult, scope: WorkspaceSearchScopeSnapshot? = nil) {
+    func openSearchResult(_ result: LibrarySearchResult, scope: WorkspaceSearchScopeSnapshot? = nil, focus: WorkspaceSearchResultFocus = .automatic) {
         do {
+            guard focus.isValid(for: result) else { throw LibronixBookError.sourceChanged }
             let resource = try resourceForSearchResult(result, scope: scope)
             let reader = readers.first(where: {
                 $0.id == referenceTargetID && $0.resource.id == resource.id && $0.resource.format == resource.format &&
                 $0.resource.legacyIdentifier == resource.legacyIdentifier && $0.resource.location == resource.location
             }) ?? open(resource, startReading: false)
-            activate(reader); reader.loadSearchResult(result); activeTool = nil
+            activate(reader); reader.loadSearchResult(result, focus: focus); activeTool = nil
         } catch {
             if activeTool == .referenceSearch { referenceSearch.showOpeningError(error.localizedDescription) }
             else { search.error = error.localizedDescription }
@@ -185,8 +186,16 @@ struct ReaderHighlight: Identifiable, Codable, Equatable {
 }
 
 @MainActor extension ReaderSession {
-    func loadSearchResult(_ result: LibrarySearchResult) {
-        load(.init(ordinal: result.sectionOrdinal), selection: result.hits.first?.range.nsRange ?? (result.externalHits.isEmpty ? result.verseRange?.nsRange : nil),
+    func loadSearchResult(_ result: LibrarySearchResult, focus: WorkspaceSearchResultFocus = .automatic) {
+        guard focus.isValid(for: result) else { error = LibronixBookError.sourceChanged.localizedDescription; return }
+        let selection: NSRange?
+        switch focus {
+        case .automatic: selection = result.hits.first?.range.nsRange ?? (result.externalHits.isEmpty ? result.verseRange?.nsRange : nil)
+        case .reader(let range): selection = range.nsRange
+        case .external: selection = nil
+        case .summary: selection = result.hitCount == 0 ? result.verseRange?.nsRange : nil
+        }
+        load(.init(ordinal: result.sectionOrdinal), selection: selection,
              expectedFingerprint: result.decodedTextSHA256, expectedSourceStamps: result.sourceStamps)
     }
 }

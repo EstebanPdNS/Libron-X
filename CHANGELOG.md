@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Browse every retained search occurrence with aligned context, resource grouping, configurable order and next/previous selection.
+
 - Find approximate literal phrases with selectable edit limits, source-accurate Unicode selection and explicit coverage.
 
 - Search verified resource fields with separate source-title matches, explicit coverage and exact reader selection.

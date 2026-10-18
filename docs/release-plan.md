@@ -26,7 +26,7 @@ A feature counts only when its complete behavior is implemented and verified. Ea
 - [x] Advanced query execution.
 - [x] Resource field search.
 - [x] Fuzzy search.
-- [ ] Search result views.
+- [x] Search result views.
 - [ ] Long-running search control.
 - [ ] Resource association manager.
 - [ ] General resource associations.

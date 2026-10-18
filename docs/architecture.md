@@ -242,3 +242,66 @@ verses excluded. A read-only SQL/full-matrix oracle independently confirms the
 source phrase and edit distance. Ten original user-state files and the library
 catalog/entries are restored exactly; all 1099 integrity checks across 521
 managed packages pass. Evidence covers the observed Spanish dark native UI.
+
+## Search result views and occurrence navigation
+
+Global search retains a bounded context for each returned reader hit, instead
+of showing only the first match in an article. Each context carries its exact
+original hit range and a grapheme-safe snippet range in the complete decoded
+page. Article/verse boundaries clip context, and shared-page offsets are rebased
+back to original reader coordinates. Context generation never changes the
+source text, the report's hits, its fingerprints or its source stamps.
+
+`LibrarySearchBudget.maximumContextUTF16` defaults to 8 Mi UTF-16 units and has a
+0–64 Mi bound shared across the report. Each context also respects snippetUTF16.
+The native occurrence budget is 20000 with 240-unit snippets, so the default
+presentation budget accommodates ordinary retained hits. A smaller/custom budget
+may omit contexts, with explicit context coverage separate from actual search
+coverage. Hits and opening evidence stay available. Long matches may be shown
+partially with ellipses; an oversized grapheme is omitted rather than split.
+The existing article snippet remains the summary/backward-compatible fallback.
+
+Native Context and Aligned context layouts share the same occurrence identities.
+Aligned context uses three columns: preceding text, matched text, following text.
+Visible text is verbatim source content; UI labels alone enter localization.
+External title matches use their actual metadata value and its independent
+field/value/range identity, never fabricated body positions. Negative-only
+matches retain summary rows; positive evidence omitted by a search limit is
+identified separately. A missing context is explicit and does not block opening.
+
+Grouping is None or Resource, keyed by resource ID so identical titles stay
+separate. Ordering is Search order, Title A–Z, Title Z–A or Most matches per
+article. Title comparison uses fixed case/diacritic-insensitive numeric ordering
+with deterministic identity/source tie breaks. With resource grouping, groups
+follow their first result in the selected order; most-matches ordering ranks
+articles, not an inferred aggregate resource relevance score. Reordering never
+mutates the report or drops/reassigns occurrence IDs. Layout, grouping and order
+are session preferences, retained when a query clears or is replaced.
+
+Previous/Next selection stops at both ends. The list scrolls to the selected
+occurrence and keeps it through presentation changes. Native list selection,
+Enter/double-click, per-row Open and Open selection use the same focus. Option-
+Command-Up/Down navigate the list without replacing existing Find shortcuts.
+The navigation counter counts retained occurrence/summary rows; the original
+footer counts matching article/verse result units and examined source articles.
+
+Opening a reader occurrence validates that its exact range belongs to the report
+before loading it, then uses the established source-stamp/fingerprint validation.
+Opening metadata deliberately has no reader highlight, even when the same result
+also contains body matches. Negative summaries preserve their legitimate verse
+scope; omitted positive hits do not invent a selection. Invalid focus and changed
+sources remain explicit failures. This presentation does not claim the original
+Libronix relevance ranking or unrestricted original result-view equivalence.
+
+Acceptance: 784 tests in 131 suites pass in maintained and public source trees,
+with 11 new test definitions. Installed build 52 verifies six occurrence rows
+across two owned EPUBs, both context layouts, grouping/order changes that retain
+the selected occurrence, navigation boundaries/shortcuts and Enter opening of
+the third far match. Independent authored HTMLParser/native archive selections
+agree at [1015,15]; metadata opening from a mixed body/title result stays [0,0].
+Real Reina-Valera 1909 Ge1:1 yields two rows for `Dios OR cielos`; selecting the
+second opens `cielos` at [32,6], independently checked against read-only original
+SQLite and the reader display-prefix contract. Negative-only and empty result
+states pass native checks. Ten original state files and catalog/entry set are
+restored exactly; all 1099 integrity checks across 521 managed packages pass.
+Native visual evidence covers observed Spanish dark appearance only.

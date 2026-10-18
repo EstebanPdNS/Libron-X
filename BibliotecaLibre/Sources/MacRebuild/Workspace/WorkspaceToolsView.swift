@@ -26,8 +26,8 @@ struct WorkspaceToolsView: View {
             case .keyLinks: KeyLinkView(workspace: workspace, controller: workspace.keyLinks)
             }
         }.frame(minWidth: tool == .information ? 700 : 680, idealWidth: tool == .information ? 700 : 820,
-                minHeight: tool == .information ? nil : expandedScope ? 620 : 520,
-                idealHeight: tool == .information ? nil : expandedScope ? 720 : 620)
+                minHeight: tool == .information ? nil : tool == .search ? 680 : expandedScope ? 620 : 520,
+                idealHeight: tool == .information ? nil : tool == .search ? 820 : expandedScope ? 720 : 620)
             .modifier(MacPanelControlPresentation())
     }
     private var expandedScope: Bool {
@@ -112,19 +112,7 @@ struct WorkspaceSearchView: View {
             if search.isSearching {
                 HStack { ProgressView().controlSize(.small); Text(LF("{count} artículos examinados", ["count": String(search.progress?.counters.articlesExamined ?? 0)])) }
             }
-            List(search.report?.results ?? []) { result in
-                HStack {
-                    VStack(alignment: .leading, spacing: 5) {
-                        HStack { Text(result.resourceTitle).font(.headline); Spacer(); Text(result.bibleReference ?? LF("Artículo {number}", ["number": String(result.sectionOrdinal + 1)])).font(.caption) }
-                        Text(result.snippet.text).lineLimit(3).foregroundStyle(.secondary)
-                        ForEach(Array(Set(result.externalHits.map { $0.field.localizedTitle + ": " + $0.value })).sorted(), id: \.self) {
-                            Text($0).font(.caption).lineLimit(2)
-                        }
-                        Text(LF("{count} coincidencias", ["count": String(result.hitCount)])).font(.caption)
-                    }.padding(.vertical, 4).frame(maxWidth: .infinity, alignment: .leading)
-                    Button(L("Abrir")) { workspace.openSearchResult(result, scope: search.scopeSnapshot) }
-                }.contentShape(Rectangle()).onTapGesture(count: 2) { workspace.openSearchResult(result, scope: search.scopeSnapshot) }
-            }
+            WorkspaceSearchResultsView(workspace: workspace, search: search, presentation: search.presentation)
             if let report = search.report {
                 if let scope = search.scopeSnapshot { Text(scope.description).font(.caption).lineLimit(2) }
                 if report.unit == .bibleVerse {

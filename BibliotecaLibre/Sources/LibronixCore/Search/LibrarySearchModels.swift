@@ -9,16 +9,18 @@ public struct LibrarySearchBudget: Hashable, Sendable {
     public var maximumArticles: Int
     public var maximumResults: Int
     public var maximumOccurrences: Int
+    public var maximumContextUTF16: Int
     public var snippetUTF16: Int
     public var progressBatchSize: Int
 
     public init(maximumDurationSeconds: Double = 60, maximumArticles: Int = 20_000,
                 maximumResults: Int = 500, maximumOccurrences: Int = 20_000,
-                snippetUTF16: Int = 240, progressBatchSize: Int = 64) {
+                snippetUTF16: Int = 240, progressBatchSize: Int = 64, maximumContextUTF16: Int = 8 * 1024 * 1024) {
         self.maximumDurationSeconds = maximumDurationSeconds
         self.maximumArticles = maximumArticles
         self.maximumResults = maximumResults
         self.maximumOccurrences = maximumOccurrences
+        self.maximumContextUTF16 = maximumContextUTF16
         self.snippetUTF16 = snippetUTF16
         self.progressBatchSize = progressBatchSize
     }
@@ -114,6 +116,13 @@ public struct LibrarySearchSnippet: Hashable, Sendable {
     public let omittedSuffix: Bool
 }
 
+/// One retained reader hit and its bounded context in the unchanged source.
+public struct LibrarySearchOccurrenceContext: Hashable, Sendable {
+    public let range: SearchTextRange
+    public let snippet: LibrarySearchSnippet
+    public init(range: SearchTextRange, snippet: LibrarySearchSnippet) { self.range = range; self.snippet = snippet }
+}
+
 public struct LibrarySearchResult: Hashable, Sendable, Identifiable {
     public let resourceID: String
     public let resourceTitle: String
@@ -130,6 +139,8 @@ public struct LibrarySearchResult: Hashable, Sendable, Identifiable {
     public let bibleReference: String?
     public let verseRange: SearchTextRange?
     public var externalHits: [TextSearchExternalHit] = []
+    public var contexts: [LibrarySearchOccurrenceContext] = []
+    public var contextsOmitted: Int { max(0, hits.count - Set(contexts.map(\.range)).count) }
     public var id: String {
         resourceID + "#section=" + String(sectionOrdinal)
             + (verseRange.map { "#verse=" + String($0.location) } ?? "")
@@ -154,6 +165,8 @@ public struct LibrarySearchReport: Sendable {
     /// formats, read/evaluation failures or budget stops. This is not index parity.
     public let coverageComplete: Bool
     public var truncated: Bool { limitReason != nil }
+    /// Presentation coverage is separate from search/source coverage.
+    public var contextCoverageComplete: Bool { results.allSatisfy { $0.contextsOmitted == 0 } }
     public let scopeDescription: String
 }
 
