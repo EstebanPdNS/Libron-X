@@ -34,6 +34,8 @@ struct ReaderOEBView: NSViewRepresentable {
         config.defaultWebpagePreferences.allowsContentJavaScript = false
         config.setURLSchemeHandler(source, forURLScheme: "libronx-oeb")
         if let selectionHandler { config.userContentController.add(selectionHandler, contentWorld: .defaultClient, name: "reader") }
+        config.userContentController.addUserScript(WKUserScript(source: ReaderSourceLinkAttributes.htmlScript,
+            injectionTime: .atDocumentEnd, forMainFrameOnly: true, in: .defaultClient))
         config.userContentController.addUserScript(WKUserScript(source: Self.bridge, injectionTime: .atDocumentEnd,
             forMainFrameOnly: true, in: .defaultClient))
         return config
@@ -381,12 +383,19 @@ enum ReaderOEBHTML {
         let item = NSMenuItem(title: L("Buscar en diccionario"), action: #selector(lookupSelectedWord), keyEquivalent: "")
         item.target = self; item.isEnabled = selectedWord != nil
         menu.addItem(.separator()); menu.addItem(item)
+        if reader != nil {
+            let citation = NSMenuItem(title:L("Copiar cita del recurso"),action:#selector(copyResourceCitation),keyEquivalent:"")
+            citation.target = self; menu.addItem(citation)
+        }
         FeatureHelp.shared.addItem(to: menu, topic: reader?.isDictionary == true ? .dictionary : .navigation)
         return menu
     }
     private var selectedWord: String? {
         guard let reader, let text = reader.page?.text, let range = Range(reader.selectedRange, in: text) else { return nil }
         return DictionaryController.singleWord(String(text[range]))
+    }
+    @objc private func copyResourceCitation() {
+        if let reader { ResourceCitationActions.copy([reader.resource]) }
     }
     @objc private func lookupSelectedWord() {
         if let word = selectedWord { reader?.onQuickDictionaryLookup?(word, self, visibleRect.insetBy(dx: 40, dy: 40)) }

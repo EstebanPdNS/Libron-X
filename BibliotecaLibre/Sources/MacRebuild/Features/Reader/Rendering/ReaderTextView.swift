@@ -152,11 +152,7 @@ struct ReaderTextView: NSViewRepresentable {
         let rendered = ReaderTypography.render(text: text, content: content, typography: typography, scale: scale,
                                                visibleInterlinearLines: visibleInterlinearLines)
         let display = NSMutableAttributedString(attributedString: rendered.text)
-        for (index, link) in inlineLinks.enumerated() where Range(link.range, in: text) != nil {
-            if let url = URL(string: "libronx-inline://local/\(index)") {
-                display.addAttribute(.link, value: url, range: link.range)
-            }
-        }
+        ReaderSourceLinkAttributes.install(inlineLinks, in: display, verseAnchors: content?.anchors ?? [])
         let fingerprint = LibrarySearchService.textFingerprint(text)
         for mark in highlights where mark.ordinal == identity?.ordinal && mark.fingerprint == fingerprint && Range(mark.range, in: text) != nil {
             let color: NSColor = switch mark.color { case "green": .systemGreen; case "blue": .systemBlue; case "pink": .systemPink; default: .systemYellow }
@@ -424,6 +420,11 @@ final class ActiveTextView: NSTextView {
     }
     private func enhancedMenu(_ native: NSMenu?) -> NSMenu {
         let menu = native ?? NSMenu()
+        if linkPreview.resource != nil {
+            menu.addItem(.separator())
+            let citation = NSMenuItem(title:L("Copiar cita del recurso"), action:#selector(copyResourceCitation), keyEquivalent:"")
+            citation.target = self; menu.addItem(citation)
+        }
         if lookupWord != nil {
             menu.addItem(.separator())
             let lookup = NSMenuItem(title: L("Buscar en diccionario"), action: #selector(lookupDictionaryWord), keyEquivalent: "")
@@ -431,6 +432,9 @@ final class ActiveTextView: NSTextView {
         }
         FeatureHelp.shared.addItem(to: menu, topic: contextHelpTopic)
         return menu
+    }
+    @objc private func copyResourceCitation() {
+        if let resource = linkPreview.resource { ResourceCitationActions.copy([resource]) }
     }
     @objc private func lookupDictionaryWord() {
         if selectedRange().length > 0 { presentDictionary(selectedRange()) }

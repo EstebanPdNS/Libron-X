@@ -81,6 +81,32 @@ import Testing
         try await Task.sleep(for: .milliseconds(60))
         #expect(reader.resource.id == fixture.resources[0].id && !reader.isLoading)
     }
+    @Test func selectingNativePaneTitleReleasesPreviousTextEditorForArrowRouting() throws {
+        let window = NSWindow(contentRect: .init(x: 0, y: 0, width: 400, height: 200),
+            styleMask: [.titled], backing: .buffered, defer: false)
+        window.isReleasedWhenClosed = false
+        defer { window.close() }
+        let root = NSView(frame: .init(x: 0, y: 0, width: 400, height: 200))
+        let editor = NSTextView(frame: .init(x: 0, y: 0, width: 100, height: 30))
+        editor.isEditable = true
+        let title = PanePointerSurface.PointerView(frame: .init(x: 0, y: 100, width: 200, height: 30))
+        var activated = false
+        title.actions = PanePointerSurface(cursor: .openHand, began: { _ in activated = true }, changed: { _ in }, ended: {})
+        root.addSubview(editor); root.addSubview(title); window.contentView = root
+        #expect(window.makeFirstResponder(editor))
+        #expect(window.firstResponder === editor)
+        let click = try #require(NSEvent.mouseEvent(with: .leftMouseDown, location: .init(x: 20, y: 110),
+            modifierFlags: [], timestamp: 0, windowNumber: window.windowNumber, context: nil,
+            eventNumber: 0, clickCount: 1, pressure: 1))
+        title.mouseDown(with: click)
+        title.mouseUp(with: click)
+        #expect(activated)
+        #expect(window.firstResponder !== editor)
+        let arrow = try #require(NSEvent.keyEvent(with: .keyDown, location: .zero, modifierFlags: [],
+            timestamp: 0, windowNumber: window.windowNumber, context: nil,
+            characters: "", charactersIgnoringModifiers: "", isARepeat: false, keyCode: 124))
+        #expect(BibleVersionKeyboardRouting.KeyView.accepts(arrow, responder: window.firstResponder))
+    }
     @Test func arrowRoutingPreservesTextEditingAndModifiedShortcuts() throws {
         func key(_ code: UInt16, _ flags: NSEvent.ModifierFlags = []) throws -> NSEvent {
             try #require(NSEvent.keyEvent(with: .keyDown, location: .zero, modifierFlags: flags,

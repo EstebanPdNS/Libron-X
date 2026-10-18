@@ -58,19 +58,31 @@ import SwiftUI
 }
 
 @MainActor final class ReaderLinkPreviewController: NSObject, NSPopoverDelegate {
+    // A clicked card outlives a recycled article surface. Its anchor is the
+    // reader window's stable content view, and only its explicit X dismisses it.
+    private static var pinned: [ObjectIdentifier: ReaderLinkPreviewController] = [:]
+    static var pinnedPreviewCount: Int { pinned.count }
     var resource: LibraryResource?
     var onOpen: (LibraryResource, ReaderDestination, Bool) -> Void = { _, _, _ in }
     var resolveResource: ((LibraryResource, LegacyInlineLink) throws -> LibraryResource)?
-    private let state = ReaderLinkPreviewState()
-    private var popover = NSPopover()
+    let state: ReaderLinkPreviewState
+    private(set) var popover = NSPopover()
+    private(set) var isPinned = false
     private var hoverTask: Task<Void, Never>?
     private var pending: LegacyInlineLink?
     private var displayed: LegacyInlineLink?
 
+    init(loader: @escaping ReaderSession.Loader = ReaderSession.read) {
+        state = ReaderLinkPreviewState(loader: loader)
+        super.init()
+    }
+
     func show(_ link: LegacyInlineLink, at rect: NSRect, in view: NSView, hovering: Bool) {
+        if hovering && isPinned { return }
         if hovering && !AppPreferences.shared.hoverNotes { cancelHover(); return }
         if displayed == link && popover.isShown {
-            if !hovering { focusContent() }
+            if !hovering && !isPinned { present(link, at: rect, in: view, focus: true) }
+            else if !hovering { focusContent() }
             return
         }
         if hovering && pending == link { return }
@@ -97,12 +109,21 @@ import SwiftUI
     }
     func cancelHover() { hoverTask?.cancel(); hoverTask = nil; pending = nil }
     func dismiss() {
+        // Article navigation and hover cleanup may retire a transient preview,
+        // but cannot dismiss a card the user explicitly opened.
+        guard !isPinned else { cancelHover(); return }
+        close()
+    }
+    func close() {
         cancelHover(); state.cancel(); displayed = nil
+        isPinned = false
         if popover.isShown { popover.close() }
+        Self.pinned.removeValue(forKey: ObjectIdentifier(self))
     }
     func popoverDidClose(_ notification: Notification) {
         guard notification.object as? NSPopover === popover else { return }
-        cancelHover(); state.cancel(); displayed = nil
+        cancelHover(); state.cancel(); displayed = nil; isPinned = false
+        Self.pinned.removeValue(forKey: ObjectIdentifier(self))
     }
     private func focusContent() {
         guard let view = popover.contentViewController?.view, let window = view.window else { return }
@@ -116,10 +137,13 @@ import SwiftUI
         cancelHover()
         if popover.isShown { popover.delegate = nil; popover.close() }
         popover = NSPopover()
+        isPinned = focus
+        if isPinned { Self.pinned[ObjectIdentifier(self)] = self }
         displayed = link
         do { state.load(link, resource: try resolveResource?(resource, link) ?? resource) }
         catch { state.fail(link, error: error) }
-        popover.behavior = .transient; popover.animates = false; popover.delegate = self
+        popover.behavior = isPinned ? .applicationDefined : .transient
+        popover.animates = false; popover.delegate = self
         popover.contentViewController = NSHostingController(rootView: ReaderLinkPreviewView(state: state, resource: resource,
             open: { [weak self] destination, newReader in
                 guard let self, let targetResource = self.state.resource else { return }
@@ -129,13 +153,15 @@ import SwiftUI
             }, openNested: { [weak self] resource, destination, newReader in
                 guard let self else { return }
                 self.dismiss(); self.onOpen(resource, destination, newReader)
-            }, close: { [weak self] in self?.dismiss() }))
-        popover.show(relativeTo: rect, of: view, preferredEdge: .maxY)
+            }, close: { [weak self] in self?.close() }).modifier(AppInterfaceLanguage()))
+        popover.contentSize = NSSize(width: 400, height: 320)
+        let anchor = isPinned ? (view.window?.contentView ?? view) : view
+        popover.show(relativeTo: anchor.convert(rect, from: view), of: anchor, preferredEdge: .maxY)
         if focus { focusContent() }
     }
 }
 
-private struct ReaderLinkPreviewView: View {
+struct ReaderLinkPreviewView: View {
     let state: ReaderLinkPreviewState
     let resource: LibraryResource
     let open: (ReaderDestination, Bool) -> Void
@@ -174,7 +200,7 @@ private struct ReaderLinkPreviewView: View {
                 Button(L("Abrir aquí")) { if let page = state.page { open(page.destination, false) } }
                 Button(L("Abrir en otra lectura")) { if let page = state.page { open(page.destination, true) } }
                 Spacer()
-            }.disabled(state.page == nil).padding(10)
+            }.modifier(MacPanelControlPresentation()).disabled(state.page == nil).padding(10)
         }.frame(width: 400)
     }
 }

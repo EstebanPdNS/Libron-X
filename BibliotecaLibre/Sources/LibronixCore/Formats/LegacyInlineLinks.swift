@@ -28,6 +28,12 @@ public enum LegacyInlineLinkTarget: Codable, Sendable, Equatable {
     case bible(LegacyBibleLinkReference)
 }
 
+/// Importers assign a role from an explicit source link, never from the verse
+/// label alone. Optional storage keeps existing resource packages compatible.
+public enum LegacyInlineLinkRole: String, Codable, Sendable {
+    case studyCommentary
+}
+
 /// An unchanged source-text span linked to an explicit, checked destination.
 /// The destination is a physical article in the same resource, never a command,
 /// URL or an offset copied from another edition. Bible addresses require their
@@ -37,6 +43,7 @@ public struct LegacyInlineLink: Codable, Sendable, Equatable {
     public let label: String
     public let sourceName: String
     public let target: LegacyInlineLinkTarget
+    public var role: LegacyInlineLinkRole? = nil
     public var sectionOrdinal: Int? { if case let .article(ordinal) = target { ordinal } else { nil } }
     public init(range: NSRange, label: String, sourceName: String, sectionOrdinal: Int) {
         self.init(range: range, label: label, sourceName: sourceName, target: .article(sectionOrdinal))

@@ -18,9 +18,11 @@ struct BibleVersionKeyboardRouting: NSViewRepresentable {
             guard window != nil else { return }
             monitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [weak self] event in
                 let handled = MainActor.assumeIsolated {
+                    // A macOS screen-sharing indicator can be a visible child
+                    // window (NSLocalWindowSharingWindow). Only the key event's
+                    // own window and actual sheets/editors determine routing.
                     guard let self, let window = self.window, window.isKeyWindow,
                           window.attachedSheet == nil, event.window === window,
-                          window.childWindows?.contains(where: { $0.isVisible }) != true,
                           self.workspace.activeTool == nil, self.workspace.error == nil,
                           !self.workspace.showsHome,
                           Self.accepts(event, responder: window.firstResponder),

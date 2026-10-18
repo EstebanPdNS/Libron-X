@@ -1,5 +1,14 @@
 [
   {
+    "version": "0.4",
+    "changes": [
+      "Búsqueda de biblioteca con índices persistentes, rangos, campos, operadores y control de ejecución.",
+      "Colecciones, prioridades y asociaciones de recursos con identidad y procedencia.",
+      "Bibliografía, estilos de cita y gestión reversible de duplicados y ediciones.",
+      "Enlaces azules y tarjetas de notas persistentes con controles Liquid Glass."
+    ]
+  },
+  {
     "version": "0.3",
     "changes": [
       "Formato .libron con metadatos, procedencia y copias opcionales en backup.",

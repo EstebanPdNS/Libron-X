@@ -21,3 +21,6 @@
 *.p12
 *.pfx
 private-fixtures/
+**/.source-versions/
+*.epub
+*.libron/

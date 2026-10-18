@@ -184,13 +184,14 @@ struct ResourceReaderToolbar: View {
                 else {
                     HStack(spacing: 8) {
                         referenceField.frame(width: geometry.size.width >= 620 ? 120 : 90)
+                        bookChapterControls(compact: geometry.size.width < 620)
                         Spacer(minLength: 4)
                         // Use the actual pane width, not competing mounted
                         // popover anchors in ViewThatFits. Zooming must never
                         // move a live popover between alternate toolbar trees.
-                        if geometry.size.width >= 820 { compactControls }
-                        else if geometry.size.width >= 620 { mediumControls }
-                        else if geometry.size.width >= 400 { minimalControls }
+                        if geometry.size.width >= (chapterBooks.isEmpty ? 820 : 1060) { compactControls }
+                        else if geometry.size.width >= (chapterBooks.isEmpty ? 620 : 860) { mediumControls }
+                        else if geometry.size.width >= (chapterBooks.isEmpty ? 400 : 650) { minimalControls }
                         else { essentialControls }
                     }
                 }
@@ -211,7 +212,6 @@ struct ResourceReaderToolbar: View {
     }
     private var compactControls: some View {
         HStack(spacing: 8) {
-            bookChapterControls()
             versionControls
             MacReaderControlGroup { referenceTargetButton }
             MacReaderControlGroup {
@@ -282,41 +282,50 @@ struct ResourceReaderToolbar: View {
     private var currentChapter: LegacyPassageQuery? {
         reader.currentReference.flatMap(LegacyPassageQuery.navigationInput)
     }
-    @ViewBuilder private func bookChapterControls(inMenu: Bool = false) -> some View {
+    @ViewBuilder private func bookChapterControls(inMenu: Bool = false, compact: Bool = false) -> some View {
         if !chapterBooks.isEmpty {
-            let selected = chapterBooks.first { $0.id == currentChapter?.sourceBookKey } ?? chapterBooks.first!
+            let selected = chapterBooks.first { book in
+                book.id == currentChapter?.sourceBookKey || book.sourceOrdinals?.values.contains(reader.page?.destination.ordinal ?? -1) == true
+            } ?? chapterBooks.first!
             if inMenu {
                 bookMenu(selected, inMenu: true)
                 chapterMenu(selected, inMenu: true)
             } else {
                 MacReaderControlGroup {
-                    bookMenu(selected, inMenu: false)
+                    bookMenu(selected, inMenu: false, compact: compact)
                     Divider().frame(height: 16)
-                    chapterMenu(selected, inMenu: false)
+                    chapterMenu(selected, inMenu: false, compact: compact)
                 }
             }
         }
     }
-    private func bookMenu(_ selected: BibleChapterBook, inMenu: Bool) -> some View {
+    private func bookMenu(_ selected: BibleChapterBook, inMenu: Bool, compact: Bool = false) -> some View {
         Menu {
             ForEach(chapterBooks) { book in
                 Button(book.title(language: AppLanguage.saved())) { navigate(book, chapter: book.chapters.first ?? 1) }
             }
         } label: {
-            Text(inMenu ? L("Libro") : selected.title(language: AppLanguage.saved())).lineLimit(1).frame(maxWidth: inMenu ? nil : 112)
+            if compact { Image(systemName: "book.closed") }
+            else { Text(inMenu ? L("Libro") : selected.title(language: AppLanguage.saved())).lineLimit(1).frame(maxWidth: inMenu ? nil : 112) }
         }.help(L("Libro")).accessibilityLabel(L("Libro")).featureHelpTarget(.bibleReading)
     }
-    private func chapterMenu(_ selected: BibleChapterBook, inMenu: Bool) -> some View {
+    private func chapterMenu(_ selected: BibleChapterBook, inMenu: Bool, compact: Bool = false) -> some View {
         Menu {
             ForEach(selected.chapters, id: \.self) { chapter in
                 Button(String(chapter)) { navigate(selected, chapter: chapter) }
             }
         } label: {
-            Text(inMenu ? L("Capítulo") : L("Capítulo") + " " + String(currentChapter?.chapter ?? selected.chapters.first ?? 1)).monospacedDigit()
+            let observedChapter = selected.sourceOrdinals?.first(where: { $0.value == reader.page?.destination.ordinal })?.key
+            let chapter = observedChapter ?? currentChapter?.chapter ?? selected.chapters.first ?? 1
+            Text(inMenu ? L("Capítulo") : (compact ? "" : L("Capítulo") + " ") + String(chapter)).monospacedDigit()
         }.help(L("Capítulo")).accessibilityLabel(L("Capítulo")).featureHelpTarget(.bibleReading)
     }
     private func navigate(_ book: BibleChapterBook, chapter: Int) {
         perform {
+            if let ordinal = book.sourceOrdinals?[chapter] {
+                reader.load(.init(ordinal: ordinal), propagateReference: false)
+                return
+            }
             reader.changeLocatorMode(false)
             reader.locator = book.reference(chapter: chapter)
             reader.goToReference()

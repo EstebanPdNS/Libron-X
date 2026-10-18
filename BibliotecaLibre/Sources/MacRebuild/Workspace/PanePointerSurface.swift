@@ -130,6 +130,9 @@ struct PanePointerSurface: NSViewRepresentable {
             return .init(windowPoint: event.locationInWindow, canvasX: p.x, canvasY: p.y)
         }
         override func mouseDown(with event: NSEvent) {
+            // This native title/resize surface bypasses SwiftUI's tap gesture
+            // and the canvas monitor. End the previous field edit here too.
+            window?.makeFirstResponder(nil)
             if event.clickCount == 2 { actions.doubleClick(); return }
             if let root = window?.contentView { canvas = PaneCanvasSurface.find(in: root) }
             isDragging = true; Self.dragCursor = actions.cursor

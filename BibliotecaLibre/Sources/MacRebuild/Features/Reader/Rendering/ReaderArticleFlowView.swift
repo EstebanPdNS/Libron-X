@@ -179,9 +179,7 @@ struct ReaderArticleFlowView: NSViewRepresentable {
             let rendered = ReaderTypography.render(text: page.text, content: page.content, typography: page.typography,
                 scale: reader.renderingScale, visibleInterlinearLines: lines)
             let display = NSMutableAttributedString(attributedString: rendered.text)
-            for (index, link) in page.inlineLinks.enumerated() where Range(link.range, in: page.text) != nil {
-                display.addAttribute(.link, value: URL(string: "libronx-inline://local/\(index)")!, range: link.range)
-            }
+            ReaderSourceLinkAttributes.install(page.inlineLinks, in: display, verseAnchors: page.content?.anchors ?? [])
             let fingerprint = LibrarySearchService.textFingerprint(page.text)
             for mark in marks where mark.fingerprint == fingerprint && Range(mark.range, in: page.text) != nil {
                 let color: NSColor = switch mark.color { case "green": .systemGreen; case "blue": .systemBlue; case "pink": .systemPink; default: .systemYellow }

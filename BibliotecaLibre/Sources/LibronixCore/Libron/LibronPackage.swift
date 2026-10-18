@@ -143,6 +143,7 @@ public enum LibronPackage {
         defer { try? fm.removeItem(at: stage) }
         func copy(_ url: URL, as path: String) throws -> LibronMember {
             let destination = stage.appendingPathComponent(path)
+            try fm.createDirectory(at: destination.deletingLastPathComponent(), withIntermediateDirectories: true)
             try fm.copyItem(at: url, to: destination)
             let before = try hash(url), after = try hash(destination)
             guard before == after else { throw LibronError.invalid("Source changed during conversion") }
@@ -151,9 +152,32 @@ public enum LibronPackage {
         let payload = try copy(resource.location, as: "content/" + resource.location.lastPathComponent)
         guard payload.sha256 == digest else { throw LibronError.invalid("Source changed during conversion") }
         let index = try resource.indexLocation.map { try copy($0, as: "content/" + $0.lastPathComponent) }
-        let manifest = LibronManifest(id: resource.id, metadata: metadata, originalName: resource.location.lastPathComponent,
+        var manifest = LibronManifest(id: resource.id, metadata: metadata, originalName: resource.location.lastPathComponent,
             sourceFormat: resource.format, legacyIdentifier: resource.legacyIdentifier, isHelp: resource.isHelp,
             support: resource.support, payload: payload, index: index)
+        // A portable .libron already owns its independent native reader. Keep
+        // that verified representation when importing into another library;
+        // rebuilding from its retained EPUB would discard custom study indexes.
+        if let sourcePackage = resource.packageLocation {
+            let sourceManifest = try read(sourcePackage, verify: true).0
+            guard sourceManifest.id == resource.id, sourceManifest.payload.sha256 == digest else {
+                throw LibronError.invalid("Changed source package identity")
+            }
+            if let native = sourceManifest.normalizedContent {
+                manifest.normalizedContent = try copy(sourcePackage.appendingPathComponent(native.path), as: "normalized/reader.sqlite")
+                let receipt = sourcePackage.appendingPathComponent("normalized/conversion.json")
+                if fm.fileExists(atPath: receipt.path) {
+                    let values = try receipt.resourceValues(forKeys: [.fileSizeKey, .isRegularFileKey, .isSymbolicLinkKey])
+                    guard values.isRegularFile == true, values.isSymbolicLink != true,
+                          (values.fileSize ?? 0) <= 4 * 1024 * 1024 else { throw LibronError.invalid("Invalid native conversion receipt") }
+                    let data = try Data(contentsOf: receipt)
+                    guard let record = try JSONSerialization.jsonObject(with: data) as? [String: Any],
+                          record["sourceSHA256"] as? String == digest, record["resourceID"] as? String == resource.id,
+                          record["state"] as? String == "complete" else { throw LibronError.invalid("Changed native conversion receipt") }
+                    _ = try copy(receipt, as: "normalized/conversion.json")
+                }
+            }
+        }
         let encoder = JSONEncoder(); encoder.outputFormatting = [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes]
         try encoder.encode(manifest).write(to: stage.appendingPathComponent("manifest.json"), options: .atomic)
         _ = try read(stage, verify: true)

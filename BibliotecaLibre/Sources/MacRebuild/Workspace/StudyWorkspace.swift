@@ -49,6 +49,8 @@ enum PaneArrangement { case cascade, horizontal, vertical }
     var resourcePriorities: ResourcePriorities
     var keyLinks = KeyLinkController()
     var associationNavigation = AssociationNavigationController()
+    var bibliography = BibliographyController()
+    var editions = LibraryEditionsController()
     var collections: LibraryCollections
     var resourceAssociations: ResourceAssociationSets
     var parallelBibleSets: ParallelBibleSets
@@ -290,6 +292,7 @@ enum PaneArrangement { case cascade, horizontal, vertical }
         search.cancel()
         keyLinks.cancel()
         associationNavigation.cancel()
+        bibliography.cancel()
         referenceSearch.cancel()
         do { try personal.save() } catch { self.error = error.localizedDescription }
         closeAll(); importGeneration += 1; importTask?.cancel(); isImporting = false

@@ -161,6 +161,8 @@ struct RebuildCommands: Commands {
             Button(L("Enlaces clave…")) { workspace.activeTool = .keyLinks }
             Button(L("Asociaciones de recursos…")) { workspace.activeTool = .associations }
             Button(L("Recursos asociados…")) { workspace.beginAssociatedResources() }
+            Button(L("Bibliografía…")) { workspace.activeTool = .bibliography }
+            Button(L("Duplicados y ediciones…")) { workspace.activeTool = .editions }
             Button(L("Diccionarios")) { workspace.dictionary.openInside(workspace: workspace) }
             Button(L("Copiar versículos bíblicos…")) { workspace.activeTool = .bibleCopy }
             Button(L("Documentos de estudio…")) { workspace.activeTool = .documents }

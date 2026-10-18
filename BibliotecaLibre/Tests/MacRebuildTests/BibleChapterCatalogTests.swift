@@ -32,4 +32,29 @@ import LibronixCore
             #expect(page.text.isEmpty == false)
         }
     }
+    @Test func everyInstalledBibleHasNavigableObservedChapterSelectors() async throws {
+        guard let path = ProcessInfo.processInfo.environment["LIBRONX_MANAGED_CORPUS"] else { return }
+        let resources = try LibronCatalog.load(from: URL(fileURLWithPath: path)).resources
+            .filter { $0.libron?.resourceType == "Biblia" }
+        #expect(!resources.isEmpty)
+        for resource in resources {
+            let books = try await BibleChapterCatalog.shared.books(in: resource)
+            #expect(!books.isEmpty, "No chapter selectors: \(resource.title)")
+            for book in books {
+                #expect(!book.chapters.isEmpty, "Empty book: \(resource.title) / \(book.id)")
+                for chapter in book.chapters {
+                    #expect(book.sourceOrdinals?[chapter] != nil || LegacyPassageQuery.navigationInput(book.reference(chapter: chapter)) != nil,
+                        "Invalid navigation: \(resource.title) / \(book.reference(chapter: chapter))")
+                }
+            }
+            if let opaque = books.first(where: { $0.sourceOrdinals != nil }),
+               let ordinal = opaque.sourceOrdinals?[opaque.chapters[0]] {
+                let page = try await ReaderSession.read(resource, .init(ordinal: ordinal))
+                #expect(page.destination.ordinal == ordinal)
+                #expect(!page.text.isEmpty)
+            }
+            print("Bible selectors: \(resource.location.lastPathComponent) books=\(books.count) chapters=\(books.reduce(0) { $0 + $1.chapters.count })")
+        }
+    }
+
 }

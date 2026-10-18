@@ -53,6 +53,7 @@ struct LibraryChooser: View {
             .overlay { RoundedRectangle(cornerRadius: 10).strokeBorder(Color(nsColor: .separatorColor).opacity(0.6), lineWidth: 1) }
             .contextMenu(forSelectionType: String.self) { ids in
                 Button(L("Abrir recurso")) { open(ids.first) }.disabled(ids.isEmpty)
+                Button(L("Copiar cita del recurso")) { ResourceCitationActions.copy(workspace.resources.filter { ids.contains($0.id) }) }.disabled(ids.isEmpty)
                 Button(L("Ocultar recurso")) {
                     do { try workspace.hideLibraryResources(ids) }
                     catch { workspace.error = error.localizedDescription }

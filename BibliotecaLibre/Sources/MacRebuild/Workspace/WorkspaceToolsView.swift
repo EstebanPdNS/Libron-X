@@ -22,14 +22,16 @@ struct WorkspaceToolsView: View {
             case .topics: TopicBrowserView(workspace: workspace)
             case .bibleCopy: BibleCopyToolView(workspace: workspace)
             case .windows: WorkspaceWindowsView(workspace: workspace)
+            case .bibliography: BibliographyView(workspace:workspace,controller:workspace.bibliography)
+            case .editions: LibraryEditionsView(workspace:workspace,controller:workspace.editions)
             case .associationLinks: AssociatedResourcesView(workspace: workspace, controller: workspace.associationNavigation)
             case .associations: ResourceAssociationSettingsView(workspace: workspace)
             case .parallelSets: ParallelBibleSettingsView(workspace: workspace)
             case .keyLinks: KeyLinkView(workspace: workspace, controller: workspace.keyLinks)
             }
         }.frame(minWidth: tool == .information ? 700 : 680, idealWidth: tool == .information ? 700 : 820,
-                minHeight: tool == .information ? nil : tool == .search ? 680 : expandedScope ? 620 : 520,
-                idealHeight: tool == .information ? nil : tool == .search ? 820 : expandedScope ? 720 : 620)
+                minHeight: tool == .information ? nil : tool == .bibliography ? 640 : tool == .search ? 680 : expandedScope ? 620 : 520,
+                idealHeight: tool == .information ? nil : tool == .bibliography ? 820 : tool == .search ? 820 : expandedScope ? 720 : 620)
             .modifier(MacPanelControlPresentation())
     }
     private var expandedScope: Bool {
@@ -50,6 +52,8 @@ struct WorkspaceToolsView: View {
         case .topics: "Explorador temático"
         case .bibleCopy: "Copiar versículos bíblicos"
         case .windows: "Ventanas"
+        case .bibliography: "Bibliografía"
+        case .editions: "Duplicados y ediciones"
         case .associationLinks: "Recursos asociados"
         case .associations: "Asociaciones de recursos"
         case .parallelSets: "Grupos de Biblias paralelas"

@@ -12,6 +12,15 @@ actor BibleVersionCatalog {
                 if let stamp = try? LegacyGraphicsService.fileStamp(resource.location) { cache[resource.location] = (stamp, true) }
                 result.append(resource); continue
             }
+            // An EPUB is only a Bible version after its native conversion has
+            // supplied real verse addresses. A title or catalog type alone
+            // must never admit a generic EPUB into parallel Bible navigation.
+            if resource.format == .epub, resource.libron?.resourceType == "Biblia",
+               let native = LibronNativeReader.location(resource),
+               let references = try? LibronNativeDatabase(native).chapterReferences(),
+               !references.isEmpty {
+                result.append(resource); continue
+            }
             if resource.format == .eSwordSQLite {
                 if resource.libron?.resourceType == "Biblia" { result.append(resource) }
                 continue

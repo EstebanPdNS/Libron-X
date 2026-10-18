@@ -131,6 +131,18 @@
     "ur": "یہاں کھولیں",
     "zh-Hans": "在此打开"
   },
+  "Abrir asociados…": {
+    "ar": "فتح الموارد المرتبطة…",
+    "bn": "সংযুক্ত রিসোর্স খুলুন…",
+    "en": "Open associated resources…",
+    "es": "Abrir asociados…",
+    "fr": "Ouvrir les ressources associées…",
+    "hi": "संबंधित संसाधन खोलें…",
+    "id": "Buka sumber terkait…",
+    "pt": "Abrir recursos associados…",
+    "ur": "متعلقہ وسائل کھولیں…",
+    "zh-Hans": "打开关联资源…"
+  },
   "Abrir carpeta de recursos…": {
     "ar": "فتح مجلد الموارد…",
     "bn": "রিসোর্স ফোল্ডার খুলুন…",
@@ -467,6 +479,18 @@
     "ur": "آگے",
     "zh-Hans": "前进"
   },
+  "Administrar asociaciones…": {
+    "ar": "إدارة الارتباطات…",
+    "bn": "সংযোগ পরিচালনা করুন…",
+    "en": "Manage associations…",
+    "es": "Administrar asociaciones…",
+    "fr": "Gérer les associations…",
+    "hi": "संबंध प्रबंधित करें…",
+    "id": "Kelola asosiasi…",
+    "pt": "Gerenciar associações…",
+    "ur": "تعلقات منظم کریں…",
+    "zh-Hans": "管理关联…"
+  },
   "Administrar recursos y licencias": {
     "ar": "إدارة الموارد والتراخيص",
     "bn": "রিসোর্স ও লাইসেন্স পরিচালনা",
@@ -755,6 +779,30 @@
     "ur": "پینل بڑا یا بحال کریں",
     "zh-Hans": "放大或还原面板"
   },
+  "Analiza la biblioteca para comparar copias y ediciones.": {
+    "ar": "حلل المكتبة لمقارنة النسخ والطبعات.",
+    "bn": "অনুলিপি ও সংস্করণ তুলনা করতে বিশ্লেষণ করুন।",
+    "en": "Analyze the library to compare copies and editions.",
+    "es": "Analiza la biblioteca para comparar copias y ediciones.",
+    "fr": "Analysez la bibliothèque pour comparer les copies et éditions.",
+    "hi": "प्रतियों और संस्करणों की तुलना के लिए विश्लेषण करें।",
+    "id": "Analisis perpustakaan untuk membandingkan salinan dan edisi.",
+    "pt": "Analise a biblioteca para comparar cópias e edições.",
+    "ur": "نقول اور ایڈیشن کا موازنہ کرنے کے لیے تجزیہ کریں۔",
+    "zh-Hans": "分析书库以比较副本和版本。"
+  },
+  "Analizar biblioteca": {
+    "ar": "تحليل المكتبة",
+    "bn": "লাইব্রেরি বিশ্লেষণ করুন",
+    "en": "Analyze library",
+    "es": "Analizar biblioteca",
+    "fr": "Analyser la bibliothèque",
+    "hi": "लाइब्रेरी का विश्लेषण करें",
+    "id": "Analisis perpustakaan",
+    "pt": "Analisar biblioteca",
+    "ur": "لائبریری کا تجزیہ کریں",
+    "zh-Hans": "分析书库"
+  },
   "Apariencia": {
     "ar": "المظهر",
     "bn": "চেহারা",
@@ -959,6 +1007,18 @@
     "ur": "وسائل کے تعلقات…",
     "zh-Hans": "资源关联…"
   },
+  "Asociación": {
+    "ar": "الارتباط",
+    "bn": "সংযোগ",
+    "en": "Association",
+    "es": "Asociación",
+    "fr": "Association",
+    "hi": "संबंध",
+    "id": "Asosiasi",
+    "pt": "Associação",
+    "ur": "تعلق",
+    "zh-Hans": "关联"
+  },
   "Aspecto": {
     "ar": "المظهر",
     "bn": "চেহারা",
@@ -1043,6 +1103,18 @@
     "ur": "مصنف",
     "zh-Hans": "作者"
   },
+  "Autor y título": {
+    "ar": "المؤلف والعنوان",
+    "bn": "লেখক ও শিরোনাম",
+    "en": "Author and title",
+    "es": "Autor y título",
+    "fr": "Auteur et titre",
+    "hi": "लेखक और शीर्षक",
+    "id": "Penulis dan judul",
+    "pt": "Autor e título",
+    "ur": "مصنف اور عنوان",
+    "zh-Hans": "作者和标题"
+  },
   "Ayuda contextual con «¿Qué es esto?» y ajustes más compactos.": {
     "ar": "مساعدة سياقية عبر «ما هذا؟» وإعدادات أكثر اختصارًا.",
     "bn": "“এটি কী?” প্রাসঙ্গিক সহায়তা এবং আরও সংক্ষিপ্ত সেটিংস।",
@@ -1103,6 +1175,18 @@
     "ur": "اصل اشاعت کا سال",
     "zh-Hans": "原作出版年"
   },
+  "Año y título": {
+    "ar": "السنة والعنوان",
+    "bn": "সাল ও শিরোনাম",
+    "en": "Year and title",
+    "es": "Año y título",
+    "fr": "Année et titre",
+    "hi": "वर्ष और शीर्षक",
+    "id": "Tahun dan judul",
+    "pt": "Ano e título",
+    "ur": "سال اور عنوان",
+    "zh-Hans": "年份和标题"
+  },
   "Bajar": {
     "ar": "نقل لأسفل",
     "bn": "নিচে সরান",
@@ -1150,6 +1234,54 @@
     "pt": "Bíblias e texto bíblico",
     "ur": "بائبل اور بائبلی متن",
     "zh-Hans": "圣经与经文"
+  },
+  "Bibliografía": {
+    "ar": "قائمة المراجع",
+    "bn": "গ্রন্থপঞ্জি",
+    "en": "Bibliography",
+    "es": "Bibliografía",
+    "fr": "Bibliographie",
+    "hi": "ग्रंथसूची",
+    "id": "Bibliografi",
+    "pt": "Bibliografia",
+    "ur": "کتابیات",
+    "zh-Hans": "参考书目"
+  },
+  "Bibliografía con miembros pendientes": {
+    "ar": "قائمة مراجع ذات أعضاء غير مطابقين",
+    "bn": "অসমাধিত সদস্যসহ গ্রন্থপঞ্জি",
+    "en": "Bibliography with unresolved members",
+    "es": "Bibliografía con miembros pendientes",
+    "fr": "Bibliographie avec des membres non résolus",
+    "hi": "अनसुलझे सदस्यों वाली ग्रंथसूची",
+    "id": "Bibliografi dengan anggota yang belum ditemukan",
+    "pt": "Bibliografia com membros pendentes",
+    "ur": "غیر حل شدہ ارکان والی کتابیات",
+    "zh-Hans": "包含未解析成员的参考书目"
+  },
+  "Bibliografía, estilos de cita y gestión reversible de duplicados y ediciones.": {
+    "ar": "ببليوغرافيا وأنماط استشهاد وإدارة قابلة للتراجع للنسخ والطبعات.",
+    "bn": "গ্রন্থপঞ্জি, উদ্ধৃতির ধরন এবং ফিরিয়ে আনা যায় এমন সদৃশ ও সংস্করণ ব্যবস্থাপনা।",
+    "en": "Bibliographies, citation styles and reversible duplicate and edition management.",
+    "es": "Bibliografía, estilos de cita y gestión reversible de duplicados y ediciones.",
+    "fr": "Bibliographies, citations et gestion réversible des doublons et éditions.",
+    "hi": "ग्रंथसूची, उद्धरण शैलियाँ और प्रतियों का पूर्ववत प्रबंधन।",
+    "id": "Bibliografi, gaya sitasi dan pengelolaan duplikat serta edisi yang dapat dibatalkan.",
+    "pt": "Bibliografia, estilos de citação e gestão reversível de duplicados e edições.",
+    "ur": "کتابیات، حوالہ جاتی انداز اور نقول و ایڈیشن کا قابل واپسی انتظام۔",
+    "zh-Hans": "参考书目、引用格式及可撤销的重复项和版本管理。"
+  },
+  "Bibliografía…": {
+    "ar": "قائمة المراجع…",
+    "bn": "গ্রন্থপঞ্জি…",
+    "en": "Bibliography…",
+    "es": "Bibliografía…",
+    "fr": "Bibliographie…",
+    "hi": "ग्रंथसूची…",
+    "id": "Bibliografi…",
+    "pt": "Bibliografia…",
+    "ur": "کتابیات…",
+    "zh-Hans": "参考书目…"
   },
   "Biblioteca": {
     "ar": "المكتبة",
@@ -1559,6 +1691,18 @@
     "ur": "تلاش منسوخ؛ جزوی نتائج محفوظ ہیں۔",
     "zh-Hans": "搜索已取消；已保留部分结果。"
   },
+  "Búsqueda de biblioteca con índices persistentes, rangos, campos, operadores y control de ejecución.": {
+    "ar": "بحث المكتبة بفهارس دائمة ونطاقات وحقول وعوامل وتحكم بالتشغيل.",
+    "bn": "স্থায়ী সূচি, পরিসর, ক্ষেত্র, অপারেটর ও নিয়ন্ত্রণসহ অনুসন্ধান।",
+    "en": "Library search with persistent indexes, ranges, fields, operators and run controls.",
+    "es": "Búsqueda de biblioteca con índices persistentes, rangos, campos, operadores y control de ejecución.",
+    "fr": "Recherche avec index persistants, plages, champs, opérateurs et commandes.",
+    "hi": "स्थायी अनुक्रमणिका, दायरे, फ़ील्ड, ऑपरेटर और नियंत्रण सहित खोज।",
+    "id": "Pencarian dengan indeks persisten, rentang, bidang, operator dan kontrol.",
+    "pt": "Pesquisa com índices persistentes, intervalos, campos, operadores e controles.",
+    "ur": "مستقل اشاریے، حدود، خانوں، عوامل اور کنٹرول کے ساتھ تلاش۔",
+    "zh-Hans": "书库搜索支持持久索引、范围、字段、运算符和运行控制。"
+  },
   "Búsqueda desde el otro extremo": {
     "ar": "البحث من الطرف الآخر",
     "bn": "অন্য প্রান্ত থেকে অনুসন্ধান",
@@ -1787,6 +1931,18 @@
     "ur": "زمرہ",
     "zh-Hans": "分类"
   },
+  "Catálogo": {
+    "ar": "الفهرس",
+    "bn": "ক্যাটালগ",
+    "en": "Catalog",
+    "es": "Catálogo",
+    "fr": "Catalogue",
+    "hi": "कैटलॉग",
+    "id": "Katalog",
+    "pt": "Catálogo",
+    "ur": "فہرست",
+    "zh-Hans": "目录"
+  },
   "Cerrar": {
     "ar": "إغلاق",
     "bn": "বন্ধ করুন",
@@ -1894,6 +2050,18 @@
     "pt": "Fechar janela",
     "ur": "ونڈو بند کریں",
     "zh-Hans": "关闭窗口"
+  },
+  "Chicago · autor–fecha": {
+    "ar": "شيكاغو · المؤلف–التاريخ",
+    "bn": "শিকাগো · লেখক–তারিখ",
+    "en": "Chicago · author–date",
+    "es": "Chicago · autor–fecha",
+    "fr": "Chicago · auteur–date",
+    "hi": "शिकागो · लेखक–तिथि",
+    "id": "Chicago · penulis–tanggal",
+    "pt": "Chicago · autor–data",
+    "ur": "شکاگو · مصنف–تاریخ",
+    "zh-Hans": "Chicago · 作者–日期"
   },
   "Cita bibliográfica": {
     "ar": "استشهاد ببليوغرافي",
@@ -2051,6 +2219,30 @@
     "ur": "مجموعے",
     "zh-Hans": "收藏集"
   },
+  "Colecciones de la bibliografía": {
+    "ar": "مجموعات قائمة المراجع",
+    "bn": "গ্রন্থপঞ্জির সংগ্রহ",
+    "en": "Bibliography collections",
+    "es": "Colecciones de la bibliografía",
+    "fr": "Collections de la bibliographie",
+    "hi": "ग्रंथसूची संग्रह",
+    "id": "Koleksi bibliografi",
+    "pt": "Coleções da bibliografia",
+    "ur": "کتابیات کے مجموعے",
+    "zh-Hans": "参考书目集合"
+  },
+  "Colecciones, prioridades y asociaciones de recursos con identidad y procedencia.": {
+    "ar": "مجموعات وأولويات وارتباطات موارد مع الهوية والمصدر.",
+    "bn": "পরিচয় ও উৎসসহ সংগ্রহ, অগ্রাধিকার ও রিসোর্সের সংযোগ।",
+    "en": "Collections, priorities and resource associations with identity and provenance.",
+    "es": "Colecciones, prioridades y asociaciones de recursos con identidad y procedencia.",
+    "fr": "Collections, priorités et associations avec identité et provenance.",
+    "hi": "पहचान और स्रोत सहित संग्रह, प्राथमिकताएँ और संबंध।",
+    "id": "Koleksi, prioritas dan asosiasi dengan identitas dan asal.",
+    "pt": "Coleções, prioridades e associações com identidade e procedência.",
+    "ur": "شناخت اور ماخذ کے ساتھ مجموعے، ترجیحات اور وسائل کے روابط۔",
+    "zh-Hans": "具有身份与来源信息的合集、优先级和资源关联。"
+  },
   "Colección": {
     "ar": "المجموعة المنشورة",
     "bn": "সংকলন",
@@ -2062,6 +2254,18 @@
     "pt": "Coleção",
     "ur": "مجموعہ",
     "zh-Hans": "丛书"
+  },
+  "Colección no disponible": {
+    "ar": "المجموعة غير متاحة",
+    "bn": "সংগ্রহ অনুপলব্ধ",
+    "en": "Collection unavailable",
+    "es": "Colección no disponible",
+    "fr": "Collection indisponible",
+    "hi": "संग्रह अनुपलब्ध है",
+    "id": "Koleksi tidak tersedia",
+    "pt": "Coleção indisponível",
+    "ur": "مجموعہ دستیاب نہیں",
+    "zh-Hans": "集合不可用"
   },
   "Columna amplia": {
     "ar": "عمود عريض",
@@ -2327,6 +2531,18 @@
     "ur": "نقل کریں",
     "zh-Hans": "复制"
   },
+  "Copiar cita del recurso": {
+    "ar": "نسخ استشهاد المورد",
+    "bn": "রিসোর্সের উদ্ধৃতি কপি করুন",
+    "en": "Copy resource citation",
+    "es": "Copiar cita del recurso",
+    "fr": "Copier la référence de la ressource",
+    "hi": "संसाधन का उद्धरण कॉपी करें",
+    "id": "Salin sitasi sumber",
+    "pt": "Copiar citação do recurso",
+    "ur": "وسیلے کا حوالہ نقل کریں",
+    "zh-Hans": "复制资源引用"
+  },
   "Copiar imagen": {
     "ar": "نسخ الصورة",
     "bn": "ছবি অনুলিপি",
@@ -2338,6 +2554,18 @@
     "pt": "Copiar imagem",
     "ur": "تصویر نقل کریں",
     "zh-Hans": "复制图片"
+  },
+  "Copiar informe": {
+    "ar": "نسخ التقرير",
+    "bn": "প্রতিবেদন অনুলিপি করুন",
+    "en": "Copy report",
+    "es": "Copiar informe",
+    "fr": "Copier le rapport",
+    "hi": "रिपोर्ट कॉपी करें",
+    "id": "Salin laporan",
+    "pt": "Copiar relatório",
+    "ur": "رپورٹ نقل کریں",
+    "zh-Hans": "复制报告"
   },
   "Copiar selección": {
     "ar": "نسخ التحديد",
@@ -2386,6 +2614,18 @@
     "pt": "Copiar versículos bíblicos…",
     "ur": "بائبل کی آیات نقل کریں…",
     "zh-Hans": "复制圣经经文…"
+  },
+  "Copias exactas": {
+    "ar": "نسخ متطابقة",
+    "bn": "হুবহু অনুলিপি",
+    "en": "Exact copies",
+    "es": "Copias exactas",
+    "fr": "Copies identiques",
+    "hi": "समान प्रतियाँ",
+    "id": "Salinan identik",
+    "pt": "Cópias exatas",
+    "ur": "بالکل یکساں نقول",
+    "zh-Hans": "完全相同的副本"
   },
   "Crea o abre un archivo de notas o una lista de versículos. Dale un título, edita su contenido y guárdalo como documento personal, separado de los libros importados.": {
     "ar": "أنشئ دفتر ملاحظات أو قائمة آيات أو افتحها. أضف عنوانًا وعدّل المحتوى واحفظه مستندًا شخصيًا منفصلًا عن الكتب المستوردة.",
@@ -2519,6 +2759,30 @@
     "ur": "زبان کا کوڈ (اختیاری)",
     "zh-Hans": "语言代码（可选）"
   },
+  "Datos de la edición": {
+    "ar": "بيانات الطبعة",
+    "bn": "সংস্করণের তথ্য",
+    "en": "Edition details",
+    "es": "Datos de la edición",
+    "fr": "Données de l’édition",
+    "hi": "संस्करण का विवरण",
+    "id": "Rincian edisi",
+    "pt": "Dados da edição",
+    "ur": "نسخے کی تفصیلات",
+    "zh-Hans": "版本信息"
+  },
+  "Declarado": {
+    "ar": "مُصرّح به",
+    "bn": "ঘোষিত",
+    "en": "Declared",
+    "es": "Declarado",
+    "fr": "Déclaré",
+    "hi": "घोषित",
+    "id": "Dinyatakan",
+    "pt": "Declarado",
+    "ur": "بیان کردہ",
+    "zh-Hans": "已声明"
+  },
   "Definiciones y sinónimos": {
     "ar": "تعريفات ومترادفات",
     "bn": "সংজ্ঞা ও সমার্থক শব্দ",
@@ -2651,6 +2915,18 @@
     "ur": "خودکار ڈاؤن لوڈ اور بند کرتے وقت انسٹال کریں",
     "zh-Hans": "自动下载并在退出时安装"
   },
+  "Desconocido": {
+    "ar": "غير معروف",
+    "bn": "অজানা",
+    "en": "Unknown",
+    "es": "Desconocido",
+    "fr": "Inconnu",
+    "hi": "अज्ञात",
+    "id": "Tidak diketahui",
+    "pt": "Desconhecido",
+    "ur": "نامعلوم",
+    "zh-Hans": "未知"
+  },
   "Desmarcar todos": {
     "ar": "إلغاء تحديد الكل",
     "bn": "সব নির্বাচন বাতিল করুন",
@@ -2674,6 +2950,18 @@
     "pt": "Expanda Alterações desta versão para ler as notas incluídas na versão instalada. Elas funcionam sem internet e descrevem essa versão, não a versão mais recente do GitHub.",
     "ur": "اس نسخے میں تبدیلیاں کھول کر نصب شدہ نسخے کے نوٹس پڑھیں۔ یہ آف لائن دستیاب ہیں اور اسی نسخے کی وضاحت کرتے ہیں، GitHub کے تازہ ترین کی نہیں۔",
     "zh-Hans": "展开此版本的更改可阅读已安装版本附带的说明。这些说明可离线使用，描述的是本机版本，而不是 GitHub 上的最新版本。"
+  },
+  "Destino": {
+    "ar": "الوجهة",
+    "bn": "গন্তব্য",
+    "en": "Destination",
+    "es": "Destino",
+    "fr": "Destination",
+    "hi": "गंतव्य",
+    "id": "Tujuan",
+    "pt": "Destino",
+    "ur": "منزل",
+    "zh-Hans": "目标"
   },
   "Destino de las referencias": {
     "ar": "وجهة المراجع",
@@ -3035,6 +3323,30 @@
     "ur": "دو کالم",
     "zh-Hans": "两列"
   },
+  "Duplicados y ediciones": {
+    "ar": "النسخ المكررة والطبعات",
+    "bn": "সদৃশ ও সংস্করণ",
+    "en": "Duplicates and editions",
+    "es": "Duplicados y ediciones",
+    "fr": "Doublons et éditions",
+    "hi": "डुप्लिकेट और संस्करण",
+    "id": "Duplikat dan edisi",
+    "pt": "Duplicados e edições",
+    "ur": "نقول اور ایڈیشن",
+    "zh-Hans": "重复项与版本"
+  },
+  "Duplicados y ediciones…": {
+    "ar": "النسخ المكررة والطبعات…",
+    "bn": "সদৃশ ও সংস্করণ…",
+    "en": "Duplicates and editions…",
+    "es": "Duplicados y ediciones…",
+    "fr": "Doublons et éditions…",
+    "hi": "डुप्लिकेट और संस्करण…",
+    "id": "Duplikat dan edisi…",
+    "pt": "Duplicados e edições…",
+    "ur": "نقول اور ایڈیشن…",
+    "zh-Hans": "重复项与版本…"
+  },
   "Duplicar lectura": {
     "ar": "تكرار القراءة",
     "bn": "পাঠের প্রতিলিপি",
@@ -3107,6 +3419,18 @@
     "ur": "کام کی جگہ کی فائل اب دستیاب نہیں۔",
     "zh-Hans": "工作区文件已不可用。"
   },
+  "El catálogo cambió. Analiza la biblioteca de nuevo.": {
+    "ar": "تغير الفهرس. حلل المكتبة مجددًا.",
+    "bn": "ক্যাটালগ বদলেছে। আবার বিশ্লেষণ করুন।",
+    "en": "The catalog changed. Analyze the library again.",
+    "es": "El catálogo cambió. Analiza la biblioteca de nuevo.",
+    "fr": "Le catalogue a changé. Analysez de nouveau la bibliothèque.",
+    "hi": "कैटलॉग बदल गया। लाइब्रेरी का फिर विश्लेषण करें।",
+    "id": "Katalog berubah. Analisis ulang perpustakaan.",
+    "pt": "O catálogo mudou. Analise a biblioteca novamente.",
+    "ur": "فہرست بدل گئی ہے۔ دوبارہ تجزیہ کریں۔",
+    "zh-Hans": "目录已更改。请重新分析书库。"
+  },
   "El grupo de Biblias ya no está disponible.": {
     "ar": "لم تعد مجموعة الترجمات متاحة.",
     "bn": "বাইবেল গোষ্ঠীটি আর উপলব্ধ নেই।",
@@ -3130,6 +3454,30 @@
     "pt": "Isso altera o idioma da interface. Os livros mantêm o texto original.",
     "ur": "اس سے انٹرفیس کی زبان بدلتی ہے۔ کتابوں کا اصل متن برقرار رہتا ہے۔",
     "zh-Hans": "这只会更改界面语言，书籍保留原文。"
+  },
+  "El informe cambió. Vuelve a exportarlo.": {
+    "ar": "تغيّر التقرير. صدّره مرة أخرى.",
+    "bn": "প্রতিবেদন বদলেছে। আবার রপ্তানি করুন।",
+    "en": "The report changed. Export it again.",
+    "es": "El informe cambió. Vuelve a exportarlo.",
+    "fr": "Le rapport a changé. Exportez-le à nouveau.",
+    "hi": "रिपोर्ट बदल गई है। इसे फिर से निर्यात करें।",
+    "id": "Laporan berubah. Ekspor kembali.",
+    "pt": "O relatório mudou. Exporte-o novamente.",
+    "ur": "رپورٹ بدل گئی ہے۔ اسے دوبارہ برآمد کریں۔",
+    "zh-Hans": "报告已更改。请重新导出。"
+  },
+  "El informe no puede sustituir un recurso ni el catálogo de la biblioteca.": {
+    "ar": "لا يمكن للتقرير أن يستبدل موردًا أو فهرس المكتبة.",
+    "bn": "প্রতিবেদন কোনো রিসোর্স বা লাইব্রেরির ক্যাটালগ প্রতিস্থাপন করতে পারে না।",
+    "en": "The report cannot replace a resource or the library catalog.",
+    "es": "El informe no puede sustituir un recurso ni el catálogo de la biblioteca.",
+    "fr": "Le rapport ne peut remplacer ni une ressource ni le catalogue de la bibliothèque.",
+    "hi": "रिपोर्ट किसी संसाधन या पुस्तकालय कैटलॉग को प्रतिस्थापित नहीं कर सकती।",
+    "id": "Laporan tidak dapat mengganti sumber atau katalog perpustakaan.",
+    "pt": "O relatório não pode substituir um recurso nem o catálogo da biblioteca.",
+    "ur": "رپورٹ کسی وسیلے یا کتب خانے کے کیٹلاگ کی جگہ نہیں لے سکتی۔",
+    "zh-Hans": "报告不能覆盖资源或书库目录。"
   },
   "El lector de este formato todavía no está implementado en la nueva aplicación.": {
     "ar": "لم يُنفّذ قارئ لهذا التنسيق بعد في التطبيق الجديد.",
@@ -3191,6 +3539,18 @@
     "ur": "وسیلہ اس تعلق کے ساتھ مطابقت نہیں رکھتا۔",
     "zh-Hans": "此资源与该关联不兼容。"
   },
+  "El recurso se abrirá en una lectura nueva.": {
+    "ar": "سيُفتح المورد في قراءة جديدة.",
+    "bn": "রিসোর্সটি একটি নতুন পাঠে খুলবে।",
+    "en": "The resource will open in a new reading.",
+    "es": "El recurso se abrirá en una lectura nueva.",
+    "fr": "La ressource s’ouvrira dans une nouvelle lecture.",
+    "hi": "संसाधन एक नए पठन में खुलेगा।",
+    "id": "Sumber akan terbuka dalam bacaan baru.",
+    "pt": "O recurso será aberto em uma nova leitura.",
+    "ur": "وسیلہ نئے مطالعے میں کھلے گا۔",
+    "zh-Hans": "资源将在新阅读面板中打开。"
+  },
   "El servicio original de desbloqueo de licencias todavía no tiene una implementación verificada.": {
     "ar": "لا تتوفر بعد نسخة مُتحقّق منها لخدمة فتح التراخيص الأصلية.",
     "bn": "মূল লাইসেন্স খোলার পরিষেবার যাচাইকৃত বাস্তবায়ন এখনও নেই।",
@@ -3227,6 +3587,18 @@
     "ur": "دائرے میں وسائل کی شناخت متصادم ہے۔",
     "zh-Hans": "范围包含相互冲突的资源标识。"
   },
+  "El ámbito de la bibliografía no es válido.": {
+    "ar": "نطاق قائمة المراجع غير صالح.",
+    "bn": "গ্রন্থপঞ্জির পরিসর বৈধ নয়।",
+    "en": "The bibliography scope is invalid.",
+    "es": "El ámbito de la bibliografía no es válido.",
+    "fr": "Le périmètre de la bibliographie est invalide.",
+    "hi": "ग्रंथसूची का दायरा अमान्य है।",
+    "id": "Cakupan bibliografi tidak valid.",
+    "pt": "O âmbito da bibliografia é inválido.",
+    "ur": "کتابیات کا دائرہ درست نہیں ہے۔",
+    "zh-Hans": "参考书目范围无效。"
+  },
   "El ámbito no contiene recursos disponibles para buscar.": {
     "ar": "لا يحتوي النطاق على موارد متاحة للبحث.",
     "bn": "পরিসরে অনুসন্ধানের জন্য কোনো সম্পদ উপলব্ধ নেই।",
@@ -3238,6 +3610,18 @@
     "pt": "O âmbito não contém recursos disponíveis para buscar.",
     "ur": "دائرے میں تلاش کے لیے کوئی وسیلہ دستیاب نہیں۔",
     "zh-Hans": "范围中没有可供搜索的资源。"
+  },
+  "El ámbito o el catálogo cambió. Genera la bibliografía de nuevo para copiarla o exportarla.": {
+    "ar": "تغيّر النطاق أو الفهرس. أنشئ قائمة المراجع مجددًا لنسخها أو تصديرها.",
+    "bn": "পরিসর বা ক্যাটালগ বদলেছে। অনুলিপি বা রপ্তানির জন্য গ্রন্থপঞ্জি আবার তৈরি করুন।",
+    "en": "The scope or catalog changed. Generate the bibliography again to copy or export it.",
+    "es": "El ámbito o el catálogo cambió. Genera la bibliografía de nuevo para copiarla o exportarla.",
+    "fr": "Le périmètre ou le catalogue a changé. Générez à nouveau la bibliographie pour la copier ou l’exporter.",
+    "hi": "दायरा या कैटलॉग बदल गया है। कॉपी या निर्यात करने के लिए ग्रंथसूची फिर से बनाएँ।",
+    "id": "Cakupan atau katalog berubah. Buat ulang bibliografi untuk menyalin atau mengekspornya.",
+    "pt": "O âmbito ou catálogo mudou. Gere a bibliografia novamente para copiar ou exportar.",
+    "ur": "دائرہ یا کیٹلاگ بدل گیا ہے۔ نقل یا برآمد کرنے کے لیے کتابیات دوبارہ بنائیں۔",
+    "zh-Hans": "范围或目录已更改。请重新生成参考书目后再复制或导出。"
   },
   "El área de trabajo se cargó, pero no se pudo actualizar la lista de recientes: {error}": {
     "ar": "حُمّلت مساحة العمل، لكن تعذر تحديث القائمة الأخيرة: {error}",
@@ -3262,6 +3646,42 @@
     "pt": "A área de trabalho foi salva, mas a lista de recentes não pôde ser atualizada: {error}",
     "ur": "کام کی جگہ محفوظ ہو گئی، لیکن حالیہ فہرست اپ ڈیٹ نہیں ہو سکی: {error}",
     "zh-Hans": "工作区已保存，但无法更新最近列表：{error}"
+  },
+  "Elegir archivo .lbxras…": {
+    "ar": "اختيار ملف .lbxras…",
+    "bn": ".lbxras ফাইল বেছে নিন…",
+    "en": "Choose .lbxras file…",
+    "es": "Elegir archivo .lbxras…",
+    "fr": "Choisir un fichier .lbxras…",
+    "hi": " .lbxras फ़ाइल चुनें…",
+    "id": "Pilih berkas .lbxras…",
+    "pt": "Escolher arquivo .lbxras…",
+    "ur": ".lbxras فائل منتخب کریں…",
+    "zh-Hans": "选择 .lbxras 文件…"
+  },
+  "Elegir edición": {
+    "ar": "اختيار طبعة",
+    "bn": "সংস্করণ বেছে নিন",
+    "en": "Choose edition",
+    "es": "Elegir edición",
+    "fr": "Choisir une édition",
+    "hi": "संस्करण चुनें",
+    "id": "Pilih edisi",
+    "pt": "Escolher edição",
+    "ur": "نسخہ منتخب کریں",
+    "zh-Hans": "选择版本"
+  },
+  "Elegir recursos": {
+    "ar": "اختيار الموارد",
+    "bn": "রিসোর্স বেছে নিন",
+    "en": "Choose resources",
+    "es": "Elegir recursos",
+    "fr": "Choisir des ressources",
+    "hi": "संसाधन चुनें",
+    "id": "Pilih sumber",
+    "pt": "Escolher recursos",
+    "ur": "وسائل منتخب کریں",
+    "zh-Hans": "选择资源"
   },
   "Elegir…": {
     "ar": "اختيار…",
@@ -3455,6 +3875,18 @@
     "ur": "سے شروع ہوتا ہے",
     "zh-Hans": "开头为"
   },
+  "En una serie importada, la pertenencia declarada por el original determina los recursos compatibles.": {
+    "ar": "في السلسلة المستوردة، تحدد العضوية المعلنة في الأصل الموارد المتوافقة.",
+    "bn": "আমদানি করা সিরিজে মূল নথির ঘোষিত সদস্যতা সামঞ্জস্যপূর্ণ রিসোর্স নির্ধারণ করে।",
+    "en": "In an imported series, the original declared membership determines compatible resources.",
+    "es": "En una serie importada, la pertenencia declarada por el original determina los recursos compatibles.",
+    "fr": "Dans une série importée, l’appartenance déclarée dans l’original détermine les ressources compatibles.",
+    "hi": "आयातित श्रृंखला में मूल दस्तावेज़ की घोषित सदस्यता संगत संसाधन तय करती है।",
+    "id": "Dalam seri impor, keanggotaan yang dinyatakan dalam sumber asli menentukan sumber yang kompatibel.",
+    "pt": "Em uma série importada, os membros declarados pelo original determinam os recursos compatíveis.",
+    "ur": "درآمد شدہ سلسلے میں اصل دستاویز کی اعلان کردہ رکنیت موافق وسائل طے کرتی ہے۔",
+    "zh-Hans": "导入的系列以原始定义的成员关系确定兼容资源。"
+  },
   "Encabezados": {
     "ar": "العناوين",
     "bn": "শিরোনাম",
@@ -3479,6 +3911,18 @@
     "ur": "عبارات کے واضح حوالے تلاش کریں۔ قوسین میں ایڈیشن دینے سے تلاش صرف اسی ایڈیشن کا نام بتانے والے حوالوں تک محدود رہتی ہے۔",
     "zh-Hans": "查找明确的经文引用。在括号中指定版本后，仅搜索标明该版本的引用。"
   },
+  "Enlaces azules y tarjetas de notas persistentes con controles Liquid Glass.": {
+    "ar": "روابط زرقاء وبطاقات ملاحظات ثابتة بعناصر Liquid Glass.",
+    "bn": "নীল লিংক ও Liquid Glass নিয়ন্ত্রণসহ স্থায়ী নোট কার্ড।",
+    "en": "Blue links and persistent note cards with Liquid Glass controls.",
+    "es": "Enlaces azules y tarjetas de notas persistentes con controles Liquid Glass.",
+    "fr": "Liens bleus et fiches de notes persistantes avec commandes Liquid Glass.",
+    "hi": "नीले लिंक और Liquid Glass नियंत्रण सहित स्थायी नोट कार्ड।",
+    "id": "Tautan biru dan kartu catatan persisten dengan kontrol Liquid Glass.",
+    "pt": "Links azuis e cartões de notas persistentes com controles Liquid Glass.",
+    "ur": "نیلے روابط اور Liquid Glass کنٹرول کے ساتھ مستقل نوٹ کارڈ۔",
+    "zh-Hans": "蓝色链接与带 Liquid Glass 控件的常驻注释卡片。"
+  },
   "Enlaces clave": {
     "ar": "روابط رئيسية",
     "bn": "মূল লিংক",
@@ -3502,6 +3946,18 @@
     "pt": "Links-chave…",
     "ur": "کلیدی روابط…",
     "zh-Hans": "关键链接…"
+  },
+  "Entrada": {
+    "ar": "المدخل",
+    "bn": "ভুক্তি",
+    "en": "Entry",
+    "es": "Entrada",
+    "fr": "Entrée",
+    "hi": "प्रविष्टि",
+    "id": "Entri",
+    "pt": "Entrada",
+    "ur": "اندراج",
+    "zh-Hans": "词条"
   },
   "Error de búsqueda": {
     "ar": "خطأ في البحث",
@@ -3707,6 +4163,18 @@
     "ur": "یہ حصہ خودکار طور پر جاری رکھنے کے لیے بہت بڑا ہے۔ اگلا مضمون استعمال کریں۔",
     "zh-Hans": "此部分过大，无法自动继续。请使用“下一篇”。"
   },
+  "Estilo de cita": {
+    "ar": "نمط الاستشهاد",
+    "bn": "উদ্ধৃতির ধরন",
+    "en": "Citation style",
+    "es": "Estilo de cita",
+    "fr": "Style de citation",
+    "hi": "उद्धरण शैली",
+    "id": "Gaya sitasi",
+    "pt": "Estilo de citação",
+    "ur": "حوالے کا انداز",
+    "zh-Hans": "引用格式"
+  },
   "Estudios bíblicos": {
     "ar": "الدراسات الكتابية",
     "bn": "বাইবেল অধ্যয়ন",
@@ -3790,6 +4258,18 @@
     "pt": "Exportar",
     "ur": "برآمد کریں",
     "zh-Hans": "导出"
+  },
+  "Exportar bibliografía": {
+    "ar": "تصدير قائمة المراجع",
+    "bn": "গ্রন্থপঞ্জি রপ্তানি করুন",
+    "en": "Export bibliography",
+    "es": "Exportar bibliografía",
+    "fr": "Exporter la bibliographie",
+    "hi": "ग्रंथसूची निर्यात करें",
+    "id": "Ekspor bibliografi",
+    "pt": "Exportar bibliografia",
+    "ur": "کتابیات برآمد کریں",
+    "zh-Hans": "导出参考书目"
   },
   "Exportar lectura": {
     "ar": "تصدير القراءة",
@@ -3971,6 +4451,30 @@
     "ur": "سسٹم فونٹس اور منتخب الفاظ کے لیے لغت تلاش۔",
     "zh-Hans": "系统字体和选词查词典。"
   },
+  "Genera una bibliografía para consultar los datos de las ediciones.": {
+    "ar": "أنشئ قائمة مراجع للاطلاع على بيانات الطبعات.",
+    "bn": "সংস্করণের তথ্য দেখতে গ্রন্থপঞ্জি তৈরি করুন।",
+    "en": "Generate a bibliography to inspect edition details.",
+    "es": "Genera una bibliografía para consultar los datos de las ediciones.",
+    "fr": "Générez une bibliographie pour consulter les données des éditions.",
+    "hi": "संस्करण विवरण देखने के लिए ग्रंथसूची बनाएँ।",
+    "id": "Buat bibliografi untuk melihat rincian edisi.",
+    "pt": "Gere uma bibliografia para consultar os dados das edições.",
+    "ur": "نسخوں کی تفصیلات دیکھنے کے لیے کتابیات بنائیں۔",
+    "zh-Hans": "生成参考书目以查看版本信息。"
+  },
+  "Generado": {
+    "ar": "تاريخ الإنشاء",
+    "bn": "তৈরির সময়",
+    "en": "Generated",
+    "es": "Generado",
+    "fr": "Généré",
+    "hi": "बनाया गया",
+    "id": "Dibuat",
+    "pt": "Gerado",
+    "ur": "تخلیق کا وقت",
+    "zh-Hans": "生成时间"
+  },
   "General": {
     "ar": "عام",
     "bn": "সাধারণ",
@@ -3982,6 +4486,18 @@
     "pt": "Geral",
     "ur": "عمومی",
     "zh-Hans": "通用"
+  },
+  "Generar bibliografía": {
+    "ar": "إنشاء قائمة المراجع",
+    "bn": "গ্রন্থপঞ্জি তৈরি করুন",
+    "en": "Generate bibliography",
+    "es": "Generar bibliografía",
+    "fr": "Générer la bibliographie",
+    "hi": "ग्रंथसूची बनाएँ",
+    "id": "Buat bibliografi",
+    "pt": "Gerar bibliografia",
+    "ur": "کتابیات بنائیں",
+    "zh-Hans": "生成参考书目"
   },
   "Gramática": {
     "ar": "قواعد اللغة",
@@ -4030,6 +4546,18 @@
     "pt": "Grupo de dicionários",
     "ur": "لغات کا گروپ",
     "zh-Hans": "词典组"
+  },
+  "Grupo original: {number} · Prioridad: {priority} · Tipo: {type}": {
+    "ar": "المجموعة الأصلية: {number} · الأولوية: {priority} · النوع: {type}",
+    "bn": "মূল দল: {number} · অগ্রাধিকার: {priority} · ধরন: {type}",
+    "en": "Original group: {number} · Priority: {priority} · Type: {type}",
+    "es": "Grupo original: {number} · Prioridad: {priority} · Tipo: {type}",
+    "fr": "Groupe d’origine : {number} · Priorité : {priority} · Type : {type}",
+    "hi": "मूल समूह: {number} · प्राथमिकता: {priority} · प्रकार: {type}",
+    "id": "Grup asli: {number} · Prioritas: {priority} · Jenis: {type}",
+    "pt": "Grupo original: {number} · Prioridade: {priority} · Tipo: {type}",
+    "ur": "اصل گروپ: {number} · ترجیح: {priority} · قسم: {type}",
+    "zh-Hans": "原始分组：{number} · 优先级：{priority} · 类型：{type}"
   },
   "Grupo {group}": {
     "ar": "المجموعة {group}",
@@ -4162,6 +4690,18 @@
     "pt": "Salvar área de trabalho…",
     "ur": "کام کی جگہ محفوظ کریں…",
     "zh-Hans": "保存工作区…"
+  },
+  "HTML": {
+    "ar": "HTML",
+    "bn": "HTML",
+    "en": "HTML",
+    "es": "HTML",
+    "fr": "HTML",
+    "hi": "HTML",
+    "id": "HTML",
+    "pt": "HTML",
+    "ur": "HTML",
+    "zh-Hans": "HTML"
   },
   "HTML…": {
     "ar": "HTML…",
@@ -4355,6 +4895,42 @@
     "ur": "مطابقت رکھنے والے e-Sword اور EPUB وسائل درآمد کریں اور پڑھیں۔",
     "zh-Hans": "导入并阅读兼容的 e-Sword 和 EPUB 资源。"
   },
+  "Importar": {
+    "ar": "استيراد",
+    "bn": "আমদানি করুন",
+    "en": "Import",
+    "es": "Importar",
+    "fr": "Importer",
+    "hi": "आयात करें",
+    "id": "Impor",
+    "pt": "Importar",
+    "ur": "درآمد کریں",
+    "zh-Hans": "导入"
+  },
+  "Importar asociación original": {
+    "ar": "استيراد ارتباط أصلي",
+    "bn": "মূল সংযোগ আমদানি করুন",
+    "en": "Import original association",
+    "es": "Importar asociación original",
+    "fr": "Importer une association d’origine",
+    "hi": "मूल संबंध आयात करें",
+    "id": "Impor asosiasi asli",
+    "pt": "Importar associação original",
+    "ur": "اصل تعلق درآمد کریں",
+    "zh-Hans": "导入原始关联"
+  },
+  "Importar asociación original…": {
+    "ar": "استيراد ارتباط أصلي…",
+    "bn": "মূল সংযোগ আমদানি করুন…",
+    "en": "Import original association…",
+    "es": "Importar asociación original…",
+    "fr": "Importer une association d’origine…",
+    "hi": "मूल संबंध आयात करें…",
+    "id": "Impor asosiasi asli…",
+    "pt": "Importar associação original…",
+    "ur": "اصل تعلق درآمد کریں…",
+    "zh-Hans": "导入原始关联…"
+  },
   "Importar recursos": {
     "ar": "استيراد الموارد",
     "bn": "রিসোর্স আমদানি করুন",
@@ -4402,6 +4978,18 @@
     "pt": "Imagens do artigo",
     "ur": "مضمون کی تصاویر",
     "zh-Hans": "文章图片"
+  },
+  "Inferido": {
+    "ar": "مستنتج",
+    "bn": "অনুমিত",
+    "en": "Inferred",
+    "es": "Inferido",
+    "fr": "Déduit",
+    "hi": "अनुमानित",
+    "id": "Disimpulkan",
+    "pt": "Inferido",
+    "ur": "اخذ شدہ",
+    "zh-Hans": "推断"
   },
   "Inferior": {
     "ar": "أسفل",
@@ -4451,6 +5039,18 @@
     "ur": "معلومات",
     "zh-Hans": "信息"
   },
+  "Informe bibliográfico": {
+    "ar": "تقرير المراجع",
+    "bn": "গ্রন্থপঞ্জি প্রতিবেদন",
+    "en": "Bibliography report",
+    "es": "Informe bibliográfico",
+    "fr": "Rapport bibliographique",
+    "hi": "ग्रंथसूची रिपोर्ट",
+    "id": "Laporan bibliografi",
+    "pt": "Relatório bibliográfico",
+    "ur": "کتابیاتی رپورٹ",
+    "zh-Hans": "参考书目报告"
+  },
   "Inicio": {
     "ar": "الرئيسية",
     "bn": "প্রথম পাতা",
@@ -4462,6 +5062,18 @@
     "pt": "Início",
     "ur": "ابتدائی صفحہ",
     "zh-Hans": "主页"
+  },
+  "Inicio del recurso": {
+    "ar": "بداية المورد",
+    "bn": "রিসোর্সের শুরু",
+    "en": "Resource beginning",
+    "es": "Inicio del recurso",
+    "fr": "Début de la ressource",
+    "hi": "संसाधन की शुरुआत",
+    "id": "Awal sumber",
+    "pt": "Início do recurso",
+    "ur": "وسیلے کا آغاز",
+    "zh-Hans": "资源开头"
   },
   "Inicio del tema": {
     "ar": "بداية الموضوع",
@@ -4511,6 +5123,18 @@
     "ur": "بائبلی تشریح",
     "zh-Hans": "圣经诠释"
   },
+  "Introduce una referencia o entrada válida.": {
+    "ar": "أدخل مرجعًا أو مدخلًا صالحًا.",
+    "bn": "একটি বৈধ উল্লেখ বা ভুক্তি লিখুন।",
+    "en": "Enter a valid reference or entry.",
+    "es": "Introduce una referencia o entrada válida.",
+    "fr": "Saisissez une référence ou une entrée valide.",
+    "hi": "मान्य संदर्भ या प्रविष्टि दर्ज करें।",
+    "id": "Masukkan referensi atau entri yang valid.",
+    "pt": "Insira uma referência ou entrada válida.",
+    "ur": "درست حوالہ یا اندراج لکھیں۔",
+    "zh-Hans": "请输入有效的经文引用或词条。"
+  },
   "Ir": {
     "ar": "انتقال",
     "bn": "যান",
@@ -4547,6 +5171,18 @@
     "ur": "بائیں",
     "zh-Hans": "左侧"
   },
+  "JSON": {
+    "ar": "JSON",
+    "bn": "JSON",
+    "en": "JSON",
+    "es": "JSON",
+    "fr": "JSON",
+    "hi": "JSON",
+    "id": "JSON",
+    "pt": "JSON",
+    "ur": "JSON",
+    "zh-Hans": "JSON"
+  },
   "La actualización está lista para instalar.": {
     "ar": "التحديث جاهز للتثبيت.",
     "bn": "আপডেট ইনস্টলের জন্য প্রস্তুত।",
@@ -4571,6 +5207,18 @@
     "ur": "Libron-X بند کرنے پر اپ ڈیٹ انسٹال ہو گی۔",
     "zh-Hans": "退出 Libron-X 时将安装更新。"
   },
+  "La asociación cambió. Ejecuta la acción de nuevo.": {
+    "ar": "تغيّر الارتباط. نفّذ الإجراء مرة أخرى.",
+    "bn": "সংযোগ বদলেছে। কাজটি আবার করুন।",
+    "en": "The association changed. Run the action again.",
+    "es": "La asociación cambió. Ejecuta la acción de nuevo.",
+    "fr": "L’association a changé. Relancez l’action.",
+    "hi": "संबंध बदल गया है। क्रिया दोबारा चलाएँ।",
+    "id": "Asosiasi berubah. Jalankan tindakan lagi.",
+    "pt": "A associação mudou. Execute a ação novamente.",
+    "ur": "تعلق بدل گیا ہے۔ کارروائی دوبارہ کریں۔",
+    "zh-Hans": "关联已更改。请重新执行操作。"
+  },
   "La asociación ya no está disponible.": {
     "ar": "لم يعد الارتباط متاحًا.",
     "bn": "সংযোগটি আর পাওয়া যাচ্ছে না।",
@@ -4594,6 +5242,30 @@
     "pt": "A barra de ferramentas permite abrir Início e Biblioteca, pesquisar, criar documentos e acessar as ferramentas de estudo. Os botões que não cabem aparecem no menu de opções adicionais. Clique com o botão direito em um botão para conhecer sua função.",
     "ur": "ٹول بار سے آپ مرکزی صفحہ اور لائبریری کھول سکتے ہیں، تلاش کر سکتے ہیں، دستاویزات بنا سکتے ہیں اور مطالعے کے اوزار استعمال کر سکتے ہیں۔ جو بٹن جگہ میں نہیں آتے وہ اضافی مینو میں دکھائی دیتے ہیں۔ کسی بٹن کا کام جاننے کے لیے اس پر دایاں کلک کریں۔",
     "zh-Hans": "工具栏可打开主页和书库、搜索、创建文档以及访问研读工具。放不下的按钮会出现在溢出菜单中。右键单击按钮可了解其功能。"
+  },
+  "La bibliografía contiene identidades de recurso incompatibles.": {
+    "ar": "تحتوي قائمة المراجع على هويات موارد غير متوافقة.",
+    "bn": "গ্রন্থপঞ্জিতে অসামঞ্জস্যপূর্ণ রিসোর্সের পরিচয় আছে।",
+    "en": "The bibliography contains incompatible resource identities.",
+    "es": "La bibliografía contiene identidades de recurso incompatibles.",
+    "fr": "La bibliographie contient des identités de ressources incompatibles.",
+    "hi": "ग्रंथसूची में असंगत संसाधन पहचान हैं।",
+    "id": "Bibliografi berisi identitas sumber yang tidak kompatibel.",
+    "pt": "A bibliografia contém identidades de recursos incompatíveis.",
+    "ur": "کتابیات میں وسائل کی ناموافق شناختیں ہیں۔",
+    "zh-Hans": "参考书目包含不兼容的资源身份。"
+  },
+  "La bibliografía supera el límite de recursos.": {
+    "ar": "تتجاوز قائمة المراجع حد الموارد.",
+    "bn": "গ্রন্থপঞ্জি রিসোর্সের সীমা ছাড়িয়েছে।",
+    "en": "The bibliography exceeds the resource limit.",
+    "es": "La bibliografía supera el límite de recursos.",
+    "fr": "La bibliographie dépasse la limite de ressources.",
+    "hi": "ग्रंथसूची संसाधन सीमा से अधिक है।",
+    "id": "Bibliografi melebihi batas sumber.",
+    "pt": "A bibliografia excede o limite de recursos.",
+    "ur": "کتابیات وسائل کی حد سے تجاوز کرتی ہے۔",
+    "zh-Hans": "参考书目超过资源数量限制。"
   },
   "La biblioteca cambió. Vuelve a buscar.": {
     "ar": "تغيّرت المكتبة. ابحث مجددًا.",
@@ -4715,6 +5387,42 @@
     "ur": "ترتیبات بدل گئی ہیں۔ یہ نتائج کھولنے کے لیے نئی تلاش چلائیں۔",
     "zh-Hans": "配置已更改。请运行新搜索后再打开这些结果。"
   },
+  "La definición no contiene asociaciones activas.": {
+    "ar": "لا يحتوي التعريف على ارتباطات نشطة.",
+    "bn": "সংজ্ঞায় কোনো সক্রিয় সংযোগ নেই।",
+    "en": "The definition contains no active associations.",
+    "es": "La definición no contiene asociaciones activas.",
+    "fr": "La définition ne contient aucune association active.",
+    "hi": "परिभाषा में कोई सक्रिय संबंध नहीं है।",
+    "id": "Definisi tidak berisi asosiasi aktif.",
+    "pt": "A definição não contém associações ativas.",
+    "ur": "تعریف میں کوئی فعال تعلق نہیں ہے۔",
+    "zh-Hans": "该定义不包含有效关联。"
+  },
+  "La identidad del recurso cambió.": {
+    "ar": "تغيّرت هوية المورد.",
+    "bn": "রিসোর্সের পরিচয় বদলেছে।",
+    "en": "The resource identity changed.",
+    "es": "La identidad del recurso cambió.",
+    "fr": "L’identité de la ressource a changé.",
+    "hi": "संसाधन की पहचान बदल गई है।",
+    "id": "Identitas sumber berubah.",
+    "pt": "A identidade do recurso mudou.",
+    "ur": "وسیلے کی شناخت بدل گئی ہے۔",
+    "zh-Hans": "资源身份已更改。"
+  },
+  "La lectura de origen cambió. Vuelve a abrir los recursos asociados.": {
+    "ar": "تغيّرت القراءة الأصلية. أعد فتح الموارد المرتبطة.",
+    "bn": "মূল পাঠ বদলেছে। সংযুক্ত রিসোর্স আবার খুলুন।",
+    "en": "The source reading changed. Reopen associated resources.",
+    "es": "La lectura de origen cambió. Vuelve a abrir los recursos asociados.",
+    "fr": "La lecture d’origine a changé. Rouvrez les ressources associées.",
+    "hi": "मूल पठन बदल गया है। संबंधित संसाधन फिर से खोलें।",
+    "id": "Bacaan asal berubah. Buka kembali sumber terkait.",
+    "pt": "A leitura de origem mudou. Reabra os recursos associados.",
+    "ur": "اصل مطالعہ بدل گیا ہے۔ متعلقہ وسائل دوبارہ کھولیں۔",
+    "zh-Hans": "来源阅读已更改。请重新打开关联资源。"
+  },
   "La lista de temas es parcial; puede haber más artículos en otros recursos.": {
     "ar": "قائمة الموضوعات جزئية؛ قد توجد مقالات أخرى في موارد أخرى.",
     "bn": "বিষয়ের তালিকা আংশিক; অন্য রিসোর্সে আরও নিবন্ধ থাকতে পারে।",
@@ -4799,6 +5507,18 @@
     "ur": "مجموعوں میں غیر موافق ڈیٹا ہے۔",
     "zh-Hans": "收藏集包含不兼容的数据。"
   },
+  "Las copias exactas se comprueban por contenido. Las ediciones posibles requieren revisión. Ocultar es reversible.": {
+    "ar": "تتحقق النسخ بالمحتوى. تحتاج الطبعات المحتملة إلى مراجعة. يمكن إلغاء الإخفاء.",
+    "bn": "বিষয়বস্তু দিয়ে অনুলিপি যাচাই হয়। সম্ভাব্য সংস্করণ পর্যালোচনা করুন। লুকানো ফিরিয়ে আনা যায়।",
+    "en": "Exact copies are checked by content. Possible editions need review. Hiding is reversible.",
+    "es": "Las copias exactas se comprueban por contenido. Las ediciones posibles requieren revisión. Ocultar es reversible.",
+    "fr": "Les copies identiques sont vérifiées par contenu. Les éditions possibles sont à examiner. Le masquage est réversible.",
+    "hi": "समान प्रतियाँ सामग्री से जाँची जाती हैं। संस्करणों की समीक्षा करें। छिपाना पूर्ववत हो सकता है।",
+    "id": "Salinan diperiksa berdasarkan isi. Edisi perlu ditinjau. Penyembunyian dapat dibatalkan.",
+    "pt": "As cópias exatas são verificadas pelo conteúdo. Possíveis edições exigem revisão. Ocultar é reversível.",
+    "ur": "نقول مواد سے جانچی جاتی ہیں۔ ممکنہ ایڈیشن کا جائزہ لیں۔ چھپانا واپس ہو سکتا ہے۔",
+    "zh-Hans": "按内容验证相同副本。可能的版本需审核。隐藏可撤销。"
+  },
   "Las reglas necesitan entre 1 y 32 condiciones válidas.": {
     "ar": "تتطلب القواعد من شرط واحد إلى 32 شرطًا صالحًا.",
     "bn": "নিয়মে ১ থেকে ৩২টি বৈধ শর্ত প্রয়োজন।",
@@ -4858,6 +5578,18 @@
     "pt": "Leitura bíblica",
     "ur": "بائبل کا مطالعہ",
     "zh-Hans": "圣经阅读"
+  },
+  "Lectura nueva": {
+    "ar": "قراءة جديدة",
+    "bn": "নতুন পাঠ",
+    "en": "New reading",
+    "es": "Lectura nueva",
+    "fr": "Nouvelle lecture",
+    "hi": "नया पठन",
+    "id": "Bacaan baru",
+    "pt": "Nova leitura",
+    "ur": "نیا مطالعہ",
+    "zh-Hans": "新阅读面板"
   },
   "Lecturas abiertas": {
     "ar": "نوافذ القراءة المفتوحة",
@@ -4991,6 +5723,18 @@
     "ur": "تیار",
     "zh-Hans": "就绪"
   },
+  "Los alternativos reemplazan esta lectura después de comprobar el destino.": {
+    "ar": "تحل البدائل محل هذه القراءة بعد التحقق من الوجهة.",
+    "bn": "গন্তব্য যাচাইয়ের পরে বিকল্প রিসোর্স এই পাঠ প্রতিস্থাপন করে।",
+    "en": "Alternatives replace this reading after verifying the destination.",
+    "es": "Los alternativos reemplazan esta lectura después de comprobar el destino.",
+    "fr": "Les alternatives remplacent cette lecture après vérification de la destination.",
+    "hi": "गंतव्य की जाँच के बाद विकल्प इस पठन को बदलते हैं।",
+    "id": "Sumber alternatif mengganti bacaan ini setelah tujuan diverifikasi.",
+    "pt": "Os alternativos substituem esta leitura após verificar o destino.",
+    "ur": "منزل کی تصدیق کے بعد متبادل اس مطالعے کی جگہ لیتے ہیں۔",
+    "zh-Hans": "替代资源将在验证目标后替换当前阅读。"
+  },
   "Los archivos se convertirán a .libron. ¿Deseas guardar una copia del original en la carpeta backup de la biblioteca?": {
     "ar": "ستُحوّل الملفات إلى .libron. هل تريد حفظ نسخة من الأصل في مجلد backup بالمكتبة؟",
     "bn": "ফাইলগুলি .libron-এ রূপান্তরিত হবে। লাইব্রেরির backup ফোল্ডারে মূল ফাইলের অনুলিপি রাখবেন কি?",
@@ -5051,6 +5795,18 @@
     "ur": "وسیلے میں غیر شناخت شدہ خانے جزوی کوریج کا باعث بنتے ہیں۔",
     "zh-Hans": "资源未标识的字段会导致覆盖不完整。"
   },
+  "Los complementarios se abren en una lectura nueva.": {
+    "ar": "تُفتح الموارد المكملة في قراءة جديدة.",
+    "bn": "পরিপূরক রিসোর্স একটি নতুন পাঠে খোলে।",
+    "en": "Companions open in a new reading.",
+    "es": "Los complementarios se abren en una lectura nueva.",
+    "fr": "Les compléments s’ouvrent dans une nouvelle lecture.",
+    "hi": "पूरक संसाधन नए पठन में खुलते हैं।",
+    "id": "Sumber pendamping terbuka dalam bacaan baru.",
+    "pt": "Os complementares abrem em uma nova leitura.",
+    "ur": "تکمیلی وسائل نئے مطالعے میں کھلتے ہیں۔",
+    "zh-Hans": "配套资源将在新阅读面板中打开。"
+  },
   "Los grupos de Biblias contienen datos incompatibles.": {
     "ar": "تحتوي مجموعات الترجمات على بيانات غير متوافقة.",
     "bn": "বাইবেল গোষ্ঠীতে অসামঞ্জস্যপূর্ণ তথ্য রয়েছে।",
@@ -5074,6 +5830,18 @@
     "pt": "Os menus do sistema usam este idioma ao reabrir o aplicativo.",
     "ur": "ایپ دوبارہ کھولنے پر نظام کے مینو یہ زبان استعمال کرتے ہیں۔",
     "zh-Hans": "重新打开应用后，系统菜单会使用此语言。"
+  },
+  "Los metadatos superan los límites del informe o contienen datos inválidos.": {
+    "ar": "تتجاوز البيانات الوصفية حدود التقرير أو تحتوي على بيانات غير صالحة.",
+    "bn": "মেটাডেটা প্রতিবেদনের সীমা ছাড়িয়েছে বা তাতে অবৈধ তথ্য আছে।",
+    "en": "The metadata exceeds report limits or contains invalid data.",
+    "es": "Los metadatos superan los límites del informe o contienen datos inválidos.",
+    "fr": "Les métadonnées dépassent les limites du rapport ou contiennent des données invalides.",
+    "hi": "मेटाडेटा रिपोर्ट सीमा से अधिक है या उसमें अमान्य डेटा है।",
+    "id": "Metadata melebihi batas laporan atau berisi data tidak valid.",
+    "pt": "Os metadados excedem os limites do relatório ou contêm dados inválidos.",
+    "ur": "میٹاڈیٹا رپورٹ کی حدود سے تجاوز کرتا ہے یا اس میں غلط معلومات ہیں۔",
+    "zh-Hans": "元数据超出报告限制或包含无效数据。"
   },
   "Los recursos LSF disponibles se abren localmente. Los formatos que aún requieren un lector y los servicios de licencias que no están disponibles se indican en cada recurso.": {
     "ar": "تُفتح موارد LSF المتاحة محليًا. يوضّح كل مورد التنسيقات التي تحتاج قارئًا وخدمات التراخيص غير المتاحة.",
@@ -5134,6 +5902,18 @@
     "pt": "Linhas do interlinear",
     "ur": "بین السطور سطریں",
     "zh-Hans": "逐词对照行"
+  },
+  "MLA": {
+    "ar": "MLA",
+    "bn": "MLA",
+    "en": "MLA",
+    "es": "MLA",
+    "fr": "MLA",
+    "hi": "MLA",
+    "id": "MLA",
+    "pt": "MLA",
+    "ur": "MLA",
+    "zh-Hans": "MLA"
   },
   "Mantener abierta": {
     "ar": "إبقاء مفتوحة",
@@ -5243,6 +6023,18 @@
     "ur": "میری لائبریری…",
     "zh-Hans": "我的书库…"
   },
+  "Miembro pendiente": {
+    "ar": "عضو غير مطابق",
+    "bn": "অসমাধিত সদস্য",
+    "en": "Unresolved member",
+    "es": "Miembro pendiente",
+    "fr": "Membre non résolu",
+    "hi": "अनसुलझा सदस्य",
+    "id": "Anggota belum ditemukan",
+    "pt": "Membro pendente",
+    "ur": "غیر حل شدہ رکن",
+    "zh-Hans": "未解析成员"
+  },
   "Minimizada": {
     "ar": "مصغّرة",
     "bn": "ছোট করা হয়েছে",
@@ -5290,6 +6082,18 @@
     "pt": "Missões e evangelização",
     "ur": "مشن اور بشارت",
     "zh-Hans": "宣教与福音传播"
+  },
+  "Mismo original, distinto contenido nativo": {
+    "ar": "الأصل نفسه، محتوى أصلي مختلف",
+    "bn": "একই মূল, ভিন্ন নেটিভ বিষয়বস্তু",
+    "en": "Same original, different native content",
+    "es": "Mismo original, distinto contenido nativo",
+    "fr": "Même original, contenu natif différent",
+    "hi": "मूल समान, नेटिव सामग्री अलग",
+    "id": "Sumber sama, konten native berbeda",
+    "pt": "Mesmo original, conteúdo nativo diferente",
+    "ur": "ایک اصل، مختلف مقامی مواد",
+    "zh-Hans": "原件相同，原生内容不同"
   },
   "Monografía": {
     "ar": "دراسة متخصصة",
@@ -5519,6 +6323,18 @@
     "ur": "اس نسخے کے ساتھ تبدیلیوں کی فہرست شامل نہیں ہے۔",
     "zh-Hans": "此版本未附带更新日志。"
   },
+  "No hay una asociación disponible para esta lectura.": {
+    "ar": "لا يوجد ارتباط متاح لهذه القراءة.",
+    "bn": "এই পাঠের জন্য কোনো সংযোগ নেই।",
+    "en": "No association is available for this reading.",
+    "es": "No hay una asociación disponible para esta lectura.",
+    "fr": "Aucune association disponible pour cette lecture.",
+    "hi": "इस पठन के लिए कोई संबंध उपलब्ध नहीं है।",
+    "id": "Tidak ada asosiasi untuk bacaan ini.",
+    "pt": "Não há associação disponível para esta leitura.",
+    "ur": "اس مطالعے کے لیے کوئی تعلق دستیاب نہیں ہے۔",
+    "zh-Hans": "此阅读没有可用的关联。"
+  },
   "No hay áreas de trabajo recientes.": {
     "ar": "لا توجد مساحات عمل حديثة.",
     "bn": "কোনো সাম্প্রতিক কর্মক্ষেত্র নেই।",
@@ -5530,6 +6346,18 @@
     "pt": "Nenhuma área de trabalho recente.",
     "ur": "کوئی حالیہ کام کی جگہ نہیں۔",
     "zh-Hans": "没有最近的工作区。"
+  },
+  "No se encontraron duplicados ni ediciones coincidentes.": {
+    "ar": "لم توجد نسخ مكررة أو طبعات مطابقة.",
+    "bn": "সদৃশ বা মিলযুক্ত সংস্করণ পাওয়া যায়নি।",
+    "en": "No duplicates or matching editions found.",
+    "es": "No se encontraron duplicados ni ediciones coincidentes.",
+    "fr": "Aucun doublon ni édition correspondante trouvé.",
+    "hi": "कोई डुप्लिकेट या मिलता संस्करण नहीं मिला।",
+    "id": "Tidak ditemukan duplikat atau edisi serupa.",
+    "pt": "Nenhum duplicado ou edição correspondente encontrado.",
+    "ur": "کوئی نقل یا ملتا ایڈیشن نہیں ملا۔",
+    "zh-Hans": "未发现重复项或匹配的版本。"
   },
   "No se encontraron referencias coincidentes.": {
     "ar": "لم يُعثر على مراجع مطابقة.",
@@ -6035,6 +6863,18 @@
     "ur": "ماخذ",
     "zh-Hans": "来源"
   },
+  "Origen: {title}": {
+    "ar": "المصدر: {title}",
+    "bn": "উৎস: {title}",
+    "en": "Source: {title}",
+    "es": "Origen: {title}",
+    "fr": "Origine : {title}",
+    "hi": "स्रोत: {title}",
+    "id": "Asal: {title}",
+    "pt": "Origem: {title}",
+    "ur": "ماخذ: {title}",
+    "zh-Hans": "来源：{title}"
+  },
   "Original": {
     "ar": "الأصل",
     "bn": "মূল",
@@ -6263,6 +7103,18 @@
     "ur": "ہر آیت",
     "zh-Hans": "按经文"
   },
+  "Posibles ediciones": {
+    "ar": "طبعات محتملة",
+    "bn": "সম্ভাব্য সংস্করণ",
+    "en": "Possible editions",
+    "es": "Posibles ediciones",
+    "fr": "Éditions possibles",
+    "hi": "संभावित संस्करण",
+    "id": "Kemungkinan edisi",
+    "pt": "Possíveis edições",
+    "ur": "ممکنہ ایڈیشن",
+    "zh-Hans": "可能的版本"
+  },
   "Posición {number}": {
     "ar": "الموضع {number}",
     "bn": "অবস্থান {number}",
@@ -6334,6 +7186,18 @@
     "pt": "Prioridades",
     "ur": "ترجیحات",
     "zh-Hans": "优先级"
+  },
+  "Procedencia de la asociación": {
+    "ar": "مصدر الارتباط",
+    "bn": "সংযোগের উৎস",
+    "en": "Association provenance",
+    "es": "Procedencia de la asociación",
+    "fr": "Provenance de l’association",
+    "hi": "संबंध का स्रोत",
+    "id": "Asal asosiasi",
+    "pt": "Procedência da associação",
+    "ur": "تعلق کا ماخذ",
+    "zh-Hans": "关联来源"
   },
   "Procesador": {
     "ar": "المعالج",
@@ -6539,6 +7403,30 @@
     "ur": "وسیلہ غیر دستیاب یا ناموافق ہے",
     "zh-Hans": "资源不可用或不兼容"
   },
+  "Recursos asociados": {
+    "ar": "الموارد المرتبطة",
+    "bn": "সংযুক্ত রিসোর্স",
+    "en": "Associated resources",
+    "es": "Recursos asociados",
+    "fr": "Ressources associées",
+    "hi": "संबंधित संसाधन",
+    "id": "Sumber terkait",
+    "pt": "Recursos associados",
+    "ur": "متعلقہ وسائل",
+    "zh-Hans": "关联资源"
+  },
+  "Recursos asociados…": {
+    "ar": "الموارد المرتبطة…",
+    "bn": "সংযুক্ত রিসোর্স…",
+    "en": "Associated resources…",
+    "es": "Recursos asociados…",
+    "fr": "Ressources associées…",
+    "hi": "संबंधित संसाधन…",
+    "id": "Sumber terkait…",
+    "pt": "Recursos associados…",
+    "ur": "متعلقہ وسائل…",
+    "zh-Hans": "关联资源…"
+  },
   "Recursos compatibles": {
     "ar": "موارد متوافقة",
     "bn": "সামঞ্জস্যপূর্ণ রিসোর্স",
@@ -6598,6 +7486,18 @@
     "pt": "Recursos paralelos",
     "ur": "متوازی وسائل",
     "zh-Hans": "平行资源"
+  },
+  "Recursos pendientes": {
+    "ar": "موارد معلقة",
+    "bn": "বাকি রিসোর্স",
+    "en": "Pending resources",
+    "es": "Recursos pendientes",
+    "fr": "Ressources en attente",
+    "hi": "लंबित संसाधन",
+    "id": "Sumber tertunda",
+    "pt": "Recursos pendentes",
+    "ur": "زیر التوا وسائل",
+    "zh-Hans": "待处理资源"
   },
   "Recursos preferidos": {
     "ar": "الموارد المفضلة",
@@ -6815,6 +7715,18 @@
     "ur": "سبز رنگ سے نمایاں کریں",
     "zh-Hans": "绿色高亮"
   },
+  "Resolución automática": {
+    "ar": "مطابقة تلقائية",
+    "bn": "স্বয়ংক্রিয় সমাধান",
+    "en": "Automatic resolution",
+    "es": "Resolución automática",
+    "fr": "Résolution automatique",
+    "hi": "स्वचालित समाधान",
+    "id": "Resolusi otomatis",
+    "pt": "Resolução automática",
+    "ur": "خودکار مطابقت",
+    "zh-Hans": "自动解析"
+  },
   "Restablecer": {
     "ar": "إعادة تعيين",
     "bn": "রিসেট করুন",
@@ -7007,6 +7919,18 @@
     "ur": "سرخ طے شدہ آئیکن ہے۔ آپ کا انتخاب اگلی بار کے لیے محفوظ رہتا ہے۔",
     "zh-Hans": "红色为默认图标。您的选择会保留到下次启动。"
   },
+  "Se abrirá el inicio del recurso; los números de artículo no se transfieren entre libros.": {
+    "ar": "ستُفتح بداية المورد؛ لا تُنقل أرقام المقالات بين الكتب.",
+    "bn": "রিসোর্সের শুরু খুলবে; বইয়ের মধ্যে নিবন্ধের সংখ্যা স্থানান্তরিত হয় না।",
+    "en": "The resource beginning will open; article numbers are not transferred between books.",
+    "es": "Se abrirá el inicio del recurso; los números de artículo no se transfieren entre libros.",
+    "fr": "Le début de la ressource s’ouvrira ; les numéros d’article ne sont pas transférés entre livres.",
+    "hi": "संसाधन की शुरुआत खुलेगी; पुस्तकों के बीच लेख संख्या स्थानांतरित नहीं होती।",
+    "id": "Awal sumber akan dibuka; nomor artikel tidak dipindahkan antar buku.",
+    "pt": "O início do recurso será aberto; os números de artigo não são transferidos entre livros.",
+    "ur": "وسیلے کا آغاز کھلے گا؛ کتابوں کے درمیان مضمون نمبر منتقل نہیں ہوتے۔",
+    "zh-Hans": "将打开资源开头；文章编号不会在书籍之间转移。"
+  },
   "Se alcanzó el límite de búsqueda": {
     "ar": "تم بلوغ حد البحث",
     "bn": "অনুসন্ধানের সীমায় পৌঁছেছে",
@@ -7055,6 +7979,18 @@
     "ur": "کھلے قارئین کے مکمل وسائل میں تلاش ہوتی ہے، جن میں کم سے کم کیے گئے قارئین بھی شامل ہیں۔",
     "zh-Hans": "搜索已打开阅读器的完整资源，包括已最小化的阅读器。"
   },
+  "Se conservarán el documento original, su procedencia, el orden y los miembros ausentes. La relación elegida se aplicará a todos los grupos del archivo.": {
+    "ar": "سيُحتفظ بالمستند الأصلي ومصدره والترتيب والأعضاء المفقودين. تنطبق العلاقة المختارة على جميع مجموعات الملف.",
+    "bn": "মূল নথি, তার উৎস, ক্রম ও অনুপস্থিত সদস্য বজায় থাকবে। নির্বাচিত সম্পর্ক ফাইলের সব দলে প্রযোজ্য হবে।",
+    "en": "The original document, provenance, order and missing members will be retained. The chosen relation applies to every group in the file.",
+    "es": "Se conservarán el documento original, su procedencia, el orden y los miembros ausentes. La relación elegida se aplicará a todos los grupos del archivo.",
+    "fr": "Le document original, sa provenance, l’ordre et les membres absents seront conservés. La relation choisie s’applique à tous les groupes du fichier.",
+    "hi": "मूल दस्तावेज़, उसका स्रोत, क्रम और अनुपलब्ध सदस्य बनाए रखे जाएँगे। चुना गया संबंध फ़ाइल के सभी समूहों पर लागू होगा।",
+    "id": "Dokumen asli, asal, urutan, dan anggota yang hilang akan dipertahankan. Relasi yang dipilih berlaku untuk semua grup dalam berkas.",
+    "pt": "O documento original, sua procedência, a ordem e os membros ausentes serão preservados. A relação escolhida se aplica a todos os grupos do arquivo.",
+    "ur": "اصل دستاویز، اس کا ماخذ، ترتیب اور غیر موجود ارکان محفوظ رہیں گے۔ منتخب تعلق فائل کے تمام گروپوں پر لاگو ہوگا۔",
+    "zh-Hans": "将保留原始文档、来源、顺序和缺失成员。所选关系将应用于文件中的所有分组。"
+  },
   "Se muestran las primeras {count} entradas; quedan resultados o recursos por consultar.": {
     "ar": "تُعرض أول {count} مدخلات؛ توجد نتائج أو موارد أخرى لم تُفحص.",
     "bn": "প্রথম {count}টি প্রবেশ দেখানো হয়েছে; আরও ফলাফল বা রিসোর্স বাকি আছে।",
@@ -7066,6 +8002,18 @@
     "pt": "São mostradas as primeiras {count} entradas; há resultados ou recursos por consultar.",
     "ur": "پہلے {count} اندراجات دکھائے گئے ہیں؛ مزید نتائج یا وسائل باقی ہیں۔",
     "zh-Hans": "显示前 {count} 个条目；还有结果或资源未查询。"
+  },
+  "Se usan los metadatos del catálogo, incluidos los recursos ocultos. Los datos desconocidos no se completan.": {
+    "ar": "تُستخدم بيانات الفهرس الوصفية، بما فيها الموارد المخفية. لا تُستكمل البيانات غير المعروفة.",
+    "bn": "লুকানো রিসোর্সসহ ক্যাটালগের মেটাডেটা ব্যবহৃত হয়। অজানা তথ্য পূরণ করা হয় না।",
+    "en": "Catalog metadata is used, including hidden resources. Unknown data is not filled in.",
+    "es": "Se usan los metadatos del catálogo, incluidos los recursos ocultos. Los datos desconocidos no se completan.",
+    "fr": "Les métadonnées du catalogue sont utilisées, y compris pour les ressources masquées. Les données inconnues ne sont pas complétées.",
+    "hi": "छिपे संसाधनों सहित कैटलॉग मेटाडेटा का उपयोग होता है। अज्ञात डेटा नहीं भरा जाता।",
+    "id": "Metadata katalog digunakan, termasuk sumber tersembunyi. Data yang tidak diketahui tidak diisi.",
+    "pt": "São usados os metadados do catálogo, incluindo recursos ocultos. Dados desconhecidos não são preenchidos.",
+    "ur": "پوشیدہ وسائل سمیت کیٹلاگ کا میٹاڈیٹا استعمال ہوتا ہے۔ نامعلوم معلومات پوری نہیں کی جاتیں۔",
+    "zh-Hans": "使用目录元数据，包括隐藏资源。不会补填未知数据。"
   },
   "Secciones verificadas": {
     "ar": "الأقسام التي تم التحقق منها",
@@ -7090,6 +8038,18 @@
     "pt": "Selecione arquivos ou adicione uma pasta. Os pacotes .libron terão metadados e conteúdo. Escolha Sim para copiar originais para backup ou Não para não copiar. Reative a pergunta em Biblioteca.",
     "ur": "فائلیں چنیں یا فولڈر شامل کریں۔ میٹاڈیٹا اور مواد والے .libron پیکج بنیں گے۔ اصل کو backup میں نقل کرنے کے لیے ہاں، ورنہ نہیں چنیں۔ لائبریری میں سوال دوبارہ فعال کر سکتے ہیں۔",
     "zh-Hans": "选择文件或添加文件夹。系统将创建含元数据和内容的 .libron 包。选择“是”将原件复制到 backup，选择“否”跳过副本。可在书库设置中重新启用询问。"
+  },
+  "Selecciona recursos para la bibliografía.": {
+    "ar": "اختر موارد لقائمة المراجع.",
+    "bn": "গ্রন্থপঞ্জির জন্য রিসোর্স বেছে নিন।",
+    "en": "Select resources for the bibliography.",
+    "es": "Selecciona recursos para la bibliografía.",
+    "fr": "Sélectionnez des ressources pour la bibliographie.",
+    "hi": "ग्रंथसूची के लिए संसाधन चुनें।",
+    "id": "Pilih sumber untuk bibliografi.",
+    "pt": "Selecione recursos para a bibliografia.",
+    "ur": "کتابیات کے لیے وسائل منتخب کریں۔",
+    "zh-Hans": "请选择参考书目的资源。"
   },
   "Selecciona texto antes de aplicar un resaltado o agregar una nota personal. Las marcas pertenecen a tus datos de estudio y no reescriben el libro original.": {
     "ar": "حدد النص قبل تمييزه أو إضافة ملاحظة شخصية. تُحفظ العلامات ضمن بيانات دراستك ولا تعيد كتابة الكتاب الأصلي.",
@@ -7150,6 +8110,42 @@
     "pt": "Selecione um tema para ver seus artigos associados.",
     "ur": "متعلقہ مضامین دیکھنے کے لیے موضوع منتخب کریں۔",
     "zh-Hans": "选择主题以查看关联文章。"
+  },
+  "Selecciona una asociación": {
+    "ar": "اختر ارتباطًا",
+    "bn": "একটি সংযোগ বেছে নিন",
+    "en": "Select an association",
+    "es": "Selecciona una asociación",
+    "fr": "Sélectionnez une association",
+    "hi": "संबंध चुनें",
+    "id": "Pilih asosiasi",
+    "pt": "Selecione uma associação",
+    "ur": "تعلق منتخب کریں",
+    "zh-Hans": "选择关联"
+  },
+  "Selecciona una colección para la bibliografía.": {
+    "ar": "اختر مجموعة لقائمة المراجع.",
+    "bn": "গ্রন্থপঞ্জির জন্য একটি সংগ্রহ বেছে নিন।",
+    "en": "Select a collection for the bibliography.",
+    "es": "Selecciona una colección para la bibliografía.",
+    "fr": "Sélectionnez une collection pour la bibliographie.",
+    "hi": "ग्रंथसूची के लिए संग्रह चुनें।",
+    "id": "Pilih koleksi untuk bibliografi.",
+    "pt": "Selecione uma coleção para a bibliografia.",
+    "ur": "کتابیات کے لیے مجموعہ منتخب کریں۔",
+    "zh-Hans": "请选择参考书目的集合。"
+  },
+  "Selecciona una definición de asociación de Libronix.": {
+    "ar": "اختر تعريف ارتباط Libronix.",
+    "bn": "Libronix সংযোগের একটি সংজ্ঞা বেছে নিন।",
+    "en": "Select a Libronix association definition.",
+    "es": "Selecciona una definición de asociación de Libronix.",
+    "fr": "Sélectionnez une définition d’association Libronix.",
+    "hi": "Libronix संबंध की परिभाषा चुनें।",
+    "id": "Pilih definisi asosiasi Libronix.",
+    "pt": "Selecione uma definição de associação do Libronix.",
+    "ur": "Libronix تعلق کی تعریف منتخب کریں۔",
+    "zh-Hans": "选择一个 Libronix 关联定义。"
   },
   "Selecciona una lectura para activarla o cerrarla.": {
     "ar": "حدد نافذة قراءة لتنشيطها أو إغلاقها.",
@@ -7259,6 +8255,42 @@
     "ur": "سب منتخب کریں",
     "zh-Hans": "全部选择"
   },
+  "Seleccionar visibles": {
+    "ar": "اختيار الموارد الظاهرة",
+    "bn": "দৃশ্যমান রিসোর্স বেছে নিন",
+    "en": "Select visible resources",
+    "es": "Seleccionar visibles",
+    "fr": "Sélectionner les ressources visibles",
+    "hi": "दिख रहे संसाधन चुनें",
+    "id": "Pilih sumber yang terlihat",
+    "pt": "Selecionar visíveis",
+    "ur": "نظر آنے والے وسائل منتخب کریں",
+    "zh-Hans": "选择可见资源"
+  },
+  "Selección": {
+    "ar": "الموارد المحددة",
+    "bn": "নির্বাচন",
+    "en": "Selection",
+    "es": "Selección",
+    "fr": "Sélection",
+    "hi": "चयन",
+    "id": "Pilihan",
+    "pt": "Seleção",
+    "ur": "انتخاب",
+    "zh-Hans": "所选资源"
+  },
+  "Selección bibliográfica": {
+    "ar": "اختيار المراجع",
+    "bn": "গ্রন্থপঞ্জির নির্বাচন",
+    "en": "Bibliography selection",
+    "es": "Selección bibliográfica",
+    "fr": "Sélection bibliographique",
+    "hi": "ग्रंथसूची चयन",
+    "id": "Pilihan bibliografi",
+    "pt": "Seleção bibliográfica",
+    "ur": "کتابیاتی انتخاب",
+    "zh-Hans": "参考书目选择"
+  },
   "Selector de distribución por ventana y cursores de redimensionado.": {
     "ar": "محدد تخطيط لكل نافذة ومؤشرات لتغيير الحجم.",
     "bn": "প্রতি উইন্ডোর বিন্যাস নির্বাচন ও আকার পরিবর্তনের কার্সর।",
@@ -7330,6 +8362,18 @@
     "pt": "Sem ocorrências",
     "ur": "کوئی مماثل نتیجہ نہیں",
     "zh-Hans": "无匹配项"
+  },
+  "Sin evidencia": {
+    "ar": "دون توثيق",
+    "bn": "প্রমাণ নেই",
+    "en": "Unverified",
+    "es": "Sin evidencia",
+    "fr": "Sans preuve",
+    "hi": "बिना प्रमाण",
+    "id": "Belum terverifikasi",
+    "pt": "Sem evidência",
+    "ur": "بغیر ثبوت",
+    "zh-Hans": "未证实"
   },
   "Sin seleccionar": {
     "ar": "غير محدّد",
@@ -7618,6 +8662,18 @@
     "pt": "Teologia",
     "ur": "الٰہیات",
     "zh-Hans": "神学"
+  },
+  "Texto": {
+    "ar": "نص",
+    "bn": "পাঠ্য",
+    "en": "Text",
+    "es": "Texto",
+    "fr": "Texte",
+    "hi": "पाठ",
+    "id": "Teks",
+    "pt": "Texto",
+    "ur": "متن",
+    "zh-Hans": "文本"
   },
   "Texto bíblico": {
     "ar": "نص الكتاب المقدس",
@@ -8051,6 +9107,18 @@
     "ur": "فہرست صاف کریں",
     "zh-Hans": "清除列表"
   },
+  "Vaciar selección": {
+    "ar": "مسح التحديد",
+    "bn": "নির্বাচন খালি করুন",
+    "en": "Clear selection",
+    "es": "Vaciar selección",
+    "fr": "Vider la sélection",
+    "hi": "चयन खाली करें",
+    "id": "Kosongkan pilihan",
+    "pt": "Limpar seleção",
+    "ur": "انتخاب صاف کریں",
+    "zh-Hans": "清空选择"
+  },
   "Valor": {
     "ar": "القيمة",
     "bn": "মান",
@@ -8062,6 +9130,18 @@
     "pt": "Valor",
     "ur": "قدر",
     "zh-Hans": "值"
+  },
+  "Varias ediciones coinciden; elige una.": {
+    "ar": "توجد طبعات متعددة مطابقة؛ اختر واحدة.",
+    "bn": "একাধিক সংস্করণ মেলে; একটি বেছে নিন।",
+    "en": "Multiple editions match; choose one.",
+    "es": "Varias ediciones coinciden; elige una.",
+    "fr": "Plusieurs éditions correspondent ; choisissez-en une.",
+    "hi": "कई संस्करण मेल खाते हैं; एक चुनें।",
+    "id": "Beberapa edisi cocok; pilih satu.",
+    "pt": "Várias edições correspondem; escolha uma.",
+    "ur": "کئی نسخے ملتے ہیں؛ ایک منتخب کریں۔",
+    "zh-Hans": "多个版本匹配；请选择一个。"
   },
   "Ventana vacía": {
     "ar": "نافذة فارغة",
@@ -8507,6 +9587,30 @@
     "ur": "{total} میں سے {current}",
     "zh-Hans": "{current} / {total}"
   },
+  "{groups} grupos · {members} referencias de recursos": {
+    "ar": "{groups} مجموعات · {members} مراجع موارد",
+    "bn": "{groups} দল · {members} রিসোর্সের উল্লেখ",
+    "en": "{groups} groups · {members} resource references",
+    "es": "{groups} grupos · {members} referencias de recursos",
+    "fr": "{groups} groupes · {members} références de ressources",
+    "hi": "{groups} समूह · {members} संसाधन संदर्भ",
+    "id": "{groups} grup · {members} referensi sumber",
+    "pt": "{groups} grupos · {members} referências de recursos",
+    "ur": "{groups} گروپ · {members} وسائل کے حوالے",
+    "zh-Hans": "{groups} 个分组 · {members} 个资源引用"
+  },
+  "{included} de {requested} recursos · {unknown} campos desconocidos": {
+    "ar": "{included} من {requested} موارد · {unknown} حقول غير معروفة",
+    "bn": "{requested}টির মধ্যে {included}টি রিসোর্স · {unknown}টি অজানা ক্ষেত্র",
+    "en": "{included} of {requested} resources · {unknown} unknown fields",
+    "es": "{included} de {requested} recursos · {unknown} campos desconocidos",
+    "fr": "{included} ressources sur {requested} · {unknown} champs inconnus",
+    "hi": "{requested} में से {included} संसाधन · {unknown} अज्ञात फ़ील्ड",
+    "id": "{included} dari {requested} sumber · {unknown} bidang tidak diketahui",
+    "pt": "{included} de {requested} recursos · {unknown} campos desconhecidos",
+    "ur": "{requested} میں سے {included} وسائل · {unknown} نامعلوم خانے",
+    "zh-Hans": "{included}/{requested} 个资源 · {unknown} 个未知字段"
+  },
   "{panes} paneles · {resources} recursos": {
     "ar": "اللوحات: {panes} · الموارد: {resources}",
     "bn": "প্যানেল: {panes} · রিসোর্স: {resources}",
@@ -8650,401 +9754,5 @@
     "pt": "Última verificação",
     "ur": "آخری جانچ",
     "zh-Hans": "上次检查"
-  },
-  "Abrir asociados…": {
-    "es": "Abrir asociados…",
-    "en": "Open associated resources…",
-    "pt": "Abrir recursos associados…",
-    "fr": "Ouvrir les ressources associées…",
-    "zh-Hans": "打开关联资源…",
-    "ar": "فتح الموارد المرتبطة…",
-    "hi": "संबंधित संसाधन खोलें…",
-    "bn": "সংযুক্ত রিসোর্স খুলুন…",
-    "ur": "متعلقہ وسائل کھولیں…",
-    "id": "Buka sumber terkait…"
-  },
-  "Administrar asociaciones…": {
-    "es": "Administrar asociaciones…",
-    "en": "Manage associations…",
-    "pt": "Gerenciar associações…",
-    "fr": "Gérer les associations…",
-    "zh-Hans": "管理关联…",
-    "ar": "إدارة الارتباطات…",
-    "hi": "संबंध प्रबंधित करें…",
-    "bn": "সংযোগ পরিচালনা করুন…",
-    "ur": "تعلقات منظم کریں…",
-    "id": "Kelola asosiasi…"
-  },
-  "Asociación": {
-    "es": "Asociación",
-    "en": "Association",
-    "pt": "Associação",
-    "fr": "Association",
-    "zh-Hans": "关联",
-    "ar": "الارتباط",
-    "hi": "संबंध",
-    "bn": "সংযোগ",
-    "ur": "تعلق",
-    "id": "Asosiasi"
-  },
-  "Destino": {
-    "es": "Destino",
-    "en": "Destination",
-    "pt": "Destino",
-    "fr": "Destination",
-    "zh-Hans": "目标",
-    "ar": "الوجهة",
-    "hi": "गंतव्य",
-    "bn": "গন্তব্য",
-    "ur": "منزل",
-    "id": "Tujuan"
-  },
-  "Entrada": {
-    "es": "Entrada",
-    "en": "Entry",
-    "pt": "Entrada",
-    "fr": "Entrée",
-    "zh-Hans": "词条",
-    "ar": "المدخل",
-    "hi": "प्रविष्टि",
-    "bn": "ভুক্তি",
-    "ur": "اندراج",
-    "id": "Entri"
-  },
-  "Inicio del recurso": {
-    "es": "Inicio del recurso",
-    "en": "Resource beginning",
-    "pt": "Início do recurso",
-    "fr": "Début de la ressource",
-    "zh-Hans": "资源开头",
-    "ar": "بداية المورد",
-    "hi": "संसाधन की शुरुआत",
-    "bn": "রিসোর্সের শুরু",
-    "ur": "وسیلے کا آغاز",
-    "id": "Awal sumber"
-  },
-  "Introduce una referencia o entrada válida.": {
-    "es": "Introduce una referencia o entrada válida.",
-    "en": "Enter a valid reference or entry.",
-    "pt": "Insira uma referência ou entrada válida.",
-    "fr": "Saisissez une référence ou une entrée valide.",
-    "zh-Hans": "请输入有效的经文引用或词条。",
-    "ar": "أدخل مرجعًا أو مدخلًا صالحًا.",
-    "hi": "मान्य संदर्भ या प्रविष्टि दर्ज करें।",
-    "bn": "একটি বৈধ উল্লেখ বা ভুক্তি লিখুন।",
-    "ur": "درست حوالہ یا اندراج لکھیں۔",
-    "id": "Masukkan referensi atau entri yang valid."
-  },
-  "La asociación cambió. Ejecuta la acción de nuevo.": {
-    "es": "La asociación cambió. Ejecuta la acción de nuevo.",
-    "en": "The association changed. Run the action again.",
-    "pt": "A associação mudou. Execute a ação novamente.",
-    "fr": "L’association a changé. Relancez l’action.",
-    "zh-Hans": "关联已更改。请重新执行操作。",
-    "ar": "تغيّر الارتباط. نفّذ الإجراء مرة أخرى.",
-    "hi": "संबंध बदल गया है। क्रिया दोबारा चलाएँ।",
-    "bn": "সংযোগ বদলেছে। কাজটি আবার করুন।",
-    "ur": "تعلق بدل گیا ہے۔ کارروائی دوبارہ کریں۔",
-    "id": "Asosiasi berubah. Jalankan tindakan lagi."
-  },
-  "La lectura de origen cambió. Vuelve a abrir los recursos asociados.": {
-    "es": "La lectura de origen cambió. Vuelve a abrir los recursos asociados.",
-    "en": "The source reading changed. Reopen associated resources.",
-    "pt": "A leitura de origem mudou. Reabra os recursos associados.",
-    "fr": "La lecture d’origine a changé. Rouvrez les ressources associées.",
-    "zh-Hans": "来源阅读已更改。请重新打开关联资源。",
-    "ar": "تغيّرت القراءة الأصلية. أعد فتح الموارد المرتبطة.",
-    "hi": "मूल पठन बदल गया है। संबंधित संसाधन फिर से खोलें।",
-    "bn": "মূল পাঠ বদলেছে। সংযুক্ত রিসোর্স আবার খুলুন।",
-    "ur": "اصل مطالعہ بدل گیا ہے۔ متعلقہ وسائل دوبارہ کھولیں۔",
-    "id": "Bacaan asal berubah. Buka kembali sumber terkait."
-  },
-  "Lectura nueva": {
-    "es": "Lectura nueva",
-    "en": "New reading",
-    "pt": "Nova leitura",
-    "fr": "Nouvelle lecture",
-    "zh-Hans": "新阅读面板",
-    "ar": "قراءة جديدة",
-    "hi": "नया पठन",
-    "bn": "নতুন পাঠ",
-    "ur": "نیا مطالعہ",
-    "id": "Bacaan baru"
-  },
-  "Los alternativos reemplazan esta lectura después de comprobar el destino.": {
-    "es": "Los alternativos reemplazan esta lectura después de comprobar el destino.",
-    "en": "Alternatives replace this reading after verifying the destination.",
-    "pt": "Os alternativos substituem esta leitura após verificar o destino.",
-    "fr": "Les alternatives remplacent cette lecture après vérification de la destination.",
-    "zh-Hans": "替代资源将在验证目标后替换当前阅读。",
-    "ar": "تحل البدائل محل هذه القراءة بعد التحقق من الوجهة.",
-    "hi": "गंतव्य की जाँच के बाद विकल्प इस पठन को बदलते हैं।",
-    "bn": "গন্তব্য যাচাইয়ের পরে বিকল্প রিসোর্স এই পাঠ প্রতিস্থাপন করে।",
-    "ur": "منزل کی تصدیق کے بعد متبادل اس مطالعے کی جگہ لیتے ہیں۔",
-    "id": "Sumber alternatif mengganti bacaan ini setelah tujuan diverifikasi."
-  },
-  "Los complementarios se abren en una lectura nueva.": {
-    "es": "Los complementarios se abren en una lectura nueva.",
-    "en": "Companions open in a new reading.",
-    "pt": "Os complementares abrem em uma nova leitura.",
-    "fr": "Les compléments s’ouvrent dans une nouvelle lecture.",
-    "zh-Hans": "配套资源将在新阅读面板中打开。",
-    "ar": "تُفتح الموارد المكملة في قراءة جديدة.",
-    "hi": "पूरक संसाधन नए पठन में खुलते हैं।",
-    "bn": "পরিপূরক রিসোর্স একটি নতুন পাঠে খোলে।",
-    "ur": "تکمیلی وسائل نئے مطالعے میں کھلتے ہیں۔",
-    "id": "Sumber pendamping terbuka dalam bacaan baru."
-  },
-  "No hay una asociación disponible para esta lectura.": {
-    "es": "No hay una asociación disponible para esta lectura.",
-    "en": "No association is available for this reading.",
-    "pt": "Não há associação disponível para esta leitura.",
-    "fr": "Aucune association disponible pour cette lecture.",
-    "zh-Hans": "此阅读没有可用的关联。",
-    "ar": "لا يوجد ارتباط متاح لهذه القراءة.",
-    "hi": "इस पठन के लिए कोई संबंध उपलब्ध नहीं है।",
-    "bn": "এই পাঠের জন্য কোনো সংযোগ নেই।",
-    "ur": "اس مطالعے کے لیے کوئی تعلق دستیاب نہیں ہے۔",
-    "id": "Tidak ada asosiasi untuk bacaan ini."
-  },
-  "Recursos asociados": {
-    "es": "Recursos asociados",
-    "en": "Associated resources",
-    "pt": "Recursos associados",
-    "fr": "Ressources associées",
-    "zh-Hans": "关联资源",
-    "ar": "الموارد المرتبطة",
-    "hi": "संबंधित संसाधन",
-    "bn": "সংযুক্ত রিসোর্স",
-    "ur": "متعلقہ وسائل",
-    "id": "Sumber terkait"
-  },
-  "Recursos asociados…": {
-    "es": "Recursos asociados…",
-    "en": "Associated resources…",
-    "pt": "Recursos associados…",
-    "fr": "Ressources associées…",
-    "zh-Hans": "关联资源…",
-    "ar": "الموارد المرتبطة…",
-    "hi": "संबंधित संसाधन…",
-    "bn": "সংযুক্ত রিসোর্স…",
-    "ur": "متعلقہ وسائل…",
-    "id": "Sumber terkait…"
-  },
-  "Se abrirá el inicio del recurso; los números de artículo no se transfieren entre libros.": {
-    "es": "Se abrirá el inicio del recurso; los números de artículo no se transfieren entre libros.",
-    "en": "The resource beginning will open; article numbers are not transferred between books.",
-    "pt": "O início do recurso será aberto; os números de artigo não são transferidos entre livros.",
-    "fr": "Le début de la ressource s’ouvrira ; les numéros d’article ne sont pas transférés entre livres.",
-    "zh-Hans": "将打开资源开头；文章编号不会在书籍之间转移。",
-    "ar": "ستُفتح بداية المورد؛ لا تُنقل أرقام المقالات بين الكتب.",
-    "hi": "संसाधन की शुरुआत खुलेगी; पुस्तकों के बीच लेख संख्या स्थानांतरित नहीं होती।",
-    "bn": "রিসোর্সের শুরু খুলবে; বইয়ের মধ্যে নিবন্ধের সংখ্যা স্থানান্তরিত হয় না।",
-    "ur": "وسیلے کا آغاز کھلے گا؛ کتابوں کے درمیان مضمون نمبر منتقل نہیں ہوتے۔",
-    "id": "Awal sumber akan dibuka; nomor artikel tidak dipindahkan antar buku."
-  },
-  "Selecciona una asociación": {
-    "es": "Selecciona una asociación",
-    "en": "Select an association",
-    "pt": "Selecione uma associação",
-    "fr": "Sélectionnez une association",
-    "zh-Hans": "选择关联",
-    "ar": "اختر ارتباطًا",
-    "hi": "संबंध चुनें",
-    "bn": "একটি সংযোগ বেছে নিন",
-    "ur": "تعلق منتخب کریں",
-    "id": "Pilih asosiasi"
-  },
-  "Origen: {title}": {
-    "es": "Origen: {title}",
-    "en": "Source: {title}",
-    "pt": "Origem: {title}",
-    "fr": "Origine : {title}",
-    "zh-Hans": "来源：{title}",
-    "ar": "المصدر: {title}",
-    "hi": "स्रोत: {title}",
-    "bn": "উৎস: {title}",
-    "ur": "ماخذ: {title}",
-    "id": "Asal: {title}"
-  },
-  "El recurso se abrirá en una lectura nueva.": {
-    "es": "El recurso se abrirá en una lectura nueva.",
-    "en": "The resource will open in a new reading.",
-    "pt": "O recurso será aberto em uma nova leitura.",
-    "fr": "La ressource s’ouvrira dans une nouvelle lecture.",
-    "zh-Hans": "资源将在新阅读面板中打开。",
-    "ar": "سيُفتح المورد في قراءة جديدة.",
-    "hi": "संसाधन एक नए पठन में खुलेगा।",
-    "bn": "রিসোর্সটি একটি নতুন পাঠে খুলবে।",
-    "ur": "وسیلہ نئے مطالعے میں کھلے گا۔",
-    "id": "Sumber akan terbuka dalam bacaan baru."
-  },
-  "Elegir archivo .lbxras…": {
-    "es": "Elegir archivo .lbxras…",
-    "en": "Choose .lbxras file…",
-    "pt": "Escolher arquivo .lbxras…",
-    "fr": "Choisir un fichier .lbxras…",
-    "zh-Hans": "选择 .lbxras 文件…",
-    "ar": "اختيار ملف .lbxras…",
-    "hi": " .lbxras फ़ाइल चुनें…",
-    "bn": ".lbxras ফাইল বেছে নিন…",
-    "ur": ".lbxras فائل منتخب کریں…",
-    "id": "Pilih berkas .lbxras…"
-  },
-  "Elegir edición": {
-    "es": "Elegir edición",
-    "en": "Choose edition",
-    "pt": "Escolher edição",
-    "fr": "Choisir une édition",
-    "zh-Hans": "选择版本",
-    "ar": "اختيار طبعة",
-    "hi": "संस्करण चुनें",
-    "bn": "সংস্করণ বেছে নিন",
-    "ur": "نسخہ منتخب کریں",
-    "id": "Pilih edisi"
-  },
-  "En una serie importada, la pertenencia declarada por el original determina los recursos compatibles.": {
-    "es": "En una serie importada, la pertenencia declarada por el original determina los recursos compatibles.",
-    "en": "In an imported series, the original declared membership determines compatible resources.",
-    "pt": "Em uma série importada, os membros declarados pelo original determinam os recursos compatíveis.",
-    "fr": "Dans une série importée, l’appartenance déclarée dans l’original détermine les ressources compatibles.",
-    "zh-Hans": "导入的系列以原始定义的成员关系确定兼容资源。",
-    "ar": "في السلسلة المستوردة، تحدد العضوية المعلنة في الأصل الموارد المتوافقة.",
-    "hi": "आयातित श्रृंखला में मूल दस्तावेज़ की घोषित सदस्यता संगत संसाधन तय करती है।",
-    "bn": "আমদানি করা সিরিজে মূল নথির ঘোষিত সদস্যতা সামঞ্জস্যপূর্ণ রিসোর্স নির্ধারণ করে।",
-    "ur": "درآمد شدہ سلسلے میں اصل دستاویز کی اعلان کردہ رکنیت موافق وسائل طے کرتی ہے۔",
-    "id": "Dalam seri impor, keanggotaan yang dinyatakan dalam sumber asli menentukan sumber yang kompatibel."
-  },
-  "Grupo original: {number} · Prioridad: {priority} · Tipo: {type}": {
-    "es": "Grupo original: {number} · Prioridad: {priority} · Tipo: {type}",
-    "en": "Original group: {number} · Priority: {priority} · Type: {type}",
-    "pt": "Grupo original: {number} · Prioridade: {priority} · Tipo: {type}",
-    "fr": "Groupe d’origine : {number} · Priorité : {priority} · Type : {type}",
-    "zh-Hans": "原始分组：{number} · 优先级：{priority} · 类型：{type}",
-    "ar": "المجموعة الأصلية: {number} · الأولوية: {priority} · النوع: {type}",
-    "hi": "मूल समूह: {number} · प्राथमिकता: {priority} · प्रकार: {type}",
-    "bn": "মূল দল: {number} · অগ্রাধিকার: {priority} · ধরন: {type}",
-    "ur": "اصل گروپ: {number} · ترجیح: {priority} · قسم: {type}",
-    "id": "Grup asli: {number} · Prioritas: {priority} · Jenis: {type}"
-  },
-  "Importar": {
-    "es": "Importar",
-    "en": "Import",
-    "pt": "Importar",
-    "fr": "Importer",
-    "zh-Hans": "导入",
-    "ar": "استيراد",
-    "hi": "आयात करें",
-    "bn": "আমদানি করুন",
-    "ur": "درآمد کریں",
-    "id": "Impor"
-  },
-  "Importar asociación original": {
-    "es": "Importar asociación original",
-    "en": "Import original association",
-    "pt": "Importar associação original",
-    "fr": "Importer une association d’origine",
-    "zh-Hans": "导入原始关联",
-    "ar": "استيراد ارتباط أصلي",
-    "hi": "मूल संबंध आयात करें",
-    "bn": "মূল সংযোগ আমদানি করুন",
-    "ur": "اصل تعلق درآمد کریں",
-    "id": "Impor asosiasi asli"
-  },
-  "Importar asociación original…": {
-    "es": "Importar asociación original…",
-    "en": "Import original association…",
-    "pt": "Importar associação original…",
-    "fr": "Importer une association d’origine…",
-    "zh-Hans": "导入原始关联…",
-    "ar": "استيراد ارتباط أصلي…",
-    "hi": "मूल संबंध आयात करें…",
-    "bn": "মূল সংযোগ আমদানি করুন…",
-    "ur": "اصل تعلق درآمد کریں…",
-    "id": "Impor asosiasi asli…"
-  },
-  "La definición no contiene asociaciones activas.": {
-    "es": "La definición no contiene asociaciones activas.",
-    "en": "The definition contains no active associations.",
-    "pt": "A definição não contém associações ativas.",
-    "fr": "La définition ne contient aucune association active.",
-    "zh-Hans": "该定义不包含有效关联。",
-    "ar": "لا يحتوي التعريف على ارتباطات نشطة.",
-    "hi": "परिभाषा में कोई सक्रिय संबंध नहीं है।",
-    "bn": "সংজ্ঞায় কোনো সক্রিয় সংযোগ নেই।",
-    "ur": "تعریف میں کوئی فعال تعلق نہیں ہے۔",
-    "id": "Definisi tidak berisi asosiasi aktif."
-  },
-  "Procedencia de la asociación": {
-    "es": "Procedencia de la asociación",
-    "en": "Association provenance",
-    "pt": "Procedência da associação",
-    "fr": "Provenance de l’association",
-    "zh-Hans": "关联来源",
-    "ar": "مصدر الارتباط",
-    "hi": "संबंध का स्रोत",
-    "bn": "সংযোগের উৎস",
-    "ur": "تعلق کا ماخذ",
-    "id": "Asal asosiasi"
-  },
-  "Resolución automática": {
-    "es": "Resolución automática",
-    "en": "Automatic resolution",
-    "pt": "Resolução automática",
-    "fr": "Résolution automatique",
-    "zh-Hans": "自动解析",
-    "ar": "مطابقة تلقائية",
-    "hi": "स्वचालित समाधान",
-    "bn": "স্বয়ংক্রিয় সমাধান",
-    "ur": "خودکار مطابقت",
-    "id": "Resolusi otomatis"
-  },
-  "Se conservarán el documento original, su procedencia, el orden y los miembros ausentes. La relación elegida se aplicará a todos los grupos del archivo.": {
-    "es": "Se conservarán el documento original, su procedencia, el orden y los miembros ausentes. La relación elegida se aplicará a todos los grupos del archivo.",
-    "en": "The original document, provenance, order and missing members will be retained. The chosen relation applies to every group in the file.",
-    "pt": "O documento original, sua procedência, a ordem e os membros ausentes serão preservados. A relação escolhida se aplica a todos os grupos do arquivo.",
-    "fr": "Le document original, sa provenance, l’ordre et les membres absents seront conservés. La relation choisie s’applique à tous les groupes du fichier.",
-    "zh-Hans": "将保留原始文档、来源、顺序和缺失成员。所选关系将应用于文件中的所有分组。",
-    "ar": "سيُحتفظ بالمستند الأصلي ومصدره والترتيب والأعضاء المفقودين. تنطبق العلاقة المختارة على جميع مجموعات الملف.",
-    "hi": "मूल दस्तावेज़, उसका स्रोत, क्रम और अनुपलब्ध सदस्य बनाए रखे जाएँगे। चुना गया संबंध फ़ाइल के सभी समूहों पर लागू होगा।",
-    "bn": "মূল নথি, তার উৎস, ক্রম ও অনুপস্থিত সদস্য বজায় থাকবে। নির্বাচিত সম্পর্ক ফাইলের সব দলে প্রযোজ্য হবে।",
-    "ur": "اصل دستاویز، اس کا ماخذ، ترتیب اور غیر موجود ارکان محفوظ رہیں گے۔ منتخب تعلق فائل کے تمام گروپوں پر لاگو ہوگا۔",
-    "id": "Dokumen asli, asal, urutan, dan anggota yang hilang akan dipertahankan. Relasi yang dipilih berlaku untuk semua grup dalam berkas."
-  },
-  "Selecciona una definición de asociación de Libronix.": {
-    "es": "Selecciona una definición de asociación de Libronix.",
-    "en": "Select a Libronix association definition.",
-    "pt": "Selecione uma definição de associação do Libronix.",
-    "fr": "Sélectionnez une définition d’association Libronix.",
-    "zh-Hans": "选择一个 Libronix 关联定义。",
-    "ar": "اختر تعريف ارتباط Libronix.",
-    "hi": "Libronix संबंध की परिभाषा चुनें।",
-    "bn": "Libronix সংযোগের একটি সংজ্ঞা বেছে নিন।",
-    "ur": "Libronix تعلق کی تعریف منتخب کریں۔",
-    "id": "Pilih definisi asosiasi Libronix."
-  },
-  "Varias ediciones coinciden; elige una.": {
-    "es": "Varias ediciones coinciden; elige una.",
-    "en": "Multiple editions match; choose one.",
-    "pt": "Várias edições correspondem; escolha uma.",
-    "fr": "Plusieurs éditions correspondent ; choisissez-en une.",
-    "zh-Hans": "多个版本匹配；请选择一个。",
-    "ar": "توجد طبعات متعددة مطابقة؛ اختر واحدة.",
-    "hi": "कई संस्करण मेल खाते हैं; एक चुनें।",
-    "bn": "একাধিক সংস্করণ মেলে; একটি বেছে নিন।",
-    "ur": "کئی نسخے ملتے ہیں؛ ایک منتخب کریں۔",
-    "id": "Beberapa edisi cocok; pilih satu."
-  },
-  "{groups} grupos · {members} referencias de recursos": {
-    "es": "{groups} grupos · {members} referencias de recursos",
-    "en": "{groups} groups · {members} resource references",
-    "pt": "{groups} grupos · {members} referências de recursos",
-    "fr": "{groups} groupes · {members} références de ressources",
-    "zh-Hans": "{groups} 个分组 · {members} 个资源引用",
-    "ar": "{groups} مجموعات · {members} مراجع موارد",
-    "hi": "{groups} समूह · {members} संसाधन संदर्भ",
-    "bn": "{groups} দল · {members} রিসোর্সের উল্লেখ",
-    "ur": "{groups} گروپ · {members} وسائل کے حوالے",
-    "id": "{groups} grup · {members} referensi sumber"
   }
 }

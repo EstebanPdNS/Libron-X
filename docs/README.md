@@ -1,12 +1,13 @@
 # Documentation
 
-Documentation applies to the v0.1 beta source.
+Documentation applies to the current beta source; historical verification records retain their original scope.
 
 - [Getting started](getting-started.md): install, choose a library and change language.
 - [Compatibility](compatibility.md): supported scope and known limits.
 - [Development](development.md): build, tests, localization and release checks.
 - [Architecture](architecture.md): modules, state ownership and data boundaries.
 - [Source map](source-map.md): every maintained source file, grouped by responsibility.
+- [Bibliographies, citations and editions](library-reports.md): reports, citation templates and reversible duplicate review.
 - [Verification](verification-v0.1.md): checks performed for this beta.
 - [Contributing](../CONTRIBUTING.md): small changes and useful bug reports.
 

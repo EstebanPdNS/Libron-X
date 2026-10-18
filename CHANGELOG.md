@@ -1,27 +1,24 @@
 # Changelog
 
-## Unreleased
+## v0.4 — 2026-10-18
 
+- Review exact copies and possible editions with reversible visibility actions.
+- Format and copy resource citations using Catalog, Chicago author–date and MLA book templates.
+- Generate library, collection and selection bibliographies with provenance and exports.
+- Keep clicked note previews open with Liquid Glass reading actions.
+- Standardize blue underlined reader links while preserving verse-body typography.
+- Preserve verified native EPUB study content when copying resource packages.
+- Restore Bible selectors and arrow-key version switching across native Bible resources.
 - Import original resource associations with source provenance, ordered missing members and explicit edition resolution.
-
 - Open owned association members as alternatives or companions with verified passage, headword or explicit beginning destinations.
-
 - Manage ordered alternative and companion resource associations with compatibility filters and safe restoration.
-
 - Stream search results with cooperative pause/resume, cancellation, adjustable limits and stale-result guards.
-
 - Browse every retained search occurrence with aligned context, resource grouping, configurable order and next/previous selection.
-
 - Find approximate literal phrases with selectable edit limits, source-accurate Unicode selection and explicit coverage.
-
 - Search verified resource fields with separate source-title matches, explicit coverage and exact reader selection.
-
 - Execute bounded proximity and order queries with word, character and verified verse distances.
-
 - Build automatic resource collections from saved metadata conditions with live previews.
-
 - Search selected collections, resource subsets and open readers with explicit coverage warnings.
-
 - Search the managed library with persistent source-bound indexes.
 - Organize mixed resources in persistent manual collections.
 - Configure resource priorities and resolve Bible, commentary and word links.

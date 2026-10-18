@@ -30,11 +30,15 @@ actor WorkspaceSearchReader: LibrarySearchContentProvider {
         var titles: [Int: String] = [:]
         for entry in first.entries where titles[entry.ordinal] == nil { titles[entry.ordinal] = entry.title }
         let fields: [SearchField]
-        switch resource.format {
+        let nativeEPUBBible = resource.format == .epub && first.oeb == nil &&
+            resource.libron?.resourceType == "Biblia" && !(first.content?.anchors.isEmpty ?? true)
+        if nativeEPUBBible { fields = [.body, .title, .bibleText] }
+        else { switch resource.format {
         case .libronixOEB, .epub: fields = [.body, .title, .heading, .footnote, .quotation]
         case .libronDictionary: fields = [.body, .title]
         case .eSwordSQLite: fields = (first.content?.anchors.isEmpty == false) ? [.body, .title, .bibleText] : [.body, .title]
         default: fields = [.body, .title, .bibleText]
+        }
         }
         let result = LibrarySearchPreparedResource(articles: (0..<first.sectionCount).map {
             .init(sectionOrdinal: $0, title: titles[$0] ?? resource.title + " · " + String($0 + 1))
@@ -65,7 +69,11 @@ actor WorkspaceSearchReader: LibrarySearchContentProvider {
             let fields: SearchFieldDirectory?
             if let provided = result.fieldDirectory { fields = provided }
             else { fields = try await sourceFields.directory(resource, ordinal: article.sectionOrdinal, text: result.text, stamps: prepared.sourceStamps, anchors: anchors) }
-            if resource.format == .eSwordSQLite {
+            let nativeEPUBBible = resource.format == .epub && resource.libron?.resourceType == "Biblia"
+            if resource.format == .eSwordSQLite || nativeEPUBBible {
+                // Native imported Bibles use explicit UTF-16 anchors regardless
+                // of the retained source container. Do not interpret their zero
+                // datatype as an unverified legacy reference.
                 // e-Sword's authored reader anchors use datatype zero, not the
                 // legacy driver's datatype two. Preserve them as explicit verse
                 // intervals instead of relabeling the source's datatype.
@@ -79,7 +87,11 @@ actor WorkspaceSearchReader: LibrarySearchContentProvider {
                     return .init(reference: entry.reference, normalizedReference: reference.normalizedKey,
                                  range: .init(location: entry.offset, length: end - entry.offset))
                 }
-                decoded = .init(text: result.text, warnings: warnings, bibleVerses: verses, referenceLinks: links, fieldDirectory: fields)
+                let nativeFields: SearchFieldDirectory? = nativeEPUBBible ? .init(
+                    regions: [.body: result.text.isEmpty ? [] : [.init(location: 0, length: result.text.utf16.count)],
+                              .bibleText: verses.map(\.range)],
+                    externalValues: [.title: [article.title]]) : fields
+                decoded = .init(text: result.text, warnings: warnings, bibleVerses: verses, referenceLinks: links, fieldDirectory: nativeFields)
             } else {
                 decoded = .init(text: result.text, warnings: warnings, referenceAnchors: anchors, referenceLinks: links, fieldDirectory: fields)
             }

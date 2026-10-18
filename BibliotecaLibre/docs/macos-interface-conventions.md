@@ -40,3 +40,16 @@ inside the search field, without a detached search button. Keep the search on
 the leading side and insert flexible space before trailing action groups.
 Dictionary panes retain visible text zoom at every toolbar width; overflow menus
 preserve contents, local Find, navigation and the shared reading-output actions.
+
+Reader hyperlinks use the common blue, single-underline presentation in
+`ReaderSourceLinkAttributes`, including references inside notes and HTML books.
+Style only the actual linked span. Verse commentary and footnote markers must
+underline their number or marker, never the complete verse body. Keep source
+text, reference offsets, typography and image bytes unchanged.
+
+Clicking a native reader link opens the existing compact preview card directly
+and pins it until its X is pressed. Focus loss, source navigation and hover
+previews must not dismiss or replace a pinned card. Keep its selectable native
+text, images and scrolling. Its Open Here and Open in Another Reading actions
+use `MacPanelControlPresentation`; do not replace the compact card with a
+separate utility window or require hover before clicking.

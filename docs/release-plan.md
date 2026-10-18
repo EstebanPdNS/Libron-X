@@ -1,6 +1,6 @@
 # Road to v0.9
 
-Current release: **v0.3**. The following six releases cover all **104 accepted features**. Counts were randomly allocated between 10 and 20 and are fixed for this plan.
+Current release: **v0.4**. The following six releases cover all **104 accepted features**. Counts were randomly allocated between 10 and 20 and are fixed for this plan.
 
 A feature counts only when its complete behavior is implemented and verified. Each release requires regression tests, native acceptance, resource/user-data preservation, and a verified distributable. Test cases, internal builds and bug fixes do not count as additional features. Version numbers indicate delivery order, not a completion percentage.
 
@@ -30,10 +30,10 @@ A feature counts only when its complete behavior is implemented and verified. Ea
 - [x] Long-running search control.
 - [x] Resource association manager.
 - [x] General resource associations.
-- [ ] Bibliography reports.
-- [ ] Citation styles.
-- [ ] Copy resource citation.
-- [ ] Duplicate and edition manager.
+- [x] Bibliography reports.
+- [x] Citation styles.
+- [x] Copy resource citation.
+- [x] Duplicate and edition manager.
 
 ## v0.5 · 11 features
 
