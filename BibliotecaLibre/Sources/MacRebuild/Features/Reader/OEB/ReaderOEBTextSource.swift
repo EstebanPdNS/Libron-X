@@ -18,7 +18,15 @@ struct ReaderOEBTextPage: Sendable {
     let referenceLinks: [BibleReferenceSourceLink]
     let lexicalBreaks: [Int]?
     let fieldDirectory: SearchFieldDirectory?
-    var estimatedBytes: Int { text.utf16.count * 2 + articleRanges.count * 64 + path.utf16.count * 2 + referenceLinks.reduce(0) { $0 + $1.target.utf16.count * 2 + 48 } + (fieldDirectory?.regions.values.reduce(0) { $0 + $1.count * 32 } ?? 0) + (lexicalBreaks?.count ?? 0) * 8 + 128 }
+    var estimatedBytes: Int {
+        let textBytes = text.utf16.count * 2
+        let rangeBytes = articleRanges.count * 64
+        let pathBytes = path.utf16.count * 2
+        let referenceBytes = referenceLinks.reduce(0) { $0 + $1.target.utf16.count * 2 + 48 }
+        let fieldBytes = fieldDirectory?.regions.values.reduce(0) { $0 + $1.count * 32 } ?? 0
+        let breakBytes = (lexicalBreaks?.count ?? 0) * 8
+        return textBytes + rangeBytes + pathBytes + referenceBytes + fieldBytes + breakBytes + 128
+    }
 
     init(text: String, anchors: [String: Int], path: String, articles: [LibronixOEBArticle],
          referenceLinks: [BibleReferenceSourceLink] = [], fieldDirectory: SearchFieldDirectory? = nil, lexicalBreaks: [Int]? = nil) throws {

@@ -7,7 +7,7 @@ establish complete functional parity with the original Libronix application.
 - The maintained source passed 856 tests in 144 suites, serially on macOS.
 - The tested and public trees matched across 381 source, test and localization files.
 - Swift 6.2 compatibility fixes split metadata concatenation and snapshot reference-search progress before awaiting callbacks. CI restores checksum-verified, attributed dictionary packages and runs tests serially.
-- The release app was built from the public tree as v0.4.0 build 69 for arm64,
+- The release app was built from the public tree as v0.4.0 build 70 for arm64,
   installed at `/Applications/Libron-X.app` and verified with strict code signing.
 - Native bibliography checks generated a 535-resource catalog report, a
   two-resource collection report, a partial collection with one missing member,

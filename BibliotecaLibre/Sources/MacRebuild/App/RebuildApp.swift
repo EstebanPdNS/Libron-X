@@ -65,6 +65,10 @@ struct RebuildCommands: Commands {
     @Bindable var workspace: StudyWorkspace
     @Environment(\.openWindow) private var openWindow
     var body: some Commands {
+        fileAndEditingCommands
+        studyCommands
+    }
+    @CommandsBuilder private var fileAndEditingCommands: some Commands {
         CommandGroup(after: .appInfo) {
             Button(L("Buscar actualizaciones…")) { AppUpdater.shared.check() }
         }
@@ -126,6 +130,8 @@ struct RebuildCommands: Commands {
             Button(L("Buscar anterior")) { workspace.activeReader?.find(.backward) }
                 .keyboardShortcut("g", modifiers: [.command, .shift]).disabled(workspace.activeReader?.findQuery.isEmpty != false)
         }
+    }
+    @CommandsBuilder private var studyCommands: some Commands {
         CommandMenu(L("Ir")) {
             Button(L("Mi biblioteca…")) { openWindow(id: "library") }
             Button(L("Explorador temático…")) { workspace.activeTool = .topics }.keyboardShortcut("t")

@@ -115,7 +115,9 @@ enum PaneArrangement { case cascade, horizontal, vertical }
         let automatic = languages.map { code -> ParallelBibleSet in
             let hash = LibrarySearchService.textFingerprint("libron-language-group:" + code)
             let h = Array(hash.prefix(32))
-            let uuid = UUID(uuidString: String(h[0..<8]) + "-" + String(h[8..<12]) + "-" + String(h[12..<16]) + "-" + String(h[16..<20]) + "-" + String(h[20..<32]))!
+            let groups = [String(h[0..<8]), String(h[8..<12]), String(h[12..<16]),
+                          String(h[16..<20]), String(h[20..<32])]
+            let uuid = UUID(uuidString: groups.joined(separator: "-"))!
             return ParallelBibleSet(id: uuid, name: LibraryLanguages.name(code), members: bibles.filter {
                 LibronMetadata.deriving($0).languages.map(LibraryLanguages.canonical).contains(code)
             }.sorted { $0.title.localizedStandardCompare($1.title) == .orderedAscending }.map(ParallelBibleMember.init), automaticLanguage: code)
