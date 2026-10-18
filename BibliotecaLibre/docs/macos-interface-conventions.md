@@ -53,3 +53,16 @@ previews must not dismiss or replace a pinned card. Keep its selectable native
 text, images and scrolling. Its Open Here and Open in Another Reading actions
 use `MacPanelControlPresentation`; do not replace the compact card with a
 separate utility window or require hover before clicking.
+
+Study notes and articles opened in another reading use a dedicated commentary
+pane for that Bible edition. Reuse its companion pane, retain native selectable
+text and source hyperlinks, and follow the source viewport in one direction.
+Keep an explicit native follow/pause control. A missing owned commentary is a
+neutral empty state; never substitute the preceding verse's note. Restoring a
+workspace preserves the source relationship and pause state.
+
+Illustrated commentary panes use a native split view with selectable text on the
+left and large source images on the right, adapting vertically in narrow panes.
+Image enlargement uses the shared native image viewer. Suppress only the
+publisher's explicitly identified decorative rule and badge files; retain
+illustrations, maps, original assets and every source UTF-16 address.

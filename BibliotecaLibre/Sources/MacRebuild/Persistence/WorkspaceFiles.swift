@@ -21,6 +21,10 @@ struct WorkspaceArchive: Codable {
         var interlinearLines: [Int]? = nil
         var viewportOffset: Int? = nil
         var parallelSetID: UUID? = nil
+        var commentarySourceIndex: Int? = nil
+        var commentaryResourceID: String? = nil
+        var followsCommentary: Bool? = nil
+        var commentaryReference: String? = nil
     }
     var schemaVersion = 1
     var libraryRoot: URL?
@@ -41,7 +45,18 @@ struct WorkspaceArchive: Codable {
               referenceTargetIndex.map({ panes.indices.contains($0) }) ?? true,
               openingOrder.map({ $0.count == panes.count && Set($0) == Set(panes.indices) }) ?? true
               else { throw PersonalStateError.invalid("El área de trabajo contiene ventanas o recursos incompatibles.") }
-        for pane in panes {
+        for (index, pane) in panes.enumerated() {
+            if let resourceID = pane.commentaryResourceID, resourceID != pane.resource.id {
+                throw PersonalStateError.invalid("El vínculo del comentario no es válido.")
+            }
+            if let source = pane.commentarySourceIndex {
+                guard panes.indices.contains(source), source != index,
+                      panes[source].commentaryResourceID == nil,
+                      pane.commentaryResourceID == pane.resource.id,
+                      panes[source].resource.id == pane.commentaryResourceID else {
+                    throw PersonalStateError.invalid("El vínculo del comentario no es válido.")
+                }
+            }
             try pane.destination?.validate()
             for destination in pane.history { try destination.validate() }
             let f = pane.frame
@@ -66,7 +81,11 @@ struct WorkspaceArchive: Codable {
                 minimized: reader.isMinimized, maximized: reader.isMaximized, contents: reader.showsContents,
                 locator: reader.showsLocator, articleLocator: reader.locatorIsArticle, scale: reader.textScale, selection: reader.committedSelection,
                 history: reader.history, historyIndex: reader.historyIndex, link: reader.linkGroup,
-                interlinearLines: reader.visibleInterlinearLines?.sorted(), viewportOffset: reader.viewportCharacterOffset, parallelSetID: reader.parallelSetID) },
+                interlinearLines: reader.visibleInterlinearLines?.sorted(), viewportOffset: reader.viewportCharacterOffset, parallelSetID: reader.parallelSetID,
+                commentarySourceIndex: readers.firstIndex { $0.id == reader.commentarySourceID && $0.resource.id == reader.commentaryResourceID },
+                commentaryResourceID: reader.commentaryResourceID,
+                followsCommentary: reader.commentarySourceID == nil ? nil : reader.followsCommentary,
+                commentaryReference: reader.commentaryReference) },
             activeIndex: readers.firstIndex { $0.id == activeID }, referenceTargetIndex: readers.firstIndex { $0.id == referenceTargetID }, showsHome: showsHome,
             openingOrder: orderedReaders.compactMap { reader in readers.firstIndex { $0 === reader } })
     }
@@ -81,12 +100,25 @@ struct WorkspaceArchive: Codable {
             reader.showsContents = pane.contents; reader.showsLocator = pane.locator
             reader.locatorIsArticle = pane.articleLocator; reader.textScale = pane.scale; reader.linkGroup = pane.link
             reader.parallelSetID = pane.parallelSetID
+            reader.commentaryResourceID = pane.commentaryResourceID
+            reader.followsCommentary = pane.followsCommentary ?? true
+            reader.commentaryReference = pane.commentaryReference
             reader.visibleInterlinearLines = pane.interlinearLines.map(Set.init)
             reader.history = pane.history; reader.historyIndex = pane.historyIndex
             if let destination = pane.destination {
                 reader.load(destination, historyTarget: pane.historyIndex >= 0 ? pane.historyIndex : nil,
                             propagateReference: false, selection: pane.selection, expectedFingerprint: pane.fingerprint, viewportOffset: pane.viewportOffset)
             }
+        }
+        for (index, pane) in saved.panes.enumerated() {
+            guard let sourceIndex = pane.commentarySourceIndex else { continue }
+            let reader = readers[index]
+            reader.commentarySourceID = readers[sourceIndex].id
+            reader.commentaryResourceID = pane.commentaryResourceID
+            reader.followsCommentary = pane.followsCommentary ?? true
+            reader.commentaryReference = pane.commentaryReference
+            reader.pendingCommentaryOrdinal = pane.destination?.ordinal
+            reader.commentaryRestoreReference = pane.commentaryReference
         }
         readerOrder = (saved.openingOrder ?? Array(saved.panes.indices)).map { readers[$0].id }
         activeID = saved.activeIndex.map { readers[$0].id } ?? visibleReaders.last?.id

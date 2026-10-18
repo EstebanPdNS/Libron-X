@@ -27,6 +27,10 @@ struct ReaderHighlight: Identifiable, Codable, Equatable {
             self.dictionary.selectionChanged(text, workspace: self)
         }
         reader.highlights = personal.highlights.filter { $0.resourceID == reader.resource.id }
+        reader.onReadingPositionChange = { [weak self, weak reader] reference in
+            guard let self, let reader else { return }
+            self.updateCommentaryFollowers(from: reader, reference: reference)
+        }
         reader.onReferenceNavigation = { [weak self, weak reader] reference in
             guard let self, let reader, reader.linkGroup != .none else { return }
             for other in self.readers where other !== reader && other.linkGroup == reader.linkGroup {
@@ -41,6 +45,9 @@ struct ReaderHighlight: Identifiable, Codable, Equatable {
         copy.showsContents = reader.showsContents; copy.showsLocator = reader.showsLocator
         copy.locatorIsArticle = reader.locatorIsArticle; copy.textScale = reader.textScale
         copy.parallelSetID = reader.parallelSetID
+        copy.commentaryResourceID = reader.commentaryResourceID
+        copy.commentaryReference = reader.commentaryReference
+        copy.followsCommentary = false
         copy.visibleInterlinearLines = reader.visibleInterlinearLines
         copy.selectedRange = reader.committedSelection; copy.selectionRequest += 1
         copy.visibleBibleReference = reader.visibleBibleReference; copy.viewportCharacterOffset = reader.viewportCharacterOffset

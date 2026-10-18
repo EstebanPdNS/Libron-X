@@ -11,6 +11,7 @@ struct ReaderTextView: NSViewRepresentable {
     var content: LegacySectionContent? = nil
     var typography: LegacyTypography? = nil
     var graphics: [LegacyGraphicAsset] = []
+    var detachedImages = false
     var scale = 1.0
     var highlights: [ReaderHighlight] = []
     var visibleInterlinearLines: Set<Int>? = nil
@@ -23,6 +24,8 @@ struct ReaderTextView: NSViewRepresentable {
     var inlineLinks: [LegacyInlineLink] = []
     var onOpenLink: (LibraryResource, ReaderDestination, Bool) -> Void = { _, _, _ in }
     var resolveLinkResource: ((LibraryResource, LegacyInlineLink) throws -> LibraryResource)? = nil
+    var onDictionaryLookup: ((String) -> Void)? = nil
+    var onQuickDictionaryLookup: ((String, NSView, NSRect) -> Void)? = nil
     let activate: () -> Void
     @MainActor final class Coordinator: NSObject, NSTextViewDelegate {
         var identity: ReaderDestination?; var text = ""; var scale = 0.0; var graphicHashes: [String] = []
@@ -36,6 +39,7 @@ struct ReaderTextView: NSViewRepresentable {
         var onSelection: (NSRange) -> Void = { _ in }
         var onVisiblePosition: (Int) -> Void = { _ in }
         var scrollTask: Task<Void, Never>?
+        var detachedImages = false
         var biblePositions: [(source: Int, visible: Int)] = []
         func cancelViewportObservation() { scrollTask?.cancel(); scrollTask = nil }
         func userScrolled(_ scroll: NSScrollView) {
@@ -121,13 +125,15 @@ struct ReaderTextView: NSViewRepresentable {
         view.activate = activate
         (scroll as? ReaderScrollView)?.activate = activate
         let coordinator = context.coordinator
+        view.lookupWord = onDictionaryLookup
+        view.quickLookupWord = onQuickDictionaryLookup
         view.linkPreview.resource = resource
         view.linkPreview.onOpen = onOpenLink
         view.linkPreview.resolveResource = resolveLinkResource
         coordinator.onSelection = onSelection
         coordinator.onVisiblePosition = onVisiblePosition
         let pageChanged = context.coordinator.text != text || context.coordinator.identity != identity
-        let renderChanged = pageChanged || coordinator.scale != scale || coordinator.graphicHashes != graphics.map(\.sha256) || coordinator.highlights != highlights || coordinator.visibleInterlinearLines != visibleInterlinearLines || coordinator.chosenFont != AppPreferences.shared.readingFont || coordinator.sourceFontsRevision != sourceFontsRevision || coordinator.inlineLinks != inlineLinks
+        let renderChanged = pageChanged || coordinator.detachedImages != detachedImages || coordinator.scale != scale || coordinator.graphicHashes != graphics.map(\.sha256) || coordinator.highlights != highlights || coordinator.visibleInterlinearLines != visibleInterlinearLines || coordinator.chosenFont != AppPreferences.shared.readingFont || coordinator.sourceFontsRevision != sourceFontsRevision || coordinator.inlineLinks != inlineLinks
         let selectionChanged = coordinator.selectionRequest != selectionRequest
         guard renderChanged || selectionChanged else { return }
         coordinator.cancelViewportObservation()
@@ -143,6 +149,7 @@ struct ReaderTextView: NSViewRepresentable {
         }
         context.coordinator.text = text; context.coordinator.identity = identity; context.coordinator.scale = scale
         context.coordinator.graphicHashes = graphics.map(\.sha256)
+        coordinator.detachedImages = detachedImages
         coordinator.highlights = highlights
         coordinator.visibleInterlinearLines = visibleInterlinearLines
         coordinator.chosenFont = AppPreferences.shared.readingFont
@@ -158,7 +165,7 @@ struct ReaderTextView: NSViewRepresentable {
             let color: NSColor = switch mark.color { case "green": .systemGreen; case "blue": .systemBlue; case "pink": .systemPink; default: .systemYellow }
             display.addAttribute(.backgroundColor, value: color.withAlphaComponent(0.35), range: mark.range)
         }
-        let installed = ReaderImageRenderer.install(graphics, in: display)
+        let installed = ReaderImageRenderer.install(graphics, in: display, detached: detachedImages)
         let warnings = rendered.warnings.filter { graphics.isEmpty || $0 != "Las imágenes integradas todavía requieren representación." } + installed.warnings
         Task { @MainActor in
             guard context.coordinator.identity == identity, context.coordinator.text == text, context.coordinator.scale == scale else { return }

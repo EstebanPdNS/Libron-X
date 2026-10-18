@@ -375,7 +375,7 @@ struct ResourceReaderToolbar: View {
     @ViewBuilder private var graphicsMenu: some View {
         if let assets = reader.page?.graphics, !assets.isEmpty {
             Menu {
-                ForEach(Array(assets.enumerated()), id: \.offset) { index, asset in
+                ForEach(Array(assets.filter { !ReaderImageRenderer.isDecoration($0) }.enumerated()), id: \.offset) { index, asset in
                     Button(LF("Abrir imagen {number}", ["number": String(index + 1)])) { perform { if let image = ReaderImageRenderer.decode(asset.data) { MapPreview.show(image: image, title: reader.resource.title) } } }
                 }
             } label: { MacToolbarLabel(L("Mapas e imágenes"), "photo") }.help(L("Mapas e imágenes")).menuIndicator(.hidden)

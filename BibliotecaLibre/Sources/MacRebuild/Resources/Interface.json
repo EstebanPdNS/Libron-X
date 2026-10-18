@@ -767,6 +767,18 @@
     "ur": "نقشے کا زوم",
     "zh-Hans": "地图缩放"
   },
+  "Ampliar imagen": {
+    "ar": "تكبير الصورة",
+    "bn": "ছবি বড় করুন",
+    "en": "Enlarge image",
+    "es": "Ampliar imagen",
+    "fr": "Agrandir l’image",
+    "hi": "चित्र बड़ा करें",
+    "id": "Perbesar gambar",
+    "pt": "Ampliar imagem",
+    "ur": "تصویر بڑی کریں",
+    "zh-Hans": "放大图片"
+  },
   "Ampliar o restaurar panel": {
     "ar": "تكبير اللوحة أو استعادتها",
     "bn": "প্যানেল বড় বা পুনরুদ্ধার করুন",
@@ -2315,6 +2327,30 @@
     "ur": "بائبل کی تفسیر",
     "zh-Hans": "圣经注释"
   },
+  "Comentarios": {
+    "ar": "التعليقات",
+    "bn": "ভাষ্য",
+    "en": "Commentary",
+    "es": "Comentarios",
+    "fr": "Commentaires",
+    "hi": "टिप्पणियाँ",
+    "id": "Tafsiran",
+    "pt": "Comentários",
+    "ur": "تفسیر",
+    "zh-Hans": "注释"
+  },
+  "Comentarios · {title}": {
+    "ar": "التعليقات · {title}",
+    "bn": "ভাষ্য · {title}",
+    "en": "Commentary · {title}",
+    "es": "Comentarios · {title}",
+    "fr": "Commentaires · {title}",
+    "hi": "टिप्पणियाँ · {title}",
+    "id": "Tafsiran · {title}",
+    "pt": "Comentários · {title}",
+    "ur": "تفسیر · {title}",
+    "zh-Hans": "注释 · {title}"
+  },
   "Compilación": {
     "ar": "البنية",
     "bn": "বিল্ড",
@@ -3574,6 +3610,18 @@
     "pt": "O tipo, idioma ou série da associação é inválido.",
     "ur": "تعلق کی قسم، زبان یا سلسلہ درست نہیں ہے۔",
     "zh-Hans": "关联的类型、语言或系列无效。"
+  },
+  "El vínculo del comentario no es válido.": {
+    "ar": "رابط التعليق غير صالح.",
+    "bn": "ভাষ্যের লিঙ্কটি অবৈধ।",
+    "en": "The commentary link is invalid.",
+    "es": "El vínculo del comentario no es válido.",
+    "fr": "Le lien du commentaire n’est pas valide.",
+    "hi": "टिप्पणी का लिंक अमान्य है।",
+    "id": "Tautan tafsiran tidak valid.",
+    "pt": "O vínculo do comentário é inválido.",
+    "ur": "تفسیر کا لنک درست نہیں ہے۔",
+    "zh-Hans": "注释链接无效。"
   },
   "El ámbito contiene identidades de recurso incompatibles.": {
     "ar": "يحتوي النطاق على هويات موارد متعارضة.",
@@ -6287,6 +6335,18 @@
     "ur": "برابر نہیں ہے",
     "zh-Hans": "不等于"
   },
+  "No hay comentario para {reference}.": {
+    "ar": "لا يوجد تعليق على {reference}.",
+    "bn": "{reference} এর জন্য কোনো ভাষ্য নেই।",
+    "en": "There is no commentary for {reference}.",
+    "es": "No hay comentario para {reference}.",
+    "fr": "Aucun commentaire pour {reference}.",
+    "hi": "{reference} के लिए कोई टिप्पणी नहीं है।",
+    "id": "Tidak ada tafsiran untuk {reference}.",
+    "pt": "Não há comentário para {reference}.",
+    "ur": "{reference} کے لیے کوئی تفسیر نہیں ہے۔",
+    "zh-Hans": "{reference} 没有注释。"
+  },
   "No hay diccionarios disponibles.": {
     "ar": "لا توجد قواميس متاحة.",
     "bn": "কোনো অভিধান উপলব্ধ নেই।",
@@ -8026,6 +8086,18 @@
     "pt": "Seções verificadas",
     "ur": "تصدیق شدہ حصے",
     "zh-Hans": "已验证章节"
+  },
+  "Seguir la Biblia de origen": {
+    "ar": "متابعة الكتاب المقدس الأصلي",
+    "bn": "মূল বাইবেল অনুসরণ করুন",
+    "en": "Follow the source Bible",
+    "es": "Seguir la Biblia de origen",
+    "fr": "Suivre la Bible d’origine",
+    "hi": "मूल बाइबल का अनुसरण करें",
+    "id": "Ikuti Alkitab sumber",
+    "pt": "Seguir a Bíblia de origem",
+    "ur": "اصل بائبل کی پیروی کریں",
+    "zh-Hans": "跟随来源圣经"
   },
   "Selecciona archivos o agrega una carpeta. Se crearán paquetes .libron con metadatos y contenido. Elige Sí para copiar los originales a backup o No para omitir esa copia. Puedes volver a activar la pregunta en Biblioteca.": {
     "ar": "اختر ملفات أو أضف مجلدًا. ستُنشأ حزم .libron بالبيانات الوصفية والمحتوى. اختر نعم لنسخ الأصول إلى backup أو لا لتخطي النسخ. يمكنك تفعيل السؤال مجددًا في المكتبة.",

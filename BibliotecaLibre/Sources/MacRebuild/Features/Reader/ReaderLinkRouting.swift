@@ -25,7 +25,34 @@ import LibronixCore
         throw RebuildError.bibleReferenceTargetUnavailable
     }
     func openInlineLink(_ resource: LibraryResource, destination: ReaderDestination, from source: ReaderSession, newReader: Bool) {
-        if newReader { open(resource, destination: destination); return }
+        if newReader {
+            let owner = source.commentarySourceID.flatMap { id in readers.first { $0.id == id } } ?? source
+            let isNote = destination.reference == nil && resource.id == owner.resource.id &&
+                (owner.canSynchronizeBible || source.isCommentary)
+            let target: ReaderSession
+            let created: Bool
+            if isNote, let existing = readers.first(where: {
+                $0 !== owner && $0.resource.id == resource.id && ($0.isCommentary ||
+                    (!$0.canSynchronizeBible && $0.page?.destination.ordinal == destination.ordinal))
+            }) {
+                target = existing; created = false; activate(target)
+            } else { target = open(resource, startReading: false); created = true }
+            if isNote {
+                target.commentarySourceID = owner.isCommentary ? nil : owner.id
+                target.commentaryResourceID = resource.id
+                target.followsCommentary = true
+                let context = owner.readingFlowPages.first { page in
+                    page.inlineLinks.contains { $0.sectionOrdinal == destination.ordinal }
+                }
+                let link = context?.inlineLinks.first { $0.sectionOrdinal == destination.ordinal }
+                let index = ReaderBibleIndex(anchors: context?.content?.anchors ?? [], textLength: context?.text.utf16.count)
+                target.commentaryReference = link.flatMap { index.reference(at: $0.range.location) } ?? owner.currentReference
+                target.pendingCommentaryOrdinal = destination.ordinal
+                if created { target.frame = PaneFrame(x: 0.45, y: 0.04, width: 0.54, height: 0.91) }
+            }
+            target.load(destination, propagateReference: false)
+            return
+        }
         let explicit = destination.reference == nil ? nil : readers.first { $0.id == referenceTargetID && $0.resource.id == resource.id }
         let target = explicit ?? (source.resource.id == resource.id ? source : readers.first { $0.resource.id == resource.id })
             ?? open(resource, startReading: false)

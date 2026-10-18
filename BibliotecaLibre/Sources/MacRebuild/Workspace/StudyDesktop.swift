@@ -89,7 +89,8 @@ struct InternalReaderPane: View {
     var body: some View {
         VStack(spacing: 0) {
             titleBar
-            ResourceReaderToolbar(reader: reader, workspace: workspace)
+            if reader.isCommentary { ReaderCommentaryToolbar(reader: reader, workspace: workspace) }
+            else { ResourceReaderToolbar(reader: reader, workspace: workspace) }
             Divider()
             if reader.showsLocator {
                 HStack {
@@ -105,6 +106,11 @@ struct InternalReaderPane: View {
                 HStack { MacToolbarLabel(L("Error de lectura"), "exclamationmark.triangle"); Text(error).textSelection(.enabled); Spacer() }
                     .font(.callout).padding(10).background(Color.orange.opacity(0.12))
             }
+            if reader.commentarySourceID != nil, reader.page == nil, !reader.isLoading,
+               reader.error == nil, let reference = reader.commentaryReference {
+                Text(LF("No hay comentario para {reference}.", ["reference": reference]))
+                    .foregroundStyle(.secondary).textSelection(.enabled).padding(12)
+            }
             HSplitView {
                 if reader.showsContents {
                     ScrollView {
@@ -117,7 +123,9 @@ struct InternalReaderPane: View {
                         }
                     }.frame(minWidth: 120, idealWidth: 180, maxWidth: 280)
                 }
-                if let oeb = reader.page?.oeb {
+                if reader.isCommentary {
+                    ReaderCommentaryView(reader: reader, workspace: workspace)
+                } else if let oeb = reader.page?.oeb {
                     ReaderOEBView(reader: reader, page: oeb, activate: { workspace.activate(reader) }).frame(minWidth: 50)
                         .opacity(reader.textScale == 0 ? 0 : 1)
                         .allowsHitTesting(reader.textScale > 0).accessibilityHidden(reader.textScale == 0)
@@ -160,7 +168,7 @@ struct InternalReaderPane: View {
         }
         .transaction { $0.animation = nil }
         .shadow(color: .black.opacity(workspace.activeID == reader.id ? 0.16 : 0.08), radius: 5, y: 2)
-        .accessibilityElement(children: .contain).accessibilityLabel(reader.resource.title)
+        .accessibilityElement(children: .contain).accessibilityLabel(reader.displayTitle)
     }
     private var paneShape: RoundedRectangle { RoundedRectangle(cornerRadius: 12, style: .continuous) }
     private var titleBar: some View {
@@ -172,7 +180,7 @@ struct InternalReaderPane: View {
                     workspace.toggleMaximized(reader)
                 }
             }
-            Text(reader.resource.title).font(.system(size: 12, weight: .medium)).lineLimit(1)
+            Text(reader.displayTitle).font(.system(size: 12, weight: .medium)).lineLimit(1)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                 .overlay {
                     PanePointerSurface(cursor: .openHand, doubleClick: {

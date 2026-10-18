@@ -188,6 +188,9 @@ enum PaneArrangement { case cascade, horizontal, vertical }
     }
     func close(_ reader: ReaderSession) {
         reader.cancel(); readers.removeAll { $0 === reader }
+        for follower in readers where follower.commentarySourceID == reader.id {
+            follower.commentarySourceID = nil
+        }
         readerOrder.removeAll { $0 == reader.id }
         if activeID == reader.id { activeID = visibleReaders.last?.id }
         if referenceTargetID == reader.id { referenceTargetID = nil }

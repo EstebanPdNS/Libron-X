@@ -8,6 +8,12 @@ struct ReaderOutputMenuItems: View {
         Button(L("Copiar selección o artículo")) { workspace.activate(reader); ReaderOutputActions.copy(reader, workspace: workspace) }
         Button(L("Copiar cita del recurso")) { ResourceCitationActions.copy([reader.resource]) }
         ResourceCitationStylePicker()
+        if reader.commentarySourceID != nil {
+            Toggle(L("Seguir la Biblia de origen"), isOn: Binding(
+                get: { reader.followsCommentary },
+                set: { workspace.setCommentaryFollowing($0, for: reader) }
+                ))
+        }
         Button(L("Agregar a favoritos")) { workspace.activate(reader); workspace.addFavorite() }
         Button(L("Agregar nota sobre la selección")) { perform { workspace.addNoteForSelection(reader) } }
         Divider()

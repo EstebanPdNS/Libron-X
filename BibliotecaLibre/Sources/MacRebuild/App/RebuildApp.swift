@@ -203,7 +203,7 @@ struct RebuildCommands: Commands {
             Button(L("Mosaico vertical")) { workspace.arrange(.vertical) }.disabled(workspace.visibleReaders.isEmpty)
             Divider()
             ForEach(workspace.orderedReaders) { reader in
-                Button((workspace.activeID == reader.id ? "✓ " : "") + reader.resource.title) { workspace.activate(reader) }
+                Button((workspace.activeID == reader.id ? "✓ " : "") + reader.displayTitle) { workspace.activate(reader) }
             }
             Button(L("Ventanas…")) { workspace.activeTool = .windows }.disabled(workspace.readers.isEmpty)
             Divider()

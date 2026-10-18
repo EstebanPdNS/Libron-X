@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- Follow the Bible viewport in a dedicated, reusable commentary pane with pause and workspace restoration.
+- Present illustrated notes with native text/image split views and enlarged source images.
+- Suppress identified publisher dividers and badges while preserving original assets and source addresses.
+
 ## v0.4 — 2026-10-18
 
 - Review exact copies and possible editions with reversible visibility actions.

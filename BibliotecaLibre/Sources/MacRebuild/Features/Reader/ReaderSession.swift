@@ -51,6 +51,8 @@ struct ReaderPage: Sendable {
     }
     private(set) var hasObservedBible = false
     @ObservationIgnored private var bibleIndex = ReaderBibleIndex(anchors: [])
+    var isCommentary: Bool { commentaryResourceID != nil }
+    var displayTitle: String { isCommentary ? LF("Comentarios · {title}", ["title": resource.title]) : resource.title }
     var isDictionary: Bool { LibronDictionaryIndex.supports(resource) }
     var dictionaryWord = ""
     func clearDictionaryDefinition() {
@@ -110,7 +112,20 @@ struct ReaderPage: Sendable {
             onTextSelection?(String(text[range]))
         }
     }
-    var visibleBibleReference: String?
+    var commentarySourceID: UUID?
+    var commentaryResourceID: String?
+    var followsCommentary = true
+    var commentaryReference: String?
+    var pendingCommentaryOrdinal: Int?
+    var commentaryRestoreReference: String?
+    var onReadingPositionChange: ((String) -> Void)?
+    var visibleBibleReference: String? {
+        didSet {
+            guard !isLoading, let reference = visibleBibleReference,
+                  reference != oldValue else { return }
+            onReadingPositionChange?(reference)
+        }
+    }
     var viewportCharacterOffset: Int?
     var selectionRequest = 0
     var flowPages: [ReaderPage] = []
@@ -166,6 +181,7 @@ struct ReaderPage: Sendable {
     func readingPositionLabel(language: AppLanguage) -> String {
         guard let page else { return "" }
         let article = page.articlePositionLabel(language: language)
+        if commentarySourceID != nil, let reference = commentaryReference { return "\(reference) · \(article)" }
         guard resource.libron?.resourceType == "Biblia" || canSynchronizeBible,
               let reference = currentReference, !reference.isEmpty else { return article }
         return "\(reference) · \(article)"
@@ -177,7 +193,7 @@ struct ReaderPage: Sendable {
         _ = page // Keep the computed result dependent on page replacement.
         return bibleIndex.reference(at: offset)
     }
-    var canSynchronizeBible: Bool { _ = page; return !bibleIndex.entries.isEmpty }
+    var canSynchronizeBible: Bool { _ = page; return !isCommentary && !bibleIndex.entries.isEmpty }
     var bibleReferences: [String] { _ = page; return bibleIndex.references }
     /// Only actual viewport scroll events enter this path. Text selection is
     /// independent of the reading position and must never move linked panes.
@@ -332,7 +348,7 @@ struct ReaderPage: Sendable {
         generation += 1; task?.cancel(); task = nil; isLoading = false; pendingOEBSelection = nil; cancelFind()
     }
     func readForFlow(_ destination: ReaderDestination) async throws -> ReaderPage { try await loader(resource, destination) }
-    private func commit(_ result: ReaderPage, historyTarget: Int? = nil) {
+    private func commit(_ result: ReaderPage, historyTarget: Int? = nil, recordHistory: Bool = true) {
         oebProjectionReady = false; pendingOEBSelection = nil; pendingOEBFind = nil
         page = result; locator = locatorIsArticle ? String(result.destination.ordinal + 1) : result.destination.reference ?? ""
         flowPages = [result]; flowWarning = nil; flowEndOrdinal = nil; flowBeginningOrdinal = nil; flowLookahead = 5
@@ -341,6 +357,7 @@ struct ReaderPage: Sendable {
         visibleBibleReference = result.destination.reference.flatMap { LegacyPassageQuery.sourceReference($0)?.displayReference }
             ?? bibleReference(at: selectedRange.location)
         if !locatorIsArticle, let reference = visibleBibleReference { locator = reference }
+        if !recordHistory { return }
         if let historyTarget { historyIndex = historyTarget }
         else if history.last != result.destination || historyIndex != history.count - 1 {
             history = Array(history.prefix(historyIndex + 1))
@@ -349,7 +366,7 @@ struct ReaderPage: Sendable {
     }
     func load(_ destination: ReaderDestination, historyTarget: Int? = nil, propagateReference: Bool = true,
               selection: NSRange? = nil, expectedFingerprint: String? = nil, viewportOffset: Int? = nil,
-              expectedSourceStamps: [LibrarySearchFileStamp] = []) {
+              expectedSourceStamps: [LibrarySearchFileStamp] = [], recordHistory: Bool = true) {
         cancel()
         let token = generation
         isLoading = true; error = nil
@@ -363,7 +380,7 @@ struct ReaderPage: Sendable {
                     if let expectedFingerprint, LibrarySearchService.textFingerprint(result.text) != expectedFingerprint { throw LegacyIndicesError.sourceChanged }
                     if let selection, Range(selection, in: result.text) == nil { throw LegacyIndicesError.sourceChanged }
                 }
-                self.commit(result, historyTarget: historyTarget)
+                self.commit(result, historyTarget: historyTarget, recordHistory: recordHistory)
                 if let oeb = result.oeb { self.pendingOEBSelection = (oeb.url, expectedFingerprint, selection) }
                 else if let selection {
                     self.selectedRange = selection; self.viewportCharacterOffset = selection.location; self.selectionRequest += 1
@@ -374,6 +391,7 @@ struct ReaderPage: Sendable {
                     if !self.locatorIsArticle, let reference = self.visibleBibleReference { self.locator = reference }
                 }
                 self.isLoading = false
+                if let reference = self.currentReference { self.onReadingPositionChange?(reference) }
                 if self.flowEnabled { self.fillReadingFlow() }
                 if propagateReference, result.oeb == nil, let reference = self.currentReference { self.onReferenceNavigation?(reference) }
             } catch {
