@@ -150,7 +150,8 @@ struct WorkspaceSearchScopeSnapshot: Sendable {
                 guard let set = context.collections.first(where: { $0.id == id }) else {
                     issues.append(.init(id: id.uuidString, title: id.uuidString, reason: .missingCollection)); continue
                 }
-                names.append(set.name); requested += set.members
+                if let rule = set.rule { try rule.validate() }
+                names.append(set.name); requested += set.resolvedMembers(in: context.library)
             }
         }
         var unique: [String: LibraryCollectionMember] = [:], order: [String] = []

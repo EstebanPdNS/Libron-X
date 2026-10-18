@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Build automatic resource collections from saved metadata conditions with live previews.
+
 - Search selected collections, resource subsets and open readers with explicit coverage warnings.
 
 - Search the managed library with persistent source-bound indexes.

@@ -95,7 +95,7 @@ enum PaneArrangement { case cascade, horizontal, vertical }
                 groupMatches = parallelBibleSets.sets.first { $0.id == uuid }?.members.contains { $0.resolve(in: [resource]) != nil } == true
             } else if libraryGroup.hasPrefix("collection:") {
                 let id = UUID(uuidString: String(libraryGroup.dropFirst(11)))
-                groupMatches = collections.sets.first { $0.id == id }?.members.contains { $0.resolve(in: [resource]) != nil } == true
+                groupMatches = collections.sets.first { $0.id == id }?.contains(resource) == true
             } else { groupMatches = true }
             return queryMatches && groupMatches && (libraryFacetValue.isEmpty || libraryFacet.value(resource) == libraryFacetValue)
         }.sorted { lhs, rhs in

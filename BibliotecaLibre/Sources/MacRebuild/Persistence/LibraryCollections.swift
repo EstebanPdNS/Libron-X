@@ -20,14 +20,19 @@ struct LibraryCollection: Codable, Identifiable, Equatable, Sendable {
     var id = UUID()
     var name: String
     var members: [LibraryCollectionMember] = []
+    var rule: LibraryCollectionRule? = nil
 }
 struct LibraryCollectionsSnapshot: Codable {
     var schemaVersion = 1
     var sets: [LibraryCollection] = []
     func validate() throws {
-        guard schemaVersion == 1 else { throw PersonalStateError.futureVersion }
+        guard schemaVersion == 1 || (schemaVersion == 2 && sets.contains { $0.rule != nil }) else { throw PersonalStateError.futureVersion }
         guard sets.count <= 256, Set(sets.map(\.id)).count == sets.count else { throw Self.invalid() }
         for set in sets {
+            if let rule = set.rule {
+                guard schemaVersion == 2, set.members.isEmpty else { throw Self.invalid() }
+                try rule.validate()
+            }
             guard !set.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
                   set.name.utf16.count <= 160, !set.name.contains("\0"), set.members.count <= 8192,
                   Set(set.members.map(\.id)).count == set.members.count,
@@ -44,7 +49,7 @@ struct LibraryCollectionsSnapshot: Codable {
     }
 }
 
-/// Manual collections are separate owned state; membership never moves or modifies books.
+/// Collections are separate owned state; membership never moves or modifies books.
 @MainActor @Observable final class LibraryCollections {
     private(set) var sets: [LibraryCollection] = []
     private(set) var loadError: String?
@@ -63,22 +68,25 @@ struct LibraryCollectionsSnapshot: Codable {
             try next.validate(); sets = next.sets; canSave = true; loadError = nil
         } catch { loadError = error.localizedDescription; throw error }
     }
-    @discardableResult func create() throws -> UUID {
-        let base = L("Nueva colección")
+    @discardableResult func create(rule: LibraryCollectionRule? = nil) throws -> UUID {
+        if let rule { try rule.validate() }
+        let base = L(rule == nil ? "Nueva colección" : "Nueva colección por reglas")
         var name = base, number = 2
         while sets.contains(where: { $0.name == name }) { name = "\(base) \(number)"; number += 1 }
-        let set = LibraryCollection(name: name)
+        let set = LibraryCollection(name: name, rule: rule)
         try commit(sets + [set]); return set.id
     }
     func rename(_ id: UUID, to name: String) throws {
         try edit(id) { $0.name = name.trimmingCharacters(in: .whitespacesAndNewlines) }
     }
     func add(_ resource: LibraryResource, to id: UUID) throws {
+        try requireManual(id)
         try edit(id) { set in
             if !set.members.contains(where: { $0.id == resource.id }) { set.members.append(.init(resource)) }
         }
     }
     func add(_ resources: [LibraryResource], to id: UUID) throws {
+        try requireManual(id)
         try edit(id) { collection in
             var known = Set(collection.members.map(\.id))
             for resource in resources where known.insert(resource.id).inserted {
@@ -87,13 +95,27 @@ struct LibraryCollectionsSnapshot: Codable {
         }
     }
     func removeMember(_ resourceID: String, from id: UUID) throws {
+        try requireManual(id)
         try edit(id) { $0.members.removeAll { $0.id == resourceID } }
     }
     func moveMember(_ resourceID: String, in id: UUID, by delta: Int) throws {
+        try requireManual(id)
         guard delta == -1 || delta == 1 else { return }
         try edit(id) { set in
             guard let index = set.members.firstIndex(where: { $0.id == resourceID }), set.members.indices.contains(index + delta) else { return }
             set.members.swapAt(index, index + delta)
+        }
+    }
+    func saveRule(_ rule: LibraryCollectionRule, for id: UUID) throws {
+        try rule.validate()
+        guard sets.first(where: { $0.id == id })?.rule != nil else {
+            throw PersonalStateError.invalid(L("Esta colección es manual."))
+        }
+        try edit(id) { $0.rule = rule }
+    }
+    private func requireManual(_ id: UUID) throws {
+        guard sets.first(where: { $0.id == id })?.rule == nil else {
+            throw PersonalStateError.invalid(L("La pertenencia de esta colección se calcula mediante reglas."))
         }
     }
     func remove(_ id: UUID) throws { try commit(sets.filter { $0.id != id }) }
@@ -104,7 +126,7 @@ struct LibraryCollectionsSnapshot: Codable {
     private func commit(_ next: [LibraryCollection]) throws {
         guard canSave else { throw PersonalStateError.invalid(loadError ?? L("No se pudieron leer las colecciones.")) }
         guard next != sets else { return }
-        let snapshot = LibraryCollectionsSnapshot(sets: next)
+        let snapshot = LibraryCollectionsSnapshot(schemaVersion: next.contains { $0.rule != nil } ? 2 : 1, sets: next)
         try snapshot.validate(); try file.save(snapshot); sets = next; loadError = nil
     }
 }
