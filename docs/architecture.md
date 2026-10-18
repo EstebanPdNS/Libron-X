@@ -345,3 +345,50 @@ invalid-zero rejection, and stale-query opening guards. A finished Reina-Valera
 chapters and 4122 occurrences: an independent read-only SQLite/HTMLParser/Unicode
 regex oracle agrees exactly. Native visual evidence covers observed Spanish dark
 appearance. Full original Libronix search equivalence remains unproven.
+
+## Resource association manager
+The Tools menu opens a native association editor for ordered alternative or
+companion resource groups. Owned definitions live in resource-associations.json,
+separate from original .lbxras files, Bible groups, collections and priorities.
+Groups have stable UUIDs, an explicit relation and a compatibility scope: Bible,
+commentary, dictionary, lexicon or a named series, optionally constrained by a
+canonical language code. Series match the declared collection with fixed case-
+and diacritic-insensitive comparison; blank or unknown series never match all
+resources. Dictionary/lexicon language eligibility uses the existing KeyLink
+datatype declarations when available. These are declared compatibility criteria,
+not proof that every source implements every navigation coordinate.
+
+The editor creates, names, configures and deletes groups, filters/adds eligible
+resources, removes members and changes their order. Draft profile changes must
+be saved before adding resources. A compatibility change is transactional and
+requires all retained members to resolve and satisfy the new scope. Renaming or
+changing relation preserves unresolved members. Hidden, absent, replaced or
+newly incompatible resources remain visible with their saved identity and order;
+resolution checks exact path, format, legacy identifier and current scope.
+Restoring the same eligible identity resolves it again without changing the
+saved definition.
+
+Persistence validates version, group/member bounds, unique IDs, names, paths,
+language and series before saving. There are at most 128 groups and 256 members
+per group. Writes use the established atomic previous-file/concurrent-writer
+checks. Invalid or future state remains untouched and blocks writes until a
+valid reload; failed reloads retain the last valid in-memory groups.
+
+Static examination of the 53 supplied original association files finds 49 groups
+and 1116 ordered member references, mostly without an explicit relation type.
+That establishes ordered membership and priority declarations, including absent
+resources, but does not establish a runtime alternative/companion contract.
+This editor records the user's chosen relation explicitly. Import of original
+association definitions and resource navigation are separate integration work;
+this manager alone does not close the original Parallel Resources workflow.
+
+Acceptance: 803 tests in 134 suites pass, including eight new test definitions.
+Installed build 54 verifies creation, Unicode naming, language filtering, adding
+real Reina-Valera 1909/Biblia al Día members, ordered movement and companion
+relation persistence. An incompatible profile change is rejected without loss.
+Restart retains name/relation/scope/order and an unavailable identity; restoring
+the exact owned test definition resolves it again. Member removal, group removal
+and empty states pass native checks. Ten original user-state files restore
+exactly; the new test-only state is archived. Catalog/entry set and all 53 original
+association definitions remain unchanged; 1099 package integrity checks pass.
+Native visual evidence covers observed Spanish dark appearance only.

@@ -49,6 +49,7 @@ enum PaneArrangement { case cascade, horizontal, vertical }
     var resourcePriorities: ResourcePriorities
     var keyLinks = KeyLinkController()
     var collections: LibraryCollections
+    var resourceAssociations: ResourceAssociationSets
     var parallelBibleSets: ParallelBibleSets
     var recentWorkspaces: RecentWorkspaces
     @ObservationIgnored var bibleVersionTask: Task<Void, Never>?
@@ -57,12 +58,13 @@ enum PaneArrangement { case cascade, horizontal, vertical }
     @ObservationIgnored private var importTask: Task<Void, Never>?
     @ObservationIgnored private var importGeneration = 0
     @ObservationIgnored private var accessURLs: [URL] = []
-    init(personal: WorkspacePersonalState? = nil, resourceVisibility: LibraryResourceVisibility? = nil, recentWorkspaces: RecentWorkspaces? = nil, parallelBibleSets: ParallelBibleSets? = nil, collections: LibraryCollections? = nil, resourcePriorities: ResourcePriorities? = nil) {
+    init(personal: WorkspacePersonalState? = nil, resourceVisibility: LibraryResourceVisibility? = nil, recentWorkspaces: RecentWorkspaces? = nil, parallelBibleSets: ParallelBibleSets? = nil, collections: LibraryCollections? = nil, resourcePriorities: ResourcePriorities? = nil, resourceAssociations: ResourceAssociationSets? = nil) {
         self.personal = personal ?? WorkspacePersonalState()
         self.resourceVisibility = resourceVisibility ?? LibraryResourceVisibility()
         self.resourcePriorities = resourcePriorities ?? ResourcePriorities()
         self.collections = collections ?? LibraryCollections()
         self.parallelBibleSets = parallelBibleSets ?? ParallelBibleSets()
+        self.resourceAssociations = resourceAssociations ?? ResourceAssociationSets()
         self.recentWorkspaces = recentWorkspaces ?? RecentWorkspaces()
     }
     var availableResources: [LibraryResource] { resources.filter { !resourceVisibility.isHidden($0) } }

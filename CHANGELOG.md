@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Manage ordered alternative and companion resource associations with compatibility filters and safe restoration.
+
 - Stream search results with cooperative pause/resume, cancellation, adjustable limits and stale-result guards.
 
 - Browse every retained search occurrence with aligned context, resource grouping, configurable order and next/previous selection.

@@ -239,6 +239,18 @@
     "ur": "تصویر {number} کھولیں",
     "zh-Hans": "打开图片 {number}"
   },
+  "Abrir preferidos": {
+    "ar": "فتح المفضلة",
+    "bn": "পছন্দেরগুলো খুলুন",
+    "en": "Open preferred",
+    "es": "Abrir preferidos",
+    "fr": "Ouvrir les favoris",
+    "hi": "पसंदीदा खोलें",
+    "id": "Buka pilihan utama",
+    "pt": "Abrir preferidos",
+    "ur": "ترجیحی وسائل کھولیں",
+    "zh-Hans": "打开首选资源"
+  },
   "Abrir recurso": {
     "ar": "فتح المورد",
     "bn": "রিসোর্স খুলুন",
@@ -262,6 +274,18 @@
     "pt": "Abrir referência",
     "ur": "حوالہ کھولیں",
     "zh-Hans": "打开经文"
+  },
+  "Abrir selección": {
+    "ar": "فتح التحديد",
+    "bn": "নির্বাচিতটি খুলুন",
+    "en": "Open selection",
+    "es": "Abrir selección",
+    "fr": "Ouvrir la sélection",
+    "hi": "चयन खोलें",
+    "id": "Buka pilihan",
+    "pt": "Abrir seleção",
+    "ur": "انتخاب کھولیں",
+    "zh-Hans": "打开所选项"
   },
   "Abrir…": {
     "ar": "فتح…",
@@ -455,6 +479,18 @@
     "ur": "وسائل اور لائسنس کا انتظام",
     "zh-Hans": "管理资源和许可证"
   },
+  "Advertencias": {
+    "ar": "تحذيرات",
+    "bn": "সতর্কতা",
+    "en": "Warnings",
+    "es": "Advertencias",
+    "fr": "Avertissements",
+    "hi": "चेतावनियाँ",
+    "id": "Peringatan",
+    "pt": "Avisos",
+    "ur": "انتباہات",
+    "zh-Hans": "警告"
+  },
   "Advertencias de conversión": {
     "ar": "تنبيهات التحويل",
     "bn": "রূপান্তরের সতর্কতা",
@@ -539,6 +575,18 @@
     "ur": "فولڈر شامل کریں…",
     "zh-Hans": "添加文件夹…"
   },
+  "Agregar condición": {
+    "ar": "إضافة شرط",
+    "bn": "শর্ত যোগ করুন",
+    "en": "Add condition",
+    "es": "Agregar condición",
+    "fr": "Ajouter une condition",
+    "hi": "शर्त जोड़ें",
+    "id": "Tambah kondisi",
+    "pt": "Adicionar condição",
+    "ur": "شرط شامل کریں",
+    "zh-Hans": "添加条件"
+  },
   "Agregar nota": {
     "ar": "إضافة ملاحظة",
     "bn": "টীকা যোগ করুন",
@@ -563,6 +611,54 @@
     "ur": "منتخب متن پر نوٹ شامل کریں",
     "zh-Hans": "为选中内容添加笔记"
   },
+  "Agregar recurso": {
+    "ar": "إضافة مورد",
+    "bn": "রিসোর্স যোগ করুন",
+    "en": "Add resource",
+    "es": "Agregar recurso",
+    "fr": "Ajouter une ressource",
+    "hi": "संसाधन जोड़ें",
+    "id": "Tambah sumber",
+    "pt": "Adicionar recurso",
+    "ur": "وسیلہ شامل کریں",
+    "zh-Hans": "添加资源"
+  },
+  "Agregar recursos a la colección": {
+    "ar": "إضافة موارد إلى المجموعة",
+    "bn": "সংগ্রহে রিসোর্স যোগ করুন",
+    "en": "Add resources to collection",
+    "es": "Agregar recursos a la colección",
+    "fr": "Ajouter des ressources à la collection",
+    "hi": "संग्रह में संसाधन जोड़ें",
+    "id": "Tambahkan sumber daya ke koleksi",
+    "pt": "Adicionar recursos à coleção",
+    "ur": "مجموعے میں وسائل شامل کریں",
+    "zh-Hans": "向收藏集添加资源"
+  },
+  "Agregar recursos compatibles": {
+    "ar": "إضافة موارد متوافقة",
+    "bn": "সামঞ্জস্যপূর্ণ রিসোর্স যোগ করুন",
+    "en": "Add compatible resources",
+    "es": "Agregar recursos compatibles",
+    "fr": "Ajouter des ressources compatibles",
+    "hi": "संगत संसाधन जोड़ें",
+    "id": "Tambah sumber yang kompatibel",
+    "pt": "Adicionar recursos compatíveis",
+    "ur": "مطابقت رکھنے والے وسائل شامل کریں",
+    "zh-Hans": "添加兼容资源"
+  },
+  "Agregar seleccionados": {
+    "ar": "إضافة المحدد",
+    "bn": "নির্বাচিত যোগ করুন",
+    "en": "Add selected",
+    "es": "Agregar seleccionados",
+    "fr": "Ajouter la sélection",
+    "hi": "चयनित जोड़ें",
+    "id": "Tambahkan yang dipilih",
+    "pt": "Adicionar selecionados",
+    "ur": "منتخب شامل کریں",
+    "zh-Hans": "添加所选项"
+  },
   "Agregar ubicación actual": {
     "ar": "إضافة الموقع الحالي",
     "bn": "বর্তমান অবস্থান যোগ করুন",
@@ -574,6 +670,18 @@
     "pt": "Adicionar localização atual",
     "ur": "موجودہ مقام شامل کریں",
     "zh-Hans": "添加当前位置"
+  },
+  "Agrupar": {
+    "ar": "تجميع",
+    "bn": "দলবদ্ধ করুন",
+    "en": "Group",
+    "es": "Agrupar",
+    "fr": "Grouper",
+    "hi": "समूह",
+    "id": "Kelompokkan",
+    "pt": "Agrupar",
+    "ur": "گروہ بنائیں",
+    "zh-Hans": "分组"
   },
   "Ajustar al ancho": {
     "ar": "ملاءمة العرض",
@@ -598,6 +706,30 @@
     "pt": "Ao abrir o Libron-X",
     "ur": "Libron-X کھولنے پر",
     "zh-Hans": "打开 Libron-X 时"
+  },
+  "Algunos contextos no se muestran por el límite de presentación. Puedes abrir las coincidencias.": {
+    "ar": "بعض السياقات غير معروضة بسبب حد العرض. لا يزال بإمكانك فتح التطابقات.",
+    "bn": "প্রদর্শনের সীমার কারণে কিছু প্রসঙ্গ দেখানো হয়নি। তবুও মিলগুলো খুলতে পারবেন।",
+    "en": "Some contexts are hidden by the presentation limit. You can still open the matches.",
+    "es": "Algunos contextos no se muestran por el límite de presentación. Puedes abrir las coincidencias.",
+    "fr": "Certains contextes sont masqués par la limite de présentation. Vous pouvez toujours ouvrir les correspondances.",
+    "hi": "प्रस्तुति सीमा के कारण कुछ संदर्भ नहीं दिखते। आप मिलान खोल सकते हैं।",
+    "id": "Sebagian konteks tidak ditampilkan karena batas penyajian. Kecocokan tetap dapat dibuka.",
+    "pt": "Alguns contextos não são exibidos pelo limite de apresentação. Você ainda pode abrir as ocorrências.",
+    "ur": "نمائش کی حد کے باعث کچھ سیاق نہیں دکھائے گئے۔ مماثلتیں اب بھی کھولی جا سکتی ہیں۔",
+    "zh-Hans": "部分上下文因显示限额而未展示。仍可打开匹配结果。"
+  },
+  "Alternativos": {
+    "ar": "بدائل",
+    "bn": "বিকল্প",
+    "en": "Alternatives",
+    "es": "Alternativos",
+    "fr": "Alternatives",
+    "hi": "विकल्प",
+    "id": "Alternatif",
+    "pt": "Alternativos",
+    "ur": "متبادل",
+    "zh-Hans": "替代资源"
   },
   "Ampliación del mapa": {
     "ar": "تكبير الخريطة",
@@ -790,6 +922,42 @@
     "pt": "Artigos associados",
     "ur": "متعلقہ مضامین",
     "zh-Hans": "关联文章"
+  },
+  "Artículos máximos": {
+    "ar": "الحد الأقصى للمقالات",
+    "bn": "সর্বাধিক নিবন্ধ",
+    "en": "Maximum articles",
+    "es": "Artículos máximos",
+    "fr": "Articles maximum",
+    "hi": "अधिकतम लेख",
+    "id": "Artikel maksimum",
+    "pt": "Máximo de artigos",
+    "ur": "زیادہ سے زیادہ مضامین",
+    "zh-Hans": "最多文章数"
+  },
+  "Asociaciones de recursos": {
+    "ar": "ارتباطات الموارد",
+    "bn": "রিসোর্সের সংযোগ",
+    "en": "Resource associations",
+    "es": "Asociaciones de recursos",
+    "fr": "Associations de ressources",
+    "hi": "संसाधन संबंध",
+    "id": "Asosiasi sumber",
+    "pt": "Associações de recursos",
+    "ur": "وسائل کے تعلقات",
+    "zh-Hans": "资源关联"
+  },
+  "Asociaciones de recursos…": {
+    "ar": "ارتباطات الموارد…",
+    "bn": "রিসোর্সের সংযোগ…",
+    "en": "Resource associations…",
+    "es": "Asociaciones de recursos…",
+    "fr": "Associations de ressources…",
+    "hi": "संसाधन संबंध…",
+    "id": "Asosiasi sumber…",
+    "pt": "Associações de recursos…",
+    "ur": "وسائل کے تعلقات…",
+    "zh-Hans": "资源关联…"
   },
   "Aspecto": {
     "ar": "المظهر",
@@ -1259,6 +1427,30 @@
     "ur": "اس وسیلے میں تلاش کریں…",
     "zh-Hans": "在此资源中查找…"
   },
+  "Buscar referencias bíblicas": {
+    "ar": "البحث عن مراجع الكتاب المقدس",
+    "bn": "বাইবেলের উল্লেখ খুঁজুন",
+    "en": "Find Bible references",
+    "es": "Buscar referencias bíblicas",
+    "fr": "Rechercher des références bibliques",
+    "hi": "बाइबल संदर्भ खोजें",
+    "id": "Cari referensi Alkitab",
+    "pt": "Buscar referências bíblicas",
+    "ur": "بائبل کے حوالے تلاش کریں",
+    "zh-Hans": "查找圣经引用"
+  },
+  "Buscar referencias bíblicas…": {
+    "ar": "البحث عن مراجع الكتاب المقدس…",
+    "bn": "বাইবেলের উল্লেখ খুঁজুন…",
+    "en": "Find Bible references…",
+    "es": "Buscar referencias bíblicas…",
+    "fr": "Rechercher des références bibliques…",
+    "hi": "बाइबल संदर्भ खोजें…",
+    "id": "Cari referensi Alkitab…",
+    "pt": "Buscar referências bíblicas…",
+    "ur": "بائبل کے حوالے تلاش کریں…",
+    "zh-Hans": "查找圣经引用…"
+  },
   "Buscar siguiente": {
     "ar": "بحث عن التالي",
     "bn": "পরেরটি খুঁজুন",
@@ -1355,6 +1547,18 @@
     "ur": "تلاش منسوخ ہو گئی۔",
     "zh-Hans": "搜索已取消。"
   },
+  "Búsqueda cancelada; se conservan los resultados parciales.": {
+    "ar": "تم إلغاء البحث؛ تم الاحتفاظ بالنتائج الجزئية.",
+    "bn": "অনুসন্ধান বাতিল হয়েছে; আংশিক ফলাফল রাখা হয়েছে।",
+    "en": "Search cancelled; partial results are retained.",
+    "es": "Búsqueda cancelada; se conservan los resultados parciales.",
+    "fr": "Recherche annulée ; les résultats partiels sont conservés.",
+    "hi": "खोज रद्द हुई; आंशिक परिणाम सुरक्षित हैं।",
+    "id": "Pencarian dibatalkan; hasil sebagian dipertahankan.",
+    "pt": "Pesquisa cancelada; os resultados parciais foram mantidos.",
+    "ur": "تلاش منسوخ؛ جزوی نتائج محفوظ ہیں۔",
+    "zh-Hans": "搜索已取消；已保留部分结果。"
+  },
   "Búsqueda desde el otro extremo": {
     "ar": "البحث من الطرف الآخر",
     "bn": "অন্য প্রান্ত থেকে অনুসন্ধান",
@@ -1366,6 +1570,42 @@
     "pt": "Busca reiniciada no outro extremo",
     "ur": "دوسرے سرے سے تلاش",
     "zh-Hans": "已从另一端继续查找"
+  },
+  "Búsqueda pausada": {
+    "ar": "البحث متوقف مؤقتًا",
+    "bn": "অনুসন্ধান বিরত",
+    "en": "Search paused",
+    "es": "Búsqueda pausada",
+    "fr": "Recherche en pause",
+    "hi": "खोज रुकी हुई है",
+    "id": "Pencarian dijeda",
+    "pt": "Pesquisa pausada",
+    "ur": "تلاش عارضی طور پر رکی ہوئی ہے",
+    "zh-Hans": "搜索已暂停"
+  },
+  "Búsqueda terminada": {
+    "ar": "اكتمل البحث",
+    "bn": "অনুসন্ধান শেষ",
+    "en": "Search finished",
+    "es": "Búsqueda terminada",
+    "fr": "Recherche terminée",
+    "hi": "खोज पूरी हुई",
+    "id": "Pencarian selesai",
+    "pt": "Pesquisa concluída",
+    "ur": "تلاش مکمل ہوئی",
+    "zh-Hans": "搜索已完成"
+  },
+  "Búsqueda terminada con cobertura parcial": {
+    "ar": "انتهى البحث بتغطية جزئية",
+    "bn": "আংশিক আওতা নিয়ে অনুসন্ধান শেষ",
+    "en": "Search finished with partial coverage",
+    "es": "Búsqueda terminada con cobertura parcial",
+    "fr": "Recherche terminée avec une couverture partielle",
+    "hi": "खोज आंशिक कवरेज के साथ पूरी हुई",
+    "id": "Pencarian selesai dengan cakupan sebagian",
+    "pt": "Pesquisa concluída com cobertura parcial",
+    "ur": "تلاش جزوی تکمیل کے ساتھ ختم ہوئی",
+    "zh-Hans": "搜索已结束，覆盖不完整"
   },
   "Cambiar tamaño del panel": {
     "ar": "تغيير حجم اللوحة",
@@ -1391,6 +1631,42 @@
     "ur": "اس نسخے میں تبدیلیاں",
     "zh-Hans": "此版本的更改"
   },
+  "Cambios máximos": {
+    "ar": "الحد الأقصى للتعديلات",
+    "bn": "সর্বাধিক পরিবর্তন",
+    "en": "Maximum edits",
+    "es": "Cambios máximos",
+    "fr": "Modifications maximales",
+    "hi": "अधिकतम बदलाव",
+    "id": "Perubahan maksimum",
+    "pt": "Máximo de alterações",
+    "ur": "زیادہ سے زیادہ تبدیلیاں",
+    "zh-Hans": "最多改动次数"
+  },
+  "Cambios sin guardar": {
+    "ar": "تغييرات غير محفوظة",
+    "bn": "অসংরক্ষিত পরিবর্তন",
+    "en": "Unsaved changes",
+    "es": "Cambios sin guardar",
+    "fr": "Modifications non enregistrées",
+    "hi": "बिना सहेजे बदलाव",
+    "id": "Perubahan belum disimpan",
+    "pt": "Alterações não salvas",
+    "ur": "غیر محفوظ تبدیلیاں",
+    "zh-Hans": "未保存的更改"
+  },
+  "Campo": {
+    "ar": "الحقل",
+    "bn": "ক্ষেত্র",
+    "en": "Field",
+    "es": "Campo",
+    "fr": "Champ",
+    "hi": "फ़ील्ड",
+    "id": "Kolom",
+    "pt": "Campo",
+    "ur": "خانہ",
+    "zh-Hans": "字段"
+  },
   "Canal de actualizaciones": {
     "ar": "قناة التحديث",
     "bn": "আপডেট চ্যানেল",
@@ -1402,6 +1678,18 @@
     "pt": "Canal de atualizações",
     "ur": "اپ ڈیٹ چینل",
     "zh-Hans": "更新通道"
+  },
+  "Cancelando búsqueda…": {
+    "ar": "جارٍ إلغاء البحث…",
+    "bn": "অনুসন্ধান বাতিল হচ্ছে…",
+    "en": "Cancelling search…",
+    "es": "Cancelando búsqueda…",
+    "fr": "Annulation de la recherche…",
+    "hi": "खोज रद्द हो रही है…",
+    "id": "Membatalkan pencarian…",
+    "pt": "Cancelando pesquisa…",
+    "ur": "تلاش منسوخ ہو رہی ہے…",
+    "zh-Hans": "正在取消搜索…"
   },
   "Cancelar": {
     "ar": "إلغاء",
@@ -1619,6 +1907,18 @@
     "ur": "کتابی حوالہ",
     "zh-Hans": "书目信息"
   },
+  "Citas": {
+    "ar": "الاقتباسات",
+    "bn": "উদ্ধৃতি",
+    "en": "Quotations",
+    "es": "Citas",
+    "fr": "Citations",
+    "hi": "उद्धरण",
+    "id": "Kutipan",
+    "pt": "Citações",
+    "ur": "اقتباسات",
+    "zh-Hans": "引文"
+  },
   "Claro": {
     "ar": "فاتح",
     "bn": "হালকা",
@@ -1642,6 +1942,18 @@
     "pt": "Abrangência bíblica",
     "ur": "بائبلی دائرہ",
     "zh-Hans": "圣经范围"
+  },
+  "Coincidencia": {
+    "ar": "المطابقة",
+    "bn": "মিল",
+    "en": "Match",
+    "es": "Coincidencia",
+    "fr": "Correspondance",
+    "hi": "मिलान",
+    "id": "Pencocokan",
+    "pt": "Correspondência",
+    "ur": "مطابقت",
+    "zh-Hans": "匹配"
   },
   "Coincidencia anterior": {
     "ar": "التطابق السابق",
@@ -1691,6 +2003,30 @@
     "ur": "اگلا مماثل نتیجہ (⌘G)",
     "zh-Hans": "下一个匹配项 (⌘G)"
   },
+  "Coincidencias máximas": {
+    "ar": "الحد الأقصى للتطابقات",
+    "bn": "সর্বাধিক মিল",
+    "en": "Maximum matches",
+    "es": "Coincidencias máximas",
+    "fr": "Correspondances maximum",
+    "hi": "अधिकतम मिलान",
+    "id": "Kecocokan maksimum",
+    "pt": "Máximo de ocorrências",
+    "ur": "زیادہ سے زیادہ مماثلتیں",
+    "zh-Hans": "最多匹配数"
+  },
+  "Coincidencias omitidas por el límite": {
+    "ar": "تطابقات محذوفة بسبب الحد",
+    "bn": "সীমার কারণে বাদ দেওয়া মিল",
+    "en": "Matches omitted by the limit",
+    "es": "Coincidencias omitidas por el límite",
+    "fr": "Correspondances omises par la limite",
+    "hi": "सीमा के कारण छोड़े गए मिलान",
+    "id": "Kecocokan dihilangkan karena batas",
+    "pt": "Ocorrências omitidas pelo limite",
+    "ur": "حد کے باعث چھوڑی گئی مماثلتیں",
+    "zh-Hans": "因限额而省略的匹配"
+  },
   "Colaboradores": {
     "ar": "المساهمون",
     "bn": "সহযোগী",
@@ -1702,6 +2038,18 @@
     "pt": "Colaboradores",
     "ur": "معاونین",
     "zh-Hans": "贡献者"
+  },
+  "Colecciones": {
+    "ar": "مجموعات",
+    "bn": "সংগ্রহ",
+    "en": "Collections",
+    "es": "Colecciones",
+    "fr": "Collections",
+    "hi": "संग्रह",
+    "id": "Koleksi",
+    "pt": "Coleções",
+    "ur": "مجموعے",
+    "zh-Hans": "收藏集"
   },
   "Colección": {
     "ar": "المجموعة المنشورة",
@@ -1775,6 +2123,18 @@
     "ur": "بلڈ",
     "zh-Hans": "构建版本"
   },
+  "Complementarios": {
+    "ar": "موارد مكملة",
+    "bn": "পরিপূরক",
+    "en": "Companions",
+    "es": "Complementarios",
+    "fr": "Compléments",
+    "hi": "पूरक",
+    "id": "Pendamping",
+    "pt": "Complementares",
+    "ur": "تکمیلی",
+    "zh-Hans": "配套资源"
+  },
   "Concordancia": {
     "ar": "فهرس ألفاظ",
     "bn": "শব্দসূচি",
@@ -1786,6 +2146,18 @@
     "pt": "Concordância",
     "ur": "کشف الالفاظ",
     "zh-Hans": "经文索引"
+  },
+  "Condición": {
+    "ar": "الشرط",
+    "bn": "শর্ত",
+    "en": "Condition",
+    "es": "Condición",
+    "fr": "Condition",
+    "hi": "शर्त",
+    "id": "Kondisi",
+    "pt": "Condição",
+    "ur": "شرط",
+    "zh-Hans": "条件"
   },
   "Configurar grupos…": {
     "ar": "إعداد المجموعات…",
@@ -1834,6 +2206,54 @@
     "pt": "Conteúdo nativo verificado",
     "ur": "تصدیق شدہ مقامی مواد",
     "zh-Hans": "已验证的原生内容"
+  },
+  "Contexto": {
+    "ar": "السياق",
+    "bn": "প্রসঙ্গ",
+    "en": "Context",
+    "es": "Contexto",
+    "fr": "Contexte",
+    "hi": "संदर्भ",
+    "id": "Konteks",
+    "pt": "Contexto",
+    "ur": "سیاق",
+    "zh-Hans": "上下文"
+  },
+  "Contexto alineado": {
+    "ar": "سياق بمحاذاة",
+    "bn": "সারিবদ্ধ প্রসঙ্গ",
+    "en": "Aligned context",
+    "es": "Contexto alineado",
+    "fr": "Contexte aligné",
+    "hi": "संरेखित संदर्भ",
+    "id": "Konteks sejajar",
+    "pt": "Contexto alinhado",
+    "ur": "ہم ترتیب سیاق",
+    "zh-Hans": "对齐上下文"
+  },
+  "Contexto no disponible": {
+    "ar": "السياق غير متاح",
+    "bn": "প্রসঙ্গ পাওয়া যাচ্ছে না",
+    "en": "Context unavailable",
+    "es": "Contexto no disponible",
+    "fr": "Contexte indisponible",
+    "hi": "संदर्भ उपलब्ध नहीं",
+    "id": "Konteks tidak tersedia",
+    "pt": "Contexto indisponível",
+    "ur": "سیاق دستیاب نہیں",
+    "zh-Hans": "上下文不可用"
+  },
+  "Contiene": {
+    "ar": "يحتوي على",
+    "bn": "অন্তর্ভুক্ত করে",
+    "en": "Contains",
+    "es": "Contiene",
+    "fr": "Contient",
+    "hi": "शामिल है",
+    "id": "Mengandung",
+    "pt": "Contém",
+    "ur": "شامل ہے",
+    "zh-Hans": "包含"
   },
   "Continuar desde el inicio o el final": {
     "ar": "متابعة من البداية أو النهاية",
@@ -2003,6 +2423,30 @@
     "ur": "بائبل منتخب کرنے کے لیے گروپ بنائیں۔",
     "zh-Hans": "创建分组以选择圣经。"
   },
+  "Crea una asociación para elegir recursos alternativos o complementarios.": {
+    "ar": "أنشئ ارتباطًا لاختيار موارد بديلة أو مكملة.",
+    "bn": "বিকল্প বা পরিপূরক রিসোর্স বেছে নিতে একটি সংযোগ তৈরি করুন।",
+    "en": "Create an association to choose alternative or companion resources.",
+    "es": "Crea una asociación para elegir recursos alternativos o complementarios.",
+    "fr": "Créez une association pour choisir des ressources alternatives ou complémentaires.",
+    "hi": "वैकल्पिक या पूरक संसाधन चुनने के लिए संबंध बनाएँ।",
+    "id": "Buat asosiasi untuk memilih sumber alternatif atau pendamping.",
+    "pt": "Crie uma associação para escolher recursos alternativos ou complementares.",
+    "ur": "متبادل یا تکمیلی وسائل منتخب کرنے کے لیے تعلق بنائیں۔",
+    "zh-Hans": "创建关联以选择替代或配套资源。"
+  },
+  "Crea una colección para elegir sus recursos.": {
+    "ar": "أنشئ مجموعة لاختيار مواردها.",
+    "bn": "রিসোর্স বেছে নিতে একটি সংগ্রহ তৈরি করুন।",
+    "en": "Create a collection to choose its resources.",
+    "es": "Crea una colección para elegir sus recursos.",
+    "fr": "Créez une collection pour choisir ses ressources.",
+    "hi": "संसाधन चुनने के लिए संग्रह बनाएँ।",
+    "id": "Buat koleksi untuk memilih sumber dayanya.",
+    "pt": "Crie uma coleção para escolher seus recursos.",
+    "ur": "وسائل منتخب کرنے کے لیے ایک مجموعہ بنائیں۔",
+    "zh-Hans": "创建收藏集以选择其资源。"
+  },
   "Crear una nota editable con este texto": {
     "ar": "إنشاء ملاحظة قابلة للتحرير من هذا النص",
     "bn": "এই পাঠ দিয়ে সম্পাদনযোগ্য টীকা তৈরি করুন",
@@ -2039,6 +2483,42 @@
     "ur": "چار خانوں کی گرڈ",
     "zh-Hans": "四宫格"
   },
+  "Cualquier condición": {
+    "ar": "أي شرط",
+    "bn": "যেকোনো শর্ত",
+    "en": "Any condition",
+    "es": "Cualquier condición",
+    "fr": "Une condition au choix",
+    "hi": "कोई भी शर्त",
+    "id": "Salah satu kondisi",
+    "pt": "Qualquer condição",
+    "ur": "کوئی بھی شرط",
+    "zh-Hans": "任一条件"
+  },
+  "Cuerpo": {
+    "ar": "المتن",
+    "bn": "মূল পাঠ",
+    "en": "Body",
+    "es": "Cuerpo",
+    "fr": "Corps",
+    "hi": "मुख्य पाठ",
+    "id": "Isi",
+    "pt": "Corpo",
+    "ur": "متن",
+    "zh-Hans": "正文"
+  },
+  "Código de idioma (opcional)": {
+    "ar": "رمز اللغة (اختياري)",
+    "bn": "ভাষার কোড (ঐচ্ছিক)",
+    "en": "Language code (optional)",
+    "es": "Código de idioma (opcional)",
+    "fr": "Code de langue (facultatif)",
+    "hi": "भाषा कोड (वैकल्पिक)",
+    "id": "Kode bahasa (opsional)",
+    "pt": "Código de idioma (opcional)",
+    "ur": "زبان کا کوڈ (اختیاری)",
+    "zh-Hans": "语言代码（可选）"
+  },
   "Definiciones y sinónimos": {
     "ar": "تعريفات ومترادفات",
     "bn": "সংজ্ঞা ও সমার্থক শব্দ",
@@ -2074,6 +2554,30 @@
     "pt": "Do original",
     "ur": "اصل سے",
     "zh-Hans": "遵循原文"
+  },
+  "Demasiadas asociaciones de recursos.": {
+    "ar": "عدد ارتباطات الموارد كبير جدًا.",
+    "bn": "রিসোর্সের সংযোগ অনেক বেশি।",
+    "en": "Too many resource associations.",
+    "es": "Demasiadas asociaciones de recursos.",
+    "fr": "Trop d’associations de ressources.",
+    "hi": "संसाधन संबंध बहुत अधिक हैं।",
+    "id": "Terlalu banyak asosiasi sumber.",
+    "pt": "Há associações de recursos demais.",
+    "ur": "وسائل کے تعلقات بہت زیادہ ہیں۔",
+    "zh-Hans": "资源关联过多。"
+  },
+  "Demasiados recursos en la asociación.": {
+    "ar": "عدد الموارد في الارتباط كبير جدًا.",
+    "bn": "সংযোগে রিসোর্স অনেক বেশি।",
+    "en": "Too many resources in the association.",
+    "es": "Demasiados recursos en la asociación.",
+    "fr": "Trop de ressources dans l’association.",
+    "hi": "संबंध में संसाधन बहुत अधिक हैं।",
+    "id": "Terlalu banyak sumber dalam asosiasi.",
+    "pt": "Há recursos demais na associação.",
+    "ur": "تعلق میں وسائل بہت زیادہ ہیں۔",
+    "zh-Hans": "关联中的资源过多。"
   },
   "Derecha": {
     "ar": "يمين",
@@ -2146,6 +2650,18 @@
     "pt": "Baixar e instalar automaticamente ao sair",
     "ur": "خودکار ڈاؤن لوڈ اور بند کرتے وقت انسٹال کریں",
     "zh-Hans": "自动下载并在退出时安装"
+  },
+  "Desmarcar todos": {
+    "ar": "إلغاء تحديد الكل",
+    "bn": "সব নির্বাচন বাতিল করুন",
+    "en": "Deselect all",
+    "es": "Desmarcar todos",
+    "fr": "Tout désélectionner",
+    "hi": "सभी अचयनित करें",
+    "id": "Batalkan semua pilihan",
+    "pt": "Desmarcar todos",
+    "ur": "سب غیر منتخب کریں",
+    "zh-Hans": "全部取消选择"
   },
   "Despliega Cambios de esta versión para leer las notas incluidas en la versión instalada. Funcionan sin conexión y describen esa versión, en lugar de la última publicada en GitHub.": {
     "ar": "وسّع التغييرات في هذا الإصدار لقراءة الملاحظات المرفقة بالإصدار المثبت. تعمل دون اتصال وتصف نسختك، لا أحدث إصدار على GitHub.",
@@ -2447,6 +2963,18 @@
     "ur": "مطالعے کی دستاویز…",
     "zh-Hans": "研读文档…"
   },
+  "Documento personal": {
+    "ar": "مستند شخصي",
+    "bn": "ব্যক্তিগত নথি",
+    "en": "Personal document",
+    "es": "Documento personal",
+    "fr": "Document personnel",
+    "hi": "व्यक्तिगत दस्तावेज़",
+    "id": "Dokumen pribadi",
+    "pt": "Documento pessoal",
+    "ur": "ذاتی دستاویز",
+    "zh-Hans": "个人文档"
+  },
   "Documentos de estudio": {
     "ar": "مستندات الدراسة",
     "bn": "অধ্যয়নের নথি",
@@ -2470,6 +2998,18 @@
     "pt": "Documentos de estudo…",
     "ur": "مطالعے کی دستاویزات…",
     "zh-Hans": "研读文档…"
+  },
+  "Documentos personales": {
+    "ar": "المستندات الشخصية",
+    "bn": "ব্যক্তিগত নথি",
+    "en": "Personal documents",
+    "es": "Documentos personales",
+    "fr": "Documents personnels",
+    "hi": "व्यक्तिगत दस्तावेज़",
+    "id": "Dokumen pribadi",
+    "pt": "Documentos pessoais",
+    "ur": "ذاتی دستاویزات",
+    "zh-Hans": "个人文档"
   },
   "Dos a la izquierda y una a la derecha": {
     "ar": "اثنتان يسارًا وواحدة يمينًا",
@@ -2506,6 +3046,18 @@
     "pt": "Duplicar leitura",
     "ur": "مطالعہ کی نقل بنائیں",
     "zh-Hans": "复制阅读窗口"
+  },
+  "Duración activa (s)": {
+    "ar": "المدة النشطة (ث)",
+    "bn": "সক্রিয় সময় (সে)",
+    "en": "Active duration (s)",
+    "es": "Duración activa (s)",
+    "fr": "Durée active (s)",
+    "hi": "सक्रिय अवधि (सेकंड)",
+    "id": "Durasi aktif (dtk)",
+    "pt": "Duração ativa (s)",
+    "ur": "فعال دورانیہ (سیکنڈ)",
+    "zh-Hans": "活动时长（秒）"
   },
   "Edición": {
     "ar": "الطبعة",
@@ -2615,6 +3167,30 @@
     "ur": "اس پسندیدہ کا وسیلہ کھلی لائبریری میں دستیاب نہیں۔",
     "zh-Hans": "当前书库中没有此收藏对应的资源。"
   },
+  "El recurso del resultado ya no conserva su identidad o disponibilidad.": {
+    "ar": "تغيرت هوية مورد النتيجة أو لم يعد متاحًا.",
+    "bn": "ফলাফলের সম্পদের পরিচয় বদলেছে বা সেটি আর উপলব্ধ নেই।",
+    "en": "The result resource has changed identity or is no longer available.",
+    "es": "El recurso del resultado ya no conserva su identidad o disponibilidad.",
+    "fr": "La ressource du résultat a changé d’identité ou n’est plus disponible.",
+    "hi": "परिणाम के संसाधन की पहचान बदल गई है या वह उपलब्ध नहीं है।",
+    "id": "Sumber hasil telah berubah identitas atau tidak lagi tersedia.",
+    "pt": "O recurso do resultado mudou de identidade ou não está mais disponível.",
+    "ur": "نتیجے کے وسیلے کی شناخت بدل گئی ہے یا وہ اب دستیاب نہیں۔",
+    "zh-Hans": "结果对应的资源标识已更改或资源不再可用。"
+  },
+  "El recurso no es compatible con esta asociación.": {
+    "ar": "المورد غير متوافق مع هذا الارتباط.",
+    "bn": "রিসোর্সটি এই সংযোগের সঙ্গে সামঞ্জস্যপূর্ণ নয়।",
+    "en": "The resource is not compatible with this association.",
+    "es": "El recurso no es compatible con esta asociación.",
+    "fr": "La ressource n’est pas compatible avec cette association.",
+    "hi": "संसाधन इस संबंध के साथ संगत नहीं है।",
+    "id": "Sumber tidak kompatibel dengan asosiasi ini.",
+    "pt": "O recurso não é compatível com esta associação.",
+    "ur": "وسیلہ اس تعلق کے ساتھ مطابقت نہیں رکھتا۔",
+    "zh-Hans": "此资源与该关联不兼容。"
+  },
   "El servicio original de desbloqueo de licencias todavía no tiene una implementación verificada.": {
     "ar": "لا تتوفر بعد نسخة مُتحقّق منها لخدمة فتح التراخيص الأصلية.",
     "bn": "মূল লাইসেন্স খোলার পরিষেবার যাচাইকৃত বাস্তবায়ন এখনও নেই।",
@@ -2626,6 +3202,42 @@
     "pt": "O serviço original de desbloqueio de licenças ainda não tem uma implementação verificada.",
     "ur": "اصل لائسنس کھولنے کی خدمت کا تصدیق شدہ نفاذ ابھی دستیاب نہیں۔",
     "zh-Hans": "原版许可证解锁服务尚无经过验证的实现。"
+  },
+  "El tipo, idioma o serie de la asociación no es válido.": {
+    "ar": "نوع الارتباط أو لغته أو سلسلته غير صالح.",
+    "bn": "সংযোগের ধরন, ভাষা বা সিরিজ বৈধ নয়।",
+    "en": "The association type, language or series is invalid.",
+    "es": "El tipo, idioma o serie de la asociación no es válido.",
+    "fr": "Le type, la langue ou la série de l’association est invalide.",
+    "hi": "संबंध का प्रकार, भाषा या श्रृंखला अमान्य है।",
+    "id": "Jenis, bahasa, atau seri asosiasi tidak valid.",
+    "pt": "O tipo, idioma ou série da associação é inválido.",
+    "ur": "تعلق کی قسم، زبان یا سلسلہ درست نہیں ہے۔",
+    "zh-Hans": "关联的类型、语言或系列无效。"
+  },
+  "El ámbito contiene identidades de recurso incompatibles.": {
+    "ar": "يحتوي النطاق على هويات موارد متعارضة.",
+    "bn": "পরিসরে সম্পদের পরিচয়ে দ্বন্দ্ব রয়েছে।",
+    "en": "The scope contains conflicting resource identities.",
+    "es": "El ámbito contiene identidades de recurso incompatibles.",
+    "fr": "Le périmètre contient des identités de ressources incompatibles.",
+    "hi": "दायरे में संसाधनों की पहचान में टकराव है।",
+    "id": "Lingkup berisi identitas sumber yang bertentangan.",
+    "pt": "O âmbito contém identidades de recursos incompatíveis.",
+    "ur": "دائرے میں وسائل کی شناخت متصادم ہے۔",
+    "zh-Hans": "范围包含相互冲突的资源标识。"
+  },
+  "El ámbito no contiene recursos disponibles para buscar.": {
+    "ar": "لا يحتوي النطاق على موارد متاحة للبحث.",
+    "bn": "পরিসরে অনুসন্ধানের জন্য কোনো সম্পদ উপলব্ধ নেই।",
+    "en": "The scope contains no available resources to search.",
+    "es": "El ámbito no contiene recursos disponibles para buscar.",
+    "fr": "Le périmètre ne contient aucune ressource disponible pour la recherche.",
+    "hi": "दायरे में खोजने योग्य संसाधन उपलब्ध नहीं हैं।",
+    "id": "Lingkup tidak berisi sumber yang tersedia untuk dicari.",
+    "pt": "O âmbito não contém recursos disponíveis para buscar.",
+    "ur": "دائرے میں تلاش کے لیے کوئی وسیلہ دستیاب نہیں۔",
+    "zh-Hans": "范围中没有可供搜索的资源。"
   },
   "El área de trabajo se cargó, pero no se pudo actualizar la lista de recientes: {error}": {
     "ar": "حُمّلت مساحة العمل، لكن تعذر تحديث القائمة الأخيرة: {error}",
@@ -2771,6 +3383,30 @@
     "ur": "سسٹم کا فونٹ منتخب کریں یا اصل انداز برقرار رکھنے کے لیے طے شدہ اختیار رکھیں۔ متبادل فونٹ Times New Roman ہے۔",
     "zh-Hans": "选择系统字体，或保留默认选项以保留原始样式。备用字体为 Times New Roman。"
   },
+  "Eliminar asociación": {
+    "ar": "حذف الارتباط",
+    "bn": "সংযোগ মুছুন",
+    "en": "Delete association",
+    "es": "Eliminar asociación",
+    "fr": "Supprimer l’association",
+    "hi": "संबंध हटाएँ",
+    "id": "Hapus asosiasi",
+    "pt": "Excluir associação",
+    "ur": "تعلق حذف کریں",
+    "zh-Hans": "删除关联"
+  },
+  "Eliminar colección": {
+    "ar": "حذف المجموعة",
+    "bn": "সংগ্রহ মুছুন",
+    "en": "Delete collection",
+    "es": "Eliminar colección",
+    "fr": "Supprimer la collection",
+    "hi": "संग्रह हटाएँ",
+    "id": "Hapus koleksi",
+    "pt": "Excluir coleção",
+    "ur": "مجموعہ حذف کریں",
+    "zh-Hans": "删除收藏集"
+  },
   "Eliminar favorito": {
     "ar": "حذف المفضلة",
     "bn": "পছন্দের থেকে সরান",
@@ -2807,6 +3443,66 @@
     "ur": "آیت ہٹائیں",
     "zh-Hans": "移除经文"
   },
+  "Empieza por": {
+    "ar": "يبدأ بـ",
+    "bn": "দিয়ে শুরু",
+    "en": "Starts with",
+    "es": "Empieza por",
+    "fr": "Commence par",
+    "hi": "से शुरू होता है",
+    "id": "Diawali dengan",
+    "pt": "Começa com",
+    "ur": "سے شروع ہوتا ہے",
+    "zh-Hans": "开头为"
+  },
+  "Encabezados": {
+    "ar": "العناوين",
+    "bn": "শিরোনাম",
+    "en": "Headings",
+    "es": "Encabezados",
+    "fr": "En-têtes",
+    "hi": "शीर्षक",
+    "id": "Judul bagian",
+    "pt": "Cabeçalhos",
+    "ur": "سرخیاں",
+    "zh-Hans": "标题"
+  },
+  "Encuentra menciones explícitas de pasajes. Una edición entre paréntesis limita la búsqueda a citas que indican esa edición.": {
+    "ar": "ابحث عن إشارات صريحة إلى المقاطع. يؤدي وضع طبعة بين قوسين إلى قصر البحث على الاقتباسات التي تسمي تلك الطبعة.",
+    "bn": "পদের স্পষ্ট উল্লেখ খুঁজুন। বন্ধনীতে সংস্করণ দিলে অনুসন্ধান কেবল সেই সংস্করণের নাম দেওয়া উদ্ধৃতিতে সীমিত থাকে।",
+    "en": "Find explicit mentions of passages. An edition in parentheses limits the search to citations naming that edition.",
+    "es": "Encuentra menciones explícitas de pasajes. Una edición entre paréntesis limita la búsqueda a citas que indican esa edición.",
+    "fr": "Recherchez les mentions explicites de passages. Une édition entre parenthèses limite la recherche aux citations qui la précisent.",
+    "hi": "पदों के स्पष्ट उल्लेख खोजें। कोष्ठक में संस्करण देने पर केवल उसी संस्करण का नाम बताने वाले उद्धरण खोजे जाते हैं।",
+    "id": "Temukan penyebutan ayat secara eksplisit. Edisi dalam tanda kurung membatasi pencarian pada kutipan yang menyebut edisi tersebut.",
+    "pt": "Encontre menções explícitas de passagens. Uma edição entre parênteses limita a busca às citações que indicam essa edição.",
+    "ur": "عبارات کے واضح حوالے تلاش کریں۔ قوسین میں ایڈیشن دینے سے تلاش صرف اسی ایڈیشن کا نام بتانے والے حوالوں تک محدود رہتی ہے۔",
+    "zh-Hans": "查找明确的经文引用。在括号中指定版本后，仅搜索标明该版本的引用。"
+  },
+  "Enlaces clave": {
+    "ar": "روابط رئيسية",
+    "bn": "মূল লিংক",
+    "en": "Key links",
+    "es": "Enlaces clave",
+    "fr": "Liens clés",
+    "hi": "मुख्य लिंक",
+    "id": "Tautan utama",
+    "pt": "Links-chave",
+    "ur": "کلیدی روابط",
+    "zh-Hans": "关键链接"
+  },
+  "Enlaces clave…": {
+    "ar": "روابط رئيسية…",
+    "bn": "মূল লিংক…",
+    "en": "Key links…",
+    "es": "Enlaces clave…",
+    "fr": "Liens clés…",
+    "hi": "मुख्य लिंक…",
+    "id": "Tautan utama…",
+    "pt": "Links-chave…",
+    "ur": "کلیدی روابط…",
+    "zh-Hans": "关键链接…"
+  },
   "Error de búsqueda": {
     "ar": "خطأ في البحث",
     "bn": "অনুসন্ধানে ত্রুটি",
@@ -2830,6 +3526,18 @@
     "pt": "Erro de leitura",
     "ur": "مطالعے کی خرابی",
     "zh-Hans": "阅读错误"
+  },
+  "Es igual a": {
+    "ar": "يساوي",
+    "bn": "সমান",
+    "en": "Equals",
+    "es": "Es igual a",
+    "fr": "Est égal à",
+    "hi": "बराबर है",
+    "id": "Sama dengan",
+    "pt": "É igual a",
+    "ur": "برابر ہے",
+    "zh-Hans": "等于"
   },
   "Escribe un número de artículo válido.": {
     "ar": "أدخل رقم مقال صالحًا.",
@@ -2866,6 +3574,18 @@
     "pt": "Área de trabalho",
     "ur": "کام کی جگہ",
     "zh-Hans": "工作区"
+  },
+  "Esperando el punto de pausa…": {
+    "ar": "في انتظار نقطة الإيقاف المؤقت…",
+    "bn": "বিরতির পর্যায়ের অপেক্ষা…",
+    "en": "Waiting for a pause point…",
+    "es": "Esperando el punto de pausa…",
+    "fr": "En attente d’un point de pause…",
+    "hi": "विराम बिंदु की प्रतीक्षा…",
+    "id": "Menunggu titik jeda…",
+    "pt": "Aguardando um ponto de pausa…",
+    "ur": "وقفے کے مقام کا انتظار…",
+    "zh-Hans": "正在等待暂停点…"
   },
   "Esquina inferior derecha": {
     "ar": "الزاوية السفلية اليمنى",
@@ -2927,6 +3647,18 @@
     "ur": "کونے",
     "zh-Hans": "四角"
   },
+  "Esta colección es manual.": {
+    "ar": "هذه المجموعة يدوية.",
+    "bn": "এই সংগ্রহটি ম্যানুয়াল।",
+    "en": "This collection is manual.",
+    "es": "Esta colección es manual.",
+    "fr": "Cette collection est manuelle.",
+    "hi": "यह संग्रह मैन्युअल है।",
+    "id": "Koleksi ini bersifat manual.",
+    "pt": "Esta coleção é manual.",
+    "ur": "یہ مجموعہ دستی ہے۔",
+    "zh-Hans": "此集合为手动集合。"
+  },
   "Esta ventana muestra una Biblia. Escribe una referencia y pulsa Intro, o elige libro y capítulo. Las flechas junto al icono de Biblia cambian de versión conservando el versículo; el icono permite elegir una Biblia o cambiar de grupo. Usa el zoom para ajustar el texto y el menú de acciones para las demás herramientas.": {
     "ar": "تعرض هذه النافذة الكتاب المقدس. اكتب مرجعًا واضغط على مفتاح الإدخال، أو اختر السفر والإصحاح. تغيّر الأسهم بجانب أيقونة الكتاب المقدس الترجمة مع الاحتفاظ بالآية؛ وتتيح الأيقونة اختيار ترجمة أو تغيير المجموعة. استخدم التكبير لضبط النص وقائمة الإجراءات لبقية الأدوات.",
     "bn": "এই উইন্ডোতে বাইবেল দেখানো হয়। একটি রেফারেন্স লিখে এন্টার চাপুন, অথবা বই ও অধ্যায় বেছে নিন। বাইবেলের আইকনের পাশের তীর দিয়ে একই পদ রেখে সংস্করণ বদলানো যায়; আইকন থেকে বাইবেল বা দল বেছে নিতে পারেন। লেখার আকারের জন্য জুম এবং অন্য সরঞ্জামের জন্য কাজের মেনু ব্যবহার করুন।",
@@ -2987,6 +3719,18 @@
     "ur": "بائبلی مطالعہ",
     "zh-Hans": "圣经研究"
   },
+  "Etiqueta": {
+    "ar": "الوسم",
+    "bn": "ট্যাগ",
+    "en": "Tag",
+    "es": "Etiqueta",
+    "fr": "Étiquette",
+    "hi": "टैग",
+    "id": "Tag",
+    "pt": "Etiqueta",
+    "ur": "ٹیگ",
+    "zh-Hans": "标签"
+  },
   "Etiquetas": {
     "ar": "الوسوم",
     "bn": "ট্যাগ",
@@ -2998,6 +3742,18 @@
     "pt": "Etiquetas",
     "ur": "ٹیگ",
     "zh-Hans": "标签"
+  },
+  "Exacta": {
+    "ar": "دقيقة",
+    "bn": "নির্ভুল",
+    "en": "Exact",
+    "es": "Exacta",
+    "fr": "Exacte",
+    "hi": "सटीक",
+    "id": "Persis",
+    "pt": "Exata",
+    "ur": "عین مطابق",
+    "zh-Hans": "精确"
   },
   "Explorador temático": {
     "ar": "متصفح المواضيع",
@@ -3083,6 +3839,30 @@
     "ur": "اس کے مطابق چھانٹیں",
     "zh-Hans": "筛选依据"
   },
+  "Filtrar recursos": {
+    "ar": "تصفية الموارد",
+    "bn": "রিসোর্স ছাঁকুন",
+    "en": "Filter resources",
+    "es": "Filtrar recursos",
+    "fr": "Filtrer les ressources",
+    "hi": "संसाधन फ़िल्टर करें",
+    "id": "Filter sumber",
+    "pt": "Filtrar recursos",
+    "ur": "وسائل چھانٹیں",
+    "zh-Hans": "筛选资源"
+  },
+  "Filtrar recursos de la selección": {
+    "ar": "تصفية موارد التحديد",
+    "bn": "নির্বাচনের সম্পদ ছাঁকুন",
+    "en": "Filter selection resources",
+    "es": "Filtrar recursos de la selección",
+    "fr": "Filtrer les ressources de la sélection",
+    "hi": "चयन के संसाधन फ़िल्टर करें",
+    "id": "Saring sumber pilihan",
+    "pt": "Filtrar recursos da seleção",
+    "ur": "انتخاب کے وسائل چھانٹیں",
+    "zh-Hans": "筛选待选资源"
+  },
   "Final": {
     "ar": "النهاية",
     "bn": "শেষ",
@@ -3130,6 +3910,42 @@
     "pt": "Formato original",
     "ur": "اصل فارمیٹ",
     "zh-Hans": "原始格式"
+  },
+  "Frase aproximada": {
+    "ar": "عبارة تقريبية",
+    "bn": "আনুমানিক বাক্যাংশ",
+    "en": "Approximate phrase",
+    "es": "Frase aproximada",
+    "fr": "Expression approximative",
+    "hi": "अनुमानित वाक्यांश",
+    "id": "Frasa perkiraan",
+    "pt": "Frase aproximada",
+    "ur": "تقریبی فقرہ",
+    "zh-Hans": "近似短语"
+  },
+  "Frase literal": {
+    "ar": "عبارة حرفية",
+    "bn": "আক্ষরিক বাক্যাংশ",
+    "en": "Literal phrase",
+    "es": "Frase literal",
+    "fr": "Expression littérale",
+    "hi": "शाब्दिक वाक्यांश",
+    "id": "Frasa literal",
+    "pt": "Frase literal",
+    "ur": "لفظی فقرہ",
+    "zh-Hans": "字面短语"
+  },
+  "Frase literal, sin operadores: inserciones, eliminaciones o sustituciones de caracteres. No reordena palabras.": {
+    "ar": "عبارة حرفية بدون عوامل تشغيل: إدراج أحرف أو حذفها أو استبدالها. لا يتغير ترتيب الكلمات.",
+    "bn": "অপারেটর ছাড়া আক্ষরিক বাক্যাংশ: অক্ষর যোগ, মুছে ফেলা বা প্রতিস্থাপন। শব্দের ক্রম বদলায় না।",
+    "en": "Literal phrase, without operators: character insertions, deletions or substitutions. Words are not reordered.",
+    "es": "Frase literal, sin operadores: inserciones, eliminaciones o sustituciones de caracteres. No reordena palabras.",
+    "fr": "Expression littérale, sans opérateurs : insertion, suppression ou substitution de caractères. Les mots ne sont pas réordonnés.",
+    "hi": "बिना ऑपरेटर का शाब्दिक वाक्यांश: अक्षर जोड़ना, हटाना या बदलना। शब्दों का क्रम नहीं बदलता।",
+    "id": "Frasa literal tanpa operator: penyisipan, penghapusan, atau penggantian karakter. Urutan kata tidak diubah.",
+    "pt": "Frase literal, sem operadores: inserções, exclusões ou substituições de caracteres. Não reordena palavras.",
+    "ur": "آپریٹر کے بغیر لفظی فقرہ: حروف کا اضافہ، حذف یا تبدیلی۔ الفاظ کی ترتیب نہیں بدلتی۔",
+    "zh-Hans": "字面短语，不使用运算符：允许插入、删除或替换字符，不调整词序。"
   },
   "Fuente": {
     "ar": "الخط",
@@ -3263,6 +4079,18 @@
     "ur": "بعد میں واپس آنے کے لیے موجودہ جگہ کو پسندیدہ میں محفوظ کریں۔ پسندیدہ کو فولڈروں میں ترتیب دیں۔ کھولنے پر محفوظ وسیلہ اور جگہ کھلتی ہے۔",
     "zh-Hans": "将当前阅读位置保存为收藏以便返回。可使用文件夹整理收藏。打开收藏会跳转到保存的资源和位置。"
   },
+  "Guarda los cambios antes de agregar recursos.": {
+    "ar": "احفظ التغييرات قبل إضافة الموارد.",
+    "bn": "রিসোর্স যোগ করার আগে পরিবর্তন সংরক্ষণ করুন।",
+    "en": "Save changes before adding resources.",
+    "es": "Guarda los cambios antes de agregar recursos.",
+    "fr": "Enregistrez les modifications avant d’ajouter des ressources.",
+    "hi": "संसाधन जोड़ने से पहले बदलाव सहेजें।",
+    "id": "Simpan perubahan sebelum menambah sumber.",
+    "pt": "Salve as alterações antes de adicionar recursos.",
+    "ur": "وسائل شامل کرنے سے پہلے تبدیلیاں محفوظ کریں۔",
+    "zh-Hans": "添加资源前请保存更改。"
+  },
   "Guardar": {
     "ar": "حفظ",
     "bn": "সংরক্ষণ",
@@ -3299,6 +4127,18 @@
     "ur": "اصل فائلیں backup میں نقل کریں",
     "zh-Hans": "将原件复制到 backup"
   },
+  "Guardar reglas": {
+    "ar": "حفظ القواعد",
+    "bn": "নিয়ম সংরক্ষণ করুন",
+    "en": "Save rules",
+    "es": "Guardar reglas",
+    "fr": "Enregistrer les règles",
+    "hi": "नियम सहेजें",
+    "id": "Simpan aturan",
+    "pt": "Salvar regras",
+    "ur": "قواعد محفوظ کریں",
+    "zh-Hans": "保存规则"
+  },
   "Guardar área de trabajo": {
     "ar": "حفظ مساحة العمل",
     "bn": "কর্মক্ষেত্র সংরক্ষণ করুন",
@@ -3334,6 +4174,30 @@
     "pt": "HTML…",
     "ur": "HTML…",
     "zh-Hans": "HTML…"
+  },
+  "Habilitado": {
+    "ar": "مفعّل",
+    "bn": "সক্রিয়",
+    "en": "Enabled",
+    "es": "Habilitado",
+    "fr": "Activé",
+    "hi": "सक्षम",
+    "id": "Aktif",
+    "pt": "Ativado",
+    "ur": "فعال",
+    "zh-Hans": "已启用"
+  },
+  "Hasta 3600 s, 500000 artículos, 10000 resultados y 1000000 coincidencias.": {
+    "ar": "حتى 3600 ثانية و500000 مقالة و10000 نتيجة و1000000 تطابق.",
+    "bn": "সর্বোচ্চ ৩৬০০ সেকেন্ড, ৫০০০০০ নিবন্ধ, ১০০০০ ফলাফল ও ১০০০০০০ মিল।",
+    "en": "Up to 3600 seconds, 500000 articles, 10000 results and 1000000 matches.",
+    "es": "Hasta 3600 s, 500000 artículos, 10000 resultados y 1000000 coincidencias.",
+    "fr": "Jusqu’à 3600 secondes, 500000 articles, 10000 résultats et 1000000 correspondances.",
+    "hi": "अधिकतम 3600 सेकंड, 500000 लेख, 10000 परिणाम और 1000000 मिलान।",
+    "id": "Hingga 3600 detik, 500000 artikel, 10000 hasil, dan 1000000 kecocokan.",
+    "pt": "Até 3600 segundos, 500000 artigos, 10000 resultados e 1000000 ocorrências.",
+    "ur": "زیادہ سے زیادہ 3600 سیکنڈ، 500000 مضامین، 10000 نتائج اور 1000000 مماثلتیں۔",
+    "zh-Hans": "最多3600秒、500000篇文章、10000个结果和1000000处匹配。"
   },
   "Hay una actualización disponible.": {
     "ar": "يتوفر تحديث.",
@@ -3430,6 +4294,18 @@
     "pt": "Ícones Red e Dark e ajustes reorganizados.",
     "ur": "Red اور Dark آئیکن اور نئی ترتیب والی سیٹنگز۔",
     "zh-Hans": "Red 和 Dark 图标以及重新整理的设置。"
+  },
+  "Identidad del recurso modificada": {
+    "ar": "تغيرت هوية المورد",
+    "bn": "সম্পদের পরিচয় পরিবর্তিত হয়েছে",
+    "en": "Resource identity changed",
+    "es": "Identidad del recurso modificada",
+    "fr": "Identité de la ressource modifiée",
+    "hi": "संसाधन की पहचान बदली गई",
+    "id": "Identitas sumber berubah",
+    "pt": "Identidade do recurso alterada",
+    "ur": "وسیلے کی شناخت بدل گئی",
+    "zh-Hans": "资源标识已更改"
   },
   "Idioma": {
     "ar": "اللغة",
@@ -3695,6 +4571,18 @@
     "ur": "Libron-X بند کرنے پر اپ ڈیٹ انسٹال ہو گی۔",
     "zh-Hans": "退出 Libron-X 时将安装更新。"
   },
+  "La asociación ya no está disponible.": {
+    "ar": "لم يعد الارتباط متاحًا.",
+    "bn": "সংযোগটি আর পাওয়া যাচ্ছে না।",
+    "en": "The association is no longer available.",
+    "es": "La asociación ya no está disponible.",
+    "fr": "L’association n’est plus disponible.",
+    "hi": "संबंध अब उपलब्ध नहीं है।",
+    "id": "Asosiasi tidak lagi tersedia.",
+    "pt": "A associação não está mais disponível.",
+    "ur": "تعلق اب دستیاب نہیں ہے۔",
+    "zh-Hans": "该关联已不可用。"
+  },
   "La barra de herramientas permite abrir Inicio y Biblioteca, buscar, crear documentos y acceder a las acciones de estudio. Los botones que no caben aparecen en el menú de desbordamiento. Haz clic derecho sobre un botón para conocer su función.": {
     "ar": "يتيح شريط الأدوات فتح الصفحة الرئيسية والمكتبة والبحث وإنشاء المستندات والوصول إلى أدوات الدراسة. تظهر الأزرار التي لا تتسع لها المساحة في قائمة إضافية. انقر بزر الفأرة الأيمن على زر لمعرفة وظيفته.",
     "bn": "টুলবার থেকে মূল পাতা ও লাইব্রেরি খুলতে, অনুসন্ধান করতে, নথি তৈরি করতে এবং অধ্যয়নের সরঞ্জাম ব্যবহার করতে পারেন। জায়গায় না কুলানো বোতামগুলো অতিরিক্ত মেনুতে দেখা যায়। কোনো বোতামের কাজ জানতে সেটিতে ডান-ক্লিক করুন।",
@@ -3755,6 +4643,30 @@
     "ur": "تلاش وسیلے کے دوسرے سرے سے جاری ہوئی۔",
     "zh-Hans": "已从资源的另一端继续查找。"
   },
+  "La búsqueda falló. Inicia una búsqueda nueva para abrir resultados.": {
+    "ar": "فشل البحث. ابدأ بحثًا جديدًا لفتح النتائج.",
+    "bn": "অনুসন্ধান ব্যর্থ হয়েছে। ফলাফল খুলতে নতুন অনুসন্ধান শুরু করুন।",
+    "en": "The search failed. Start a new search before opening results.",
+    "es": "La búsqueda falló. Inicia una búsqueda nueva para abrir resultados.",
+    "fr": "La recherche a échoué. Lancez une nouvelle recherche pour ouvrir les résultats.",
+    "hi": "खोज विफल हुई। परिणाम खोलने से पहले नई खोज शुरू करें।",
+    "id": "Pencarian gagal. Mulai pencarian baru untuk membuka hasil.",
+    "pt": "A pesquisa falhou. Inicie uma nova pesquisa para abrir resultados.",
+    "ur": "تلاش ناکام ہوئی۔ نتائج کھولنے کے لیے نئی تلاش شروع کریں۔",
+    "zh-Hans": "搜索失败。请开始新搜索后再打开结果。"
+  },
+  "La búsqueda tiene resultados parciales o fuentes pendientes": {
+    "ar": "البحث يحتوي على نتائج جزئية أو مصادر معلقة",
+    "bn": "অনুসন্ধানের ফল আংশিক বা কিছু উৎস অপেক্ষমাণ",
+    "en": "Search has partial results or pending sources",
+    "es": "La búsqueda tiene resultados parciales o fuentes pendientes",
+    "fr": "La recherche comporte des résultats partiels ou des sources en attente",
+    "hi": "खोज के परिणाम आंशिक हैं या कुछ स्रोत लंबित हैं",
+    "id": "Pencarian memiliki hasil sebagian atau sumber tertunda",
+    "pt": "A busca tem resultados parciais ou fontes pendentes",
+    "ur": "تلاش کے نتائج جزوی ہیں یا کچھ ذرائع زیر التوا ہیں",
+    "zh-Hans": "搜索结果不完整或有待处理的来源"
+  },
   "La búsqueda tiene resultados parciales o recursos pendientes": {
     "ar": "نتائج البحث جزئية أو توجد موارد معلّقة",
     "bn": "অনুসন্ধানে আংশিক ফলাফল বা অপেক্ষমান রিসোর্স রয়েছে",
@@ -3766,6 +4678,42 @@
     "pt": "A busca tem resultados parciais ou recursos pendentes",
     "ur": "تلاش کے نتائج جزوی ہیں یا وسائل زیر التوا ہیں",
     "zh-Hans": "搜索结果不完整或有待处理资源"
+  },
+  "La colección ya no está disponible.": {
+    "ar": "لم تعد المجموعة متاحة.",
+    "bn": "সংগ্রহটি আর উপলভ্য নেই।",
+    "en": "The collection is no longer available.",
+    "es": "La colección ya no está disponible.",
+    "fr": "La collection n’est plus disponible.",
+    "hi": "संग्रह अब उपलब्ध नहीं है।",
+    "id": "Koleksi tidak lagi tersedia.",
+    "pt": "A coleção não está mais disponível.",
+    "ur": "مجموعہ اب دستیاب نہیں ہے۔",
+    "zh-Hans": "该收藏集已不可用。"
+  },
+  "La configuración cambió. Cancela e inicia una búsqueda nueva.": {
+    "ar": "تغيرت الإعدادات. ألغِ البحث وابدأ بحثًا جديدًا.",
+    "bn": "সেটিং বদলেছে। বাতিল করে নতুন অনুসন্ধান শুরু করুন।",
+    "en": "The configuration changed. Cancel and start a new search.",
+    "es": "La configuración cambió. Cancela e inicia una búsqueda nueva.",
+    "fr": "La configuration a changé. Annulez et lancez une nouvelle recherche.",
+    "hi": "सेटिंग बदल गई है। रद्द करें और नई खोज शुरू करें।",
+    "id": "Konfigurasi berubah. Batalkan dan mulai pencarian baru.",
+    "pt": "A configuração mudou. Cancele e inicie uma nova pesquisa.",
+    "ur": "ترتیبات بدل گئی ہیں۔ منسوخ کرکے نئی تلاش شروع کریں۔",
+    "zh-Hans": "配置已更改。请取消并开始新搜索。"
+  },
+  "La configuración cambió. Ejecuta una búsqueda nueva para abrir estos resultados.": {
+    "ar": "تغيرت الإعدادات. نفّذ بحثًا جديدًا لفتح هذه النتائج.",
+    "bn": "সেটিং বদলেছে। এই ফলাফল খুলতে নতুন অনুসন্ধান চালান।",
+    "en": "The configuration changed. Run a new search before opening these results.",
+    "es": "La configuración cambió. Ejecuta una búsqueda nueva para abrir estos resultados.",
+    "fr": "La configuration a changé. Lancez une nouvelle recherche pour ouvrir ces résultats.",
+    "hi": "सेटिंग बदल गई है। ये परिणाम खोलने से पहले नई खोज करें।",
+    "id": "Konfigurasi berubah. Jalankan pencarian baru untuk membuka hasil ini.",
+    "pt": "A configuração mudou. Execute uma nova pesquisa para abrir estes resultados.",
+    "ur": "ترتیبات بدل گئی ہیں۔ یہ نتائج کھولنے کے لیے نئی تلاش چلائیں۔",
+    "zh-Hans": "配置已更改。请运行新搜索后再打开这些结果。"
   },
   "La lista de temas es parcial; puede haber más artículos en otros recursos.": {
     "ar": "قائمة الموضوعات جزئية؛ قد توجد مقالات أخرى في موارد أخرى.",
@@ -3791,6 +4739,30 @@
     "ur": "حالیہ کام کی جگہوں کی فہرست میں غیر موافق اندراجات ہیں۔",
     "zh-Hans": "最近工作区列表包含不兼容的条目。"
   },
+  "La pertenencia de esta colección se calcula mediante reglas.": {
+    "ar": "تُحسب عضوية هذه المجموعة باستخدام القواعد.",
+    "bn": "এই সংগ্রহের সদস্যতা নিয়ম দিয়ে নির্ধারিত হয়।",
+    "en": "Membership of this collection is calculated using rules.",
+    "es": "La pertenencia de esta colección se calcula mediante reglas.",
+    "fr": "Les membres de cette collection sont déterminés par des règles.",
+    "hi": "इस संग्रह की सदस्यता नियमों से निर्धारित होती है।",
+    "id": "Keanggotaan koleksi ini dihitung menggunakan aturan.",
+    "pt": "Os membros desta coleção são definidos por regras.",
+    "ur": "اس مجموعے کی رکنیت قواعد سے طے ہوتی ہے۔",
+    "zh-Hans": "此集合的成员由规则计算。"
+  },
+  "La pertenencia se actualiza al cambiar los metadatos de la biblioteca. No se modifica ningún libro.": {
+    "ar": "تتحدث العضوية عند تغير بيانات المكتبة. لا يتم تعديل أي كتاب.",
+    "bn": "লাইব্রেরির মেটাডেটা বদলালে সদস্যতা হালনাগাদ হয়। কোনো বই পরিবর্তিত হয় না।",
+    "en": "Membership updates when library metadata changes. No books are modified.",
+    "es": "La pertenencia se actualiza al cambiar los metadatos de la biblioteca. No se modifica ningún libro.",
+    "fr": "Les membres sont actualisés quand les métadonnées de la bibliothèque changent. Aucun livre n'est modifié.",
+    "hi": "पुस्तकालय का मेटाडेटा बदलने पर सदस्यता अपडेट होती है। कोई पुस्तक बदली नहीं जाती।",
+    "id": "Keanggotaan diperbarui saat metadata perpustakaan berubah. Buku tidak diubah.",
+    "pt": "Os membros são atualizados quando os metadados da biblioteca mudam. Nenhum livro é alterado.",
+    "ur": "لائبریری کا میٹا ڈیٹا بدلنے پر رکنیت بدلتی ہے۔ کوئی کتاب تبدیل نہیں ہوتی۔",
+    "zh-Hans": "成员随书库元数据变化而更新。不会修改任何书籍。"
+  },
   "La referencia solicita la edición {edition}. Abre esa edición para seguir este enlace.": {
     "ar": "يتطلب المرجع الإصدار {edition}. افتح ذلك الإصدار لاتباع الرابط.",
     "bn": "সূত্রটির জন্য {edition} সংস্করণ প্রয়োজন। সংযোগ অনুসরণ করতে সেই সংস্করণ খুলুন।",
@@ -3802,6 +4774,54 @@
     "pt": "A referência exige a edição {edition}. Abra essa edição para seguir este link.",
     "ur": "حوالے کے لیے نسخہ {edition} درکار ہے۔ ربط پر جانے کے لیے وہ نسخہ کھولیں۔",
     "zh-Hans": "此经文需要版本 {edition}。请打开该版本以跟随链接。"
+  },
+  "Las asociaciones conservan su orden y los recursos ausentes. Los grupos de Biblias se administran por separado.": {
+    "ar": "تحتفظ الارتباطات بترتيبها والموارد المفقودة. تُدار مجموعات الكتاب المقدس بشكل منفصل.",
+    "bn": "সংযোগের ক্রম ও অনুপস্থিত রিসোর্স বজায় থাকে। বাইবেলের দলগুলো আলাদাভাবে পরিচালিত হয়।",
+    "en": "Associations retain their order and missing resources. Bible groups are managed separately.",
+    "es": "Las asociaciones conservan su orden y los recursos ausentes. Los grupos de Biblias se administran por separado.",
+    "fr": "Les associations conservent leur ordre et les ressources absentes. Les groupes de Bibles se gèrent séparément.",
+    "hi": "संबंध अपना क्रम और अनुपलब्ध संसाधन बनाए रखते हैं। बाइबल समूह अलग से प्रबंधित होते हैं।",
+    "id": "Asosiasi mempertahankan urutan dan sumber yang hilang. Grup Alkitab dikelola terpisah.",
+    "pt": "As associações preservam a ordem e os recursos ausentes. Os grupos de Bíblias são gerenciados separadamente.",
+    "ur": "تعلقات اپنی ترتیب اور غیر موجود وسائل برقرار رکھتے ہیں۔ بائبل کے گروپ الگ منظم کیے جاتے ہیں۔",
+    "zh-Hans": "关联会保留顺序和缺失的资源。圣经分组单独管理。"
+  },
+  "Las colecciones contienen datos incompatibles.": {
+    "ar": "تحتوي المجموعات على بيانات غير متوافقة.",
+    "bn": "সংগ্রহে অসামঞ্জস্যপূর্ণ ডেটা রয়েছে।",
+    "en": "Collections contain incompatible data.",
+    "es": "Las colecciones contienen datos incompatibles.",
+    "fr": "Les collections contiennent des données incompatibles.",
+    "hi": "संग्रहों में असंगत डेटा है।",
+    "id": "Koleksi berisi data yang tidak kompatibel.",
+    "pt": "As coleções contêm dados incompatíveis.",
+    "ur": "مجموعوں میں غیر موافق ڈیٹا ہے۔",
+    "zh-Hans": "收藏集包含不兼容的数据。"
+  },
+  "Las reglas necesitan entre 1 y 32 condiciones válidas.": {
+    "ar": "تتطلب القواعد من شرط واحد إلى 32 شرطًا صالحًا.",
+    "bn": "নিয়মে ১ থেকে ৩২টি বৈধ শর্ত প্রয়োজন।",
+    "en": "Rules require between 1 and 32 valid conditions.",
+    "es": "Las reglas necesitan entre 1 y 32 condiciones válidas.",
+    "fr": "Les règles exigent entre 1 et 32 conditions valides.",
+    "hi": "नियमों के लिए 1 से 32 मान्य शर्तें चाहिए।",
+    "id": "Aturan memerlukan 1 hingga 32 kondisi yang valid.",
+    "pt": "As regras exigem entre 1 e 32 condições válidas.",
+    "ur": "قواعد کے لیے 1 سے 32 درست شرائط درکار ہیں۔",
+    "zh-Hans": "规则需要 1 至 32 个有效条件。"
+  },
+  "Lectores abiertos": {
+    "ar": "القارئات المفتوحة",
+    "bn": "খোলা পাঠক",
+    "en": "Open readers",
+    "es": "Lectores abiertos",
+    "fr": "Lecteurs ouverts",
+    "hi": "खुले पाठक",
+    "id": "Pembaca terbuka",
+    "pt": "Leitores abertos",
+    "ur": "کھلے قارئین",
+    "zh-Hans": "已打开的阅读器"
   },
   "Lectura": {
     "ar": "القراءة",
@@ -3923,6 +4943,18 @@
     "ur": "کوڈ کا لائسنس",
     "zh-Hans": "代码许可证"
   },
+  "Limpiar selección": {
+    "ar": "مسح التحديد",
+    "bn": "নির্বাচন সাফ করুন",
+    "en": "Clear selection",
+    "es": "Limpiar selección",
+    "fr": "Effacer la sélection",
+    "hi": "चयन साफ़ करें",
+    "id": "Hapus pilihan",
+    "pt": "Limpar seleção",
+    "ur": "انتخاب صاف کریں",
+    "zh-Hans": "清除选择"
+  },
   "Lista de versículos": {
     "ar": "قائمة آيات",
     "bn": "পদতালিকা",
@@ -3934,6 +4966,18 @@
     "pt": "Lista de versículos",
     "ur": "آیات کی فہرست",
     "zh-Hans": "经文列表"
+  },
+  "Lista guardada": {
+    "ar": "قائمة محفوظة",
+    "bn": "সংরক্ষিত তালিকা",
+    "en": "Saved list",
+    "es": "Lista guardada",
+    "fr": "Liste enregistrée",
+    "hi": "सहेजी गई सूची",
+    "id": "Daftar tersimpan",
+    "pt": "Lista salva",
+    "ur": "محفوظ فہرست",
+    "zh-Hans": "已保存的列表"
   },
   "Listo": {
     "ar": "جاهز",
@@ -3971,6 +5015,18 @@
     "ur": "ترتیب کی تبدیلیاں فوراً محفوظ ہوتی ہیں۔ گروپ سے وسیلہ نکالنے پر اس کی فائل حذف نہیں ہوتی۔",
     "zh-Hans": "顺序变更会立即保存。从分组移除资源不会删除文件。"
   },
+  "Los cambios se aplican a la próxima búsqueda. Alcanzar un límite termina la búsqueda con cobertura parcial.": {
+    "ar": "تُطبق التغييرات على البحث التالي. يؤدي بلوغ أحد الحدود إلى إنهاء البحث بتغطية جزئية.",
+    "bn": "পরিবর্তন পরবর্তী অনুসন্ধানে প্রযোজ্য হবে। সীমায় পৌঁছালে আংশিক আওতা নিয়ে অনুসন্ধান শেষ হবে।",
+    "en": "Changes apply to the next search. Reaching a limit ends the search with partial coverage.",
+    "es": "Los cambios se aplican a la próxima búsqueda. Alcanzar un límite termina la búsqueda con cobertura parcial.",
+    "fr": "Les changements s’appliquent à la prochaine recherche. Une limite atteinte termine la recherche avec une couverture partielle.",
+    "hi": "बदलाव अगली खोज पर लागू होंगे। सीमा पर खोज आंशिक कवरेज के साथ समाप्त होती है।",
+    "id": "Perubahan berlaku pada pencarian berikutnya. Mencapai batas mengakhiri pencarian dengan cakupan sebagian.",
+    "pt": "As alterações valem para a próxima pesquisa. Atingir um limite encerra a pesquisa com cobertura parcial.",
+    "ur": "تبدیلیاں اگلی تلاش پر لاگو ہوں گی۔ حد تک پہنچنے پر تلاش جزوی تکمیل کے ساتھ ختم ہوگی۔",
+    "zh-Hans": "更改适用于下一次搜索。达到限额时，搜索将以部分覆盖状态结束。"
+  },
   "Los cambios se guardan en los datos propios de esta aplicación.": {
     "ar": "تُحفظ التغييرات في بيانات هذا التطبيق.",
     "bn": "পরিবর্তন এই অ্যাপের নিজস্ব তথ্যে সংরক্ষিত হয়।",
@@ -3982,6 +5038,18 @@
     "pt": "As alterações são salvas nos dados deste aplicativo.",
     "ur": "تبدیلیاں اس ایپ کے اپنے ڈیٹا میں محفوظ ہوتی ہیں۔",
     "zh-Hans": "更改保存在本应用的数据中。"
+  },
+  "Los campos no identificados por el recurso producen cobertura parcial.": {
+    "ar": "تؤدي الحقول التي لا يحددها المورد إلى تغطية جزئية.",
+    "bn": "রিসোর্সে অচিহ্নিত ক্ষেত্র থাকলে কভারেজ আংশিক হয়।",
+    "en": "Fields not identified by the resource produce partial coverage.",
+    "es": "Los campos no identificados por el recurso producen cobertura parcial.",
+    "fr": "Les champs non identifiés par la ressource donnent une couverture partielle.",
+    "hi": "संसाधन में अज्ञात फ़ील्ड होने पर कवरेज आंशिक होता है।",
+    "id": "Kolom yang tidak diidentifikasi sumber menghasilkan cakupan parsial.",
+    "pt": "Os campos não identificados pelo recurso produzem cobertura parcial.",
+    "ur": "وسیلے میں غیر شناخت شدہ خانے جزوی کوریج کا باعث بنتے ہیں۔",
+    "zh-Hans": "资源未标识的字段会导致覆盖不完整。"
   },
   "Los grupos de Biblias contienen datos incompatibles.": {
     "ar": "تحتوي مجموعات الترجمات على بيانات غير متوافقة.",
@@ -4042,6 +5110,18 @@
     "pt": "Léxico",
     "ur": "فرہنگ",
     "zh-Hans": "词汇集"
+  },
+  "Límites de búsqueda": {
+    "ar": "حدود البحث",
+    "bn": "অনুসন্ধানের সীমা",
+    "en": "Search limits",
+    "es": "Límites de búsqueda",
+    "fr": "Limites de recherche",
+    "hi": "खोज सीमाएँ",
+    "id": "Batas pencarian",
+    "pt": "Limites da pesquisa",
+    "ur": "تلاش کی حدود",
+    "zh-Hans": "搜索限制"
   },
   "Líneas del interlineal": {
     "ar": "أسطر النص بين السطور",
@@ -4247,6 +5327,18 @@
     "ur": "عمودی ترتیب",
     "zh-Hans": "垂直平铺"
   },
+  "Mostrar en biblioteca": {
+    "ar": "إظهار في المكتبة",
+    "bn": "লাইব্রেরিতে দেখান",
+    "en": "Show in library",
+    "es": "Mostrar en biblioteca",
+    "fr": "Afficher dans la bibliothèque",
+    "hi": "पुस्तकालय में दिखाएँ",
+    "id": "Tampilkan di perpustakaan",
+    "pt": "Mostrar na biblioteca",
+    "ur": "لائبریری میں دکھائیں",
+    "zh-Hans": "在书库中显示"
+  },
   "Mostrar notas al mantener el puntero": {
     "ar": "إظهار الملاحظات عند تمرير المؤشر",
     "bn": "পয়েন্টার রাখলে টীকা দেখান",
@@ -4271,6 +5363,18 @@
     "ur": "تمام سطریں دکھائیں",
     "zh-Hans": "显示所有行"
   },
+  "Más coincidencias por artículo": {
+    "ar": "الأكثر تطابقًا لكل مقالة",
+    "bn": "প্রতি নিবন্ধে সর্বাধিক মিল",
+    "en": "Most matches per article",
+    "es": "Más coincidencias por artículo",
+    "fr": "Plus de correspondances par article",
+    "hi": "प्रति लेख अधिक मिलान",
+    "id": "Kecocokan terbanyak per artikel",
+    "pt": "Mais ocorrências por artigo",
+    "ur": "فی مضمون زیادہ مماثلتیں",
+    "zh-Hans": "每篇文章匹配最多"
+  },
   "Más opciones": {
     "ar": "المزيد من الخيارات",
     "bn": "আরও বিকল্প",
@@ -4282,6 +5386,30 @@
     "pt": "Mais opções",
     "ur": "مزید اختیارات",
     "zh-Hans": "更多选项"
+  },
+  "Máximo 256 caracteres; la frase debe ser más larga que el límite de cambios. Los límites de trabajo producen cobertura parcial.": {
+    "ar": "الحد الأقصى 256 حرفًا؛ يجب أن تكون العبارة أطول من حد التعديلات. تؤدي حدود العمل إلى تغطية جزئية.",
+    "bn": "সর্বোচ্চ ২৫৬ অক্ষর; বাক্যাংশ পরিবর্তনের সীমার চেয়ে দীর্ঘ হতে হবে। কাজের সীমা হলে অনুসন্ধানের আওতা আংশিক হয়।",
+    "en": "At most 256 characters; the phrase must be longer than the edit limit. Work limits produce partial coverage.",
+    "es": "Máximo 256 caracteres; la frase debe ser más larga que el límite de cambios. Los límites de trabajo producen cobertura parcial.",
+    "fr": "256 caractères maximum ; l’expression doit être plus longue que la limite de modifications. Les limites de calcul entraînent une couverture partielle.",
+    "hi": "अधिकतम 256 अक्षर; वाक्यांश बदलाव की सीमा से लंबा होना चाहिए। कार्य सीमा पर कवरेज आंशिक रहती है।",
+    "id": "Maksimal 256 karakter; frasa harus lebih panjang dari batas perubahan. Batas kerja menghasilkan cakupan sebagian.",
+    "pt": "No máximo 256 caracteres; a frase deve ser maior que o limite de alterações. Os limites de trabalho produzem cobertura parcial.",
+    "ur": "زیادہ سے زیادہ 256 حروف؛ فقرہ تبدیلیوں کی حد سے لمبا ہونا چاہیے۔ کام کی حد پر تلاش کی تکمیل جزوی رہتی ہے۔",
+    "zh-Hans": "最多256个字符；短语长度必须大于改动次数上限。达到计算限额时会显示覆盖不完整。"
+  },
+  "NEAR usa 48 unidades UTF-16. WORDS cuenta palabras intermedias. VERSES usa referencias reales del mismo capítulo. Cada artículo o versículo conserva su ámbito.": {
+    "ar": "يستخدم NEAR مقدار 48 وحدة UTF-16. يحسب WORDS الكلمات الفاصلة. يستخدم VERSES المراجع الفعلية في الإصحاح نفسه. يحتفظ كل مقال أو آية بنطاقه.",
+    "bn": "NEAR ৪৮টি UTF-16 একক ব্যবহার করে। WORDS মাঝের শব্দ গোনে। VERSES একই অধ্যায়ের প্রকৃত উদ্ধৃতি ব্যবহার করে। প্রতিটি নিবন্ধ বা পদ নিজস্ব পরিসর রাখে।",
+    "en": "NEAR uses 48 UTF-16 units. WORDS counts intervening words. VERSES uses actual references in the same chapter. Each article or verse keeps its own scope.",
+    "es": "NEAR usa 48 unidades UTF-16. WORDS cuenta palabras intermedias. VERSES usa referencias reales del mismo capítulo. Cada artículo o versículo conserva su ámbito.",
+    "fr": "NEAR utilise 48 unités UTF-16. WORDS compte les mots intermédiaires. VERSES utilise les références réelles du même chapitre. Chaque article ou verset conserve son périmètre.",
+    "hi": "NEAR में 48 UTF-16 इकाइयाँ हैं। WORDS बीच के शब्द गिनता है। VERSES एक ही अध्याय के वास्तविक संदर्भ उपयोग करता है। प्रत्येक लेख या पद का अपना दायरा रहता है।",
+    "id": "NEAR memakai 48 unit UTF-16. WORDS menghitung kata di antaranya. VERSES memakai referensi nyata dalam pasal yang sama. Setiap artikel atau ayat mempertahankan lingkupnya.",
+    "pt": "NEAR usa 48 unidades UTF-16. WORDS conta as palavras intermediárias. VERSES usa referências reais do mesmo capítulo. Cada artigo ou versículo mantém seu âmbito.",
+    "ur": "NEAR میں 48 UTF-16 اکائیاں ہیں۔ WORDS درمیانی الفاظ گنتا ہے۔ VERSES ایک ہی باب کے حقیقی حوالوں کو استعمال کرتا ہے۔ ہر مضمون یا آیت کا اپنا دائرہ رہتا ہے۔",
+    "zh-Hans": "NEAR 使用 48 个 UTF-16 单位。WORDS 计算中间单词。VERSES 使用同一章的实际经节引用。每篇文章或经节保留各自的范围。"
   },
   "Negro y rojo": {
     "ar": "أسود وأحمر",
@@ -4319,6 +5447,42 @@
     "ur": "نہیں",
     "zh-Hans": "否"
   },
+  "No contiene": {
+    "ar": "لا يحتوي على",
+    "bn": "অন্তর্ভুক্ত করে না",
+    "en": "Does not contain",
+    "es": "No contiene",
+    "fr": "Ne contient pas",
+    "hi": "शामिल नहीं है",
+    "id": "Tidak mengandung",
+    "pt": "Não contém",
+    "ur": "شامل نہیں ہے",
+    "zh-Hans": "不包含"
+  },
+  "No disponible": {
+    "ar": "غير متاح",
+    "bn": "অনুপলব্ধ",
+    "en": "Unavailable",
+    "es": "No disponible",
+    "fr": "Indisponible",
+    "hi": "अनुपलब्ध",
+    "id": "Tidak tersedia",
+    "pt": "Indisponível",
+    "ur": "دستیاب نہیں",
+    "zh-Hans": "不可用"
+  },
+  "No es igual a": {
+    "ar": "لا يساوي",
+    "bn": "সমান নয়",
+    "en": "Does not equal",
+    "es": "No es igual a",
+    "fr": "N'est pas égal à",
+    "hi": "बराबर नहीं है",
+    "id": "Tidak sama dengan",
+    "pt": "Não é igual a",
+    "ur": "برابر نہیں ہے",
+    "zh-Hans": "不等于"
+  },
   "No hay diccionarios disponibles.": {
     "ar": "لا توجد قواميس متاحة.",
     "bn": "কোনো অভিধান উপলব্ধ নেই।",
@@ -4330,6 +5494,18 @@
     "pt": "Não há dicionários disponíveis.",
     "ur": "کوئی لغت دستیاب نہیں ہے۔",
     "zh-Hans": "没有可用词典。"
+  },
+  "No hay recursos compatibles para agregar.": {
+    "ar": "لا توجد موارد متوافقة لإضافتها.",
+    "bn": "যোগ করার মতো সামঞ্জস্যপূর্ণ রিসোর্স নেই।",
+    "en": "No compatible resources to add.",
+    "es": "No hay recursos compatibles para agregar.",
+    "fr": "Aucune ressource compatible à ajouter.",
+    "hi": "जोड़ने के लिए कोई संगत संसाधन नहीं है।",
+    "id": "Tidak ada sumber kompatibel untuk ditambahkan.",
+    "pt": "Não há recursos compatíveis para adicionar.",
+    "ur": "شامل کرنے کے لیے کوئی موافق وسیلہ نہیں ہے۔",
+    "zh-Hans": "没有可添加的兼容资源。"
   },
   "No hay un registro de cambios incluido para esta versión.": {
     "ar": "لا يتضمن هذا الإصدار سجل تغييرات.",
@@ -4354,6 +5530,18 @@
     "pt": "Nenhuma área de trabalho recente.",
     "ur": "کوئی حالیہ کام کی جگہ نہیں۔",
     "zh-Hans": "没有最近的工作区。"
+  },
+  "No se encontraron referencias coincidentes.": {
+    "ar": "لم يُعثر على مراجع مطابقة.",
+    "bn": "কোনো মিলে যাওয়া উল্লেখ পাওয়া যায়নি।",
+    "en": "No matching references found.",
+    "es": "No se encontraron referencias coincidentes.",
+    "fr": "Aucune référence correspondante trouvée.",
+    "hi": "कोई मेल खाता संदर्भ नहीं मिला।",
+    "id": "Tidak ditemukan referensi yang cocok.",
+    "pt": "Nenhuma referência correspondente encontrada.",
+    "ur": "کوئی مماثل حوالہ نہیں ملا۔",
+    "zh-Hans": "未找到匹配的引用。"
   },
   "No se encontró esta referencia en el recurso.": {
     "ar": "لم يُعثر على هذا المرجع في المورد.",
@@ -4390,6 +5578,30 @@
     "pt": "Não foi possível carregar este ícone. A escolha anterior foi mantida.",
     "ur": "یہ آئیکن لوڈ نہیں ہو سکا۔ پچھلا انتخاب برقرار ہے۔",
     "zh-Hans": "无法加载此图标。将保留之前的选择。"
+  },
+  "No se pudieron leer las asociaciones.": {
+    "ar": "تعذرت قراءة الارتباطات.",
+    "bn": "সংযোগ পড়া যায়নি।",
+    "en": "Could not read associations.",
+    "es": "No se pudieron leer las asociaciones.",
+    "fr": "Impossible de lire les associations.",
+    "hi": "संबंध पढ़े नहीं जा सके।",
+    "id": "Tidak dapat membaca asosiasi.",
+    "pt": "Não foi possível ler as associações.",
+    "ur": "تعلقات پڑھے نہیں جا سکے۔",
+    "zh-Hans": "无法读取关联。"
+  },
+  "No se pudieron leer las colecciones.": {
+    "ar": "تعذرت قراءة المجموعات.",
+    "bn": "সংগ্রহ পড়া যায়নি।",
+    "en": "Could not read collections.",
+    "es": "No se pudieron leer las colecciones.",
+    "fr": "Impossible de lire les collections.",
+    "hi": "संग्रह पढ़े नहीं जा सके।",
+    "id": "Koleksi tidak dapat dibaca.",
+    "pt": "Não foi possível ler as coleções.",
+    "ur": "مجموعے پڑھے نہیں جا سکے۔",
+    "zh-Hans": "无法读取收藏集。"
   },
   "No se pudieron leer los grupos de Biblias.": {
     "ar": "تعذرت قراءة مجموعات الترجمات.",
@@ -4438,6 +5650,42 @@
     "pt": "Não perguntar novamente",
     "ur": "دوبارہ نہ پوچھیں",
     "zh-Hans": "不再询问"
+  },
+  "Nombre de la asociación": {
+    "ar": "اسم الارتباط",
+    "bn": "সংযোগের নাম",
+    "en": "Association name",
+    "es": "Nombre de la asociación",
+    "fr": "Nom de l’association",
+    "hi": "संबंध का नाम",
+    "id": "Nama asosiasi",
+    "pt": "Nome da associação",
+    "ur": "تعلق کا نام",
+    "zh-Hans": "关联名称"
+  },
+  "Nombre de la colección": {
+    "ar": "اسم المجموعة",
+    "bn": "সংগ্রহের নাম",
+    "en": "Collection name",
+    "es": "Nombre de la colección",
+    "fr": "Nom de la collection",
+    "hi": "संग्रह का नाम",
+    "id": "Nama koleksi",
+    "pt": "Nome da coleção",
+    "ur": "مجموعے کا نام",
+    "zh-Hans": "收藏集名称"
+  },
+  "Nombre de la serie": {
+    "ar": "اسم السلسلة",
+    "bn": "সিরিজের নাম",
+    "en": "Series name",
+    "es": "Nombre de la serie",
+    "fr": "Nom de la série",
+    "hi": "श्रृंखला का नाम",
+    "id": "Nama seri",
+    "pt": "Nome da série",
+    "ur": "سلسلے کا نام",
+    "zh-Hans": "系列名称"
   },
   "Nombre del documento": {
     "ar": "اسم المستند",
@@ -4498,6 +5746,42 @@
     "pt": "Notas e referências",
     "ur": "نوٹس اور حوالہ جات",
     "zh-Hans": "注释和经文"
+  },
+  "Nueva asociación": {
+    "ar": "ارتباط جديد",
+    "bn": "নতুন সংযোগ",
+    "en": "New association",
+    "es": "Nueva asociación",
+    "fr": "Nouvelle association",
+    "hi": "नया संबंध",
+    "id": "Asosiasi baru",
+    "pt": "Nova associação",
+    "ur": "نیا تعلق",
+    "zh-Hans": "新建关联"
+  },
+  "Nueva colección": {
+    "ar": "مجموعة جديدة",
+    "bn": "নতুন সংগ্রহ",
+    "en": "New collection",
+    "es": "Nueva colección",
+    "fr": "Nouvelle collection",
+    "hi": "नया संग्रह",
+    "id": "Koleksi baru",
+    "pt": "Nova coleção",
+    "ur": "نیا مجموعہ",
+    "zh-Hans": "新建收藏集"
+  },
+  "Nueva colección por reglas": {
+    "ar": "مجموعة جديدة حسب القواعد",
+    "bn": "নতুন নিয়মভিত্তিক সংগ্রহ",
+    "en": "New rule-based collection",
+    "es": "Nueva colección por reglas",
+    "fr": "Nouvelle collection par règles",
+    "hi": "नया नियम आधारित संग्रह",
+    "id": "Koleksi berbasis aturan baru",
+    "pt": "Nova coleção por regras",
+    "ur": "قواعد پر مبنی نیا مجموعہ",
+    "zh-Hans": "新建规则集合"
   },
   "Nueva lista de versículos": {
     "ar": "قائمة آيات جديدة",
@@ -4631,6 +5915,42 @@
     "ur": "تلاش کے اختیارات",
     "zh-Hans": "查找选项"
   },
+  "Operadores de búsqueda": {
+    "ar": "عوامل البحث",
+    "bn": "অনুসন্ধান অপারেটর",
+    "en": "Search operators",
+    "es": "Operadores de búsqueda",
+    "fr": "Opérateurs de recherche",
+    "hi": "खोज ऑपरेटर",
+    "id": "Operator pencarian",
+    "pt": "Operadores de pesquisa",
+    "ur": "تلاش کے آپریٹرز",
+    "zh-Hans": "搜索运算符"
+  },
+  "Orden": {
+    "ar": "الترتيب",
+    "bn": "ক্রম",
+    "en": "Order",
+    "es": "Orden",
+    "fr": "Ordre",
+    "hi": "क्रम",
+    "id": "Urutan",
+    "pt": "Ordem",
+    "ur": "ترتیب",
+    "zh-Hans": "顺序"
+  },
+  "Orden de búsqueda": {
+    "ar": "ترتيب البحث",
+    "bn": "অনুসন্ধানের ক্রম",
+    "en": "Search order",
+    "es": "Orden de búsqueda",
+    "fr": "Ordre de recherche",
+    "hi": "खोज क्रम",
+    "id": "Urutan pencarian",
+    "pt": "Ordem da pesquisa",
+    "ur": "تلاش کی ترتیب",
+    "zh-Hans": "搜索顺序"
+  },
   "Orden de las Biblias": {
     "ar": "ترتيب الترجمات",
     "bn": "বাইবেলের ক্রম",
@@ -4642,6 +5962,18 @@
     "pt": "Ordem das Bíblias",
     "ur": "بائبل کی ترتیب",
     "zh-Hans": "圣经顺序"
+  },
+  "Orden de recursos asociados": {
+    "ar": "ترتيب الموارد المرتبطة",
+    "bn": "সংযুক্ত রিসোর্সের ক্রম",
+    "en": "Associated resource order",
+    "es": "Orden de recursos asociados",
+    "fr": "Ordre des ressources associées",
+    "hi": "संबंधित संसाधनों का क्रम",
+    "id": "Urutan sumber terkait",
+    "pt": "Ordem dos recursos associados",
+    "ur": "متعلقہ وسائل کی ترتیب",
+    "zh-Hans": "关联资源顺序"
   },
   "Ordenar por": {
     "ar": "ترتيب حسب",
@@ -4859,6 +6191,66 @@
     "ur": "عبارت، مثلاً John 1:1-5",
     "zh-Hans": "经文，例如 John 1:1-5"
   },
+  "Pasajes o libros": {
+    "ar": "مقاطع أو أسفار",
+    "bn": "অংশ বা বই",
+    "en": "Passages or books",
+    "es": "Pasajes o libros",
+    "fr": "Passages ou livres",
+    "hi": "अंश या पुस्तकें",
+    "id": "Bagian atau kitab",
+    "pt": "Passagens ou livros",
+    "ur": "عبارات یا کتابیں",
+    "zh-Hans": "经文或书卷"
+  },
+  "Pasajes, por ejemplo Gn 1–3; Juan 3:16–18; Romanos": {
+    "ar": "مقاطع، مثل Gen 1–3; John 3:16–18; Romans",
+    "bn": "অংশ, যেমন Gen 1–3; John 3:16–18; Romans",
+    "en": "Passages, e.g. Gen 1–3; John 3:16–18; Romans",
+    "es": "Pasajes, por ejemplo Gn 1–3; Juan 3:16–18; Romanos",
+    "fr": "Passages, par ex. Gen 1–3; John 3:16–18; Romans",
+    "hi": "अंश, जैसे Gen 1–3; John 3:16–18; Romans",
+    "id": "Bagian, misalnya Gen 1–3; John 3:16–18; Romans",
+    "pt": "Passagens, por exemplo Gn 1–3; João 3:16–18; Romanos",
+    "ur": "عبارات، مثلاً Gen 1–3; John 3:16–18; Romans",
+    "zh-Hans": "经文，例如 Gen 1–3; John 3:16–18; Romans"
+  },
+  "Pausar": {
+    "ar": "إيقاف مؤقت",
+    "bn": "সাময়িক বিরতি",
+    "en": "Pause",
+    "es": "Pausar",
+    "fr": "Mettre en pause",
+    "hi": "रोकें",
+    "id": "Jeda",
+    "pt": "Pausar",
+    "ur": "عارضی طور پر روکیں",
+    "zh-Hans": "暂停"
+  },
+  "Pausar espera a que termine el artículo o versículo actual. Al cerrar esta ventana, la búsqueda se pausa.": {
+    "ar": "ينتظر الإيقاف المؤقت انتهاء المقالة أو الآية الحالية. يؤدي إغلاق هذه النافذة إلى إيقاف البحث مؤقتًا.",
+    "bn": "বিরতি বর্তমান নিবন্ধ বা পদের কাজ শেষ হওয়ার অপেক্ষা করে। এই উইন্ডো বন্ধ করলে অনুসন্ধান বিরত হয়।",
+    "en": "Pause waits for the current article or verse to finish. Closing this window pauses the search.",
+    "es": "Pausar espera a que termine el artículo o versículo actual. Al cerrar esta ventana, la búsqueda se pausa.",
+    "fr": "La pause attend la fin de l’article ou du verset en cours. Fermer cette fenêtre met la recherche en pause.",
+    "hi": "विराम वर्तमान लेख या पद पूरा होने तक प्रतीक्षा करता है। यह विंडो बंद करने से खोज रुकती है।",
+    "id": "Jeda menunggu artikel atau ayat saat ini selesai. Menutup jendela ini menjeda pencarian.",
+    "pt": "A pausa espera o artigo ou versículo atual terminar. Fechar esta janela pausa a pesquisa.",
+    "ur": "وقفہ موجودہ مضمون یا آیت کے مکمل ہونے کا انتظار کرتا ہے۔ اس ونڈو کو بند کرنے سے تلاش رک جاتی ہے۔",
+    "zh-Hans": "暂停会等待当前文章或经文处理完毕。关闭此窗口将暂停搜索。"
+  },
+  "Por reglas": {
+    "ar": "حسب القواعد",
+    "bn": "নিয়মভিত্তিক",
+    "en": "Rule-based",
+    "es": "Por reglas",
+    "fr": "Par règles",
+    "hi": "नियम आधारित",
+    "id": "Berbasis aturan",
+    "pt": "Por regras",
+    "ur": "قواعد پر مبنی",
+    "zh-Hans": "按规则"
+  },
   "Por versículo": {
     "ar": "لكل آية",
     "bn": "প্রতি পদ",
@@ -4931,6 +6323,18 @@
     "ur": "پہلا عوامی بیٹا۔",
     "zh-Hans": "首个公开测试版。"
   },
+  "Prioridades": {
+    "ar": "الأولويات",
+    "bn": "অগ্রাধিকার",
+    "en": "Priorities",
+    "es": "Prioridades",
+    "fr": "Priorités",
+    "hi": "प्राथमिकताएँ",
+    "id": "Prioritas",
+    "pt": "Prioridades",
+    "ur": "ترجیحات",
+    "zh-Hans": "优先级"
+  },
   "Procesador": {
     "ar": "المعالج",
     "bn": "প্রসেসর",
@@ -4942,6 +6346,18 @@
     "pt": "Processador",
     "ur": "پروسیسر",
     "zh-Hans": "处理器"
+  },
+  "Promover": {
+    "ar": "ترقية",
+    "bn": "অগ্রাধিকার দিন",
+    "en": "Promote",
+    "es": "Promover",
+    "fr": "Promouvoir",
+    "hi": "प्राथमिकता दें",
+    "id": "Prioritaskan",
+    "pt": "Promover",
+    "ur": "ترجیح دیں",
+    "zh-Hans": "提升优先级"
   },
   "Propiedades del recurso": {
     "ar": "خصائص المورد",
@@ -4991,6 +6407,42 @@
     "ur": "پیراگراف",
     "zh-Hans": "段落"
   },
+  "Quita los recursos no disponibles o incompatibles antes de cambiar el tipo, idioma o serie.": {
+    "ar": "أزل الموارد غير المتاحة أو غير المتوافقة قبل تغيير النوع أو اللغة أو السلسلة.",
+    "bn": "ধরন, ভাষা বা সিরিজ বদলানোর আগে অনুপলব্ধ বা অসামঞ্জস্যপূর্ণ রিসোর্স সরান।",
+    "en": "Remove unavailable or incompatible resources before changing the type, language or series.",
+    "es": "Quita los recursos no disponibles o incompatibles antes de cambiar el tipo, idioma o serie.",
+    "fr": "Retirez les ressources indisponibles ou incompatibles avant de changer le type, la langue ou la série.",
+    "hi": "प्रकार, भाषा या श्रृंखला बदलने से पहले अनुपलब्ध या असंगत संसाधन हटाएँ।",
+    "id": "Hapus sumber yang tidak tersedia atau tidak kompatibel sebelum mengubah jenis, bahasa, atau seri.",
+    "pt": "Remova os recursos indisponíveis ou incompatíveis antes de alterar o tipo, idioma ou série.",
+    "ur": "قسم، زبان یا سلسلہ بدلنے سے پہلے غیر دستیاب یا ناموافق وسائل ہٹائیں۔",
+    "zh-Hans": "更改类型、语言或系列前，请移除不可用或不兼容的资源。"
+  },
+  "Quitar condición": {
+    "ar": "إزالة الشرط",
+    "bn": "শর্ত সরান",
+    "en": "Remove condition",
+    "es": "Quitar condición",
+    "fr": "Retirer la condition",
+    "hi": "शर्त हटाएँ",
+    "id": "Hapus kondisi",
+    "pt": "Remover condição",
+    "ur": "شرط ہٹائیں",
+    "zh-Hans": "移除条件"
+  },
+  "Quitar de la colección": {
+    "ar": "إزالة من المجموعة",
+    "bn": "সংগ্রহ থেকে সরান",
+    "en": "Remove from collection",
+    "es": "Quitar de la colección",
+    "fr": "Retirer de la collection",
+    "hi": "संग्रह से निकालें",
+    "id": "Keluarkan dari koleksi",
+    "pt": "Remover da coleção",
+    "ur": "مجموعے سے ہٹائیں",
+    "zh-Hans": "从收藏集中移除"
+  },
   "Quitar del grupo": {
     "ar": "إزالة من المجموعة",
     "bn": "গোষ্ঠী থেকে সরান",
@@ -5002,6 +6454,54 @@
     "pt": "Remover do grupo",
     "ur": "گروپ سے نکالیں",
     "zh-Hans": "从分组移除"
+  },
+  "Quitar prioridad": {
+    "ar": "إزالة الأولوية",
+    "bn": "অগ্রাধিকার সরান",
+    "en": "Remove priority",
+    "es": "Quitar prioridad",
+    "fr": "Retirer la priorité",
+    "hi": "प्राथमिकता हटाएँ",
+    "id": "Hapus prioritas",
+    "pt": "Remover prioridade",
+    "ur": "ترجیح ہٹائیں",
+    "zh-Hans": "移除优先级"
+  },
+  "Rango bíblico": {
+    "ar": "نطاق الكتاب المقدس",
+    "bn": "বাইবেলের পরিসর",
+    "en": "Bible range",
+    "es": "Rango bíblico",
+    "fr": "Plage biblique",
+    "hi": "बाइबल का दायरा",
+    "id": "Rentang Alkitab",
+    "pt": "Intervalo bíblico",
+    "ur": "بائبل کا دائرہ",
+    "zh-Hans": "圣经范围"
+  },
+  "Rango: {range}": {
+    "ar": "النطاق: {range}",
+    "bn": "পরিসর: {range}",
+    "en": "Range: {range}",
+    "es": "Rango: {range}",
+    "fr": "Plage : {range}",
+    "hi": "दायरा: {range}",
+    "id": "Rentang: {range}",
+    "pt": "Intervalo: {range}",
+    "ur": "دائرہ: {range}",
+    "zh-Hans": "范围：{range}"
+  },
+  "Reanudar": {
+    "ar": "استئناف",
+    "bn": "পুনরায় চালান",
+    "en": "Resume",
+    "es": "Reanudar",
+    "fr": "Reprendre",
+    "hi": "फिर शुरू करें",
+    "id": "Lanjutkan",
+    "pt": "Retomar",
+    "ur": "دوبارہ جاری کریں",
+    "zh-Hans": "继续"
   },
   "Recurso": {
     "ar": "المورد",
@@ -5027,6 +6527,30 @@
     "ur": "وسیلہ دستیاب نہیں",
     "zh-Hans": "资源不可用"
   },
+  "Recurso no disponible o incompatible": {
+    "ar": "المورد غير متاح أو غير متوافق",
+    "bn": "রিসোর্স অনুপলব্ধ বা অসামঞ্জস্যপূর্ণ",
+    "en": "Resource unavailable or incompatible",
+    "es": "Recurso no disponible o incompatible",
+    "fr": "Ressource indisponible ou incompatible",
+    "hi": "संसाधन अनुपलब्ध या असंगत है",
+    "id": "Sumber tidak tersedia atau tidak kompatibel",
+    "pt": "Recurso indisponível ou incompatível",
+    "ur": "وسیلہ غیر دستیاب یا ناموافق ہے",
+    "zh-Hans": "资源不可用或不兼容"
+  },
+  "Recursos compatibles": {
+    "ar": "موارد متوافقة",
+    "bn": "সামঞ্জস্যপূর্ণ রিসোর্স",
+    "en": "Compatible resources",
+    "es": "Recursos compatibles",
+    "fr": "Ressources compatibles",
+    "hi": "संगत संसाधन",
+    "id": "Sumber kompatibel",
+    "pt": "Recursos compatíveis",
+    "ur": "موافق وسائل",
+    "zh-Hans": "兼容资源"
+  },
   "Recursos de la biblioteca": {
     "ar": "موارد المكتبة",
     "bn": "লাইব্রেরির রিসোর্স",
@@ -5038,6 +6562,18 @@
     "pt": "Recursos da biblioteca",
     "ur": "لائبریری کے وسائل",
     "zh-Hans": "书库资源"
+  },
+  "Recursos de la colección": {
+    "ar": "موارد المجموعة",
+    "bn": "সংগ্রহের রিসোর্স",
+    "en": "Collection resources",
+    "es": "Recursos de la colección",
+    "fr": "Ressources de la collection",
+    "hi": "संग्रह के संसाधन",
+    "id": "Sumber daya koleksi",
+    "pt": "Recursos da coleção",
+    "ur": "مجموعے کے وسائل",
+    "zh-Hans": "收藏集资源"
   },
   "Recursos no disponibles": {
     "ar": "الموارد غير المتاحة",
@@ -5062,6 +6598,30 @@
     "pt": "Recursos paralelos",
     "ur": "متوازی وسائل",
     "zh-Hans": "平行资源"
+  },
+  "Recursos preferidos": {
+    "ar": "الموارد المفضلة",
+    "bn": "পছন্দের রিসোর্স",
+    "en": "Preferred resources",
+    "es": "Recursos preferidos",
+    "fr": "Ressources préférées",
+    "hi": "पसंदीदा संसाधन",
+    "id": "Sumber daya pilihan",
+    "pt": "Recursos preferidos",
+    "ur": "ترجیحی وسائل",
+    "zh-Hans": "首选资源"
+  },
+  "Recursos seleccionados": {
+    "ar": "الموارد المحددة",
+    "bn": "নির্বাচিত সম্পদ",
+    "en": "Selected resources",
+    "es": "Recursos seleccionados",
+    "fr": "Ressources sélectionnées",
+    "hi": "चुने गए संसाधन",
+    "id": "Sumber terpilih",
+    "pt": "Recursos selecionados",
+    "ur": "منتخب وسائل",
+    "zh-Hans": "所选资源"
   },
   "Recursos y licencias": {
     "ar": "الموارد والتراخيص",
@@ -5134,6 +6694,42 @@
     "pt": "Referência geral",
     "ur": "عمومی مراجع",
     "zh-Hans": "综合参考"
+  },
+  "Referencia o entrada": {
+    "ar": "مرجع أو مدخل",
+    "bn": "উল্লেখ বা শিরোশব্দ",
+    "en": "Reference or headword",
+    "es": "Referencia o entrada",
+    "fr": "Référence ou entrée",
+    "hi": "संदर्भ या प्रविष्टि",
+    "id": "Referensi atau entri",
+    "pt": "Referência ou entrada",
+    "ur": "حوالہ یا اندراج",
+    "zh-Hans": "经文引用或词条"
+  },
+  "Referencia, por ejemplo Jn 3:16 o Jn 3:16(RVR60)": {
+    "ar": "مرجع، مثل Jn 3:16 أو Jn 3:16(RVR60)",
+    "bn": "উল্লেখ, যেমন Jn 3:16 বা Jn 3:16(RVR60)",
+    "en": "Reference, e.g. Jn 3:16 or Jn 3:16(RVR60)",
+    "es": "Referencia, por ejemplo Jn 3:16 o Jn 3:16(RVR60)",
+    "fr": "Référence, par ex. Jn 3:16 ou Jn 3:16(RVR60)",
+    "hi": "संदर्भ, जैसे Jn 3:16 या Jn 3:16(RVR60)",
+    "id": "Referensi, misalnya Jn 3:16 atau Jn 3:16(RVR60)",
+    "pt": "Referência, por exemplo Jn 3:16 ou Jn 3:16(RVR60)",
+    "ur": "حوالہ، مثلاً Jn 3:16 یا Jn 3:16(RVR60)",
+    "zh-Hans": "引用，例如 Jn 3:16 或 Jn 3:16(RVR60)"
+  },
+  "Relación": {
+    "ar": "العلاقة",
+    "bn": "সম্পর্ক",
+    "en": "Relation",
+    "es": "Relación",
+    "fr": "Relation",
+    "hi": "संबंध",
+    "id": "Relasi",
+    "pt": "Relação",
+    "ur": "تعلق",
+    "zh-Hans": "关系"
   },
   "Rellenar y ordenar": {
     "ar": "ملء وترتيب",
@@ -5219,6 +6815,30 @@
     "ur": "سبز رنگ سے نمایاں کریں",
     "zh-Hans": "绿色高亮"
   },
+  "Restablecer": {
+    "ar": "إعادة تعيين",
+    "bn": "রিসেট করুন",
+    "en": "Reset",
+    "es": "Restablecer",
+    "fr": "Réinitialiser",
+    "hi": "रीसेट करें",
+    "id": "Atur ulang",
+    "pt": "Restaurar",
+    "ur": "دوبارہ ترتیب دیں",
+    "zh-Hans": "重置"
+  },
+  "Restablecer prioridades": {
+    "ar": "إعادة تعيين الأولويات",
+    "bn": "অগ্রাধিকার রিসেট করুন",
+    "en": "Reset priorities",
+    "es": "Restablecer prioridades",
+    "fr": "Réinitialiser les priorités",
+    "hi": "प्राथमिकताएँ रीसेट करें",
+    "id": "Atur ulang prioritas",
+    "pt": "Redefinir prioridades",
+    "ur": "ترجیحات بحال کریں",
+    "zh-Hans": "重置优先级"
+  },
   "Restaurar las lecturas anteriores": {
     "ar": "استعادة القراءات السابقة",
     "bn": "আগের পাঠ ফিরিয়ে আনুন",
@@ -5254,6 +6874,102 @@
     "pt": "Restaurar tamanho do texto",
     "ur": "متن کا سائز بحال کریں",
     "zh-Hans": "还原文字大小"
+  },
+  "Resultado anterior": {
+    "ar": "النتيجة السابقة",
+    "bn": "আগের ফলাফল",
+    "en": "Previous result",
+    "es": "Resultado anterior",
+    "fr": "Résultat précédent",
+    "hi": "पिछला परिणाम",
+    "id": "Hasil sebelumnya",
+    "pt": "Resultado anterior",
+    "ur": "پچھلا نتیجہ",
+    "zh-Hans": "上一个结果"
+  },
+  "Resultado de búsqueda": {
+    "ar": "نتيجة البحث",
+    "bn": "অনুসন্ধানের ফলাফল",
+    "en": "Search result",
+    "es": "Resultado de búsqueda",
+    "fr": "Résultat de recherche",
+    "hi": "खोज परिणाम",
+    "id": "Hasil pencarian",
+    "pt": "Resultado da busca",
+    "ur": "تلاش کا نتیجہ",
+    "zh-Hans": "搜索结果"
+  },
+  "Resultado siguiente": {
+    "ar": "النتيجة التالية",
+    "bn": "পরের ফলাফল",
+    "en": "Next result",
+    "es": "Resultado siguiente",
+    "fr": "Résultat suivant",
+    "hi": "अगला परिणाम",
+    "id": "Hasil berikutnya",
+    "pt": "Próximo resultado",
+    "ur": "اگلا نتیجہ",
+    "zh-Hans": "下一个结果"
+  },
+  "Resultado sin coincidencias positivas": {
+    "ar": "نتيجة بدون تطابقات إيجابية",
+    "bn": "ইতিবাচক মিল ছাড়া ফলাফল",
+    "en": "Result without positive matches",
+    "es": "Resultado sin coincidencias positivas",
+    "fr": "Résultat sans correspondances positives",
+    "hi": "सकारात्मक मिलान रहित परिणाम",
+    "id": "Hasil tanpa kecocokan positif",
+    "pt": "Resultado sem ocorrências positivas",
+    "ur": "مثبت مماثلت کے بغیر نتیجہ",
+    "zh-Hans": "没有正向匹配的结果"
+  },
+  "Resultado {current} de {total}": {
+    "ar": "النتيجة {current} من {total}",
+    "bn": "ফলাফল {current} / {total}",
+    "en": "Result {current} of {total}",
+    "es": "Resultado {current} de {total}",
+    "fr": "Résultat {current} sur {total}",
+    "hi": "परिणाम {current} / {total}",
+    "id": "Hasil {current} dari {total}",
+    "pt": "Resultado {current} de {total}",
+    "ur": "نتیجہ {current} از {total}",
+    "zh-Hans": "结果 {current}，共 {total} 个"
+  },
+  "Resultados de búsqueda": {
+    "ar": "نتائج البحث",
+    "bn": "অনুসন্ধানের ফলাফল",
+    "en": "Search results",
+    "es": "Resultados de búsqueda",
+    "fr": "Résultats de recherche",
+    "hi": "खोज परिणाम",
+    "id": "Hasil pencarian",
+    "pt": "Resultados da pesquisa",
+    "ur": "تلاش کے نتائج",
+    "zh-Hans": "搜索结果"
+  },
+  "Resultados de: {query}": {
+    "ar": "نتائج: {query}",
+    "bn": "এর ফলাফল: {query}",
+    "en": "Results for: {query}",
+    "es": "Resultados de: {query}",
+    "fr": "Résultats pour : {query}",
+    "hi": "इसके परिणाम: {query}",
+    "id": "Hasil untuk: {query}",
+    "pt": "Resultados de: {query}",
+    "ur": "اس کے نتائج: {query}",
+    "zh-Hans": "搜索结果：{query}"
+  },
+  "Resultados máximos": {
+    "ar": "الحد الأقصى للنتائج",
+    "bn": "সর্বাধিক ফলাফল",
+    "en": "Maximum results",
+    "es": "Resultados máximos",
+    "fr": "Résultats maximum",
+    "hi": "अधिकतम परिणाम",
+    "id": "Hasil maksimum",
+    "pt": "Máximo de resultados",
+    "ur": "زیادہ سے زیادہ نتائج",
+    "zh-Hans": "最多结果数"
   },
   "Revisión interna": {
     "ar": "المراجعة الداخلية",
@@ -5291,6 +7007,30 @@
     "ur": "سرخ طے شدہ آئیکن ہے۔ آپ کا انتخاب اگلی بار کے لیے محفوظ رہتا ہے۔",
     "zh-Hans": "红色为默认图标。您的选择会保留到下次启动。"
   },
+  "Se alcanzó el límite de búsqueda": {
+    "ar": "تم بلوغ حد البحث",
+    "bn": "অনুসন্ধানের সীমায় পৌঁছেছে",
+    "en": "Search limit reached",
+    "es": "Se alcanzó el límite de búsqueda",
+    "fr": "Limite de recherche atteinte",
+    "hi": "खोज की सीमा पूरी हो गई",
+    "id": "Batas pencarian tercapai",
+    "pt": "Limite de busca atingido",
+    "ur": "تلاش کی حد پوری ہو گئی",
+    "zh-Hans": "已达到搜索上限"
+  },
+  "Se alcanzó el límite de {limit}.": {
+    "ar": "تم بلوغ حد {limit}.",
+    "bn": "{limit} সীমায় পৌঁছেছে।",
+    "en": "The {limit} limit was reached.",
+    "es": "Se alcanzó el límite de {limit}.",
+    "fr": "La limite de {limit} a été atteinte.",
+    "hi": "{limit} की सीमा पूरी हो गई।",
+    "id": "Batas {limit} tercapai.",
+    "pt": "O limite de {limit} foi atingido.",
+    "ur": "{limit} کی حد تک پہنچ گئے ہیں۔",
+    "zh-Hans": "已达到{limit}限制。"
+  },
   "Se aplica a las nuevas lecturas. El 100 % conserva el tamaño de lectura ampliado; los estilos del archivo original no se modifican.": {
     "ar": "ينطبق على القراءات الجديدة. يحافظ ‎100%‎ على حجم القراءة المكبّر وأنماط الملف الأصلي.",
     "bn": "নতুন পাঠে প্রযোজ্য। ১০০% বড় পঠন আকার এবং মূল ফাইলের শৈলী বজায় রাখে।",
@@ -5302,6 +7042,18 @@
     "pt": "Aplica-se a novas leituras. 100% mantém o tamanho ampliado; os estilos do arquivo original são preservados.",
     "ur": "نئے مطالعے پر لاگو ہوتا ہے۔ 100% پر پڑھنے کا بڑا سائز اور اصل فائل کے انداز برقرار رہتے ہیں۔",
     "zh-Hans": "适用于新打开的阅读。100% 保留放大的阅读字号，并保留原始文件的样式。"
+  },
+  "Se buscan los recursos completos de los lectores abiertos, incluidos los minimizados.": {
+    "ar": "يُبحث في الموارد الكاملة للقارئات المفتوحة، بما فيها المصغّرة.",
+    "bn": "খোলা পাঠকের সম্পূর্ণ সম্পদে অনুসন্ধান হয়, ছোট করা পাঠকও অন্তর্ভুক্ত।",
+    "en": "Search the complete resources of open readers, including minimized readers.",
+    "es": "Se buscan los recursos completos de los lectores abiertos, incluidos los minimizados.",
+    "fr": "La recherche porte sur les ressources complètes des lecteurs ouverts, y compris ceux réduits.",
+    "hi": "खुले पाठकों के पूरे संसाधनों में खोजें, जिनमें छोटे किए गए पाठक भी शामिल हैं।",
+    "id": "Cari seluruh sumber pembaca yang terbuka, termasuk yang diminimalkan.",
+    "pt": "A busca inclui os recursos completos dos leitores abertos, inclusive os minimizados.",
+    "ur": "کھلے قارئین کے مکمل وسائل میں تلاش ہوتی ہے، جن میں کم سے کم کیے گئے قارئین بھی شامل ہیں۔",
+    "zh-Hans": "搜索已打开阅读器的完整资源，包括已最小化的阅读器。"
   },
   "Se muestran las primeras {count} entradas; quedan resultados o recursos por consultar.": {
     "ar": "تُعرض أول {count} مدخلات؛ توجد نتائج أو موارد أخرى لم تُفحص.",
@@ -5411,6 +7163,18 @@
     "ur": "فعال یا بند کرنے کے لیے مطالعے کی ونڈو منتخب کریں۔",
     "zh-Hans": "选择要激活或关闭的阅读窗口。"
   },
+  "Selecciona una lista de versículos": {
+    "ar": "اختر قائمة آيات",
+    "bn": "একটি পদের তালিকা নির্বাচন করুন",
+    "en": "Select a verse list",
+    "es": "Selecciona una lista de versículos",
+    "fr": "Sélectionnez une liste de versets",
+    "hi": "पदों की सूची चुनें",
+    "id": "Pilih daftar ayat",
+    "pt": "Selecione uma lista de versículos",
+    "ur": "آیات کی فہرست منتخب کریں",
+    "zh-Hans": "选择经文列表"
+  },
   "Selecciona una nota.": {
     "ar": "اختر ملاحظة.",
     "bn": "টীকা বাছাই করুন।",
@@ -5422,6 +7186,30 @@
     "pt": "Selecione uma nota.",
     "ur": "نوٹ منتخب کریں۔",
     "zh-Hans": "选择笔记。"
+  },
+  "Selecciona una o varias colecciones con ⌘.": {
+    "ar": "اختر مجموعة واحدة أو أكثر باستخدام ⌘.",
+    "bn": "⌘ ব্যবহার করে এক বা একাধিক সংগ্রহ নির্বাচন করুন।",
+    "en": "Select one or more collections using ⌘.",
+    "es": "Selecciona una o varias colecciones con ⌘.",
+    "fr": "Sélectionnez une ou plusieurs collections avec ⌘.",
+    "hi": "⌘ का उपयोग करके एक या अधिक संग्रह चुनें।",
+    "id": "Pilih satu atau beberapa koleksi dengan ⌘.",
+    "pt": "Selecione uma ou mais coleções usando ⌘.",
+    "ur": "⌘ کے ذریعے ایک یا زیادہ مجموعے منتخب کریں۔",
+    "zh-Hans": "按住 ⌘ 可选择多个集合。"
+  },
+  "Selecciona una o varias colecciones para buscar.": {
+    "ar": "اختر مجموعة واحدة أو أكثر للبحث.",
+    "bn": "অনুসন্ধানের জন্য এক বা একাধিক সংগ্রহ নির্বাচন করুন।",
+    "en": "Select one or more collections to search.",
+    "es": "Selecciona una o varias colecciones para buscar.",
+    "fr": "Sélectionnez une ou plusieurs collections à rechercher.",
+    "hi": "खोजने के लिए एक या अधिक संग्रह चुनें।",
+    "id": "Pilih satu atau beberapa koleksi untuk dicari.",
+    "pt": "Selecione uma ou mais coleções para buscar.",
+    "ur": "تلاش کے لیے ایک یا زیادہ مجموعے منتخب کریں۔",
+    "zh-Hans": "请选择一个或多个集合进行搜索。"
   },
   "Selecciona una palabra y elige Buscar en diccionario con el clic derecho. Cambia de diccionario en el selector. Mantén la ventana de diccionarios abierta para consultar automáticamente nuevas palabras; las frases no se consultan.": {
     "ar": "حدّد كلمة وانقر بزر الفأرة الأيمن ثم اختر البحث في القاموس. بدّل القاموس من المحدّد. أبقِ النافذة مفتوحة للبحث التلقائي عن الكلمات المحدّدة؛ تُتجاهل العبارات.",
@@ -5459,6 +7247,18 @@
     "ur": "سب منتخب کریں",
     "zh-Hans": "全选"
   },
+  "Seleccionar todos": {
+    "ar": "تحديد الكل",
+    "bn": "সব নির্বাচন করুন",
+    "en": "Select all",
+    "es": "Seleccionar todos",
+    "fr": "Tout sélectionner",
+    "hi": "सभी चुनें",
+    "id": "Pilih semua",
+    "pt": "Selecionar todos",
+    "ur": "سب منتخب کریں",
+    "zh-Hans": "全部选择"
+  },
   "Selector de distribución por ventana y cursores de redimensionado.": {
     "ar": "محدد تخطيط لكل نافذة ومؤشرات لتغيير الحجم.",
     "bn": "প্রতি উইন্ডোর বিন্যাস নির্বাচন ও আকার পরিবর্তনের কার্সর।",
@@ -5470,6 +7270,18 @@
     "pt": "Seletor de disposição por janela e cursores de redimensionamento.",
     "ur": "ہر ونڈو کے لیے ترتیب کا انتخاب اور سائز تبدیل کرنے والے کرسر۔",
     "zh-Hans": "每个窗口的布局选择器和大小调整光标。"
+  },
+  "Serie": {
+    "ar": "السلسلة",
+    "bn": "সিরিজ",
+    "en": "Series",
+    "es": "Serie",
+    "fr": "Série",
+    "hi": "श्रृंखला",
+    "id": "Seri",
+    "pt": "Série",
+    "ur": "سلسلہ",
+    "zh-Hans": "丛书"
   },
   "Sermonario o bosquejos": {
     "ar": "عظات أو مخططات",
@@ -5494,6 +7306,18 @@
     "pt": "Próxima leitura",
     "ur": "اگلا مطالعہ",
     "zh-Hans": "下一个阅读窗口"
+  },
+  "Sin agrupar": {
+    "ar": "بدون تجميع",
+    "bn": "দলবদ্ধ নয়",
+    "en": "Ungrouped",
+    "es": "Sin agrupar",
+    "fr": "Sans regroupement",
+    "hi": "बिना समूह",
+    "id": "Tanpa kelompok",
+    "pt": "Sem agrupamento",
+    "ur": "بغیر گروہ",
+    "zh-Hans": "不分组"
   },
   "Sin coincidencias": {
     "ar": "لا توجد تطابقات",
@@ -5530,6 +7354,18 @@
     "pt": "Sem localização",
     "ur": "کوئی مقام نہیں",
     "zh-Hans": "无位置"
+  },
+  "Sin valor": {
+    "ar": "بلا قيمة",
+    "bn": "মান নেই",
+    "en": "No value",
+    "es": "Sin valor",
+    "fr": "Sans valeur",
+    "hi": "कोई मान नहीं",
+    "id": "Tanpa nilai",
+    "pt": "Sem valor",
+    "ur": "کوئی قدر نہیں",
+    "zh-Hans": "无值"
   },
   "Sin vínculos": {
     "ar": "بلا روابط",
@@ -5783,6 +7619,18 @@
     "ur": "الٰہیات",
     "zh-Hans": "神学"
   },
+  "Texto bíblico": {
+    "ar": "نص الكتاب المقدس",
+    "bn": "বাইবেলের পাঠ",
+    "en": "Bible text",
+    "es": "Texto bíblico",
+    "fr": "Texte biblique",
+    "hi": "बाइबल पाठ",
+    "id": "Teks Alkitab",
+    "pt": "Texto bíblico",
+    "ur": "بائبل کا متن",
+    "zh-Hans": "圣经经文"
+  },
   "Texto con imágenes (RTFD)…": {
     "ar": "نص مع صور (RTFD)…",
     "bn": "ছবিসহ পাঠ (RTFD)…",
@@ -5831,6 +7679,18 @@
     "ur": "متن…",
     "zh-Hans": "文本…"
   },
+  "Tiene valor": {
+    "ar": "له قيمة",
+    "bn": "মান আছে",
+    "en": "Has a value",
+    "es": "Tiene valor",
+    "fr": "A une valeur",
+    "hi": "मान मौजूद है",
+    "id": "Memiliki nilai",
+    "pt": "Tem valor",
+    "ur": "قدر موجود ہے",
+    "zh-Hans": "有值"
+  },
   "Tipo": {
     "ar": "النوع",
     "bn": "ধরন",
@@ -5854,6 +7714,18 @@
     "pt": "Tipo de busca",
     "ur": "تلاش کی قسم",
     "zh-Hans": "搜索类型"
+  },
+  "Tipo de recurso": {
+    "ar": "نوع المورد",
+    "bn": "রিসোর্সের ধরন",
+    "en": "Resource type",
+    "es": "Tipo de recurso",
+    "fr": "Type de ressource",
+    "hi": "संसाधन प्रकार",
+    "id": "Jenis sumber",
+    "pt": "Tipo de recurso",
+    "ur": "وسیلے کی قسم",
+    "zh-Hans": "资源类型"
   },
   "Tipo de versión": {
     "ar": "نوع الإصدار",
@@ -5891,6 +7763,18 @@
     "ur": "تمام بائبل",
     "zh-Hans": "所有圣经"
   },
+  "Todas las condiciones": {
+    "ar": "كل الشروط",
+    "bn": "সব শর্ত",
+    "en": "All conditions",
+    "es": "Todas las condiciones",
+    "fr": "Toutes les conditions",
+    "hi": "सभी शर्तें",
+    "id": "Semua kondisi",
+    "pt": "Todas as condições",
+    "ur": "تمام شرائط",
+    "zh-Hans": "所有条件"
+  },
   "Todavía no hay versiones Stable publicadas.": {
     "ar": "لم تُنشر إصدارات Stable بعد.",
     "bn": "এখনও কোনো Stable সংস্করণ প্রকাশিত হয়নি।",
@@ -5902,6 +7786,18 @@
     "pt": "Ainda não há versões Stable publicadas.",
     "ur": "ابھی کوئی Stable نسخہ شائع نہیں ہوا۔",
     "zh-Hans": "尚未发布 Stable 版本。"
+  },
+  "Todo el texto": {
+    "ar": "كل النص المرئي",
+    "bn": "সব দৃশ্যমান পাঠ",
+    "en": "All visible text",
+    "es": "Todo el texto",
+    "fr": "Tout le texte visible",
+    "hi": "सभी दृश्यमान पाठ",
+    "id": "Semua teks yang terlihat",
+    "pt": "Todo o texto visível",
+    "ur": "تمام نظر آنے والا متن",
+    "zh-Hans": "全部可见文本"
   },
   "Todos": {
     "ar": "الكل",
@@ -5926,6 +7822,18 @@
     "pt": "Todos os recursos",
     "ur": "تمام وسائل",
     "zh-Hans": "全部资源"
+  },
+  "Todos los versículos": {
+    "ar": "كل الآيات",
+    "bn": "সব পদ",
+    "en": "All verses",
+    "es": "Todos los versículos",
+    "fr": "Tous les versets",
+    "hi": "सभी पद",
+    "id": "Semua ayat",
+    "pt": "Todos os versículos",
+    "ur": "تمام آیات",
+    "zh-Hans": "所有经文"
   },
   "Trasladar y redimensionar": {
     "ar": "نقل وتغيير الحجم",
@@ -5974,6 +7882,30 @@
     "pt": "Título",
     "ur": "عنوان",
     "zh-Hans": "标题"
+  },
+  "Título A–Z": {
+    "ar": "العنوان A–Z",
+    "bn": "শিরোনাম A–Z",
+    "en": "Title A–Z",
+    "es": "Título A–Z",
+    "fr": "Titre A–Z",
+    "hi": "शीर्षक A–Z",
+    "id": "Judul A–Z",
+    "pt": "Título A–Z",
+    "ur": "عنوان A–Z",
+    "zh-Hans": "标题 A–Z"
+  },
+  "Título Z–A": {
+    "ar": "العنوان Z–A",
+    "bn": "শিরোনাম Z–A",
+    "en": "Title Z–A",
+    "es": "Título Z–A",
+    "fr": "Titre Z–A",
+    "hi": "शीर्षक Z–A",
+    "id": "Judul Z–A",
+    "pt": "Título Z–A",
+    "ur": "عنوان Z–A",
+    "zh-Hans": "标题 Z–A"
   },
   "Título de artículo": {
     "ar": "عنوان المقال",
@@ -6047,6 +7979,18 @@
     "ur": "ایک پیراگراف",
     "zh-Hans": "单一段落"
   },
+  "Un título del índice puede abrir su artículo sin resaltar el cuerpo.": {
+    "ar": "يمكن لعنوان الفهرس فتح مقالته دون تمييز المتن.",
+    "bn": "সূচির শিরোনাম মূল পাঠ হাইলাইট না করেই নিবন্ধ খুলতে পারে।",
+    "en": "An index title can open its article without highlighting the body.",
+    "es": "Un título del índice puede abrir su artículo sin resaltar el cuerpo.",
+    "fr": "Un titre d’index peut ouvrir son article sans surligner le corps.",
+    "hi": "सूची का शीर्षक मुख्य पाठ को हाइलाइट किए बिना अपना लेख खोल सकता है।",
+    "id": "Judul indeks dapat membuka artikelnya tanpa menyorot isi.",
+    "pt": "Um título do índice pode abrir seu artigo sem destacar o corpo.",
+    "ur": "فہرست کا عنوان متن نمایاں کیے بغیر اپنا مضمون کھول سکتا ہے۔",
+    "zh-Hans": "索引标题可以打开其文章而不突出显示正文。"
+  },
   "Una a la izquierda y dos a la derecha": {
     "ar": "واحدة يسارًا واثنتان يمينًا",
     "bn": "বামে একটি, ডানে দুটি",
@@ -6058,6 +8002,18 @@
     "pt": "Uma à esquerda e duas à direita",
     "ur": "بائیں ایک، دائیں دو",
     "zh-Hans": "左一右二"
+  },
+  "Una fuente cambió o no pudo verificarse después de la pausa. Inicia una búsqueda nueva.": {
+    "ar": "تغير أحد المصادر أو تعذر التحقق منه بعد الإيقاف المؤقت. ابدأ بحثًا جديدًا.",
+    "bn": "বিরতির পর কোনো উৎস বদলেছে বা যাচাই করা যায়নি। নতুন অনুসন্ধান শুরু করুন।",
+    "en": "A source changed or could not be verified after pausing. Start a new search.",
+    "es": "Una fuente cambió o no pudo verificarse después de la pausa. Inicia una búsqueda nueva.",
+    "fr": "Une source a changé ou n’a pas pu être vérifiée après la pause. Lancez une nouvelle recherche.",
+    "hi": "विराम के बाद स्रोत बदला या सत्यापित नहीं हो सका। नई खोज शुरू करें।",
+    "id": "Sumber berubah atau tidak dapat diverifikasi setelah jeda. Mulai pencarian baru.",
+    "pt": "Uma fonte mudou ou não pôde ser verificada após a pausa. Inicie uma nova pesquisa.",
+    "ur": "وقفے کے بعد کوئی ماخذ بدل گیا یا اس کی تصدیق نہ ہو سکی۔ نئی تلاش شروع کریں۔",
+    "zh-Hans": "暂停后有来源已更改或无法验证。请开始新搜索。"
   },
   "Una parte del pasaje no conserva una referencia o un intervalo de texto válido.": {
     "ar": "لا يحتفظ جزء من المقطع بمرجع أو نطاق نص صالح.",
@@ -6263,6 +8219,18 @@
     "ur": "سیٹنگز میں نسخے کی معلومات اور تبدیلیوں کی فہرست۔",
     "zh-Hans": "设置中集成版本信息和更新日志。"
   },
+  "Versículo": {
+    "ar": "آية",
+    "bn": "পদ",
+    "en": "Verse",
+    "es": "Versículo",
+    "fr": "Verset",
+    "hi": "पद",
+    "id": "Ayat",
+    "pt": "Versículo",
+    "ur": "آیت",
+    "zh-Hans": "节"
+  },
   "Versículos bíblicos": {
     "ar": "آيات الكتاب المقدس",
     "bn": "বাইবেলের পদ",
@@ -6287,6 +8255,18 @@
     "ur": "مسیحی زندگی اور روحانیت",
     "zh-Hans": "基督徒生活与灵修"
   },
+  "Vista": {
+    "ar": "العرض",
+    "bn": "দৃশ্য",
+    "en": "View",
+    "es": "Vista",
+    "fr": "Vue",
+    "hi": "दृश्य",
+    "id": "Tampilan",
+    "pt": "Visualização",
+    "ur": "منظر",
+    "zh-Hans": "视图"
+  },
   "Vista previa": {
     "ar": "معاينة",
     "bn": "পূর্বরূপ",
@@ -6298,6 +8278,18 @@
     "pt": "Prévia",
     "ur": "پیش منظر",
     "zh-Hans": "预览"
+  },
+  "Vista previa de la colección": {
+    "ar": "معاينة المجموعة",
+    "bn": "সংগ্রহের পূর্বরূপ",
+    "en": "Collection preview",
+    "es": "Vista previa de la colección",
+    "fr": "Aperçu de la collection",
+    "hi": "संग्रह पूर्वावलोकन",
+    "id": "Pratinjau koleksi",
+    "pt": "Prévia da coleção",
+    "ur": "مجموعے کا پیش منظر",
+    "zh-Hans": "集合预览"
   },
   "Volver a cargar": {
     "ar": "إعادة التحميل",
@@ -6371,6 +8363,18 @@
     "ur": "کم از کم macOS",
     "zh-Hans": "最低 macOS 版本"
   },
+  "{articles} artículos · {fields} campos personales": {
+    "ar": "{articles} مقالات · {fields} حقول شخصية",
+    "bn": "{articles} নিবন্ধ · {fields} ব্যক্তিগত ক্ষেত্র",
+    "en": "{articles} articles · {fields} personal fields",
+    "es": "{articles} artículos · {fields} campos personales",
+    "fr": "{articles} articles · {fields} champs personnels",
+    "hi": "{articles} लेख · {fields} व्यक्तिगत फ़ील्ड",
+    "id": "{articles} artikel · {fields} bidang pribadi",
+    "pt": "{articles} artigos · {fields} campos pessoais",
+    "ur": "{articles} مضامین · {fields} ذاتی خانے",
+    "zh-Hans": "{articles} 篇文章 · {fields} 个个人字段"
+  },
   "{count} artículos examinados": {
     "ar": "المقالات المفحوصة: {count}",
     "bn": "পরীক্ষিত নিবন্ধ: {count}",
@@ -6382,6 +8386,30 @@
     "pt": "Artigos examinados: {count}",
     "ur": "جانچے گئے مضامین: {count}",
     "zh-Hans": "已检查文章：{count}"
+  },
+  "{count} artículos examinados · {seconds} s de trabajo activo": {
+    "ar": "تم فحص {count} مقالة · {seconds} ث من العمل النشط",
+    "bn": "{count}টি নিবন্ধ পরীক্ষা করা হয়েছে · {seconds} সেকেন্ড সক্রিয় কাজ",
+    "en": "{count} articles examined · {seconds} s of active work",
+    "es": "{count} artículos examinados · {seconds} s de trabajo activo",
+    "fr": "{count} articles examinés · {seconds} s de travail actif",
+    "hi": "{count} लेख जाँचे · {seconds} सेकंड सक्रिय कार्य",
+    "id": "{count} artikel diperiksa · {seconds} dtk kerja aktif",
+    "pt": "{count} artigos examinados · {seconds} s de trabalho ativo",
+    "ur": "{count} مضامین کا جائزہ · {seconds} سیکنڈ فعال کام",
+    "zh-Hans": "已检查{count}篇文章 · 活动处理{seconds}秒"
+  },
+  "{count} avisos adicionales": {
+    "ar": "{count} تنبيهات إضافية",
+    "bn": "আরও {count}টি বিজ্ঞপ্তি",
+    "en": "{count} additional notices",
+    "es": "{count} avisos adicionales",
+    "fr": "{count} avis supplémentaires",
+    "hi": "{count} अतिरिक्त सूचनाएँ",
+    "id": "{count} pemberitahuan tambahan",
+    "pt": "{count} avisos adicionais",
+    "ur": "{count} اضافی اطلاعیں",
+    "zh-Hans": "另有 {count} 条提示"
   },
   "{count} coincidencias": {
     "ar": "التطابقات: {count}",
@@ -6455,6 +8483,18 @@
     "ur": "غیر دستیاب وسائل: {count}",
     "zh-Hans": "不可用的资源：{count}"
   },
+  "{count} recursos seleccionados": {
+    "ar": "{count} موارد محددة",
+    "bn": "{count}টি সম্পদ নির্বাচিত",
+    "en": "{count} selected resources",
+    "es": "{count} recursos seleccionados",
+    "fr": "{count} ressources sélectionnées",
+    "hi": "{count} संसाधन चुने गए",
+    "id": "{count} sumber dipilih",
+    "pt": "{count} recursos selecionados",
+    "ur": "{count} وسائل منتخب",
+    "zh-Hans": "已选择 {count} 个资源"
+  },
   "{current} de {total}": {
     "ar": "{current} من {total}",
     "bn": "{total}-এর মধ্যে {current}",
@@ -6491,6 +8531,30 @@
     "ur": "نتائج: {results} · جانچے گئے مضامین: {articles}",
     "zh-Hans": "结果：{results} · 已检查文章：{articles}"
   },
+  "{results} resultados · {articles} artículos · {fields} campos personales": {
+    "ar": "{results} نتائج · {articles} مقالات · {fields} حقول شخصية",
+    "bn": "{results} ফলাফল · {articles} নিবন্ধ · {fields} ব্যক্তিগত ক্ষেত্র",
+    "en": "{results} results · {articles} articles · {fields} personal fields",
+    "es": "{results} resultados · {articles} artículos · {fields} campos personales",
+    "fr": "{results} résultats · {articles} articles · {fields} champs personnels",
+    "hi": "{results} परिणाम · {articles} लेख · {fields} व्यक्तिगत फ़ील्ड",
+    "id": "{results} hasil · {articles} artikel · {fields} bidang pribadi",
+    "pt": "{results} resultados · {articles} artigos · {fields} campos pessoais",
+    "ur": "{results} نتائج · {articles} مضامین · {fields} ذاتی خانے",
+    "zh-Hans": "{results} 个结果 · {articles} 篇文章 · {fields} 个个人字段"
+  },
+  "{selected} versículos examinados · {excluded} fuera del rango": {
+    "ar": "تم فحص {selected} آيات · {excluded} خارج النطاق",
+    "bn": "{selected} পদ পরীক্ষা করা হয়েছে · {excluded} পরিসরের বাইরে",
+    "en": "{selected} verses examined · {excluded} outside the range",
+    "es": "{selected} versículos examinados · {excluded} fuera del rango",
+    "fr": "{selected} versets examinés · {excluded} hors de la plage",
+    "hi": "{selected} पद जाँचे गए · {excluded} दायरे से बाहर",
+    "id": "{selected} ayat diperiksa · {excluded} di luar rentang",
+    "pt": "{selected} versículos examinados · {excluded} fora do intervalo",
+    "ur": "{selected} آیات کی جانچ ہوئی · {excluded} دائرے سے باہر",
+    "zh-Hans": "已检查 {selected} 节经文 · {excluded} 节在范围外"
+  },
   "¿Qué es esto?": {
     "ar": "ما هذا؟",
     "bn": "এটি কী?",
@@ -6502,6 +8566,18 @@
     "pt": "O que é isto?",
     "ur": "یہ کیا ہے؟",
     "zh-Hans": "这是什么？"
+  },
+  "Ámbito": {
+    "ar": "النطاق",
+    "bn": "পরিসর",
+    "en": "Scope",
+    "es": "Ámbito",
+    "fr": "Périmètre",
+    "hi": "दायरा",
+    "id": "Lingkup",
+    "pt": "Âmbito",
+    "ur": "دائرہ",
+    "zh-Hans": "范围"
   },
   "Área de trabajo guardada": {
     "ar": "مساحة عمل محفوظة",
@@ -6574,1757 +8650,5 @@
     "pt": "Última verificação",
     "ur": "آخری جانچ",
     "zh-Hans": "上次检查"
-  },
-  "Versículo": {
-    "en": "Verse",
-    "zh-Hans": "节",
-    "hi": "पद",
-    "es": "Versículo",
-    "ar": "آية",
-    "fr": "Verset",
-    "bn": "পদ",
-    "pt": "Versículo",
-    "id": "Ayat",
-    "ur": "آیت"
-  },
-  "Colecciones": {
-    "en": "Collections",
-    "zh-Hans": "收藏集",
-    "hi": "संग्रह",
-    "ar": "مجموعات",
-    "fr": "Collections",
-    "bn": "সংগ্রহ",
-    "pt": "Coleções",
-    "id": "Koleksi",
-    "ur": "مجموعے",
-    "es": "Colecciones"
-  },
-  "Nueva colección": {
-    "en": "New collection",
-    "zh-Hans": "新建收藏集",
-    "hi": "नया संग्रह",
-    "ar": "مجموعة جديدة",
-    "fr": "Nouvelle collection",
-    "bn": "নতুন সংগ্রহ",
-    "pt": "Nova coleção",
-    "id": "Koleksi baru",
-    "ur": "نیا مجموعہ",
-    "es": "Nueva colección"
-  },
-  "Nombre de la colección": {
-    "en": "Collection name",
-    "zh-Hans": "收藏集名称",
-    "hi": "संग्रह का नाम",
-    "ar": "اسم المجموعة",
-    "fr": "Nom de la collection",
-    "bn": "সংগ্রহের নাম",
-    "pt": "Nome da coleção",
-    "id": "Nama koleksi",
-    "ur": "مجموعے کا نام",
-    "es": "Nombre de la colección"
-  },
-  "Eliminar colección": {
-    "en": "Delete collection",
-    "zh-Hans": "删除收藏集",
-    "hi": "संग्रह हटाएँ",
-    "ar": "حذف المجموعة",
-    "fr": "Supprimer la collection",
-    "bn": "সংগ্রহ মুছুন",
-    "pt": "Excluir coleção",
-    "id": "Hapus koleksi",
-    "ur": "مجموعہ حذف کریں",
-    "es": "Eliminar colección"
-  },
-  "Recursos de la colección": {
-    "en": "Collection resources",
-    "zh-Hans": "收藏集资源",
-    "hi": "संग्रह के संसाधन",
-    "ar": "موارد المجموعة",
-    "fr": "Ressources de la collection",
-    "bn": "সংগ্রহের রিসোর্স",
-    "pt": "Recursos da coleção",
-    "id": "Sumber daya koleksi",
-    "ur": "مجموعے کے وسائل",
-    "es": "Recursos de la colección"
-  },
-  "Quitar de la colección": {
-    "en": "Remove from collection",
-    "zh-Hans": "从收藏集中移除",
-    "hi": "संग्रह से निकालें",
-    "ar": "إزالة من المجموعة",
-    "fr": "Retirer de la collection",
-    "bn": "সংগ্রহ থেকে সরান",
-    "pt": "Remover da coleção",
-    "id": "Keluarkan dari koleksi",
-    "ur": "مجموعے سے ہٹائیں",
-    "es": "Quitar de la colección"
-  },
-  "Mostrar en biblioteca": {
-    "en": "Show in library",
-    "zh-Hans": "在书库中显示",
-    "hi": "पुस्तकालय में दिखाएँ",
-    "ar": "إظهار في المكتبة",
-    "fr": "Afficher dans la bibliothèque",
-    "bn": "লাইব্রেরিতে দেখান",
-    "pt": "Mostrar na biblioteca",
-    "id": "Tampilkan di perpustakaan",
-    "ur": "لائبریری میں دکھائیں",
-    "es": "Mostrar en biblioteca"
-  },
-  "Agregar recursos a la colección": {
-    "en": "Add resources to collection",
-    "zh-Hans": "向收藏集添加资源",
-    "hi": "संग्रह में संसाधन जोड़ें",
-    "ar": "إضافة موارد إلى المجموعة",
-    "fr": "Ajouter des ressources à la collection",
-    "bn": "সংগ্রহে রিসোর্স যোগ করুন",
-    "pt": "Adicionar recursos à coleção",
-    "id": "Tambahkan sumber daya ke koleksi",
-    "ur": "مجموعے میں وسائل شامل کریں",
-    "es": "Agregar recursos a la colección"
-  },
-  "Agregar seleccionados": {
-    "en": "Add selected",
-    "zh-Hans": "添加所选项",
-    "hi": "चयनित जोड़ें",
-    "ar": "إضافة المحدد",
-    "fr": "Ajouter la sélection",
-    "bn": "নির্বাচিত যোগ করুন",
-    "pt": "Adicionar selecionados",
-    "id": "Tambahkan yang dipilih",
-    "ur": "منتخب شامل کریں",
-    "es": "Agregar seleccionados"
-  },
-  "Crea una colección para elegir sus recursos.": {
-    "en": "Create a collection to choose its resources.",
-    "zh-Hans": "创建收藏集以选择其资源。",
-    "hi": "संसाधन चुनने के लिए संग्रह बनाएँ।",
-    "ar": "أنشئ مجموعة لاختيار مواردها.",
-    "fr": "Créez une collection pour choisir ses ressources.",
-    "bn": "রিসোর্স বেছে নিতে একটি সংগ্রহ তৈরি করুন।",
-    "pt": "Crie uma coleção para escolher seus recursos.",
-    "id": "Buat koleksi untuk memilih sumber dayanya.",
-    "ur": "وسائل منتخب کرنے کے لیے ایک مجموعہ بنائیں۔",
-    "es": "Crea una colección para elegir sus recursos."
-  },
-  "Las colecciones contienen datos incompatibles.": {
-    "en": "Collections contain incompatible data.",
-    "zh-Hans": "收藏集包含不兼容的数据。",
-    "hi": "संग्रहों में असंगत डेटा है।",
-    "ar": "تحتوي المجموعات على بيانات غير متوافقة.",
-    "fr": "Les collections contiennent des données incompatibles.",
-    "bn": "সংগ্রহে অসামঞ্জস্যপূর্ণ ডেটা রয়েছে।",
-    "pt": "As coleções contêm dados incompatíveis.",
-    "id": "Koleksi berisi data yang tidak kompatibel.",
-    "ur": "مجموعوں میں غیر موافق ڈیٹا ہے۔",
-    "es": "Las colecciones contienen datos incompatibles."
-  },
-  "La colección ya no está disponible.": {
-    "en": "The collection is no longer available.",
-    "zh-Hans": "该收藏集已不可用。",
-    "hi": "संग्रह अब उपलब्ध नहीं है।",
-    "ar": "لم تعد المجموعة متاحة.",
-    "fr": "La collection n’est plus disponible.",
-    "bn": "সংগ্রহটি আর উপলভ্য নেই।",
-    "pt": "A coleção não está mais disponível.",
-    "id": "Koleksi tidak lagi tersedia.",
-    "ur": "مجموعہ اب دستیاب نہیں ہے۔",
-    "es": "La colección ya no está disponible."
-  },
-  "No se pudieron leer las colecciones.": {
-    "en": "Could not read collections.",
-    "zh-Hans": "无法读取收藏集。",
-    "hi": "संग्रह पढ़े नहीं जा सके।",
-    "ar": "تعذرت قراءة المجموعات.",
-    "fr": "Impossible de lire les collections.",
-    "bn": "সংগ্রহ পড়া যায়নি।",
-    "pt": "Não foi possível ler as coleções.",
-    "id": "Koleksi tidak dapat dibaca.",
-    "ur": "مجموعے پڑھے نہیں جا سکے۔",
-    "es": "No se pudieron leer las colecciones."
-  },
-  "Abrir preferidos": {
-    "en": "Open preferred",
-    "zh-Hans": "打开首选资源",
-    "hi": "पसंदीदा खोलें",
-    "ar": "فتح المفضلة",
-    "fr": "Ouvrir les favoris",
-    "bn": "পছন্দেরগুলো খুলুন",
-    "pt": "Abrir preferidos",
-    "id": "Buka pilihan utama",
-    "ur": "ترجیحی وسائل کھولیں",
-    "es": "Abrir preferidos"
-  },
-  "Advertencias": {
-    "en": "Warnings",
-    "zh-Hans": "警告",
-    "hi": "चेतावनियाँ",
-    "ar": "تحذيرات",
-    "fr": "Avertissements",
-    "bn": "সতর্কতা",
-    "pt": "Avisos",
-    "id": "Peringatan",
-    "ur": "انتباہات",
-    "es": "Advertencias"
-  },
-  "Desmarcar todos": {
-    "en": "Deselect all",
-    "zh-Hans": "全部取消选择",
-    "hi": "सभी अचयनित करें",
-    "ar": "إلغاء تحديد الكل",
-    "fr": "Tout désélectionner",
-    "bn": "সব নির্বাচন বাতিল করুন",
-    "pt": "Desmarcar todos",
-    "id": "Batalkan semua pilihan",
-    "ur": "سب غیر منتخب کریں",
-    "es": "Desmarcar todos"
-  },
-  "Enlaces clave": {
-    "en": "Key links",
-    "zh-Hans": "关键链接",
-    "hi": "मुख्य लिंक",
-    "ar": "روابط رئيسية",
-    "fr": "Liens clés",
-    "bn": "মূল লিংক",
-    "pt": "Links-chave",
-    "id": "Tautan utama",
-    "ur": "کلیدی روابط",
-    "es": "Enlaces clave"
-  },
-  "Enlaces clave…": {
-    "en": "Key links…",
-    "zh-Hans": "关键链接…",
-    "hi": "मुख्य लिंक…",
-    "ar": "روابط رئيسية…",
-    "fr": "Liens clés…",
-    "bn": "মূল লিংক…",
-    "pt": "Links-chave…",
-    "id": "Tautan utama…",
-    "ur": "کلیدی روابط…",
-    "es": "Enlaces clave…"
-  },
-  "Prioridades": {
-    "en": "Priorities",
-    "zh-Hans": "优先级",
-    "hi": "प्राथमिकताएँ",
-    "ar": "الأولويات",
-    "fr": "Priorités",
-    "bn": "অগ্রাধিকার",
-    "pt": "Prioridades",
-    "id": "Prioritas",
-    "ur": "ترجیحات",
-    "es": "Prioridades"
-  },
-  "Promover": {
-    "en": "Promote",
-    "zh-Hans": "提升优先级",
-    "hi": "प्राथमिकता दें",
-    "ar": "ترقية",
-    "fr": "Promouvoir",
-    "bn": "অগ্রাধিকার দিন",
-    "pt": "Promover",
-    "id": "Prioritaskan",
-    "ur": "ترجیح دیں",
-    "es": "Promover"
-  },
-  "Quitar prioridad": {
-    "en": "Remove priority",
-    "zh-Hans": "移除优先级",
-    "hi": "प्राथमिकता हटाएँ",
-    "ar": "إزالة الأولوية",
-    "fr": "Retirer la priorité",
-    "bn": "অগ্রাধিকার সরান",
-    "pt": "Remover prioridade",
-    "id": "Hapus prioritas",
-    "ur": "ترجیح ہٹائیں",
-    "es": "Quitar prioridad"
-  },
-  "Recursos preferidos": {
-    "en": "Preferred resources",
-    "zh-Hans": "首选资源",
-    "hi": "पसंदीदा संसाधन",
-    "ar": "الموارد المفضلة",
-    "fr": "Ressources préférées",
-    "bn": "পছন্দের রিসোর্স",
-    "pt": "Recursos preferidos",
-    "id": "Sumber daya pilihan",
-    "ur": "ترجیحی وسائل",
-    "es": "Recursos preferidos"
-  },
-  "Referencia o entrada": {
-    "en": "Reference or headword",
-    "zh-Hans": "经文引用或词条",
-    "hi": "संदर्भ या प्रविष्टि",
-    "ar": "مرجع أو مدخل",
-    "fr": "Référence ou entrée",
-    "bn": "উল্লেখ বা শিরোশব্দ",
-    "pt": "Referência ou entrada",
-    "id": "Referensi atau entri",
-    "ur": "حوالہ یا اندراج",
-    "es": "Referencia o entrada"
-  },
-  "Seleccionar todos": {
-    "en": "Select all",
-    "zh-Hans": "全部选择",
-    "hi": "सभी चुनें",
-    "ar": "تحديد الكل",
-    "fr": "Tout sélectionner",
-    "bn": "সব নির্বাচন করুন",
-    "pt": "Selecionar todos",
-    "id": "Pilih semua",
-    "ur": "سب منتخب کریں",
-    "es": "Seleccionar todos"
-  },
-  "Habilitado": {
-    "en": "Enabled",
-    "zh-Hans": "已启用",
-    "hi": "सक्षम",
-    "ar": "مفعّل",
-    "fr": "Activé",
-    "bn": "সক্রিয়",
-    "pt": "Ativado",
-    "id": "Aktif",
-    "ur": "فعال",
-    "es": "Habilitado"
-  },
-  "Restablecer prioridades": {
-    "en": "Reset priorities",
-    "zh-Hans": "重置优先级",
-    "hi": "प्राथमिकताएँ रीसेट करें",
-    "ar": "إعادة تعيين الأولويات",
-    "fr": "Réinitialiser les priorités",
-    "bn": "অগ্রাধিকার রিসেট করুন",
-    "pt": "Redefinir prioridades",
-    "id": "Atur ulang prioritas",
-    "ur": "ترجیحات بحال کریں",
-    "es": "Restablecer prioridades"
-  },
-  "Buscar referencias bíblicas": {
-    "ar": "البحث عن مراجع الكتاب المقدس",
-    "bn": "বাইবেলের উল্লেখ খুঁজুন",
-    "en": "Find Bible references",
-    "es": "Buscar referencias bíblicas",
-    "fr": "Rechercher des références bibliques",
-    "hi": "बाइबल संदर्भ खोजें",
-    "id": "Cari referensi Alkitab",
-    "pt": "Buscar referências bíblicas",
-    "ur": "بائبل کے حوالے تلاش کریں",
-    "zh-Hans": "查找圣经引用"
-  },
-  "Buscar referencias bíblicas…": {
-    "ar": "البحث عن مراجع الكتاب المقدس…",
-    "bn": "বাইবেলের উল্লেখ খুঁজুন…",
-    "en": "Find Bible references…",
-    "es": "Buscar referencias bíblicas…",
-    "fr": "Rechercher des références bibliques…",
-    "hi": "बाइबल संदर्भ खोजें…",
-    "id": "Cari referensi Alkitab…",
-    "pt": "Buscar referências bíblicas…",
-    "ur": "بائبل کے حوالے تلاش کریں…",
-    "zh-Hans": "查找圣经引用…"
-  },
-  "Documento personal": {
-    "ar": "مستند شخصي",
-    "bn": "ব্যক্তিগত নথি",
-    "en": "Personal document",
-    "es": "Documento personal",
-    "fr": "Document personnel",
-    "hi": "व्यक्तिगत दस्तावेज़",
-    "id": "Dokumen pribadi",
-    "pt": "Documento pessoal",
-    "ur": "ذاتی دستاویز",
-    "zh-Hans": "个人文档"
-  },
-  "Documentos personales": {
-    "ar": "المستندات الشخصية",
-    "bn": "ব্যক্তিগত নথি",
-    "en": "Personal documents",
-    "es": "Documentos personales",
-    "fr": "Documents personnels",
-    "hi": "व्यक्तिगत दस्तावेज़",
-    "id": "Dokumen pribadi",
-    "pt": "Documentos pessoais",
-    "ur": "ذاتی دستاویزات",
-    "zh-Hans": "个人文档"
-  },
-  "Encuentra menciones explícitas de pasajes. Una edición entre paréntesis limita la búsqueda a citas que indican esa edición.": {
-    "ar": "ابحث عن إشارات صريحة إلى المقاطع. يؤدي وضع طبعة بين قوسين إلى قصر البحث على الاقتباسات التي تسمي تلك الطبعة.",
-    "bn": "পদের স্পষ্ট উল্লেখ খুঁজুন। বন্ধনীতে সংস্করণ দিলে অনুসন্ধান কেবল সেই সংস্করণের নাম দেওয়া উদ্ধৃতিতে সীমিত থাকে।",
-    "en": "Find explicit mentions of passages. An edition in parentheses limits the search to citations naming that edition.",
-    "es": "Encuentra menciones explícitas de pasajes. Una edición entre paréntesis limita la búsqueda a citas que indican esa edición.",
-    "fr": "Recherchez les mentions explicites de passages. Une édition entre parenthèses limite la recherche aux citations qui la précisent.",
-    "hi": "पदों के स्पष्ट उल्लेख खोजें। कोष्ठक में संस्करण देने पर केवल उसी संस्करण का नाम बताने वाले उद्धरण खोजे जाते हैं।",
-    "id": "Temukan penyebutan ayat secara eksplisit. Edisi dalam tanda kurung membatasi pencarian pada kutipan yang menyebut edisi tersebut.",
-    "pt": "Encontre menções explícitas de passagens. Uma edição entre parênteses limita a busca às citações que indicam essa edição.",
-    "ur": "عبارات کے واضح حوالے تلاش کریں۔ قوسین میں ایڈیشن دینے سے تلاش صرف اسی ایڈیشن کا نام بتانے والے حوالوں تک محدود رہتی ہے۔",
-    "zh-Hans": "查找明确的经文引用。在括号中指定版本后，仅搜索标明该版本的引用。"
-  },
-  "La búsqueda tiene resultados parciales o fuentes pendientes": {
-    "ar": "البحث يحتوي على نتائج جزئية أو مصادر معلقة",
-    "bn": "অনুসন্ধানের ফল আংশিক বা কিছু উৎস অপেক্ষমাণ",
-    "en": "Search has partial results or pending sources",
-    "es": "La búsqueda tiene resultados parciales o fuentes pendientes",
-    "fr": "La recherche comporte des résultats partiels ou des sources en attente",
-    "hi": "खोज के परिणाम आंशिक हैं या कुछ स्रोत लंबित हैं",
-    "id": "Pencarian memiliki hasil sebagian atau sumber tertunda",
-    "pt": "A busca tem resultados parciais ou fontes pendentes",
-    "ur": "تلاش کے نتائج جزوی ہیں یا کچھ ذرائع زیر التوا ہیں",
-    "zh-Hans": "搜索结果不完整或有待处理的来源"
-  },
-  "No se encontraron referencias coincidentes.": {
-    "ar": "لم يُعثر على مراجع مطابقة.",
-    "bn": "কোনো মিলে যাওয়া উল্লেখ পাওয়া যায়নি।",
-    "en": "No matching references found.",
-    "es": "No se encontraron referencias coincidentes.",
-    "fr": "Aucune référence correspondante trouvée.",
-    "hi": "कोई मेल खाता संदर्भ नहीं मिला।",
-    "id": "Tidak ditemukan referensi yang cocok.",
-    "pt": "Nenhuma referência correspondente encontrada.",
-    "ur": "کوئی مماثل حوالہ نہیں ملا۔",
-    "zh-Hans": "未找到匹配的引用。"
-  },
-  "Referencia, por ejemplo Jn 3:16 o Jn 3:16(RVR60)": {
-    "ar": "مرجع، مثل Jn 3:16 أو Jn 3:16(RVR60)",
-    "bn": "উল্লেখ, যেমন Jn 3:16 বা Jn 3:16(RVR60)",
-    "en": "Reference, e.g. Jn 3:16 or Jn 3:16(RVR60)",
-    "es": "Referencia, por ejemplo Jn 3:16 o Jn 3:16(RVR60)",
-    "fr": "Référence, par ex. Jn 3:16 ou Jn 3:16(RVR60)",
-    "hi": "संदर्भ, जैसे Jn 3:16 या Jn 3:16(RVR60)",
-    "id": "Referensi, misalnya Jn 3:16 atau Jn 3:16(RVR60)",
-    "pt": "Referência, por exemplo Jn 3:16 ou Jn 3:16(RVR60)",
-    "ur": "حوالہ، مثلاً Jn 3:16 یا Jn 3:16(RVR60)",
-    "zh-Hans": "引用，例如 Jn 3:16 或 Jn 3:16(RVR60)"
-  },
-  "Resultado de búsqueda": {
-    "ar": "نتيجة البحث",
-    "bn": "অনুসন্ধানের ফলাফল",
-    "en": "Search result",
-    "es": "Resultado de búsqueda",
-    "fr": "Résultat de recherche",
-    "hi": "खोज परिणाम",
-    "id": "Hasil pencarian",
-    "pt": "Resultado da busca",
-    "ur": "تلاش کا نتیجہ",
-    "zh-Hans": "搜索结果"
-  },
-  "Se alcanzó el límite de búsqueda": {
-    "ar": "تم بلوغ حد البحث",
-    "bn": "অনুসন্ধানের সীমায় পৌঁছেছে",
-    "en": "Search limit reached",
-    "es": "Se alcanzó el límite de búsqueda",
-    "fr": "Limite de recherche atteinte",
-    "hi": "खोज की सीमा पूरी हो गई",
-    "id": "Batas pencarian tercapai",
-    "pt": "Limite de busca atingido",
-    "ur": "تلاش کی حد پوری ہو گئی",
-    "zh-Hans": "已达到搜索上限"
-  },
-  "{articles} artículos · {fields} campos personales": {
-    "ar": "{articles} مقالات · {fields} حقول شخصية",
-    "bn": "{articles} নিবন্ধ · {fields} ব্যক্তিগত ক্ষেত্র",
-    "en": "{articles} articles · {fields} personal fields",
-    "es": "{articles} artículos · {fields} campos personales",
-    "fr": "{articles} articles · {fields} champs personnels",
-    "hi": "{articles} लेख · {fields} व्यक्तिगत फ़ील्ड",
-    "id": "{articles} artikel · {fields} bidang pribadi",
-    "pt": "{articles} artigos · {fields} campos pessoais",
-    "ur": "{articles} مضامین · {fields} ذاتی خانے",
-    "zh-Hans": "{articles} 篇文章 · {fields} 个个人字段"
-  },
-  "{results} resultados · {articles} artículos · {fields} campos personales": {
-    "ar": "{results} نتائج · {articles} مقالات · {fields} حقول شخصية",
-    "bn": "{results} ফলাফল · {articles} নিবন্ধ · {fields} ব্যক্তিগত ক্ষেত্র",
-    "en": "{results} results · {articles} articles · {fields} personal fields",
-    "es": "{results} resultados · {articles} artículos · {fields} campos personales",
-    "fr": "{results} résultats · {articles} articles · {fields} champs personnels",
-    "hi": "{results} परिणाम · {articles} लेख · {fields} व्यक्तिगत फ़ील्ड",
-    "id": "{results} hasil · {articles} artikel · {fields} bidang pribadi",
-    "pt": "{results} resultados · {articles} artigos · {fields} campos pessoais",
-    "ur": "{results} نتائج · {articles} مضامین · {fields} ذاتی خانے",
-    "zh-Hans": "{results} 个结果 · {articles} 篇文章 · {fields} 个个人字段"
-  },
-  "Rango bíblico": {
-    "es": "Rango bíblico",
-    "en": "Bible range",
-    "zh-Hans": "圣经范围",
-    "hi": "बाइबल का दायरा",
-    "ar": "نطاق الكتاب المقدس",
-    "fr": "Plage biblique",
-    "bn": "বাইবেলের পরিসর",
-    "pt": "Intervalo bíblico",
-    "id": "Rentang Alkitab",
-    "ur": "بائبل کا دائرہ"
-  },
-  "Todos los versículos": {
-    "es": "Todos los versículos",
-    "en": "All verses",
-    "zh-Hans": "所有经文",
-    "hi": "सभी पद",
-    "ar": "كل الآيات",
-    "fr": "Tous les versets",
-    "bn": "সব পদ",
-    "pt": "Todos os versículos",
-    "id": "Semua ayat",
-    "ur": "تمام آیات"
-  },
-  "Pasajes o libros": {
-    "es": "Pasajes o libros",
-    "en": "Passages or books",
-    "zh-Hans": "经文或书卷",
-    "hi": "अंश या पुस्तकें",
-    "ar": "مقاطع أو أسفار",
-    "fr": "Passages ou livres",
-    "bn": "অংশ বা বই",
-    "pt": "Passagens ou livros",
-    "id": "Bagian atau kitab",
-    "ur": "عبارات یا کتابیں"
-  },
-  "Lista guardada": {
-    "es": "Lista guardada",
-    "en": "Saved list",
-    "zh-Hans": "已保存的列表",
-    "hi": "सहेजी गई सूची",
-    "ar": "قائمة محفوظة",
-    "fr": "Liste enregistrée",
-    "bn": "সংরক্ষিত তালিকা",
-    "pt": "Lista salva",
-    "id": "Daftar tersimpan",
-    "ur": "محفوظ فہرست"
-  },
-  "Pasajes, por ejemplo Gn 1–3; Juan 3:16–18; Romanos": {
-    "es": "Pasajes, por ejemplo Gn 1–3; Juan 3:16–18; Romanos",
-    "en": "Passages, e.g. Gen 1–3; John 3:16–18; Romans",
-    "zh-Hans": "经文，例如 Gen 1–3; John 3:16–18; Romans",
-    "hi": "अंश, जैसे Gen 1–3; John 3:16–18; Romans",
-    "ar": "مقاطع، مثل Gen 1–3; John 3:16–18; Romans",
-    "fr": "Passages, par ex. Gen 1–3; John 3:16–18; Romans",
-    "bn": "অংশ, যেমন Gen 1–3; John 3:16–18; Romans",
-    "pt": "Passagens, por exemplo Gn 1–3; João 3:16–18; Romanos",
-    "id": "Bagian, misalnya Gen 1–3; John 3:16–18; Romans",
-    "ur": "عبارات، مثلاً Gen 1–3; John 3:16–18; Romans"
-  },
-  "Selecciona una lista de versículos": {
-    "es": "Selecciona una lista de versículos",
-    "en": "Select a verse list",
-    "zh-Hans": "选择经文列表",
-    "hi": "पदों की सूची चुनें",
-    "ar": "اختر قائمة آيات",
-    "fr": "Sélectionnez une liste de versets",
-    "bn": "একটি পদের তালিকা নির্বাচন করুন",
-    "pt": "Selecione uma lista de versículos",
-    "id": "Pilih daftar ayat",
-    "ur": "آیات کی فہرست منتخب کریں"
-  },
-  "Rango: {range}": {
-    "es": "Rango: {range}",
-    "en": "Range: {range}",
-    "zh-Hans": "范围：{range}",
-    "hi": "दायरा: {range}",
-    "ar": "النطاق: {range}",
-    "fr": "Plage : {range}",
-    "bn": "পরিসর: {range}",
-    "pt": "Intervalo: {range}",
-    "id": "Rentang: {range}",
-    "ur": "دائرہ: {range}"
-  },
-  "{selected} versículos examinados · {excluded} fuera del rango": {
-    "es": "{selected} versículos examinados · {excluded} fuera del rango",
-    "en": "{selected} verses examined · {excluded} outside the range",
-    "zh-Hans": "已检查 {selected} 节经文 · {excluded} 节在范围外",
-    "hi": "{selected} पद जाँचे गए · {excluded} दायरे से बाहर",
-    "ar": "تم فحص {selected} آيات · {excluded} خارج النطاق",
-    "fr": "{selected} versets examinés · {excluded} hors de la plage",
-    "bn": "{selected} পদ পরীক্ষা করা হয়েছে · {excluded} পরিসরের বাইরে",
-    "pt": "{selected} versículos examinados · {excluded} fora do intervalo",
-    "id": "{selected} ayat diperiksa · {excluded} di luar rentang",
-    "ur": "{selected} آیات کی جانچ ہوئی · {excluded} دائرے سے باہر"
-  },
-  "El ámbito contiene identidades de recurso incompatibles.": {
-    "es": "El ámbito contiene identidades de recurso incompatibles.",
-    "en": "The scope contains conflicting resource identities.",
-    "zh-Hans": "范围包含相互冲突的资源标识。",
-    "hi": "दायरे में संसाधनों की पहचान में टकराव है।",
-    "ar": "يحتوي النطاق على هويات موارد متعارضة.",
-    "fr": "Le périmètre contient des identités de ressources incompatibles.",
-    "bn": "পরিসরে সম্পদের পরিচয়ে দ্বন্দ্ব রয়েছে।",
-    "pt": "O âmbito contém identidades de recursos incompatíveis.",
-    "id": "Lingkup berisi identitas sumber yang bertentangan.",
-    "ur": "دائرے میں وسائل کی شناخت متصادم ہے۔"
-  },
-  "Selecciona una o varias colecciones para buscar.": {
-    "es": "Selecciona una o varias colecciones para buscar.",
-    "en": "Select one or more collections to search.",
-    "zh-Hans": "请选择一个或多个集合进行搜索。",
-    "hi": "खोजने के लिए एक या अधिक संग्रह चुनें।",
-    "ar": "اختر مجموعة واحدة أو أكثر للبحث.",
-    "fr": "Sélectionnez une ou plusieurs collections à rechercher.",
-    "bn": "অনুসন্ধানের জন্য এক বা একাধিক সংগ্রহ নির্বাচন করুন।",
-    "pt": "Selecione uma ou mais coleções para buscar.",
-    "id": "Pilih satu atau beberapa koleksi untuk dicari.",
-    "ur": "تلاش کے لیے ایک یا زیادہ مجموعے منتخب کریں۔"
-  },
-  "El ámbito no contiene recursos disponibles para buscar.": {
-    "es": "El ámbito no contiene recursos disponibles para buscar.",
-    "en": "The scope contains no available resources to search.",
-    "zh-Hans": "范围中没有可供搜索的资源。",
-    "hi": "दायरे में खोजने योग्य संसाधन उपलब्ध नहीं हैं।",
-    "ar": "لا يحتوي النطاق على موارد متاحة للبحث.",
-    "fr": "Le périmètre ne contient aucune ressource disponible pour la recherche.",
-    "bn": "পরিসরে অনুসন্ধানের জন্য কোনো সম্পদ উপলব্ধ নেই।",
-    "pt": "O âmbito não contém recursos disponíveis para buscar.",
-    "id": "Lingkup tidak berisi sumber yang tersedia untuk dicari.",
-    "ur": "دائرے میں تلاش کے لیے کوئی وسیلہ دستیاب نہیں۔"
-  },
-  "El recurso del resultado ya no conserva su identidad o disponibilidad.": {
-    "es": "El recurso del resultado ya no conserva su identidad o disponibilidad.",
-    "en": "The result resource has changed identity or is no longer available.",
-    "zh-Hans": "结果对应的资源标识已更改或资源不再可用。",
-    "hi": "परिणाम के संसाधन की पहचान बदल गई है या वह उपलब्ध नहीं है।",
-    "ar": "تغيرت هوية مورد النتيجة أو لم يعد متاحًا.",
-    "fr": "La ressource du résultat a changé d’identité ou n’est plus disponible.",
-    "bn": "ফলাফলের সম্পদের পরিচয় বদলেছে বা সেটি আর উপলব্ধ নেই।",
-    "pt": "O recurso do resultado mudou de identidade ou não está mais disponível.",
-    "id": "Sumber hasil telah berubah identitas atau tidak lagi tersedia.",
-    "ur": "نتیجے کے وسیلے کی شناخت بدل گئی ہے یا وہ اب دستیاب نہیں۔"
-  },
-  "Ámbito": {
-    "es": "Ámbito",
-    "en": "Scope",
-    "zh-Hans": "范围",
-    "hi": "दायरा",
-    "ar": "النطاق",
-    "fr": "Périmètre",
-    "bn": "পরিসর",
-    "pt": "Âmbito",
-    "id": "Lingkup",
-    "ur": "دائرہ"
-  },
-  "Recursos seleccionados": {
-    "es": "Recursos seleccionados",
-    "en": "Selected resources",
-    "zh-Hans": "所选资源",
-    "hi": "चुने गए संसाधन",
-    "ar": "الموارد المحددة",
-    "fr": "Ressources sélectionnées",
-    "bn": "নির্বাচিত সম্পদ",
-    "pt": "Recursos selecionados",
-    "id": "Sumber terpilih",
-    "ur": "منتخب وسائل"
-  },
-  "Lectores abiertos": {
-    "es": "Lectores abiertos",
-    "en": "Open readers",
-    "zh-Hans": "已打开的阅读器",
-    "hi": "खुले पाठक",
-    "ar": "القارئات المفتوحة",
-    "fr": "Lecteurs ouverts",
-    "bn": "খোলা পাঠক",
-    "pt": "Leitores abertos",
-    "id": "Pembaca terbuka",
-    "ur": "کھلے قارئین"
-  },
-  "No disponible": {
-    "es": "No disponible",
-    "en": "Unavailable",
-    "zh-Hans": "不可用",
-    "hi": "अनुपलब्ध",
-    "ar": "غير متاح",
-    "fr": "Indisponible",
-    "bn": "অনুপলব্ধ",
-    "pt": "Indisponível",
-    "id": "Tidak tersedia",
-    "ur": "دستیاب نہیں"
-  },
-  "Identidad del recurso modificada": {
-    "es": "Identidad del recurso modificada",
-    "en": "Resource identity changed",
-    "zh-Hans": "资源标识已更改",
-    "hi": "संसाधन की पहचान बदली गई",
-    "ar": "تغيرت هوية المورد",
-    "fr": "Identité de la ressource modifiée",
-    "bn": "সম্পদের পরিচয় পরিবর্তিত হয়েছে",
-    "pt": "Identidade do recurso alterada",
-    "id": "Identitas sumber berubah",
-    "ur": "وسیلے کی شناخت بدل گئی"
-  },
-  "Selecciona una o varias colecciones con ⌘.": {
-    "es": "Selecciona una o varias colecciones con ⌘.",
-    "en": "Select one or more collections using ⌘.",
-    "zh-Hans": "按住 ⌘ 可选择多个集合。",
-    "hi": "⌘ का उपयोग करके एक या अधिक संग्रह चुनें।",
-    "ar": "اختر مجموعة واحدة أو أكثر باستخدام ⌘.",
-    "fr": "Sélectionnez une ou plusieurs collections avec ⌘.",
-    "bn": "⌘ ব্যবহার করে এক বা একাধিক সংগ্রহ নির্বাচন করুন।",
-    "pt": "Selecione uma ou mais coleções usando ⌘.",
-    "id": "Pilih satu atau beberapa koleksi dengan ⌘.",
-    "ur": "⌘ کے ذریعے ایک یا زیادہ مجموعے منتخب کریں۔"
-  },
-  "Filtrar recursos de la selección": {
-    "es": "Filtrar recursos de la selección",
-    "en": "Filter selection resources",
-    "zh-Hans": "筛选待选资源",
-    "hi": "चयन के संसाधन फ़िल्टर करें",
-    "ar": "تصفية موارد التحديد",
-    "fr": "Filtrer les ressources de la sélection",
-    "bn": "নির্বাচনের সম্পদ ছাঁকুন",
-    "pt": "Filtrar recursos da seleção",
-    "id": "Saring sumber pilihan",
-    "ur": "انتخاب کے وسائل چھانٹیں"
-  },
-  "Limpiar selección": {
-    "es": "Limpiar selección",
-    "en": "Clear selection",
-    "zh-Hans": "清除选择",
-    "hi": "चयन साफ़ करें",
-    "ar": "مسح التحديد",
-    "fr": "Effacer la sélection",
-    "bn": "নির্বাচন সাফ করুন",
-    "pt": "Limpar seleção",
-    "id": "Hapus pilihan",
-    "ur": "انتخاب صاف کریں"
-  },
-  "Se buscan los recursos completos de los lectores abiertos, incluidos los minimizados.": {
-    "es": "Se buscan los recursos completos de los lectores abiertos, incluidos los minimizados.",
-    "en": "Search the complete resources of open readers, including minimized readers.",
-    "zh-Hans": "搜索已打开阅读器的完整资源，包括已最小化的阅读器。",
-    "hi": "खुले पाठकों के पूरे संसाधनों में खोजें, जिनमें छोटे किए गए पाठक भी शामिल हैं।",
-    "ar": "يُبحث في الموارد الكاملة للقارئات المفتوحة، بما فيها المصغّرة.",
-    "fr": "La recherche porte sur les ressources complètes des lecteurs ouverts, y compris ceux réduits.",
-    "bn": "খোলা পাঠকের সম্পূর্ণ সম্পদে অনুসন্ধান হয়, ছোট করা পাঠকও অন্তর্ভুক্ত।",
-    "pt": "A busca inclui os recursos completos dos leitores abertos, inclusive os minimizados.",
-    "id": "Cari seluruh sumber pembaca yang terbuka, termasuk yang diminimalkan.",
-    "ur": "کھلے قارئین کے مکمل وسائل میں تلاش ہوتی ہے، جن میں کم سے کم کیے گئے قارئین بھی شامل ہیں۔"
-  },
-  "{count} recursos seleccionados": {
-    "es": "{count} recursos seleccionados",
-    "en": "{count} selected resources",
-    "zh-Hans": "已选择 {count} 个资源",
-    "hi": "{count} संसाधन चुने गए",
-    "ar": "{count} موارد محددة",
-    "fr": "{count} ressources sélectionnées",
-    "bn": "{count}টি সম্পদ নির্বাচিত",
-    "pt": "{count} recursos selecionados",
-    "id": "{count} sumber dipilih",
-    "ur": "{count} وسائل منتخب"
-  },
-  "{count} avisos adicionales": {
-    "es": "{count} avisos adicionales",
-    "en": "{count} additional notices",
-    "zh-Hans": "另有 {count} 条提示",
-    "hi": "{count} अतिरिक्त सूचनाएँ",
-    "ar": "{count} تنبيهات إضافية",
-    "fr": "{count} avis supplémentaires",
-    "bn": "আরও {count}টি বিজ্ঞপ্তি",
-    "pt": "{count} avisos adicionais",
-    "id": "{count} pemberitahuan tambahan",
-    "ur": "{count} اضافی اطلاعیں"
-  },
-  "Todas las condiciones": {
-    "es": "Todas las condiciones",
-    "en": "All conditions",
-    "zh-Hans": "所有条件",
-    "hi": "सभी शर्तें",
-    "ar": "كل الشروط",
-    "fr": "Toutes les conditions",
-    "bn": "সব শর্ত",
-    "pt": "Todas as condições",
-    "id": "Semua kondisi",
-    "ur": "تمام شرائط"
-  },
-  "Cualquier condición": {
-    "es": "Cualquier condición",
-    "en": "Any condition",
-    "zh-Hans": "任一条件",
-    "hi": "कोई भी शर्त",
-    "ar": "أي شرط",
-    "fr": "Une condition au choix",
-    "bn": "যেকোনো শর্ত",
-    "pt": "Qualquer condição",
-    "id": "Salah satu kondisi",
-    "ur": "کوئی بھی شرط"
-  },
-  "Por reglas": {
-    "es": "Por reglas",
-    "en": "Rule-based",
-    "zh-Hans": "按规则",
-    "hi": "नियम आधारित",
-    "ar": "حسب القواعد",
-    "fr": "Par règles",
-    "bn": "নিয়মভিত্তিক",
-    "pt": "Por regras",
-    "id": "Berbasis aturan",
-    "ur": "قواعد پر مبنی"
-  },
-  "Nueva colección por reglas": {
-    "es": "Nueva colección por reglas",
-    "en": "New rule-based collection",
-    "zh-Hans": "新建规则集合",
-    "hi": "नया नियम आधारित संग्रह",
-    "ar": "مجموعة جديدة حسب القواعد",
-    "fr": "Nouvelle collection par règles",
-    "bn": "নতুন নিয়মভিত্তিক সংগ্রহ",
-    "pt": "Nova coleção por regras",
-    "id": "Koleksi berbasis aturan baru",
-    "ur": "قواعد پر مبنی نیا مجموعہ"
-  },
-  "Guardar reglas": {
-    "es": "Guardar reglas",
-    "en": "Save rules",
-    "zh-Hans": "保存规则",
-    "hi": "नियम सहेजें",
-    "ar": "حفظ القواعد",
-    "fr": "Enregistrer les règles",
-    "bn": "নিয়ম সংরক্ষণ করুন",
-    "pt": "Salvar regras",
-    "id": "Simpan aturan",
-    "ur": "قواعد محفوظ کریں"
-  },
-  "Coincidencia": {
-    "es": "Coincidencia",
-    "en": "Match",
-    "zh-Hans": "匹配",
-    "hi": "मिलान",
-    "ar": "المطابقة",
-    "fr": "Correspondance",
-    "bn": "মিল",
-    "pt": "Correspondência",
-    "id": "Pencocokan",
-    "ur": "مطابقت"
-  },
-  "Campo": {
-    "es": "Campo",
-    "en": "Field",
-    "zh-Hans": "字段",
-    "hi": "फ़ील्ड",
-    "ar": "الحقل",
-    "fr": "Champ",
-    "bn": "ক্ষেত্র",
-    "pt": "Campo",
-    "id": "Kolom",
-    "ur": "خانہ"
-  },
-  "Condición": {
-    "es": "Condición",
-    "en": "Condition",
-    "zh-Hans": "条件",
-    "hi": "शर्त",
-    "ar": "الشرط",
-    "fr": "Condition",
-    "bn": "শর্ত",
-    "pt": "Condição",
-    "id": "Kondisi",
-    "ur": "شرط"
-  },
-  "Quitar condición": {
-    "es": "Quitar condición",
-    "en": "Remove condition",
-    "zh-Hans": "移除条件",
-    "hi": "शर्त हटाएँ",
-    "ar": "إزالة الشرط",
-    "fr": "Retirer la condition",
-    "bn": "শর্ত সরান",
-    "pt": "Remover condição",
-    "id": "Hapus kondisi",
-    "ur": "شرط ہٹائیں"
-  },
-  "Agregar condición": {
-    "es": "Agregar condición",
-    "en": "Add condition",
-    "zh-Hans": "添加条件",
-    "hi": "शर्त जोड़ें",
-    "ar": "إضافة شرط",
-    "fr": "Ajouter une condition",
-    "bn": "শর্ত যোগ করুন",
-    "pt": "Adicionar condição",
-    "id": "Tambah kondisi",
-    "ur": "شرط شامل کریں"
-  },
-  "Cambios sin guardar": {
-    "es": "Cambios sin guardar",
-    "en": "Unsaved changes",
-    "zh-Hans": "未保存的更改",
-    "hi": "बिना सहेजे बदलाव",
-    "ar": "تغييرات غير محفوظة",
-    "fr": "Modifications non enregistrées",
-    "bn": "অসংরক্ষিত পরিবর্তন",
-    "pt": "Alterações não salvas",
-    "id": "Perubahan belum disimpan",
-    "ur": "غیر محفوظ تبدیلیاں"
-  },
-  "Vista previa de la colección": {
-    "es": "Vista previa de la colección",
-    "en": "Collection preview",
-    "zh-Hans": "集合预览",
-    "hi": "संग्रह पूर्वावलोकन",
-    "ar": "معاينة المجموعة",
-    "fr": "Aperçu de la collection",
-    "bn": "সংগ্রহের পূর্বরূপ",
-    "pt": "Prévia da coleção",
-    "id": "Pratinjau koleksi",
-    "ur": "مجموعے کا پیش منظر"
-  },
-  "Tiene valor": {
-    "es": "Tiene valor",
-    "en": "Has a value",
-    "zh-Hans": "有值",
-    "hi": "मान मौजूद है",
-    "ar": "له قيمة",
-    "fr": "A une valeur",
-    "bn": "মান আছে",
-    "pt": "Tem valor",
-    "id": "Memiliki nilai",
-    "ur": "قدر موجود ہے"
-  },
-  "Sin valor": {
-    "es": "Sin valor",
-    "en": "No value",
-    "zh-Hans": "无值",
-    "hi": "कोई मान नहीं",
-    "ar": "بلا قيمة",
-    "fr": "Sans valeur",
-    "bn": "মান নেই",
-    "pt": "Sem valor",
-    "id": "Tanpa nilai",
-    "ur": "کوئی قدر نہیں"
-  },
-  "Contiene": {
-    "es": "Contiene",
-    "en": "Contains",
-    "zh-Hans": "包含",
-    "hi": "शामिल है",
-    "ar": "يحتوي على",
-    "fr": "Contient",
-    "bn": "অন্তর্ভুক্ত করে",
-    "pt": "Contém",
-    "id": "Mengandung",
-    "ur": "شامل ہے"
-  },
-  "Es igual a": {
-    "es": "Es igual a",
-    "en": "Equals",
-    "zh-Hans": "等于",
-    "hi": "बराबर है",
-    "ar": "يساوي",
-    "fr": "Est égal à",
-    "bn": "সমান",
-    "pt": "É igual a",
-    "id": "Sama dengan",
-    "ur": "برابر ہے"
-  },
-  "Empieza por": {
-    "es": "Empieza por",
-    "en": "Starts with",
-    "zh-Hans": "开头为",
-    "hi": "से शुरू होता है",
-    "ar": "يبدأ بـ",
-    "fr": "Commence par",
-    "bn": "দিয়ে শুরু",
-    "pt": "Começa com",
-    "id": "Diawali dengan",
-    "ur": "سے شروع ہوتا ہے"
-  },
-  "No contiene": {
-    "es": "No contiene",
-    "en": "Does not contain",
-    "zh-Hans": "不包含",
-    "hi": "शामिल नहीं है",
-    "ar": "لا يحتوي على",
-    "fr": "Ne contient pas",
-    "bn": "অন্তর্ভুক্ত করে না",
-    "pt": "Não contém",
-    "id": "Tidak mengandung",
-    "ur": "شامل نہیں ہے"
-  },
-  "No es igual a": {
-    "es": "No es igual a",
-    "en": "Does not equal",
-    "zh-Hans": "不等于",
-    "hi": "बराबर नहीं है",
-    "ar": "لا يساوي",
-    "fr": "N'est pas égal à",
-    "bn": "সমান নয়",
-    "pt": "Não é igual a",
-    "id": "Tidak sama dengan",
-    "ur": "برابر نہیں ہے"
-  },
-  "Serie": {
-    "es": "Serie",
-    "en": "Series",
-    "zh-Hans": "丛书",
-    "hi": "श्रृंखला",
-    "ar": "السلسلة",
-    "fr": "Série",
-    "bn": "সিরিজ",
-    "pt": "Série",
-    "id": "Seri",
-    "ur": "سلسلہ"
-  },
-  "Etiqueta": {
-    "es": "Etiqueta",
-    "en": "Tag",
-    "zh-Hans": "标签",
-    "hi": "टैग",
-    "ar": "الوسم",
-    "fr": "Étiquette",
-    "bn": "ট্যাগ",
-    "pt": "Etiqueta",
-    "id": "Tag",
-    "ur": "ٹیگ"
-  },
-  "Tipo de recurso": {
-    "es": "Tipo de recurso",
-    "en": "Resource type",
-    "zh-Hans": "资源类型",
-    "hi": "संसाधन प्रकार",
-    "ar": "نوع المورد",
-    "fr": "Type de ressource",
-    "bn": "রিসোর্সের ধরন",
-    "pt": "Tipo de recurso",
-    "id": "Jenis sumber",
-    "ur": "وسیلے کی قسم"
-  },
-  "Esta colección es manual.": {
-    "es": "Esta colección es manual.",
-    "en": "This collection is manual.",
-    "zh-Hans": "此集合为手动集合。",
-    "hi": "यह संग्रह मैन्युअल है।",
-    "ar": "هذه المجموعة يدوية.",
-    "fr": "Cette collection est manuelle.",
-    "bn": "এই সংগ্রহটি ম্যানুয়াল।",
-    "pt": "Esta coleção é manual.",
-    "id": "Koleksi ini bersifat manual.",
-    "ur": "یہ مجموعہ دستی ہے۔"
-  },
-  "La pertenencia de esta colección se calcula mediante reglas.": {
-    "es": "La pertenencia de esta colección se calcula mediante reglas.",
-    "en": "Membership of this collection is calculated using rules.",
-    "zh-Hans": "此集合的成员由规则计算。",
-    "hi": "इस संग्रह की सदस्यता नियमों से निर्धारित होती है।",
-    "ar": "تُحسب عضوية هذه المجموعة باستخدام القواعد.",
-    "fr": "Les membres de cette collection sont déterminés par des règles.",
-    "bn": "এই সংগ্রহের সদস্যতা নিয়ম দিয়ে নির্ধারিত হয়।",
-    "pt": "Os membros desta coleção são definidos por regras.",
-    "id": "Keanggotaan koleksi ini dihitung menggunakan aturan.",
-    "ur": "اس مجموعے کی رکنیت قواعد سے طے ہوتی ہے۔"
-  },
-  "Las reglas necesitan entre 1 y 32 condiciones válidas.": {
-    "es": "Las reglas necesitan entre 1 y 32 condiciones válidas.",
-    "en": "Rules require between 1 and 32 valid conditions.",
-    "zh-Hans": "规则需要 1 至 32 个有效条件。",
-    "hi": "नियमों के लिए 1 से 32 मान्य शर्तें चाहिए।",
-    "ar": "تتطلب القواعد من شرط واحد إلى 32 شرطًا صالحًا.",
-    "fr": "Les règles exigent entre 1 et 32 conditions valides.",
-    "bn": "নিয়মে ১ থেকে ৩২টি বৈধ শর্ত প্রয়োজন।",
-    "pt": "As regras exigem entre 1 e 32 condições válidas.",
-    "id": "Aturan memerlukan 1 hingga 32 kondisi yang valid.",
-    "ur": "قواعد کے لیے 1 سے 32 درست شرائط درکار ہیں۔"
-  },
-  "La pertenencia se actualiza al cambiar los metadatos de la biblioteca. No se modifica ningún libro.": {
-    "es": "La pertenencia se actualiza al cambiar los metadatos de la biblioteca. No se modifica ningún libro.",
-    "en": "Membership updates when library metadata changes. No books are modified.",
-    "zh-Hans": "成员随书库元数据变化而更新。不会修改任何书籍。",
-    "hi": "पुस्तकालय का मेटाडेटा बदलने पर सदस्यता अपडेट होती है। कोई पुस्तक बदली नहीं जाती।",
-    "ar": "تتحدث العضوية عند تغير بيانات المكتبة. لا يتم تعديل أي كتاب.",
-    "fr": "Les membres sont actualisés quand les métadonnées de la bibliothèque changent. Aucun livre n'est modifié.",
-    "bn": "লাইব্রেরির মেটাডেটা বদলালে সদস্যতা হালনাগাদ হয়। কোনো বই পরিবর্তিত হয় না।",
-    "pt": "Os membros são atualizados quando os metadados da biblioteca mudam. Nenhum livro é alterado.",
-    "id": "Keanggotaan diperbarui saat metadata perpustakaan berubah. Buku tidak diubah.",
-    "ur": "لائبریری کا میٹا ڈیٹا بدلنے پر رکنیت بدلتی ہے۔ کوئی کتاب تبدیل نہیں ہوتی۔"
-  },
-  "Restablecer": {
-    "es": "Restablecer",
-    "en": "Reset",
-    "zh-Hans": "重置",
-    "hi": "रीसेट करें",
-    "ar": "إعادة تعيين",
-    "fr": "Réinitialiser",
-    "bn": "রিসেট করুন",
-    "pt": "Restaurar",
-    "id": "Atur ulang",
-    "ur": "دوبارہ ترتیب دیں"
-  },
-  "Operadores de búsqueda": {
-    "es": "Operadores de búsqueda",
-    "en": "Search operators",
-    "zh-Hans": "搜索运算符",
-    "hi": "खोज ऑपरेटर",
-    "ar": "عوامل البحث",
-    "fr": "Opérateurs de recherche",
-    "bn": "অনুসন্ধান অপারেটর",
-    "pt": "Operadores de pesquisa",
-    "id": "Operator pencarian",
-    "ur": "تلاش کے آپریٹرز"
-  },
-  "NEAR usa 48 unidades UTF-16. WORDS cuenta palabras intermedias. VERSES usa referencias reales del mismo capítulo. Cada artículo o versículo conserva su ámbito.": {
-    "es": "NEAR usa 48 unidades UTF-16. WORDS cuenta palabras intermedias. VERSES usa referencias reales del mismo capítulo. Cada artículo o versículo conserva su ámbito.",
-    "en": "NEAR uses 48 UTF-16 units. WORDS counts intervening words. VERSES uses actual references in the same chapter. Each article or verse keeps its own scope.",
-    "zh-Hans": "NEAR 使用 48 个 UTF-16 单位。WORDS 计算中间单词。VERSES 使用同一章的实际经节引用。每篇文章或经节保留各自的范围。",
-    "hi": "NEAR में 48 UTF-16 इकाइयाँ हैं। WORDS बीच के शब्द गिनता है। VERSES एक ही अध्याय के वास्तविक संदर्भ उपयोग करता है। प्रत्येक लेख या पद का अपना दायरा रहता है।",
-    "ar": "يستخدم NEAR مقدار 48 وحدة UTF-16. يحسب WORDS الكلمات الفاصلة. يستخدم VERSES المراجع الفعلية في الإصحاح نفسه. يحتفظ كل مقال أو آية بنطاقه.",
-    "fr": "NEAR utilise 48 unités UTF-16. WORDS compte les mots intermédiaires. VERSES utilise les références réelles du même chapitre. Chaque article ou verset conserve son périmètre.",
-    "bn": "NEAR ৪৮টি UTF-16 একক ব্যবহার করে। WORDS মাঝের শব্দ গোনে। VERSES একই অধ্যায়ের প্রকৃত উদ্ধৃতি ব্যবহার করে। প্রতিটি নিবন্ধ বা পদ নিজস্ব পরিসর রাখে।",
-    "pt": "NEAR usa 48 unidades UTF-16. WORDS conta as palavras intermediárias. VERSES usa referências reais do mesmo capítulo. Cada artigo ou versículo mantém seu âmbito.",
-    "id": "NEAR memakai 48 unit UTF-16. WORDS menghitung kata di antaranya. VERSES memakai referensi nyata dalam pasal yang sama. Setiap artikel atau ayat mempertahankan lingkupnya.",
-    "ur": "NEAR میں 48 UTF-16 اکائیاں ہیں۔ WORDS درمیانی الفاظ گنتا ہے۔ VERSES ایک ہی باب کے حقیقی حوالوں کو استعمال کرتا ہے۔ ہر مضمون یا آیت کا اپنا دائرہ رہتا ہے۔"
-  },
-  "Cuerpo": {
-    "es": "Cuerpo",
-    "en": "Body",
-    "zh-Hans": "正文",
-    "hi": "मुख्य पाठ",
-    "ar": "المتن",
-    "fr": "Corps",
-    "bn": "মূল পাঠ",
-    "pt": "Corpo",
-    "id": "Isi",
-    "ur": "متن"
-  },
-  "Encabezados": {
-    "es": "Encabezados",
-    "en": "Headings",
-    "zh-Hans": "标题",
-    "hi": "शीर्षक",
-    "ar": "العناوين",
-    "fr": "En-têtes",
-    "bn": "শিরোনাম",
-    "pt": "Cabeçalhos",
-    "id": "Judul bagian",
-    "ur": "سرخیاں"
-  },
-  "Texto bíblico": {
-    "es": "Texto bíblico",
-    "en": "Bible text",
-    "zh-Hans": "圣经经文",
-    "hi": "बाइबल पाठ",
-    "ar": "نص الكتاب المقدس",
-    "fr": "Texte biblique",
-    "bn": "বাইবেলের পাঠ",
-    "pt": "Texto bíblico",
-    "id": "Teks Alkitab",
-    "ur": "بائبل کا متن"
-  },
-  "Citas": {
-    "es": "Citas",
-    "en": "Quotations",
-    "zh-Hans": "引文",
-    "hi": "उद्धरण",
-    "ar": "الاقتباسات",
-    "fr": "Citations",
-    "bn": "উদ্ধৃতি",
-    "pt": "Citações",
-    "id": "Kutipan",
-    "ur": "اقتباسات"
-  },
-  "Todo el texto": {
-    "es": "Todo el texto",
-    "en": "All visible text",
-    "zh-Hans": "全部可见文本",
-    "hi": "सभी दृश्यमान पाठ",
-    "ar": "كل النص المرئي",
-    "fr": "Tout le texte visible",
-    "bn": "সব দৃশ্যমান পাঠ",
-    "pt": "Todo o texto visível",
-    "id": "Semua teks yang terlihat",
-    "ur": "تمام نظر آنے والا متن"
-  },
-  "Los campos no identificados por el recurso producen cobertura parcial.": {
-    "es": "Los campos no identificados por el recurso producen cobertura parcial.",
-    "en": "Fields not identified by the resource produce partial coverage.",
-    "zh-Hans": "资源未标识的字段会导致覆盖不完整。",
-    "hi": "संसाधन में अज्ञात फ़ील्ड होने पर कवरेज आंशिक होता है।",
-    "ar": "تؤدي الحقول التي لا يحددها المورد إلى تغطية جزئية.",
-    "fr": "Les champs non identifiés par la ressource donnent une couverture partielle.",
-    "bn": "রিসোর্সে অচিহ্নিত ক্ষেত্র থাকলে কভারেজ আংশিক হয়।",
-    "pt": "Os campos não identificados pelo recurso produzem cobertura parcial.",
-    "id": "Kolom yang tidak diidentifikasi sumber menghasilkan cakupan parsial.",
-    "ur": "وسیلے میں غیر شناخت شدہ خانے جزوی کوریج کا باعث بنتے ہیں۔"
-  },
-  "Un título del índice puede abrir su artículo sin resaltar el cuerpo.": {
-    "es": "Un título del índice puede abrir su artículo sin resaltar el cuerpo.",
-    "en": "An index title can open its article without highlighting the body.",
-    "zh-Hans": "索引标题可以打开其文章而不突出显示正文。",
-    "hi": "सूची का शीर्षक मुख्य पाठ को हाइलाइट किए बिना अपना लेख खोल सकता है।",
-    "ar": "يمكن لعنوان الفهرس فتح مقالته دون تمييز المتن.",
-    "fr": "Un titre d’index peut ouvrir son article sans surligner le corps.",
-    "bn": "সূচির শিরোনাম মূল পাঠ হাইলাইট না করেই নিবন্ধ খুলতে পারে।",
-    "pt": "Um título do índice pode abrir seu artigo sem destacar o corpo.",
-    "id": "Judul indeks dapat membuka artikelnya tanpa menyorot isi.",
-    "ur": "فہرست کا عنوان متن نمایاں کیے بغیر اپنا مضمون کھول سکتا ہے۔"
-  },
-  "Exacta": {
-    "es": "Exacta",
-    "en": "Exact",
-    "zh-Hans": "精确",
-    "hi": "सटीक",
-    "ar": "دقيقة",
-    "fr": "Exacte",
-    "bn": "নির্ভুল",
-    "pt": "Exata",
-    "id": "Persis",
-    "ur": "عین مطابق"
-  },
-  "Frase aproximada": {
-    "es": "Frase aproximada",
-    "en": "Approximate phrase",
-    "zh-Hans": "近似短语",
-    "hi": "अनुमानित वाक्यांश",
-    "ar": "عبارة تقريبية",
-    "fr": "Expression approximative",
-    "bn": "আনুমানিক বাক্যাংশ",
-    "pt": "Frase aproximada",
-    "id": "Frasa perkiraan",
-    "ur": "تقریبی فقرہ"
-  },
-  "Cambios máximos": {
-    "es": "Cambios máximos",
-    "en": "Maximum edits",
-    "zh-Hans": "最多改动次数",
-    "hi": "अधिकतम बदलाव",
-    "ar": "الحد الأقصى للتعديلات",
-    "fr": "Modifications maximales",
-    "bn": "সর্বাধিক পরিবর্তন",
-    "pt": "Máximo de alterações",
-    "id": "Perubahan maksimum",
-    "ur": "زیادہ سے زیادہ تبدیلیاں"
-  },
-  "Frase literal, sin operadores: inserciones, eliminaciones o sustituciones de caracteres. No reordena palabras.": {
-    "es": "Frase literal, sin operadores: inserciones, eliminaciones o sustituciones de caracteres. No reordena palabras.",
-    "en": "Literal phrase, without operators: character insertions, deletions or substitutions. Words are not reordered.",
-    "zh-Hans": "字面短语，不使用运算符：允许插入、删除或替换字符，不调整词序。",
-    "hi": "बिना ऑपरेटर का शाब्दिक वाक्यांश: अक्षर जोड़ना, हटाना या बदलना। शब्दों का क्रम नहीं बदलता।",
-    "ar": "عبارة حرفية بدون عوامل تشغيل: إدراج أحرف أو حذفها أو استبدالها. لا يتغير ترتيب الكلمات.",
-    "fr": "Expression littérale, sans opérateurs : insertion, suppression ou substitution de caractères. Les mots ne sont pas réordonnés.",
-    "bn": "অপারেটর ছাড়া আক্ষরিক বাক্যাংশ: অক্ষর যোগ, মুছে ফেলা বা প্রতিস্থাপন। শব্দের ক্রম বদলায় না।",
-    "pt": "Frase literal, sem operadores: inserções, exclusões ou substituições de caracteres. Não reordena palavras.",
-    "id": "Frasa literal tanpa operator: penyisipan, penghapusan, atau penggantian karakter. Urutan kata tidak diubah.",
-    "ur": "آپریٹر کے بغیر لفظی فقرہ: حروف کا اضافہ، حذف یا تبدیلی۔ الفاظ کی ترتیب نہیں بدلتی۔"
-  },
-  "Máximo 256 caracteres; la frase debe ser más larga que el límite de cambios. Los límites de trabajo producen cobertura parcial.": {
-    "es": "Máximo 256 caracteres; la frase debe ser más larga que el límite de cambios. Los límites de trabajo producen cobertura parcial.",
-    "en": "At most 256 characters; the phrase must be longer than the edit limit. Work limits produce partial coverage.",
-    "zh-Hans": "最多256个字符；短语长度必须大于改动次数上限。达到计算限额时会显示覆盖不完整。",
-    "hi": "अधिकतम 256 अक्षर; वाक्यांश बदलाव की सीमा से लंबा होना चाहिए। कार्य सीमा पर कवरेज आंशिक रहती है।",
-    "ar": "الحد الأقصى 256 حرفًا؛ يجب أن تكون العبارة أطول من حد التعديلات. تؤدي حدود العمل إلى تغطية جزئية.",
-    "fr": "256 caractères maximum ; l’expression doit être plus longue que la limite de modifications. Les limites de calcul entraînent une couverture partielle.",
-    "bn": "সর্বোচ্চ ২৫৬ অক্ষর; বাক্যাংশ পরিবর্তনের সীমার চেয়ে দীর্ঘ হতে হবে। কাজের সীমা হলে অনুসন্ধানের আওতা আংশিক হয়।",
-    "pt": "No máximo 256 caracteres; a frase deve ser maior que o limite de alterações. Os limites de trabalho produzem cobertura parcial.",
-    "id": "Maksimal 256 karakter; frasa harus lebih panjang dari batas perubahan. Batas kerja menghasilkan cakupan sebagian.",
-    "ur": "زیادہ سے زیادہ 256 حروف؛ فقرہ تبدیلیوں کی حد سے لمبا ہونا چاہیے۔ کام کی حد پر تلاش کی تکمیل جزوی رہتی ہے۔"
-  },
-  "Frase literal": {
-    "es": "Frase literal",
-    "en": "Literal phrase",
-    "zh-Hans": "字面短语",
-    "hi": "शाब्दिक वाक्यांश",
-    "ar": "عبارة حرفية",
-    "fr": "Expression littérale",
-    "bn": "আক্ষরিক বাক্যাংশ",
-    "pt": "Frase literal",
-    "id": "Frasa literal",
-    "ur": "لفظی فقرہ"
-  },
-  "Vista": {
-    "es": "Vista",
-    "en": "View",
-    "zh-Hans": "视图",
-    "hi": "दृश्य",
-    "ar": "العرض",
-    "fr": "Vue",
-    "bn": "দৃশ্য",
-    "pt": "Visualização",
-    "id": "Tampilan",
-    "ur": "منظر"
-  },
-  "Contexto": {
-    "es": "Contexto",
-    "en": "Context",
-    "zh-Hans": "上下文",
-    "hi": "संदर्भ",
-    "ar": "السياق",
-    "fr": "Contexte",
-    "bn": "প্রসঙ্গ",
-    "pt": "Contexto",
-    "id": "Konteks",
-    "ur": "سیاق"
-  },
-  "Contexto alineado": {
-    "es": "Contexto alineado",
-    "en": "Aligned context",
-    "zh-Hans": "对齐上下文",
-    "hi": "संरेखित संदर्भ",
-    "ar": "سياق بمحاذاة",
-    "fr": "Contexte aligné",
-    "bn": "সারিবদ্ধ প্রসঙ্গ",
-    "pt": "Contexto alinhado",
-    "id": "Konteks sejajar",
-    "ur": "ہم ترتیب سیاق"
-  },
-  "Agrupar": {
-    "es": "Agrupar",
-    "en": "Group",
-    "zh-Hans": "分组",
-    "hi": "समूह",
-    "ar": "تجميع",
-    "fr": "Grouper",
-    "bn": "দলবদ্ধ করুন",
-    "pt": "Agrupar",
-    "id": "Kelompokkan",
-    "ur": "گروہ بنائیں"
-  },
-  "Sin agrupar": {
-    "es": "Sin agrupar",
-    "en": "Ungrouped",
-    "zh-Hans": "不分组",
-    "hi": "बिना समूह",
-    "ar": "بدون تجميع",
-    "fr": "Sans regroupement",
-    "bn": "দলবদ্ধ নয়",
-    "pt": "Sem agrupamento",
-    "id": "Tanpa kelompok",
-    "ur": "بغیر گروہ"
-  },
-  "Orden": {
-    "es": "Orden",
-    "en": "Order",
-    "zh-Hans": "顺序",
-    "hi": "क्रम",
-    "ar": "الترتيب",
-    "fr": "Ordre",
-    "bn": "ক্রম",
-    "pt": "Ordem",
-    "id": "Urutan",
-    "ur": "ترتیب"
-  },
-  "Orden de búsqueda": {
-    "es": "Orden de búsqueda",
-    "en": "Search order",
-    "zh-Hans": "搜索顺序",
-    "hi": "खोज क्रम",
-    "ar": "ترتيب البحث",
-    "fr": "Ordre de recherche",
-    "bn": "অনুসন্ধানের ক্রম",
-    "pt": "Ordem da pesquisa",
-    "id": "Urutan pencarian",
-    "ur": "تلاش کی ترتیب"
-  },
-  "Título A–Z": {
-    "es": "Título A–Z",
-    "en": "Title A–Z",
-    "zh-Hans": "标题 A–Z",
-    "hi": "शीर्षक A–Z",
-    "ar": "العنوان A–Z",
-    "fr": "Titre A–Z",
-    "bn": "শিরোনাম A–Z",
-    "pt": "Título A–Z",
-    "id": "Judul A–Z",
-    "ur": "عنوان A–Z"
-  },
-  "Título Z–A": {
-    "es": "Título Z–A",
-    "en": "Title Z–A",
-    "zh-Hans": "标题 Z–A",
-    "hi": "शीर्षक Z–A",
-    "ar": "العنوان Z–A",
-    "fr": "Titre Z–A",
-    "bn": "শিরোনাম Z–A",
-    "pt": "Título Z–A",
-    "id": "Judul Z–A",
-    "ur": "عنوان Z–A"
-  },
-  "Más coincidencias por artículo": {
-    "es": "Más coincidencias por artículo",
-    "en": "Most matches per article",
-    "zh-Hans": "每篇文章匹配最多",
-    "hi": "प्रति लेख अधिक मिलान",
-    "ar": "الأكثر تطابقًا لكل مقالة",
-    "fr": "Plus de correspondances par article",
-    "bn": "প্রতি নিবন্ধে সর্বাধিক মিল",
-    "pt": "Mais ocorrências por artigo",
-    "id": "Kecocokan terbanyak per artikel",
-    "ur": "فی مضمون زیادہ مماثلتیں"
-  },
-  "Resultado anterior": {
-    "es": "Resultado anterior",
-    "en": "Previous result",
-    "zh-Hans": "上一个结果",
-    "hi": "पिछला परिणाम",
-    "ar": "النتيجة السابقة",
-    "fr": "Résultat précédent",
-    "bn": "আগের ফলাফল",
-    "pt": "Resultado anterior",
-    "id": "Hasil sebelumnya",
-    "ur": "پچھلا نتیجہ"
-  },
-  "Resultado siguiente": {
-    "es": "Resultado siguiente",
-    "en": "Next result",
-    "zh-Hans": "下一个结果",
-    "hi": "अगला परिणाम",
-    "ar": "النتيجة التالية",
-    "fr": "Résultat suivant",
-    "bn": "পরের ফলাফল",
-    "pt": "Próximo resultado",
-    "id": "Hasil berikutnya",
-    "ur": "اگلا نتیجہ"
-  },
-  "Resultado {current} de {total}": {
-    "es": "Resultado {current} de {total}",
-    "en": "Result {current} of {total}",
-    "zh-Hans": "结果 {current}，共 {total} 个",
-    "hi": "परिणाम {current} / {total}",
-    "ar": "النتيجة {current} من {total}",
-    "fr": "Résultat {current} sur {total}",
-    "bn": "ফলাফল {current} / {total}",
-    "pt": "Resultado {current} de {total}",
-    "id": "Hasil {current} dari {total}",
-    "ur": "نتیجہ {current} از {total}"
-  },
-  "Abrir selección": {
-    "es": "Abrir selección",
-    "en": "Open selection",
-    "zh-Hans": "打开所选项",
-    "hi": "चयन खोलें",
-    "ar": "فتح التحديد",
-    "fr": "Ouvrir la sélection",
-    "bn": "নির্বাচিতটি খুলুন",
-    "pt": "Abrir seleção",
-    "id": "Buka pilihan",
-    "ur": "انتخاب کھولیں"
-  },
-  "Resultados de búsqueda": {
-    "es": "Resultados de búsqueda",
-    "en": "Search results",
-    "zh-Hans": "搜索结果",
-    "hi": "खोज परिणाम",
-    "ar": "نتائج البحث",
-    "fr": "Résultats de recherche",
-    "bn": "অনুসন্ধানের ফলাফল",
-    "pt": "Resultados da pesquisa",
-    "id": "Hasil pencarian",
-    "ur": "تلاش کے نتائج"
-  },
-  "Algunos contextos no se muestran por el límite de presentación. Puedes abrir las coincidencias.": {
-    "es": "Algunos contextos no se muestran por el límite de presentación. Puedes abrir las coincidencias.",
-    "en": "Some contexts are hidden by the presentation limit. You can still open the matches.",
-    "zh-Hans": "部分上下文因显示限额而未展示。仍可打开匹配结果。",
-    "hi": "प्रस्तुति सीमा के कारण कुछ संदर्भ नहीं दिखते। आप मिलान खोल सकते हैं।",
-    "ar": "بعض السياقات غير معروضة بسبب حد العرض. لا يزال بإمكانك فتح التطابقات.",
-    "fr": "Certains contextes sont masqués par la limite de présentation. Vous pouvez toujours ouvrir les correspondances.",
-    "bn": "প্রদর্শনের সীমার কারণে কিছু প্রসঙ্গ দেখানো হয়নি। তবুও মিলগুলো খুলতে পারবেন।",
-    "pt": "Alguns contextos não são exibidos pelo limite de apresentação. Você ainda pode abrir as ocorrências.",
-    "id": "Sebagian konteks tidak ditampilkan karena batas penyajian. Kecocokan tetap dapat dibuka.",
-    "ur": "نمائش کی حد کے باعث کچھ سیاق نہیں دکھائے گئے۔ مماثلتیں اب بھی کھولی جا سکتی ہیں۔"
-  },
-  "Coincidencias omitidas por el límite": {
-    "es": "Coincidencias omitidas por el límite",
-    "en": "Matches omitted by the limit",
-    "zh-Hans": "因限额而省略的匹配",
-    "hi": "सीमा के कारण छोड़े गए मिलान",
-    "ar": "تطابقات محذوفة بسبب الحد",
-    "fr": "Correspondances omises par la limite",
-    "bn": "সীমার কারণে বাদ দেওয়া মিল",
-    "pt": "Ocorrências omitidas pelo limite",
-    "id": "Kecocokan dihilangkan karena batas",
-    "ur": "حد کے باعث چھوڑی گئی مماثلتیں"
-  },
-  "Resultado sin coincidencias positivas": {
-    "es": "Resultado sin coincidencias positivas",
-    "en": "Result without positive matches",
-    "zh-Hans": "没有正向匹配的结果",
-    "hi": "सकारात्मक मिलान रहित परिणाम",
-    "ar": "نتيجة بدون تطابقات إيجابية",
-    "fr": "Résultat sans correspondances positives",
-    "bn": "ইতিবাচক মিল ছাড়া ফলাফল",
-    "pt": "Resultado sem ocorrências positivas",
-    "id": "Hasil tanpa kecocokan positif",
-    "ur": "مثبت مماثلت کے بغیر نتیجہ"
-  },
-  "Contexto no disponible": {
-    "es": "Contexto no disponible",
-    "en": "Context unavailable",
-    "zh-Hans": "上下文不可用",
-    "hi": "संदर्भ उपलब्ध नहीं",
-    "ar": "السياق غير متاح",
-    "fr": "Contexte indisponible",
-    "bn": "প্রসঙ্গ পাওয়া যাচ্ছে না",
-    "pt": "Contexto indisponível",
-    "id": "Konteks tidak tersedia",
-    "ur": "سیاق دستیاب نہیں"
-  },
-  "Reanudar": {
-    "es": "Reanudar",
-    "en": "Resume",
-    "zh-Hans": "继续",
-    "hi": "फिर शुरू करें",
-    "ar": "استئناف",
-    "fr": "Reprendre",
-    "bn": "পুনরায় চালান",
-    "pt": "Retomar",
-    "id": "Lanjutkan",
-    "ur": "دوبارہ جاری کریں"
-  },
-  "Pausar": {
-    "es": "Pausar",
-    "en": "Pause",
-    "zh-Hans": "暂停",
-    "hi": "रोकें",
-    "ar": "إيقاف مؤقت",
-    "fr": "Mettre en pause",
-    "bn": "সাময়িক বিরতি",
-    "pt": "Pausar",
-    "id": "Jeda",
-    "ur": "عارضی طور پر روکیں"
-  },
-  "Límites de búsqueda": {
-    "es": "Límites de búsqueda",
-    "en": "Search limits",
-    "zh-Hans": "搜索限制",
-    "hi": "खोज सीमाएँ",
-    "ar": "حدود البحث",
-    "fr": "Limites de recherche",
-    "bn": "অনুসন্ধানের সীমা",
-    "pt": "Limites da pesquisa",
-    "id": "Batas pencarian",
-    "ur": "تلاش کی حدود"
-  },
-  "Duración activa (s)": {
-    "es": "Duración activa (s)",
-    "en": "Active duration (s)",
-    "zh-Hans": "活动时长（秒）",
-    "hi": "सक्रिय अवधि (सेकंड)",
-    "ar": "المدة النشطة (ث)",
-    "fr": "Durée active (s)",
-    "bn": "সক্রিয় সময় (সে)",
-    "pt": "Duração ativa (s)",
-    "id": "Durasi aktif (dtk)",
-    "ur": "فعال دورانیہ (سیکنڈ)"
-  },
-  "Artículos máximos": {
-    "es": "Artículos máximos",
-    "en": "Maximum articles",
-    "zh-Hans": "最多文章数",
-    "hi": "अधिकतम लेख",
-    "ar": "الحد الأقصى للمقالات",
-    "fr": "Articles maximum",
-    "bn": "সর্বাধিক নিবন্ধ",
-    "pt": "Máximo de artigos",
-    "id": "Artikel maksimum",
-    "ur": "زیادہ سے زیادہ مضامین"
-  },
-  "Resultados máximos": {
-    "es": "Resultados máximos",
-    "en": "Maximum results",
-    "zh-Hans": "最多结果数",
-    "hi": "अधिकतम परिणाम",
-    "ar": "الحد الأقصى للنتائج",
-    "fr": "Résultats maximum",
-    "bn": "সর্বাধিক ফলাফল",
-    "pt": "Máximo de resultados",
-    "id": "Hasil maksimum",
-    "ur": "زیادہ سے زیادہ نتائج"
-  },
-  "Coincidencias máximas": {
-    "es": "Coincidencias máximas",
-    "en": "Maximum matches",
-    "zh-Hans": "最多匹配数",
-    "hi": "अधिकतम मिलान",
-    "ar": "الحد الأقصى للتطابقات",
-    "fr": "Correspondances maximum",
-    "bn": "সর্বাধিক মিল",
-    "pt": "Máximo de ocorrências",
-    "id": "Kecocokan maksimum",
-    "ur": "زیادہ سے زیادہ مماثلتیں"
-  },
-  "Hasta 3600 s, 500000 artículos, 10000 resultados y 1000000 coincidencias.": {
-    "es": "Hasta 3600 s, 500000 artículos, 10000 resultados y 1000000 coincidencias.",
-    "en": "Up to 3600 seconds, 500000 articles, 10000 results and 1000000 matches.",
-    "zh-Hans": "最多3600秒、500000篇文章、10000个结果和1000000处匹配。",
-    "hi": "अधिकतम 3600 सेकंड, 500000 लेख, 10000 परिणाम और 1000000 मिलान।",
-    "ar": "حتى 3600 ثانية و500000 مقالة و10000 نتيجة و1000000 تطابق.",
-    "fr": "Jusqu’à 3600 secondes, 500000 articles, 10000 résultats et 1000000 correspondances.",
-    "bn": "সর্বোচ্চ ৩৬০০ সেকেন্ড, ৫০০০০০ নিবন্ধ, ১০০০০ ফলাফল ও ১০০০০০০ মিল।",
-    "pt": "Até 3600 segundos, 500000 artigos, 10000 resultados e 1000000 ocorrências.",
-    "id": "Hingga 3600 detik, 500000 artikel, 10000 hasil, dan 1000000 kecocokan.",
-    "ur": "زیادہ سے زیادہ 3600 سیکنڈ، 500000 مضامین، 10000 نتائج اور 1000000 مماثلتیں۔"
-  },
-  "Los cambios se aplican a la próxima búsqueda. Alcanzar un límite termina la búsqueda con cobertura parcial.": {
-    "es": "Los cambios se aplican a la próxima búsqueda. Alcanzar un límite termina la búsqueda con cobertura parcial.",
-    "en": "Changes apply to the next search. Reaching a limit ends the search with partial coverage.",
-    "zh-Hans": "更改适用于下一次搜索。达到限额时，搜索将以部分覆盖状态结束。",
-    "hi": "बदलाव अगली खोज पर लागू होंगे। सीमा पर खोज आंशिक कवरेज के साथ समाप्त होती है।",
-    "ar": "تُطبق التغييرات على البحث التالي. يؤدي بلوغ أحد الحدود إلى إنهاء البحث بتغطية جزئية.",
-    "fr": "Les changements s’appliquent à la prochaine recherche. Une limite atteinte termine la recherche avec une couverture partielle.",
-    "bn": "পরিবর্তন পরবর্তী অনুসন্ধানে প্রযোজ্য হবে। সীমায় পৌঁছালে আংশিক আওতা নিয়ে অনুসন্ধান শেষ হবে।",
-    "pt": "As alterações valem para a próxima pesquisa. Atingir um limite encerra a pesquisa com cobertura parcial.",
-    "id": "Perubahan berlaku pada pencarian berikutnya. Mencapai batas mengakhiri pencarian dengan cakupan sebagian.",
-    "ur": "تبدیلیاں اگلی تلاش پر لاگو ہوں گی۔ حد تک پہنچنے پر تلاش جزوی تکمیل کے ساتھ ختم ہوگی۔"
-  },
-  "{count} artículos examinados · {seconds} s de trabajo activo": {
-    "es": "{count} artículos examinados · {seconds} s de trabajo activo",
-    "en": "{count} articles examined · {seconds} s of active work",
-    "zh-Hans": "已检查{count}篇文章 · 活动处理{seconds}秒",
-    "hi": "{count} लेख जाँचे · {seconds} सेकंड सक्रिय कार्य",
-    "ar": "تم فحص {count} مقالة · {seconds} ث من العمل النشط",
-    "fr": "{count} articles examinés · {seconds} s de travail actif",
-    "bn": "{count}টি নিবন্ধ পরীক্ষা করা হয়েছে · {seconds} সেকেন্ড সক্রিয় কাজ",
-    "pt": "{count} artigos examinados · {seconds} s de trabalho ativo",
-    "id": "{count} artikel diperiksa · {seconds} dtk kerja aktif",
-    "ur": "{count} مضامین کا جائزہ · {seconds} سیکنڈ فعال کام"
-  },
-  "Pausar espera a que termine el artículo o versículo actual. Al cerrar esta ventana, la búsqueda se pausa.": {
-    "es": "Pausar espera a que termine el artículo o versículo actual. Al cerrar esta ventana, la búsqueda se pausa.",
-    "en": "Pause waits for the current article or verse to finish. Closing this window pauses the search.",
-    "zh-Hans": "暂停会等待当前文章或经文处理完毕。关闭此窗口将暂停搜索。",
-    "hi": "विराम वर्तमान लेख या पद पूरा होने तक प्रतीक्षा करता है। यह विंडो बंद करने से खोज रुकती है।",
-    "ar": "ينتظر الإيقاف المؤقت انتهاء المقالة أو الآية الحالية. يؤدي إغلاق هذه النافذة إلى إيقاف البحث مؤقتًا.",
-    "fr": "La pause attend la fin de l’article ou du verset en cours. Fermer cette fenêtre met la recherche en pause.",
-    "bn": "বিরতি বর্তমান নিবন্ধ বা পদের কাজ শেষ হওয়ার অপেক্ষা করে। এই উইন্ডো বন্ধ করলে অনুসন্ধান বিরত হয়।",
-    "pt": "A pausa espera o artigo ou versículo atual terminar. Fechar esta janela pausa a pesquisa.",
-    "id": "Jeda menunggu artikel atau ayat saat ini selesai. Menutup jendela ini menjeda pencarian.",
-    "ur": "وقفہ موجودہ مضمون یا آیت کے مکمل ہونے کا انتظار کرتا ہے۔ اس ونڈو کو بند کرنے سے تلاش رک جاتی ہے۔"
-  },
-  "Esperando el punto de pausa…": {
-    "es": "Esperando el punto de pausa…",
-    "en": "Waiting for a pause point…",
-    "zh-Hans": "正在等待暂停点…",
-    "hi": "विराम बिंदु की प्रतीक्षा…",
-    "ar": "في انتظار نقطة الإيقاف المؤقت…",
-    "fr": "En attente d’un point de pause…",
-    "bn": "বিরতির পর্যায়ের অপেক্ষা…",
-    "pt": "Aguardando um ponto de pausa…",
-    "id": "Menunggu titik jeda…",
-    "ur": "وقفے کے مقام کا انتظار…"
-  },
-  "Búsqueda pausada": {
-    "es": "Búsqueda pausada",
-    "en": "Search paused",
-    "zh-Hans": "搜索已暂停",
-    "hi": "खोज रुकी हुई है",
-    "ar": "البحث متوقف مؤقتًا",
-    "fr": "Recherche en pause",
-    "bn": "অনুসন্ধান বিরত",
-    "pt": "Pesquisa pausada",
-    "id": "Pencarian dijeda",
-    "ur": "تلاش عارضی طور پر رکی ہوئی ہے"
-  },
-  "Cancelando búsqueda…": {
-    "es": "Cancelando búsqueda…",
-    "en": "Cancelling search…",
-    "zh-Hans": "正在取消搜索…",
-    "hi": "खोज रद्द हो रही है…",
-    "ar": "جارٍ إلغاء البحث…",
-    "fr": "Annulation de la recherche…",
-    "bn": "অনুসন্ধান বাতিল হচ্ছে…",
-    "pt": "Cancelando pesquisa…",
-    "id": "Membatalkan pencarian…",
-    "ur": "تلاش منسوخ ہو رہی ہے…"
-  },
-  "Búsqueda cancelada; se conservan los resultados parciales.": {
-    "es": "Búsqueda cancelada; se conservan los resultados parciales.",
-    "en": "Search cancelled; partial results are retained.",
-    "zh-Hans": "搜索已取消；已保留部分结果。",
-    "hi": "खोज रद्द हुई; आंशिक परिणाम सुरक्षित हैं।",
-    "ar": "تم إلغاء البحث؛ تم الاحتفاظ بالنتائج الجزئية.",
-    "fr": "Recherche annulée ; les résultats partiels sont conservés.",
-    "bn": "অনুসন্ধান বাতিল হয়েছে; আংশিক ফলাফল রাখা হয়েছে।",
-    "pt": "Pesquisa cancelada; os resultados parciais foram mantidos.",
-    "id": "Pencarian dibatalkan; hasil sebagian dipertahankan.",
-    "ur": "تلاش منسوخ؛ جزوی نتائج محفوظ ہیں۔"
-  },
-  "Búsqueda terminada": {
-    "es": "Búsqueda terminada",
-    "en": "Search finished",
-    "zh-Hans": "搜索已完成",
-    "hi": "खोज पूरी हुई",
-    "ar": "اكتمل البحث",
-    "fr": "Recherche terminée",
-    "bn": "অনুসন্ধান শেষ",
-    "pt": "Pesquisa concluída",
-    "id": "Pencarian selesai",
-    "ur": "تلاش مکمل ہوئی"
-  },
-  "Búsqueda terminada con cobertura parcial": {
-    "es": "Búsqueda terminada con cobertura parcial",
-    "en": "Search finished with partial coverage",
-    "zh-Hans": "搜索已结束，覆盖不完整",
-    "hi": "खोज आंशिक कवरेज के साथ पूरी हुई",
-    "ar": "انتهى البحث بتغطية جزئية",
-    "fr": "Recherche terminée avec une couverture partielle",
-    "bn": "আংশিক আওতা নিয়ে অনুসন্ধান শেষ",
-    "pt": "Pesquisa concluída com cobertura parcial",
-    "id": "Pencarian selesai dengan cakupan sebagian",
-    "ur": "تلاش جزوی تکمیل کے ساتھ ختم ہوئی"
-  },
-  "La búsqueda falló. Inicia una búsqueda nueva para abrir resultados.": {
-    "es": "La búsqueda falló. Inicia una búsqueda nueva para abrir resultados.",
-    "en": "The search failed. Start a new search before opening results.",
-    "zh-Hans": "搜索失败。请开始新搜索后再打开结果。",
-    "hi": "खोज विफल हुई। परिणाम खोलने से पहले नई खोज शुरू करें।",
-    "ar": "فشل البحث. ابدأ بحثًا جديدًا لفتح النتائج.",
-    "fr": "La recherche a échoué. Lancez une nouvelle recherche pour ouvrir les résultats.",
-    "bn": "অনুসন্ধান ব্যর্থ হয়েছে। ফলাফল খুলতে নতুন অনুসন্ধান শুরু করুন।",
-    "pt": "A pesquisa falhou. Inicie uma nova pesquisa para abrir resultados.",
-    "id": "Pencarian gagal. Mulai pencarian baru untuk membuka hasil.",
-    "ur": "تلاش ناکام ہوئی۔ نتائج کھولنے کے لیے نئی تلاش شروع کریں۔"
-  },
-  "Resultados de: {query}": {
-    "es": "Resultados de: {query}",
-    "en": "Results for: {query}",
-    "zh-Hans": "搜索结果：{query}",
-    "hi": "इसके परिणाम: {query}",
-    "ar": "نتائج: {query}",
-    "fr": "Résultats pour : {query}",
-    "bn": "এর ফলাফল: {query}",
-    "pt": "Resultados de: {query}",
-    "id": "Hasil untuk: {query}",
-    "ur": "اس کے نتائج: {query}"
-  },
-  "La configuración cambió. Ejecuta una búsqueda nueva para abrir estos resultados.": {
-    "es": "La configuración cambió. Ejecuta una búsqueda nueva para abrir estos resultados.",
-    "en": "The configuration changed. Run a new search before opening these results.",
-    "zh-Hans": "配置已更改。请运行新搜索后再打开这些结果。",
-    "hi": "सेटिंग बदल गई है। ये परिणाम खोलने से पहले नई खोज करें।",
-    "ar": "تغيرت الإعدادات. نفّذ بحثًا جديدًا لفتح هذه النتائج.",
-    "fr": "La configuration a changé. Lancez une nouvelle recherche pour ouvrir ces résultats.",
-    "bn": "সেটিং বদলেছে। এই ফলাফল খুলতে নতুন অনুসন্ধান চালান।",
-    "pt": "A configuração mudou. Execute uma nova pesquisa para abrir estes resultados.",
-    "id": "Konfigurasi berubah. Jalankan pencarian baru untuk membuka hasil ini.",
-    "ur": "ترتیبات بدل گئی ہیں۔ یہ نتائج کھولنے کے لیے نئی تلاش چلائیں۔"
-  },
-  "La configuración cambió. Cancela e inicia una búsqueda nueva.": {
-    "es": "La configuración cambió. Cancela e inicia una búsqueda nueva.",
-    "en": "The configuration changed. Cancel and start a new search.",
-    "zh-Hans": "配置已更改。请取消并开始新搜索。",
-    "hi": "सेटिंग बदल गई है। रद्द करें और नई खोज शुरू करें।",
-    "ar": "تغيرت الإعدادات. ألغِ البحث وابدأ بحثًا جديدًا.",
-    "fr": "La configuration a changé. Annulez et lancez une nouvelle recherche.",
-    "bn": "সেটিং বদলেছে। বাতিল করে নতুন অনুসন্ধান শুরু করুন।",
-    "pt": "A configuração mudou. Cancele e inicie uma nova pesquisa.",
-    "id": "Konfigurasi berubah. Batalkan dan mulai pencarian baru.",
-    "ur": "ترتیبات بدل گئی ہیں۔ منسوخ کرکے نئی تلاش شروع کریں۔"
-  },
-  "Una fuente cambió o no pudo verificarse después de la pausa. Inicia una búsqueda nueva.": {
-    "es": "Una fuente cambió o no pudo verificarse después de la pausa. Inicia una búsqueda nueva.",
-    "en": "A source changed or could not be verified after pausing. Start a new search.",
-    "zh-Hans": "暂停后有来源已更改或无法验证。请开始新搜索。",
-    "hi": "विराम के बाद स्रोत बदला या सत्यापित नहीं हो सका। नई खोज शुरू करें।",
-    "ar": "تغير أحد المصادر أو تعذر التحقق منه بعد الإيقاف المؤقت. ابدأ بحثًا جديدًا.",
-    "fr": "Une source a changé ou n’a pas pu être vérifiée après la pause. Lancez une nouvelle recherche.",
-    "bn": "বিরতির পর কোনো উৎস বদলেছে বা যাচাই করা যায়নি। নতুন অনুসন্ধান শুরু করুন।",
-    "pt": "Uma fonte mudou ou não pôde ser verificada após a pausa. Inicie uma nova pesquisa.",
-    "id": "Sumber berubah atau tidak dapat diverifikasi setelah jeda. Mulai pencarian baru.",
-    "ur": "وقفے کے بعد کوئی ماخذ بدل گیا یا اس کی تصدیق نہ ہو سکی۔ نئی تلاش شروع کریں۔"
-  },
-  "Se alcanzó el límite de {limit}.": {
-    "es": "Se alcanzó el límite de {limit}.",
-    "en": "The {limit} limit was reached.",
-    "zh-Hans": "已达到{limit}限制。",
-    "hi": "{limit} की सीमा पूरी हो गई।",
-    "ar": "تم بلوغ حد {limit}.",
-    "fr": "La limite de {limit} a été atteinte.",
-    "bn": "{limit} সীমায় পৌঁছেছে।",
-    "pt": "O limite de {limit} foi atingido.",
-    "id": "Batas {limit} tercapai.",
-    "ur": "{limit} کی حد تک پہنچ گئے ہیں۔"
   }
 }

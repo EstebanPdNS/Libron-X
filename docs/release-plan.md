@@ -28,7 +28,7 @@ A feature counts only when its complete behavior is implemented and verified. Ea
 - [x] Fuzzy search.
 - [x] Search result views.
 - [x] Long-running search control.
-- [ ] Resource association manager.
+- [x] Resource association manager.
 - [ ] General resource associations.
 - [ ] Bibliography reports.
 - [ ] Citation styles.

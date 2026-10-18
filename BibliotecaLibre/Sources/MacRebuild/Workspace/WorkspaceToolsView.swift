@@ -22,6 +22,7 @@ struct WorkspaceToolsView: View {
             case .topics: TopicBrowserView(workspace: workspace)
             case .bibleCopy: BibleCopyToolView(workspace: workspace)
             case .windows: WorkspaceWindowsView(workspace: workspace)
+            case .associations: ResourceAssociationSettingsView(workspace: workspace)
             case .parallelSets: ParallelBibleSettingsView(workspace: workspace)
             case .keyLinks: KeyLinkView(workspace: workspace, controller: workspace.keyLinks)
             }
@@ -48,6 +49,7 @@ struct WorkspaceToolsView: View {
         case .topics: "Explorador temático"
         case .bibleCopy: "Copiar versículos bíblicos"
         case .windows: "Ventanas"
+        case .associations: "Asociaciones de recursos"
         case .parallelSets: "Grupos de Biblias paralelas"
         case .keyLinks: "Enlaces clave"
         }
