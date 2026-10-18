@@ -118,8 +118,8 @@ public actor BibleReferenceSearchService {
             if results.count >= budget.maximumOccurrences { return .occurrences }
             return nil
         }
-        func progress(_ title: String?) async {
-            await onProgress?(.init(counters:counters,personalFieldsExamined:personalExamined,currentSourceTitle:title,elapsedSeconds:elapsed()))
+        func progress(_ title: String?) -> BibleReferenceSearchProgress {
+            .init(counters:counters,personalFieldsExamined:personalExamined,currentSourceTitle:title,elapsedSeconds:elapsed())
         }
         func critical(_ error: any Error) throws {
             if error is CancellationError { throw CancellationError() }
@@ -146,7 +146,7 @@ public actor BibleReferenceSearchService {
                             personalDestination:.init(documentID:document.documentID,entryID:field.entryID,field:field.kind,textSHA256:hash,projectionSHA256:projectionHash,range:mention.range)))
                     }
                 } catch { try critical(error); personal[index].fieldsFailed += 1;personal[index].errors.append(error.localizedDescription) }
-                if personalExamined.isMultiple(of:budget.progressBatchSize) { await progress(document.title) }
+                if personalExamined.isMultiple(of:budget.progressBatchSize) { await onProgress?(progress(document.title)) }
             }
             personal[index].complete = document.projectionComplete && personal[index].fieldsFailed == 0 && personal[index].fieldsExamined == document.fields.count
         }
@@ -157,7 +157,7 @@ public actor BibleReferenceSearchService {
             if results.count >= budget.maximumOccurrences { return .occurrences }
             return nil
         }
-        await progress(nil)
+        await onProgress?(progress(nil))
         for index in resources.indices {
             try Task.checkCancellation()
             if !(await provider.supports(resources[index])) || resources[index].support == .invalidFile {
@@ -212,14 +212,14 @@ public actor BibleReferenceSearchService {
                     try critical(error);counters.articlesFailed += 1;reports[index].articlesFailed += 1
                     reports[index].errors.append(.init(sectionOrdinal:article.sectionOrdinal,code:"reference-article",message:error.localizedDescription))
                 }
-                if counters.articlesExamined.isMultiple(of:budget.progressBatchSize) { await progress(resource.title) }
+                if counters.articlesExamined.isMultiple(of:budget.progressBatchSize) { await onProgress?(progress(resource.title)) }
             }
             if reports[index].articlesExamined == source.articles.count, reports[index].articlesFailed == 0 {
                 reports[index].status = .complete;counters.resourcesCompleted += 1
             }
-            await progress(resource.title)
+            await onProgress?(progress(resource.title))
         }
-        await progress(nil)
+        await onProgress?(progress(nil))
         for (resource,source) in prepared { try await provider.verifyUnchanged(resource,prepared:source) }
         try Task.checkCancellation()
         return .init(query:query.original,results:results,resources:reports,documents:personal,counters:counters,personalFieldsExamined:personalExamined,

@@ -52,6 +52,12 @@ public struct LibronMetadata: Codable, Hashable, Sendable {
         return m
     }
     public var searchText: String {
-        ([title, originalTitle ?? "", abbreviation ?? "", subtitle ?? "", resourceType, category, origin, year ?? "", originalYear ?? "", publisher ?? "", collection ?? "", edition ?? "", biblicalCoverage ?? ""] + authors + contributors + languages + subcategories + tags).joined(separator: " ")
+        var values = [title, originalTitle ?? "", abbreviation ?? "", subtitle ?? "", resourceType, category, origin, year ?? "", originalYear ?? "", publisher ?? "", collection ?? "", edition ?? "", biblicalCoverage ?? ""]
+        values.append(contentsOf: authors)
+        values.append(contentsOf: contributors)
+        values.append(contentsOf: languages)
+        values.append(contentsOf: subcategories)
+        values.append(contentsOf: tags)
+        return values.joined(separator: " ")
     }
 }
