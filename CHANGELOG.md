@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Open owned association members as alternatives or companions with verified passage, headword or explicit beginning destinations.
+
 - Manage ordered alternative and companion resource associations with compatibility filters and safe restoration.
 
 - Stream search results with cooperative pause/resume, cancellation, adjustable limits and stale-result guards.

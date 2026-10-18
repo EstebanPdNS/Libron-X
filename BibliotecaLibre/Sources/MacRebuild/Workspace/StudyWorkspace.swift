@@ -48,6 +48,7 @@ enum PaneArrangement { case cascade, horizontal, vertical }
     var availableBibleVersions: [LibraryResource] = []
     var resourcePriorities: ResourcePriorities
     var keyLinks = KeyLinkController()
+    var associationNavigation = AssociationNavigationController()
     var collections: LibraryCollections
     var resourceAssociations: ResourceAssociationSets
     var parallelBibleSets: ParallelBibleSets
@@ -156,6 +157,7 @@ enum PaneArrangement { case cascade, horizontal, vertical }
         // Invalidate results from the old scope before accepting another search.
         search.clear()
         keyLinks.clear()
+        associationNavigation.cancel()
         referenceSearch.clear()
         if !availableResources.contains(where: { $0.id == search.resourceID }) { search.resourceID = nil }
         if !availableResources.contains(where: { $0.id == librarySelection }) { librarySelection = nil }
@@ -287,6 +289,7 @@ enum PaneArrangement { case cascade, horizontal, vertical }
         bibleVersionTask?.cancel()
         search.cancel()
         keyLinks.cancel()
+        associationNavigation.cancel()
         referenceSearch.cancel()
         do { try personal.save() } catch { self.error = error.localizedDescription }
         closeAll(); importGeneration += 1; importTask?.cancel(); isImporting = false

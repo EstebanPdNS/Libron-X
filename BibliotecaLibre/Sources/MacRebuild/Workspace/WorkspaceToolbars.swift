@@ -396,6 +396,7 @@ struct ResourceReaderToolbar: View {
                     get: { workspace.referenceTargetID == reader.id },
                     set: { selected in perform { workspace.setReferenceTarget(selected, for: reader) } }))
                 ParallelBibleMenu(workspace: workspace, reader: reader, toolbarPresentation: false)
+                Button(L("Recursos asociados…")) { workspace.beginAssociatedResources(source: reader) }
                 Button(L("Buscar en este recurso")) { perform(reader.showFind) }
                 interlinearMenu
                 graphicsMenu

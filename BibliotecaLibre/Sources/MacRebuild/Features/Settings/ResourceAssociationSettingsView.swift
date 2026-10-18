@@ -51,6 +51,7 @@ struct ResourceAssociationSettingsView: View {
             VStack(alignment: .leading, spacing: 10) {
                 if let selected {
                     profile(selected)
+                    Button(L("Abrir asociados…")) { workspace.beginAssociatedResources(groupID: selected.id) }.disabled(edited || selected.members.isEmpty)
                     Text(LF("{count} recursos", ["count": String(selected.members.count)]))
                         .font(.caption).foregroundStyle(.secondary)
                     List(selected.members, selection: $selectedMemberID) { member in

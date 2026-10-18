@@ -382,6 +382,28 @@ struct ReaderPage: Sendable {
             }
         }
     }
+    /// Association lookup has already resolved the target's own coordinate.
+    /// Commit only after source validation; no ordinal/history crosses resources.
+    var associationGeneration: Int { generation }
+    func installAssociation(_ match: KeyLinkMatch, mode: AssociationDestinationMode) throws {
+        try LibrarySearchFileStamp.verify(match.stamps)
+        guard match.page.destination.ordinal == match.destination.ordinal else { throw LegacyIndicesError.sourceChanged }
+        cancel(); resource = match.resource
+        history = []; historyIndex = -1; hasObservedBible = false
+        visibleInterlinearLines = nil; presentationWarnings = []; findStatus = .idle
+        parallelSetID = nil; linkGroup = .none; dictionaryWord = mode == .headword ? match.label : ""
+        locatorIsArticle = mode != .reference
+        commit(match.page)
+        if mode == .headword { locator = match.label }
+        error = nil
+        fontTask?.cancel()
+        fontTask = Task { [weak self, resource] in
+            await ReaderResourceFonts.register(near: resource.location)
+            guard !Task.isCancelled else { return }; self?.sourceFontsRevision += 1
+        }
+        if flowEnabled { fillReadingFlow() }
+    }
+
     /// Resolve against the replacement resource before changing the visible book.
     /// Physical article offsets and history never cross edition boundaries.
     func changeBibleVersion(to replacement: LibraryResource, reference: String,

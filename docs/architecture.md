@@ -392,3 +392,43 @@ and empty states pass native checks. Ten original user-state files restore
 exactly; the new test-only state is archived. Catalog/entry set and all 53 original
 association definitions remain unchanged; 1099 package integrity checks pass.
 Native visual evidence covers observed Spanish dark appearance only.
+
+## General association navigation (original import pending)
+
+Owned association groups now open resources through Tools > Associated resources,
+the reader Actions menu, or the association editor. A native selectable list,
+Open selection/Enter and explicit New reading action preserve keyboard and
+accessibility operation. A source-bound browser shows groups containing the
+source's exact eligible identity. Opening a group explicitly from the manager
+can browse another group without replacing an unrelated source.
+
+Alternatives replace the same pane after successful resolution; companions and
+explicit new readings retain the source pane. Bible references and dictionary/
+lexicon headwords resolve independently in each target through the established
+KeyLink readers. Series may use those coordinates when declared and supported,
+or an explicit Resource beginning operation. No source article ordinal or history
+is transferred to another resource. Reference and headword inputs are bounded;
+missing or unsupported coordinates fail without replacing visible content.
+
+Lookup captures the group/request and source navigation generation. Before any
+commit, it rechecks group membership, current availability, source identity/
+generation/reference and the target's complete source-file stamp set. Cancelled,
+closed, navigated, hidden or superseded contexts cannot apply late results. A
+changed definition or source reports failure and releases the busy state. A
+successful alternative keeps pane ID/geometry/zoom, resets resource-local history,
+interlinear/search state and old Bible/link-group bindings, and reconnects the
+new resource's annotations and commands. Companion zoom inherits the source.
+Existing Bible set definitions and all resource files remain separate.
+
+814 tests in 135 suites pass, including 11 new definitions with parameterized
+source-close and forged-result controls. Installed build 56 verifies Enter
+opening, Bible replacement at Ge1:1, explicit new reading, two independently
+opened commentaries, BDB-to-Strong H1 replacement, missing-headword refusal and
+explicit beginning navigation between two ELA volumes. Independent read-only
+SQLite oracles match Ryrie ordinal 66, Matthew Henry ordinal 1255, and H1 ordinal
+0 in both lexicons. Native visual evidence covers observed Spanish dark appearance.
+
+The general-associations checklist feature remains pending until original
+association definition import is integrated, including order, provenance and
+unresolved/ambiguous GUID references. This navigation checkpoint alone does not
+claim the original Parallel Resources workflow is complete.
