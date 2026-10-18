@@ -2,7 +2,7 @@ import Foundation
 import Observation
 import LibronixCore
 
-struct LibraryCollectionMember: Codable, Equatable, Identifiable {
+struct LibraryCollectionMember: Codable, Equatable, Identifiable, Sendable {
     var resourceID: String
     var title: String
     var format: ResourceFormat
@@ -16,7 +16,7 @@ struct LibraryCollectionMember: Codable, Equatable, Identifiable {
         resources.first { $0.id == resourceID && $0.format == format && $0.legacyIdentifier == legacyIdentifier }
     }
 }
-struct LibraryCollection: Codable, Identifiable, Equatable {
+struct LibraryCollection: Codable, Identifiable, Equatable, Sendable {
     var id = UUID()
     var name: String
     var members: [LibraryCollectionMember] = []

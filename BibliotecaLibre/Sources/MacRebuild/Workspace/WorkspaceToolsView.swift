@@ -25,8 +25,17 @@ struct WorkspaceToolsView: View {
             case .parallelSets: ParallelBibleSettingsView(workspace: workspace)
             case .keyLinks: KeyLinkView(workspace: workspace, controller: workspace.keyLinks)
             }
-        }.frame(minWidth: tool == .information ? 700 : 680, idealWidth: tool == .information ? 700 : 820, minHeight: tool == .information ? nil : 520, idealHeight: tool == .information ? nil : 620)
+        }.frame(minWidth: tool == .information ? 700 : 680, idealWidth: tool == .information ? 700 : 820,
+                minHeight: tool == .information ? nil : expandedScope ? 620 : 520,
+                idealHeight: tool == .information ? nil : expandedScope ? 720 : 620)
             .modifier(MacPanelControlPresentation())
+    }
+    private var expandedScope: Bool {
+        let kind: WorkspaceSearchScopeKind?
+        if tool == .search { kind = workspace.search.scope.kind }
+        else if tool == .referenceSearch && workspace.referenceSearch.includeLibrary { kind = workspace.referenceSearch.scope.kind }
+        else { kind = nil }
+        return kind == .collections || kind == .subset
     }
     private var title: String {
         switch tool {
@@ -48,7 +57,7 @@ struct WorkspaceToolsView: View {
 struct WorkspaceSearchView: View {
     @Bindable var workspace: StudyWorkspace
     @Bindable var search: WorkspaceSearchController
-    private func run() { search.run(workspace.availableResources, documents: workspace.personal.documents) }
+    private func run() { search.run(workspace.availableResources, documents: workspace.personal.documents, scopeContext: workspace.searchScopeContext()) }
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
@@ -57,13 +66,7 @@ struct WorkspaceSearchView: View {
                 if search.isSearching { Button(L("Cancelar"), action: search.cancel) }
                 else { Button(L("Buscar"), action: run).disabled(search.query.isEmpty) }
             }
-            HStack {
-                Toggle(L("Toda la biblioteca"), isOn: $search.allResources)
-                Picker(L("Recurso"), selection: Binding(get: { search.resourceID ?? "" }, set: { search.resourceID = $0 })) {
-                    Text(L("Selecciona un recurso")).tag("")
-                    ForEach(workspace.availableResources) { resource in Text(resource.title).tag(resource.id) }
-                }.disabled(search.allResources)
-            }.disabled(search.isSearching)
+            WorkspaceSearchScopePicker(selection: search.scope, context: workspace.searchScopeContext()).disabled(search.isSearching)
             if search.bibleVerses {
                 VStack(alignment: .leading, spacing: 8) {
                     Picker(L("Rango bíblico"), selection: $search.bibleRangeMode) {
@@ -90,6 +93,11 @@ struct WorkspaceSearchView: View {
                 Toggle(L("Versículos bíblicos"), isOn: $search.bibleVerses)
             }.disabled(search.isSearching)
             if let message = search.error { Text(message).foregroundStyle(.red).textSelection(.enabled) }
+            if search.report == nil, let scope = search.scopeSnapshot, !scope.complete {
+                DisclosureGroup(L("La búsqueda tiene resultados parciales o recursos pendientes")) {
+                    ScrollView { Text(scope.issueLines.joined(separator: "\n")).font(.caption).textSelection(.enabled) }.frame(maxHeight: 100)
+                }
+            }
             if search.isSearching {
                 HStack { ProgressView().controlSize(.small); Text(LF("{count} artículos examinados", ["count": String(search.progress?.counters.articlesExamined ?? 0)])) }
             }
@@ -100,19 +108,20 @@ struct WorkspaceSearchView: View {
                         Text(result.snippet.text).lineLimit(3).foregroundStyle(.secondary)
                         Text(LF("{count} coincidencias", ["count": String(result.hitCount)])).font(.caption)
                     }.padding(.vertical, 4).frame(maxWidth: .infinity, alignment: .leading)
-                    Button(L("Abrir")) { workspace.openSearchResult(result) }
-                }.contentShape(Rectangle()).onTapGesture(count: 2) { workspace.openSearchResult(result) }
+                    Button(L("Abrir")) { workspace.openSearchResult(result, scope: search.scopeSnapshot) }
+                }.contentShape(Rectangle()).onTapGesture(count: 2) { workspace.openSearchResult(result, scope: search.scopeSnapshot) }
             }
             if let report = search.report {
+                if let scope = search.scopeSnapshot { Text(scope.description).font(.caption).lineLimit(2) }
                 if report.unit == .bibleVerse {
                     Text(LF("Rango: {range}", ["range": report.bibleRange?.description ?? L("Todos los versículos")])).font(.caption)
                     Text(LF("{selected} versículos examinados · {excluded} fuera del rango", ["selected": String(report.counters.versesExamined), "excluded": String(report.counters.versesExcludedByRange)])).font(.caption)
                 }
                 Text(LF("{results} resultados · {articles} artículos examinados", ["results": String(report.counters.resultsReturned), "articles": String(report.counters.articlesExamined)])).font(.caption)
-                if !report.coverageComplete {
+                if !search.coverageComplete {
                     DisclosureGroup(L("La búsqueda tiene resultados parciales o recursos pendientes")) {
                         ScrollView {
-                            Text(([report.limitReason.map { "Se alcanzó el límite de \($0.rawValue)." }].compactMap { $0 } + report.resourceReports.filter { $0.status != .complete }.map { "\($0.resourceTitle): \($0.warnings.joined(separator: " ")) \($0.errors.map(\.message).joined(separator: " "))" }).joined(separator: "\n"))
+                            Text(((search.scopeSnapshot?.issueLines ?? []) + [report.limitReason.map { "Se alcanzó el límite de \($0.rawValue)." }].compactMap { $0 } + report.resourceReports.filter { $0.status != .complete }.map { "\($0.resourceTitle): \($0.warnings.joined(separator: " ")) \($0.errors.map(\.message).joined(separator: " "))" }).joined(separator: "\n"))
                                 .font(.caption).textSelection(.enabled).frame(maxWidth: .infinity, alignment: .leading)
                         }.frame(maxHeight: 100)
                     }

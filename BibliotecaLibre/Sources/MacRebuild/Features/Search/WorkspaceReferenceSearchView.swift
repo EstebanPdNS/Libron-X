@@ -4,7 +4,7 @@ import LibronixCore
 struct WorkspaceReferenceSearchView: View {
     @Bindable var workspace: StudyWorkspace
     @Bindable var search: WorkspaceReferenceSearchController
-    private func run() { search.run(resources: workspace.availableResources, documents: workspace.personal.documents) }
+    private func run() { search.run(resources: workspace.availableResources, documents: workspace.personal.documents, scopeContext: workspace.searchScopeContext()) }
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
@@ -18,17 +18,16 @@ struct WorkspaceReferenceSearchView: View {
                     Toggle(L("Recursos de la biblioteca"), isOn: $search.includeLibrary)
                     Toggle(L("Documentos personales"), isOn: $search.includeDocuments)
                 }
-                HStack {
-                    Toggle(L("Toda la biblioteca"), isOn: $search.allResources)
-                    Picker(L("Recurso"), selection: Binding(get: { search.resourceID ?? "" }, set: { search.resourceID = $0 })) {
-                        Text(L("Selecciona un recurso")).tag("")
-                        ForEach(workspace.availableResources) { Text($0.title).tag($0.id) }
-                    }.disabled(search.allResources)
-                }.disabled(!search.includeLibrary)
+                WorkspaceSearchScopePicker(selection: search.scope, context: workspace.searchScopeContext()).disabled(!search.includeLibrary)
             }.disabled(search.isSearching)
             Text(L("Encuentra menciones explícitas de pasajes. Una edición entre paréntesis limita la búsqueda a citas que indican esa edición."))
                 .font(.caption).foregroundStyle(.secondary)
             if let error = search.error { Text(error).foregroundStyle(.red).textSelection(.enabled) }
+            if search.report == nil, let scope = search.scopeSnapshot, !scope.complete {
+                DisclosureGroup(L("La búsqueda tiene resultados parciales o fuentes pendientes")) {
+                    ScrollView { Text(scope.issueLines.joined(separator: "\n")).font(.caption).textSelection(.enabled) }.frame(maxHeight: 100)
+                }
+            }
             if search.isSearching {
                 HStack {
                     ProgressView().controlSize(.small)
@@ -50,8 +49,9 @@ struct WorkspaceReferenceSearchView: View {
                 }.contentShape(Rectangle()).onTapGesture(count: 2) { workspace.openReferenceSearchResult(result) }
             }
             if let report = search.report {
+                if let scope = search.scopeSnapshot { Text(scope.description).font(.caption).lineLimit(2) }
                 Text(LF("{results} resultados · {articles} artículos · {fields} campos personales", ["results": String(report.results.count), "articles": String(report.counters.articlesExamined), "fields": String(report.personalFieldsExamined)])).font(.caption)
-                if !report.coverageComplete {
+                if !search.coverageComplete {
                     DisclosureGroup(L("La búsqueda tiene resultados parciales o fuentes pendientes")) {
                         ScrollView { Text(details(report)).font(.caption).textSelection(.enabled).frame(maxWidth: .infinity, alignment: .leading) }.frame(maxHeight: 120)
                     }
@@ -63,7 +63,7 @@ struct WorkspaceReferenceSearchView: View {
         LF("{articles} artículos · {fields} campos personales", ["articles": String(search.progress?.counters.articlesExamined ?? 0), "fields": String(search.progress?.personalFieldsExamined ?? 0)])
     }
     private func details(_ report: BibleReferenceSearchReport) -> String {
-        var lines = report.limitReason.map { [L("Se alcanzó el límite de búsqueda") + ": " + $0.rawValue] } ?? []
+        var lines = (search.scopeSnapshot?.issueLines ?? []) + (report.limitReason.map { [L("Se alcanzó el límite de búsqueda") + ": " + $0.rawValue] } ?? [])
         lines += report.resources.filter { $0.status != .complete }.map { $0.resourceTitle + ": " + ($0.warnings + $0.errors.map(\.message)).joined(separator: " ") }
         lines += report.documents.filter { !$0.complete }.map { $0.title + ": " + ($0.warnings + $0.errors).joined(separator: " ") }
         return lines.joined(separator: "\n")

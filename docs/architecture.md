@@ -63,3 +63,14 @@ Resource priorities keep promoted order, enabled flags and per-datatype opening 
 Reference-mention search spans reader projections and personal documents. See [the query, projection and native acceptance contract](../BibliotecaLibre/docs/reference-mention-search.md); original-engine equivalence remains a separate gate.
 
 Bible text search supports compiled passage/book unions and immutable saved-list scopes. See [the range and verse-boundary contract](../BibliotecaLibre/docs/bible-search-ranges.md).
+
+
+## Resource search scopes
+
+`WorkspaceSearchScopeSelection` provides one source-selection contract for text, Bible and reference-mention searches: a resource, the visible library, the union of selected collections, an explicit resource subset, or all open readers (including minimized panes). Native multi-selection retains off-filter resource choices. Repeated readers and overlapping collections contribute each stable resource identity once. An empty selection fails explicitly and never widens to the library.
+
+Each submission captures an immutable `WorkspaceSearchScopeSnapshot`. Collection membership checks ID, source format and legacy identity; titles are display metadata. Missing, hidden or replaced members remain scope issues. Available members can still be searched, but complete coverage requires both a complete source report and an issue-free scope. Collection or visibility state errors fail the affected search rather than guessing membership. Personal-document-only reference searches remain independent of library scope.
+
+Result navigation is bound to the captured resource and source location. A still-available external source can reopen after its reader closes; a removed managed source, changed identity or hidden resource fails explicitly. The core evaluators, source coordinate contracts, index generation and Bible range semantics remain unchanged. Selection is session state; this feature does not introduce saved query documents or rule-based collections.
+
+Installed v0.3.0 build 41 was checked in the current Spanish dark native interface: overlapping collections, explicit missing-member warnings, manual selection across filters, empty-selection errors, two open resources including a minimized reader, and reference search within collections. Two real resources produced 16 scanned articles; the literal query returned the expected 16 matches in one article and the passage query returned its expected explicit citation. The full suite passes 712 tests in 118 suites, including nine new scope workflow tests covering identity conflicts, external-reader reopening, supersession and Bible-range composition. Light/RTL and older macOS rendering were not manually inspected in this checkpoint. Original engine/RPOS and cross-versification equivalence retain separate acceptance gates.

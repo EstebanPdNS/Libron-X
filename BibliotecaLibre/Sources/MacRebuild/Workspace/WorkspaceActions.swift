@@ -113,7 +113,7 @@ struct ReaderHighlight: Identifiable, Codable, Equatable {
     func submitToolbarSearch() {
         guard !search.query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
         beginSearch()
-        search.run(availableResources, documents: personal.documents)
+        search.run(availableResources, documents: personal.documents, scopeContext: searchScopeContext())
     }
     func addHighlight(_ color: String) {
         guard let reader = activeReader, let page = reader.page, reader.selectedRange.length > 0 else { return }
@@ -169,12 +169,18 @@ struct ReaderHighlight: Identifiable, Codable, Equatable {
         pendingNoteID = note.id
         savePersonal(); activeTool = .documents
     }
-    func openSearchResult(_ result: LibrarySearchResult) {
-        guard let resource = availableResources.first(where: { $0.id == result.resourceID }) else { return }
-        let reader = readers.first(where: { $0.id == referenceTargetID && $0.resource.id == resource.id }) ?? open(resource, startReading: false)
-        activate(reader)
-        reader.loadSearchResult(result)
-        activeTool = nil
+    func openSearchResult(_ result: LibrarySearchResult, scope: WorkspaceSearchScopeSnapshot? = nil) {
+        do {
+            let resource = try resourceForSearchResult(result, scope: scope)
+            let reader = readers.first(where: {
+                $0.id == referenceTargetID && $0.resource.id == resource.id && $0.resource.format == resource.format &&
+                $0.resource.legacyIdentifier == resource.legacyIdentifier && $0.resource.location == resource.location
+            }) ?? open(resource, startReading: false)
+            activate(reader); reader.loadSearchResult(result); activeTool = nil
+        } catch {
+            if activeTool == .referenceSearch { referenceSearch.showOpeningError(error.localizedDescription) }
+            else { search.error = error.localizedDescription }
+        }
     }
 }
 

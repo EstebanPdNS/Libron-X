@@ -4,7 +4,7 @@ import LibronixCore
 
 /// An exclusion belongs to a physical path, format and observed edition ID.
 /// Titles alone never hide another translation or format.
-struct HiddenLibraryResource: Codable, Equatable, Identifiable {
+struct HiddenLibraryResource: Codable, Equatable, Identifiable, Sendable {
     var id: String
     var title: String
     var format: ResourceFormat

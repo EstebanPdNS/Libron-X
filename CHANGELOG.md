@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Search selected collections, resource subsets and open readers with explicit coverage warnings.
+
 - Search the managed library with persistent source-bound indexes.
 - Organize mixed resources in persistent manual collections.
 - Configure resource priorities and resolve Bible, commentary and word links.

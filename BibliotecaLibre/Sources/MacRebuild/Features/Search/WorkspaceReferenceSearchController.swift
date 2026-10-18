@@ -4,9 +4,12 @@ import LibronixCore
 
 @MainActor @Observable final class WorkspaceReferenceSearchController {
     var query = ""
-    var resourceID: String?
+    var scope = WorkspaceSearchScopeSelection()
+    var resourceID: String? { get { scope.resourceID } set { scope.resourceID = newValue } }
     var includeLibrary = true
-    var allResources = false
+    var allResources: Bool { get { scope.allResources } set { scope.allResources = newValue } }
+    private(set) var scopeSnapshot: WorkspaceSearchScopeSnapshot?
+    var coverageComplete: Bool { report?.coverageComplete == true && scopeSnapshot?.complete != false }
     var includeDocuments = true
     private(set) var isSearching = false
     private(set) var report: BibleReferenceSearchReport?
@@ -21,16 +24,18 @@ import LibronixCore
     func cancel() {
         generation += 1; task?.cancel(); task = nil; isSearching = false
     }
-    func clear() { cancel(); report = nil; progress = nil; error = nil }
+    func clear() { cancel(); report = nil; progress = nil; error = nil; scopeSnapshot = nil }
     func showOpeningError(_ message: String) { error = message }
-    func run(resources: [LibraryResource], documents: [StudyDocument]) {
+    func run(resources: [LibraryResource], documents: [StudyDocument], scopeContext: WorkspaceSearchScopeContext? = nil) {
         clear(); let token = generation
         do {
             let parsed = try BibleReferenceQuery.parse(query)
-            let selected = includeLibrary ? (allResources ? resources : resources.filter { $0.id == resourceID }) : []
+            let snapshot = try includeLibrary ? WorkspaceSearchScopeResolver.resolve(scope, context: scopeContext ?? .init(library: resources)) : nil
+            scopeSnapshot = snapshot
+            let selected = snapshot?.resources ?? []
             let personal = includeDocuments ? documents : []
             guard !includeLibrary || !selected.isEmpty else {
-                throw PersonalStateError.invalid("Selecciona un recurso para buscar en la biblioteca.")
+                throw WorkspaceSearchScopeError.noResources
             }
             guard !selected.isEmpty || !personal.isEmpty else {
                 throw PersonalStateError.invalid("Selecciona un recurso o documentos personales para buscar.")
@@ -72,10 +77,7 @@ import LibronixCore
     }
     func openReferenceSearchResult(_ result: BibleReferenceSearchResult) {
         if let destination = result.resourceDestination {
-            guard availableResources.contains(where: { $0.id == destination.resourceID }) else {
-                referenceSearch.showOpeningError(L("Recurso no disponible")); return
-            }
-            openSearchResult(destination); return
+            openSearchResult(destination, scope: referenceSearch.scopeSnapshot); return
         }
         guard let destination = result.personalDestination else { return }
         do {

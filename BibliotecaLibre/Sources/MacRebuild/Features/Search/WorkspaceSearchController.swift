@@ -6,8 +6,11 @@ enum WorkspaceBibleRangeMode: String, CaseIterable, Sendable { case all, custom,
 
 @MainActor @Observable final class WorkspaceSearchController {
     var query = ""
-    var resourceID: String?
-    var allResources = false
+    var scope = WorkspaceSearchScopeSelection()
+    var resourceID: String? { get { scope.resourceID } set { scope.resourceID = newValue } }
+    var allResources: Bool { get { scope.allResources } set { scope.allResources = newValue } }
+    private(set) var scopeSnapshot: WorkspaceSearchScopeSnapshot?
+    var coverageComplete: Bool { report?.coverageComplete == true && scopeSnapshot?.complete != false }
     var caseSensitive = false
     var wholeWords = true
     var bibleVerses = false
@@ -21,12 +24,14 @@ enum WorkspaceBibleRangeMode: String, CaseIterable, Sendable { case all, custom,
     @ObservationIgnored private var task: Task<Void, Never>?
     @ObservationIgnored private var generation = 0
     func cancel() { generation += 1; task?.cancel(); task = nil; isSearching = false }
-    func run(_ resources: [LibraryResource], documents: [StudyDocument] = []) {
-        cancel(); let token = generation
-        error = nil; report = nil; progress = nil
-        let selected = allResources ? resources : resources.filter { $0.id == resourceID }
-        guard !selected.isEmpty else { error = L("Selecciona un recurso para buscar."); return }
+    func clear() { cancel(); error = nil; report = nil; progress = nil; scopeSnapshot = nil }
+    func run(_ resources: [LibraryResource], documents: [StudyDocument] = [], scopeContext: WorkspaceSearchScopeContext? = nil) {
+        clear(); let token = generation
         do {
+            let snapshot = try WorkspaceSearchScopeResolver.resolve(scope, context: scopeContext ?? .init(library: resources))
+            scopeSnapshot = snapshot
+            let selected = snapshot.resources
+            guard !selected.isEmpty else { throw WorkspaceSearchScopeError.noResources }
             let parsed = try SearchQueryParser.parse(query)
             var options = TextSearchOptions(); options.caseSensitive = caseSensitive; options.wholeWords = wholeWords
             let unit: LibrarySearchUnit = bibleVerses ? .bibleVerse : .article

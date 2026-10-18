@@ -152,10 +152,9 @@ enum PaneArrangement { case cascade, horizontal, vertical }
     }
     private func libraryVisibilityChanged() {
         // Invalidate results from the old scope before accepting another search.
-        search.cancel()
+        search.clear()
         keyLinks.clear()
         referenceSearch.clear()
-        search.report = nil; search.progress = nil; search.error = nil
         if !availableResources.contains(where: { $0.id == search.resourceID }) { search.resourceID = nil }
         if !availableResources.contains(where: { $0.id == librarySelection }) { librarySelection = nil }
     }
