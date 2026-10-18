@@ -6,13 +6,13 @@ import LibronixCore
 struct AuthoredOEBFixture {
     let root: URL
     let resource: LibraryResource
-    init(missingStyle: Bool = false) throws {
+    init(missingStyle: Bool = false, chapterBody: String? = nil) throws {
         root = FileManager.default.temporaryDirectory.appendingPathComponent("owned-oeb-" + UUID().uuidString)
         try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
         func html(_ body: String) -> Data { Data(("<html><head><meta charset=\"utf-8\"><link rel=\"stylesheet\" href=\"Help.css\"></head><body>" + body + "</body></html>").utf8) }
         var members = [
             "Cover.html":html("<span id=\"a0\"></span><h1>Owned cover</h1><p>No match here.</p>"),
-            "Chapter.html":html("<span id=\"a1\"></span><h1>Gamma</h1><p>café a\u{301}rbol 😀 gamma <strong>Delta</strong></p><p class=\"hidden\">InvisibleNeedle</p><table><tr><td>Table</td><td>Gamma</td></tr></table><span id=\"a2\"></span><h2>Second</h2><p>Gamma second</p>"),
+            "Chapter.html":html(chapterBody ?? "<span id=\"a1\"></span><h1>Gamma</h1><p>café a\u{301}rbol 😀 gamma <strong>Delta</strong></p><p class=\"hidden\">InvisibleNeedle</p><table><tr><td>Table</td><td>Gamma</td></tr></table><span id=\"a2\"></span><h2>Second</h2><p>Gamma second</p>"),
             "Tail.html":html("<span id=\"a3\"></span><p>Tail Gamma</p>")]
         if !missingStyle { members["Help.css"] = Data(".hidden { display:none; } h1 { color:navy; } table { border:1px solid gray; }".utf8) }
         let names = ["Cover.html","Chapter.html","Tail.html"]

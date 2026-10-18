@@ -199,7 +199,27 @@ struct ReaderOEBView: NSViewRepresentable {
             }
             anchors[fragment] = offset;
           }
-          return {text: visible.map(n => n.data).join(''), anchors};
+          // Coordinates use the same visible text-node stream as selection.
+          // Keep raw destinations; Swift accepts only recognized Bible syntax.
+          const byElement = new Map(); let offset = 0;
+          for (const node of visible) {
+            for (let element = node.parentElement; element; element = element.parentElement) {
+              const targets = [];
+              if (element.hasAttribute('lbxrt:xref')) targets.push(element.getAttribute('lbxrt:xref'));
+              if (element.tagName === 'A' && element.hasAttribute('href')) targets.push(element.getAttribute('href'));
+              if (!targets.length || !node.length) continue;
+              let records = byElement.get(element);
+              if (!records) {
+                records = [...new Set(targets)].map(target => ({start: offset, length: 0, target}));
+                byElement.set(element, records);
+              }
+              for (const record of records) record.length = offset + node.length - record.start;
+            }
+            offset += node.length;
+          }
+          const links = Array.from(byElement.values()).flat();
+          if (links.length > 100000) throw new Error('Too many source links');
+          return {text: visible.map(n => n.data).join(''), anchors, links};
         },
         select: (start, length) => {
           if (!length) return false;

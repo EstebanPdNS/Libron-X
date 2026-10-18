@@ -23,6 +23,47 @@ import CSQLite
         Issue.record("Search result navigation did not finish")
     }
 
+    @Test func renderedReferenceLinksUseVisibleDOMRangesCheckedTargetsAndCacheIdentity() async throws {
+        _ = NSApplication.shared
+        let fixture = try AuthoredOEBFixture(chapterBody: #"<span id="a1"></span><h1>😀 References</h1><a href="bible+rvr60.64.3.16"><b>Jn3:</b><i>18</i><span class="hidden">Hidden John3:99</span></a><a href="https://example.invalid/John3:88">external</a><span lbxrt:xref="bible+esv.64.3.19">next</span><a class="hidden" href="bible.64.3.77">hidden</a><span id="a2"></span><p>John3:20</p>"#)
+        defer { fixture.remove() }
+        let original = try Data(contentsOf: fixture.resource.location)
+        for normalized in [false, true] {
+            let resource: LibraryResource
+            if normalized {
+                let package = try LibronPackage.create(fixture.resource, in: fixture.root.appendingPathComponent("library"), backup: false)
+                resource = try LibronPackage.read(package).1
+                _ = try await LibronNativeNormalizer().convert(resource)
+            } else { resource = fixture.resource }
+            let cache = fixture.root.appendingPathComponent(normalized ? "native-search" : "original-search")
+            let source = WorkspaceSearchReader()
+            let prepared = try await source.prepare(resource)
+            #expect(prepared.projectionVersion == "workspace-reference-links-v2")
+            let provider = PersistentLibrarySearchProvider(source: source, directory: cache)
+            let query = try BibleReferenceQuery.parse("John3")
+            let report = try await BibleReferenceSearchService(provider: provider).search(resources: [resource], query: query)
+            #expect(report.coverageComplete && report.results.count == 3)
+            #expect(report.results.map(\.mention.label) == ["Jn3:18", "next", "John3:20"])
+            #expect(report.results.map { $0.mention.citation.spans[0].lower.verse } == [16,19,20])
+            #expect(report.results.map { $0.mention.citation.edition } == ["rvr60","esv",nil])
+            #expect(report.results.map(\.mention.origin) == [.explicitLink,.explicitLink,.visibleText])
+            let hit = try #require(report.results.first?.resourceDestination)
+            #expect(hit.sectionOrdinal == 1 && hit.hits[0].range.location > 0)
+            let reader = ReaderSession(resource: resource)
+            reader.loadSearchResult(hit); try await settle(reader)
+            let page = try #require(reader.page?.oeb)
+            let projection = try await ReaderOEBTextSource.shared.read(book: page.book, path: "Chapter.html", viewport: .init())
+            try reader.acceptOEBProjection(projection.text, at: page.url)
+            #expect(reader.selectedText == "Jn3:18")
+            let reopened = PersistentLibrarySearchProvider(source: WorkspaceSearchReader(), directory: cache)
+            let warm = try await BibleReferenceSearchService(provider: reopened).search(resources: [resource], query: query)
+            #expect(warm.coverageComplete && warm.results.map(\.mention) == report.results.map(\.mention))
+            let metrics = await reopened.metrics
+            #expect(metrics.cachedReads == 4 && metrics.sourceReads == 0)
+        }
+        #expect(try Data(contentsOf: fixture.resource.location) == original)
+    }
+
     @Test func mixedLegacyAndESwordSearchUsesVisibleTextAndVerseBoundaries() async throws {
         _ = NSApplication.shared
         let legacy = try AuthoredReaderFixture(documents: [["Gamma 😀", "Other section"]]); defer { legacy.remove() }

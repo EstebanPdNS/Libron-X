@@ -15,7 +15,8 @@ actor LibrarySearchReader: LibrarySearchContentProvider {
             let inner = try await LibronixBookService.shared.prepare(resource)
             let prepared = try await prepare(inner)
             let result = LibrarySearchPreparedResource(articles: prepared.articles,
-                sourceStamps: prepared.sourceStamps + [original], warnings: prepared.warnings)
+                sourceStamps: prepared.sourceStamps + [original], warnings: prepared.warnings,
+                projectionVersion: prepared.projectionVersion)
             try verify(result); embeddedSources[resource.id] = inner
             return result
         }
@@ -44,7 +45,7 @@ actor LibrarySearchReader: LibrarySearchContentProvider {
         let prepared = LibrarySearchPreparedResource(
             articles: sectionIndex.sections.map {
                 .init(sectionOrdinal: $0.ordinal, title: titles[$0.ordinal] ?? "Artículo \($0.ordinal + 1)")
-            }, sourceStamps: stamps, warnings: warnings)
+            }, sourceStamps: stamps, warnings: warnings, projectionVersion: "core-legacy-reference-links-v1")
         try verify(prepared)
         return prepared
     }
@@ -52,10 +53,24 @@ actor LibrarySearchReader: LibrarySearchContentProvider {
     func read(_ resource: LibraryResource, article: LibrarySearchArticleDescriptor,
               prepared: LibrarySearchPreparedResource) async throws -> LibrarySearchDecodedArticle {
         try verify(prepared)
-        let content = try await contentService.read((embeddedSources[resource.id] ?? resource).location, ordinal: article.sectionOrdinal)
+        let source = embeddedSources[resource.id] ?? resource
+        let content = try await contentService.read(source.location, ordinal: article.sectionOrdinal)
+        let resolution: LegacyInlineLinkResolution
+        var warnings = content.warnings
+        do {
+            resolution = try await contentService.inlineLinks(source.location, content: content, indexURL: source.indexLocation)
+        } catch is CancellationError { throw CancellationError() }
+        catch let error as LegacyIndicesError where error == .sourceChanged { throw error }
+        catch {
+            // Physical-section search remains available when no usable LIX is
+            // present, but never invent a link target without its checked index.
+            resolution = .init(links: [], unresolvedAttributedRuns: 0)
+            warnings.append("No se pudieron resolver los enlaces del artículo: \(error.localizedDescription)")
+        }
         try verify(prepared)
         guard content.descriptor.ordinal == article.sectionOrdinal else { throw LibrarySearchError.invalidArticleDirectory }
-        return .init(text: content.plainText, warnings: content.warnings, referenceAnchors: content.anchors)
+        return .init(text: content.plainText, warnings: warnings, referenceAnchors: content.anchors,
+                     referenceLinks: resolution.links.compactMap(BibleReferenceSourceLink.init))
     }
 
     func verifyUnchanged(_ resource: LibraryResource, prepared: LibrarySearchPreparedResource) async throws {

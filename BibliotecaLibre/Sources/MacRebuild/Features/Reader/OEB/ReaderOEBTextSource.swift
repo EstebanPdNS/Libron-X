@@ -15,9 +15,11 @@ struct ReaderOEBTextPage: Sendable {
     let fingerprint: String
     let path: String
     let articleRanges: [Int: NSRange]
-    var estimatedBytes: Int { text.utf16.count * 2 + articleRanges.count * 64 + path.utf16.count * 2 + 128 }
+    let referenceLinks: [BibleReferenceSourceLink]
+    var estimatedBytes: Int { text.utf16.count * 2 + articleRanges.count * 64 + path.utf16.count * 2 + referenceLinks.reduce(0) { $0 + $1.target.utf16.count * 2 + 48 } + 128 }
 
-    init(text: String, anchors: [String: Int], path: String, articles: [LibronixOEBArticle]) throws {
+    init(text: String, anchors: [String: Int], path: String, articles: [LibronixOEBArticle],
+         referenceLinks: [BibleReferenceSourceLink] = []) throws {
         let count = text.utf16.count
         let entries = articles.filter { $0.path.lowercased() == path.lowercased() }.sorted { $0.ordinal < $1.ordinal }
         guard !entries.isEmpty else { throw LibronixBookError.invalidDirectory }
@@ -38,7 +40,7 @@ struct ReaderOEBTextPage: Sendable {
             ranges[article.ordinal] = NSRange(location: starts[index], length: end - starts[index])
         }
         self.text = text; fingerprint = LibrarySearchService.textFingerprint(text)
-        self.path = path; articleRanges = ranges
+        self.path = path; articleRanges = ranges; self.referenceLinks = referenceLinks
     }
 }
 
@@ -195,8 +197,16 @@ private actor OEBProjectionSlots {
                 let raw = try await view.callAsyncJavaScript("return window.libronxReader.index(fragments);", arguments: ["fragments":fragments], in: nil, contentWorld: .defaultClient)
                 guard let value = raw as? [String: Any], let text = value["text"] as? String,
                       text.utf16.count <= 16 * 1024 * 1024, let anchors = value["anchors"] as? [String: Int],
-                      fragments.allSatisfy({ anchors[$0] != nil }) else { throw LibronixBookError.invalidDirectory }
-                let result = try ReaderOEBTextPage(text: text, anchors: anchors, path: path, articles: entries)
+                      fragments.allSatisfy({ anchors[$0] != nil }),
+                      let rawLinks = value["links"] as? [[String: Any]], rawLinks.count <= 100_000 else { throw LibronixBookError.invalidDirectory }
+                let links = try rawLinks.map { raw -> BibleReferenceSourceLink in
+                    guard let start = raw["start"] as? Int, let length = raw["length"] as? Int,
+                          let target = raw["target"] as? String, start >= 0, length > 0,
+                          start <= text.utf16.count, length <= text.utf16.count - start,
+                          Range(NSRange(location: start, length: length), in: text) != nil else { throw LibronixBookError.invalidDirectory }
+                    return .init(range: .init(location: start, length: length), target: target)
+                }
+                let result = try ReaderOEBTextPage(text: text, anchors: anchors, path: path, articles: entries, referenceLinks: links)
                 try book.verifySource(); finish(.success(result), run: run)
             } catch { finish(.failure(error), run: run) }
         }

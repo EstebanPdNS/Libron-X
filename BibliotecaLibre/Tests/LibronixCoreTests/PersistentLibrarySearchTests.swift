@@ -24,17 +24,24 @@ import CSQLite
     actor Source: LibrarySearchContentProvider {
         var failReads = false
         var reads = 0
+        let projectionVersion: String?
+        let projectedLink: BibleReferenceSourceLink?
+        init(projectionVersion: String? = nil, projectedLink: BibleReferenceSourceLink? = nil) {
+            self.projectionVersion = projectionVersion; self.projectedLink = projectedLink
+        }
         func blockReads() { failReads = true }
         func prepare(_ resource: LibraryResource) async throws -> LibrarySearchPreparedResource {
             let stamp = try LibrarySearchFileStamp.capture(resource.location)
             let articles = try JSONDecoder().decode([LibrarySearchDecodedArticle].self, from: Data(contentsOf: resource.location))
-            return .init(articles: articles.indices.map { .init(sectionOrdinal: $0, title: String($0)) }, sourceStamps: [stamp])
+            return .init(articles: articles.indices.map { .init(sectionOrdinal: $0, title: String($0)) }, sourceStamps: [stamp], projectionVersion: projectionVersion)
         }
         func read(_ resource: LibraryResource, article: LibrarySearchArticleDescriptor, prepared: LibrarySearchPreparedResource) async throws -> LibrarySearchDecodedArticle {
             try Task.checkCancellation()
             if failReads { throw LibronError.invalid("Cold reader deliberately unavailable") }
             reads += 1
-            return try JSONDecoder().decode([LibrarySearchDecodedArticle].self, from: Data(contentsOf: resource.location))[article.sectionOrdinal]
+            let decoded = try JSONDecoder().decode([LibrarySearchDecodedArticle].self, from: Data(contentsOf: resource.location))[article.sectionOrdinal]
+            if let projectedLink { return .init(text: decoded.text, referenceLinks: [projectedLink]) }
+            return decoded
         }
         func verifyUnchanged(_ resource: LibraryResource, prepared: LibrarySearchPreparedResource) async throws {
             try LibrarySearchFileStamp.verify(prepared.sourceStamps)
@@ -51,6 +58,37 @@ import CSQLite
         #expect(sqlite3_open(url.path, &db) == SQLITE_OK)
         defer { sqlite3_close(db) }
         #expect(sqlite3_exec(db, sql, nil, nil, nil) == SQLITE_OK)
+    }
+
+    @Test func changedProjectionInvalidatesTextOnlyCacheWithoutChangingTheOriginal() async throws {
+        let fixture = try Fixture(["😀 16"]); defer { fixture.remove() }
+        let original = try Data(contentsOf: fixture.resource.location)
+        let old = PersistentLibrarySearchProvider(source: Source(), directory: fixture.cache)
+        _ = try await search(old, fixture.resource, "16")
+        let link = BibleReferenceSourceLink(range: .init(location: 3, length: 2), target: "=rJn3:16(RVR60)")
+        let newSource = Source(projectionVersion: "checked-links-v1", projectedLink: link)
+        let upgraded = PersistentLibrarySearchProvider(source: newSource, directory: fixture.cache)
+        let query = try BibleReferenceQuery.parse("John3:16(RVR60)")
+        let fresh = try await BibleReferenceSearchService(provider: upgraded).search(resources: [fixture.resource], query: query)
+        #expect(fresh.coverageComplete && fresh.results.count == 1)
+        #expect(fresh.results.first?.mention.origin == .explicitLink && fresh.results.first?.mention.label == "16")
+        let upgradedMetrics = await upgraded.metrics
+        #expect(upgradedMetrics.sourceReads == 1 && upgradedMetrics.cachedReads == 0)
+        let blocked = Source(projectionVersion: "checked-links-v1", projectedLink: link); await blocked.blockReads()
+        let reopened = PersistentLibrarySearchProvider(source: blocked, directory: fixture.cache)
+        let warm = try await BibleReferenceSearchService(provider: reopened).search(resources: [fixture.resource], query: query)
+        #expect(warm.coverageComplete && warm.results.map(\.mention) == fresh.results.map(\.mention))
+        let warmMetrics = await reopened.metrics
+        #expect(warmMetrics.sourceReads == 0 && warmMetrics.cachedReads == 1)
+        #expect(try Data(contentsOf: fixture.resource.location) == original)
+    }
+
+    @Test func olderPreparedIdentitiesDecodeWithoutAssumingReferenceCompleteness() throws {
+        let old = try JSONDecoder().decode(LibrarySearchPreparedResource.self, from: Data(#"{"articles":[],"sourceStamps":[],"warnings":[]}"#.utf8))
+        #expect(old.projectionVersion == nil)
+        let upgraded = LibrarySearchPreparedResource(articles: [], projectionVersion: "checked-links-v1")
+        #expect(try JSONEncoder().encode(old) != JSONEncoder().encode(upgraded))
+        #expect(try JSONDecoder().decode(LibrarySearchPreparedResource.self, from: JSONEncoder().encode(upgraded)).projectionVersion == "checked-links-v1")
     }
 
     @Test func reopeningTheIndexReusesTextAndPrunesOnlyProvenNonmatches() async throws {

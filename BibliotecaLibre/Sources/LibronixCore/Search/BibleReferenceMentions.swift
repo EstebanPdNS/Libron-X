@@ -51,6 +51,14 @@ public struct BibleReferenceSourceLink: Codable, Hashable, Sendable {
     public let range: SearchTextRange
     public let target: String
     public init(range: SearchTextRange, target: String) { self.range = range; self.target = target }
+    /// Use the reader's checked destination, including extended attributes.
+    /// sourceName and display labels may name a different attribute or passage.
+    public init?(_ link: LegacyInlineLink) {
+        guard case let .bible(reference) = link.target else { return nil }
+        let a = reference.passage.start, b = reference.passage.end
+        self.init(range: .init(location: link.range.location, length: link.range.length),
+                  target: a.key + (a == b ? "" : "-" + b.key) + (reference.edition.map { "(" + $0 + ")" } ?? ""))
+    }
 }
 public struct BibleReferenceQuery: Sendable {
     public let original: String

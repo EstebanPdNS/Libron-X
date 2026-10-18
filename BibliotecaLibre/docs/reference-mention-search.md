@@ -18,16 +18,21 @@ Limits: 4096 UTF-16 units per query, 16 million per article projection, 256 span
 
 Personal fields remain separate, so a title ending in a book name cannot join a body beginning with numbers. Their destination retains both a text hash and a projection hash covering the visible text and explicit link targets. Editing an invisible hyperlink destination therefore invalidates an old result even when its label is unchanged. The owning editor must supply the same projection it renders and verify these fingerprints before navigation.
 
-Personal snapshots are examined first and report their field progress separately from book article counters. Article, result, occurrence and duration limits report partial coverage. Failed/unsupported resources, incomplete personal projections and field failures remain visible. Cancellation and source changes propagate; final progress callbacks cannot conceal a changed source. `LibrarySearchDecodedArticle.referenceLinks` is optional so existing text-only cache records remain decodable.
+Personal snapshots are examined first and report their field progress separately from book article counters. Article, result, occurrence and duration limits report partial coverage. Failed/unsupported resources, incomplete personal projections and field failures remain visible. Cancellation and source changes propagate; final progress callbacks cannot conceal a changed source. `LibrarySearchDecodedArticle.referenceLinks` is optional so existing text-only cache records remain decodable. `LibrarySearchPreparedResource.projectionVersion` binds the producer contract into the persistent index identity: an older text-only projection is invalidated even when the source files have not changed.
+
+## Reader link projections
+
+The portable legacy adapter and the native workspace adapter supply checked `LegacyInlineLinkTarget.bible` destinations. Conversion uses the typed destination rather than `sourceName` or display text; this preserves references stored in an extended attribute after a different first attribute. Local article links do not become Bible references based on their labels.
+
+The HTML bridge collects raw `href` and `lbxrt:xref` attributes across the same visible DOM text nodes used for reader selection. Hidden nodes have no coordinates, labels split by inline formatting retain one span, and external URLs are rejected by reference parsing. The source attributes remain inert. Shared-page article ownership still applies. The workspace projection version is `workspace-reference-links-v2`; the portable legacy version is `core-legacy-reference-links-v1`.
 
 ## Verification and remaining work
 
-The host regression run passes 675 tests in 112 suites. New tests cover citation spellings, ranges, editions, original wire IDs, Unicode, article boundaries, typed-label conflicts, long streams, cache compatibility, personal projection identity, error/budget behavior, cancellation and changes during final progress.
+The host regression run passes 679 tests in 112 suites. New tests cover citation spellings, ranges, editions, original wire IDs, Unicode, article boundaries, typed-label conflicts, long streams, cache compatibility, personal projection identity, error/budget behavior, cancellation and changes during final progress. Authored raw and normalized OEB cases verify DOM link ranges, hidden nodes, external URLs, exact reader selection and persistent-cache reopening. A separate cache-upgrade test changes only the producer projection version, confirms the old text-only row is replaced, and then reads the new link projection with source reads deliberately blocked.
 
 Before accepting the complete feature:
 
-- Supply explicit reference links from the actual native/legacy reader projections, including rendered HTML link ranges and destinations.
-- Change the reader projection identity/cache namespace so an older text-only cache record cannot stand in for a reference-complete projection.
+- Extend authored reader-link evidence to the managed original corpus, including format-specific destination dialects and unresolved source-index cases.
 - Project every supported personal-document field using the current editor's actual text and link semantics; retain explicit unsupported-field reporting.
 - Add source-checked document/entry navigation and reader selection through the native interface, preserving existing search commands.
 - Verify positive/negative, edition and source-change cases on installed native workflows and the managed resource corpus.

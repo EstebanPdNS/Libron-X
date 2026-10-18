@@ -2,7 +2,7 @@ import Foundation
 import LibronixCore
 
 /// Global search uses the same independent text/DOM projections as visible
-/// readers. The portable Core's default legacy provider remains unchanged.
+/// readers, including their checked native Bible-link destinations.
 actor WorkspaceSearchReader: LibrarySearchContentProvider {
     private let nativeReader = LibronNativeReader()
 
@@ -30,7 +30,7 @@ actor WorkspaceSearchReader: LibrarySearchContentProvider {
         for entry in first.entries where titles[entry.ordinal] == nil { titles[entry.ordinal] = entry.title }
         let result = LibrarySearchPreparedResource(articles: (0..<first.sectionCount).map {
             .init(sectionOrdinal: $0, title: titles[$0] ?? resource.title + " · " + String($0 + 1))
-        }, sourceStamps: stamps, warnings: [])
+        }, sourceStamps: stamps, warnings: [], projectionVersion: "workspace-reference-links-v2")
         try await verifyUnchanged(resource, prepared: result)
         return result
     }
@@ -47,9 +47,10 @@ actor WorkspaceSearchReader: LibrarySearchContentProvider {
             let projection = try await ReaderOEBTextSource.shared.read(book: html.book, path: path, viewport: .init())
             guard let range = projection.articleRanges[article.sectionOrdinal] else { throw LibrarySearchError.invalidArticleDirectory }
             decoded = .init(text: projection.text, warnings: warnings,
-                            searchRange: .init(location: range.location, length: range.length))
+                            searchRange: .init(location: range.location, length: range.length), referenceLinks: projection.referenceLinks)
         } else {
             let anchors = result.content?.anchors ?? []
+            let links = result.inlineLinks.compactMap(BibleReferenceSourceLink.init)
             if resource.format == .eSwordSQLite {
                 // e-Sword's authored reader anchors use datatype zero, not the
                 // legacy driver's datatype two. Preserve them as explicit verse
@@ -64,9 +65,9 @@ actor WorkspaceSearchReader: LibrarySearchContentProvider {
                     return .init(reference: entry.reference, normalizedReference: reference.normalizedKey,
                                  range: .init(location: entry.offset, length: end - entry.offset))
                 }
-                decoded = .init(text: result.text, warnings: warnings, bibleVerses: verses)
+                decoded = .init(text: result.text, warnings: warnings, bibleVerses: verses, referenceLinks: links)
             } else {
-                decoded = .init(text: result.text, warnings: warnings, referenceAnchors: anchors)
+                decoded = .init(text: result.text, warnings: warnings, referenceAnchors: anchors, referenceLinks: links)
             }
         }
         try await verifyUnchanged(resource, prepared: prepared)

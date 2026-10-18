@@ -56,4 +56,18 @@ struct LegacyInlineLinksTests {
         let result = LegacyInlineLinks.resolve(content: body, namedPositions: [.init(directoryRow: 0, articleID: 0, label: "note")])
         #expect(result.links.isEmpty && result.unresolvedAttributedRuns == 3)
     }
+
+    @Test func searchProjectsOnlyCheckedBibleTargetsAndIgnoresMisleadingNames() throws {
+        let text = "😀 Jn3:16"
+        let range = NSRange(location: 3, length: 6)
+        let target = try #require(LegacyBibleLinkReference.parse("=rJud 1:11-13(RVR60)"))
+        let checked = LegacyInlineLink(range: range, label: "Jn3:16", sourceName: "unrelated first attribute", target: .bible(target))
+        let projected = try #require(BibleReferenceSourceLink(checked))
+        let result = try #require(BibleReferenceMentions.extract(text, links: [projected]).first)
+        #expect(result.origin == .explicitLink && result.label == "Jn3:16" && result.range.nsRange == range)
+        #expect(try BibleReferenceQuery.parse("Jude12(RVR60)").matches(result))
+        #expect(!(try BibleReferenceQuery.parse("John3:16").matches(result)))
+        let article = LegacyInlineLink(range: range, label: "Jn3:16", sourceName: "=rJn3:16", sectionOrdinal: 42)
+        #expect(BibleReferenceSourceLink(article) == nil)
+    }
 }

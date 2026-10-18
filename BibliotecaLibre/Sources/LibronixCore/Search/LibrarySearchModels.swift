@@ -208,11 +208,15 @@ public struct LibrarySearchFileStamp: Hashable, Sendable, Codable {
 }
 
 public struct LibrarySearchPreparedResource: Sendable, Codable {
+    /// Producer-owned projection contract. A changed decoder/link projection
+    /// must invalidate cached articles even when the original files did not change.
+    public let projectionVersion: String?
     public let articles: [LibrarySearchArticleDescriptor]
     public let sourceStamps: [LibrarySearchFileStamp]
     public let warnings: [String]
     public init(articles: [LibrarySearchArticleDescriptor], sourceStamps: [LibrarySearchFileStamp] = [],
-                warnings: [String] = []) {
+                warnings: [String] = [], projectionVersion: String? = nil) {
+        self.projectionVersion = projectionVersion
         self.articles = articles
         self.sourceStamps = sourceStamps
         self.warnings = warnings
