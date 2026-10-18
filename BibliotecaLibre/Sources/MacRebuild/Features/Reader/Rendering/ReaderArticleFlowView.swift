@@ -68,6 +68,7 @@ struct ReaderArticleFlowView: NSViewRepresentable {
         var sourceStamp: LegacyGraphicSourceStamp?
         var graphicHashes: [String] = []
         var warnings: [String] = []
+        var commentaryPositions: [(reference: String, offset: Int)] = []
         init(page: ReaderPage) {
             self.page = page
             view.textContainer?.replaceLayoutManager(ReaderLayoutManager())
@@ -92,6 +93,8 @@ struct ReaderArticleFlowView: NSViewRepresentable {
         var order: [Int] = []
         var selectionRequest = -1
         var observation: Task<Void, Never>?
+        var hasObservedScroll = false
+        var isUpdating = false
         var isLayingOut = false
         var layoutDirty = true
         var layoutSize = CGSize.zero
@@ -100,6 +103,13 @@ struct ReaderArticleFlowView: NSViewRepresentable {
         init(reader: ReaderSession, workspace: StudyWorkspace) { self.reader = reader; self.workspace = workspace }
         func update() {
             guard !isDismantled, let document, let scroll else { return }
+            let changedPages = order != reader.readingFlowPages.map { $0.destination.ordinal }
+            let explicitNavigation = selectionRequest != reader.selectionRequest
+            isUpdating = true
+            defer {
+                isUpdating = false
+                if hasObservedScroll, changedPages, !explicitNavigation { userScrolled() }
+            }
             let anchor = viewportAnchor()
             let pages = reader.readingFlowPages, ordinals = pages.map { $0.destination.ordinal }
             for id in Set(order).subtracting(ordinals) {
@@ -194,6 +204,14 @@ struct ReaderArticleFlowView: NSViewRepresentable {
                 return (source: anchor.characterOffset, visible: ActiveTextView.visibleCharacter(in: page.text as NSString, at: anchor.characterOffset))
             } ?? []
             surface.view.isReplacingDocument = true; surface.view.inlineImages = []
+            let index = ReaderBibleIndex(anchors: page.content?.anchors ?? [], textLength: page.text.utf16.count)
+            surface.commentaryPositions = page.inlineLinks.compactMap { link in
+                // A chapter title can repeat verse 1's reference. Follow the
+                // nearest original anchor before this note, not the title.
+                guard link.role == .studyCommentary,
+                      let anchor = index.entries.last(where: { $0.offset <= link.range.location }) else { return nil }
+                return (anchor.reference, ActiveTextView.visibleCharacter(in: page.text as NSString, at: anchor.offset))
+            }.sorted { $0.offset < $1.offset }
             surface.view.textStorage?.setAttributedString(display)
             surface.view.inlineImages = images.images; surface.view.isReplacingDocument = false
             if Range(selected, in: page.text) != nil { surface.view.setSelectedRange(selected) }
@@ -261,25 +279,42 @@ struct ReaderArticleFlowView: NSViewRepresentable {
             document.setFrameSize(.init(width: document.frame.width, height: max(scroll.contentSize.height, contentHeight + trailingPadding)))
             scroll.contentView.scroll(to: .init(x: 0, y: y)); scroll.reflectScrolledClipView(scroll.contentView)
         }
+        /// Advance as soon as a note's opening line passes above the viewport,
+        /// even while the remainder of that verse is still visible.
+        func nextCommentaryReference() -> String? {
+            guard let scroll else { return nil }
+            let top = scroll.contentView.bounds.minY
+            for id in order {
+                guard let surface = surfaces[id], surface.view.frame.maxY >= top,
+                      let layout = surface.view.layoutManager else { continue }
+                for position in surface.commentaryPositions {
+                    let glyph = layout.glyphIndexForCharacter(at: position.offset)
+                    guard glyph < layout.numberOfGlyphs else { continue }
+                    let line = layout.lineFragmentRect(forGlyphAt: glyph, effectiveRange: nil)
+                    let y = surface.view.frame.minY + surface.view.textContainerOrigin.y + line.minY
+                    if y >= top - 2 { return position.reference }
+                }
+            }
+            return nil
+        }
         func userScrolled() {
-            guard observation == nil else { return }
+            guard !isDismantled, !isUpdating, !isLayingOut, !reader.isLoading, observation == nil else { return }
+            hasObservedScroll = true
             let generation = reader.flowGeneration
             observation = Task { @MainActor [weak self] in
                 do { try await Task.sleep(for: .milliseconds(80)) } catch { return }
                 guard let self else { return }; self.observation = nil
                 guard self.reader.flowGeneration == generation else { return }
                 guard let anchor = self.viewportAnchor(), let surface = self.surfaces[anchor.ordinal],
-                      let layout = surface.view.layoutManager, let container = surface.view.textContainer else { return }
+                      surface.view.layoutManager != nil, let container = surface.view.textContainer else { return }
                 let view = surface.view
                 let point = NSPoint(x: view.textContainerInset.width + container.lineFragmentPadding,
                     y: max(0, anchor.localY - view.textContainerOrigin.y + 2))
-                let glyph = layout.glyphIndex(for: point, in: container)
-                guard glyph < layout.numberOfGlyphs else { return }
-                var lineRange = NSRange()
-                _ = layout.lineFragmentRect(forGlyphAt: glyph, effectiveRange: &lineRange)
-                let line = layout.characterRange(forGlyphRange: lineRange, actualGlyphRange: nil)
-                let verse = surface.delegate.biblePositions.first { NSLocationInRange($0.visible, line) }
-                self.reader.observeFlowPage(anchor.ordinal, offset: verse?.source ?? layout.characterIndexForGlyph(at: glyph))
+                if let offset = ReaderTextView.Coordinator.viewportSourceOffset(in: view, point: point,
+                    positions: surface.delegate.biblePositions) {
+                    self.reader.observeCommentaryPosition(self.nextCommentaryReference())
+                    self.reader.observeFlowPage(anchor.ordinal, offset: offset)
+                }
             }
         }
     }

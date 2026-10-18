@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Normalize original superscript and symbol note links into the shared commentary system, preserving source typography, images and destinations.
+- Assemble every physical fragment of a chapter and keep chapter order correct when original articles overlap.
+
+- Keep each study Bible chapter’s comments in one continuous native reading, following the current verse across chapter changes.
+- Follow actual scrolling, including momentum and scrollbar input; advance commentary when a note’s opening line passes above the viewport and reverse naturally when scrolling back.
+- Preserve explicit note ranges across chapters and keep chapter Find, copy, history and navigation within the commentary reading.
+
 - Follow the Bible viewport in a dedicated, reusable commentary pane with pause and workspace restoration.
 - Present illustrated notes with native text/image split views and enlarged source images.
 - Suppress identified publisher dividers and badges while preserving original assets and source addresses.

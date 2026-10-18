@@ -81,6 +81,10 @@ extension ReaderPage {
 extension ReaderDestination {
     func validate() throws {
         guard ordinal >= 0, passageStartReference == nil || endReference != nil else { throw RebuildError.invalidPassagePart }
+        if let commentaryChapter {
+            guard let chapter = LegacyPassageQuery.sourceReference(commentaryChapter), chapter.verse == 1,
+                  endReference == nil else { throw RebuildError.invalidPassagePart }
+        }
         if let endReference {
             guard let reference, LegacyPassageQuery.sourceReference(reference) != nil,
                   LegacyPassageQuery.sourceReference(endReference) != nil,

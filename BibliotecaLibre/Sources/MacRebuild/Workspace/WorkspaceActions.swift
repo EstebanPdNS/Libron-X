@@ -29,7 +29,7 @@ struct ReaderHighlight: Identifiable, Codable, Equatable {
         reader.highlights = personal.highlights.filter { $0.resourceID == reader.resource.id }
         reader.onReadingPositionChange = { [weak self, weak reader] reference in
             guard let self, let reader else { return }
-            self.updateCommentaryFollowers(from: reader, reference: reference)
+            self.updateCommentaryFollowers(from: reader, reference: reader.commentaryViewportReference ?? reference)
         }
         reader.onReferenceNavigation = { [weak self, weak reader] reference in
             guard let self, let reader, reader.linkGroup != .none else { return }
@@ -134,6 +134,7 @@ struct ReaderHighlight: Identifiable, Codable, Equatable {
         guard let reader = activeReader, let page = reader.page else { return }
         let removed = Set(personal.highlights.filter { mark in
             mark.resourceID == reader.resource.id && mark.ordinal == page.destination.ordinal &&
+            mark.fingerprint == LibrarySearchService.textFingerprint(page.text) &&
             NSIntersectionRange(mark.range, reader.selectedRange).length > 0
         }.map(\.id))
         personal.highlights.removeAll { removed.contains($0.id) }

@@ -27,6 +27,24 @@ struct LibronNativeDatabaseTests {
         #expect(try reader.resolve("2 John1:2") == nil)
         #expect(try Data(contentsOf: url) == before)
     }
+    @Test func sharedArticlesKeepNumericChapterOrderAndExposeEveryPhysicalFragmentReadOnly() throws {
+        let url = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString + ".sqlite")
+        defer { try? FileManager.default.removeItem(at: url) }
+        do {
+            let db = try LibronNativeDatabase(url, create: true)
+            try db.add(reference: "Ge 2:1", ordinal: 10, offset: 11)
+            try db.add(reference: "Ge 1:1", ordinal: 10, offset: 12)
+            try db.add(reference: "Ge 1:15", ordinal: 11, offset: 0)
+            try db.add(reference: "Ge 3:1", ordinal: 12, offset: 0)
+            try db.add(reference: "Ex 1:1", ordinal: 10, offset: 5000)
+            try db.finish()
+        }
+        let before = try Data(contentsOf: url), db = try LibronNativeDatabase(url)
+        #expect(try db.chapterReferences() == ["ge 1:1", "ge 2:1", "ge 3:1", "ex 1:1"])
+        #expect(try db.chapterSectionOrdinals("Ge 1:1") == [10, 11])
+        #expect(try db.chapterSectionOrdinals("Ge 2:7") == [10])
+        #expect(try Data(contentsOf: url) == before)
+    }
     @Test func compressedRecordsCanonicalReferencesAndWordsRoundTrip() throws {
         let url = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString+".sqlite")
         defer { try? FileManager.default.removeItem(at:url) }

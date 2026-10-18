@@ -4,14 +4,13 @@ import LibronixCore
 @MainActor extension StudyWorkspace {
     func setCommentaryFollowing(_ enabled: Bool, for reader: ReaderSession) {
         reader.followsCommentary = enabled
-        if !enabled { reader.cancel(); reader.pendingCommentaryOrdinal = nil }
+        if !enabled { reader.cancel(); reader.pendingCommentaryOrdinal = nil; reader.pendingCommentaryChapter = nil }
         else if let source = readers.first(where: { $0.id == reader.commentarySourceID }),
-                let reference = source.currentReference {
+                let reference = source.commentaryViewportReference ?? source.currentReference {
             updateCommentaryFollowers(from: source, reference: reference)
         }
     }
-    /// Follow only explicit commentary links owned by this verse and edition.
-    /// No footnote, ordinal proximity or citation label is used to invent a match.
+    /// Follow explicit verse links and verified note-heading ranges in this edition.
     func updateCommentaryFollowers(from source: ReaderSession, reference: String) {
         guard readers.contains(where: { $0 === source }),
               let key = LegacyPassageQuery.sourceReference(reference)?.normalizedKey else { return }
@@ -33,7 +32,19 @@ import LibronixCore
                 if restored == reference { continue }
             }
             target.commentaryReference = reference
-            guard let ordinal = link?.sectionOrdinal else {
+            if LibronNativeReader.location(source.resource) != nil,
+               let query = LegacyPassageQuery.sourceReference(reference) {
+                let chapter = "\(query.sourceBookKey) \(query.chapter):1"
+                if target.page?.destination.commentaryChapter == chapter, !target.isLoading {
+                    target.alignCommentary(to: reference); continue
+                }
+                if target.pendingCommentaryChapter == chapter && target.isLoading { continue }
+                target.pendingCommentaryChapter = chapter
+                target.load(.init(ordinal: source.page?.destination.ordinal ?? 0, reference: reference, commentaryChapter: chapter),
+                    propagateReference: false, recordHistory: false)
+                continue
+            }
+            guard let ordinal = link?.sectionOrdinal ?? source.page?.commentaryOrdinals[key] else {
                 target.cancel(); target.pendingCommentaryOrdinal = nil
                 target.page = nil; target.flowPages = []; target.visibleBibleReference = nil
                 target.locator = reference

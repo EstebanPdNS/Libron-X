@@ -93,6 +93,85 @@ import Testing
         surfaces[1].delegate.onSelection(.init(location: 2, length: 2))
         #expect(reader.page?.destination.ordinal == 1 && reader.selectedRange == .init(location: 2, length: 2))
     }
+    @Test func actualClipMovementFollowsAcrossBufferedChaptersAndBackWithoutWheelCallbacks() async throws {
+        _ = NSApplication.shared
+        let fixture = try AuthoredReaderFixture(documents: [(1...8).map { "Article \($0)" }]); defer { fixture.remove() }
+        let pages = try pages(fixture), reader = ReaderSession(resource: fixture.resources[0]), workspace = StudyWorkspace()
+        reader.page = pages[0]; reader.flowPages = Array(pages.prefix(3)); reader.visibleBibleReference = "Ge 1:1"
+        let coordinator = ReaderArticleFlowView.Coordinator(reader: reader, workspace: workspace)
+        let scroll = ReaderScrollView(frame: .init(x: 0, y: 0, width: 600, height: 80))
+        let document = ReaderArticleFlowView.FlowDocument(); scroll.documentView = document
+        coordinator.scroll = scroll; coordinator.document = document
+        scroll.onUserScroll = { [weak coordinator] in coordinator?.userScrolled() }
+        coordinator.update()
+        #expect(coordinator.observation == nil, "Programmatic initial layout must not emit scroll navigation")
+        for ordinal in [0, 1, 0, 2, 1] {
+            let surface = try #require(coordinator.surfaces[ordinal])
+            scroll.contentView.scroll(to: .init(x: 0, y: surface.view.frame.minY))
+            scroll.reflectScrolledClipView(scroll.contentView)
+            await coordinator.observation?.value
+            #expect(reader.page?.destination.ordinal == ordinal && reader.currentReference == "Ge 1:\(ordinal + 1)")
+            coordinator.update()
+        }
+        reader.cancel()
+    }
+    @Test func commentaryAdvancesPastAnOpeningLineBeforeTheVisibleVerseEndsAndReversesOnUpwardScroll() async throws {
+        _ = NSApplication.shared
+        let fixture = try AuthoredReaderFixture(documents: [(1...8).map { "Article \($0) with authored continuing text.\nA second line remains visible.\nA third line." }]); defer { fixture.remove() }
+        var pages = try pages(fixture)
+        for ordinal in [0, 2] {
+            var link = LegacyInlineLink(range: .init(location: 0, length: 1), label: "Authored note", sourceName: "authored", sectionOrdinal: ordinal + 4)
+            link.role = .studyCommentary; pages[ordinal].inlineLinks = [link]
+        }
+        let reader = ReaderSession(resource: fixture.resources[0]), workspace = StudyWorkspace()
+        reader.page = pages[0]; reader.flowPages = Array(pages.prefix(3)); reader.visibleBibleReference = "Ge 1:1"
+        let coordinator = ReaderArticleFlowView.Coordinator(reader: reader, workspace: workspace)
+        let scroll = ReaderScrollView(frame: .init(x: 0, y: 0, width: 600, height: 100))
+        let document = ReaderArticleFlowView.FlowDocument(); scroll.documentView = document
+        coordinator.scroll = scroll; coordinator.document = document; coordinator.update()
+        let first = try #require(coordinator.surfaces[0]), layout = try #require(first.view.layoutManager)
+        let y = first.view.textContainerOrigin.y + layout.lineFragmentRect(forGlyphAt: 0, effectiveRange: nil).minY
+        var followed: [String] = []; reader.onReadingPositionChange = { followed.append($0) }
+        for (top, expected) in [(y, "Ge 1:1"), (y + 4, "Ge 1:3"), (y + 15, "Ge 1:3"), (y, "Ge 1:1")] {
+            scroll.contentView.scroll(to: .init(x: 0, y: top))
+            coordinator.userScrolled(); await coordinator.observation?.value
+            #expect(reader.currentReference == "Ge 1:1", "The verse body is still visible")
+            #expect(reader.commentaryViewportReference == expected && followed.last == expected)
+        }
+        reader.cancel()
+    }
+    @Test func repeatedChapterReferenceWaitsForTheActualVerseOpeningLine() throws {
+        _ = NSApplication.shared
+        let fixture = try AuthoredReaderFixture(documents: [(1...8).map { _ in "Chapter heading\n1 First verse with note a.\n2 Second verse with note b." }]); defer { fixture.remove() }
+        var page = try pages(fixture)[0]
+        let source = try #require(page.content), text = page.text as NSString
+        let first = text.range(of: "1 First").location, second = text.range(of: "2 Second").location
+        let anchors = [(0, "Ge 1:1"), (first, "Ge 1:1"), (second, "Ge 1:2")].map { offset, reference in
+            LegacyReferenceAnchor(reference: reference, flags: 0, dataTypeCode: 16,
+                characterOffset: offset, decodedOffset: UInt64(offset), referenceFormatFlags: 0)
+        }
+        page.content = LegacySectionContent(descriptor: source.descriptor, plainText: source.plainText, runs: source.runs,
+            expectedCharacterCount: source.expectedCharacterCount, recognizedFormat: source.recognizedFormat,
+            paragraphs: source.paragraphs, anchors: anchors, markers: [], graphics: [], warnings: [], paragraphDocuments: nil)
+        page.inlineLinks = ["a.", "b."].enumerated().map { ordinal, label in
+            var link = LegacyInlineLink(range: text.range(of: label), label: label, sourceName: "authored", sectionOrdinal: ordinal + 4)
+            link.role = .studyCommentary; return link
+        }
+        let reader = ReaderSession(resource: fixture.resources[0]), workspace = StudyWorkspace()
+        reader.page = page; reader.flowPages = [page]
+        let coordinator = ReaderArticleFlowView.Coordinator(reader: reader, workspace: workspace)
+        let scroll = ReaderScrollView(frame: .init(x: 0, y: 0, width: 600, height: 40))
+        let document = ReaderArticleFlowView.FlowDocument(); scroll.documentView = document
+        coordinator.scroll = scroll; coordinator.document = document; coordinator.update()
+        let surface = try #require(coordinator.surfaces[0]), layout = try #require(surface.view.layoutManager)
+        let firstGlyph = layout.glyphIndexForCharacter(at: first)
+        let y = surface.view.textContainerOrigin.y + layout.lineFragmentRect(forGlyphAt: firstGlyph, effectiveRange: nil).minY
+        #expect(surface.commentaryPositions.map(\.offset) == [first, second])
+        scroll.contentView.scroll(to: .init(x: 0, y: y - 4))
+        #expect(coordinator.nextCommentaryReference() == "Ge 1:1")
+        scroll.contentView.scroll(to: .init(x: 0, y: y + 4))
+        #expect(coordinator.nextCommentaryReference() == "Ge 1:2")
+    }
     @Test func inheritedPrefaceContextIsVerifiedAgainstTheSourceBeforeBufferingOrFollowing() async throws {
         let fixture = try AuthoredReaderFixture(documents: [(1...8).map { "First.\nSecond.\nArticle \($0)" }]); defer { fixture.remove() }
         var pages = try pages(fixture)

@@ -58,14 +58,24 @@ struct ReaderTextView: NSViewRepresentable {
                 let visible = scroll.documentVisibleRect
                 let point = NSPoint(x: view.textContainerInset.width + container.lineFragmentPadding,
                                     y: max(0, visible.minY - view.textContainerOrigin.y + 2))
-                let glyph = layout.glyphIndex(for: point, in: container)
-                guard glyph < layout.numberOfGlyphs else { return }
-                var lineGlyphs = NSRange()
-                _ = layout.lineFragmentRect(forGlyphAt: glyph, effectiveRange: &lineGlyphs)
-                let line = layout.characterRange(forGlyphRange: lineGlyphs, actualGlyphRange: nil)
-                let firstVerse = self.biblePositions.first { NSLocationInRange($0.visible, line) }
-                self.onVisiblePosition(firstVerse?.source ?? layout.characterIndexForGlyph(at: glyph))
+                if let offset = Self.viewportSourceOffset(in: view, point: point, positions: self.biblePositions) {
+                    self.onVisiblePosition(offset)
+                }
             }
+        }
+        /// The verse owning the beginning of the visible line, not a later
+        /// verse number that happens to share that line in paragraph layouts.
+        static func viewportSourceOffset(in view: NSTextView, point: NSPoint,
+            positions: [(source: Int, visible: Int)]) -> Int? {
+            guard let layout = view.layoutManager, let container = view.textContainer,
+                  layout.numberOfGlyphs > 0 else { return nil }
+            let glyph = layout.glyphIndex(for: point, in: container)
+            guard glyph < layout.numberOfGlyphs else { return nil }
+            var glyphs = NSRange()
+            _ = layout.lineFragmentRect(forGlyphAt: glyph, effectiveRange: &glyphs)
+            let line = layout.characterRange(forGlyphRange: glyphs, actualGlyphRange: nil)
+            let start = ActiveTextView.visibleCharacter(in: view.string as NSString, at: line.location)
+            return positions.last(where: { $0.visible <= start })?.source ?? line.location
         }
         func textViewDidChangeSelection(_ notification: Notification) {
             guard !isApplying, let view = notification.object as? NSTextView else { return }
@@ -241,6 +251,12 @@ final class ReaderScrollView: NSScrollView {
     var onUserScroll: (() -> Void)?
     override func scrollWheel(with event: NSEvent) {
         activate?(); super.scrollWheel(with: event); onUserScroll?()
+    }
+    // Observe actual clip movement, including responsive/momentum scrolling,
+    // scrollbar dragging and native keyboard scrolling after the wheel callback.
+    override func reflectScrolledClipView(_ clipView: NSClipView) {
+        super.reflectScrolledClipView(clipView)
+        onUserScroll?()
     }
 }
 final class ReaderScroller: NSScroller {

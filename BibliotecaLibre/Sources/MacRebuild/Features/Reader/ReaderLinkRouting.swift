@@ -26,6 +26,7 @@ import LibronixCore
     }
     func openInlineLink(_ resource: LibraryResource, destination: ReaderDestination, from source: ReaderSession, newReader: Bool) {
         if newReader {
+            var resolvedDestination = destination
             let owner = source.commentarySourceID.flatMap { id in readers.first { $0.id == id } } ?? source
             let isNote = destination.reference == nil && resource.id == owner.resource.id &&
                 (owner.canSynchronizeBible || source.isCommentary)
@@ -48,10 +49,18 @@ import LibronixCore
                 let index = ReaderBibleIndex(anchors: context?.content?.anchors ?? [], textLength: context?.text.utf16.count)
                 target.commentaryReference = link.flatMap { index.reference(at: $0.range.location) } ?? owner.currentReference
                 target.pendingCommentaryOrdinal = destination.ordinal
+                target.pendingCommentaryChapter = nil
+                if link?.role == .studyCommentary, LibronNativeReader.location(resource) != nil,
+                   let reference = target.commentaryReference,
+                   let query = LegacyPassageQuery.sourceReference(reference) {
+                    let chapter = "\(query.sourceBookKey) \(query.chapter):1"
+                    target.pendingCommentaryChapter = chapter
+                    resolvedDestination = .init(ordinal: context?.destination.ordinal ?? 0, reference: reference, commentaryChapter: chapter)
+                }
                 if created { target.frame = PaneFrame(x: 0.45, y: 0.04, width: 0.54, height: 0.91) }
             }
             target.rememberCommentaryLocation()
-            target.load(destination, propagateReference: false)
+            target.load(resolvedDestination, propagateReference: false)
             return
         }
         let explicit = destination.reference == nil ? nil : readers.first { $0.id == referenceTargetID && $0.resource.id == resource.id }

@@ -12,6 +12,7 @@ struct ReaderDestination: Equatable, Sendable, Codable {
     var endReference: String? = nil
     var requiredEdition: String? = nil
     var passageStartReference: String? = nil
+    var commentaryChapter: String? = nil
 }
 struct ReaderEntry: Codable, Identifiable, Sendable {
     var id: Int
@@ -30,6 +31,10 @@ struct ReaderPage: Sendable {
     var typography: LegacyTypography? = nil
     var graphics: [LegacyGraphicAsset] = []
     var inlineLinks: [LegacyInlineLink] = []
+    var commentaryOrdinals: [String: Int] = [:]
+    var commentaryLocations: [String: Int] = [:]
+    var commentaryPrevious: String? = nil
+    var commentaryNext: String? = nil
     var interlinearLines: [LibronixInterlinearLineDefinition] = []
     var passageParts: [ReaderPassagePart] = []
     var oeb: ReaderOEBPage? = nil
@@ -116,7 +121,9 @@ struct ReaderPage: Sendable {
     var commentaryResourceID: String?
     var followsCommentary = true
     var commentaryReference: String?
+    var commentaryViewportReference: String?
     var pendingCommentaryOrdinal: Int?
+    var pendingCommentaryChapter: String?
     var commentaryRestoreReference: String?
     var onReadingPositionChange: ((String) -> Void)?
     var visibleBibleReference: String? {
@@ -165,8 +172,9 @@ struct ReaderPage: Sendable {
     /// Automatic verse following does not fill history with wheel events.
     /// Preserve its current note when the user explicitly opens an article.
     func rememberCommentaryLocation() {
-        guard isCommentary, let destination = committedPage?.destination,
-              history.indices.contains(historyIndex) ? history[historyIndex] != destination : true else { return }
+        guard isCommentary, var destination = committedPage?.destination else { return }
+        if destination.commentaryChapter != nil { destination.reference = commentaryReference ?? destination.reference }
+        guard history.indices.contains(historyIndex) ? history[historyIndex] != destination : true else { return }
         history = Array(history.prefix(historyIndex + 1)) + [destination]
         historyIndex = history.count - 1
     }
@@ -224,6 +232,13 @@ struct ReaderPage: Sendable {
         if !locatorIsArticle { locator = reference }
         onReferenceNavigation?(reference)
     }
+    /// Commentary follows the next note whose opening line has not passed the
+    /// viewport top. Bible groups retain the actual verse owning visible text.
+    func observeCommentaryPosition(_ reference: String?) {
+        guard !isLoading else { return }
+        commentaryViewportReference = reference
+        if let reference { onReadingPositionChange?(reference) }
+    }
     func followBibleReference(_ reference: String) {
         guard let query = LegacyPassageQuery.sourceReference(reference) else { return }
         if flowEnabled, bibleIndex.offsets[query.normalizedKey] == nil {
@@ -256,15 +271,17 @@ struct ReaderPage: Sendable {
             load(.init(ordinal: page?.destination.ordinal ?? 0, reference: query.displayReference), propagateReference: false)
         }
     }
-    var canGoToPreviousArticle: Bool { !isLoading && (page?.destination.ordinal ?? 0) > 0 }
-    var canGoToNextArticle: Bool { !isLoading && page.map { $0.destination.ordinal + 1 < $0.sectionCount } == true }
+    var canGoToPreviousArticle: Bool { !isLoading && page.map { $0.destination.commentaryChapter != nil ? $0.commentaryPrevious != nil : $0.destination.ordinal > 0 } == true }
+    var canGoToNextArticle: Bool { !isLoading && page.map { $0.destination.commentaryChapter != nil ? $0.commentaryNext != nil : $0.destination.ordinal + 1 < $0.sectionCount } == true }
     func previousArticle() {
         guard canGoToPreviousArticle, let page else { return }
+        if let chapter = page.commentaryPrevious { load(.init(ordinal: 0, reference: chapter, commentaryChapter: chapter)); return }
         if let index = page.passagePartIndex, let destination = page.passageDestination(at: index - 1) { load(destination) }
         else { load(.init(ordinal: page.destination.ordinal - 1)) }
     }
     func nextArticle() {
         guard canGoToNextArticle, let page else { return }
+        if let chapter = page.commentaryNext { load(.init(ordinal: 0, reference: chapter, commentaryChapter: chapter)); return }
         if let index = page.passagePartIndex, let destination = page.passageDestination(at: index + 1) { load(destination) }
         else { load(.init(ordinal: page.destination.ordinal + 1)) }
     }
@@ -309,6 +326,7 @@ struct ReaderPage: Sendable {
         // the previously committed page, text selection and viewport untouched.
         let token = findGeneration
         let position = direction == .forward && !incremental ? NSMaxRange(selectedRange) : selectedRange.location
+        if findInCommentaryChapter(direction, position: position) { return }
         let request = ReaderFindRequest(query: findQuery, ordinal: page.destination.ordinal, position: position,
                                         direction: direction, options: findOptions,
                                         oebViewport: page.oeb == nil ? nil : .init(width: Double(oebWebView?.bounds.width ?? 760), zoom: renderingScale))
@@ -361,6 +379,7 @@ struct ReaderPage: Sendable {
         }
     }
     func cancel() {
+        commentaryViewportReference = nil
         flowGeneration += 1; flowTask?.cancel(); flowTask = nil
         generation += 1; task?.cancel(); task = nil; isLoading = false; pendingOEBSelection = nil; cancelFind()
     }
@@ -374,6 +393,8 @@ struct ReaderPage: Sendable {
         visibleBibleReference = result.destination.reference.flatMap { LegacyPassageQuery.sourceReference($0)?.displayReference }
             ?? bibleReference(at: selectedRange.location)
         if !locatorIsArticle, let reference = visibleBibleReference { locator = reference }
+        if isCommentary, result.destination.commentaryChapter != nil, recordHistory,
+           let reference = result.destination.reference { commentaryReference = reference }
         if !recordHistory { return }
         if let historyTarget { historyIndex = historyTarget }
         else if history.last != result.destination || historyIndex != history.count - 1 {
@@ -408,6 +429,9 @@ struct ReaderPage: Sendable {
                     if !self.locatorIsArticle, let reference = self.visibleBibleReference { self.locator = reference }
                 }
                 self.isLoading = false
+                if result.destination.commentaryChapter != nil, !recordHistory, let reference = self.commentaryReference {
+                    self.alignCommentary(to: reference)
+                }
                 if let reference = self.currentReference { self.onReadingPositionChange?(reference) }
                 if self.flowEnabled { self.fillReadingFlow() }
                 if propagateReference, result.oeb == nil, let reference = self.currentReference { self.onReferenceNavigation?(reference) }

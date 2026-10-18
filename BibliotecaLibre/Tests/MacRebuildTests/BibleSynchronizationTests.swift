@@ -212,6 +212,24 @@ import Testing
 }
 
 @MainActor struct BibleViewportTests {
+    @Test func aLaterVerseOnTheSameVisibleLineDoesNotAdvanceTheReadingPosition() throws {
+        _ = NSApplication.shared
+        let view = ActiveTextView(frame: .init(x: 0, y: 0, width: 260, height: 240))
+        view.textContainer?.containerSize = .init(width: 260, height: CGFloat.greatestFiniteMagnitude)
+        view.font = .systemFont(ofSize: 18)
+        view.string = "1 " + String(repeating: "Authored text ", count: 6) + "2 Second verse continues."
+        let layout = try #require(view.layoutManager), container = try #require(view.textContainer)
+        layout.ensureLayout(for: container)
+        let second = (view.string as NSString).range(of: "2 Second").location
+        let glyph = layout.glyphIndexForCharacter(at: second)
+        var glyphs = NSRange()
+        let rect = layout.lineFragmentRect(forGlyphAt: glyph, effectiveRange: &glyphs)
+        let line = layout.characterRange(forGlyphRange: glyphs, actualGlyphRange: nil)
+        #expect(line.location < second, "The authored regression must put verse 2 after verse 1's continuing text on the same line")
+        let offset = ReaderTextView.Coordinator.viewportSourceOffset(in: view,
+            point: .init(x: container.lineFragmentPadding, y: rect.minY + 2), positions: [(0, 0), (second, second)])
+        #expect(offset == 0)
+    }
     @Test func readerKeepsFloatingScrollerWithoutReservingALegacyTrack() throws {
         _ = NSApplication.shared
         let scroll = ReaderScrollView(frame: NSRect(x: 0, y: 0, width: 600, height: 240))

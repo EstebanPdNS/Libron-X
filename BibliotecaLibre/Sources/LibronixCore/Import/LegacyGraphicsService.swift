@@ -15,6 +15,17 @@ public struct LegacyGraphicAsset: Codable, Sendable {
     public let name: String
     public let data: Data
     public let sha256: String
+    /// A transient chapter projection; original package coordinates stay intact.
+    public func offsettingCharacters(by offset: Int) -> Self {
+        var shifted = LegacyGraphicRun(sourceRunFlags: graphic.sourceRunFlags, attribute: graphic.attribute,
+            reference: graphic.reference, characterOffset: graphic.characterOffset + offset,
+            decodedOffset: graphic.decodedOffset, fileOffset: graphic.fileOffset, rawHeaderHex: graphic.rawHeaderHex)
+        shifted.extendedAttributes = graphic.extendedAttributes; shifted.embeddedData = graphic.embeddedData
+        shifted.embeddedFormat = graphic.embeddedFormat; shifted.intrinsicWidth = graphic.intrinsicWidth
+        shifted.intrinsicHeight = graphic.intrinsicHeight
+        return .init(graphic: shifted, name: name, data: data, sha256: sha256)
+    }
+
 }
 public struct LegacyGraphicsResult: Sendable {
     public let assets: [LegacyGraphicAsset]

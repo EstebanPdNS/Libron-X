@@ -46,6 +46,10 @@ struct LibronNormalizationReceipt: Codable {
 actor LibronNativeReader {
     static let shared = LibronNativeReader()
     private var headers: [URL: LibronNativeHeader] = [:]
+    var commentaryIndexes: [URL: [String: [String: Int]]] = [:]
+    var commentaryChapters: [URL: [String: ReaderPage]] = [:]
+    var commentaryBookChapters: [URL: [String]] = [:]
+    var nativeTypographies: [URL: [String: LegacyTypography]] = [:]
     private var htmlBooks: [URL: LibronixOEBBook] = [:]
     nonisolated static func location(_ resource: LibraryResource) -> URL? {
         guard let package = resource.packageLocation else { return nil }
@@ -64,8 +68,18 @@ actor LibronNativeReader {
         headers[url] = result
         return result
     }
-    func read(_ resource: LibraryResource, _ requested: ReaderDestination) throws -> ReaderPage {
+    func nativeTypography(_ key: String?, db: LibronNativeDatabase, url: URL) throws -> LegacyTypography? {
+        guard let key else { return nil }
+        if let saved = nativeTypographies[url]?[key] { return saved }
+        guard let data = try db.get(key) else { return nil }
+        let result = try JSONDecoder().decode(LegacyTypography.self, from: data)
+        if nativeTypographies.values.reduce(0, { $0 + $1.count }) >= 128 { nativeTypographies.removeAll() }
+        nativeTypographies[url, default: [:]][key] = result
+        return result
+    }
+    func read(_ resource: LibraryResource, _ requested: ReaderDestination) async throws -> ReaderPage {
         guard let url = Self.location(resource), let header = try header(resource) else { throw RebuildError.unsupportedFormat }
+        if requested.commentaryChapter != nil { return try await readCommentaryChapter(resource, requested) }
         let db = try LibronNativeDatabase(url)
         if header.profile == "html" {
             let book: LibronixOEBBook
@@ -117,9 +131,10 @@ actor LibronNativeReader {
             guard (0..<header.sectionCount).contains(ordinal), let data = try db.get("section/\(ordinal)") else { throw RebuildError.referenceNotFound }
             return try JSONDecoder().decode(LibronNativeSection.self,from:data)
         }
-        let stored = try section(ordinal)
-        let typography: LegacyTypography?
-        if let key = stored.typographyKey, let data = try db.get(key) { typography = try JSONDecoder().decode(LegacyTypography.self,from:data) } else { typography = nil }
+        var stored = try section(ordinal)
+        let typography = try nativeTypography(stored.typographyKey, db: db, url: url)
+        stored.inlineLinks = ReaderStudyNoteLinks.classify(stored.inlineLinks, anchors: stored.content?.anchors ?? [],
+            runs: stored.content?.runs ?? [], typography: typography)
         var selection: NSRange?
         func verseEnd(_ value: LibronNativeSection, offset: Int, reference: String) -> Int {
             if let end = value.referenceEnds?[offset], end > offset, end <= value.text.utf16.count { return end }
@@ -148,9 +163,10 @@ actor LibronNativeReader {
                 if index == ordinal { selection = range }
             }
         }
+        let commentaryOrdinals = try commentaryIndex(resource, section: stored, db: db, bookKey: requested.reference.flatMap(LegacyPassageQuery.sourceReference)?.sourceBookKey)
         return .init(destination:.init(ordinal:ordinal,reference:parts.first(where: { $0.ordinal == ordinal })?.reference ?? match?.reference,endReference:requested.endReference,requiredEdition:requested.requiredEdition,passageStartReference:requested.endReference == nil ? requested.passageStartReference : requested.passageStartReference ?? match?.reference),
             text:stored.text,sectionCount:header.sectionCount,entries:header.entries,selection:selection,warning:stored.warning,
-            content:stored.content,typography:typography,graphics:stored.graphics,inlineLinks:stored.inlineLinks,interlinearLines:stored.interlinearLines,passageParts:parts)
+            content:stored.content,typography:typography,graphics:stored.graphics,inlineLinks:stored.inlineLinks,commentaryOrdinals:commentaryOrdinals,interlinearLines:stored.interlinearLines,passageParts:parts)
     }
 }
 

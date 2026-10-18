@@ -11,13 +11,13 @@ struct RenderedReaderText {
 /// require separate rendering; applying styles must never move a source anchor.
 @MainActor enum ReaderTypography {
     static func render(text: String, content: LegacySectionContent?, typography: LegacyTypography?, scale: Double = 1,
-                       visibleInterlinearLines: Set<Int>? = nil) -> RenderedReaderText {
+                       visibleInterlinearLines: Set<Int>? = nil, usesChosenFont: Bool = true) -> RenderedReaderText {
         let scale = scale.isFinite ? min(4.5, max(0.015, scale)) : 1
-        let fallback = NSFont(name: AppPreferences.shared.readingFont.isEmpty ? "Times New Roman" : AppPreferences.shared.readingFont, size: 12 * scale) ?? NSFont.systemFont(ofSize: 12 * scale)
+        let fallback = NSFont(name: (!usesChosenFont || AppPreferences.shared.readingFont.isEmpty) ? "Times New Roman" : AppPreferences.shared.readingFont, size: 12 * scale) ?? NSFont.systemFont(ofSize: 12 * scale)
         let result = NSMutableAttributedString(string: text, attributes: [.font: fallback, .foregroundColor: NSColor.textColor])
         func applyChosenFont(_ text: NSMutableAttributedString) {
             let family = AppPreferences.shared.readingFont
-            guard !family.isEmpty else { return }
+            guard usesChosenFont, !family.isEmpty else { return }
             text.enumerateAttribute(.font, in: NSRange(location: 0, length: text.length)) { value, range, _ in
                 let original = value as? NSFont ?? fallback
                 let chosen = NSFontManager.shared.convert(original, toFamily: family)

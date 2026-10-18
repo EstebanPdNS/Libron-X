@@ -108,8 +108,15 @@ public final class LibronNativeDatabase {
               row.count == 3, let ordinal = Int(row[0]), let offset = Int(row[1]) else { return nil }
         return (ordinal,offset,row[2])
     }
+    /// A chapter may span several original physical articles.
+    public func chapterSectionOrdinals(_ reference: String) throws -> [Int] {
+        guard let query = LegacyPassageQuery.sourceReference(reference) else { return [] }
+        let previous = ["2jn": "2jo", "3jn": "3jo"][query.sourceBookKey] ?? query.sourceBookKey
+        return try rows("SELECT DISTINCT ordinal FROM bible_v1 WHERE (book=? OR book=?) AND chapter=? ORDER BY ordinal",
+            values: [query.sourceBookKey, previous, String(query.chapter)]).compactMap { $0.first.flatMap(Int.init) }
+    }
     public func chapterReferences() throws -> [String] {
-        try rows("SELECT book,chapter,MIN(verse) FROM bible_v1 GROUP BY book,chapter ORDER BY MIN(ordinal),MIN(offset)").compactMap { row in
+        try rows("WITH first_sections AS (SELECT book,MIN(ordinal) AS first_ordinal FROM bible_v1 GROUP BY book), books AS (SELECT v.book,b.first_ordinal,MIN(v.offset) AS first_offset FROM bible_v1 v JOIN first_sections b ON b.book=v.book AND b.first_ordinal=v.ordinal GROUP BY v.book) SELECT v.book,v.chapter,MIN(v.verse) FROM bible_v1 v JOIN books b ON b.book=v.book GROUP BY v.book,v.chapter ORDER BY b.first_ordinal,b.first_offset,v.chapter,v.book").compactMap { row in
             guard row.count == 3 else { return nil }; return row[0]+" "+row[1]+":"+row[2]
         }
     }
