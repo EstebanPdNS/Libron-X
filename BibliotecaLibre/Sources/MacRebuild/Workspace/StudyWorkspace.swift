@@ -43,6 +43,7 @@ enum PaneArrangement { case cascade, horizontal, vertical }
     var personal: WorkspacePersonalState
     var resourceVisibility: LibraryResourceVisibility
     var availableBibleVersions: [LibraryResource] = []
+    var collections: LibraryCollections
     var parallelBibleSets: ParallelBibleSets
     var recentWorkspaces: RecentWorkspaces
     @ObservationIgnored var bibleVersionTask: Task<Void, Never>?
@@ -51,9 +52,10 @@ enum PaneArrangement { case cascade, horizontal, vertical }
     @ObservationIgnored private var importTask: Task<Void, Never>?
     @ObservationIgnored private var importGeneration = 0
     @ObservationIgnored private var accessURLs: [URL] = []
-    init(personal: WorkspacePersonalState? = nil, resourceVisibility: LibraryResourceVisibility? = nil, recentWorkspaces: RecentWorkspaces? = nil, parallelBibleSets: ParallelBibleSets? = nil) {
+    init(personal: WorkspacePersonalState? = nil, resourceVisibility: LibraryResourceVisibility? = nil, recentWorkspaces: RecentWorkspaces? = nil, parallelBibleSets: ParallelBibleSets? = nil, collections: LibraryCollections? = nil) {
         self.personal = personal ?? WorkspacePersonalState()
         self.resourceVisibility = resourceVisibility ?? LibraryResourceVisibility()
+        self.collections = collections ?? LibraryCollections()
         self.parallelBibleSets = parallelBibleSets ?? ParallelBibleSets()
         self.recentWorkspaces = recentWorkspaces ?? RecentWorkspaces()
     }
@@ -85,6 +87,9 @@ enum PaneArrangement { case cascade, horizontal, vertical }
             else if libraryGroup.hasPrefix("language:") { groupMatches = m.languages.map(LibraryLanguages.canonical).contains(String(libraryGroup.dropFirst(9))) }
             else if libraryGroup.hasPrefix("personal:"), let uuid = UUID(uuidString: String(libraryGroup.dropFirst(9))) {
                 groupMatches = parallelBibleSets.sets.first { $0.id == uuid }?.members.contains { $0.resolve(in: [resource]) != nil } == true
+            } else if libraryGroup.hasPrefix("collection:") {
+                let id = UUID(uuidString: String(libraryGroup.dropFirst(11)))
+                groupMatches = collections.sets.first { $0.id == id }?.members.contains { $0.resolve(in: [resource]) != nil } == true
             } else { groupMatches = true }
             return queryMatches && groupMatches && (libraryFacetValue.isEmpty || libraryFacet.value(resource) == libraryFacetValue)
         }.sorted { lhs, rhs in

@@ -55,3 +55,5 @@ See the [source map](source-map.md) for individual files and [compatibility](com
 
 
 Persistent global search uses a rebuildable, source-bound local index. See [persistent search](../BibliotecaLibre/docs/persistent-library-search.md) for matching, invalidation and recovery boundaries.
+
+Manual resource collections use separate validated, atomic app-owned state. See [the collection contract](../BibliotecaLibre/docs/manual-resource-collections.md) for identity, filtering, persistence and acceptance limits.

@@ -6,6 +6,7 @@ struct LibraryChooser: View {
     @Environment(\.dismissWindow) private var dismissWindow
     @Environment(\.openWindow) private var openWindow
     @Bindable private var preferences = LibraryPreferences.shared
+    @RebuildViewState private var showsCollections = false
     @FocusState private var searchFocused: Bool
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -83,6 +84,7 @@ struct LibraryChooser: View {
         }.padding(16).font(.system(size: 13)).controlSize(.regular)
             .modifier(MacPanelControlPresentation()).featureHelpTarget(.library)
             .onAppear { searchFocused = true }
+            .sheet(isPresented: $showsCollections) { LibraryCollectionsView(workspace: workspace) }
     }
     private var libraryHeading: some View {
         HStack(spacing: 10) {
@@ -92,6 +94,7 @@ struct LibraryChooser: View {
     }
     private var libraryActions: some View {
         HStack(spacing: 10) {
+            Button { showsCollections = true } label: { Label(L("Colecciones"), systemImage: "folder") }
             ResourceDirectoryButton(workspace: workspace)
             Button(action: workspace.chooseLibrary) { Label(L("Agregar carpeta"), systemImage: "plus.circle") }
             Button { workspace.chooseResources() } label: { Label(L("Importar recursos"), systemImage: "square.and.arrow.down") }
@@ -109,6 +112,9 @@ struct LibraryChooser: View {
                 Text(L("Todos los recursos")).tag("all")
                 Text(L("Grupo de diccionarios")).tag("dictionaries")
                 ForEach(workspace.libraryLanguages, id: \.self) { code in Text(LibraryLanguages.name(code)).tag("language:" + code) }
+                ForEach(workspace.collections.sets) { collection in
+                    Text(collection.name).tag("collection:" + collection.id.uuidString)
+                }
                 ForEach(workspace.parallelBibleSets.sets) { group in Text(group.name).tag("personal:" + group.id.uuidString) }
             }.labelsHidden().frame(width: 155)
         }.controlSize(.regular)

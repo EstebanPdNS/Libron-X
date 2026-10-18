@@ -1,0 +1,9 @@
+# Manual resource collections
+
+Open **Library → Collections** to create and rename a collection, select one or several resources, add them, and remove individual members. **Show in library** selects the collection and clears text/facet filters; later filters compose with membership. Collections can contain any resource format. Their names describe a topic, author or purpose; metadata rules are a separate planned feature.
+
+Definitions live in the app-owned `resource-collections.json`, separately from parallel Bible groups and source books. Each member retains its resource path, format, legacy identifier and display title. Missing or hidden members remain in the definition; only available exact identities appear in the library. A file at the same path with a different format or identifier does not silently replace a member.
+
+The versioned snapshot validates names, unique IDs, standardized absolute paths and bounded membership before committing an atomic write. Malformed/future state cannot be overwritten; external edits require an explicit reload. Bulk additions commit together and reject duplicates. Bounds are 256 collections, 8192 members each and 160 UTF-16 units per name.
+
+Validation: 636 tests in 107 suites, including five collection tests covering mixed-format persistence, filtering/visibility, missing editions, invalid edits, bulk overflow, corrupt state and concurrent writes. Installed build 29 was exercised with LSF, LLS and e-Sword resources, a Greek/emoji name, native multi-selection, library filtering, normal restart and member removal. The existing Bible-group state was byte-identical; 1099 payload/index/normalized-content hash checks across 521 resources passed. Native visual observation covered Spanish and dark appearance; other appearance/layout combinations remain unobserved in this checkpoint. This does not assert complete equivalence with original Libronix collections.

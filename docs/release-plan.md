@@ -17,7 +17,7 @@ A feature counts only when its complete behavior is implemented and verified. Ea
 
 - [x] Unified search across the managed library.
 - [x] Persistent search indexes.
-- [ ] General resource collections.
+- [x] General resource collections.
 - [ ] Resource priorities and key links.
 - [ ] Bible reference search.
 - [ ] Configurable Bible search ranges.
