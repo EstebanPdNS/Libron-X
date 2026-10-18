@@ -162,9 +162,26 @@ struct ReaderPage: Sendable {
         }
     }
     deinit { fontTask?.cancel(); flowTask?.cancel() }
-    var canGoBack: Bool { historyIndex > 0 && !isLoading }
+    /// Automatic verse following does not fill history with wheel events.
+    /// Preserve its current note when the user explicitly opens an article.
+    func rememberCommentaryLocation() {
+        guard isCommentary, let destination = committedPage?.destination,
+              history.indices.contains(historyIndex) ? history[historyIndex] != destination : true else { return }
+        history = Array(history.prefix(historyIndex + 1)) + [destination]
+        historyIndex = history.count - 1
+    }
+    var canGoBack: Bool {
+        guard !isLoading else { return false }
+        if historyIndex > 0 { return true }
+        return isCommentary && history.indices.contains(historyIndex) &&
+            committedPage.map { $0.destination != history[historyIndex] } == true
+    }
     var canGoForward: Bool { historyIndex + 1 < history.count && !isLoading }
-    func goBack() { if canGoBack { load(history[historyIndex - 1], historyTarget: historyIndex - 1) } }
+    func goBack() {
+        guard canGoBack else { return }
+        rememberCommentaryLocation()
+        load(history[historyIndex - 1], historyTarget: historyIndex - 1)
+    }
     func goForward() { if canGoForward { load(history[historyIndex + 1], historyTarget: historyIndex + 1) } }
     func goToReference() {
         guard !locator.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }

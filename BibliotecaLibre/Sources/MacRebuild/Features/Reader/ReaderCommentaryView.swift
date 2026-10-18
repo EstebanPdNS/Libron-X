@@ -10,24 +10,36 @@ struct ReaderCommentaryToolbar: View {
                 Image(systemName: "text.bubble").foregroundStyle(.secondary)
                 Text(reader.commentaryReference ?? L("Comentarios")).font(.callout).lineLimit(1)
                 Spacer(minLength: 4)
-                if reader.commentarySourceID != nil {
-                    Toggle(isOn: Binding(get: { reader.followsCommentary }, set: { workspace.setCommentaryFollowing($0, for: reader) })) {
-                        MacToolbarLabel(L("Seguir la Biblia de origen"), "link")
-                    }.toggleStyle(.button).help(L("Seguir la Biblia de origen"))
+                MacReaderControlGroup {
+                    Button { workspace.activate(reader); reader.goBack() } label: {
+                        MacToolbarLabel(L("Atrás"), "chevron.left")
+                    }.help(L("Atrás")).disabled(!reader.canGoBack)
+                    Button { workspace.activate(reader); reader.goForward() } label: {
+                        MacToolbarLabel(L("Adelante"), "chevron.right")
+                    }.help(L("Adelante")).disabled(!reader.canGoForward)
                 }
-                Button { workspace.activate(reader); reader.showFind() } label: {
-                    MacToolbarLabel(L("Buscar en este recurso"), "magnifyingglass")
-                }.help(L("Buscar en este recurso"))
-                ReaderZoomMenu(reader: reader, activate: { workspace.activate(reader) })
-                Menu {
-                    Button(L("Atrás")) { reader.goBack() }.disabled(!reader.canGoBack)
-                    Button(L("Adelante")) { reader.goForward() }.disabled(!reader.canGoForward)
-                    Button(L("Contenido")) { reader.showsContents.toggle() }
-                    Divider()
-                    ReaderOutputMenuItems(reader: reader, workspace: workspace)
-                } label: {
-                    MacToolbarLabel(L("Acciones de lectura"), "ellipsis")
-                }.menuIndicator(.hidden).help(L("Acciones de lectura"))
+                MacReaderControlGroup {
+                    if reader.commentarySourceID != nil {
+                        Button { workspace.setCommentaryFollowing(!reader.followsCommentary, for: reader) } label: {
+                            MacToolbarLabel(L("Seguir la Biblia de origen"), "link")
+                                .foregroundStyle(reader.followsCommentary ? Color.accentColor : Color.primary)
+                        }.help(L("Seguir la Biblia de origen"))
+                            .accessibilityValue(L(reader.followsCommentary ? "Activado" : "Desactivado"))
+                    }
+                    Button { workspace.activate(reader); reader.showFind() } label: {
+                        MacToolbarLabel(L("Buscar en este recurso"), "magnifyingglass")
+                    }.help(L("Buscar en este recurso"))
+                    ReaderZoomMenu(reader: reader, activate: { workspace.activate(reader) })
+                    Menu {
+                        Button(L("Atrás")) { reader.goBack() }.disabled(!reader.canGoBack)
+                        Button(L("Adelante")) { reader.goForward() }.disabled(!reader.canGoForward)
+                        Button(L("Contenido")) { reader.showsContents.toggle() }
+                        Divider()
+                        ReaderOutputMenuItems(reader: reader, workspace: workspace)
+                    } label: {
+                        MacToolbarLabel(L("Acciones de lectura"), "ellipsis")
+                    }.menuIndicator(.hidden).help(L("Acciones de lectura"))
+                }
             }
         }.padding(.horizontal, 8).frame(height: 44).background(.bar)
     }

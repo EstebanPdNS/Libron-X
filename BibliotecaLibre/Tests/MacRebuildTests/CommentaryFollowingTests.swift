@@ -51,6 +51,32 @@ import Testing
         try await settle(target)
         #expect(target.page?.text.contains("First commentary") == true && target.error == nil)
     }
+    @Test func articleHistoryReturnsToTheCurrentFollowedNoteAndForwardAgain() async throws {
+        let fixture = try AuthoredReaderFixture(documents: [["First. Second. Third.", "First commentary", "Second commentary", "Study article"]])
+        defer { fixture.remove() }
+        let workspace = StudyWorkspace()
+        let source = workspace.open(fixture.resources[0], startReading: false)
+        source.page = try bible(fixture); source.visibleBibleReference = "Ge 1:1"
+        workspace.openInlineLink(source.resource, destination: .init(ordinal: 1), from: source, newReader: true)
+        let target = try #require(workspace.activeReader)
+        try await settle(target)
+        source.observeBiblePosition(7, fromViewport: true)
+        try await settle(target)
+        #expect(target.canGoBack)
+        target.goBack(); try await settle(target)
+        #expect(target.page?.destination.ordinal == 1 && target.canGoForward)
+        target.goForward(); try await settle(target)
+        #expect(target.page?.destination.ordinal == 2)
+        workspace.openInlineLink(source.resource, destination: .init(ordinal: 3), from: source, newReader: true)
+        try await settle(target)
+        #expect(target.history.map(\.ordinal) == [1, 2, 3] && target.canGoBack && !target.canGoForward)
+        target.goBack(); try await settle(target)
+        #expect(target.page?.text.contains("Second commentary") == true && target.canGoForward)
+        target.goForward(); try await settle(target)
+        #expect(target.page?.text.contains("Study article") == true && !target.canGoForward)
+        workspace.closeAll()
+    }
+
     @Test func BibleReferenceReadingsStaySeparateAndPausedCommentariesStayIndependent() async throws {
         let fixture = try AuthoredReaderFixture(documents: [["First. Second. Third.", "First commentary", "Second commentary"]])
         defer { fixture.remove() }

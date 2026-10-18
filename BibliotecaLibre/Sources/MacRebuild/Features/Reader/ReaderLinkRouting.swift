@@ -50,12 +50,13 @@ import LibronixCore
                 target.pendingCommentaryOrdinal = destination.ordinal
                 if created { target.frame = PaneFrame(x: 0.45, y: 0.04, width: 0.54, height: 0.91) }
             }
+            target.rememberCommentaryLocation()
             target.load(destination, propagateReference: false)
             return
         }
         let explicit = destination.reference == nil ? nil : readers.first { $0.id == referenceTargetID && $0.resource.id == resource.id }
         let target = explicit ?? (source.resource.id == resource.id ? source : readers.first { $0.resource.id == resource.id })
             ?? open(resource, startReading: false)
-        activate(target); target.load(destination)
+        activate(target); target.rememberCommentaryLocation(); target.load(destination)
     }
 }
