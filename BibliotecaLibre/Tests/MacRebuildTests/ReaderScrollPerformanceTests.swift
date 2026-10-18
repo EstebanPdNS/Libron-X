@@ -56,11 +56,13 @@ import Testing
             try await Task.sleep(for: .milliseconds(20))
         }
         #expect(!offsets.isEmpty, "Continuous input must not postpone all synchronization until scrolling stops")
+        await coordinator.scrollTask?.value
         view.alignCharacterToTop(coordinator.biblePositions[11].source, in: scroll)
+        let beforeBurst = offsets.count
         for _ in 0..<1000 { coordinator.userScrolled(scroll) }
-        try await Task.sleep(for: .milliseconds(150))
+        await coordinator.scrollTask?.value
         #expect(offsets.last == coordinator.biblePositions[11].source)
-        #expect(offsets.count <= 5, "Wheel ticks must share one pending viewport observation")
+        #expect(offsets.count == beforeBurst + 1, "A synchronous wheel burst must share one pending viewport observation")
         coordinator.cancelViewportObservation()
     }
 
@@ -68,15 +70,20 @@ import Testing
         let (scroll, _, coordinator) = try surface()
         var calls = 0
         coordinator.onVisiblePosition = { _ in calls += 1 }
-        coordinator.userScrolled(scroll); coordinator.cancelViewportObservation()
-        try await Task.sleep(for: .milliseconds(120))
-        #expect(calls == 0 && coordinator.scrollTask == nil)
-        coordinator.userScrolled(scroll); coordinator.text = "A replacement document"
-        try await Task.sleep(for: .milliseconds(120))
+        coordinator.userScrolled(scroll)
+        let cancelled = coordinator.scrollTask
+        coordinator.cancelViewportObservation()
+        await cancelled?.value
         #expect(calls == 0 && coordinator.scrollTask == nil)
         coordinator.userScrolled(scroll)
+        let replaced = coordinator.scrollTask
+        coordinator.text = "A replacement document"
+        await replaced?.value
+        #expect(calls == 0 && coordinator.scrollTask == nil)
+        coordinator.userScrolled(scroll)
+        let dismantled = coordinator.scrollTask
         ReaderTextView.dismantleNSView(scroll, coordinator: coordinator)
-        try await Task.sleep(for: .milliseconds(120))
+        await dismantled?.value
         #expect(calls == 0 && coordinator.scrollTask == nil)
     }
 
