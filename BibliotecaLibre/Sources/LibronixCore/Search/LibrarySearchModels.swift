@@ -233,6 +233,7 @@ public struct LibrarySearchPreparedResource: Sendable, Codable {
 }
 
 public struct LibrarySearchDecodedArticle: Sendable, Codable {
+    public let lexicalBreaks: [Int]?
     public let fieldDirectory: SearchFieldDirectory?
     public let referenceLinks: [BibleReferenceSourceLink]?
     public let text: String
@@ -244,7 +245,8 @@ public struct LibrarySearchDecodedArticle: Sendable, Codable {
     public let referenceAnchors: [LegacyReferenceAnchor]
     public init(text: String, warnings: [String] = [], bibleVerses: [LibrarySearchBibleVerse] = [],
                 referenceAnchors: [LegacyReferenceAnchor] = [], searchRange: SearchTextRange? = nil,
-                referenceLinks: [BibleReferenceSourceLink]? = nil, fieldDirectory: SearchFieldDirectory? = nil) {
+                referenceLinks: [BibleReferenceSourceLink]? = nil, fieldDirectory: SearchFieldDirectory? = nil, lexicalBreaks: [Int]? = nil) {
+        self.lexicalBreaks = lexicalBreaks
         self.fieldDirectory = fieldDirectory
         self.referenceLinks = referenceLinks
         self.text = text; self.warnings = warnings; self.bibleVerses = bibleVerses; self.referenceAnchors = referenceAnchors

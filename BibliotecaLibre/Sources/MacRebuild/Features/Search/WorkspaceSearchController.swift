@@ -7,6 +7,8 @@ enum WorkspaceBibleRangeMode: String, CaseIterable, Sendable { case all, custom,
 @MainActor @Observable final class WorkspaceSearchController {
     var query = ""
     var searchField: SearchField?
+    var approximatePhrase = false
+    var maximumEdits = 1
     var scope = WorkspaceSearchScopeSelection()
     var resourceID: String? { get { scope.resourceID } set { scope.resourceID = newValue } }
     var allResources: Bool { get { scope.allResources } set { scope.allResources = newValue } }
@@ -33,9 +35,21 @@ enum WorkspaceBibleRangeMode: String, CaseIterable, Sendable { case all, custom,
             scopeSnapshot = snapshot
             let selected = snapshot.resources
             guard !selected.isEmpty else { throw WorkspaceSearchScopeError.noResources }
-            let compiled = searchField.map { $0.rawValue + ":(" + query + ")" } ?? query
-            let parsed = try SearchQueryParser.parse(compiled)
+            let text: String
+            if approximatePhrase {
+                // Treat the complete entry literally, including quotes/operators.
+                let escaped = query.replacingOccurrences(of: "\\", with: "\\\\").replacingOccurrences(of: "\"", with: "\\\"")
+                text = "\"" + escaped + "\""
+            } else { text = query }
+            let compiled = searchField.map { $0.rawValue + ":(" + text + ")" } ?? text
+            let parsed = try SearchQueryParser.parse(compiled, limits: .init(maximumOperandUTF16: approximatePhrase ? 16_384 : 512))
             var options = TextSearchOptions(); options.caseSensitive = caseSensitive; options.wholeWords = wholeWords
+            options.maximumEditDistance = approximatePhrase ? maximumEdits : 0
+            if approximatePhrase { options.maximumMatchAttempts = 5_000_000 }
+            // Validate query/options before starting any asynchronous source work.
+            _ = try TextSearchEngine.search(query: parsed, in: "", options: options,
+                verses: parsed.expression.requiresVerseContext ? [] : nil,
+                fields: .init(regions: Dictionary(uniqueKeysWithValues: parsed.expression.requiredFields.map { ($0, []) })))
             let unit: LibrarySearchUnit = bibleVerses ? .bibleVerse : .article
             let rangeMode = bibleRangeMode, rangeText = customBibleRange
             let list = documents.first { $0.id == referenceListID && $0.kind == .verseList }

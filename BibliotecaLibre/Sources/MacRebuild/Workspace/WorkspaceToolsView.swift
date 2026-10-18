@@ -61,13 +61,14 @@ struct WorkspaceSearchView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
-                TextField(L("Palabra, frase entre comillas o consulta AND / OR"), text: $search.query).macInputStyle()
+                TextField(L(search.approximatePhrase ? "Frase literal" : "Palabra, frase entre comillas o consulta AND / OR"), text: $search.query).macInputStyle()
                     .onSubmit(run)
                 if search.isSearching { Button(L("Cancelar"), action: search.cancel) }
                 else { Button(L("Buscar"), action: run).disabled(search.query.isEmpty) }
             }
             WorkspaceSearchScopePicker(selection: search.scope, context: workspace.searchScopeContext()).disabled(search.isSearching)
             WorkspaceSearchFieldPicker(field: $search.searchField).disabled(search.isSearching)
+            WorkspaceSearchMatchingPicker(search: search).disabled(search.isSearching)
             if search.bibleVerses {
                 VStack(alignment: .leading, spacing: 8) {
                     Picker(L("Rango bíblico"), selection: $search.bibleRangeMode) {
@@ -93,12 +94,14 @@ struct WorkspaceSearchView: View {
                 Toggle(L("Palabras completas"), isOn: $search.wholeWords)
                 Toggle(L("Versículos bíblicos"), isOn: $search.bibleVerses)
             }.disabled(search.isSearching)
+            if !search.approximatePhrase {
             DisclosureGroup(L("Operadores de búsqueda")) {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(verbatim: "title:a · body:(a AND b) · footnote:a\nheading:a · bible:a · quote:a")
                     Text(verbatim: "a NEAR b · a NEAR/2 b · a BEFORE b · a AFTER b\na WITHIN 2 WORDS b · a BEFORE 2 CHARACTERS b\na WITHIN 1 VERSES b · (a OR b) BEFORE/0 c")
                     Text(L("NEAR usa 48 unidades UTF-16. WORDS cuenta palabras intermedias. VERSES usa referencias reales del mismo capítulo. Cada artículo o versículo conserva su ámbito."))
                 }.font(.caption).textSelection(.enabled)
+            }
             }
             if let message = search.error { Text(message).foregroundStyle(.red).textSelection(.enabled) }
             if search.report == nil, let scope = search.scopeSnapshot, !scope.complete {

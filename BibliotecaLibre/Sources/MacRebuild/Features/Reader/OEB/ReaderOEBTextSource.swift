@@ -16,11 +16,12 @@ struct ReaderOEBTextPage: Sendable {
     let path: String
     let articleRanges: [Int: NSRange]
     let referenceLinks: [BibleReferenceSourceLink]
+    let lexicalBreaks: [Int]?
     let fieldDirectory: SearchFieldDirectory?
-    var estimatedBytes: Int { text.utf16.count * 2 + articleRanges.count * 64 + path.utf16.count * 2 + referenceLinks.reduce(0) { $0 + $1.target.utf16.count * 2 + 48 } + (fieldDirectory?.regions.values.reduce(0) { $0 + $1.count * 32 } ?? 0) + 128 }
+    var estimatedBytes: Int { text.utf16.count * 2 + articleRanges.count * 64 + path.utf16.count * 2 + referenceLinks.reduce(0) { $0 + $1.target.utf16.count * 2 + 48 } + (fieldDirectory?.regions.values.reduce(0) { $0 + $1.count * 32 } ?? 0) + (lexicalBreaks?.count ?? 0) * 8 + 128 }
 
     init(text: String, anchors: [String: Int], path: String, articles: [LibronixOEBArticle],
-         referenceLinks: [BibleReferenceSourceLink] = [], fieldDirectory: SearchFieldDirectory? = nil) throws {
+         referenceLinks: [BibleReferenceSourceLink] = [], fieldDirectory: SearchFieldDirectory? = nil, lexicalBreaks: [Int]? = nil) throws {
         let count = text.utf16.count
         let entries = articles.filter { $0.path.lowercased() == path.lowercased() }.sorted { $0.ordinal < $1.ordinal }
         guard !entries.isEmpty else { throw LibronixBookError.invalidDirectory }
@@ -43,6 +44,8 @@ struct ReaderOEBTextPage: Sendable {
         self.text = text; fingerprint = LibrarySearchService.textFingerprint(text)
         self.path = path; articleRanges = ranges; self.referenceLinks = referenceLinks
         if let fieldDirectory { try fieldDirectory.validate(in: text) }
+        try TextSearchEngine.validateLexicalBreaks(lexicalBreaks, in: text)
+        self.lexicalBreaks = lexicalBreaks
         self.fieldDirectory = fieldDirectory
     }
 }
@@ -233,7 +236,7 @@ private actor OEBProjectionSlots {
                         fieldDirectory = nil
                     }
                 }
-                let result = try ReaderOEBTextPage(text: text, anchors: anchors, path: path, articles: entries, referenceLinks: links, fieldDirectory: fieldDirectory)
+                let result = try ReaderOEBTextPage(text: text, anchors: anchors, path: path, articles: entries, referenceLinks: links, fieldDirectory: fieldDirectory, lexicalBreaks: value["lexicalBreaks"] as? [Int])
                 try book.verifySource(); finish(.success(result), run: run)
             } catch { finish(.failure(error), run: run) }
         }

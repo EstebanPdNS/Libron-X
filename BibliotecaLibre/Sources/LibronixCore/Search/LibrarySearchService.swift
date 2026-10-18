@@ -215,7 +215,12 @@ public actor LibrarySearchService {
                             }
                             fields = try scopeRange.map { try declared?.clipped(to: $0, in: content.text) } ?? declared
                         } else { fields = nil }
-                        let match = try TextSearchEngine.search(query: query, in: evaluationText, options: options, verses: verseContext, fields: fields)
+                        try TextSearchEngine.validateLexicalBreaks(content.lexicalBreaks, in: content.text)
+                        let lexical = content.lexicalBreaks?.compactMap { position -> Int? in
+                            let start = scopeRange?.location ?? 0, end = scopeRange?.upperBound ?? content.text.utf16.count
+                            return position > start && position < end ? position - start : nil
+                        }
+                        let match = try TextSearchEngine.search(query: query, in: evaluationText, options: options, verses: verseContext, fields: fields, lexicalBreaks: lexical)
                         if elapsed() >= budget.maximumDurationSeconds { limit = .duration; break resourceLoop }
                         if match.matchesQuery {
                             if !articleMatched {

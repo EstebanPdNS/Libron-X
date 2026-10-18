@@ -7750,5 +7750,77 @@
     "pt": "Um título do índice pode abrir seu artigo sem destacar o corpo.",
     "id": "Judul indeks dapat membuka artikelnya tanpa menyorot isi.",
     "ur": "فہرست کا عنوان متن نمایاں کیے بغیر اپنا مضمون کھول سکتا ہے۔"
+  },
+  "Exacta": {
+    "es": "Exacta",
+    "en": "Exact",
+    "zh-Hans": "精确",
+    "hi": "सटीक",
+    "ar": "دقيقة",
+    "fr": "Exacte",
+    "bn": "নির্ভুল",
+    "pt": "Exata",
+    "id": "Persis",
+    "ur": "عین مطابق"
+  },
+  "Frase aproximada": {
+    "es": "Frase aproximada",
+    "en": "Approximate phrase",
+    "zh-Hans": "近似短语",
+    "hi": "अनुमानित वाक्यांश",
+    "ar": "عبارة تقريبية",
+    "fr": "Expression approximative",
+    "bn": "আনুমানিক বাক্যাংশ",
+    "pt": "Frase aproximada",
+    "id": "Frasa perkiraan",
+    "ur": "تقریبی فقرہ"
+  },
+  "Cambios máximos": {
+    "es": "Cambios máximos",
+    "en": "Maximum edits",
+    "zh-Hans": "最多改动次数",
+    "hi": "अधिकतम बदलाव",
+    "ar": "الحد الأقصى للتعديلات",
+    "fr": "Modifications maximales",
+    "bn": "সর্বাধিক পরিবর্তন",
+    "pt": "Máximo de alterações",
+    "id": "Perubahan maksimum",
+    "ur": "زیادہ سے زیادہ تبدیلیاں"
+  },
+  "Frase literal, sin operadores: inserciones, eliminaciones o sustituciones de caracteres. No reordena palabras.": {
+    "es": "Frase literal, sin operadores: inserciones, eliminaciones o sustituciones de caracteres. No reordena palabras.",
+    "en": "Literal phrase, without operators: character insertions, deletions or substitutions. Words are not reordered.",
+    "zh-Hans": "字面短语，不使用运算符：允许插入、删除或替换字符，不调整词序。",
+    "hi": "बिना ऑपरेटर का शाब्दिक वाक्यांश: अक्षर जोड़ना, हटाना या बदलना। शब्दों का क्रम नहीं बदलता।",
+    "ar": "عبارة حرفية بدون عوامل تشغيل: إدراج أحرف أو حذفها أو استبدالها. لا يتغير ترتيب الكلمات.",
+    "fr": "Expression littérale, sans opérateurs : insertion, suppression ou substitution de caractères. Les mots ne sont pas réordonnés.",
+    "bn": "অপারেটর ছাড়া আক্ষরিক বাক্যাংশ: অক্ষর যোগ, মুছে ফেলা বা প্রতিস্থাপন। শব্দের ক্রম বদলায় না।",
+    "pt": "Frase literal, sem operadores: inserções, exclusões ou substituições de caracteres. Não reordena palavras.",
+    "id": "Frasa literal tanpa operator: penyisipan, penghapusan, atau penggantian karakter. Urutan kata tidak diubah.",
+    "ur": "آپریٹر کے بغیر لفظی فقرہ: حروف کا اضافہ، حذف یا تبدیلی۔ الفاظ کی ترتیب نہیں بدلتی۔"
+  },
+  "Máximo 256 caracteres; la frase debe ser más larga que el límite de cambios. Los límites de trabajo producen cobertura parcial.": {
+    "es": "Máximo 256 caracteres; la frase debe ser más larga que el límite de cambios. Los límites de trabajo producen cobertura parcial.",
+    "en": "At most 256 characters; the phrase must be longer than the edit limit. Work limits produce partial coverage.",
+    "zh-Hans": "最多256个字符；短语长度必须大于改动次数上限。达到计算限额时会显示覆盖不完整。",
+    "hi": "अधिकतम 256 अक्षर; वाक्यांश बदलाव की सीमा से लंबा होना चाहिए। कार्य सीमा पर कवरेज आंशिक रहती है।",
+    "ar": "الحد الأقصى 256 حرفًا؛ يجب أن تكون العبارة أطول من حد التعديلات. تؤدي حدود العمل إلى تغطية جزئية.",
+    "fr": "256 caractères maximum ; l’expression doit être plus longue que la limite de modifications. Les limites de calcul entraînent une couverture partielle.",
+    "bn": "সর্বোচ্চ ২৫৬ অক্ষর; বাক্যাংশ পরিবর্তনের সীমার চেয়ে দীর্ঘ হতে হবে। কাজের সীমা হলে অনুসন্ধানের আওতা আংশিক হয়।",
+    "pt": "No máximo 256 caracteres; a frase deve ser maior que o limite de alterações. Os limites de trabalho produzem cobertura parcial.",
+    "id": "Maksimal 256 karakter; frasa harus lebih panjang dari batas perubahan. Batas kerja menghasilkan cakupan sebagian.",
+    "ur": "زیادہ سے زیادہ 256 حروف؛ فقرہ تبدیلیوں کی حد سے لمبا ہونا چاہیے۔ کام کی حد پر تلاش کی تکمیل جزوی رہتی ہے۔"
+  },
+  "Frase literal": {
+    "es": "Frase literal",
+    "en": "Literal phrase",
+    "zh-Hans": "字面短语",
+    "hi": "शाब्दिक वाक्यांश",
+    "ar": "عبارة حرفية",
+    "fr": "Expression littérale",
+    "bn": "আক্ষরিক বাক্যাংশ",
+    "pt": "Frase literal",
+    "id": "Frasa literal",
+    "ur": "لفظی فقرہ"
   }
 }

@@ -87,7 +87,7 @@ struct ReaderOEBView: NSViewRepresentable {
                     data = try ReaderOEBHTML.protectedHTML(original)
                 }
                 urlSchemeTask.didReceive(URLResponse(url: url, mimeType: LibronixOEBBook.mimeType(path),
-                    expectedContentLength: data.count, textEncodingName: path.lowercased().hasSuffix(".html") || path.lowercased().hasSuffix(".css") ? "utf-8" : nil))
+                    expectedContentLength: data.count, textEncodingName: LibronixOEBBook.mimeType(path) == "text/html" || LibronixOEBBook.mimeType(path) == "text/css" ? "utf-8" : nil))
                 urlSchemeTask.didReceive(data); urlSchemeTask.didFinish()
             } catch {
                 assetFailures.append(urlSchemeTask.request.url?.lastPathComponent ?? "Recurso")
@@ -226,6 +226,39 @@ struct ReaderOEBView: NSViewRepresentable {
             }
             offset += node.length;
           }
+          // Keep block/BR word boundaries without inserting display characters.
+          const lexical = new Set(), nodeOffsets = []; let position = 0, priorBlock = null;
+          function blockOwner(node) {
+            for (let e = node.parentElement; e; e = e.parentElement) {
+              if (['block','flow-root','flex','grid','list-item','table','table-cell','table-row','table-caption','table-row-group','table-header-group','table-footer-group'].includes(getComputedStyle(e).display)) return e;
+            }
+            return null;
+          }
+          for (const node of visible) {
+            nodeOffsets.push(position);
+            if (node.length) {
+              const block = blockOwner(node);
+              if (position > 0 && priorBlock !== block) lexical.add(position);
+              priorBlock = block;
+            }
+            position += node.length;
+          }
+          for (const br of document.querySelectorAll('br')) {
+            let shown = true;
+            for (let e = br; e; e = e.parentElement) {
+              const style = getComputedStyle(e);
+              if (style.display === 'none' || style.visibility === 'hidden') { shown = false; break; }
+            }
+            if (!shown) continue;
+            let low = 0, high = visible.length;
+            while (low < high) {
+              const mid = (low + high) >>> 1;
+              if (br.compareDocumentPosition(visible[mid]) & Node.DOCUMENT_POSITION_FOLLOWING) high = mid;
+              else low = mid + 1;
+            }
+            if (low < nodeOffsets.length && nodeOffsets[low] > 0) lexical.add(nodeOffsets[low]);
+          }
+          if (lexical.size > 100000) throw new Error('Too many source word boundaries');
           const links = Array.from(byElement.values()).flat();
           if (links.length > 100000) throw new Error('Too many source links');
           // Semantic fields share the existing visible-node coordinates. No
@@ -260,7 +293,7 @@ struct ReaderOEBView: NSViewRepresentable {
             fieldOffset += node.length;
           }
           // Field exhaustion cannot break established unqualified reading/find.
-          return {text: visible.map(n => n.data).join(''), anchors, links, fields: fieldLimit ? null : fields,
+          return {text: visible.map(n => n.data).join(''), anchors, links, lexicalBreaks: [...lexical].sort((a,b) => a-b), fields: fieldLimit ? null : fields,
             fieldValues: {title: fields.title.length ? [] : (document.title ? [document.title] : [])}};
         },
         select: (start, length) => {

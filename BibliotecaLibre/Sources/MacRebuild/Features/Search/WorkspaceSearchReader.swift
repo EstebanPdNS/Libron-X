@@ -38,7 +38,7 @@ actor WorkspaceSearchReader: LibrarySearchContentProvider {
         }
         let result = LibrarySearchPreparedResource(articles: (0..<first.sectionCount).map {
             .init(sectionOrdinal: $0, title: titles[$0] ?? resource.title + " · " + String($0 + 1))
-        }, sourceStamps: stamps, warnings: [], projectionVersion: "workspace-search-fields-v4", availableFields: fields)
+        }, sourceStamps: stamps, warnings: [], projectionVersion: "workspace-search-block-boundaries-v5", availableFields: fields)
         try await verifyUnchanged(resource, prepared: result)
         return result
     }
@@ -57,7 +57,8 @@ actor WorkspaceSearchReader: LibrarySearchContentProvider {
             decoded = .init(text: projection.text, warnings: warnings,
                             searchRange: .init(location: range.location, length: range.length), referenceLinks: projection.referenceLinks,
                             fieldDirectory: try await sourceFields.directory(resource, ordinal: article.sectionOrdinal, text: projection.text, stamps: prepared.sourceStamps,
-                                html: html, rendered: projection.fieldDirectory, visibleRange: .init(location: range.location, length: range.length)))
+                                html: html, rendered: projection.fieldDirectory, visibleRange: .init(location: range.location, length: range.length)),
+                            lexicalBreaks: projection.lexicalBreaks)
         } else {
             let anchors = result.content?.anchors ?? []
             let links = result.inlineLinks.compactMap(BibleReferenceSourceLink.init)

@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Find approximate literal phrases with selectable edit limits, source-accurate Unicode selection and explicit coverage.
+
 - Search verified resource fields with separate source-title matches, explicit coverage and exact reader selection.
 
 - Execute bounded proximity and order queries with word, character and verified verse distances.

@@ -166,3 +166,79 @@ selection, external-title opening, actual LSF title/body queries, and the positi
 and negative Bible verse-distance pair across all 1189 Reina-Valera 1909 articles.
 Ten pre-existing state files and the library catalog/entry set were restored
 exactly. All 1099 integrity checks across 521 managed packages pass.
+
+## Approximate phrase search
+
+The native Match picker offers Exact and Approximate phrase. Exact preserves the
+existing grammar and matching behavior. Approximate phrase treats the complete
+entry literally, including AND, colons, quotes and backslashes; choose the source
+field separately. Select one, two or three character edits. Insertions, deletions
+and substitutions each cost one; a neighboring transposition costs two. This is
+textual edit distance, not semantic similarity, stemming or word reordering.
+
+The independent matcher uses banded Levenshtein over original extended grapheme
+clusters. Comparison tokens use canonical normalization and the selected case /
+diacritic folding with a fixed POSIX locale. A folding expansion stays one token
+for its original grapheme; it does not introduce synthetic reader characters.
+Spaces and punctuation participate in the distance. Native whole-word settings
+retain explicit lexical boundaries, including internal apostrophes; they do not
+claim language-specific tokenization. Disabling whole words allows every original
+grapheme boundary as a candidate start.
+
+For each eligible start, return the candidate with the lowest edit distance,
+then the length closest to the query, then the shorter span. An exact candidate
+wins at the same start. Overlapping starts may produce separate hits; this does
+not rank articles by relevance. Original UTF-16 offsets, source hashes and opening
+validation remain unchanged, including for combining marks and emoji sequences.
+
+The phrase must contain more graphemes than the selected edit limit and at most
+256 graphemes. Bounded query-parser source limits still apply. Each evaluated
+article/verse or external field value is limited to 1048576 UTF-16 units. The
+native controller allows 5000000 match-work units per article; candidate starts
+and dynamic-programming cells consume the shared work budget. Preprocessing,
+candidate scanning and matrix work observe cancellation. Budget exhaustion throws
+an explicit error; the library reports partial coverage instead of complete
+absence. General duration/result/occurrence budgets remain in force.
+
+Approximation applies to operands in the Core AST, preserving Boolean/positional
+witnesses there. The native phrase mode deliberately supplies one escaped literal
+operand, optionally wrapped by the field picker. Field fragments and separate
+article/verse units remain closed scopes; fuzzy matching cannot concatenate them.
+External title values share work/hit budgets and keep their own coordinates.
+Literal index pruning is disabled for approximate requests, including warm-cache
+requests, so spelling variants cannot disappear behind exact candidate filters.
+The decoded text cache keeps its schema; HTML word-boundary metadata uses the projection generation below.
+
+The product matcher is independent of the original Libronix fuzzy implementation;
+original algorithm/ranking equivalence remains a separate evidence requirement.
+
+Rendered HTML supplies validated zero-width lexical breaks at block transitions
+and visible BR elements. Inline markup keeps a continuous word. These breaks
+split only words that the unchanged text-node stream would otherwise join; they
+never add whitespace, shift offsets or count phantom words around existing
+spaces. The reader's text fingerprint stays unchanged. Search transport/cache
+records carry optional sorted, bounded, grapheme-safe offsets, clipped/rebased
+with article/verse scopes. Native projection generation
+`workspace-search-block-boundaries-v5` invalidates older missing-boundary caches;
+old Codable records remain readable with unknown/nil boundary metadata.
+
+
+XHTML and HTML reader responses declare UTF-8 consistently with the checked
+UTF-8 source projection, including documents without a charset declaration.
+This keeps emoji/combining characters and result fingerprints identical in
+search and the actual reader; an encoding mismatch must never apply an offset
+to different displayed text. A real WebKit regression opens the owned XHTML
+fixture and verifies the selected DOM text without a test-side selection call.
+
+Acceptance: 773 tests in 129 suites pass in maintained and public source trees,
+including 16 new test definitions and 256 independent full-matrix oracle cases.
+A separate enabled 64-article LSF/LLS/SQLite/OEB source-field regression passes.
+Installed build 51 verifies exact, near and unrelated phrases, thresholds one
+through three, literal operator text, field notes/titles and exact visible
+selection of the original phrase beside an intact emoji. On real Reina-Valera
+1909, Ge1:1 Body search for `En el principo` returns one hit with one allowed edit
+and zero in Exact mode; all 1189 articles are inspected and 31102 out-of-range
+verses excluded. A read-only SQL/full-matrix oracle independently confirms the
+source phrase and edit distance. Ten original user-state files and the library
+catalog/entries are restored exactly; all 1099 integrity checks across 521
+managed packages pass. Evidence covers the observed Spanish dark native UI.

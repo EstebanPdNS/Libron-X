@@ -1,6 +1,7 @@
 import Foundation
 
 public struct TextSearchOptions: Hashable, Sendable {
+    public var maximumEditDistance: Int
     public var caseSensitive: Bool
     public var diacriticSensitive: Bool
     public var wholeWords: Bool
@@ -12,7 +13,8 @@ public struct TextSearchOptions: Hashable, Sendable {
     public init(caseSensitive: Bool = false, diacriticSensitive: Bool = true,
                 wholeWords: Bool = true, maximumTextUTF16: Int = 16 * 1_024 * 1_024,
                 maximumHits: Int = 10_000, maximumMatchAttempts: Int = 100_000,
-                maximumDocuments: Int = 10_000) {
+                maximumDocuments: Int = 10_000, maximumEditDistance: Int = 0) {
+        self.maximumEditDistance = maximumEditDistance
         self.caseSensitive = caseSensitive
         self.diacriticSensitive = diacriticSensitive
         self.wholeWords = wholeWords
@@ -58,11 +60,15 @@ public struct TextSearchDocumentResult: Hashable, Sendable {
 
 public enum TextSearchError: Error, LocalizedError, Equatable, Sendable {
     case invalidLimits, textLimit, hitLimit, workLimit, documentLimit, duplicateDocumentID(String)
+    case invalidApproximateOperand, approximateTextLimit, invalidLexicalBoundaries
     case verseContextRequired, unsupportedVerseBoundary
     case fieldContextRequired, unsupportedField(SearchField), invalidFieldDirectory, nonPositionalField(SearchField)
 
     public var errorDescription: String? {
         switch self {
+        case .invalidLexicalBoundaries: "Source word boundaries are invalid or exceed the boundary budget."
+        case .invalidApproximateOperand: "Approximate operands must contain more grapheme clusters than the edit limit and at most 256 grapheme clusters."
+        case .approximateTextLimit: "Approximate search supports at most 1048576 UTF-16 units per evaluated article or field value."
         case .invalidLimits: "Search limits must be positive and within the engine's safety bounds."
         case .textLimit: "Document exceeds the UTF-16 text budget."
         case .hitLimit: "Search exceeds the hit budget; no incomplete result is returned."
@@ -85,11 +91,13 @@ public enum TextSearchEngine {
     public static func search(query: SearchQuery, in text: String,
                               options: TextSearchOptions = TextSearchOptions(),
                               verses: [LibrarySearchBibleVerse]? = nil,
-                              fields: SearchFieldDirectory? = nil,
+                              fields: SearchFieldDirectory? = nil, lexicalBreaks: [Int]? = nil,
                               checkCancellation: (@Sendable () throws -> Void)? = nil) throws -> TextSearchResult {
         try validate(options)
+        if options.maximumEditDistance > 0 { try ApproximateTextMatcher.validate(query.expression, distance: options.maximumEditDistance) }
         let length = text.utf16.count
         guard length <= options.maximumTextUTF16 else { throw TextSearchError.textLimit }
+        if options.maximumEditDistance > 0, length > 1_048_576 { throw TextSearchError.approximateTextLimit }
         try Task.checkCancellation()
         try checkCancellation?()
         if query.expression.requiresVerseContext, verses == nil || (verses?.isEmpty == true && !text.isEmpty) { throw TextSearchError.verseContextRequired }
@@ -98,7 +106,8 @@ public enum TextSearchEngine {
             try fields.validate(in: text)
             for field in query.expression.requiredFields where !fields.supports(field) { throw TextSearchError.unsupportedField(field) }
         }
-        var evaluator = try Evaluator(text: text, options: options, verses: verses, fields: fields, checkCancellation: checkCancellation)
+        try validateLexicalBreaks(lexicalBreaks, in: text)
+        var evaluator = try Evaluator(text: text, options: options, verses: verses, fields: fields, lexicalBreaks: lexicalBreaks ?? [], checkCancellation: checkCancellation)
         let outcome = try evaluator.evaluate(query.expression)
         let hits = outcome.matches ? try evaluator.makeHits(outcome.evidence) : []
         let external = outcome.matches ? try evaluator.makeExternalHits(outcome.evidence) : []
@@ -129,8 +138,20 @@ public enum TextSearchEngine {
         return output
     }
 
+    public static func validateLexicalBreaks(_ breaks: [Int]?, in text: String) throws {
+        guard let breaks else { return }
+        guard breaks.count <= 100_000 else { throw TextSearchError.invalidLexicalBoundaries }
+        let source = text as NSString
+        var previous = 0
+        for position in breaks {
+            guard position > previous, position < source.length,
+                  source.rangeOfComposedCharacterSequence(at: position).location == position else { throw TextSearchError.invalidLexicalBoundaries }
+            previous = position
+        }
+    }
+
     private static func validate(_ options: TextSearchOptions) throws {
-        guard options.maximumTextUTF16 > 0, options.maximumTextUTF16 <= 64 * 1_024 * 1_024,
+        guard (0...3).contains(options.maximumEditDistance), options.maximumTextUTF16 > 0, options.maximumTextUTF16 <= 64 * 1_024 * 1_024,
               options.maximumHits > 0, options.maximumHits <= 1_000_000,
               options.maximumMatchAttempts > 0, options.maximumMatchAttempts <= 10_000_000,
               options.maximumDocuments > 0, options.maximumDocuments <= 100_000 else {
@@ -163,6 +184,7 @@ public enum TextSearchEngine {
         let text: NSString
         let options: TextSearchOptions
         let checkCancellation: (@Sendable () throws -> Void)?
+        let lexicalBreaks: [Int]
         let wordStarts: Set<Int>
         let wordEnds: Set<Int>
         var sortedWordStarts: [Int] = []
@@ -178,15 +200,23 @@ public enum TextSearchEngine {
         struct ExternalKey: Hashable { let field: SearchField; let index: Int; let text: String }
         var externalCache: [ExternalKey: [SearchTextRange]] = [:]
 
-        init(text source: String, options: TextSearchOptions, verses: [LibrarySearchBibleVerse]?, fields: SearchFieldDirectory?,
+        init(text source: String, options: TextSearchOptions, verses: [LibrarySearchBibleVerse]?, fields: SearchFieldDirectory?, lexicalBreaks: [Int] = [],
              checkCancellation: (@Sendable () throws -> Void)?) throws {
             text = source as NSString
             self.options = options
             self.fields = fields
             self.checkCancellation = checkCancellation
             let boundaries = try Self.wordBoundaries(source, checkCancellation: checkCancellation)
-            wordStarts = boundaries.starts
-            wordEnds = boundaries.ends
+            let effective = lexicalBreaks.filter { position in
+                guard !boundaries.starts.contains(position), !boundaries.ends.contains(position) else { return false }
+                let index = String.Index(utf16Offset: position, in: source)
+                guard let before = source[..<index].unicodeScalars.last, let after = source[index...].unicodeScalars.first else { return false }
+                func wordPart(_ scalar: Unicode.Scalar) -> Bool { Self.isWordScalar(scalar) || scalar == "'" || scalar == "’" }
+                return wordPart(before) && wordPart(after)
+            }
+            self.lexicalBreaks = effective
+            wordStarts = boundaries.starts.union(effective)
+            wordEnds = boundaries.ends.union(effective)
             if let verses {
                 try BibleVerseText.validate(verses, in: source)
                 var previous: [String:Int] = [:]
@@ -302,7 +332,10 @@ public enum TextSearchEngine {
                     for range in fields?.regions[field] ?? [] {
                         let part = text.substring(with: range.nsRange)
                         let words = try Self.wordBoundaries(part, checkCancellation: checkCancellation)
-                        starts += words.starts.map { $0 + range.location }; ends += words.ends.map { $0 + range.location }
+                        let first = Self.upperBound(lexicalBreaks, range.location), last = Self.lowerBound(lexicalBreaks, range.upperBound)
+                        let inner = lexicalBreaks[first..<last]
+                        starts += Set(words.starts.map { $0 + range.location }).union(inner)
+                        ends += Set(words.ends.map { $0 + range.location }).union(inner)
                     }
                     coordinates = .init(starts: starts.sorted(), ends: ends.sorted())
                     fieldWordCoordinates[field] = coordinates
@@ -344,6 +377,23 @@ public enum TextSearchEngine {
                 guard fields?.supports(field) == true else { throw TextSearchError.unsupportedField(field) }
                 windows = fields?.regions[field] ?? []
             } else { windows = [.init(location: 0, length: text.length)] }
+            if options.maximumEditDistance > 0 {
+                let starts = wordStarts, ends = wordEnds, whole = options.wholeWords
+                let firstIsWord = needle.unicodeScalars.first.map(Self.isWordScalar) ?? false
+                let lastIsWord = needle.unicodeScalars.last.map(Self.isWordScalar) ?? false
+                var ranges: [SearchTextRange] = []
+                for window in windows {
+                    let base = window.location, end = window.upperBound, logical = field != nil
+                    let found = try ApproximateTextMatcher.find(needle, in: text.substring(with: window.nsRange), options: options,
+                        startAllowed: { !whole || !firstIsWord || starts.contains(base + $0) || (logical && $0 == 0) },
+                        endAllowed: { !whole || !lastIsWord || ends.contains(base + $0) || (logical && base + $0 == end) },
+                        work: &attempts, checkCancellation: checkCancellation)
+                    ranges += found.map { .init(location: base + $0.location, length: $0.length) }
+                    guard ranges.count <= options.maximumHits else { throw TextSearchError.hitLimit }
+                }
+                cache[key] = ranges
+                return ranges
+            }
             var comparison: NSString.CompareOptions = []
             if !options.caseSensitive { comparison.insert(.caseInsensitive) }
             if !options.diacriticSensitive { comparison.insert(.diacriticInsensitive) }

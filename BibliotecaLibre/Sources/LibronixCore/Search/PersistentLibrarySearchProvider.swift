@@ -113,7 +113,7 @@ public actor PersistentLibrarySearchProvider: LibrarySearchContentProvider {
         #if canImport(CSQLite)
         // Verse mode must still inspect anchors, including on non-Bible books,
         // so incompatible verse scopes cannot masquerade as complete no-hits.
-        if unit == .article, !query.expression.requiresVerseContext, query.expression.requiredFields.isEmpty, let index = indexes[resource.id] {
+        if options.maximumEditDistance == 0, unit == .article, !query.expression.requiresVerseContext, query.expression.requiredFields.isEmpty, let index = indexes[resource.id] {
             do {
                 if let selected = try index.candidates(query.expression, articles: prepared.articles) {
                     try await source.verifyUnchanged(resource, prepared: prepared)
@@ -283,6 +283,7 @@ private final class SearchIndexDatabase {
         guard PersistentLibrarySearchProvider.digest(data) == String(cString: rawHash) else { throw SearchIndexFailure.corrupt }
         let article = try JSONDecoder().decode(LibrarySearchDecodedArticle.self, from: data)
         try article.fieldDirectory?.validate(in: article.text)
+        try TextSearchEngine.validateLexicalBreaks(article.lexicalBreaks, in: article.text)
         return article
     }
     func write(_ article: LibrarySearchDecodedArticle, ordinal: Int) throws {
