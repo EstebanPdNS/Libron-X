@@ -3,6 +3,14 @@ import Testing
 @testable import LibronixCore
 
 struct BibleReferenceMentionTests {
+    @Test func observedSpanishEfeAbbreviationMatchesEphesiansWithoutChangingSourceSpelling() throws {
+        let text = "😀 Efe 5:8-10; Efesios 5:9; Eph5:10"
+        let found = try BibleReferenceMentions.extract(text)
+        #expect(found.count == 3 && found.first?.label == "Efe 5:8-10")
+        let query = try BibleReferenceQuery.parse("Ef5:9")
+        #expect(found.filter(query.matches).count == 2)
+        #expect(LegacyPassageQuery.parse("Efe5:8")?.sourceBookKey == "eph")
+    }
     private func mentions(_ text: String) throws -> [BibleReferenceMention] { try BibleReferenceMentions.extract(text) }
     @Test func aliasesPunctuationAndOriginalUTF16CoordinatesRemainExact() throws {
         let text = "😀 e\u{301} Véase Jn. 3:16; también John 3.16 y Juan 3,16; Génesis 1:1; Ge\u{301}nesis 1:2."

@@ -14,6 +14,7 @@ struct WorkspaceToolsView: View {
             Divider()
             switch tool {
             case .search: WorkspaceSearchView(workspace: workspace, search: workspace.search)
+            case .referenceSearch: WorkspaceReferenceSearchView(workspace: workspace, search: workspace.referenceSearch)
             case .documents: WorkspaceDocumentsView(workspace: workspace, personal: workspace.personal)
             case .favorites: WorkspaceFavoritesView(workspace: workspace)
             case .information: ResourceInformationView(reader: workspace.activeReader)
@@ -30,6 +31,7 @@ struct WorkspaceToolsView: View {
     private var title: String {
         switch tool {
         case .search: "Buscar"
+        case .referenceSearch: "Buscar referencias bíblicas"
         case .documents: "Documentos de estudio"
         case .favorites: "Favoritos"
         case .information: "Propiedades del recurso"

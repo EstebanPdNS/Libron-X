@@ -183,7 +183,7 @@ import CSQLite
         let root = URL(fileURLWithPath: try #require(ProcessInfo.processInfo.environment["LIBRONX_UNIFIED_SEARCH_CORPUS"]))
         let resources = try LibronCatalog.load(from: root).resources
         let provider = WorkspaceSearchReader()
-        var checked = 0, formats = Set<ResourceFormat>()
+        var checked = 0, mentionCount = 0, formats = Set<ResourceFormat>()
         for resource in resources {
             #expect(await provider.supports(resource))
             let prepared = try await provider.prepare(resource)
@@ -195,19 +195,24 @@ import CSQLite
                     let projection = try await ReaderOEBTextSource.shared.read(book: html.book, path: path, viewport: .init())
                     #expect(decoded.text == projection.text)
                     #expect(decoded.searchRange?.nsRange == projection.articleRanges[descriptor.sectionOrdinal])
+                    #expect(decoded.referenceLinks == projection.referenceLinks)
                 } else {
                     #expect(decoded.text == visible.text && decoded.searchRange == nil)
+                    #expect(decoded.referenceLinks == visible.inlineLinks.compactMap(BibleReferenceSourceLink.init))
                     if resource.format == .eSwordSQLite {
                         #expect(decoded.bibleVerses.count == ReaderBibleIndex(anchors: visible.content?.anchors ?? [], textLength: visible.text.utf16.count).entries.count)
                     } else { #expect(decoded.referenceAnchors == visible.content?.anchors ?? []) }
                 }
+                let mentions = try BibleReferenceMentions.extract(decoded.text, within: decoded.searchRange, links: decoded.referenceLinks ?? [])
+                for mention in mentions { #expect((decoded.text as NSString).substring(with: mention.range.nsRange) == mention.label) }
+                mentionCount += mentions.count
                 checked += 1
             }
             try await provider.verifyUnchanged(resource, prepared: prepared)
             formats.insert(resource.format)
         }
         #expect(resources.count > 0 && checked == resources.count * 2)
-        print("Unified search corpus: \(resources.count) resources, \(checked) first/last article projections, \(formats.count) original formats")
+        print("Unified search corpus: \(resources.count) resources, \(checked) first/last article projections, \(formats.count) original formats, \(mentionCount) reference mentions")
     }
 
     @Test func persistentHTMLAndNativeBibleSearchesKeepIdenticalResultsAfterReopening() async throws {

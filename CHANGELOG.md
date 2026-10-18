@@ -5,6 +5,7 @@
 - Search the managed library with persistent source-bound indexes.
 - Organize mixed resources in persistent manual collections.
 - Configure resource priorities and resolve Bible, commentary and word links.
+- Find edition-aware Bible references in resources and personal study documents.
 
 ## v0.3 — 2026-10-17
 

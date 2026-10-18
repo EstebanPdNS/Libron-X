@@ -199,7 +199,7 @@ public struct LegacyPassageQuery: Sendable, Codable, Equatable {
         ("1co", ["1co", "1cor", "1corinthians", "1corintios", "i corintios"]),
         ("2co", ["2co", "2cor", "2corinthians", "2corintios", "ii corintios"]),
         ("ga", ["ga", "gal", "galatians", "gálatas"]),
-        ("eph", ["eph", "ef", "ephes", "ephesians", "efesios"]),
+        ("eph", ["eph", "ef", "efe", "ephes", "ephesians", "efesios"]),
         ("php", ["php", "phil", "philip", "philippians", "fil", "filipenses"]),
         ("col", ["col", "colossians", "colosenses"]),
         ("1th", ["1th", "1thess", "1thessalonians", "1ts", "1tes", "1tesalonicenses", "i tesalonicenses"]),

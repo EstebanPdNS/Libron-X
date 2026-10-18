@@ -35,11 +35,14 @@ enum PaneArrangement { case cascade, horizontal, vertical }
     var referenceTargetID: UUID?
     var pendingLibraryReference: String?
     var pendingNoteID: UUID?
+    var personalSearchDestination: BibleReferencePersonalDestination?
+    var personalNavigationID = UUID()
     var activeTool: WorkspaceTool?
     var showsHome = false
     var snapPreview: PaneFrame?
     var dictionary = DictionaryController()
     var search = WorkspaceSearchController()
+    var referenceSearch = WorkspaceReferenceSearchController()
     var personal: WorkspacePersonalState
     var resourceVisibility: LibraryResourceVisibility
     var availableBibleVersions: [LibraryResource] = []
@@ -151,6 +154,7 @@ enum PaneArrangement { case cascade, horizontal, vertical }
         // Invalidate results from the old scope before accepting another search.
         search.cancel()
         keyLinks.clear()
+        referenceSearch.clear()
         search.report = nil; search.progress = nil; search.error = nil
         if !availableResources.contains(where: { $0.id == search.resourceID }) { search.resourceID = nil }
         if !availableResources.contains(where: { $0.id == librarySelection }) { librarySelection = nil }
@@ -282,6 +286,7 @@ enum PaneArrangement { case cascade, horizontal, vertical }
         bibleVersionTask?.cancel()
         search.cancel()
         keyLinks.cancel()
+        referenceSearch.cancel()
         do { try personal.save() } catch { self.error = error.localizedDescription }
         closeAll(); importGeneration += 1; importTask?.cancel(); isImporting = false
         for url in accessURLs { url.stopAccessingSecurityScopedResource() }

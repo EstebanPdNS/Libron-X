@@ -1,6 +1,6 @@
-# Reference mention search core — integration pending
+# Reference mention search
 
-Status: implementation preparation for `study-expansion-search-07`. The feature remains unchecked. The installed v0.3.0 build 34 is unchanged; these source changes do not add a native command or publish a new release.
+Status: native product implementation for `study-expansion-search-07`, verified on macOS in installed v0.3.0 build 37. The search is available from **Search → Find Bible references**. It is the fifth verified feature assigned to v0.4; no new release is published until that version’s full feature gate passes.
 
 ## Extraction and query contract
 
@@ -16,7 +16,7 @@ Limits: 4096 UTF-16 units per query, 16 million per article projection, 256 span
 
 `BibleReferenceSearchService` scans source-bound reader projections and immutable personal-document fields. It does not prune normalized reference matches using a literal word index. Results retain the source mention, a bounded snippet and either an existing reader-search destination or the personal document/entry/field identity.
 
-Personal fields remain separate, so a title ending in a book name cannot join a body beginning with numbers. Their destination retains both a text hash and a projection hash covering the visible text and explicit link targets. Editing an invisible hyperlink destination therefore invalidates an old result even when its label is unchanged. The owning editor must supply the same projection it renders and verify these fingerprints before navigation.
+Personal fields remain separate, so a title ending in a book name cannot join a body beginning with numbers. Their destination retains both a text hash and a projection hash covering the visible text and explicit link targets. Editing an invisible hyperlink destination therefore invalidates an old result even when its label is unchanged. The owning editor supplies the same projection it renders and verifies these fingerprints before navigation. Notebook titles, note titles, current plain/HTML note bodies, explicit note-anchor references and verse-list entries remain independent fields. HTML uses the editor's inert `NoteHTMLProjection`; adjacent formatting spans with the same explicit citation retain one link. Saved RTF that the current editor does not render is disclosed as incomplete coverage rather than silently indexed. That representation belongs to the separate rich-note editor work.
 
 Personal snapshots are examined first and report their field progress separately from book article counters. Article, result, occurrence and duration limits report partial coverage. Failed/unsupported resources, incomplete personal projections and field failures remain visible. Cancellation and source changes propagate; final progress callbacks cannot conceal a changed source. `LibrarySearchDecodedArticle.referenceLinks` is optional so existing text-only cache records remain decodable. `LibrarySearchPreparedResource.projectionVersion` binds the producer contract into the persistent index identity: an older text-only projection is invalidated even when the source files have not changed.
 
@@ -26,14 +26,18 @@ The portable legacy adapter and the native workspace adapter supply checked `Leg
 
 The HTML bridge collects raw `href` and `lbxrt:xref` attributes across the same visible DOM text nodes used for reader selection. Hidden nodes have no coordinates, labels split by inline formatting retain one span, and external URLs are rejected by reference parsing. The source attributes remain inert. Shared-page article ownership still applies. The workspace projection version is `workspace-reference-links-v2`; the portable legacy version is `core-legacy-reference-links-v1`.
 
-## Verification and remaining work
+## Native interaction and verification
 
-The host regression run passes 679 tests in 112 suites. New tests cover citation spellings, ranges, editions, original wire IDs, Unicode, article boundaries, typed-label conflicts, long streams, cache compatibility, personal projection identity, error/budget behavior, cancellation and changes during final progress. Authored raw and normalized OEB cases verify DOM link ranges, hidden nodes, external URLs, exact reader selection and persistent-cache reopening. A separate cache-upgrade test changes only the producer projection version, confirms the old text-only row is replaced, and then reads the new link projection with source reads deliberately blocked.
+The dedicated search retains the existing basic, Bible-text and topic commands. Users choose one resource or the whole visible managed library and can include personal documents. Search snapshots are immutable, personal projection work runs off the main executor, progress separates articles from personal fields, and cancellation/superseding requests cannot publish stale reports. Empty resource selections are explicit errors.
 
-Before accepting the complete feature:
+Book results use the reader's source stamps, full-projection text hash and exact UTF-16 selection. Personal results verify the document/entry/field identity and both fingerprints, select the correct note or verse entry, and show the matching citation above the editor. They do not claim a programmatic selection inside the current SwiftUI text editor. Stale personal results show an error inside the search tool and can be refreshed there; they do not create an alert behind the modal sheet. Original documents, imported XML and HTML are preserved.
 
-- Extend authored reader-link evidence to the managed original corpus, including format-specific destination dialects and unresolved source-index cases.
-- Project every supported personal-document field using the current editor's actual text and link semantics; retain explicit unsupported-field reporting.
-- Add source-checked document/entry navigation and reader selection through the native interface, preserving existing search commands.
-- Verify positive/negative, edition and source-change cases on installed native workflows and the managed resource corpus.
-- Keep unsupported canon ordering and full original-engine equivalence separate from scoped recognition evidence.
+The regression run passes **686 tests in 114 suites**. Authored cases cover reference spelling, ranges, explicit editions, original wire IDs, Unicode, logical article boundaries, typed-label conflicts, long streams, old-cache migration, source changes, personal field isolation, invisible destination edits, cancellation and query replacement. DOM tests cover raw and normalized OEB projections, hidden text, external links, exact reader selection and cache reopening with source reads deliberately blocked. All ten interface-language catalogs contain the new controls and matching placeholders.
+
+The private managed-corpus run checks **521 resources**, **1042 first/last article projections**, **14504 recognized mentions**, and **62 checked Bible destinations in 50 linked note articles from five original resources**. These are stated sample scopes, not an exhaustive comparison of every article with the original engine. All **1099 payload/index/normalized-content integrity checks** pass.
+
+Installed native checks across builds 35–37 verify the menu, document-only results, explicit-edition positive/negative cases, HTML note opening, verse-entry selection, normal-restart persistence, source-change rejection and recovery. Build 36 verifies real resource matches for the observed Spanish `Efe` abbreviation; build 37 verifies the final inline stale-result error. The same source/core regression tests pass on the final build. Temporary acceptance documents were kept privately, and all ten original personal/workspace state files were restored byte for byte.
+
+## Deliberate boundaries
+
+This feature recognizes explicit references under the grammar above. It does not convert versification between editions or close the separate original action-registry/search-engine parity gates. Unsupported cross-canon ordering remains rejected. The native walkthrough observed the current dark Spanish interface; light/RTL/older-macOS rendering was not manually observed in this acceptance run.

@@ -19,7 +19,7 @@ A feature counts only when its complete behavior is implemented and verified. Ea
 - [x] Persistent search indexes.
 - [x] General resource collections.
 - [x] Resource priorities and key links.
-- [ ] Bible reference search.
+- [x] Bible reference search.
 - [ ] Configurable Bible search ranges.
 - [ ] Collection and open-resource search scopes.
 - [ ] Rule-based collections.

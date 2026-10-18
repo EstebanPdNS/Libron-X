@@ -60,4 +60,4 @@ Manual resource collections use separate validated, atomic app-owned state. See 
 
 Resource priorities keep promoted order, enabled flags and per-datatype opening counts in independent owned state. See [key-link resolution and persistence](../BibliotecaLibre/docs/resource-priorities.md).
 
-Reference-mention extraction and search are being integrated. See [the core contract and remaining native gates](../BibliotecaLibre/docs/reference-mention-search.md); the feature is still unchecked.
+Reference-mention search spans reader projections and personal documents. See [the query, projection and native acceptance contract](../BibliotecaLibre/docs/reference-mention-search.md); original-engine equivalence remains a separate gate.

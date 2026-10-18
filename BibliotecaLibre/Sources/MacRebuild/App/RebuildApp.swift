@@ -150,6 +150,7 @@ struct RebuildCommands: Commands {
         CommandMenu(L("Buscar")) {
             Button(L("Búsqueda básica…"), action: workspace.beginSearch).keyboardShortcut("f", modifiers: [.command, .shift])
             Button(L("Búsqueda bíblica…")) { workspace.search.bibleVerses = true; workspace.beginSearch() }
+            Button(L("Buscar referencias bíblicas…")) { workspace.beginReferenceSearch() }
             Button(L("Explorador temático…")) { workspace.activeTool = .topics }
         }
         CommandMenu(L("Favoritos")) {
