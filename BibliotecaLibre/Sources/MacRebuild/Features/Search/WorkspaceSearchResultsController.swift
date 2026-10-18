@@ -70,8 +70,8 @@ struct WorkspaceSearchResultSection: Identifiable {
     var selected: WorkspaceSearchResultRow? { selectedIndex.map { rows[$0] } }
     var canNext: Bool { !rows.isEmpty && (selectedIndex ?? -1) < rows.count - 1 }
     var canPrevious: Bool { !rows.isEmpty && (selectedIndex ?? rows.count) > 0 }
-    func setResults(_ value: [LibrarySearchResult]) {
-        results = value; selectedID = nil; rebuild()
+    func setResults(_ value: [LibrarySearchResult], preserveSelection: Bool = false) {
+        results = value; if !preserveSelection { selectedID = nil }; rebuild()
     }
     func next() { move(1) }
     func previous() { move(-1) }

@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Stream search results with cooperative pause/resume, cancellation, adjustable limits and stale-result guards.
+
 - Browse every retained search occurrence with aligned context, resource grouping, configurable order and next/previous selection.
 
 - Find approximate literal phrases with selectable edit limits, source-accurate Unicode selection and explicit coverage.

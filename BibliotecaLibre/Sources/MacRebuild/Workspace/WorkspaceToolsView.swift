@@ -62,13 +62,18 @@ struct WorkspaceSearchView: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 TextField(L(search.approximatePhrase ? "Frase literal" : "Palabra, frase entre comillas o consulta AND / OR"), text: $search.query).macInputStyle()
-                    .onSubmit(run)
-                if search.isSearching { Button(L("Cancelar"), action: search.cancel) }
+                    .onSubmit(run).disabled(search.isSearching)
+                if search.isSearching {
+                    if search.phase == .paused { Button(L("Reanudar"), action: search.resume) }
+                    else { Button(L("Pausar"), action: search.pause).disabled(search.phase != .running) }
+                    Button(L("Cancelar"), action: search.cancel).disabled(search.phase == .cancelling)
+                }
                 else { Button(L("Buscar"), action: run).disabled(search.query.isEmpty) }
             }
             WorkspaceSearchScopePicker(selection: search.scope, context: workspace.searchScopeContext()).disabled(search.isSearching)
             WorkspaceSearchFieldPicker(field: $search.searchField).disabled(search.isSearching)
             WorkspaceSearchMatchingPicker(search: search).disabled(search.isSearching)
+            WorkspaceSearchLimitsView(search: search)
             if search.bibleVerses {
                 VStack(alignment: .leading, spacing: 8) {
                     Picker(L("Rango bíblico"), selection: $search.bibleRangeMode) {
@@ -109,8 +114,13 @@ struct WorkspaceSearchView: View {
                     ScrollView { Text(scope.issueLines.joined(separator: "\n")).font(.caption).textSelection(.enabled) }.frame(maxHeight: 100)
                 }
             }
-            if search.isSearching {
-                HStack { ProgressView().controlSize(.small); Text(LF("{count} artículos examinados", ["count": String(search.progress?.counters.articlesExamined ?? 0)])) }
+            WorkspaceSearchRunStatusView(search: search)
+            if let query = search.submittedQuery, search.report != nil {
+                Text(LF("Resultados de: {query}", ["query": query])).font(.caption).lineLimit(2)
+            }
+            if search.configurationChanged {
+                Text(L("La configuración cambió. Ejecuta una búsqueda nueva para abrir estos resultados."))
+                    .font(.caption).foregroundStyle(.secondary)
             }
             WorkspaceSearchResultsView(workspace: workspace, search: search, presentation: search.presentation)
             if let report = search.report {
@@ -123,13 +133,13 @@ struct WorkspaceSearchView: View {
                 if !search.coverageComplete {
                     DisclosureGroup(L("La búsqueda tiene resultados parciales o recursos pendientes")) {
                         ScrollView {
-                            Text(((search.scopeSnapshot?.issueLines ?? []) + [report.limitReason.map { "Se alcanzó el límite de \($0.rawValue)." }].compactMap { $0 } + report.resourceReports.filter { $0.status != .complete }.map { "\($0.resourceTitle): \($0.warnings.joined(separator: " ")) \($0.errors.map(\.message).joined(separator: " "))" }).joined(separator: "\n"))
+                            Text(((search.scopeSnapshot?.issueLines ?? []) + [report.limitReason.map { LF("Se alcanzó el límite de {limit}.", ["limit": $0.localizedTitle]) }].compactMap { $0 } + report.resourceReports.filter { $0.status != .complete }.map { "\($0.resourceTitle): \($0.warnings.joined(separator: " ")) \($0.errors.map(\.message).joined(separator: " "))" }).joined(separator: "\n"))
                                 .font(.caption).textSelection(.enabled).frame(maxWidth: .infinity, alignment: .leading)
                         }.frame(maxHeight: 100)
                     }
                 }
             }
-        }.padding(16).onDisappear(perform: search.cancel)
+        }.padding(16).onDisappear(perform: search.pause)
     }
 }
 

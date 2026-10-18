@@ -26,6 +26,18 @@ public struct LibrarySearchBudget: Hashable, Sendable {
     }
 }
 
+public extension LibrarySearchBudget {
+    func validate() throws {
+        guard maximumDurationSeconds.isFinite, maximumDurationSeconds > 0, maximumDurationSeconds <= 3_600,
+              maximumArticles > 0, maximumArticles <= 500_000,
+              maximumResults > 0, maximumResults <= 10_000,
+              maximumOccurrences > 0, maximumOccurrences <= 1_000_000,
+              snippetUTF16 > 0, snippetUTF16 <= 4_096,
+              maximumContextUTF16 >= 0, maximumContextUTF16 <= 64 * 1024 * 1024,
+              progressBatchSize > 0, progressBatchSize <= 10_000 else { throw LibrarySearchError.invalidBudget }
+    }
+}
+
 public enum LibrarySearchLimit: String, Sendable, Codable {
     case duration, articles, results, occurrences
 }
@@ -154,6 +166,7 @@ public struct LibrarySearchProgress: Sendable {
 }
 
 public struct LibrarySearchReport: Sendable {
+    public var runState = LibrarySearchRunState.finished
     public var bibleRange: BibleSearchRange? = nil
     public let unit: LibrarySearchUnit
     public let results: [LibrarySearchResult]
@@ -171,13 +184,14 @@ public struct LibrarySearchReport: Sendable {
 }
 
 public enum LibrarySearchError: Error, LocalizedError, Equatable, Sendable {
-    case invalidBudget
+    case invalidBudget, resumeSourceChanged
     case duplicateResourceID(String)
     case invalidArticleDirectory
     case invalidVerseDirectory
 
     public var errorDescription: String? {
         switch self {
+        case .resumeSourceChanged: "Search sources changed or could not be verified after pausing. Start a new search before opening these results."
         case .invalidBudget: "Los presupuestos de búsqueda deben ser positivos y estar dentro de los límites seguros."
         case let .duplicateResourceID(id): "El ámbito contiene dos veces el mismo recurso: \(id)."
         case .invalidArticleDirectory: "El proveedor de texto devolvió artículos duplicados o posiciones inválidas."

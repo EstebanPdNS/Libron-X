@@ -7,11 +7,12 @@ struct WorkspaceSearchResultsView: View {
     @Bindable var presentation: WorkspaceSearchResultsController
     @FocusState private var listFocused: Bool
     private func open(_ row: WorkspaceSearchResultRow) {
+        guard search.canOpenResults else { return }
         presentation.selectedID = row.id
         workspace.openSearchResult(row.result, scope: search.scopeSnapshot, focus: row.focus)
     }
     private func openSelected() -> KeyPress.Result {
-        guard let row = presentation.selected else { return .ignored }
+        guard search.canOpenResults, let row = presentation.selected else { return .ignored }
         open(row); return .handled
     }
     var body: some View {
@@ -43,7 +44,7 @@ struct WorkspaceSearchResultsView: View {
                     Text(LF("Resultado {current} de {total}", ["current": String((presentation.selectedIndex ?? -1) + 1), "total": String(presentation.rows.count)]))
                         .font(.caption).monospacedDigit()
                     Spacer()
-                    Button(L("Abrir selección")) { _ = openSelected() }.disabled(presentation.selected == nil)
+                    Button(L("Abrir selección")) { _ = openSelected() }.disabled(presentation.selected == nil || !search.canOpenResults)
                 }
             }
             ScrollViewReader { proxy in
@@ -69,7 +70,7 @@ struct WorkspaceSearchResultsView: View {
     }
     @ViewBuilder private func rows(_ value: [WorkspaceSearchResultRow]) -> some View {
         ForEach(value) { row in
-            WorkspaceSearchResultRowView(row: row, layout: presentation.layout, showsResource: presentation.grouping == .none) { open(row) }
+            WorkspaceSearchResultRowView(row: row, layout: presentation.layout, showsResource: presentation.grouping == .none, openingEnabled: search.canOpenResults) { open(row) }
                 .tag(row.id).id(row.id)
                 .contentShape(Rectangle()).onTapGesture(count: 2) { open(row) }
                 .accessibilityAction(named: Text(L("Abrir"))) { open(row) }
@@ -81,6 +82,7 @@ private struct WorkspaceSearchResultRowView: View {
     let row: WorkspaceSearchResultRow
     let layout: WorkspaceSearchResultLayout
     let showsResource: Bool
+    let openingEnabled: Bool
     let open: () -> Void
     var body: some View {
         HStack {
@@ -99,7 +101,7 @@ private struct WorkspaceSearchResultRowView: View {
                     Text(L(row.result.hitCount > 0 ? "Coincidencias omitidas por el límite" : "Resultado sin coincidencias positivas")).font(.caption)
                 } else { Text(L("Contexto no disponible")).foregroundStyle(.secondary) }
             }.padding(.vertical, 4).frame(maxWidth: .infinity, alignment: .leading)
-            Button(L("Abrir"), action: open)
+            Button(L("Abrir"), action: open).disabled(!openingEnabled)
         }
     }
     private func context(_ parts: WorkspaceSearchContextParts) -> AttributedString {

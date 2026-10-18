@@ -305,3 +305,43 @@ SQLite and the reader display-prefix contract. Negative-only and empty result
 states pass native checks. Ten original state files and catalog/entry set are
 restored exactly; all 1099 integrity checks across 521 managed packages pass.
 Native visual evidence covers observed Spanish dark appearance only.
+
+## Long-running managed search (bounded acceptance)
+
+Each execution owns an isolated actor accumulator and a cooperative control gate.
+Running snapshots publish retained results at bounded batches; only a finished,
+source-verified report can claim complete coverage. Paused, cancelled and failed
+snapshots remain partial. The original single-progress-callback API remains
+compatible, including trailing closures.
+
+Pause waits for the current article or verse boundary and suspends the same scan
+stack. Acknowledged pause time is excluded from the elapsed-time budget; active
+time includes source I/O and callbacks. Resume verifies every prepared source
+before continuing. A changed or unverifiable source fails explicitly and blocks
+opening results. Cancellation wakes a suspended gate and preserves committed
+results. This is session-only continuation: no restart cursor is persisted.
+
+The native controller freezes submitted query/options and limits while active.
+Generation tokens reject callbacks from superseded runs. Incremental result
+presentation retains the selected occurrence. Closing the search tool requests
+pause. Editing the query or limits after termination marks retained results stale
+and blocks opening until a fresh run. Existing source fingerprint and occurrence
+validation still apply when opening valid results.
+
+Duration, article, result-unit and occurrence limits are adjustable before each
+run and validated before source preparation. Reaching a limit finishes a partial
+report with its explicit reason. Increasing the limit requires a new search;
+finished limited scans cannot resume. Resource/source coverage and context
+omissions remain independently visible.
+
+Acceptance: 795 tests in 133 suites pass, including 11 new definitions covering
+pause/resume without duplicate reads, excluded pause time, both cancellation
+paths, source mutation during pause, limits, stale generations and selection.
+Installed build 53 verifies progressive search across 533 resources, stable
+acknowledged pause at 816 articles / 5.9 active seconds, continuation to 1389 /
+11.6 seconds, cancellation with retained results, two- and five-result limits,
+invalid-zero rejection, and stale-query opening guards. A finished Reina-Valera
+1909 body search for whole-word `Dios` scans 1189 chapters, returns 879 matching
+chapters and 4122 occurrences: an independent read-only SQLite/HTMLParser/Unicode
+regex oracle agrees exactly. Native visual evidence covers observed Spanish dark
+appearance. Full original Libronix search equivalence remains unproven.
