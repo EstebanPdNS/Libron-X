@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- Search the managed library with persistent source-bound indexes.
+- Organize mixed resources in persistent manual collections.
+- Configure resource priorities and resolve Bible, commentary and word links.
+
 ## v0.3 — 2026-10-17
 
 - Use standard reader panes for dictionaries.

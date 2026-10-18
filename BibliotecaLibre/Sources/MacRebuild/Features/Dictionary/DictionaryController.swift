@@ -68,7 +68,16 @@ struct DictionaryMatch: Identifiable {
             reader.error = nil; reader.isLoading = true
         }
         let language = workspace.activeReader?.resource.languages.first.map(LibraryLanguages.canonical) ?? "es"
-        let dictionaries = dictionaries(in: workspace).sorted { a, b in
+        func priorityScope(_ resource: LibraryResource) -> KeyLinkScope {
+            .init(kind: LibronMetadata.deriving(resource).resourceType == "Léxico" ? .lexicon : .dictionary, language: language)
+        }
+        let dictionaries = dictionaries(in: workspace).filter {
+            $0.id == preferredID || workspace.resourcePriorities.enabled($0, in: priorityScope($0))
+        }.sorted { a, b in
+            if (a.id == preferredID) != (b.id == preferredID) { return a.id == preferredID }
+            let aPriority = workspace.resourcePriorities.rank(a, in: priorityScope(a)) ?? Int.max
+            let bPriority = workspace.resourcePriorities.rank(b, in: priorityScope(b)) ?? Int.max
+            if aPriority != bPriority { return aPriority < bPriority }
             func rank(_ r: LibraryResource) -> Int {
                 if r.id == preferredID { return 0 }
                 let languages = r.languages.map(LibraryLanguages.canonical)

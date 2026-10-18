@@ -157,6 +157,7 @@ struct RebuildCommands: Commands {
             Button(L("Organizar favoritos…")) { workspace.activeTool = .favorites }
         }
         CommandMenu(L("Herramientas")) {
+            Button(L("Enlaces clave…")) { workspace.activeTool = .keyLinks }
             Button(L("Diccionarios")) { workspace.dictionary.openInside(workspace: workspace) }
             Button(L("Copiar versículos bíblicos…")) { workspace.activeTool = .bibleCopy }
             Button(L("Documentos de estudio…")) { workspace.activeTool = .documents }

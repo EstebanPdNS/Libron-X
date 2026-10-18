@@ -43,6 +43,8 @@ enum PaneArrangement { case cascade, horizontal, vertical }
     var personal: WorkspacePersonalState
     var resourceVisibility: LibraryResourceVisibility
     var availableBibleVersions: [LibraryResource] = []
+    var resourcePriorities: ResourcePriorities
+    var keyLinks = KeyLinkController()
     var collections: LibraryCollections
     var parallelBibleSets: ParallelBibleSets
     var recentWorkspaces: RecentWorkspaces
@@ -52,9 +54,10 @@ enum PaneArrangement { case cascade, horizontal, vertical }
     @ObservationIgnored private var importTask: Task<Void, Never>?
     @ObservationIgnored private var importGeneration = 0
     @ObservationIgnored private var accessURLs: [URL] = []
-    init(personal: WorkspacePersonalState? = nil, resourceVisibility: LibraryResourceVisibility? = nil, recentWorkspaces: RecentWorkspaces? = nil, parallelBibleSets: ParallelBibleSets? = nil, collections: LibraryCollections? = nil) {
+    init(personal: WorkspacePersonalState? = nil, resourceVisibility: LibraryResourceVisibility? = nil, recentWorkspaces: RecentWorkspaces? = nil, parallelBibleSets: ParallelBibleSets? = nil, collections: LibraryCollections? = nil, resourcePriorities: ResourcePriorities? = nil) {
         self.personal = personal ?? WorkspacePersonalState()
         self.resourceVisibility = resourceVisibility ?? LibraryResourceVisibility()
+        self.resourcePriorities = resourcePriorities ?? ResourcePriorities()
         self.collections = collections ?? LibraryCollections()
         self.parallelBibleSets = parallelBibleSets ?? ParallelBibleSets()
         self.recentWorkspaces = recentWorkspaces ?? RecentWorkspaces()
@@ -146,7 +149,9 @@ enum PaneArrangement { case cascade, horizontal, vertical }
     }
     private func libraryVisibilityChanged() {
         // Invalidate results from the old scope before accepting another search.
-        search.cancel(); search.report = nil; search.progress = nil; search.error = nil
+        search.cancel()
+        keyLinks.clear()
+        search.report = nil; search.progress = nil; search.error = nil
         if !availableResources.contains(where: { $0.id == search.resourceID }) { search.resourceID = nil }
         if !availableResources.contains(where: { $0.id == librarySelection }) { librarySelection = nil }
     }
@@ -159,8 +164,8 @@ enum PaneArrangement { case cascade, horizontal, vertical }
         showsHome = false
         readers.removeAll { $0 === reader }; readers.append(reader)
     }
-    @discardableResult func open(_ resource: LibraryResource, startReading: Bool = true, destination: ReaderDestination? = nil) -> ReaderSession {
-        let reader = ReaderSession(resource: resource)
+    @discardableResult func open(_ resource: LibraryResource, startReading: Bool = true, destination: ReaderDestination? = nil, loader: ReaderSession.Loader? = nil) -> ReaderSession {
+        let reader = ReaderSession(resource: resource, loader: loader ?? ReaderSession.read)
         showsHome = false
         connect(reader)
         let offset = Double(readers.count % 6) * 0.035
@@ -276,6 +281,7 @@ enum PaneArrangement { case cascade, horizontal, vertical }
     func shutdown() {
         bibleVersionTask?.cancel()
         search.cancel()
+        keyLinks.cancel()
         do { try personal.save() } catch { self.error = error.localizedDescription }
         closeAll(); importGeneration += 1; importTask?.cancel(); isImporting = false
         for url in accessURLs { url.stopAccessingSecurityScopedResource() }

@@ -183,6 +183,53 @@ public enum ESwordResource {
         let code = (1...bookCodes.count).contains(book) ? bookCodes[book - 1] : book == 78 ? "PrMan" : "Book \(book)"
         return code + " \(chapter)" + (verse.map { ":\($0)" } ?? "")
     }
+    /// Resolve a typed Bible key against fixed SQLite schemas. Commentary
+    /// ranges are source rows, never inferred from display titles or body text.
+    public static func referenceOrdinal(_ url: URL, reference query: String, endReference: String? = nil) throws -> Int? {
+        guard let first = LegacyPassageQuery.sourceReference(query),
+              let last = LegacyPassageQuery.sourceReference(endReference ?? query),
+              first.sourceBookKey == last.sourceBookKey,
+              (first.chapter, first.verse) <= (last.chapter, last.verse) else { return nil }
+        let db = try Database(url), kind = try db.kind()
+        func isBook(_ number: Int) -> Bool {
+            LegacyPassageQuery.sourceReference(reference(number, 1, 1))?.sourceBookKey == first.sourceBookKey
+        }
+        if kind == "Bible" {
+            let chapters = try db.rows("SELECT DISTINCT Book,Chapter FROM Bible ORDER BY Book,Chapter")
+            for (index, row) in chapters.enumerated() {
+                try Task.checkCancellation()
+                guard row.count == 2, let book = Int(row[0]), let chapter = Int(row[1]) else { throw LibronError.invalid("Invalid Bible reference directory") }
+                if isBook(book), chapter == first.chapter,
+                   try !db.rows("SELECT Verse FROM Bible WHERE Book=? AND Chapter=? AND Verse=?", integers:[book,chapter,first.verse]).isEmpty { return index }
+            }
+            return nil
+        }
+        guard kind == "VerseCommentary" else { return nil }
+        let books = try db.rows("SELECT rowid,Book FROM BookCommentary ORDER BY Book,rowid")
+        let chapters = try db.rows("SELECT rowid,Book,Chapter FROM ChapterCommentary ORDER BY Book,Chapter,rowid")
+        let verses = try db.rows("SELECT rowid,Book,ChapterBegin,VerseBegin,ChapterEnd,VerseEnd FROM VerseCommentary ORDER BY Book,ChapterBegin,VerseBegin,rowid")
+        var best: (ordinal: Int, span: Int)?
+        for (index, row) in verses.enumerated() {
+            try Task.checkCancellation()
+            guard row.count == 6, let book = Int(row[1]), let a = Int(row[2]), let b = Int(row[3]), let c = Int(row[4]), let d = Int(row[5]),
+                  a > 0, b > 0, c > 0, d > 0, a <= 1_000_000, c <= 1_000_000, b <= 1_000_000, d <= 1_000_000,
+                  (a,b) <= (c,d) else { throw LibronError.invalid("Invalid commentary reference directory") }
+            if isBook(book), (a,b) <= (first.chapter,first.verse), (last.chapter,last.verse) <= (c,d) {
+                let span = (c-a) * 1_000_001 + d-b
+                if best == nil || span < best!.span { best = (books.count + chapters.count + index,span) }
+            }
+        }
+        if let best { return best.ordinal }
+        for (index,row) in chapters.enumerated() {
+            guard row.count == 3, let book = Int(row[1]), let chapter = Int(row[2]) else { throw LibronError.invalid("Invalid commentary chapter directory") }
+            if isBook(book), chapter == first.chapter, chapter == last.chapter { return books.count + index }
+        }
+        for (index,row) in books.enumerated() {
+            guard row.count == 2, let book = Int(row[1]) else { throw LibronError.invalid("Invalid commentary book directory") }
+            if isBook(book) { return index }
+        }
+        return nil
+    }
     public static func page(_ url: URL, ordinal: Int, reference query: String? = nil) throws -> ESwordPage {
         try page(Database(url),ordinal:ordinal,reference:query)
     }
@@ -221,9 +268,9 @@ public enum ESwordResource {
         case "Reference": directory = try db.rows("SELECT rowid,Chapter FROM Reference ORDER BY rowid"); bodySQL = "SELECT Content FROM Reference WHERE rowid=?"
         default:
             // Retain book/chapter introductions, not only verse commentaries.
-            let book = try db.rows("SELECT rowid,Book FROM BookCommentary ORDER BY Book").map { ["B" + $0[0], "Book " + $0[1]] }
-            let chapters = try db.rows("SELECT rowid,Book,Chapter FROM ChapterCommentary ORDER BY Book,Chapter").map { ["C" + $0[0], reference(Int($0[1]) ?? 0, Int($0[2]) ?? 0)] }
-            let verses = try db.rows("SELECT rowid,Book,ChapterBegin,VerseBegin,ChapterEnd,VerseEnd FROM VerseCommentary ORDER BY Book,ChapterBegin,VerseBegin").map { row in
+            let book = try db.rows("SELECT rowid,Book FROM BookCommentary ORDER BY Book,rowid").map { ["B" + $0[0], "Book " + $0[1]] }
+            let chapters = try db.rows("SELECT rowid,Book,Chapter FROM ChapterCommentary ORDER BY Book,Chapter,rowid").map { ["C" + $0[0], reference(Int($0[1]) ?? 0, Int($0[2]) ?? 0)] }
+            let verses = try db.rows("SELECT rowid,Book,ChapterBegin,VerseBegin,ChapterEnd,VerseEnd FROM VerseCommentary ORDER BY Book,ChapterBegin,VerseBegin,rowid").map { row in
                 ["V" + row[0], reference(Int(row[1]) ?? 0, Int(row[2]) ?? 0, Int(row[3]) ?? 0) + "–" + row[4] + ":" + row[5]]
             }
             directory = book + chapters + verses; bodySQL = ""
@@ -237,6 +284,7 @@ public enum ESwordResource {
         return ESwordPage(ordinal: ordinal, entries: [.init(title: row[1], body: body, reference: nil)], contents: directory.map { $0[1] })
     }
     #else
+    public static func referenceOrdinal(_ url: URL, reference: String, endReference: String? = nil) throws -> Int? { throw LibronError.invalid("SQLite reader unavailable on this platform") }
     public static func audit(_ url: URL) throws -> ImportFormattingAudit { throw LibronError.invalid("SQLite importer unavailable on this platform") }
     public static func inspect(_ url: URL) throws -> LibraryResource { throw LibronError.invalid("SQLite importer unavailable on this platform") }
     public static func page(_ url: URL, ordinal: Int, reference: String? = nil) throws -> ESwordPage { throw LibronError.invalid("SQLite reader unavailable on this platform") }

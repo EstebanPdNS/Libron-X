@@ -22,6 +22,7 @@ struct WorkspaceToolsView: View {
             case .bibleCopy: BibleCopyToolView(workspace: workspace)
             case .windows: WorkspaceWindowsView(workspace: workspace)
             case .parallelSets: ParallelBibleSettingsView(workspace: workspace)
+            case .keyLinks: KeyLinkView(workspace: workspace, controller: workspace.keyLinks)
             }
         }.frame(minWidth: tool == .information ? 700 : 680, idealWidth: tool == .information ? 700 : 820, minHeight: tool == .information ? nil : 520, idealHeight: tool == .information ? nil : 620)
             .modifier(MacPanelControlPresentation())
@@ -37,6 +38,7 @@ struct WorkspaceToolsView: View {
         case .bibleCopy: "Copiar versículos bíblicos"
         case .windows: "Ventanas"
         case .parallelSets: "Grupos de Biblias paralelas"
+        case .keyLinks: "Enlaces clave"
         }
     }
 }

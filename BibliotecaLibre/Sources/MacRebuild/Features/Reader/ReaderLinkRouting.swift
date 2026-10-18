@@ -16,8 +16,12 @@ import LibronixCore
             return resource
         }
         if let target { return target.resource }
+        let scope = KeyLinkScope(kind: .bible)
+        let preferred = resourcePriorities.ordered(availableResources, in: scope)
+        if let chosen = preferred.first(where: { resourcePriorities.rank($0, in: scope) != nil }) { return chosen }
         if readers.contains(where: { $0.resource.id == source.id && $0.hasObservedBible }) { return source }
         if let bible = presentedReaders.first(where: \.hasObservedBible) { return bible.resource }
+        if let bible = preferred.first { return bible }
         throw RebuildError.bibleReferenceTargetUnavailable
     }
     func openInlineLink(_ resource: LibraryResource, destination: ReaderDestination, from source: ReaderSession, newReader: Bool) {
