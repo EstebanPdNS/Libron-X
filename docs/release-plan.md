@@ -15,8 +15,8 @@ A feature counts only when its complete behavior is implemented and verified. Ea
 
 ## v0.4 · 19 features
 
-- [ ] Unified search across the managed library.
-- [ ] Persistent search indexes.
+- [x] Unified search across the managed library.
+- [x] Persistent search indexes.
 - [ ] General resource collections.
 - [ ] Resource priorities and key links.
 - [ ] Bible reference search.

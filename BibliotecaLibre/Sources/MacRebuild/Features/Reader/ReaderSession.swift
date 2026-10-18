@@ -347,13 +347,16 @@ struct ReaderPage: Sendable {
         }
     }
     func load(_ destination: ReaderDestination, historyTarget: Int? = nil, propagateReference: Bool = true,
-              selection: NSRange? = nil, expectedFingerprint: String? = nil, viewportOffset: Int? = nil) {
+              selection: NSRange? = nil, expectedFingerprint: String? = nil, viewportOffset: Int? = nil,
+              expectedSourceStamps: [LibrarySearchFileStamp] = []) {
         cancel()
         let token = generation
         isLoading = true; error = nil
         task = Task { [weak self, resource, loader] in
             do {
+                try LibrarySearchFileStamp.verify(expectedSourceStamps)
                 let result = try await loader(resource, destination)
+                try LibrarySearchFileStamp.verify(expectedSourceStamps)
                 guard let self, token == self.generation, !Task.isCancelled else { return }
                 if result.oeb == nil {
                     if let expectedFingerprint, LibrarySearchService.textFingerprint(result.text) != expectedFingerprint { throw LegacyIndicesError.sourceChanged }

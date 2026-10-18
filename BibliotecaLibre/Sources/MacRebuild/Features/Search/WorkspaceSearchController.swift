@@ -27,7 +27,7 @@ import LibronixCore
             isSearching = true; error = nil; report = nil; progress = nil
             task = Task { [weak self] in
                 do {
-                    let result = try await LibrarySearchService().search(resources: selected, query: parsed, options: options, unit: unit,
+                    let result = try await LibrarySearchService(provider: PersistentLibrarySearchProvider(source: WorkspaceSearchReader())).search(resources: selected, query: parsed, options: options, unit: unit,
                         budget: .init(maximumDurationSeconds: 120, maximumArticles: 250_000, maximumResults: 500), onProgress: { [weak self] value in
                             await self?.receive(value, token: token)
                         })

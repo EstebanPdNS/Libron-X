@@ -46,7 +46,9 @@ public actor LibrarySearchService {
         // Opaque/invalid resources remain visible even when a later scan hits a budget.
         for index in resources.indices {
             let resource = resources[index]
-            if ![ResourceFormat.legacyLSF, .libronixLLS].contains(resource.format) || resource.support == .invalidFile {
+            let supported = await provider.supports(resource)
+            try Task.checkCancellation()
+            if !supported || resource.support == .invalidFile {
                 resourceReports[index].status = .incompatible
                 resourceReports[index].warnings = [resource.support == .invalidFile
                     ? "El recurso fue importado como archivo inválido; no se buscó su contenido."
@@ -76,7 +78,7 @@ public actor LibrarySearchService {
             do {
                 prepared = try await provider.prepare(resource)
                 let ordinals = prepared.articles.map(\.sectionOrdinal)
-                guard !ordinals.isEmpty, ordinals.count <= 500_000,
+                guard !ordinals.isEmpty, ordinals.count <= 2_000_000,
                       ordinals.allSatisfy({ $0 >= 0 }), Set(ordinals).count == ordinals.count else {
                     throw LibrarySearchError.invalidArticleDirectory
                 }
@@ -96,7 +98,25 @@ public actor LibrarySearchService {
             resourceReports[index].totalArticles = prepared.articles.count
             resourceReports[index].warnings = prepared.warnings
             resourceReports[index].status = .partial
-            let articles = prepared.articles.sorted { $0.sectionOrdinal < $1.sectionOrdinal }
+            let articles: [LibrarySearchArticleDescriptor]
+            do {
+                let ordered = prepared.articles.sorted { $0.sectionOrdinal < $1.sectionOrdinal }
+                if let candidates = try await provider.candidates(resource, prepared: prepared, query: query, options: options, unit: unit) {
+                    guard candidates.isSubset(of: Set(ordered.map(\.sectionOrdinal))) else { throw LibrarySearchError.invalidArticleDirectory }
+                    articles = ordered.filter { candidates.contains($0.sectionOrdinal) }
+                    let excluded = ordered.count - articles.count
+                    counters.articlesRuledOutByIndex += excluded
+                    resourceReports[index].articlesRuledOutByIndex = excluded
+                } else { articles = ordered }
+                try await provider.verifyUnchanged(resource, prepared: prepared)
+            } catch {
+                try propagateCritical(error)
+                resourceReports[index].status = .failed
+                resourceReports[index].errors.append(errorRecord(error, ordinal: nil))
+                counters.resourcesFailed += 1
+                continue
+            }
+            if elapsed() >= budget.maximumDurationSeconds { limit = .duration; break resourceLoop }
             for article in articles {
                 try Task.checkCancellation()
                 if let reached = budgetLimit() { limit = reached; break resourceLoop }
@@ -106,6 +126,16 @@ public actor LibrarySearchService {
                     try await provider.verifyUnchanged(resource, prepared: prepared)
                     let content = try await provider.read(resource, article: article, prepared: prepared)
                     try await provider.verifyUnchanged(resource, prepared: prepared)
+                    if let range = content.searchRange {
+                        let source = content.text as NSString
+                        guard range.location >= 0, range.length >= 0, range.location <= source.length,
+                              range.length <= source.length - range.location,
+                              Range(range.nsRange, in: content.text) != nil,
+                              (range.location == source.length || source.rangeOfComposedCharacterSequence(at: range.location).location == range.location),
+                              (range.upperBound == source.length || source.rangeOfComposedCharacterSequence(at: range.upperBound).location == range.upperBound) else {
+                            throw LibrarySearchError.invalidArticleDirectory
+                        }
+                    }
                     counters.articlesDecoded += 1
                     resourceReports[index].articlesDecoded += 1
                     if elapsed() >= budget.maximumDurationSeconds { limit = .duration; break resourceLoop }
@@ -125,7 +155,8 @@ public actor LibrarySearchService {
                             counters.versesExamined += 1
                             resourceReports[index].versesExamined += 1
                         }
-                        let evaluationText = verse.map { (content.text as NSString).substring(with: $0.range.nsRange) } ?? content.text
+                        let scopeRange = verse?.range ?? content.searchRange
+                        let evaluationText = scopeRange.map { (content.text as NSString).substring(with: $0.nsRange) } ?? content.text
                         let match = try TextSearchEngine.search(query: query, in: evaluationText, options: options)
                         if elapsed() >= budget.maximumDurationSeconds { limit = .duration; break resourceLoop }
                         if match.matchesQuery {
@@ -142,14 +173,14 @@ public actor LibrarySearchService {
                             resourceReports[index].occurrencesObserved += match.hitCount
                             let remaining = budget.maximumOccurrences - counters.occurrencesReturned
                             let retained = match.hits.prefix(remaining).map { hit in
-                                TextSearchHit(range: .init(location: hit.range.location + (verse?.range.location ?? 0),
+                                TextSearchHit(range: .init(location: hit.range.location + (scopeRange?.location ?? 0),
                                     length: hit.range.length), operands: hit.operands)
                             }
                             if fingerprint == nil { fingerprint = Self.textFingerprint(content.text) }
                             results.append(.init(resourceID: resource.id, resourceTitle: resource.title,
                                 sectionOrdinal: article.sectionOrdinal, articleTitle: verse?.reference ?? article.title,
                                 hitCount: match.hitCount, hits: retained,
-                                snippet: Self.snippet(content.text, hits: retained, maximumUTF16: budget.snippetUTF16, within: verse?.range),
+                                snippet: Self.snippet(content.text, hits: retained, maximumUTF16: budget.snippetUTF16, within: scopeRange),
                                 decodedTextSHA256: fingerprint!, sourceStamps: prepared.sourceStamps,
                                 presentationWarnings: content.warnings,
                                 bibleReference: verse?.normalizedReference, verseRange: verse?.range))
@@ -194,8 +225,8 @@ public actor LibrarySearchService {
         return .init(unit: unit, results: results, resourceReports: resourceReports, counters: counters,
             limitReason: limit, elapsedSeconds: elapsed(), coverageComplete: complete,
             scopeDescription: unit == .article
-                ? "Búsqueda lineal por artículo legado/sección física, sobre texto realmente decodificado. Los rangos pertenecen a ese texto UTF-16; no son offsets de índices legados ni búsqueda de lemas/Strong."
-                : "Búsqueda lineal dentro de intervalos nombrados por anclas bíblicas de tipo 2, hasta la siguiente referencia distinta o fin del artículo. Excluye prefijos sin referencia y no une versículos entre artículos. Los rangos UTF-16 y el hash corresponden al artículo completo. Índices, límites RPOS y equivalencia general con Libronix continúan pendientes.")
+                ? "Búsqueda lineal por artículo, sobre el texto del lector compatible. Las páginas HTML compartidas se evalúan por artículo. Los rangos UTF-16 y el hash pertenecen al texto completo del lector; no son offsets de índices legados ni búsqueda de lemas/Strong."
+                : "Búsqueda lineal dentro de intervalos bíblicos verificados por el lector compatible, hasta la siguiente referencia distinta o fin del artículo. Excluye prefijos sin referencia y no une versículos entre artículos. Los rangos UTF-16 y el hash corresponden al artículo completo. Índices, límites RPOS y equivalencia general con Libronix continúan pendientes.")
     }
 
     private func emitProgress(counters: LibrarySearchCounters, title: String?, elapsedSeconds: Double,

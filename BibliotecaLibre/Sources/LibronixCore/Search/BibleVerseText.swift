@@ -3,7 +3,7 @@ import Foundation
 /// An interval named by a decoded source anchor, within one physical article.
 /// This does not infer a canon or convert the resource's versification. The next
 /// distinct source verse (or article end) defines its conservative text boundary.
-public struct LibrarySearchBibleVerse: Hashable, Sendable {
+public struct LibrarySearchBibleVerse: Hashable, Sendable, Codable {
     public let reference: String
     public let normalizedReference: String
     public let range: SearchTextRange

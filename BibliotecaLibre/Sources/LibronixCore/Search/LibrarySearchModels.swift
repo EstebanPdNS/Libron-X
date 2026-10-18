@@ -33,6 +33,8 @@ public enum LibrarySearchResourceStatus: String, Sendable, Codable {
 }
 
 public struct LibrarySearchCounters: Hashable, Sendable {
+    /// Articles ruled out by a conservative, source-bound candidate index.
+    public var articlesRuledOutByIndex = 0
     public var resourcesTotal = 0
     public var resourcesExamined = 0
     public var resourcesPrepared = 0
@@ -58,6 +60,7 @@ public struct LibrarySearchCounters: Hashable, Sendable {
 }
 
 public struct LibrarySearchResourceReport: Hashable, Sendable, Identifiable {
+    public var articlesRuledOutByIndex = 0
     public let resourceID: String
     public let resourceTitle: String
     public let format: ResourceFormat
@@ -166,7 +169,7 @@ public enum LibrarySearchError: Error, LocalizedError, Equatable, Sendable {
     }
 }
 
-public struct LibrarySearchArticleDescriptor: Hashable, Sendable {
+public struct LibrarySearchArticleDescriptor: Hashable, Sendable, Codable {
     public let sectionOrdinal: Int
     public let title: String
     public init(sectionOrdinal: Int, title: String) {
@@ -175,7 +178,7 @@ public struct LibrarySearchArticleDescriptor: Hashable, Sendable {
     }
 }
 
-public struct LibrarySearchFileStamp: Hashable, Sendable {
+public struct LibrarySearchFileStamp: Hashable, Sendable, Codable {
     public let url: URL
     public let size: UInt64
     public let modified: Date
@@ -186,9 +189,25 @@ public struct LibrarySearchFileStamp: Hashable, Sendable {
         self.modified = modified
         self.fileNumber = fileNumber
     }
+    public static func capture(_ url: URL) throws -> Self {
+        try Task.checkCancellation()
+        let attributes = try FileManager.default.attributesOfItem(atPath: url.path)
+        guard let size = attributes[.size] as? NSNumber,
+              let modified = attributes[.modificationDate] as? Date else { throw LegacyIndicesError.sourceChanged }
+        return .init(url: url, size: size.uint64Value, modified: modified,
+                     fileNumber: (attributes[.systemFileNumber] as? NSNumber)?.uint64Value)
+    }
+    public static func verify(_ stamps: [Self]) throws {
+        for original in stamps {
+            do {
+                guard try capture(original.url) == original else { throw LegacyIndicesError.sourceChanged }
+            } catch is CancellationError { throw CancellationError() }
+            catch { throw LegacyIndicesError.sourceChanged }
+        }
+    }
 }
 
-public struct LibrarySearchPreparedResource: Sendable {
+public struct LibrarySearchPreparedResource: Sendable, Codable {
     public let articles: [LibrarySearchArticleDescriptor]
     public let sourceStamps: [LibrarySearchFileStamp]
     public let warnings: [String]
@@ -200,22 +219,39 @@ public struct LibrarySearchPreparedResource: Sendable {
     }
 }
 
-public struct LibrarySearchDecodedArticle: Sendable {
+public struct LibrarySearchDecodedArticle: Sendable, Codable {
     public let text: String
+    /// Article extent within a shared rendered page. Coordinates and the hash
+    /// remain relative to the complete visible page, including preceding articles.
+    public let searchRange: SearchTextRange?
     public let warnings: [String]
     public let bibleVerses: [LibrarySearchBibleVerse]
     public let referenceAnchors: [LegacyReferenceAnchor]
     public init(text: String, warnings: [String] = [], bibleVerses: [LibrarySearchBibleVerse] = [],
-                referenceAnchors: [LegacyReferenceAnchor] = []) {
+                referenceAnchors: [LegacyReferenceAnchor] = [], searchRange: SearchTextRange? = nil) {
         self.text = text; self.warnings = warnings; self.bibleVerses = bibleVerses; self.referenceAnchors = referenceAnchors
+        self.searchRange = searchRange
     }
 }
 
 /// Injectable read-only boundary. Production uses the existing stamp-aware
 /// LegacyContentService; synthetic fixtures never need commercial book content.
 public protocol LibrarySearchContentProvider: Sendable {
+    func supports(_ resource: LibraryResource) async -> Bool
     func prepare(_ resource: LibraryResource) async throws -> LibrarySearchPreparedResource
     func read(_ resource: LibraryResource, article: LibrarySearchArticleDescriptor,
               prepared: LibrarySearchPreparedResource) async throws -> LibrarySearchDecodedArticle
     func verifyUnchanged(_ resource: LibraryResource, prepared: LibrarySearchPreparedResource) async throws
+    /// A conservative superset of possibly matching articles. nil means every
+    /// article must be evaluated. Consumers still verify each candidate's text.
+    func candidates(_ resource: LibraryResource, prepared: LibrarySearchPreparedResource,
+                    query: SearchQuery, options: TextSearchOptions, unit: LibrarySearchUnit) async throws -> Set<Int>?
+}
+
+public extension LibrarySearchContentProvider {
+    func candidates(_ resource: LibraryResource, prepared: LibrarySearchPreparedResource,
+                    query: SearchQuery, options: TextSearchOptions, unit: LibrarySearchUnit) async throws -> Set<Int>? { nil }
+    func supports(_ resource: LibraryResource) async -> Bool {
+        [.legacyLSF, .libronixLLS].contains(resource.format)
+    }
 }

@@ -52,3 +52,6 @@ Original resources are read-only inputs. Owned JSON files live in `~/Library/App
 Shared controls use native macOS APIs, SF Symbols and availability checks for newer glass presentation. Source typography remains separate from interface appearance. Reading, keyboard focus and accessibility need their own checks after a visual change.
 
 See the [source map](source-map.md) for individual files and [compatibility](compatibility.md) for open acceptance work.
+
+
+Persistent global search uses a rebuildable, source-bound local index. See [persistent search](../BibliotecaLibre/docs/persistent-library-search.md) for matching, invalidation and recovery boundaries.
