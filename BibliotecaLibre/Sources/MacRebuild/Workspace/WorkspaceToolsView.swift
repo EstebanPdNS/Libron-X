@@ -67,6 +67,7 @@ struct WorkspaceSearchView: View {
                 else { Button(L("Buscar"), action: run).disabled(search.query.isEmpty) }
             }
             WorkspaceSearchScopePicker(selection: search.scope, context: workspace.searchScopeContext()).disabled(search.isSearching)
+            WorkspaceSearchFieldPicker(field: $search.searchField).disabled(search.isSearching)
             if search.bibleVerses {
                 VStack(alignment: .leading, spacing: 8) {
                     Picker(L("Rango bíblico"), selection: $search.bibleRangeMode) {
@@ -94,6 +95,7 @@ struct WorkspaceSearchView: View {
             }.disabled(search.isSearching)
             DisclosureGroup(L("Operadores de búsqueda")) {
                 VStack(alignment: .leading, spacing: 4) {
+                    Text(verbatim: "title:a · body:(a AND b) · footnote:a\nheading:a · bible:a · quote:a")
                     Text(verbatim: "a NEAR b · a NEAR/2 b · a BEFORE b · a AFTER b\na WITHIN 2 WORDS b · a BEFORE 2 CHARACTERS b\na WITHIN 1 VERSES b · (a OR b) BEFORE/0 c")
                     Text(L("NEAR usa 48 unidades UTF-16. WORDS cuenta palabras intermedias. VERSES usa referencias reales del mismo capítulo. Cada artículo o versículo conserva su ámbito."))
                 }.font(.caption).textSelection(.enabled)
@@ -112,6 +114,9 @@ struct WorkspaceSearchView: View {
                     VStack(alignment: .leading, spacing: 5) {
                         HStack { Text(result.resourceTitle).font(.headline); Spacer(); Text(result.bibleReference ?? LF("Artículo {number}", ["number": String(result.sectionOrdinal + 1)])).font(.caption) }
                         Text(result.snippet.text).lineLimit(3).foregroundStyle(.secondary)
+                        ForEach(Array(Set(result.externalHits.map { $0.field.localizedTitle + ": " + $0.value })).sorted(), id: \.self) {
+                            Text($0).font(.caption).lineLimit(2)
+                        }
                         Text(LF("{count} coincidencias", ["count": String(result.hitCount)])).font(.caption)
                     }.padding(.vertical, 4).frame(maxWidth: .infinity, alignment: .leading)
                     Button(L("Abrir")) { workspace.openSearchResult(result, scope: search.scopeSnapshot) }

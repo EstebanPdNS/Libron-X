@@ -5,6 +5,7 @@ import LibronixCore
 /// readers, including their checked native Bible-link destinations.
 actor WorkspaceSearchReader: LibrarySearchContentProvider {
     private let nativeReader = LibronNativeReader()
+    private let sourceFields = WorkspaceSearchFields()
 
     func supports(_ resource: LibraryResource) async -> Bool {
         [.legacyLSF, .libronixLLS, .libronixOEB, .eSwordSQLite, .epub, .libronDictionary].contains(resource.format)
@@ -28,9 +29,16 @@ actor WorkspaceSearchReader: LibrarySearchContentProvider {
         guard first.sectionCount > 0, first.sectionCount <= 2_000_000 else { throw LibrarySearchError.invalidArticleDirectory }
         var titles: [Int: String] = [:]
         for entry in first.entries where titles[entry.ordinal] == nil { titles[entry.ordinal] = entry.title }
+        let fields: [SearchField]
+        switch resource.format {
+        case .libronixOEB, .epub: fields = [.body, .title, .heading, .footnote, .quotation]
+        case .libronDictionary: fields = [.body, .title]
+        case .eSwordSQLite: fields = (first.content?.anchors.isEmpty == false) ? [.body, .title, .bibleText] : [.body, .title]
+        default: fields = [.body, .title, .bibleText]
+        }
         let result = LibrarySearchPreparedResource(articles: (0..<first.sectionCount).map {
             .init(sectionOrdinal: $0, title: titles[$0] ?? resource.title + " · " + String($0 + 1))
-        }, sourceStamps: stamps, warnings: [], projectionVersion: "workspace-bible-intervals-v3")
+        }, sourceStamps: stamps, warnings: [], projectionVersion: "workspace-search-fields-v4", availableFields: fields)
         try await verifyUnchanged(resource, prepared: result)
         return result
     }
@@ -47,10 +55,15 @@ actor WorkspaceSearchReader: LibrarySearchContentProvider {
             let projection = try await ReaderOEBTextSource.shared.read(book: html.book, path: path, viewport: .init())
             guard let range = projection.articleRanges[article.sectionOrdinal] else { throw LibrarySearchError.invalidArticleDirectory }
             decoded = .init(text: projection.text, warnings: warnings,
-                            searchRange: .init(location: range.location, length: range.length), referenceLinks: projection.referenceLinks)
+                            searchRange: .init(location: range.location, length: range.length), referenceLinks: projection.referenceLinks,
+                            fieldDirectory: try await sourceFields.directory(resource, ordinal: article.sectionOrdinal, text: projection.text, stamps: prepared.sourceStamps,
+                                html: html, rendered: projection.fieldDirectory, visibleRange: .init(location: range.location, length: range.length)))
         } else {
             let anchors = result.content?.anchors ?? []
             let links = result.inlineLinks.compactMap(BibleReferenceSourceLink.init)
+            let fields: SearchFieldDirectory?
+            if let provided = result.fieldDirectory { fields = provided }
+            else { fields = try await sourceFields.directory(resource, ordinal: article.sectionOrdinal, text: result.text, stamps: prepared.sourceStamps, anchors: anchors) }
             if resource.format == .eSwordSQLite {
                 // e-Sword's authored reader anchors use datatype zero, not the
                 // legacy driver's datatype two. Preserve them as explicit verse
@@ -65,9 +78,9 @@ actor WorkspaceSearchReader: LibrarySearchContentProvider {
                     return .init(reference: entry.reference, normalizedReference: reference.normalizedKey,
                                  range: .init(location: entry.offset, length: end - entry.offset))
                 }
-                decoded = .init(text: result.text, warnings: warnings, bibleVerses: verses, referenceLinks: links)
+                decoded = .init(text: result.text, warnings: warnings, bibleVerses: verses, referenceLinks: links, fieldDirectory: fields)
             } else {
-                decoded = .init(text: result.text, warnings: warnings, referenceAnchors: anchors, referenceLinks: links)
+                decoded = .init(text: result.text, warnings: warnings, referenceAnchors: anchors, referenceLinks: links, fieldDirectory: fields)
             }
         }
         try await verifyUnchanged(resource, prepared: prepared)

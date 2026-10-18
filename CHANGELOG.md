@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Search verified resource fields with separate source-title matches, explicit coverage and exact reader selection.
+
 - Execute bounded proximity and order queries with word, character and verified verse distances.
 
 - Build automatic resource collections from saved metadata conditions with live previews.

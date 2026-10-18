@@ -6,6 +6,7 @@ enum WorkspaceBibleRangeMode: String, CaseIterable, Sendable { case all, custom,
 
 @MainActor @Observable final class WorkspaceSearchController {
     var query = ""
+    var searchField: SearchField?
     var scope = WorkspaceSearchScopeSelection()
     var resourceID: String? { get { scope.resourceID } set { scope.resourceID = newValue } }
     var allResources: Bool { get { scope.allResources } set { scope.allResources = newValue } }
@@ -32,7 +33,8 @@ enum WorkspaceBibleRangeMode: String, CaseIterable, Sendable { case all, custom,
             scopeSnapshot = snapshot
             let selected = snapshot.resources
             guard !selected.isEmpty else { throw WorkspaceSearchScopeError.noResources }
-            let parsed = try SearchQueryParser.parse(query)
+            let compiled = searchField.map { $0.rawValue + ":(" + query + ")" } ?? query
+            let parsed = try SearchQueryParser.parse(compiled)
             var options = TextSearchOptions(); options.caseSensitive = caseSensitive; options.wholeWords = wholeWords
             let unit: LibrarySearchUnit = bibleVerses ? .bibleVerse : .article
             let rangeMode = bibleRangeMode, rangeText = customBibleRange

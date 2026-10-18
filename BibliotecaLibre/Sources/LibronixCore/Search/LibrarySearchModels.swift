@@ -129,6 +129,7 @@ public struct LibrarySearchResult: Hashable, Sendable, Identifiable {
     public let presentationWarnings: [String]
     public let bibleReference: String?
     public let verseRange: SearchTextRange?
+    public var externalHits: [TextSearchExternalHit] = []
     public var id: String {
         resourceID + "#section=" + String(sectionOrdinal)
             + (verseRange.map { "#verse=" + String($0.location) } ?? "")
@@ -175,9 +176,10 @@ public enum LibrarySearchError: Error, LocalizedError, Equatable, Sendable {
 public struct LibrarySearchArticleDescriptor: Hashable, Sendable, Codable {
     public let sectionOrdinal: Int
     public let title: String
-    public init(sectionOrdinal: Int, title: String) {
+    public let sourceTitles: [String]?
+    public init(sectionOrdinal: Int, title: String, sourceTitles: [String]? = nil) {
         self.sectionOrdinal = sectionOrdinal
-        self.title = title
+        self.title = title; self.sourceTitles = sourceTitles
     }
 }
 
@@ -211,6 +213,9 @@ public struct LibrarySearchFileStamp: Hashable, Sendable, Codable {
 }
 
 public struct LibrarySearchPreparedResource: Sendable, Codable {
+    /// nil leaves capabilities unknown; a declared profile can reject unsupported
+    /// fields once, without decoding thousands of articles merely to fail each.
+    public let availableFields: [SearchField]?
     /// Producer-owned projection contract. A changed decoder/link projection
     /// must invalidate cached articles even when the original files did not change.
     public let projectionVersion: String?
@@ -218,7 +223,8 @@ public struct LibrarySearchPreparedResource: Sendable, Codable {
     public let sourceStamps: [LibrarySearchFileStamp]
     public let warnings: [String]
     public init(articles: [LibrarySearchArticleDescriptor], sourceStamps: [LibrarySearchFileStamp] = [],
-                warnings: [String] = [], projectionVersion: String? = nil) {
+                warnings: [String] = [], projectionVersion: String? = nil, availableFields: [SearchField]? = nil) {
+        self.availableFields = availableFields
         self.projectionVersion = projectionVersion
         self.articles = articles
         self.sourceStamps = sourceStamps
@@ -227,6 +233,7 @@ public struct LibrarySearchPreparedResource: Sendable, Codable {
 }
 
 public struct LibrarySearchDecodedArticle: Sendable, Codable {
+    public let fieldDirectory: SearchFieldDirectory?
     public let referenceLinks: [BibleReferenceSourceLink]?
     public let text: String
     /// Article extent within a shared rendered page. Coordinates and the hash
@@ -237,7 +244,8 @@ public struct LibrarySearchDecodedArticle: Sendable, Codable {
     public let referenceAnchors: [LegacyReferenceAnchor]
     public init(text: String, warnings: [String] = [], bibleVerses: [LibrarySearchBibleVerse] = [],
                 referenceAnchors: [LegacyReferenceAnchor] = [], searchRange: SearchTextRange? = nil,
-                referenceLinks: [BibleReferenceSourceLink]? = nil) {
+                referenceLinks: [BibleReferenceSourceLink]? = nil, fieldDirectory: SearchFieldDirectory? = nil) {
+        self.fieldDirectory = fieldDirectory
         self.referenceLinks = referenceLinks
         self.text = text; self.warnings = warnings; self.bibleVerses = bibleVerses; self.referenceAnchors = referenceAnchors
         self.searchRange = searchRange

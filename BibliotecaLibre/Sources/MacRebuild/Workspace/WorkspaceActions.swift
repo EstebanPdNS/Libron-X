@@ -186,7 +186,7 @@ struct ReaderHighlight: Identifiable, Codable, Equatable {
 
 @MainActor extension ReaderSession {
     func loadSearchResult(_ result: LibrarySearchResult) {
-        load(.init(ordinal: result.sectionOrdinal), selection: result.hits.first?.range.nsRange ?? result.verseRange?.nsRange,
+        load(.init(ordinal: result.sectionOrdinal), selection: result.hits.first?.range.nsRange ?? (result.externalHits.isEmpty ? result.verseRange?.nsRange : nil),
              expectedFingerprint: result.decodedTextSHA256, expectedSourceStamps: result.sourceStamps)
     }
 }

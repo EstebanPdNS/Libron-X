@@ -16,10 +16,11 @@ struct ReaderOEBTextPage: Sendable {
     let path: String
     let articleRanges: [Int: NSRange]
     let referenceLinks: [BibleReferenceSourceLink]
-    var estimatedBytes: Int { text.utf16.count * 2 + articleRanges.count * 64 + path.utf16.count * 2 + referenceLinks.reduce(0) { $0 + $1.target.utf16.count * 2 + 48 } + 128 }
+    let fieldDirectory: SearchFieldDirectory?
+    var estimatedBytes: Int { text.utf16.count * 2 + articleRanges.count * 64 + path.utf16.count * 2 + referenceLinks.reduce(0) { $0 + $1.target.utf16.count * 2 + 48 } + (fieldDirectory?.regions.values.reduce(0) { $0 + $1.count * 32 } ?? 0) + 128 }
 
     init(text: String, anchors: [String: Int], path: String, articles: [LibronixOEBArticle],
-         referenceLinks: [BibleReferenceSourceLink] = []) throws {
+         referenceLinks: [BibleReferenceSourceLink] = [], fieldDirectory: SearchFieldDirectory? = nil) throws {
         let count = text.utf16.count
         let entries = articles.filter { $0.path.lowercased() == path.lowercased() }.sorted { $0.ordinal < $1.ordinal }
         guard !entries.isEmpty else { throw LibronixBookError.invalidDirectory }
@@ -41,6 +42,8 @@ struct ReaderOEBTextPage: Sendable {
         }
         self.text = text; fingerprint = LibrarySearchService.textFingerprint(text)
         self.path = path; articleRanges = ranges; self.referenceLinks = referenceLinks
+        if let fieldDirectory { try fieldDirectory.validate(in: text) }
+        self.fieldDirectory = fieldDirectory
     }
 }
 
@@ -206,7 +209,31 @@ private actor OEBProjectionSlots {
                           Range(NSRange(location: start, length: length), in: text) != nil else { throw LibronixBookError.invalidDirectory }
                     return .init(range: .init(location: start, length: length), target: target)
                 }
-                let result = try ReaderOEBTextPage(text: text, anchors: anchors, path: path, articles: entries, referenceLinks: links)
+                var fieldDirectory: SearchFieldDirectory?
+                if let rawFields = value["fields"] as? [String: Any] {
+                    do {
+                        var regions: [SearchField: [SearchTextRange]] = [:]
+                        for (name, ranges) in rawFields {
+                            guard let field = SearchField(rawValue: name) else { throw TextSearchError.invalidFieldDirectory }
+                            regions[field] = try JSONDecoder().decode([SearchTextRange].self,
+                                from: JSONSerialization.data(withJSONObject: ranges))
+                        }
+                        var external: [SearchField: [String]] = [:]
+                        if let rawValues = value["fieldValues"] as? [String: [String]] {
+                            for (name, strings) in rawValues {
+                                guard let field = SearchField(rawValue: name) else { throw TextSearchError.invalidFieldDirectory }
+                                external[field] = strings
+                            }
+                        }
+                        let fields = SearchFieldDirectory(regions: regions, externalValues: external)
+                        try fields.validate(in: text); fieldDirectory = fields
+                    } catch {
+                        // Preserve the unchanged text/selection projection. A
+                        // later field request must report absent field metadata.
+                        fieldDirectory = nil
+                    }
+                }
+                let result = try ReaderOEBTextPage(text: text, anchors: anchors, path: path, articles: entries, referenceLinks: links, fieldDirectory: fieldDirectory)
                 try book.verifySource(); finish(.success(result), run: run)
             } catch { finish(.failure(error), run: run) }
         }

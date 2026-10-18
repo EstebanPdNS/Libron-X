@@ -239,6 +239,20 @@ public enum ESwordResource {
         public init(_ url: URL) throws { database = try Database(url) }
         public func page(_ ordinal: Int) throws -> ESwordPage { try ESwordResource.page(database,ordinal:ordinal) }
     }
+    public static func searchTitles(_ url: URL) throws -> [Int: String] {
+        let db = try Database(url), kind = try db.kind()
+        let sql: String
+        switch kind {
+        case "Dictionary": sql = "SELECT rowid,Topic FROM Dictionary ORDER BY rowid"
+        case "Lexicon": sql = "SELECT rowid,Topic FROM Lexicon ORDER BY rowid"
+        case "Reference": sql = "SELECT rowid,Chapter FROM Reference ORDER BY rowid"
+        default: return [:] // Bible/commentary/date labels are generated navigation.
+        }
+        let rows = try db.rows(sql)
+        return Dictionary(uniqueKeysWithValues: rows.enumerated().compactMap { index, row in
+            row.count == 2 ? (index, row[1]) : nil
+        })
+    }
     private static func page(_ db: Database, ordinal: Int, reference query: String? = nil) throws -> ESwordPage {
         let kind = try db.kind()
         if kind == "Bible" {
@@ -288,5 +302,6 @@ public enum ESwordResource {
     public static func audit(_ url: URL) throws -> ImportFormattingAudit { throw LibronError.invalid("SQLite importer unavailable on this platform") }
     public static func inspect(_ url: URL) throws -> LibraryResource { throw LibronError.invalid("SQLite importer unavailable on this platform") }
     public static func page(_ url: URL, ordinal: Int, reference: String? = nil) throws -> ESwordPage { throw LibronError.invalid("SQLite reader unavailable on this platform") }
+    public static func searchTitles(_ url: URL) throws -> [Int: String] { throw LibronError.invalid("SQLite reader unavailable on this platform") }
     #endif
 }

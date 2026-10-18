@@ -113,7 +113,7 @@ public actor PersistentLibrarySearchProvider: LibrarySearchContentProvider {
         #if canImport(CSQLite)
         // Verse mode must still inspect anchors, including on non-Bible books,
         // so incompatible verse scopes cannot masquerade as complete no-hits.
-        if unit == .article, !query.expression.requiresVerseContext, let index = indexes[resource.id] {
+        if unit == .article, !query.expression.requiresVerseContext, query.expression.requiredFields.isEmpty, let index = indexes[resource.id] {
             do {
                 if let selected = try index.candidates(query.expression, articles: prepared.articles) {
                     try await source.verifyUnchanged(resource, prepared: prepared)
@@ -281,7 +281,9 @@ private final class SearchIndexDatabase {
               let bytes = sqlite3_column_blob(s, 0), let rawHash = sqlite3_column_text(s, 1) else { throw SearchIndexFailure.corrupt }
         let data = Data(bytes: bytes, count: size)
         guard PersistentLibrarySearchProvider.digest(data) == String(cString: rawHash) else { throw SearchIndexFailure.corrupt }
-        return try JSONDecoder().decode(LibrarySearchDecodedArticle.self, from: data)
+        let article = try JSONDecoder().decode(LibrarySearchDecodedArticle.self, from: data)
+        try article.fieldDirectory?.validate(in: article.text)
+        return article
     }
     func write(_ article: LibrarySearchDecodedArticle, ordinal: Int) throws {
         let data = try JSONEncoder().encode(article)
@@ -326,7 +328,7 @@ private final class SearchIndexDatabase {
             case .disjunction(let lhs, let rhs):
                 guard let left = try possible(lhs), let right = try possible(rhs) else { return nil }
                 return left.union(right)
-            case .negation: return nil
+            case .negation, .field: return nil
             }
         }
         // All component sets must see one SQLite snapshot. A concurrent writer

@@ -38,7 +38,7 @@ import CSQLite
             let cache = fixture.root.appendingPathComponent(normalized ? "native-search" : "original-search")
             let source = WorkspaceSearchReader()
             let prepared = try await source.prepare(resource)
-            #expect(prepared.projectionVersion == "workspace-bible-intervals-v3")
+            #expect(prepared.projectionVersion == "workspace-search-fields-v4")
             let provider = PersistentLibrarySearchProvider(source: source, directory: cache)
             let query = try BibleReferenceQuery.parse("John3")
             let report = try await BibleReferenceSearchService(provider: provider).search(resources: [resource], query: query)

@@ -26,7 +26,9 @@ public actor LibrarySearchService {
         guard bibleRange == nil || unit == .bibleVerse else { throw BibleSearchRangeError.requiresVerseMode }
         try Task.checkCancellation()
         // Validate evaluator options before classifying any source as a failed read.
-        _ = try TextSearchEngine.search(query: query, in: "", options: options, verses: query.expression.requiresVerseContext ? [] : nil)
+        _ = try TextSearchEngine.search(query: query, in: "", options: options, verses: query.expression.requiresVerseContext ? [] : nil,
+            fields: .init(regions: Dictionary(uniqueKeysWithValues: query.expression.requiredFields.map { ($0, []) })))
+        let requiresBibleDirectory = query.expression.requiresVerseContext || query.expression.requiredFields.contains(.bibleText)
         var ids = Set<String>()
         for resource in resources {
             guard ids.insert(resource.id).inserted else { throw LibrarySearchError.duplicateResourceID(resource.id) }
@@ -102,6 +104,17 @@ public actor LibrarySearchService {
             resourceReports[index].totalArticles = prepared.articles.count
             resourceReports[index].warnings = prepared.warnings
             resourceReports[index].status = .partial
+            if let available = prepared.availableFields {
+                let unsupported = query.expression.requiredFields.subtracting(available).sorted { $0.rawValue < $1.rawValue }
+                if !unsupported.isEmpty {
+                    resourceReports[index].status = .incompatible
+                    resourceReports[index].errors = unsupported.map { errorRecord(TextSearchError.unsupportedField($0), ordinal: nil) }
+                    counters.resourcesIncompatible += 1
+                    try await provider.verifyUnchanged(resource, prepared: prepared)
+                    try await emitProgress(counters: counters, title: resource.title, elapsedSeconds: elapsed(), onProgress: onProgress)
+                    continue
+                }
+            }
             let articles: [LibrarySearchArticleDescriptor]
             do {
                 let ordered = prepared.articles.sorted { $0.sectionOrdinal < $1.sectionOrdinal }
@@ -144,7 +157,7 @@ public actor LibrarySearchService {
                     resourceReports[index].articlesDecoded += 1
                     if elapsed() >= budget.maximumDurationSeconds { limit = .duration; break resourceLoop }
                     let verses: [LibrarySearchBibleVerse]
-                    if unit == .bibleVerse || query.expression.requiresVerseContext {
+                    if unit == .bibleVerse || requiresBibleDirectory {
                         let observed = content.referenceAnchors.isEmpty ? content.bibleVerses
                             : try BibleVerseText.intervals(text: content.text, anchors: content.referenceAnchors)
                         try BibleVerseText.validate(observed, in: content.text)
@@ -168,7 +181,7 @@ public actor LibrarySearchService {
                             }
                         } else { verses = logical }
                     } else { verses = [] }
-                    if unit == .article, query.expression.requiresVerseContext, verses.isEmpty { throw TextSearchError.verseContextRequired }
+                    if unit == .article, requiresBibleDirectory, verses.isEmpty { throw TextSearchError.verseContextRequired }
                     let intervals: [LibrarySearchBibleVerse?] = unit == .article ? [nil] : verses.map { Optional($0) }
                     var articleMatched = false
                     var fingerprint: String?
@@ -189,7 +202,20 @@ public actor LibrarySearchService {
                                       range: .init(location: source.range.location - origin, length: source.range.length))
                             }
                         } else { verseContext = nil }
-                        let match = try TextSearchEngine.search(query: query, in: evaluationText, options: options, verses: verseContext)
+                        let fields: SearchFieldDirectory?
+                        if !query.expression.requiredFields.isEmpty {
+                            var declared = content.fieldDirectory
+                            if query.expression.requiredFields.contains(.bibleText) {
+                                var regions = declared?.regions ?? [:]; if regions[.bibleText] == nil { regions[.bibleText] = verses.map(\.range) }
+                                var units = declared?.witnessRegions ?? [:]
+                                if units[.bibleText] == nil, let first = verses.first, let last = verses.last {
+                                    units[.bibleText] = [.init(location: first.range.location, length: last.range.upperBound - first.range.location)]
+                                }
+                                declared = .init(regions: regions, externalValues: declared?.externalValues, witnessRegions: units)
+                            }
+                            fields = try scopeRange.map { try declared?.clipped(to: $0, in: content.text) } ?? declared
+                        } else { fields = nil }
+                        let match = try TextSearchEngine.search(query: query, in: evaluationText, options: options, verses: verseContext, fields: fields)
                         if elapsed() >= budget.maximumDurationSeconds { limit = .duration; break resourceLoop }
                         if match.matchesQuery {
                             if !articleMatched {
@@ -208,6 +234,8 @@ public actor LibrarySearchService {
                                 TextSearchHit(range: .init(location: hit.range.location + (scopeRange?.location ?? 0),
                                     length: hit.range.length), operands: hit.operands)
                             }
+                            let externalRetained = Array(match.externalHits.prefix(max(0, remaining - retained.count)))
+                            let retainedCount = retained.count + externalRetained.count
                             if fingerprint == nil { fingerprint = Self.textFingerprint(content.text) }
                             results.append(.init(resourceID: resource.id, resourceTitle: resource.title,
                                 sectionOrdinal: article.sectionOrdinal, articleTitle: verse?.reference ?? article.title,
@@ -215,11 +243,11 @@ public actor LibrarySearchService {
                                 snippet: Self.snippet(content.text, hits: retained, maximumUTF16: budget.snippetUTF16, within: scopeRange),
                                 decodedTextSHA256: fingerprint!, sourceStamps: prepared.sourceStamps,
                                 presentationWarnings: content.warnings,
-                                bibleReference: verse?.normalizedReference, verseRange: verse?.range))
+                                bibleReference: verse?.normalizedReference, verseRange: verse?.range, externalHits: externalRetained))
                             counters.resultsReturned += 1
-                            counters.occurrencesReturned += retained.count
+                            counters.occurrencesReturned += retainedCount
                             resourceReports[index].resultsReturned += 1
-                            if retained.count < match.hitCount { limit = .occurrences; break resourceLoop }
+                            if retainedCount < match.hitCount { limit = .occurrences; break resourceLoop }
                         }
                     }
                 } catch {
@@ -235,7 +263,7 @@ public actor LibrarySearchService {
             }
             if resourceReports[index].articlesExamined == articles.count {
                 resourceReports[index].status = resourceReports[index].articlesFailed == 0 ? .complete : .partial
-                if (unit == .bibleVerse || query.expression.requiresVerseContext) && !hasVerseIntervals && resourceReports[index].articlesFailed == 0 {
+                if (unit == .bibleVerse || requiresBibleDirectory) && !hasVerseIntervals && resourceReports[index].articlesFailed == 0 {
                     resourceReports[index].status = .incompatible
                     resourceReports[index].warnings.append("El contenido leído no contiene intervalos de versículos compatibles; no permite afirmar ausencia de coincidencias bíblicas.")
                     counters.resourcesIncompatible += 1

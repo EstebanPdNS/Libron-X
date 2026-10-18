@@ -127,7 +127,16 @@ struct ReaderOEBView: NSViewRepresentable {
                     reader.presentationWarnings = self.assetFailures.isEmpty ? [] : ["No se pudieron cargar estos archivos de la página: " + self.assetFailures.joined(separator: ", ")]
                     // Fragment navigation is native WebKit; do not replace it
                     // with an initial empty selection at the top of the page.
-                    self.selectionRequest = reader.selectedRange.length > 0 ? -1 : reader.selectionRequest
+                    self.selectionRequest = reader.selectionRequest
+                    let range = reader.selectedRange
+                    if range.length > 0 {
+                        // Readiness is coordinator state, not observed SwiftUI state.
+                        // Deliver a pending search/find range after DOM validation;
+                        // a representable update can otherwise run before ready.
+                        webView.callAsyncJavaScript("return window.libronxReader.select(start, length);",
+                            arguments: ["start": range.location, "length": range.length],
+                            in: nil, in: .defaultClient) { _ in }
+                    }
                 case .failure(let error): reader.rejectOEBProjection(error, pageID: loadedID)
                 }
             }
@@ -219,13 +228,46 @@ struct ReaderOEBView: NSViewRepresentable {
           }
           const links = Array.from(byElement.values()).flat();
           if (links.length > 100000) throw new Error('Too many source links');
-          return {text: visible.map(n => n.data).join(''), anchors, links};
+          // Semantic fields share the existing visible-node coordinates. No
+          // CSS class, font size or generated navigation label establishes one.
+          const fields = {body: [], title: [], heading: [], footnote: [], quote: []};
+          let fieldCount = 0, fieldLimit = false, fieldOffset = 0;
+          function addField(kind, start, length) {
+            if (!length || fieldLimit) return;
+            const records = fields[kind], last = records[records.length - 1];
+            if (last && last.location + last.length === start) last.length += length;
+            else {
+              if (++fieldCount > 100000) { fieldLimit = true; return; }
+              records.push({location: start, length});
+            }
+          }
+          for (const node of visible) {
+            let note = false, heading = false, title = false, quotation = false, endnote = false;
+            for (let element = node.parentElement; element; element = element.parentElement) {
+              const types = (element.getAttribute('epub:type') || '').trim().split(/\s+/);
+              const role = (element.getAttribute('role') || '').trim().split(/\s+/)[0];
+              note ||= types.includes('footnote') || role === 'doc-footnote';
+              endnote ||= types.includes('endnote') || types.includes('endnotes') || role === 'doc-endnote' || role === 'doc-endnotes';
+              heading ||= /^H[1-6]$/.test(element.tagName) || role === 'heading';
+              title ||= types.some(t => ['title','fulltitle','covertitle','halftitle','subtitle'].includes(t));
+              quotation ||= element.tagName === 'Q' || element.tagName === 'BLOCKQUOTE';
+            }
+            if (note) addField('footnote', fieldOffset, node.length);
+            if (heading) addField('heading', fieldOffset, node.length);
+            if (title) addField('title', fieldOffset, node.length);
+            if (quotation) addField('quote', fieldOffset, node.length);
+            if (!note && !endnote && !heading && !title) addField('body', fieldOffset, node.length);
+            fieldOffset += node.length;
+          }
+          // Field exhaustion cannot break established unqualified reading/find.
+          return {text: visible.map(n => n.data).join(''), anchors, links, fields: fieldLimit ? null : fields,
+            fieldValues: {title: fields.title.length ? [] : (document.title ? [document.title] : [])}};
         },
         select: (start, length) => {
           if (!length) return false;
           const range = document.createRange(); let offset = 0, a = false, b = false;
           for (const node of nodes()) {
-            if (!a && start <= offset + node.length) { range.setStart(node, Math.max(0, start - offset)); a = true; }
+            if (!a && start < offset + node.length) { range.setStart(node, Math.max(0, start - offset)); a = true; }
             if (a && start + length <= offset + node.length) { range.setEnd(node, start + length - offset); b = true; break; }
             offset += node.length;
           }

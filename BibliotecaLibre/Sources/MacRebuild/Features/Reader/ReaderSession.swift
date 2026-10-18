@@ -34,6 +34,7 @@ struct ReaderPage: Sendable {
     var passageParts: [ReaderPassagePart] = []
     var oeb: ReaderOEBPage? = nil
     var sourceStamp: LegacyGraphicSourceStamp? = nil
+    var fieldDirectory: SearchFieldDirectory? = nil
 }
 
 /// New application state. Only the read-only format services cross the prototype boundary.
@@ -501,7 +502,9 @@ struct ReaderPage: Sendable {
         if resource.format == .libronDictionary {
             let source = try LibronDictionaryDatabase.page(resource.location, ordinal: requested.ordinal)
             let content = LegacySectionContent.imported(text: source.body, ordinal: source.ordinal, anchors: [], rtf: nil)
-            return ReaderPage(destination: .init(ordinal: source.ordinal), text: source.body, sectionCount: source.count, content: content)
+            return ReaderPage(destination: .init(ordinal: source.ordinal), text: source.body, sectionCount: source.count, content: content,
+                fieldDirectory: .init(regions: [.body: source.body.isEmpty ? [] : [.init(location: 0, length: source.body.utf16.count)]],
+                                      externalValues: [.title: [source.headword]]))
         }
         if resource.format == .eSwordSQLite { return try await ESwordReader.read(resource, requested) }
         if resource.format == .epub { return try await EPUBReader.read(resource, requested) }

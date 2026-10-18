@@ -7666,5 +7666,89 @@
     "pt": "NEAR usa 48 unidades UTF-16. WORDS conta as palavras intermediárias. VERSES usa referências reais do mesmo capítulo. Cada artigo ou versículo mantém seu âmbito.",
     "id": "NEAR memakai 48 unit UTF-16. WORDS menghitung kata di antaranya. VERSES memakai referensi nyata dalam pasal yang sama. Setiap artikel atau ayat mempertahankan lingkupnya.",
     "ur": "NEAR میں 48 UTF-16 اکائیاں ہیں۔ WORDS درمیانی الفاظ گنتا ہے۔ VERSES ایک ہی باب کے حقیقی حوالوں کو استعمال کرتا ہے۔ ہر مضمون یا آیت کا اپنا دائرہ رہتا ہے۔"
+  },
+  "Cuerpo": {
+    "es": "Cuerpo",
+    "en": "Body",
+    "zh-Hans": "正文",
+    "hi": "मुख्य पाठ",
+    "ar": "المتن",
+    "fr": "Corps",
+    "bn": "মূল পাঠ",
+    "pt": "Corpo",
+    "id": "Isi",
+    "ur": "متن"
+  },
+  "Encabezados": {
+    "es": "Encabezados",
+    "en": "Headings",
+    "zh-Hans": "标题",
+    "hi": "शीर्षक",
+    "ar": "العناوين",
+    "fr": "En-têtes",
+    "bn": "শিরোনাম",
+    "pt": "Cabeçalhos",
+    "id": "Judul bagian",
+    "ur": "سرخیاں"
+  },
+  "Texto bíblico": {
+    "es": "Texto bíblico",
+    "en": "Bible text",
+    "zh-Hans": "圣经经文",
+    "hi": "बाइबल पाठ",
+    "ar": "نص الكتاب المقدس",
+    "fr": "Texte biblique",
+    "bn": "বাইবেলের পাঠ",
+    "pt": "Texto bíblico",
+    "id": "Teks Alkitab",
+    "ur": "بائبل کا متن"
+  },
+  "Citas": {
+    "es": "Citas",
+    "en": "Quotations",
+    "zh-Hans": "引文",
+    "hi": "उद्धरण",
+    "ar": "الاقتباسات",
+    "fr": "Citations",
+    "bn": "উদ্ধৃতি",
+    "pt": "Citações",
+    "id": "Kutipan",
+    "ur": "اقتباسات"
+  },
+  "Todo el texto": {
+    "es": "Todo el texto",
+    "en": "All visible text",
+    "zh-Hans": "全部可见文本",
+    "hi": "सभी दृश्यमान पाठ",
+    "ar": "كل النص المرئي",
+    "fr": "Tout le texte visible",
+    "bn": "সব দৃশ্যমান পাঠ",
+    "pt": "Todo o texto visível",
+    "id": "Semua teks yang terlihat",
+    "ur": "تمام نظر آنے والا متن"
+  },
+  "Los campos no identificados por el recurso producen cobertura parcial.": {
+    "es": "Los campos no identificados por el recurso producen cobertura parcial.",
+    "en": "Fields not identified by the resource produce partial coverage.",
+    "zh-Hans": "资源未标识的字段会导致覆盖不完整。",
+    "hi": "संसाधन में अज्ञात फ़ील्ड होने पर कवरेज आंशिक होता है।",
+    "ar": "تؤدي الحقول التي لا يحددها المورد إلى تغطية جزئية.",
+    "fr": "Les champs non identifiés par la ressource donnent une couverture partielle.",
+    "bn": "রিসোর্সে অচিহ্নিত ক্ষেত্র থাকলে কভারেজ আংশিক হয়।",
+    "pt": "Os campos não identificados pelo recurso produzem cobertura parcial.",
+    "id": "Kolom yang tidak diidentifikasi sumber menghasilkan cakupan parsial.",
+    "ur": "وسیلے میں غیر شناخت شدہ خانے جزوی کوریج کا باعث بنتے ہیں۔"
+  },
+  "Un título del índice puede abrir su artículo sin resaltar el cuerpo.": {
+    "es": "Un título del índice puede abrir su artículo sin resaltar el cuerpo.",
+    "en": "An index title can open its article without highlighting the body.",
+    "zh-Hans": "索引标题可以打开其文章而不突出显示正文。",
+    "hi": "सूची का शीर्षक मुख्य पाठ को हाइलाइट किए बिना अपना लेख खोल सकता है।",
+    "ar": "يمكن لعنوان الفهرس فتح مقالته دون تمييز المتن.",
+    "fr": "Un titre d’index peut ouvrir son article sans surligner le corps.",
+    "bn": "সূচির শিরোনাম মূল পাঠ হাইলাইট না করেই নিবন্ধ খুলতে পারে।",
+    "pt": "Um título do índice pode abrir seu artigo sem destacar o corpo.",
+    "id": "Judul indeks dapat membuka artikelnya tanpa menyorot isi.",
+    "ur": "فہرست کا عنوان متن نمایاں کیے بغیر اپنا مضمون کھول سکتا ہے۔"
   }
 }

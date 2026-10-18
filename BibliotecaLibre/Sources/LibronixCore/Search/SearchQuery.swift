@@ -41,19 +41,29 @@ public indirect enum SearchExpression: Hashable, Sendable {
     case disjunction(SearchExpression, SearchExpression)
     case negation(SearchExpression)
     case proximity(SearchProximity, SearchExpression, SearchExpression)
+    case field(SearchField, SearchExpression)
 
     var hasPositionalWitnesses: Bool {
         switch self {
         case .term, .phrase: true
         case .disjunction(let a, let b), .proximity(_, let a, let b): a.hasPositionalWitnesses && b.hasPositionalWitnesses
+        case .field(_, let child): child.hasPositionalWitnesses
         case .conjunction, .negation: false
+        }
+    }
+    public var requiredFields: Set<SearchField> {
+        switch self {
+        case .field(let field, let child): child.requiredFields.union([field])
+        case .conjunction(let a, let b), .disjunction(let a, let b), .proximity(_, let a, let b): a.requiredFields.union(b.requiredFields)
+        case .negation(let a): a.requiredFields
+        case .term, .phrase: []
         }
     }
     public var requiresVerseContext: Bool {
         switch self {
         case .proximity(let op, let a, let b): op.unit == .verses || a.requiresVerseContext || b.requiresVerseContext
         case .conjunction(let a, let b), .disjunction(let a, let b): a.requiresVerseContext || b.requiresVerseContext
-        case .negation(let a): a.requiresVerseContext
+        case .negation(let a), .field(_, let a): a.requiresVerseContext
         case .term, .phrase: false
         }
     }
@@ -93,7 +103,7 @@ public struct SearchQueryError: Error, LocalizedError, Equatable, Sendable {
         case unexpectedClosingParenthesis, unclosedParenthesis
         case unterminatedPhrase, invalidEscape, emptyPhrase, unsupportedSyntax
         case sourceLimit, operandLimit, nodeLimit, nestingLimit, invalidLimits
-        case invalidDistance, invalidProximityOperand
+        case invalidDistance, invalidProximityOperand, nestedField
     }
     public let code: Code
     public let range: SearchTextRange
@@ -132,6 +142,7 @@ public enum SearchQueryParser {
     private enum TokenKind: Equatable {
         case term(String), phrase(String), and, or, not, left, right, end
         case proximity(SearchProximity.Direction, Int?, SearchProximity.Unit), within
+        case field(SearchField)
     }
     private struct Token {
         let kind: TokenKind
@@ -175,43 +186,50 @@ public enum SearchQueryParser {
                 } else {
                     while cursor < scalars.count,
                           !CharacterSet.whitespacesAndNewlines.contains(scalars[cursor]),
-                          scalars[cursor] != "(", scalars[cursor] != ")", scalars[cursor] != "\"" {
+                          scalars[cursor] != "(", scalars[cursor] != ")", scalars[cursor] != "\"", scalars[cursor] != ":" {
                         cursor += 1
                     }
                     let text = String(String.UnicodeScalarView(scalars[start..<cursor]))
                     let kind: TokenKind
-                    switch text {
-                    case "AND": kind = .and
-                    case "OR": kind = .or
-                    case "NOT": kind = .not
-                    case "WITHIN": kind = .within
-                    case "NEAR": kind = .proximity(.either, 48, .characters)
-                    case "BEFORE": kind = .proximity(.before, nil, .characters)
-                    case "AFTER": kind = .proximity(.after, nil, .characters)
-                    default:
-                        let operatorHead = text.split(separator: "/", maxSplits: 1).first.map(String.init) ?? text
-                        if ["NEAR", "BEFORE", "AFTER"].contains(operatorHead), text.contains("/") {
-                            let pieces = text.split(separator: "/", omittingEmptySubsequences: false)
-                            guard pieces.count == 2, !pieces[1].isEmpty, pieces[1].allSatisfy({ $0.isASCII && $0.isNumber }),
-                                  let distance = Int(pieces[1]), distance <= 1_000_000 else {
-                                throw SearchQueryError(.invalidDistance, range: range(start, cursor), "Proximity distance must be an integer from 0 to 1000000.")
+                    if cursor < scalars.count, scalars[cursor] == ":" {
+                        guard let field = SearchField(rawValue: text) else {
+                            throw SearchQueryError(.unsupportedSyntax, range: range(start, cursor + 1), "Unknown search field. Supported fields: title, body, footnote, heading, bible, quote.")
+                        }
+                        cursor += 1; kind = .field(field)
+                    } else {
+                        switch text {
+                        case "AND": kind = .and
+                        case "OR": kind = .or
+                        case "NOT": kind = .not
+                        case "WITHIN": kind = .within
+                        case "NEAR": kind = .proximity(.either, 48, .characters)
+                        case "BEFORE": kind = .proximity(.before, nil, .characters)
+                        case "AFTER": kind = .proximity(.after, nil, .characters)
+                        default:
+                            let operatorHead = text.split(separator: "/", maxSplits: 1).first.map(String.init) ?? text
+                            if ["NEAR", "BEFORE", "AFTER"].contains(operatorHead), text.contains("/") {
+                                let pieces = text.split(separator: "/", omittingEmptySubsequences: false)
+                                guard pieces.count == 2, !pieces[1].isEmpty, pieces[1].allSatisfy({ $0.isASCII && $0.isNumber }),
+                                      let distance = Int(pieces[1]), distance <= 1_000_000 else {
+                                    throw SearchQueryError(.invalidDistance, range: range(start, cursor), "Proximity distance must be an integer from 0 to 1000000.")
+                                }
+                                let direction: SearchProximity.Direction = operatorHead == "BEFORE" ? .before : operatorHead == "AFTER" ? .after : .either
+                                tokens.append(.init(kind: .proximity(direction, distance, .words), range: range(start, cursor)))
+                                guard tokens.count <= limits.maximumNodes * 3 else { throw SearchQueryError(.nodeLimit, range: range(start, cursor), "Query exceeds the token budget.") }
+                                continue
                             }
-                            let direction: SearchProximity.Direction = operatorHead == "BEFORE" ? .before : operatorHead == "AFTER" ? .after : .either
-                            tokens.append(.init(kind: .proximity(direction, distance, .words), range: range(start, cursor)))
-                            guard tokens.count <= limits.maximumNodes * 3 else { throw SearchQueryError(.nodeLimit, range: range(start, cursor), "Query exceeds the token budget.") }
-                            continue
+                            let unsupported = ["FOLLOWEDBY", "PRECEDEDBY", "FOLLOWED-BY", "PRECEDED-BY", "XOR", "IMPLIES", "IFF", "ANDNOT", "AND-NOT"]
+                            guard !unsupported.contains(operatorHead),
+                                  scalars[start..<cursor].allSatisfy({ Self.isTermScalar($0) }) else {
+                                throw SearchQueryError(.unsupportedSyntax, range: range(start, cursor),
+                                    "Unsupported query syntax. Quote literal punctuation; unknown fields, wildcards and other unsupported operators are not evaluated as text.")
+                            }
+                            guard range(start, cursor).length <= limits.maximumOperandUTF16 else {
+                                throw SearchQueryError(.operandLimit, range: range(start, cursor),
+                                                       "Term exceeds the UTF-16 operand limit.")
+                            }
+                            kind = .term(text)
                         }
-                        let unsupported = ["FOLLOWEDBY", "PRECEDEDBY", "FOLLOWED-BY", "PRECEDED-BY", "XOR", "IMPLIES", "IFF", "ANDNOT", "AND-NOT"]
-                        guard !unsupported.contains(operatorHead),
-                              scalars[start..<cursor].allSatisfy({ Self.isTermScalar($0) }) else {
-                            throw SearchQueryError(.unsupportedSyntax, range: range(start, cursor),
-                                "Unsupported query syntax. Quote literal punctuation; fields, wildcards and other unsupported operators are not evaluated as text.")
-                        }
-                        guard range(start, cursor).length <= limits.maximumOperandUTF16 else {
-                            throw SearchQueryError(.operandLimit, range: range(start, cursor),
-                                                   "Term exceeds the UTF-16 operand limit.")
-                        }
-                        kind = .term(text)
                     }
                     tokens.append(Token(kind: kind, range: range(start, cursor)))
                 }
@@ -374,6 +392,11 @@ public enum SearchQueryParser {
             }
             let token = current
             switch token.kind {
+            case .field(let field):
+                cursor += 1
+                let child = try parseUnary(depth: depth + 1)
+                guard child.requiredFields.isEmpty else { throw SearchQueryError(.nestedField, range: token.range, "Keep different field clauses outside each other's scopes.") }
+                return try node(.field(field, child), at: token.range)
             case let .term(text):
                 cursor += 1
                 return try node(.term(.init(text: text, sourceRange: token.range)), at: token.range)

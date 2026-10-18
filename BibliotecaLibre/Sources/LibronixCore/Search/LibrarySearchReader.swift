@@ -16,7 +16,7 @@ actor LibrarySearchReader: LibrarySearchContentProvider {
             let prepared = try await prepare(inner)
             let result = LibrarySearchPreparedResource(articles: prepared.articles,
                 sourceStamps: prepared.sourceStamps + [original], warnings: prepared.warnings,
-                projectionVersion: prepared.projectionVersion)
+                projectionVersion: prepared.projectionVersion, availableFields: prepared.availableFields)
             try verify(result); embeddedSources[resource.id] = inner
             return result
         }
@@ -25,13 +25,18 @@ actor LibrarySearchReader: LibrarySearchContentProvider {
         let indexURL = resource.indexLocation ?? resource.location.deletingPathExtension().appendingPathExtension("LIX")
         var stamps = [sourceStamp]
         var warnings: [String] = []
-        var titles: [Int: String] = [:]
+        var titles: [Int: String] = [:], actualTitles: [Int: [String]] = [:]
+        var titleDirectoryKnown = false
         if FileManager.default.fileExists(atPath: indexURL.path) {
             stamps.append(try stamp(indexURL))
             do {
                 let directory = try await contentService.directory(resource.location, indexURL: indexURL)
-                for entry in directory.entries where titles[entry.sectionOrdinal] == nil {
-                    titles[entry.sectionOrdinal] = entry.displayTitle
+                titleDirectoryKnown = true
+                for entry in directory.entries {
+                    if titles[entry.sectionOrdinal] == nil { titles[entry.sectionOrdinal] = entry.displayTitle }
+                    if let title = entry.title, !title.isEmpty, !actualTitles[entry.sectionOrdinal, default: []].contains(title) {
+                        actualTitles[entry.sectionOrdinal, default: []].append(title)
+                    }
                 }
                 warnings.append(contentsOf: directory.warnings)
             } catch is CancellationError { throw CancellationError() }
@@ -44,8 +49,9 @@ actor LibrarySearchReader: LibrarySearchContentProvider {
         }
         let prepared = LibrarySearchPreparedResource(
             articles: sectionIndex.sections.map {
-                .init(sectionOrdinal: $0.ordinal, title: titles[$0.ordinal] ?? "Artículo \($0.ordinal + 1)")
-            }, sourceStamps: stamps, warnings: warnings, projectionVersion: "core-legacy-reference-links-v1")
+                .init(sectionOrdinal: $0.ordinal, title: titles[$0.ordinal] ?? "Artículo \($0.ordinal + 1)",
+                      sourceTitles: titleDirectoryKnown ? actualTitles[$0.ordinal, default: []] : nil)
+            }, sourceStamps: stamps, warnings: warnings, projectionVersion: "core-legacy-source-fields-v2", availableFields: [.body, .title, .bibleText])
         try verify(prepared)
         return prepared
     }
@@ -70,7 +76,9 @@ actor LibrarySearchReader: LibrarySearchContentProvider {
         try verify(prepared)
         guard content.descriptor.ordinal == article.sectionOrdinal else { throw LibrarySearchError.invalidArticleDirectory }
         return .init(text: content.plainText, warnings: warnings, referenceAnchors: content.anchors,
-                     referenceLinks: resolution.links.compactMap(BibleReferenceSourceLink.init))
+                     referenceLinks: resolution.links.compactMap(BibleReferenceSourceLink.init),
+                     fieldDirectory: .init(regions: [.body: content.plainText.isEmpty ? [] : [.init(location: 0, length: content.plainText.utf16.count)]],
+                                           externalValues: article.sourceTitles.map { [.title: $0] }))
     }
 
     func verifyUnchanged(_ resource: LibraryResource, prepared: LibrarySearchPreparedResource) async throws {
