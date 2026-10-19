@@ -25,9 +25,12 @@ struct ParallelBibleSet: Codable, Identifiable, Equatable {
 struct ParallelBibleSetsSnapshot: Codable {
     var schemaVersion = 1
     var sets: [ParallelBibleSet] = []
+    var excludedAutomaticLanguages: [String]? = nil
     func validate() throws {
         guard schemaVersion == 1 else { throw PersonalStateError.futureVersion }
-        guard sets.count <= 128, Set(sets.map(\.id)).count == sets.count else { throw Self.invalid() }
+        guard (excludedAutomaticLanguages?.count ?? 0) <= 256,
+              excludedAutomaticLanguages?.allSatisfy({ !$0.isEmpty && $0.utf8.count <= 64 && !$0.contains("\0") }) ?? true,
+              sets.count <= 128, Set(sets.map(\.id)).count == sets.count else { throw Self.invalid() }
         for set in sets {
             guard !set.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
                   set.name.utf16.count <= 160, !set.name.contains("\0"), set.members.count <= 256,
@@ -48,6 +51,7 @@ struct ParallelBibleSetsSnapshot: Codable {
 /// Only owned group definitions are written. Membership does not move or modify books.
 @MainActor @Observable final class ParallelBibleSets {
     private(set) var sets: [ParallelBibleSet] = []
+    private(set) var excludedAutomaticLanguages: [String] = []
     private(set) var loadError: String?
     @ObservationIgnored private let file: PersonalStateFile<ParallelBibleSetsSnapshot>
     @ObservationIgnored private var canSave = false
@@ -61,7 +65,7 @@ struct ParallelBibleSetsSnapshot: Codable {
         canSave = false
         do {
             let next = try file.load() ?? .init()
-            try next.validate(); sets = next.sets; canSave = true; loadError = nil
+            try next.validate(); sets = next.sets; excludedAutomaticLanguages = next.excludedAutomaticLanguages ?? []; canSave = true; loadError = nil
         } catch { loadError = error.localizedDescription; throw error }
     }
     @discardableResult func create() throws -> UUID {
@@ -90,14 +94,22 @@ struct ParallelBibleSetsSnapshot: Codable {
         }
     }
     func remove(_ id: UUID) throws { try commit(sets.filter { $0.id != id }) }
+    func excludeAutomaticLanguage(_ code: String) throws {
+        try save(sets, excluded: Array(Set(excludedAutomaticLanguages + [code])).sorted())
+    }
+    func restoreAutomaticLanguages() throws { try save(sets, excluded: []) }
     private func edit(_ id: UUID, _ change: (inout ParallelBibleSet) -> Void) throws {
         guard let index = sets.firstIndex(where: { $0.id == id }) else { throw PersonalStateError.invalid(L("El grupo de Biblias ya no está disponible.")) }
         var next = sets; change(&next[index]); try commit(next)
     }
     private func commit(_ next: [ParallelBibleSet]) throws {
         guard canSave else { throw PersonalStateError.invalid(loadError ?? L("No se pudieron leer los grupos de Biblias.")) }
-        guard next != sets else { return }
-        let snapshot = ParallelBibleSetsSnapshot(sets: next)
-        try snapshot.validate(); try file.save(snapshot); sets = next; loadError = nil
+        try save(next, excluded: excludedAutomaticLanguages)
+    }
+    private func save(_ next: [ParallelBibleSet], excluded: [String]) throws {
+        guard canSave else { throw PersonalStateError.invalid(loadError ?? L("No se pudieron leer los grupos de Biblias.")) }
+        guard next != sets || excluded != excludedAutomaticLanguages else { return }
+        let snapshot = ParallelBibleSetsSnapshot(sets: next, excludedAutomaticLanguages: excluded)
+        try snapshot.validate(); try file.save(snapshot); sets = next; excludedAutomaticLanguages = excluded; loadError = nil
     }
 }

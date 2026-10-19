@@ -93,6 +93,12 @@ public final class LibronNativeDatabase {
         guard result == 0, written == size, Self.hash(decoded) == expected else { throw LibronError.invalid("Normalized record checksum mismatch") }
         return decoded
     }
+    public func referenceEntries() throws -> [(reference: String, ordinal: Int, offset: Int)] {
+        try rows("SELECT reference,ordinal,offset FROM bible_v1 ORDER BY ordinal,offset").compactMap { row in
+            guard row.count == 3, let ordinal = Int(row[1]), let offset = Int(row[2]) else { return nil }
+            return (row[0], ordinal, offset)
+        }
+    }
     public func clearReferences() throws { try execute("DELETE FROM bible_v1") }
     public func add(reference: String, ordinal: Int, offset: Int) throws {
         guard let q = LegacyPassageQuery.sourceReference(reference), ordinal >= 0, offset >= 0 else { return }

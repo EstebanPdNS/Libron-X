@@ -14,12 +14,13 @@ import LibronixCore
     func updateCommentaryFollowers(from source: ReaderSession, reference: String) {
         guard readers.contains(where: { $0 === source }),
               let key = LegacyPassageQuery.sourceReference(reference)?.normalizedKey else { return }
-        for target in readers where target.commentarySourceID == source.id && target.commentaryResourceID != source.resource.id {
+        for target in readers where target.commentarySourceID == source.id && target.commentaryResourceID != source.resource.id && LibronMetadata.deriving(target.resource).resourceType != "Comentario bíblico" {
             target.commentarySourceID = nil
         }
         let followers = readers.filter {
             $0.commentarySourceID == source.id && $0.followsCommentary &&
-            $0.commentaryResourceID == source.resource.id && $0.resource.id == source.resource.id
+            ($0.commentaryResourceID == source.resource.id && $0.resource.id == source.resource.id ||
+             LibronMetadata.deriving($0.resource).resourceType == "Comentario bíblico")
         }
         guard !followers.isEmpty else { return }
         let link = source.page?.inlineLinks.first {
@@ -30,6 +31,19 @@ import LibronixCore
             if let restored = target.commentaryRestoreReference {
                 target.commentaryRestoreReference = nil
                 if restored == reference { continue }
+            }
+            if LibronMetadata.deriving(target.resource).resourceType == "Comentario bíblico" {
+                let actualReference = source.currentReference ?? reference
+                target.commentaryReference = actualReference
+                guard let query = LegacyPassageQuery.sourceReference(actualReference) else { continue }
+                let chapter = "\(query.sourceBookKey) \(query.chapter):1"
+                if target.page?.destination.commentaryChapter == chapter, !target.isLoading {
+                    target.alignCommentary(to: actualReference); continue
+                }
+                if target.pendingCommentaryChapter == chapter && target.isLoading { continue }
+                target.pendingCommentaryChapter = chapter
+                target.load(.init(ordinal: 0, reference: actualReference, commentaryChapter: chapter), propagateReference: false, recordHistory: false)
+                continue
             }
             target.commentaryReference = reference
             if LibronNativeReader.location(source.resource) != nil,

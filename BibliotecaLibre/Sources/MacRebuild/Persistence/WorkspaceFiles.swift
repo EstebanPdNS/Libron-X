@@ -25,6 +25,7 @@ struct WorkspaceArchive: Codable {
         var commentaryResourceID: String? = nil
         var followsCommentary: Bool? = nil
         var commentaryReference: String? = nil
+        var commentaryFollowsActiveBible: Bool? = nil
     }
     var schemaVersion = 1
     var libraryRoot: URL?
@@ -53,7 +54,8 @@ struct WorkspaceArchive: Codable {
                 guard panes.indices.contains(source), source != index,
                       panes[source].commentaryResourceID == nil,
                       pane.commentaryResourceID == pane.resource.id,
-                      panes[source].resource.id == pane.commentaryResourceID else {
+                      (panes[source].resource.id == pane.commentaryResourceID ||
+                       LibronMetadata.deriving(pane.resource).resourceType == "Comentario bíblico") else {
                     throw PersonalStateError.invalid("El vínculo del comentario no es válido.")
                 }
             }
@@ -82,10 +84,10 @@ struct WorkspaceArchive: Codable {
                 locator: reader.showsLocator, articleLocator: reader.locatorIsArticle, scale: reader.textScale, selection: reader.committedSelection,
                 history: reader.history, historyIndex: reader.historyIndex, link: reader.linkGroup,
                 interlinearLines: reader.visibleInterlinearLines?.sorted(), viewportOffset: reader.viewportCharacterOffset, parallelSetID: reader.parallelSetID,
-                commentarySourceIndex: readers.firstIndex { $0.id == reader.commentarySourceID && $0.resource.id == reader.commentaryResourceID },
+                commentarySourceIndex: readers.firstIndex { $0.id == reader.commentarySourceID },
                 commentaryResourceID: reader.commentaryResourceID,
                 followsCommentary: reader.commentarySourceID == nil ? nil : reader.followsCommentary,
-                commentaryReference: reader.commentaryReference) },
+                commentaryReference: reader.commentaryReference, commentaryFollowsActiveBible: reader.commentaryFollowsActiveBible) },
             activeIndex: readers.firstIndex { $0.id == activeID }, referenceTargetIndex: readers.firstIndex { $0.id == referenceTargetID }, showsHome: showsHome,
             openingOrder: orderedReaders.compactMap { reader in readers.firstIndex { $0 === reader } })
     }
@@ -101,6 +103,7 @@ struct WorkspaceArchive: Codable {
             reader.locatorIsArticle = pane.articleLocator; reader.textScale = pane.scale; reader.linkGroup = pane.link
             reader.parallelSetID = pane.parallelSetID
             reader.commentaryResourceID = pane.commentaryResourceID
+            reader.commentaryFollowsActiveBible = pane.commentaryFollowsActiveBible ?? false
             reader.followsCommentary = pane.followsCommentary ?? true
             reader.commentaryReference = pane.commentaryReference
             reader.visibleInterlinearLines = pane.interlinearLines.map(Set.init)
@@ -115,6 +118,7 @@ struct WorkspaceArchive: Codable {
             let reader = readers[index]
             reader.commentarySourceID = readers[sourceIndex].id
             reader.commentaryResourceID = pane.commentaryResourceID
+            reader.commentaryFollowsActiveBible = pane.commentaryFollowsActiveBible ?? false
             reader.followsCommentary = pane.followsCommentary ?? true
             reader.commentaryReference = pane.commentaryReference
             reader.pendingCommentaryOrdinal = pane.destination?.ordinal

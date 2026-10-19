@@ -7,7 +7,25 @@ struct ReaderCommentaryToolbar: View {
     var body: some View {
         MacReaderToolbarSurface {
             HStack(spacing: 8) {
-                Image(systemName: "text.bubble").foregroundStyle(.secondary)
+                if LibronMetadata.deriving(reader.resource).resourceType == "Comentario bíblico" {
+                    MacReaderControlGroup {
+                        Menu {
+                            ForEach(workspace.commentaryResources) { resource in
+                                Button(resource.title) { workspace.openCommentary(resource, replacing: reader) }
+                            }
+                        } label: { MacToolbarLabel(reader.resource.title, "text.bubble") }
+                            .help(L("Elegir comentario bíblico"))
+                        Menu {
+                            Button(L("Biblia activa")) {
+                                workspace.chooseCommentarySource(nil, for: reader, activeBible: true)
+                            }
+                            ForEach(workspace.bibleReaders) { bible in
+                                Button(bible.resource.title) { workspace.chooseCommentarySource(bible, for: reader, activeBible: false) }
+                            }
+                        } label: { MacToolbarLabel(L("Biblia de origen"), "book") }
+                            .help(L("Biblia de origen"))
+                    }
+                } else { Image(systemName: "text.bubble").foregroundStyle(.secondary) }
                 Text(reader.commentaryReference ?? L("Comentarios")).font(.callout).lineLimit(1)
                 Spacer(minLength: 4)
                 MacReaderControlGroup {

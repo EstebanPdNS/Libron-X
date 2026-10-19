@@ -112,7 +112,7 @@ enum PaneArrangement { case cascade, horizontal, vertical }
     var bibleGroups: [ParallelBibleSet] {
         let bibles = availableResources.filter { LibronMetadata.deriving($0).resourceType == "Biblia" }
         let languages = Set(bibles.flatMap { LibronMetadata.deriving($0).languages }.map(LibraryLanguages.canonical)).sorted()
-        let automatic = languages.map { code -> ParallelBibleSet in
+        let automatic = languages.filter { !parallelBibleSets.excludedAutomaticLanguages.contains($0) }.map { code -> ParallelBibleSet in
             let hash = LibrarySearchService.textFingerprint("libron-language-group:" + code)
             let h = Array(hash.prefix(32))
             let groups = [String(h[0..<8]), String(h[8..<12]), String(h[12..<16]),
@@ -172,6 +172,10 @@ enum PaneArrangement { case cascade, horizontal, vertical }
         if activeID == reader.id, readers.last === reader, !reader.isMinimized, !showsHome { return }
         guard readers.contains(where: { $0 === reader }) else { return }
         reader.isMinimized = false; activeID = reader.id
+        if reader.canSynchronizeBible {
+            for follower in readers where follower.commentaryFollowsActiveBible { follower.commentarySourceID = reader.id }
+            if let reference = reader.currentReference { updateCommentaryFollowers(from: reader, reference: reference) }
+        }
         showsHome = false
         readers.removeAll { $0 === reader }; readers.append(reader)
     }
@@ -183,13 +187,25 @@ enum PaneArrangement { case cascade, horizontal, vertical }
         reader.frame.x += offset; reader.frame.y += offset
         reader.frame = reader.frame.constrained()
         readers.append(reader); readerOrder.append(reader.id); activeID = reader.id
-        if startReading { reader.load(destination ?? .init(ordinal: 0, prefersContentsStart: true)) }
+        if LibronMetadata.deriving(resource).resourceType == "Comentario bíblico" {
+            reader.commentaryResourceID = resource.id; reader.commentaryFollowsActiveBible = true
+            if startReading { openCommentary(resource, replacing: reader) }
+        } else if startReading {
+            if reader.canSynchronizeBible {
+                for follower in readers where follower.commentaryFollowsActiveBible { follower.commentarySourceID = reader.id }
+            }
+            reader.load(destination ?? .init(ordinal: 0, prefersContentsStart: true))
+        }
         return reader
     }
     func close(_ reader: ReaderSession) {
         reader.cancel(); readers.removeAll { $0 === reader }
         for follower in readers where follower.commentarySourceID == reader.id {
-            follower.commentarySourceID = nil
+            let replacement = follower.commentaryFollowsActiveBible ? bibleReaders.last : nil
+            follower.commentarySourceID = replacement?.id
+            if let replacement, let reference = replacement.currentReference {
+                updateCommentaryFollowers(from: replacement, reference: reference)
+            }
         }
         readerOrder.removeAll { $0 == reader.id }
         if activeID == reader.id { activeID = visibleReaders.last?.id }

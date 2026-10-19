@@ -33,6 +33,11 @@ struct LegacyBibleReferenceTests {
         let range = try BibleCopyPassage.parse("Génesis 4,1-3")
         #expect(range.start.key == "ge 4:1" && range.end.key == "ge 4:3" && !range.wholeChapter)
         #expect(try BibleCopyPassage.parse("Génesis 4").wholeChapter)
+        for book in ["1Sa", "2Sa", "1Ki", "2Ch", "1Co", "2Th", "3Jn"] {
+            let numbered = try BibleCopyPassage.parse("\(book) 1:1-\(book) 2:3")
+            #expect(numbered.start.bookKey == numbered.end.bookKey)
+            #expect(numbered.end.chapter == 2 && numbered.end.verse == 3)
+        }
     }
     @Test func serializedAddressesUseDatatypeBookIDsAndPreserveTheSourceEdition() {
         for (raw, expected) in [("bible+rvr60.1.4.1", "ge 4:1"), ("bible.64.1.1", "jn 1:1"),

@@ -44,6 +44,12 @@ struct MainWorkspaceToolbar: ToolbarContent {
         }
         if #available(macOS 26, *) { ToolbarSpacer(.fixed) }
         ToolbarItemGroup {
+            Menu {
+                ForEach(workspace.commentaryResources) { resource in
+                    Button(resource.title) { workspace.openCommentary(resource) }
+                }
+            } label: { MacToolbarMenuLabel(L("Comentarios bíblicos"), "text.bubble") }
+                .help(L("Comentarios bíblicos")).disabled(workspace.commentaryResources.isEmpty)
             MacToolbarButton(L("Diccionarios"), "character.book.closed") { workspace.dictionary.openInside(workspace: workspace) }
             MacToolbarButton(L("Buscar actualizaciones"), "arrow.down.circle") { AppUpdater.shared.check() }
             MacToolbarButton(L("Administrar recursos y licencias"), "lock.open") { workspace.activeTool = .resources }

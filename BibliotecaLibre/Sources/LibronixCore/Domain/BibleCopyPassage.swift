@@ -30,7 +30,7 @@ public struct BibleCopyPassage: Codable, Equatable, Sendable {
         if parts.count==2 {
             let suffix=parts[1]
             let expanded = suffix.allSatisfy(\.isNumber) ? "\(first.book) \(first.chapter):\(suffix)" : suffix.first?.isNumber == true ? "\(first.book) \(suffix)" : suffix
-            guard let query=LegacyPassageQuery.parse(expanded) else { throw BibleCopyError.invalidPassage };last=query
+            guard let query=LegacyPassageQuery.parse(suffix) ?? LegacyPassageQuery.parse(expanded) else { throw BibleCopyError.invalidPassage };last=query
         }
         if first.sourceBookKey==last.sourceBookKey && (last.chapter < first.chapter || last.chapter==first.chapter && last.verse < first.verse) { throw BibleCopyError.reversedPassage }
         return .init(original:text,start:.init(first),end:.init(last),wholeChapter:chapterOnly)

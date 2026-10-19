@@ -117,6 +117,7 @@ struct ReaderPage: Sendable {
             onTextSelection?(String(text[range]))
         }
     }
+    var commentaryFollowsActiveBible = false
     var commentarySourceID: UUID?
     var commentaryResourceID: String?
     var followsCommentary = true
@@ -750,3 +751,12 @@ actor ReaderStyleSource {
     }
 }
 
+
+@MainActor extension ReaderSession {
+    func replaceCommentaryResource(_ replacement: LibraryResource) {
+        cancel(); resource = replacement; page = nil; flowPages = []; history = []; historyIndex = -1
+        selectedRange = .init(location: 0, length: 0); viewportCharacterOffset = 0
+        pendingCommentaryOrdinal = nil; pendingCommentaryChapter = nil; commentaryRestoreReference = nil
+        commentaryResourceID = replacement.id; error = nil
+    }
+}

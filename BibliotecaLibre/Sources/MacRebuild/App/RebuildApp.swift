@@ -169,6 +169,9 @@ struct RebuildCommands: Commands {
             Button(L("Recursos asociados…")) { workspace.beginAssociatedResources() }
             Button(L("Bibliografía…")) { workspace.activeTool = .bibliography }
             Button(L("Duplicados y ediciones…")) { workspace.activeTool = .editions }
+            Menu(L("Comentarios bíblicos")) {
+                ForEach(workspace.commentaryResources) { resource in Button(resource.title) { workspace.openCommentary(resource) } }
+            }.disabled(workspace.commentaryResources.isEmpty)
             Button(L("Diccionarios")) { workspace.dictionary.openInside(workspace: workspace) }
             Button(L("Copiar versículos bíblicos…")) { workspace.activeTool = .bibleCopy }
             Button(L("Documentos de estudio…")) { workspace.activeTool = .documents }

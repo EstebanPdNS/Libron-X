@@ -29,6 +29,9 @@ struct ReaderHighlight: Identifiable, Codable, Equatable {
         reader.highlights = personal.highlights.filter { $0.resourceID == reader.resource.id }
         reader.onReadingPositionChange = { [weak self, weak reader] reference in
             guard let self, let reader else { return }
+            if self.activeID == reader.id, reader.canSynchronizeBible {
+                for follower in self.readers where follower.commentaryFollowsActiveBible { follower.commentarySourceID = reader.id }
+            }
             self.updateCommentaryFollowers(from: reader, reference: reader.commentaryViewportReference ?? reference)
         }
         reader.onReferenceNavigation = { [weak self, weak reader] reference in
@@ -46,6 +49,7 @@ struct ReaderHighlight: Identifiable, Codable, Equatable {
         copy.locatorIsArticle = reader.locatorIsArticle; copy.textScale = reader.textScale
         copy.parallelSetID = reader.parallelSetID
         copy.commentaryResourceID = reader.commentaryResourceID
+        copy.commentaryFollowsActiveBible = reader.commentaryFollowsActiveBible
         copy.commentaryReference = reader.commentaryReference
         copy.followsCommentary = false
         copy.visibleInterlinearLines = reader.visibleInterlinearLines

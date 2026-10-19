@@ -1,6 +1,12 @@
 # Changelog
 
-## Unreleased
+## v0.5 — 2026-10-19
+
+- Open independent Bible commentary panes with a resource selector, an explicit source Bible or active-Bible following, and pause/resume.
+- Preserve whole-chapter readings, explicit verse ranges, original articles, images, source links and restored cross-resource relationships.
+- Delete automatic language-based Bible groups persistently and restore them when needed.
+- Add an optional native resource pack containing public-domain commentaries by Barnes, Clarke, Jamieson–Fausset–Brown, Matthew Henry and Wesley, with source provenance.
+- Resolve explicitly named numbered books correctly at the end of Bible ranges.
 
 - Normalize original superscript and symbol note links into the shared commentary system, preserving source typography, images and destinations.
 - Assemble every physical fragment of a chapter and keep chapter order correct when original articles overlap.

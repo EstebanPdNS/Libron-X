@@ -1,5 +1,13 @@
 [
   {
+    "version": "0.5",
+    "changes": [
+      "Comentarios independientes que siguen cualquier Biblia, con selección de recurso y pausa.",
+      "Notas de capítulo, artículos e imágenes sincronizados con el versículo visible.",
+      "Eliminar y restaurar grupos automáticos de Biblias por idioma."
+    ]
+  },
+  {
     "version": "0.4",
     "changes": [
       "Búsqueda de biblioteca con índices persistentes, rangos, campos, operadores y control de ejecución.",

@@ -46,6 +46,7 @@ struct LibronNormalizationReceipt: Codable {
 actor LibronNativeReader {
     static let shared = LibronNativeReader()
     private var headers: [URL: LibronNativeHeader] = [:]
+    var standaloneIndexes: [URL: [StandaloneCommentaryEntry]] = [:]
     var commentaryIndexes: [URL: [String: [String: Int]]] = [:]
     var commentaryChapters: [URL: [String: ReaderPage]] = [:]
     var commentaryBookChapters: [URL: [String]] = [:]

@@ -55,6 +55,9 @@ extension LibronNativeReader {
         return result
     }
     func readCommentaryChapter(_ resource: LibraryResource, _ requested: ReaderDestination) async throws -> ReaderPage {
+        if LibronMetadata.deriving(resource).resourceType == "Comentario bíblico" {
+            return try await readStandaloneCommentary(resource, requested)
+        }
         guard let chapter = requested.commentaryChapter.flatMap(LegacyPassageQuery.sourceReference),
               let url = Self.location(resource) else { throw RebuildError.referenceNotFound }
         let key = "\(chapter.sourceBookKey) \(chapter.chapter):1"

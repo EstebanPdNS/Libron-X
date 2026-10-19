@@ -1235,6 +1235,30 @@
     "ur": "بائبل",
     "zh-Hans": "圣经"
   },
+  "Biblia activa": {
+    "ar": "الكتاب المقدس النشط",
+    "bn": "সক্রিয় বাইবেল",
+    "en": "Active Bible",
+    "es": "Biblia activa",
+    "fr": "Bible active",
+    "hi": "सक्रिय बाइबल",
+    "id": "Alkitab aktif",
+    "pt": "Bíblia ativa",
+    "ur": "فعال بائبل",
+    "zh-Hans": "当前圣经"
+  },
+  "Biblia de origen": {
+    "ar": "الكتاب المقدس المصدر",
+    "bn": "উৎস বাইবেল",
+    "en": "Source Bible",
+    "es": "Biblia de origen",
+    "fr": "Bible source",
+    "hi": "स्रोत बाइबल",
+    "id": "Alkitab sumber",
+    "pt": "Bíblia de origem",
+    "ur": "اصل بائبل",
+    "zh-Hans": "来源圣经"
+  },
   "Biblias y texto bíblico": {
     "ar": "الكتاب المقدس ونصوصه",
     "bn": "বাইবেল ও বাইবেলের পাঠ",
@@ -2338,6 +2362,30 @@
     "pt": "Comentários",
     "ur": "تفسیر",
     "zh-Hans": "注释"
+  },
+  "Comentarios bíblicos": {
+    "ar": "تفاسير الكتاب المقدس",
+    "bn": "বাইবেলের ব্যাখ্যা",
+    "en": "Bible commentaries",
+    "es": "Comentarios bíblicos",
+    "fr": "Commentaires bibliques",
+    "hi": "बाइबल टीकाएँ",
+    "id": "Tafsiran Alkitab",
+    "pt": "Comentários bíblicos",
+    "ur": "بائبل کی تفاسیر",
+    "zh-Hans": "圣经注释"
+  },
+  "Comentarios independientes que siguen cualquier Biblia, con selección de recurso y pausa.": {
+    "ar": "تفاسير مستقلة تتبع أي كتاب مقدس، مع اختيار المورد والإيقاف المؤقت.",
+    "bn": "যেকোনো বাইবেল অনুসরণকারী স্বতন্ত্র ভাষ্য, রিসোর্স নির্বাচন ও বিরতিসহ।",
+    "en": "Independent commentaries that follow any Bible, with resource selection and pause.",
+    "es": "Comentarios independientes que siguen cualquier Biblia, con selección de recurso y pausa.",
+    "fr": "Commentaires indépendants suivant toute Bible, avec choix de ressource et pause.",
+    "hi": "किसी भी बाइबल का अनुसरण करने वाली स्वतंत्र टीकाएँ, संसाधन चयन और विराम सहित।",
+    "id": "Komentar mandiri yang mengikuti Alkitab mana pun, dengan pilihan sumber dan jeda.",
+    "pt": "Comentários independentes que acompanham qualquer Bíblia, com seleção de recurso e pausa.",
+    "ur": "آزاد تفسیریں جو کسی بھی بائبل کی پیروی کرتی ہیں، وسیلہ منتخب کرنے اور توقف کے ساتھ۔",
+    "zh-Hans": "独立注释可跟随任意圣经，支持选择资源和暂停。"
   },
   "Comentarios · {title}": {
     "ar": "التعليقات · {title}",
@@ -3707,6 +3755,18 @@
     "ur": ".lbxras فائل منتخب کریں…",
     "zh-Hans": "选择 .lbxras 文件…"
   },
+  "Elegir comentario bíblico": {
+    "ar": "اختيار تفسير للكتاب المقدس",
+    "bn": "বাইবেলের ব্যাখ্যা বেছে নিন",
+    "en": "Choose Bible commentary",
+    "es": "Elegir comentario bíblico",
+    "fr": "Choisir un commentaire biblique",
+    "hi": "बाइबल टीका चुनें",
+    "id": "Pilih tafsiran Alkitab",
+    "pt": "Escolher comentário bíblico",
+    "ur": "بائبل کی تفسیر منتخب کریں",
+    "zh-Hans": "选择圣经注释"
+  },
   "Elegir edición": {
     "ar": "اختيار طبعة",
     "bn": "সংস্করণ বেছে নিন",
@@ -3910,6 +3970,18 @@
     "pt": "Remover versículo",
     "ur": "آیت ہٹائیں",
     "zh-Hans": "移除经文"
+  },
+  "Eliminar y restaurar grupos automáticos de Biblias por idioma.": {
+    "ar": "حذف مجموعات الكتاب المقدس التلقائية حسب اللغة واستعادتها.",
+    "bn": "ভাষাভিত্তিক স্বয়ংক্রিয় বাইবেল গোষ্ঠী মুছুন ও পুনরুদ্ধার করুন।",
+    "en": "Delete and restore automatic Bible groups by language.",
+    "es": "Eliminar y restaurar grupos automáticos de Biblias por idioma.",
+    "fr": "Supprimer et restaurer les groupes automatiques de Bibles par langue.",
+    "hi": "भाषा के अनुसार बने स्वचालित बाइबल समूह मिटाएँ और पुनर्स्थापित करें।",
+    "id": "Hapus dan pulihkan kelompok Alkitab otomatis berdasarkan bahasa.",
+    "pt": "Excluir e restaurar grupos automáticos de Bíblias por idioma.",
+    "ur": "زبان کے لحاظ سے خودکار بائبل گروہ حذف اور بحال کریں۔",
+    "zh-Hans": "删除和恢复按语言自动生成的圣经分组。"
   },
   "Empieza por": {
     "ar": "يبدأ بـ",
@@ -6623,6 +6695,18 @@
     "ur": "حاشیے",
     "zh-Hans": "脚注"
   },
+  "Notas de capítulo, artículos e imágenes sincronizados con el versículo visible.": {
+    "ar": "ملاحظات الإصحاح والمقالات والصور متزامنة مع الآية الظاهرة.",
+    "bn": "অধ্যায়ের টীকা, প্রবন্ধ ও ছবি দৃশ্যমান পদের সঙ্গে সমন্বিত।",
+    "en": "Chapter notes, articles and images synchronized with the visible verse.",
+    "es": "Notas de capítulo, artículos e imágenes sincronizados con el versículo visible.",
+    "fr": "Notes de chapitre, articles et images synchronisés avec le verset visible.",
+    "hi": "अध्याय की टिप्पणियाँ, लेख और चित्र दिखाई देने वाले पद से समन्वित हैं।",
+    "id": "Catatan bab, artikel, dan gambar tersinkron dengan ayat yang terlihat.",
+    "pt": "Notas de capítulo, artigos e imagens sincronizados com o versículo visível.",
+    "ur": "باب کے نوٹس، مضامین اور تصاویر نظر آنے والی آیت کے ساتھ ہم آہنگ ہیں۔",
+    "zh-Hans": "章节注释、文章和图片与可见经节同步。"
+  },
   "Notas y referencias": {
     "ar": "الملاحظات والمراجع",
     "bn": "টীকা ও সূত্র",
@@ -7810,6 +7894,18 @@
     "pt": "Redefinir prioridades",
     "ur": "ترجیحات بحال کریں",
     "zh-Hans": "重置优先级"
+  },
+  "Restaurar grupos por idioma": {
+    "ar": "استعادة مجموعات اللغات",
+    "bn": "ভাষার দলগুলি পুনরুদ্ধার করুন",
+    "en": "Restore language groups",
+    "es": "Restaurar grupos por idioma",
+    "fr": "Restaurer les groupes par langue",
+    "hi": "भाषा समूह पुनर्स्थापित करें",
+    "id": "Pulihkan grup bahasa",
+    "pt": "Restaurar grupos por idioma",
+    "ur": "زبان کے گروپ بحال کریں",
+    "zh-Hans": "恢复语言分组"
   },
   "Restaurar las lecturas anteriores": {
     "ar": "استعادة القراءات السابقة",

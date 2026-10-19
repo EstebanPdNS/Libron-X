@@ -34,7 +34,7 @@ struct ParallelBibleSettingsView: View {
                             .listRowInsets(EdgeInsets(top: 6, leading: 10, bottom: 6, trailing: 10))
                             .tag(set.id)
                             .contextMenu {
-                                Button(L("Eliminar grupo"), systemImage: "trash", role: .destructive) { removeGroup(set.id) }.disabled(set.automaticLanguage != nil)
+                                Button(L("Eliminar grupo"), systemImage: "trash", role: .destructive) { removeGroup(set.id) }
                             }
                     }
                     .listStyle(.inset)
@@ -60,7 +60,7 @@ struct ParallelBibleSettingsView: View {
                             Text(L("Nombre del grupo")).font(.headline)
                             Spacer()
                             Menu {
-                                Button(L("Eliminar grupo"), systemImage: "trash", role: .destructive) { removeGroup(selected.id) }.disabled(selected.automaticLanguage != nil)
+                                Button(L("Eliminar grupo"), systemImage: "trash", role: .destructive) { removeGroup(selected.id) }
                             } label: { Label(L("Acciones del grupo"), systemImage: "ellipsis.circle") }
                                 .labelStyle(.iconOnly).menuIndicator(.hidden).controlSize(.small)
                                 .help(L("Acciones del grupo"))
@@ -98,6 +98,9 @@ struct ParallelBibleSettingsView: View {
                     }
                 }.padding(.leading, 10).frame(minWidth: 350)
             }.padding(.trailing, 20)
+            if !sets.excludedAutomaticLanguages.isEmpty {
+                Button(L("Restaurar grupos por idioma")) { perform { try sets.restoreAutomaticLanguages() } }.padding(.horizontal, 20)
+            }
             if loading { ProgressView(L("Leyendo las Biblias disponibles…")).controlSize(.small).padding(.horizontal, 20) }
             if let error = error ?? sets.loadError {
                 HStack {
@@ -121,7 +124,10 @@ struct ParallelBibleSettingsView: View {
     }
     private func removeGroup(_ id: UUID) {
         perform {
-            try sets.remove(id)
+            if let language = workspace.bibleGroups.first(where: { $0.id == id })?.automaticLanguage {
+                try sets.excludeAutomaticLanguage(language)
+            } else { try sets.remove(id) }
+            for reader in workspace.readers where reader.parallelSetID == id { reader.parallelSetID = nil }
             if selectedSetID == id { selectedSetID = workspace.bibleGroups.first?.id }
         }
     }

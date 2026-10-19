@@ -106,7 +106,8 @@ struct InternalReaderPane: View {
                 HStack { MacToolbarLabel(L("Error de lectura"), "exclamationmark.triangle"); Text(error).textSelection(.enabled); Spacer() }
                     .font(.callout).padding(10).background(Color.orange.opacity(0.12))
             }
-            if reader.commentarySourceID != nil, reader.page == nil, !reader.isLoading,
+            if reader.commentarySourceID != nil, !reader.isLoading,
+               (reader.page == nil || reader.page?.destination.commentaryChapter != nil && reader.commentaryReference.flatMap(LegacyPassageQuery.sourceReference).flatMap({ reader.page?.commentaryLocations[$0.normalizedKey] }) == nil),
                reader.error == nil, let reference = reader.commentaryReference {
                 Text(LF("No hay comentario para {reference}.", ["reference": reference]))
                     .foregroundStyle(.secondary).textSelection(.enabled).padding(12)
