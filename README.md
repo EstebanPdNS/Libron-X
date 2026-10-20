@@ -13,6 +13,8 @@
   <img src="docs/images/libron-x-v0.1-bibles-map-rounded.png" alt="Libron-X on a MacBook Pro, with two Bibles, a map and the macOS Dock" width="1200">
 </p>
 
+This project was developed with the help of [OpenAI Codex](https://openai.com/codex/) and [Claude Code](https://claude.com/product/claude-code). Learn more about the development process [here](AI_DEVELOPMENT.md).
+
 ## Download
 
 <a href="https://github.com/EstebanPdNS/Libron-X/releases/download/v0.5/Libron-X-v0.5.zip"><img src="docs/images/download-beta.svg" alt="Download macOS beta" width="238" height="46"></a>
