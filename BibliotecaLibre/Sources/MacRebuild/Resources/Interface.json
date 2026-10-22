@@ -347,6 +347,18 @@
     "ur": "گروپ کی کارروائیاں",
     "zh-Hans": "分组操作"
   },
+  "Acentos": {
+    "ar": "علامات التشكيل",
+    "bn": "উচ্চারণচিহ্ন",
+    "en": "Accents",
+    "es": "Acentos",
+    "fr": "Accents",
+    "hi": "स्वराघात चिह्न",
+    "id": "Aksen",
+    "pt": "Acentos",
+    "ur": "اعراب",
+    "zh-Hans": "重音符号"
+  },
   "Aceptar": {
     "ar": "موافق",
     "bn": "ঠিক আছে",
@@ -2195,6 +2207,18 @@
     "ur": "بائبلی دائرہ",
     "zh-Hans": "圣经范围"
   },
+  "Cobertura parcial: no se puede confirmar la ausencia de versículos.": {
+    "ar": "التغطية جزئية: لا يمكن تأكيد الآيات المفقودة.",
+    "bn": "আংশিক অনুসন্ধান: অনুপস্থিত পদ নিশ্চিত করা যায় না।",
+    "en": "Partial coverage: missing verses cannot be confirmed.",
+    "es": "Cobertura parcial: no se puede confirmar la ausencia de versículos.",
+    "fr": "Couverture partielle : les versets absents ne peuvent pas être confirmés.",
+    "hi": "आंशिक कवरेज: अनुपस्थित पदों की पुष्टि नहीं की जा सकती।",
+    "id": "Cakupan parsial: ayat yang hilang tidak dapat dipastikan.",
+    "pt": "Cobertura parcial: não é possível confirmar versículos ausentes.",
+    "ur": "جزوی جانچ: غائب آیات کی تصدیق نہیں کی جا سکتی۔",
+    "zh-Hans": "覆盖不完整：无法确认哪些经节缺失。"
+  },
   "Coincidencia": {
     "ar": "المطابقة",
     "bn": "মিল",
@@ -2470,6 +2494,42 @@
     "pt": "Comentários · {title}",
     "ur": "تفسیر · {title}",
     "zh-Hans": "注释 · {title}"
+  },
+  "Comparar": {
+    "ar": "مقارنة",
+    "bn": "তুলনা করুন",
+    "en": "Compare",
+    "es": "Comparar",
+    "fr": "Comparer",
+    "hi": "तुलना करें",
+    "id": "Bandingkan",
+    "pt": "Comparar",
+    "ur": "موازنہ کریں",
+    "zh-Hans": "比较"
+  },
+  "Comparar pasajes bíblicos": {
+    "ar": "مقارنة المقاطع الكتابية",
+    "bn": "বাইবেলের অংশ তুলনা করুন",
+    "en": "Compare Bible passages",
+    "es": "Comparar pasajes bíblicos",
+    "fr": "Comparer des passages bibliques",
+    "hi": "बाइबल अंशों की तुलना करें",
+    "id": "Bandingkan perikop Alkitab",
+    "pt": "Comparar passagens bíblicas",
+    "ur": "بائبل کے اقتباسات کا موازنہ",
+    "zh-Hans": "比较圣经段落"
+  },
+  "Comparar pasajes bíblicos…": {
+    "ar": "مقارنة المقاطع الكتابية…",
+    "bn": "বাইবেলের অংশ তুলনা করুন…",
+    "en": "Compare Bible passages…",
+    "es": "Comparar pasajes bíblicos…",
+    "fr": "Comparer des passages bibliques…",
+    "hi": "बाइबल अंशों की तुलना करें…",
+    "id": "Bandingkan perikop Alkitab…",
+    "pt": "Comparar passagens bíblicas…",
+    "ur": "بائبل کے اقتباسات کا موازنہ…",
+    "zh-Hans": "比较圣经段落…"
   },
   "Compilación": {
     "ar": "البنية",
@@ -3695,6 +3755,18 @@
     "ur": "رپورٹ کسی وسیلے یا کتب خانے کے کیٹلاگ کی جگہ نہیں لے سکتی۔",
     "zh-Hans": "报告不能覆盖资源或书库目录。"
   },
+  "El informe todavía no está completo.": {
+    "ar": "لم يكتمل التقرير بعد.",
+    "bn": "প্রতিবেদন এখনো সম্পূর্ণ হয়নি।",
+    "en": "The report is not complete yet.",
+    "es": "El informe todavía no está completo.",
+    "fr": "Le rapport n'est pas encore terminé.",
+    "hi": "रिपोर्ट अभी पूरी नहीं है।",
+    "id": "Laporan belum selesai.",
+    "pt": "O relatório ainda não está completo.",
+    "ur": "رپورٹ ابھی مکمل نہیں ہوئی۔",
+    "zh-Hans": "报告尚未完成。"
+  },
   "El lector de este formato todavía no está implementado en la nueva aplicación.": {
     "ar": "لم يُنفّذ قارئ لهذا التنسيق بعد في التطبيق الجديد.",
     "bn": "নতুন অ্যাপে এই বিন্যাসের পাঠক এখনও বাস্তবায়িত হয়নি।",
@@ -3778,6 +3850,18 @@
     "pt": "O serviço original de desbloqueio de licenças ainda não tem uma implementação verificada.",
     "ur": "اصل لائسنس کھولنے کی خدمت کا تصدیق شدہ نفاذ ابھی دستیاب نہیں۔",
     "zh-Hans": "原版许可证解锁服务尚无经过验证的实现。"
+  },
+  "El texto supera el límite de comparación. Selecciona un pasaje más corto.": {
+    "ar": "يتجاوز النص حد المقارنة. اختر مقطعًا أقصر.",
+    "bn": "লেখা তুলনার সীমা ছাড়িয়েছে। ছোট অংশ নির্বাচন করুন।",
+    "en": "The text exceeds the comparison limit. Select a shorter passage.",
+    "es": "El texto supera el límite de comparación. Selecciona un pasaje más corto.",
+    "fr": "Le texte dépasse la limite de comparaison. Choisissez un passage plus court.",
+    "hi": "पाठ तुलना सीमा से अधिक है। छोटा अंश चुनें।",
+    "id": "Teks melebihi batas perbandingan. Pilih perikop yang lebih pendek.",
+    "pt": "O texto excede o limite de comparação. Selecione uma passagem menor.",
+    "ur": "متن موازنے کی حد سے زیادہ ہے۔ چھوٹا اقتباس منتخب کریں۔",
+    "zh-Hans": "文本超出比较限制，请选择更短的段落。"
   },
   "El tipo, idioma o serie de la asociación no es válido.": {
     "ar": "نوع الارتباط أو لغته أو سلسلته غير صالح.",
@@ -4510,6 +4594,18 @@
     "pt": "Exportar",
     "ur": "برآمد کریں",
     "zh-Hans": "导出"
+  },
+  "Exportar CSV…": {
+    "ar": "تصدير CSV…",
+    "bn": "CSV রপ্তানি করুন…",
+    "en": "Export CSV…",
+    "es": "Exportar CSV…",
+    "fr": "Exporter en CSV…",
+    "hi": "CSV निर्यात करें…",
+    "id": "Ekspor CSV…",
+    "pt": "Exportar CSV…",
+    "ur": "CSV برآمد کریں…",
+    "zh-Hans": "导出 CSV…"
   },
   "Exportar bibliografía": {
     "ar": "تصدير قائمة المراجع",
@@ -6575,6 +6671,18 @@
     "ur": "برابر نہیں ہے",
     "zh-Hans": "不等于"
   },
+  "No hay Biblias compatibles en la biblioteca.": {
+    "ar": "لا توجد كتب مقدسة متوافقة في المكتبة.",
+    "bn": "লাইব্রেরিতে কোনো সামঞ্জস্যপূর্ণ বাইবেল নেই।",
+    "en": "There are no compatible Bibles in the library.",
+    "es": "No hay Biblias compatibles en la biblioteca.",
+    "fr": "La bibliothèque ne contient aucune Bible compatible.",
+    "hi": "पुस्तकालय में कोई संगत बाइबल नहीं है।",
+    "id": "Tidak ada Alkitab yang kompatibel di perpustakaan.",
+    "pt": "Não há Bíblias compatíveis na biblioteca.",
+    "ur": "لائبریری میں کوئی موافق بائبل نہیں ہے۔",
+    "zh-Hans": "书库中没有兼容的圣经。"
+  },
   "No hay comentario para {reference}.": {
     "ar": "لا يوجد تعليق على {reference}.",
     "bn": "{reference} এর জন্য কোনো ভাষ্য নেই।",
@@ -6670,6 +6778,18 @@
     "pt": "Nenhuma referência correspondente encontrada.",
     "ur": "کوئی مماثل حوالہ نہیں ملا۔",
     "zh-Hans": "未找到匹配的引用。"
+  },
+  "No se encontraron referencias en el rango solicitado.": {
+    "ar": "لم يُعثر على مراجع ضمن النطاق المطلوب.",
+    "bn": "অনুরোধকৃত পরিসরে কোনো উদ্ধৃতি পাওয়া যায়নি।",
+    "en": "No references were found in the requested range.",
+    "es": "No se encontraron referencias en el rango solicitado.",
+    "fr": "Aucune référence trouvée dans la plage demandée.",
+    "hi": "अनुरोधित सीमा में कोई संदर्भ नहीं मिला।",
+    "id": "Tidak ditemukan referensi dalam rentang yang diminta.",
+    "pt": "Não foram encontradas referências no intervalo solicitado.",
+    "ur": "مطلوبہ دائرے میں کوئی حوالہ نہیں ملا۔",
+    "zh-Hans": "在指定范围内未找到经文。"
   },
   "No se encontró esta referencia en el recurso.": {
     "ar": "لم يُعثر على هذا المرجع في المورد.",
@@ -7103,6 +7223,18 @@
     "ur": "پوشیدہ",
     "zh-Hans": "已隐藏"
   },
+  "Omisión": {
+    "ar": "حذف",
+    "bn": "বর্জন",
+    "en": "Omission",
+    "es": "Omisión",
+    "fr": "Omission",
+    "hi": "लोप",
+    "id": "Penghilangan",
+    "pt": "Omissão",
+    "ur": "حذف",
+    "zh-Hans": "省略"
+  },
   "Opciones de búsqueda": {
     "ar": "خيارات البحث",
     "bn": "অনুসন্ধানের বিকল্প",
@@ -7391,6 +7523,18 @@
     "ur": "حصہ {current} از {total}",
     "zh-Hans": "第 {current} 部分，共 {total} 部分"
   },
+  "Pasaje, capítulo o libro": {
+    "ar": "مقطع أو إصحاح أو سفر",
+    "bn": "অংশ, অধ্যায় বা পুস্তক",
+    "en": "Passage, chapter or book",
+    "es": "Pasaje, capítulo o libro",
+    "fr": "Passage, chapitre ou livre",
+    "hi": "अंश, अध्याय या पुस्तक",
+    "id": "Perikop, pasal, atau kitab",
+    "pt": "Passagem, capítulo ou livro",
+    "ur": "اقتباس، باب یا کتاب",
+    "zh-Hans": "段落、章节或书卷"
+  },
   "Pasaje, por ejemplo Juan 1:1-5": {
     "ar": "مقطع، مثل John 1:1-5",
     "bn": "পাঠাংশ, যেমন John 1:1-5",
@@ -7642,6 +7786,18 @@
     "pt": "Propriedades…",
     "ur": "خصوصیات…",
     "zh-Hans": "属性…"
+  },
+  "Puntuación": {
+    "ar": "علامات الترقيم",
+    "bn": "বিরামচিহ্ন",
+    "en": "Punctuation",
+    "es": "Puntuación",
+    "fr": "Ponctuation",
+    "hi": "विराम चिह्न",
+    "id": "Tanda baca",
+    "pt": "Pontuação",
+    "ur": "رموز اوقاف",
+    "zh-Hans": "标点符号"
   },
   "Párrafos": {
     "ar": "فقرات",
@@ -8387,6 +8543,18 @@
     "ur": "کھلے قارئین کے مکمل وسائل میں تلاش ہوتی ہے، جن میں کم سے کم کیے گئے قارئین بھی شامل ہیں۔",
     "zh-Hans": "搜索已打开阅读器的完整资源，包括已最小化的阅读器。"
   },
+  "Se comparan las referencias de cada edición. No se convierten las versificaciones. Las diferencias de espacios se omiten.": {
+    "ar": "تُقارن مراجع كل طبعة. لا يُحوّل ترقيم الآيات، وتُتجاهل اختلافات المسافات.",
+    "bn": "প্রতিটি সংস্করণের উদ্ধৃতি তুলনা করা হয়। পদসংখ্যা পরিবর্তন করা হয় না। ফাঁকের পার্থক্য উপেক্ষা করা হয়।",
+    "en": "Each edition's references are compared. Verse numbering is not converted. Spacing differences are ignored.",
+    "es": "Se comparan las referencias de cada edición. No se convierten las versificaciones. Las diferencias de espacios se omiten.",
+    "fr": "Les références de chaque édition sont comparées. La numérotation des versets n'est pas convertie. Les différences d'espacement sont ignorées.",
+    "hi": "हर संस्करण के संदर्भों की तुलना होती है। पद क्रमांकन नहीं बदला जाता। रिक्त स्थान के अंतर अनदेखे किए जाते हैं।",
+    "id": "Referensi setiap edisi dibandingkan. Penomoran ayat tidak dikonversi. Perbedaan spasi diabaikan.",
+    "pt": "As referências de cada edição são comparadas. A numeração dos versículos não é convertida. Diferenças de espaços são ignoradas.",
+    "ur": "ہر ایڈیشن کے حوالوں کا موازنہ ہوتا ہے۔ آیات کی نمبرنگ تبدیل نہیں ہوتی۔ خالی جگہوں کے فرق نظر انداز ہوتے ہیں۔",
+    "zh-Hans": "比较各版本的经文引用，不转换经节编号，并忽略空格差异。"
+  },
   "Se conservarán el documento original, su procedencia, el orden y los miembros ausentes. La relación elegida se aplicará a todos los grupos del archivo.": {
     "ar": "سيُحتفظ بالمستند الأصلي ومصدره والترتيب والأعضاء المفقودين. تنطبق العلاقة المختارة على جميع مجموعات الملف.",
     "bn": "মূল নথি, তার উৎস, ক্রম ও অনুপস্থিত সদস্য বজায় থাকবে। নির্বাচিত সম্পর্ক ফাইলের সব দলে প্রযোজ্য হবে।",
@@ -8458,6 +8626,18 @@
     "pt": "Selecione arquivos ou adicione uma pasta. Os pacotes .libron terão metadados e conteúdo. Escolha Sim para copiar originais para backup ou Não para não copiar. Reative a pergunta em Biblioteca.",
     "ur": "فائلیں چنیں یا فولڈر شامل کریں۔ میٹاڈیٹا اور مواد والے .libron پیکج بنیں گے۔ اصل کو backup میں نقل کرنے کے لیے ہاں، ورنہ نہیں چنیں۔ لائبریری میں سوال دوبارہ فعال کر سکتے ہیں۔",
     "zh-Hans": "选择文件或添加文件夹。系统将创建含元数据和内容的 .libron 包。选择“是”将原件复制到 backup，选择“否”跳过副本。可在书库设置中重新启用询问。"
+  },
+  "Selecciona entre una y dieciséis Biblias y una versión base.": {
+    "ar": "اختر من كتاب مقدس واحد إلى ستة عشر وترجمة أساسية.",
+    "bn": "এক থেকে ষোলোটি বাইবেল এবং একটি মূল সংস্করণ নির্বাচন করুন।",
+    "en": "Select one to sixteen Bibles and a base version.",
+    "es": "Selecciona entre una y dieciséis Biblias y una versión base.",
+    "fr": "Sélectionnez une à seize Bibles et une version de référence.",
+    "hi": "एक से सोलह बाइबल और एक आधार संस्करण चुनें।",
+    "id": "Pilih satu hingga enam belas Alkitab dan satu versi acuan.",
+    "pt": "Selecione de uma a dezesseis Bíblias e uma versão base.",
+    "ur": "ایک سے سولہ بائبل اور ایک بنیادی ترجمہ منتخب کریں۔",
+    "zh-Hans": "请选择一至十六本圣经及一个基准版本。"
   },
   "Selecciona recursos para la bibliografía.": {
     "ar": "اختر موارد لقائمة المراجع.",
@@ -8998,6 +9178,18 @@
     "pt": "Superior esquerdo",
     "ur": "اوپر بائیں",
     "zh-Hans": "左上角"
+  },
+  "Sustitución": {
+    "ar": "استبدال",
+    "bn": "প্রতিস্থাপন",
+    "en": "Substitution",
+    "es": "Sustitución",
+    "fr": "Substitution",
+    "hi": "प्रतिस्थापन",
+    "id": "Penggantian",
+    "pt": "Substituição",
+    "ur": "تبدیلی",
+    "zh-Hans": "替换"
   },
   "Sí": {
     "ar": "نعم",
@@ -9647,6 +9839,18 @@
     "ur": "تصدیق کریں",
     "zh-Hans": "验证"
   },
+  "Versiones bíblicas": {
+    "ar": "ترجمات الكتاب المقدس",
+    "bn": "বাইবেলের সংস্করণ",
+    "en": "Bible versions",
+    "es": "Versiones bíblicas",
+    "fr": "Versions bibliques",
+    "hi": "बाइबल संस्करण",
+    "id": "Versi Alkitab",
+    "pt": "Versões bíblicas",
+    "ur": "بائبل کے تراجم",
+    "zh-Hans": "圣经译本"
+  },
   "Versión anterior": {
     "ar": "الترجمة السابقة",
     "bn": "আগের সংস্করণ",
@@ -9658,6 +9862,18 @@
     "pt": "Versão anterior",
     "ur": "پچھلا ترجمہ",
     "zh-Hans": "上一版本"
+  },
+  "Versión base": {
+    "ar": "الترجمة الأساسية",
+    "bn": "মূল সংস্করণ",
+    "en": "Base version",
+    "es": "Versión base",
+    "fr": "Version de référence",
+    "hi": "आधार संस्करण",
+    "id": "Versi acuan",
+    "pt": "Versão base",
+    "ur": "بنیادی ترجمہ",
+    "zh-Hans": "基准版本"
   },
   "Versión de Biblia anterior": {
     "ar": "ترجمة الكتاب المقدس السابقة",
@@ -9730,6 +9946,30 @@
     "pt": "Versículo",
     "ur": "آیت",
     "zh-Hans": "节"
+  },
+  "Versículo ausente en esta edición.": {
+    "ar": "الآية غير موجودة في هذه الطبعة.",
+    "bn": "এই সংস্করণে পদটি নেই।",
+    "en": "Verse missing from this edition.",
+    "es": "Versículo ausente en esta edición.",
+    "fr": "Verset absent de cette édition.",
+    "hi": "इस संस्करण में यह पद अनुपस्थित है।",
+    "id": "Ayat tidak ada dalam edisi ini.",
+    "pt": "Versículo ausente nesta edição.",
+    "ur": "یہ آیت اس ایڈیشن میں موجود نہیں ہے۔",
+    "zh-Hans": "此版本缺少该节。"
+  },
+  "Versículo sin verificar en esta edición.": {
+    "ar": "لم تُتحقق الآية في هذه الطبعة.",
+    "bn": "এই সংস্করণে পদটি যাচাই করা হয়নি।",
+    "en": "Verse unverified in this edition.",
+    "es": "Versículo sin verificar en esta edición.",
+    "fr": "Verset non vérifié dans cette édition.",
+    "hi": "इस संस्करण में इस पद का सत्यापन नहीं हुआ।",
+    "id": "Ayat belum diverifikasi dalam edisi ini.",
+    "pt": "Versículo não verificado nesta edição.",
+    "ur": "اس ایڈیشن میں اس آیت کی تصدیق نہیں ہوئی۔",
+    "zh-Hans": "尚未验证此版本中的该节。"
   },
   "Versículos bíblicos": {
     "ar": "آيات الكتاب المقدس",
@@ -10006,6 +10246,18 @@
     "pt": "{count} recursos selecionados",
     "ur": "{count} وسائل منتخب",
     "zh-Hans": "已选择 {count} 个资源"
+  },
+  "{count} referencias": {
+    "ar": "{count} مراجع",
+    "bn": "{count}টি উদ্ধৃতি",
+    "en": "{count} references",
+    "es": "{count} referencias",
+    "fr": "{count} références",
+    "hi": "{count} संदर्भ",
+    "id": "{count} referensi",
+    "pt": "{count} referências",
+    "ur": "{count} حوالے",
+    "zh-Hans": "{count} 处经文"
   },
   "{current} de {total}": {
     "ar": "{current} من {total}",

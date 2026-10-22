@@ -28,6 +28,7 @@ struct WorkspaceToolsView: View {
             case .associations: ResourceAssociationSettingsView(workspace: workspace)
             case .parallelSets: ParallelBibleSettingsView(workspace: workspace)
             case .keyLinks: KeyLinkView(workspace: workspace, controller: workspace.keyLinks)
+            case .passageComparison: PassageComparisonView(workspace: workspace, controller: workspace.passageComparison)
             }
         }.frame(minWidth: tool == .information ? 700 : 680, idealWidth: tool == .information ? 700 : 820,
                 minHeight: tool == .information ? nil : tool == .bibliography ? 640 : tool == .search ? 680 : expandedScope ? 620 : 520,
@@ -58,6 +59,7 @@ struct WorkspaceToolsView: View {
         case .associations: "Asociaciones de recursos"
         case .parallelSets: "Grupos de Biblias paralelas"
         case .keyLinks: "Enlaces clave"
+        case .passageComparison: "Comparar pasajes bíblicos"
         }
     }
 }

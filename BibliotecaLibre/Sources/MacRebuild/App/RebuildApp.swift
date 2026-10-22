@@ -169,6 +169,7 @@ struct RebuildCommands: Commands {
             Button(L("Organizar favoritos…")) { workspace.activeTool = .favorites }
         }
         CommandMenu(L("Herramientas")) {
+            Button(L("Comparar pasajes bíblicos…")) { workspace.activeTool = .passageComparison }
             Button(L("Enlaces clave…")) { workspace.activeTool = .keyLinks }
             Button(L("Asociaciones de recursos…")) { workspace.activeTool = .associations }
             Button(L("Recursos asociados…")) { workspace.beginAssociatedResources() }

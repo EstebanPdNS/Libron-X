@@ -49,6 +49,7 @@ enum PaneArrangement { case cascade, horizontal, vertical }
     var availableBibleVersions: [LibraryResource] = []
     var resourcePriorities: ResourcePriorities
     var keyLinks = KeyLinkController()
+    var passageComparison = PassageComparisonController()
     var associationNavigation = AssociationNavigationController()
     var bibliography = BibliographyController()
     var editions = LibraryEditionsController()
@@ -159,6 +160,7 @@ enum PaneArrangement { case cascade, horizontal, vertical }
         // Invalidate results from the old scope before accepting another search.
         search.clear()
         keyLinks.clear()
+        passageComparison.invalidate()
         associationNavigation.cancel()
         referenceSearch.clear()
         if !availableResources.contains(where: { $0.id == search.resourceID }) { search.resourceID = nil }
@@ -317,6 +319,7 @@ enum PaneArrangement { case cascade, horizontal, vertical }
         bibleVersionTask?.cancel()
         search.cancel()
         keyLinks.cancel()
+        passageComparison.cancel()
         associationNavigation.cancel()
         bibliography.cancel()
         referenceSearch.cancel()
