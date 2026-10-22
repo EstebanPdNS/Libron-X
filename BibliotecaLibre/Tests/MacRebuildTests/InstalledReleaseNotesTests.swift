@@ -14,14 +14,15 @@ struct InstalledReleaseNotesTests {
         }
         let earlier = try #require(InstalledReleaseNotes.current(version: "0.1"))
         #expect(earlier.changes != notes.changes)
-        let current = try #require(InstalledReleaseNotes.current(version: "0.5.1"))
-        #expect(current.changes.count == 4)
+        let current = try #require(InstalledReleaseNotes.current(version: "0.5"))
+        #expect(current.changes.count == 7)
         for key in current.changes {
             for language in AppLanguage.allCases {
                 #expect(AppStrings.catalog[key]?[language.rawValue]?.isEmpty == false)
             }
         }
         #expect(InstalledReleaseNotes.current(version: "0.1.1-beta.2") == nil)
+        #expect(InstalledReleaseNotes.current(version: "0.5.1") == nil)
         #expect(InstalledReleaseNotes.current(version: "99.0.0") == nil)
     }
 }

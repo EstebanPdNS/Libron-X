@@ -9,7 +9,7 @@ Documentation applies to the current beta source; historical verification record
 - [Source map](source-map.md): every maintained source file, grouped by responsibility.
 - [Bibliographies, citations and editions](library-reports.md): reports, citation templates and reversible duplicate review.
 - [Resource download codes](../BibliotecaLibre/docs/resource-download-codes.md): encrypted collections, public hosting and installation checks.
-- [Verification](verification-v0.1.md): checks performed for this beta.
+- [Verification](verification-v0.5.md): checks performed for the current beta.
 - [Contributing](../CONTRIBUTING.md): small changes and useful bug reports.
 
 The organization follows [Code Atlas](https://code-atlas.estebanpdn.chatgpt.site/), especially D01–D04, D07, D12 and D14–D18: brief entry points, explicit responsibilities, preserved attribution and evidence tied to a release.

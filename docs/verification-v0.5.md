@@ -1,11 +1,12 @@
-# Verification: v0.5.1
+# Verification: v0.5
 
 Checked on 2026-10-21 with Swift 6.4, an arm64 Mac and macOS 27.
-The installed bundle reports version 0.5.1, build 99 and the Beta channel.
+The installed bundle reports version 0.5, build 100 and the Beta channel.
 
-- The general suite passed: 909 tests in 159 suites. Private-corpus checks require
+- The general suite passed serially: 909 tests in 159 suites. Private-corpus checks require
   their explicit inputs; this run is not exhaustive acceptance of original books.
-- Nine focused localization/release-note checks passed after catalog regeneration.
+- Localization and release-note checks passed within the general suite.
+- Startup fixtures inject an isolated catalog instead of reading the developer’s library.
 - The Icedrive transport downloaded a public encrypted object without cookies or
   credentials and matched an independently recorded SHA-256.
 - All 19 final collection codes and the one-resource probe downloaded exactly the
@@ -20,6 +21,7 @@ The installed bundle reports version 0.5.1, build 99 and the Beta channel.
 - Authored regressions cover code authentication, malformed provider responses,
   file identity/size checks, safe paths, compression, repeated installation and
   repair from the verified cache.
+- The rebuilt app opened as v0.5, build 100, with the previous reading restored.
 - The release build and strict bundle signature verification passed. The embedded
   distribution key matched the existing encrypted catalogs without adding the key
   or any private library files to the public repository.

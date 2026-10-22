@@ -4,6 +4,8 @@ import Testing
 @testable import MacRebuild
 
 @MainActor struct WorkspaceStartupTests {
+    // Fixture snapshots must not be replaced by the developer’s managed library.
+    // Tests that exercise catalog loading inject their own loader below.
     private func preferences(_ defaults: UserDefaults, mode: AppStartup) -> AppPreferences {
         let value = AppPreferences(defaults: defaults, applyAppearance: { _ in }); value.startup = mode; return value
     }
@@ -26,7 +28,7 @@ import Testing
         #expect(try store.load() == nil); try store.save(snapshot)
         let name = "org.libronx.startup-tests." + UUID().uuidString, defaults = try #require(UserDefaults(suiteName: name))
         defer { defaults.removePersistentDomain(forName: name) }
-        let workspace = StudyWorkspace(), coordinator = WorkspaceStartupCoordinator(store: WorkspaceStartupStore(url: url))
+        let workspace = StudyWorkspace(), coordinator = WorkspaceStartupCoordinator(store: WorkspaceStartupStore(url: url), managedCatalog: { _ in nil })
         #expect(!(await coordinator.launch(workspace, preferences: preferences(defaults, mode: .restorePrevious), arguments: [])))
         try await wait(workspace)
         let restored = try #require(workspace.readers.first)
@@ -44,7 +46,7 @@ import Testing
         let name = "org.libronx.startup-tests." + UUID().uuidString, defaults = try #require(UserDefaults(suiteName: name))
         defer { defaults.removePersistentDomain(forName: name) }
         for mode in [AppStartup.blank, .home, .library] {
-            let workspace = StudyWorkspace(), coordinator = WorkspaceStartupCoordinator(store: WorkspaceStartupStore(url: url))
+            let workspace = StudyWorkspace(), coordinator = WorkspaceStartupCoordinator(store: WorkspaceStartupStore(url: url), managedCatalog: { _ in nil })
             let openLibrary = await coordinator.launch(workspace, preferences: preferences(defaults, mode: mode), arguments: [])
             #expect(openLibrary == (mode == .library) && workspace.readers.isEmpty && workspace.resources == snapshot.resources)
             #expect(workspace.showsHome == (mode == .home) && workspace.error == nil)
@@ -60,13 +62,13 @@ import Testing
         defer { defaults.removePersistentDomain(forName: name) }
         let preference = preferences(defaults, mode: .workspace); preference.startupWorkspaceURL = chosenURL
         let workspace = StudyWorkspace(recentWorkspaces: RecentWorkspaces(url: fixture.root.appendingPathComponent("recents.json")))
-        await WorkspaceStartupCoordinator(store: .init(url: fixture.root.appendingPathComponent("last.json"))).launch(workspace, preferences: preference, arguments: [])
+        await WorkspaceStartupCoordinator(store: .init(url: fixture.root.appendingPathComponent("last.json")), managedCatalog: { _ in nil }).launch(workspace, preferences: preference, arguments: [])
         try await wait(workspace)
         #expect(workspace.readers.first?.resource == fixture.resources[1] && workspace.readers.first?.page?.text.contains("Chosen reading") == true)
         #expect(workspace.recentWorkspaces.urls == [chosenURL])
         preference.startupWorkspaceURL = nil
         let missing = StudyWorkspace()
-        await WorkspaceStartupCoordinator(store: .init(url: fixture.root.appendingPathComponent("last2.json"))).launch(missing, preferences: preference, arguments: [])
+        await WorkspaceStartupCoordinator(store: .init(url: fixture.root.appendingPathComponent("last2.json")), managedCatalog: { _ in nil }).launch(missing, preferences: preference, arguments: [])
         #expect(missing.error != nil && missing.readers.isEmpty)
     }
     @Test func pendingCatalogKeepsMainActorAvailableAndProtectsSavedSession() async throws {

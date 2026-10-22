@@ -1,19 +1,14 @@
 [
   {
-    "version": "0.5.1",
-    "changes": [
-      "Descarga de colecciones con códigos cifrados, comprobación de integridad y caché.",
-      "Notas personales vinculadas al texto, con edición y gestión desde Documentos.",
-      "Biblioteca ordenable y selección de recursos unificada.",
-      "Mejoras en comentarios, sincronización y navegación entre Biblias."
-    ]
-  },
-  {
     "version": "0.5",
     "changes": [
       "Comentarios independientes que siguen cualquier Biblia, con selección de recurso y pausa.",
       "Notas de capítulo, artículos e imágenes sincronizados con el versículo visible.",
-      "Eliminar y restaurar grupos automáticos de Biblias por idioma."
+      "Eliminar y restaurar grupos automáticos de Biblias por idioma.",
+      "Descarga de colecciones con códigos cifrados, comprobación de integridad y caché.",
+      "Notas personales vinculadas al texto, con edición y gestión desde Documentos.",
+      "Biblioteca ordenable y selección de recursos unificada.",
+      "Mejoras en comentarios, sincronización y navegación entre Biblias."
     ]
   },
   {
