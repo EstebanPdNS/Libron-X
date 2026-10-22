@@ -6,22 +6,7 @@ struct MainWorkspaceToolbar: ToolbarContent {
     @Environment(\.openWindow) private var openWindow
     @ToolbarContentBuilder var body: some ToolbarContent {
         leadingItems
-        ToolbarItemGroup {
-            Menu {
-                Button(L("Archivo de notas")) { workspace.newDocument(.notebook) }
-                Button(L("Lista de versículos")) { workspace.newDocument(.verseList) }
-            } label: { MacToolbarMenuLabel(L("Nuevo documento"), "square.and.pencil") }
-                .help(L("Nuevo documento"))
-            Menu {
-                Button(L("Documento de estudio…"), action: workspace.openDocument)
-                Button(L("Área de trabajo…"), action: workspace.openWorkspace)
-                Button(L("Carpeta de recursos…"), action: workspace.chooseLibrary)
-                Button(L("Abrir directorio actual")) { workspace.openCurrentResourceDirectory() }
-                    .disabled(workspace.currentResourceDirectory == nil)
-            } label: { MacToolbarMenuLabel(L("Abrir"), "folder") }.help(L("Abrir"))
-            MacToolbarButton(L("Cargar área de trabajo"), "rectangle.stack", action: workspace.openWorkspace)
-            MacToolbarButton(L("Guardar área de trabajo"), "square.and.arrow.down", action: workspace.saveWorkspace)
-        }
+        documentAndResourceItems
         if #available(macOS 26, *) { ToolbarSpacer(.fixed) }
         ToolbarItemGroup {
             ReaderZoomMenu(reader: workspace.activeReader)
@@ -44,15 +29,8 @@ struct MainWorkspaceToolbar: ToolbarContent {
         }
         if #available(macOS 26, *) { ToolbarSpacer(.fixed) }
         ToolbarItemGroup {
-            Menu {
-                ForEach(workspace.commentaryResources) { resource in
-                    Button(resource.title) { workspace.openCommentary(resource) }
-                }
-            } label: { MacToolbarMenuLabel(L("Comentarios bíblicos"), "text.bubble") }
-                .help(L("Comentarios bíblicos")).disabled(workspace.commentaryResources.isEmpty)
-            MacToolbarButton(L("Diccionarios"), "character.book.closed") { workspace.dictionary.openInside(workspace: workspace) }
-            MacToolbarButton(L("Buscar actualizaciones"), "arrow.down.circle") { AppUpdater.shared.check() }
-            MacToolbarButton(L("Administrar recursos y licencias"), "lock.open") { workspace.activeTool = .resources }
+            MacToolbarButton(L("Descargas"), "arrow.down.circle") { AppUpdater.shared.showsPanel = true }
+            MacToolbarButton(L("Administrar recursos y licencias"), "externaldrive") { workspace.activeTool = .resources }
             MacToolbarButton(L("Propiedades del recurso"), "info.circle") { workspace.activeTool = .information }
                 .disabled(workspace.activeReader == nil)
         }
@@ -60,6 +38,33 @@ struct MainWorkspaceToolbar: ToolbarContent {
             ToolbarItem(placement: .status) {
                 HStack { ProgressView().controlSize(.small); Text(workspace.importProgress).font(.caption) }
             }
+        }
+    }
+    @ToolbarContentBuilder private var documentAndResourceItems: some ToolbarContent {
+        ToolbarItemGroup {
+            Menu {
+                Button(L("Archivo de notas")) { workspace.newDocument(.notebook) }
+                Button(L("Lista de versículos")) { workspace.newDocument(.verseList) }
+            } label: { MacToolbarMenuLabel(L("Nuevo documento"), "square.and.pencil") }
+                .help(L("Nuevo documento"))
+        }
+        if #available(macOS 26, *) { ToolbarSpacer(.fixed) }
+        ToolbarItemGroup {
+            ForEach(StudyResourceKind.allCases, id: \.self) { kind in
+                StudyResourcePickerButton(workspace: workspace, kind: kind)
+            }
+        }
+        if #available(macOS 26, *) { ToolbarSpacer(.fixed) }
+        ToolbarItemGroup {
+            Menu {
+                Button(L("Documento de estudio…"), action: workspace.openDocument)
+                Button(L("Área de trabajo…"), action: workspace.openWorkspace)
+                Button(L("Carpeta de recursos…"), action: workspace.chooseLibrary)
+                Button(L("Abrir directorio actual")) { workspace.openCurrentResourceDirectory() }
+                    .disabled(workspace.currentResourceDirectory == nil)
+            } label: { MacToolbarMenuLabel(L("Abrir"), "folder") }.help(L("Abrir"))
+            MacToolbarButton(L("Cargar área de trabajo"), "rectangle.stack", action: workspace.openWorkspace)
+            MacToolbarButton(L("Guardar área de trabajo"), "square.and.arrow.down", action: workspace.saveWorkspace)
         }
     }
     @ToolbarContentBuilder private var leadingItems: some ToolbarContent {
@@ -296,11 +301,20 @@ struct ResourceReaderToolbar: View {
             if inMenu {
                 bookMenu(selected, inMenu: true)
                 chapterMenu(selected, inMenu: true)
+                if reader.strongVariant != nil { Toggle(L("Números Strong"), isOn: Binding(get: { reader.showsStrongNumbers }, set: { _ in perform(reader.toggleStrongNumbers) })) }
             } else {
                 MacReaderControlGroup {
                     bookMenu(selected, inMenu: false, compact: compact)
                     Divider().frame(height: 16)
                     chapterMenu(selected, inMenu: false, compact: compact)
+                    if reader.strongVariant != nil {
+                        Divider().frame(height: 16)
+                        Button { perform(reader.toggleStrongNumbers) } label: {
+                            Text("Strong").font(.body)
+                                .foregroundStyle(reader.showsStrongNumbers ? Color.accentColor : Color.primary)
+                        }.help(L("Números Strong")).accessibilityLabel(L("Números Strong"))
+                            .accessibilityValue(L(reader.showsStrongNumbers ? "Activado" : "Desactivado"))
+                    }
                 }
             }
         }
@@ -311,7 +325,7 @@ struct ResourceReaderToolbar: View {
                 Button(book.title(language: AppLanguage.saved())) { navigate(book, chapter: book.chapters.first ?? 1) }
             }
         } label: {
-            if compact { Image(systemName: "book.closed") }
+            if compact { StudyResourceIcon(kind: .bible) }
             else { Text(inMenu ? L("Libro") : selected.title(language: AppLanguage.saved())).lineLimit(1).frame(maxWidth: inMenu ? nil : 112) }
         }.help(L("Libro")).accessibilityLabel(L("Libro")).featureHelpTarget(.bibleReading)
     }

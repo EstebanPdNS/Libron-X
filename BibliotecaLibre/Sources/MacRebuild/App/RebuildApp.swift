@@ -73,7 +73,12 @@ struct RebuildCommands: Commands {
             Button(L("Buscar actualizaciones…")) { AppUpdater.shared.check() }
         }
         CommandGroup(replacing: .newItem) {
-            Button(L("Nuevo archivo de notas")) { workspace.newDocument(.notebook) }.keyboardShortcut("n")
+            Button(L("Nueva lectura")) {
+                if let reader = workspace.activeReader { workspace.duplicate(reader) }
+                else { openWindow(id: "library") }
+            }.keyboardShortcut("t")
+            Button(L("Agregar nota"), action: workspace.newNote).keyboardShortcut("n")
+            Button(L("Nuevo archivo de notas")) { workspace.newDocument(.notebook) }
             Button(L("Nueva lista de versículos")) { workspace.newDocument(.verseList) }
             Button(L("Abrir documento…"), action: workspace.openDocument).keyboardShortcut("o")
             Divider()
@@ -134,7 +139,7 @@ struct RebuildCommands: Commands {
     @CommandsBuilder private var studyCommands: some Commands {
         CommandMenu(L("Ir")) {
             Button(L("Mi biblioteca…")) { openWindow(id: "library") }
-            Button(L("Explorador temático…")) { workspace.activeTool = .topics }.keyboardShortcut("t")
+            Button(L("Explorador temático…")) { workspace.activeTool = .topics }
             Button(L("Sincronizar Biblias abiertas")) { workspace.synchronizeBibles() }.disabled(workspace.bibleReaders.count < 2)
             Divider()
             ParallelBibleMenu(workspace: workspace, reader: workspace.activeReader, toolbarPresentation: false)
@@ -197,8 +202,7 @@ struct RebuildCommands: Commands {
             Button(L("Borrar todos los vínculos"), action: workspace.clearLinks)
                 .disabled(!workspace.readers.contains { $0.linkGroup != .none })
             Button(L("Cerrar panel")) { if let reader = workspace.activeReader { workspace.close(reader) } }
-                // Option-Command-W belongs to the restored native Close All command.
-                .keyboardShortcut("w", modifiers: [.command, .control]).disabled(workspace.activeReader == nil)
+                .keyboardShortcut("w").disabled(workspace.activeReader == nil)
             Button(L("Cerrar todos los paneles"), action: workspace.closeAll).disabled(workspace.readers.isEmpty)
             Divider()
             Button(L("Cascada")) { workspace.arrange(.cascade) }.disabled(workspace.visibleReaders.isEmpty)

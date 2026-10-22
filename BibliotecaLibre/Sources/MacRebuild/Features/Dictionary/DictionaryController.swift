@@ -153,13 +153,16 @@ struct DictionaryMatch: Identifiable {
         }
     }
     func openInside(workspace: StudyWorkspace) {
-        popover?.close(); panel?.close()
         let resources = dictionaries(in: workspace)
         guard let resource = resources.first(where: { $0.id == resourceID }) ?? resources.first else { return }
+        openInside(resource: resource, workspace: workspace)
+    }
+    func openInside(resource: LibraryResource, workspace: StudyWorkspace) {
+        guard dictionaries(in: workspace).contains(where: { $0.id == resource.id }) else { return }
+        popover?.close(); panel?.close()
         let reader = workspace.readers.first(where: \.isDictionary) ?? workspace.open(resource, startReading: false)
-        internalReaderID = reader.id
-        if !word.isEmpty { reader.showDictionary(resource, word: word, page: page); workspace.connect(reader) }
-        else { reader.load(.init(ordinal: 0)) }
+        resourceID = resource.id
+        lookupInside(word, resource: resource, reader: reader, workspace: workspace, allowsFallback: false)
         workspace.activate(reader)
     }
     func lookupInside(_ word: String, resource: LibraryResource, reader: ReaderSession, workspace: StudyWorkspace, allowsFallback: Bool = true) {
@@ -304,7 +307,7 @@ struct DictionaryReaderToolbar: View {
         }
     }
     private var dictionaryMenu: some View {
-        Menu { dictionaryItems } label: { MacToolbarLabel("Grupo de diccionarios", "character.book.closed") }
+        Menu { dictionaryItems } label: { StudyResourceLabel(title: "Grupo de diccionarios", kind: .dictionary) }
             .menuIndicator(.hidden).help(L("Grupo de diccionarios")).disabled(choices.isEmpty)
     }
     private func search() {
@@ -315,7 +318,9 @@ struct DictionaryReaderToolbar: View {
     private var actions: some View {
         Menu {
             Button(L("Diccionario anterior"), systemImage: "chevron.left") { workspace.cycleDictionary(reader, backwards: true) }.disabled(!canCycle)
-            Menu(L("Grupo de diccionarios"), systemImage: "character.book.closed") { dictionaryItems }.disabled(choices.isEmpty)
+            Menu { dictionaryItems } label: {
+                Label { Text(L("Grupo de diccionarios")) } icon: { StudyResourceIcon(kind: .dictionary) }
+            }.disabled(choices.isEmpty)
             Button(L("Diccionario siguiente"), systemImage: "chevron.right") { workspace.cycleDictionary(reader) }.disabled(!canCycle)
             Divider()
             Button(L("Contenido")) { workspace.activate(reader); reader.showsContents.toggle() }

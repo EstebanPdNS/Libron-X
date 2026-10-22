@@ -59,7 +59,7 @@ struct StudyDesktop: View {
             HStack {
                 Text(workspace.activeReader?.resource.title ?? L("Listo")).lineLimit(1)
                 Spacer()
-                Text(LF("{panes} paneles · {resources} recursos", ["panes": String(workspace.readers.count), "resources": String(workspace.resources.count)]))
+                Text(LF("{panes} paneles · {resources} recursos", ["panes": String(workspace.readers.count), "resources": String(workspace.availableResources.count)]))
             }.font(.system(size: 11)).foregroundStyle(.secondary).padding(.horizontal, 10).frame(height: 23)
         }
         .background(BibleVersionKeyboardRouting(workspace: workspace))
@@ -67,7 +67,7 @@ struct StudyDesktop: View {
             await workspace.refreshBibleVersionChoices()
             await workspace.dictionary.prepare(workspace.availableResources)
         }
-        .sheet(isPresented: $updater.showsPanel) { UpdatePanel() }
+        .sheet(isPresented: $updater.showsPanel) { UpdatePanel(workspace: workspace) }
         .toolbar { MainWorkspaceToolbar(workspace: workspace) }
         .toolbarRole(.editor)
         .modifier(MacWorkspaceTitlePresentation())
@@ -134,6 +134,7 @@ struct InternalReaderPane: View {
                     ReaderArticleFlowView(reader: reader, workspace: workspace,
                         pages: reader.readingFlowPages, selectionRevision: reader.selectionRequest,
                         scale: reader.renderingScale, fontsRevision: reader.sourceFontsRevision,
+                        personalNotes: workspace.personal.noteLinks(for: reader.resource),
                         highlights: reader.highlights, visibleLines: reader.visibleInterlinearLines)
                     .frame(minWidth: 50)
                     .opacity(reader.textScale == 0 ? 0 : 1)

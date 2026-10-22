@@ -3,7 +3,7 @@
 <p align="center">A native Bible study library for Mac, compatible with supported Libronix, classic Logos, e-Sword and EPUB resources.</p>
 
 <p align="center">
-  <a href="https://github.com/EstebanPdNS/Libron-X/releases/tag/v0.5"><img src="docs/images/badges/prerelease.svg" alt="Prerelease: v0.5" height="22"></a>
+  <a href="https://github.com/EstebanPdNS/Libron-X/releases/tag/v0.5.1"><img src="docs/images/badges/prerelease.svg" alt="Prerelease: v0.5.1" height="22"></a>
   <a href="docs/getting-started.md"><img src="docs/images/badges/macos.svg" alt="macOS 14+ · Apple Silicon" height="22"></a>
   <a href="https://github.com/EstebanPdNS/Libron-X/commits/main/"><img src="docs/images/badges/development.svg" alt="Development: active" height="22"></a>
   <a href="LICENSE"><img src="docs/images/badges/license.svg" alt="License: MIT" height="22"></a>
@@ -17,9 +17,9 @@ This project was developed with the help of [OpenAI Codex](https://openai.com/co
 
 ## Download
 
-<a href="https://github.com/EstebanPdNS/Libron-X/releases/download/v0.5/Libron-X-v0.5.zip"><img src="docs/images/download-beta.svg" alt="Download macOS beta" width="238" height="46"></a>
+<a href="https://github.com/EstebanPdNS/Libron-X/releases/download/v0.5.1/Libron-X-v0.5.1.zip"><img src="docs/images/download-beta.svg" alt="Download macOS beta" width="238" height="46"></a>
 
-**v0.5 prerelease · macOS 14+ · Apple Silicon.** Move the app to Applications and follow the [installation guide](docs/getting-started.md).
+**v0.5.1 prerelease · macOS 14+ · Apple Silicon.** Move the app to Applications and follow the [installation guide](docs/getting-started.md).
 
 ## Features
 
@@ -29,7 +29,8 @@ This project was developed with the help of [OpenAI Codex](https://openai.com/co
 - Organize `.libron` resources with collections, priorities and associations.
 - Generate bibliographies, copy citations and review duplicate editions.
 - Look up words in twelve offline dictionaries.
-- Keep notes, highlights, favorites and saved workspaces.
+- Keep linked personal notes, highlights, favorites and saved workspaces.
+- Install encrypted resource collections with download codes, integrity checks and a reusable cache.
 - Copy, print and export supported content; use ten interface languages.
 
 Compatibility varies by resource. The optional [public-domain commentary pack](https://github.com/EstebanPdNS/Libron-X/releases/download/v0.5/Libron-X-v0.5-Commentaries.zip) adds five English classics. Original Libronix binaries and commercial books are not included.

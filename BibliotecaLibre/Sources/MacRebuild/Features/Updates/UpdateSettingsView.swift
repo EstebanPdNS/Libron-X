@@ -74,16 +74,76 @@ struct UpdateStatusView: View {
     }
 }
 struct UpdatePanel: View {
+    @Bindable var workspace: StudyWorkspace
     @Bindable var updater = AppUpdater.shared
+    @Bindable var downloads = ResourceDownloadController.shared
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack {
-                Label(L("Actualizaciones de Libron-X"), systemImage: "arrow.down.circle").font(.headline)
+                Label(L("Descargas"), systemImage: "arrow.down.circle").font(.headline)
                 Spacer()
-                Button(L("Listo")) { updater.showsPanel = false }.keyboardShortcut(.cancelAction)
+                Button(L("Cerrar")) { updater.showsPanel = false }.keyboardShortcut(.cancelAction)
             }
-            Text(updater.installedVersion + " · " + updater.channel.title).foregroundStyle(.secondary)
-            UpdateStatusView(updater: updater)
-        }.padding(20).frame(width: 460).modifier(MacPanelControlPresentation())
+            GroupBox(L("Actualizaciones de Libron-X")) {
+                VStack(alignment: .leading, spacing: 10) {
+                    Text(updater.installedVersion + " · " + updater.channel.title).foregroundStyle(.secondary)
+                    UpdateStatusView(updater: updater)
+                }.frame(maxWidth: .infinity, alignment: .leading).padding(8)
+            }
+            GroupBox(L("Código de descarga")) {
+                VStack(alignment: .leading, spacing: 12) {
+                    HStack {
+                        TextField(L("Pega tu código de descarga"), text: $downloads.codeText).macInputStyle()
+                            .accessibilityIdentifier("downloads.code").disabled(downloads.isBusy)
+                            .onSubmit(start)
+                        Button(L("Descargar recursos"), action: start)
+                            .disabled(downloads.isBusy || downloads.codeText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                    }
+                    if !downloads.status.isEmpty {
+                        HStack {
+                            if downloads.isBusy { ProgressView().controlSize(.small) }
+                            Text(L(downloads.status)).font(.callout)
+                            Spacer()
+                            if downloads.isBusy { Button(L("Cancelar")) { downloads.cancel() } }
+                        }
+                    }
+                    if let error = downloads.error { Text(L(error)).foregroundStyle(.red).textSelection(.enabled) }
+                    if !downloads.rows.isEmpty {
+                        HStack {
+                            Text(downloads.collectionTitle).font(.headline)
+                            Spacer()
+                            Text("\(downloads.finishedCount) / \(downloads.rows.count)").monospacedDigit().foregroundStyle(.secondary)
+                        }
+                        List(downloads.rows) { row in
+                            VStack(alignment: .leading, spacing: 5) {
+                                HStack {
+                                    Text(row.title).lineLimit(2)
+                                    Spacer()
+                                    if let outcome = row.outcome {
+                                        Image(systemName: outcome == .failed ? "exclamationmark.circle" : "checkmark.circle.fill")
+                                            .foregroundStyle(outcome == .failed ? Color.red : Color.green)
+                                    }
+                                }
+                                Text(L(row.status)).font(.caption).foregroundStyle(.secondary)
+                                if row.outcome == nil { ProgressView(value: row.progress) }
+                                if let detail = row.detail { Text(L(detail)).font(.caption).foregroundStyle(.red).textSelection(.enabled) }
+                            }.padding(.vertical, 5)
+                        }.listStyle(.inset).frame(minHeight: 190, maxHeight: 300)
+                    }
+                    if let result = downloads.result {
+                        HStack(spacing: 16) {
+                            Text(L("Nuevos") + ": \(result.new.count)")
+                            Text(L("Actualizados") + ": \(result.updated.count)")
+                            Text(L("Ya instalados") + ": \(result.installed.count)")
+                            Text(L("Fallidos") + ": \(result.failed.count)")
+                        }.font(.callout).textSelection(.enabled)
+                    }
+                }.padding(8)
+            }
+        }.padding(20).frame(width: 700).modifier(MacPanelControlPresentation())
+    }
+    private func start() {
+        let root = workspace.libraryRoot ?? LibraryPreferences.shared.directory
+        downloads.start(in: root) { hidden in workspace.reloadDownloadedResources(at: root, hiddenIDs: hidden) }
     }
 }

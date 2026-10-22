@@ -59,12 +59,26 @@ struct ReaderPage: Sendable {
     var isCommentary: Bool { commentaryResourceID != nil }
     var displayTitle: String { isCommentary ? LF("Comentarios · {title}", ["title": resource.title]) : resource.title }
     var isDictionary: Bool { LibronDictionaryIndex.supports(resource) }
+    var showsStrongNumbers = false
+    var strongVariant: LibraryResource? {
+        guard let location = resource.libron?.evidence.first(where: { $0.field == "strongVariantPackage" })?.value else { return nil }
+        let package = location.hasPrefix("/") ? URL(fileURLWithPath: location) :
+            resource.packageLocation?.deletingLastPathComponent().appendingPathComponent(location)
+        guard let package else { return nil }
+        return try? LibronPackage.read(package).1
+    }
+    var readingResource: LibraryResource { showsStrongNumbers ? strongVariant ?? resource : resource }
+    func toggleStrongNumbers() {
+        guard strongVariant != nil, let reference = currentReference else { return }
+        showsStrongNumbers.toggle()
+        load(.init(ordinal: page?.destination.ordinal ?? 0, reference: reference), recordHistory: false)
+    }
     var dictionaryWord = ""
     func clearDictionaryDefinition() {
         cancel(); page = nil; flowPages = []; dictionaryWord = ""; error = nil
     }
     func showDictionary(_ replacement: LibraryResource, word: String, page result: ReaderPage?) {
-        cancel(); resource = replacement; history = []; historyIndex = -1
+        cancel(); resource = replacement; showsStrongNumbers = false; history = []; historyIndex = -1
         flowPages = []; dictionaryWord = word
         if let result { commit(result); error = nil }
         else { page = nil; error = L("No se encontró una definición en este diccionario.") }
@@ -117,6 +131,8 @@ struct ReaderPage: Sendable {
             onTextSelection?(String(text[range]))
         }
     }
+    var commentaryChoiceIDs: Set<String> = []
+    var commentaryChoicesReference: String?
     var commentaryFollowsActiveBible = false
     var commentarySourceID: UUID?
     var commentaryResourceID: String?
@@ -302,6 +318,7 @@ struct ReaderPage: Sendable {
     func showFind() {
         let selected = selectedText
         if !selected.isEmpty && selected.utf16.count <= 512 { findQuery = selected }
+        NSApplication.shared.keyWindow?.makeFirstResponder(nil)
         showsFind = true; findFocusRequest += 1
     }
     func hideFind() { showsFind = false; cancelFind() }
@@ -332,6 +349,7 @@ struct ReaderPage: Sendable {
                                         direction: direction, options: findOptions,
                                         oebViewport: page.oeb == nil ? nil : .init(width: Double(oebWebView?.bounds.width ?? 760), zoom: renderingScale))
         findStatus = .searching; error = nil
+        let resource = readingResource
         findTask = Task { [weak self, resource, findLoader, loader] in
             do {
                 if incremental { try await Task.sleep(for: .milliseconds(100)) }
@@ -384,7 +402,7 @@ struct ReaderPage: Sendable {
         flowGeneration += 1; flowTask?.cancel(); flowTask = nil
         generation += 1; task?.cancel(); task = nil; isLoading = false; pendingOEBSelection = nil; cancelFind()
     }
-    func readForFlow(_ destination: ReaderDestination) async throws -> ReaderPage { try await loader(resource, destination) }
+    func readForFlow(_ destination: ReaderDestination) async throws -> ReaderPage { try await loader(readingResource, destination) }
     private func commit(_ result: ReaderPage, historyTarget: Int? = nil, recordHistory: Bool = true) {
         oebProjectionReady = false; pendingOEBSelection = nil; pendingOEBFind = nil
         page = result; locator = locatorIsArticle ? String(result.destination.ordinal + 1) : result.destination.reference ?? ""
@@ -409,6 +427,7 @@ struct ReaderPage: Sendable {
         cancel()
         let token = generation
         isLoading = true; error = nil
+        let resource = readingResource
         task = Task { [weak self, resource, loader] in
             do {
                 try LibrarySearchFileStamp.verify(expectedSourceStamps)
@@ -448,7 +467,7 @@ struct ReaderPage: Sendable {
     func installAssociation(_ match: KeyLinkMatch, mode: AssociationDestinationMode) throws {
         try LibrarySearchFileStamp.verify(match.stamps)
         guard match.page.destination.ordinal == match.destination.ordinal else { throw LegacyIndicesError.sourceChanged }
-        cancel(); resource = match.resource
+        cancel(); resource = match.resource; showsStrongNumbers = false
         history = []; historyIndex = -1; hasObservedBible = false
         visibleInterlinearLines = nil; presentationWarnings = []; findStatus = .idle
         parallelSetID = nil; linkGroup = .none; dictionaryWord = mode == .headword ? match.label : ""
@@ -491,7 +510,7 @@ struct ReaderPage: Sendable {
                 }
                 guard let self, self.generation == token, !Task.isCancelled else { return }
                 guard let (replacement, result) = resolved else { throw RebuildError.referenceNotFound }
-                self.resource = replacement
+                self.resource = replacement; self.showsStrongNumbers = false
                 self.history = []; self.historyIndex = -1
                 self.hasObservedBible = false; self.visibleInterlinearLines = nil
                 self.presentationWarnings = []; self.findStatus = .idle
@@ -571,14 +590,18 @@ struct ReaderPage: Sendable {
             selectedRange = NSRange(location: initialOffset, length: 0)
         }
     }
+    nonisolated static func matchesEdition(_ resource: LibraryResource, _ edition: String) -> Bool {
+        resource.location.deletingPathExtension().lastPathComponent.caseInsensitiveCompare(edition) == .orderedSame ||
+        resource.libron?.evidence.contains { $0.field == "editionAlias" && $0.value.caseInsensitiveCompare(edition) == .orderedSame } == true
+    }
     nonisolated static func read(_ resource: LibraryResource, _ requested: ReaderDestination) async throws -> ReaderPage {
-        if let edition = requested.requiredEdition, resource.location.deletingPathExtension().lastPathComponent.caseInsensitiveCompare(edition) != .orderedSame { throw RebuildError.referenceEditionUnavailable(edition) }
+        if let edition = requested.requiredEdition, !matchesEdition(resource, edition) { throw RebuildError.referenceEditionUnavailable(edition) }
         if LibronNativeReader.location(resource) != nil { return try await LibronNativeReader.shared.read(resource,requested) }
         return try await readOriginal(resource,requested)
     }
     nonisolated static func readOriginal(_ resource: LibraryResource, _ requested: ReaderDestination) async throws -> ReaderPage {
         if let edition = requested.requiredEdition,
-           resource.location.deletingPathExtension().lastPathComponent.caseInsensitiveCompare(edition) != .orderedSame {
+           !matchesEdition(resource, edition) {
             throw RebuildError.referenceEditionUnavailable(edition)
         }
         if resource.format == .libronDictionary {
@@ -754,7 +777,7 @@ actor ReaderStyleSource {
 
 @MainActor extension ReaderSession {
     func replaceCommentaryResource(_ replacement: LibraryResource) {
-        cancel(); resource = replacement; page = nil; flowPages = []; history = []; historyIndex = -1
+        cancel(); resource = replacement; showsStrongNumbers = false; page = nil; flowPages = []; history = []; historyIndex = -1
         selectedRange = .init(location: 0, length: 0); viewportCharacterOffset = 0
         pendingCommentaryOrdinal = nil; pendingCommentaryChapter = nil; commentaryRestoreReference = nil
         commentaryResourceID = replacement.id; error = nil

@@ -25,13 +25,33 @@ fi
 archive_dir="${LIBRONX_SOURCE_ARCHIVES:-$project_dir/.source-versions}"
 mkdir -p "$archive_dir"
 source_revision=$(date -u +%Y%m%dT%H%M%SZ)-$$
-tar --exclude=Resources/BundledDictionaries/sources --exclude=Resources/BundledDictionaries/candidates -czf "$archive_dir/Libron-X-source-$source_revision.tar.gz" Package.swift Sources Tests Resources Localization scripts docs LICENSE THIRD_PARTY_NOTICES.md
+# Dictionary packages are reproducible release dependencies, shared by every
+# source revision. Keep their catalog and notices without duplicating the payload.
+tar --exclude=Resources/BundledDictionaries/sources --exclude=Resources/BundledDictionaries/candidates --exclude=Resources/BundledDictionaries/Packages -czf "$archive_dir/Libron-X-source-$source_revision.tar.gz" Package.swift Sources Tests Resources Localization scripts docs LICENSE THIRD_PARTY_NOTICES.md
 if git rev-parse --git-dir >/dev/null 2>&1; then
     git rev-parse HEAD > "$archive_dir/Libron-X-source-$source_revision.git-head.txt"
     git diff --binary > "$archive_dir/Libron-X-source-$source_revision.patch"
 fi
 cache_dir="${LIBRONX_BUILD_DIR:-$project_dir/.build/macos-app}"
-swift build --scratch-path "$cache_dir" --build-system native -c release --product LibronXRebuild
+# A local private key is embedded in the executable, never copied into source or
+# uploaded with resource collections. Public source builds can omit this key.
+key_file="${LIBRONX_RESOURCE_KEY_FILE:-$HOME/Library/Application Support/Libron-X/Distribution/library-key.txt}"
+if [ -n "${LIBRONX_RESOURCE_KEY_FILE:-}" ] && [ ! -f "$key_file" ]; then
+    printf 'Resource key file does not exist.\n' >&2
+    exit 1
+fi
+if [ -f "$key_file" ]; then
+    mkdir -p "$cache_dir/private"
+    chmod 700 "$cache_dir/private"
+    tr -d '\r\n' < "$key_file" > "$cache_dir/private/library-key.bin"
+    chmod 600 "$cache_dir/private/library-key.bin"
+    LC_ALL=C grep -Eq '^[A-Za-z0-9]{30}$' "$cache_dir/private/library-key.bin" || { printf 'Resource key must contain 30 ASCII letters or digits.\n' >&2; exit 1; }
+    [ "$(wc -c < "$cache_dir/private/library-key.bin" | tr -d ' ')" = 30 ] || exit 1
+    swift build --scratch-path "$cache_dir" --build-system native -c release --product LibronXRebuild \
+        -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __lxkey -Xlinker "$cache_dir/private/library-key.bin"
+else
+    swift build --scratch-path "$cache_dir" --build-system native -c release --product LibronXRebuild
+fi
 binary_dir=$(swift build --scratch-path "$cache_dir" --build-system native -c release --show-bin-path)
 mkdir -p "$(dirname -- "$destination")"
 staging_dir=$(mktemp -d "$(dirname -- "$destination")/.libron-x-stage.XXXXXX")
@@ -63,9 +83,9 @@ cat > "$bundle_dir/Contents/Info.plist" <<'PLIST'
 <key>CFBundleName</key><string>Libron-X</string>
 <key>CFBundleDisplayName</key><string>Libron-X</string>
 <key>CFBundleIdentifier</key><string>org.libronx.mac.rebuild</string>
-<key>CFBundleVersion</key><string>80</string>
-<key>CFBundleShortVersionString</key><string>0.5.0</string>
-<key>LibronXReleaseVersion</key><string>0.5</string>
+<key>CFBundleVersion</key><string>99</string>
+<key>CFBundleShortVersionString</key><string>0.5.1</string>
+<key>LibronXReleaseVersion</key><string>0.5.1</string>
 <key>LibronXUpdateChannel</key><string>beta</string>
 <key>CFBundleExecutable</key><string>LibronXRebuild</string>
 <key>CFBundleDevelopmentRegion</key><string>es</string>

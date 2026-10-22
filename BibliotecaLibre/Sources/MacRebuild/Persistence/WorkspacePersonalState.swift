@@ -52,6 +52,25 @@ struct WorkspacePersonalSnapshot: Codable {
             catch is CancellationError {} catch { self?.loadError = error.localizedDescription }
         }
     }
+    func renameNote(_ id: UUID, in documentID: UUID, title: String) throws {
+        let title = title.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !title.isEmpty, let document = documents.firstIndex(where: { $0.id == documentID }),
+              let note = documents[document].notes.firstIndex(where: { $0.id == id }) else { return }
+        let previous = documents[document].notes[note]
+        documents[document].notes[note].title = title
+        documents[document].notes[note].modifiedUTC = ISO8601DateFormatter().string(from: Date())
+        do { try save() }
+        catch { documents[document].notes[note] = previous; throw error }
+    }
+    /// The caller must obtain confirmation before invoking this mutation.
+    func deleteNotes(_ ids: Set<UUID>, in documentID: UUID) throws {
+        guard !ids.isEmpty, let document = documents.firstIndex(where: { $0.id == documentID }) else { return }
+        let previous = documents[document].notes
+        guard previous.contains(where: { ids.contains($0.id) }) else { return }
+        documents[document].notes.removeAll { ids.contains($0.id) }
+        do { try save() }
+        catch { documents[document].notes = previous; throw error }
+    }
     @discardableResult func create(_ kind: StudyDocumentKind) -> UUID {
         let document = StudyDocument(title: kind == .notebook ? "Mis notas" : "Lista de versículos", kind: kind)
         documents.append(document); selectedDocumentID = document.id; scheduleSave(); return document.id

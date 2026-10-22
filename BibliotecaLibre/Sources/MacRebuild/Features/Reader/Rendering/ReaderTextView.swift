@@ -14,6 +14,10 @@ struct ReaderTextView: NSViewRepresentable {
     var detachedImages = false
     var scale = 1.0
     var highlights: [ReaderHighlight] = []
+    var personalNotes: [ReaderPersonalNoteLink] = []
+    var notePersonalState: WorkspacePersonalState? = nil
+    var onEditNote: ((ReaderPersonalNoteLink) -> Void)? = nil
+    var onCreateNote: ((NSRange) -> Void)? = nil
     var visibleInterlinearLines: Set<Int>? = nil
     var sourceFontsRevision = 0
     var onWarnings: ([String]) -> Void = { _ in }
@@ -31,6 +35,7 @@ struct ReaderTextView: NSViewRepresentable {
         var identity: ReaderDestination?; var text = ""; var scale = 0.0; var graphicHashes: [String] = []
         var selectionRequest = -1
         var highlights: [ReaderHighlight] = []
+        var personalNotes: [ReaderPersonalNoteLink] = []
         var visibleInterlinearLines: Set<Int>?
         var chosenFont = ""
         var sourceFontsRevision = -1
@@ -103,6 +108,8 @@ struct ReaderTextView: NSViewRepresentable {
     func makeNSView(context: Context) -> NSScrollView {
         let scroll = ReaderScrollView()
         scroll.hasVerticalScroller = true; scroll.autohidesScrollers = true
+        scroll.drawsBackground = true; scroll.backgroundColor = .textBackgroundColor
+        scroll.contentView.drawsBackground = true; scroll.contentView.backgroundColor = .textBackgroundColor
         scroll.scrollerStyle = .overlay
         scroll.scrollerInsets = NSEdgeInsets(top: 2, left: 0, bottom: 2, right: 4)
         let view = ActiveTextView()
@@ -114,6 +121,7 @@ struct ReaderTextView: NSViewRepresentable {
         view.font = NSFont(name: "Times New Roman", size: 12) ?? .systemFont(ofSize: 12)
         view.delegate = context.coordinator
         view.textColor = .textColor; view.backgroundColor = .textBackgroundColor
+        view.drawsBackground = false // The scroll surface also paints the trailing reading space.
         view.textContainerInset = NSSize(width: 16, height: 16)
         view.isVerticallyResizable = true; view.isHorizontallyResizable = false
         view.autoresizingMask = [.width]
@@ -135,6 +143,9 @@ struct ReaderTextView: NSViewRepresentable {
         view.activate = activate
         (scroll as? ReaderScrollView)?.activate = activate
         let coordinator = context.coordinator
+        view.personalNotePreview.personal = notePersonalState
+        view.personalNotePreview.edit = onEditNote
+        view.createPersonalNote = onCreateNote
         view.lookupWord = onDictionaryLookup
         view.quickLookupWord = onQuickDictionaryLookup
         view.linkPreview.resource = resource
@@ -143,7 +154,7 @@ struct ReaderTextView: NSViewRepresentable {
         coordinator.onSelection = onSelection
         coordinator.onVisiblePosition = onVisiblePosition
         let pageChanged = context.coordinator.text != text || context.coordinator.identity != identity
-        let renderChanged = pageChanged || coordinator.detachedImages != detachedImages || coordinator.scale != scale || coordinator.graphicHashes != graphics.map(\.sha256) || coordinator.highlights != highlights || coordinator.visibleInterlinearLines != visibleInterlinearLines || coordinator.chosenFont != AppPreferences.shared.readingFont || coordinator.sourceFontsRevision != sourceFontsRevision || coordinator.inlineLinks != inlineLinks
+        let renderChanged = pageChanged || coordinator.detachedImages != detachedImages || coordinator.scale != scale || coordinator.graphicHashes != graphics.map(\.sha256) || coordinator.highlights != highlights || coordinator.personalNotes != personalNotes || coordinator.visibleInterlinearLines != visibleInterlinearLines || coordinator.chosenFont != AppPreferences.shared.readingFont || coordinator.sourceFontsRevision != sourceFontsRevision || coordinator.inlineLinks != inlineLinks
         let selectionChanged = coordinator.selectionRequest != selectionRequest
         guard renderChanged || selectionChanged else { return }
         coordinator.cancelViewportObservation()
@@ -161,6 +172,7 @@ struct ReaderTextView: NSViewRepresentable {
         context.coordinator.graphicHashes = graphics.map(\.sha256)
         coordinator.detachedImages = detachedImages
         coordinator.highlights = highlights
+        coordinator.personalNotes = personalNotes
         coordinator.visibleInterlinearLines = visibleInterlinearLines
         coordinator.chosenFont = AppPreferences.shared.readingFont
         coordinator.sourceFontsRevision = sourceFontsRevision
@@ -175,6 +187,8 @@ struct ReaderTextView: NSViewRepresentable {
             let color: NSColor = switch mark.color { case "green": .systemGreen; case "blue": .systemBlue; case "pink": .systemPink; default: .systemYellow }
             display.addAttribute(.backgroundColor, value: color.withAlphaComponent(0.35), range: mark.range)
         }
+        view.personalNoteLinks = ReaderPersonalNoteAttributes.matching(personalNotes, text: text, ordinal: identity?.ordinal)
+        ReaderPersonalNoteAttributes.install(view.personalNoteLinks, in: display)
         let installed = ReaderImageRenderer.install(graphics, in: display, detached: detachedImages)
         let warnings = rendered.warnings.filter { graphics.isEmpty || $0 != "Las imágenes integradas todavía requieren representación." } + installed.warnings
         Task { @MainActor in
@@ -269,6 +283,9 @@ final class ReaderScroller: NSScroller {
 final class ActiveTextView: NSTextView {
     var contextHelpTopic: FeatureHelpTopic = .navigation
     let linkPreview = ReaderLinkPreviewController()
+    let personalNotePreview = ReaderPersonalNotePreview()
+    var personalNoteLinks: [ReaderPersonalNoteLink] = []
+    var createPersonalNote: ((NSRange) -> Void)?
     var lookupWord: ((String) -> Void)?
     var quickLookupWord: ((String, NSView, NSRect) -> Void)?
     private var dictionaryPressureActive = false
@@ -323,6 +340,15 @@ final class ActiveTextView: NSTextView {
     }
     override func mouseExited(with event: NSEvent) { linkPreview.cancelHover(); super.mouseExited(with: event) }
     @discardableResult func showSourceLink(at index: Int, hovering: Bool = false) -> Bool {
+        if !hovering {
+            let notes = personalNoteLinks.filter { NSLocationInRange(index, $0.range) }
+            if let note = notes.first, let layout = layoutManager, let container = textContainer {
+                var rect = layout.boundingRect(forGlyphRange: layout.glyphRange(forCharacterRange: note.range, actualCharacterRange: nil), in: container)
+                rect.origin.x += textContainerOrigin.x; rect.origin.y += textContainerOrigin.y
+                personalNotePreview.show(notes, in: self, rect: rect)
+                return true
+            }
+        }
         guard let link = sourceLinks.first(where: { NSLocationInRange(index, $0.range) }),
               let layout = layoutManager, let container = textContainer else { return false }
         let glyphs = layout.glyphRange(forCharacterRange: link.range, actualCharacterRange: nil)
@@ -402,6 +428,7 @@ final class ActiveTextView: NSTextView {
             layoutManager?.invalidateDisplay(forCharacterRange: image.range)
         }
     }
+    @objc private func addPersonalNote() { activate?(); createPersonalNote?(selectedRange()) }
     private struct LinkMenuAction { let link: LegacyInlineLink; let newReader: Bool }
     override func menu(for event: NSEvent) -> NSMenu? {
         let nativeMenu = super.menu(for: event)
@@ -443,6 +470,10 @@ final class ActiveTextView: NSTextView {
     }
     private func enhancedMenu(_ native: NSMenu?) -> NSMenu {
         let menu = native ?? NSMenu()
+        if createPersonalNote != nil, selectedRange().length > 0 {
+            let note = NSMenuItem(title: L("Agregar nota"), action: #selector(addPersonalNote), keyEquivalent: "")
+            note.target = self; menu.addItem(.separator()); menu.addItem(note)
+        }
         if linkPreview.resource != nil {
             menu.addItem(.separator())
             let citation = NSMenuItem(title:L("Copiar cita del recurso"), action:#selector(copyResourceCitation), keyEquivalent:"")

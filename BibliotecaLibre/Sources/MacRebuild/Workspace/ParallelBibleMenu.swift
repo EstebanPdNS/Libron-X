@@ -5,6 +5,7 @@ struct ParallelBibleMenu: View {
     @Bindable var workspace: StudyWorkspace
     let reader: ReaderSession?
     var toolbarPresentation = true
+    @RebuildViewState private var presented = false
     private var selected: ParallelBibleSet? {
         reader?.parallelSetID.flatMap { id in workspace.bibleGroups.first { $0.id == id } }
     }
@@ -12,30 +13,21 @@ struct ParallelBibleMenu: View {
         if reader?.parallelSetID != nil { return selected?.members.compactMap { $0.resolve(in: workspace.availableResources) } ?? [] }
         return workspace.availableBibleVersions
     }
-    // A single template image preserves both the native book and cross when
-    // SwiftUI bridges this label into an AppKit menu button.
-    private static let bibleIcon: NSImage = {
-        let image = NSImage(size: NSSize(width: 20, height: 20), flipped: false) { _ in
-            let cover = NSBezierPath(roundedRect: NSRect(x: 5, y: 4.5, width: 12, height: 14), xRadius: 1.6, yRadius: 1.6)
-            NSColor.black.setStroke(); cover.lineWidth = 1.15; cover.stroke()
-            let spine = NSBezierPath()
-            spine.move(to: NSPoint(x: 5, y: 18.5)); spine.line(to: NSPoint(x: 3.5, y: 18.5))
-            spine.curve(to: NSPoint(x: 2, y: 17), controlPoint1: NSPoint(x: 2.5, y: 18.5), controlPoint2: NSPoint(x: 2, y: 18))
-            spine.line(to: NSPoint(x: 2, y: 3))
-            spine.curve(to: NSPoint(x: 3.5, y: 1.5), controlPoint1: NSPoint(x: 2, y: 2), controlPoint2: NSPoint(x: 2.5, y: 1.5))
-            spine.line(to: NSPoint(x: 17, y: 1.5)); spine.lineWidth = 1.15; spine.stroke()
-            let cross = NSBezierPath()
-            // Cover center (11, 11.5); the complete cross stays inside it.
-            cross.move(to: NSPoint(x: 11, y: 8.5)); cross.line(to: NSPoint(x: 11, y: 14.5))
-            cross.move(to: NSPoint(x: 9, y: 12.5)); cross.line(to: NSPoint(x: 13, y: 12.5))
-            cross.lineWidth = 1; cross.lineCapStyle = .round; cross.stroke()
-            return true
-        }
-        image.isTemplate = true
-        return image
-    }()
-
     var body: some View {
+        if toolbarPresentation, let reader, reader.canSynchronizeBible {
+            Button { workspace.activate(reader); presented.toggle() } label: {
+                StudyResourceLabel(title: "Biblias", kind: .bible)
+            }.help(L("Recursos paralelos")).featureHelpTarget(.groups)
+                .macToolbarPopover(isPresented: $presented, size: NSSize(width: 520, height: 440)) {
+                    StudyResourcePicker(workspace: workspace, kind: .bible, dismiss: { presented = false },
+                        resourcesOverride: choices, initialSelection: reader.resource.id,
+                        openResource: { workspace.selectParallelBible($0, for: reader) },
+                        openInNewReading: { workspace.selectParallelBible($0, for: reader, newReader: true) },
+                        bibleReader: reader)
+                }
+        } else { legacyMenu }
+    }
+    private var legacyMenu: some View {
         Menu {
             if let reader, reader.canSynchronizeBible {
                 Menu(L("Grupo de Biblias")) {
@@ -71,7 +63,7 @@ struct ParallelBibleMenu: View {
             }
         } label: {
             if toolbarPresentation { Label { Text(L("Recursos paralelos")) } icon: {
-                    Image(nsImage: Self.bibleIcon).resizable().frame(width: 20, height: 20)
+                    StudyResourceIcon(kind: .bible)
                 }.labelStyle(.iconOnly).featureHelpTarget(.groups) }
             else { Text(L("Recursos paralelos")) }
         }

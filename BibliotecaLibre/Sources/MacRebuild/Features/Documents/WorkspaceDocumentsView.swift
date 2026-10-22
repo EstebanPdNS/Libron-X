@@ -4,9 +4,20 @@ import LibronixCore
 struct WorkspaceDocumentsView: View {
     @Bindable var workspace: StudyWorkspace
     @Bindable var personal: WorkspacePersonalState
-    @RebuildViewState private var selectedNote: UUID?
+    @RebuildViewState private var selectedNotes: Set<UUID> = []
+    private var selectedNote: UUID? {
+        get { selectedNotes.count == 1 ? selectedNotes.first : nil }
+        nonmutating set { selectedNotes = newValue.map { [$0] } ?? [] }
+    }
+    @RebuildViewState private var operationDocumentID: UUID?
+    @RebuildViewState private var renamingID: UUID?
+    @RebuildViewState private var renameDraft = ""
+    @RebuildViewState private var showsRename = false
+    @RebuildViewState private var deletionIDs: Set<UUID> = []
+    @RebuildViewState private var showsDelete = false
     @RebuildViewState private var selectedVerse: UUID?
     @RebuildViewState private var verseReference = ""
+    @FocusState private var noteBodyFocused: Bool
     private var documentIndex: Int? { personal.documents.firstIndex { $0.id == personal.selectedDocumentID } }
     var body: some View {
         VStack(spacing: 12) {
@@ -43,12 +54,38 @@ struct WorkspaceDocumentsView: View {
             Text(L("Los cambios se guardan en los datos propios de esta aplicación.")).font(.caption).foregroundStyle(.secondary)
         }.padding(16)
             .onAppear {
-                if let id = workspace.pendingNoteID { selectedNote = id; workspace.pendingNoteID = nil }
+                selectPendingNote()
                 applySearchNavigation()
             }
             .onChange(of: personal.documents) { workspace.personalSearchDestination = nil; personal.scheduleSave() }
             .onChange(of: personal.selectedDocumentID) { selectedNote = nil; selectedVerse = nil; applySearchNavigation() }
             .onChange(of: workspace.personalNavigationID) { applySearchNavigation() }
+            .onChange(of: workspace.pendingNoteID) { selectPendingNote() }
+            .alert(L("Renombrar nota"), isPresented: $showsRename) {
+                TextField(L("Título de la nota"), text: $renameDraft)
+                Button(L("Cancelar"), role: .cancel) { }
+                Button(L("Guardar")) {
+                    guard let documentID = operationDocumentID, let noteID = renamingID else { return }
+                    do { try personal.renameNote(noteID, in: documentID, title: renameDraft) }
+                    catch { workspace.error = error.localizedDescription }
+                }.disabled(renameDraft.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+            }
+            .alert(L("Borrar notas"), isPresented: $showsDelete) {
+                Button(L("Cancelar"), role: .cancel) { }
+                Button(L("Borrar"), role: .destructive) {
+                    guard let documentID = operationDocumentID else { return }
+                    do {
+                        try personal.deleteNotes(deletionIDs, in: documentID)
+                        if personal.selectedDocumentID == documentID { selectedNotes.subtract(deletionIDs) }
+                    } catch { workspace.error = error.localizedDescription }
+                }
+            } message: {
+                Text(LF("Notas que se borrarán: {count}. ¿Quieres continuar?", ["count": String(deletionIDs.count)]))
+            }
+    }
+    private func selectPendingNote() {
+        guard let id = workspace.pendingNoteID else { return }
+        selectedNote = id; workspace.pendingNoteID = nil; noteBodyFocused = true
     }
     private func applySearchNavigation() {
         guard let destination = workspace.personalSearchDestination,
@@ -62,14 +99,20 @@ struct WorkspaceDocumentsView: View {
     private func notebook(_ index: Int) -> some View {
         HSplitView {
             VStack {
-                List(personal.documents[index].notes, selection: $selectedNote) { note in Text(note.title).tag(note.id) }
+                List(personal.documents[index].notes, selection: $selectedNotes) { note in Text(note.title).tag(note.id) }
+                    .accessibilityIdentifier("notes.list")
+                    .contextMenu(forSelectionType: UUID.self) { ids in
+                        Button(L("Renombrar nota")) { requestRename(ids, index: index) }.disabled(ids.count != 1)
+                        Button(L("Borrar notas"), role: .destructive) { requestDeletion(ids, index: index) }.disabled(ids.isEmpty)
+                    }
+                    .onDeleteCommand { requestDeletion(selectedNotes, index: index) }
                 Button(L("Agregar nota")) {
                     var note = StudyNote(); note.sourceContentType = "text/plain"
                     personal.documents[index].notes.append(note); selectedNote = note.id
                 }
             }.frame(minWidth: 150, idealWidth: 220)
-            if let note = personal.documents[index].notes.firstIndex(where: { $0.id == selectedNote }) {
-                VStack(alignment: .leading) {
+            VStack(alignment: .leading) {
+                if let note = personal.documents[index].notes.firstIndex(where: { $0.id == selectedNote }) {
                     TextField(L("Título de la nota"), text: $personal.documents[index].notes[note].title).macInputStyle()
                     if personal.documents[index].notes[note].sourceContentType == "text/html" {
                         ScrollView { Text(PersonalReferenceProjection.body(personal.documents[index].notes[note]).text).textSelection(.enabled) }
@@ -78,7 +121,7 @@ struct WorkspaceDocumentsView: View {
                             copy.sourceContentType = "text/plain"; copy.sourceBody = NoteHTMLProjection.spans(personal.documents[index].notes[note].sourceBody).map(\.text).joined()
                             personal.documents[index].notes.append(copy); selectedNote = copy.id
                         }
-                    } else { TextEditor(text: $personal.documents[index].notes[note].sourceBody).font(.body) }
+                    } else { TextEditor(text: $personal.documents[index].notes[note].sourceBody).font(.body).focused($noteBodyFocused) }
                     if let reference = PersonalReferenceProjection.anchor(personal.documents[index].notes[note]) {
                         Text(reference).font(.caption).foregroundStyle(.secondary).textSelection(.enabled)
                     }
@@ -89,9 +132,22 @@ struct WorkspaceDocumentsView: View {
                             }
                         }
                     }
-                }.padding(8).frame(minWidth: 300)
-            } else { Text(L("Selecciona una nota.")).foregroundStyle(.secondary).frame(maxWidth: .infinity, maxHeight: .infinity) }
+                } else {
+                    Color.clear
+                }
+            }.padding(8).frame(minWidth: 300, idealWidth: 300, maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         }
+    }
+    private func requestRename(_ ids: Set<UUID>, index: Int) {
+        guard ids.count == 1, let note = personal.documents[index].notes.first(where: { ids.contains($0.id) }) else { return }
+        operationDocumentID = personal.documents[index].id
+        renamingID = note.id; renameDraft = note.title; showsRename = true
+    }
+    private func requestDeletion(_ ids: Set<UUID>, index: Int) {
+        let valid = ids.intersection(Set(personal.documents[index].notes.map(\.id)))
+        guard !valid.isEmpty else { return }
+        operationDocumentID = personal.documents[index].id
+        deletionIDs = valid; showsDelete = true
     }
     private func verseList(_ index: Int) -> some View {
         VStack {

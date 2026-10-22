@@ -23,11 +23,22 @@ struct BibleVersionKeyboardRouting: NSViewRepresentable {
                     // own window and actual sheets/editors determine routing.
                     guard let self, let window = self.window, window.isKeyWindow,
                           window.attachedSheet == nil, event.window === window,
-                          self.workspace.activeTool == nil, self.workspace.error == nil,
-                          !self.workspace.showsHome,
+                          self.workspace.activeTool == nil, self.workspace.error == nil else { return false }
+                    if Self.isCloseReadingShortcut(event) {
+                        if !self.workspace.showsHome, let reader = self.workspace.activeReader { self.workspace.close(reader) }
+                        window.makeFirstResponder(window)
+                        return true // Keep the desktop open after its final internal reader closes.
+                    }
+                    if Self.isFindReadingShortcut(event), !self.workspace.showsHome,
+                       let reader = self.workspace.activeReader, reader.page != nil {
+                        reader.showFind()
+                        return true
+                    }
+                    guard !self.workspace.showsHome,
                           Self.accepts(event, responder: window.firstResponder),
-                          let reader = self.workspace.activeReader, reader.canSynchronizeBible || reader.isDictionary else { return false }
-                    if reader.isDictionary { self.workspace.cycleDictionary(reader, backwards: event.keyCode == 123) }
+                          let reader = self.workspace.activeReader, reader.canSynchronizeBible || reader.isDictionary || reader.isCommentary else { return false }
+                    if reader.isCommentary { self.workspace.cycleCommentary(reader, backwards: event.keyCode == 123) }
+                    else if reader.isDictionary { self.workspace.cycleDictionary(reader, backwards: event.keyCode == 123) }
                     else { self.workspace.cycleBibleVersion(reader, backwards: event.keyCode == 123) }
                     return true
                 }
@@ -40,6 +51,14 @@ struct BibleVersionKeyboardRouting: NSViewRepresentable {
             if let text = responder as? NSTextView, text.isEditable { return false }
             if responder is NSControl { return false }
             return true
+        }
+        static func isCloseReadingShortcut(_ event: NSEvent) -> Bool {
+            let modifiers = event.modifierFlags.intersection(.deviceIndependentFlagsMask).subtracting([.capsLock, .numericPad, .function])
+            return modifiers == .command && event.charactersIgnoringModifiers?.lowercased() == "w"
+        }
+        static func isFindReadingShortcut(_ event: NSEvent) -> Bool {
+            let modifiers = event.modifierFlags.intersection(.deviceIndependentFlagsMask).subtracting([.capsLock, .numericPad, .function])
+            return modifiers == .command && event.charactersIgnoringModifiers?.lowercased() == "f"
         }
         func stop() { if let monitor { NSEvent.removeMonitor(monitor); self.monitor = nil } }
     }

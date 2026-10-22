@@ -47,6 +47,7 @@ struct LibraryChooser: View {
             }
             GeometryReader { geometry in
             libraryTable(availableWidth: geometry.size.width)
+            .background(NativeResourceTableActivation(ids: workspace.filteredResources.map(\.id), open: { open($0) }))
             .controlSize(.regular)
             .tableStyle(.inset(alternatesRowBackgrounds: true))
             .clipShape(RoundedRectangle(cornerRadius: 10))
@@ -168,26 +169,36 @@ struct LibraryChooser: View {
         }
         return (minimum, max(minimum, ideal), max(minimum, availableWidth))
     }
+    private var tableSortOrder: Binding<[LibraryResourceSort]> {
+        Binding(get: {
+            [LibraryResourceSort(workspace.librarySortByAuthor ? .author : workspace.librarySortField, order: workspace.librarySortOrder)]
+        }, set: { order in
+            guard let first = order.first else { return }
+            workspace.librarySortField = first.field
+            workspace.librarySortByAuthor = false
+            workspace.librarySortOrder = first.order
+        })
+    }
     @ViewBuilder private func libraryTable(availableWidth: CGFloat) -> some View {
         if #available(macOS 15.0, *) {
-            Table(workspace.filteredResources, selection: $workspace.librarySelection) {
-                TableColumn(L("Título"), value: \.title)
+            Table(workspace.filteredResources, selection: $workspace.librarySelection, sortOrder: tableSortOrder) {
+                TableColumn(L("Título"), sortUsing: LibraryResourceSort(.title)) { resource in Text(LibraryField.title.value(resource)) }
                     .width(min: columnWidth(.title, availableWidth: availableWidth).minimum,
                            ideal: columnWidth(.title, availableWidth: availableWidth).ideal,
                            max: columnWidth(.title, availableWidth: availableWidth).maximum)
                 TableColumnForEach(preferences.columns.filter { $0 != .title }) { field in
-                    TableColumn(L(field.title)) { (resource: LibraryResource) in
+                    TableColumn(L(field.title), sortUsing: LibraryResourceSort(field)) { (resource: LibraryResource) in
                         Text(field.value(resource)).lineLimit(1).truncationMode(.tail).help(field.value(resource))
                     }.width(min: columnWidth(field, availableWidth: availableWidth).minimum, ideal: columnWidth(field, availableWidth: availableWidth).ideal, max: columnWidth(field, availableWidth: availableWidth).maximum)
                 }
             }
         } else {
-            Table(workspace.filteredResources, selection: $workspace.librarySelection) {
-                TableColumn(L("Título"), value: \.title)
-                TableColumn(L("Autor")) { resource in Text(resource.author ?? "") }
-                TableColumn(L("Idioma")) { resource in Text(LibraryField.language.value(resource)) }
-                TableColumn(L("Tipo")) { resource in Text(LibraryField.type.value(resource)) }
-                TableColumn(L("Origen")) { resource in Text(LibraryField.origin.value(resource)) }
+            Table(workspace.filteredResources, selection: $workspace.librarySelection, sortOrder: tableSortOrder) {
+                TableColumn(L("Título"), sortUsing: LibraryResourceSort(.title)) { resource in Text(LibraryField.title.value(resource)) }
+                TableColumn(L("Autor"), sortUsing: LibraryResourceSort(.author)) { resource in Text(resource.author ?? "") }
+                TableColumn(L("Idioma"), sortUsing: LibraryResourceSort(.language)) { resource in Text(LibraryField.language.value(resource)) }
+                TableColumn(L("Tipo"), sortUsing: LibraryResourceSort(.type)) { resource in Text(LibraryField.type.value(resource)) }
+                TableColumn(L("Origen"), sortUsing: LibraryResourceSort(.origin)) { resource in Text(LibraryField.origin.value(resource)) }
             }
         }
     }
