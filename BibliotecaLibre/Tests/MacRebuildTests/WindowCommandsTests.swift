@@ -1,9 +1,86 @@
 import Foundation
+import AppKit
 import LibronixCore
 import Testing
 @testable import MacRebuild
 
 @MainActor struct WindowCommandsTests {
+    @Test func closingTheActivePaneSelectsItsOpeningSuccessorAndRestoresMinimizedPanes() {
+        let workspace = workspace()
+        let readers = (0..<3).map { _ in workspace.open(resource(), startReading: false) }
+        workspace.activate(readers[1]); workspace.minimize(readers[2]); workspace.activate(readers[1])
+        workspace.close(readers[1])
+        #expect(workspace.activeReader === readers[2] && !readers[2].isMinimized)
+        workspace.close(readers[2]); #expect(workspace.activeReader === readers[0])
+        workspace.close(readers[0]); #expect(workspace.activeReader == nil && workspace.readers.isEmpty)
+    }
+    @Test func closeShortcutAcceptsCommandWWithoutStealingOtherWindowShortcuts() throws {
+        func event(_ flags: NSEvent.ModifierFlags, _ characters: String = "w") throws -> NSEvent {
+            try #require(NSEvent.keyEvent(with: .keyDown, location: .zero, modifierFlags: flags,
+                timestamp: 0, windowNumber: 0, context: nil, characters: characters,
+                charactersIgnoringModifiers: characters, isARepeat: false, keyCode: 13))
+        }
+        #expect(BibleVersionKeyboardRouting.KeyView.isCloseReadingShortcut(try event(.command)))
+        #expect(BibleVersionKeyboardRouting.KeyView.isCloseReadingShortcut(try event([.command, .capsLock], "W")))
+        for flags: NSEvent.ModifierFlags in [[], [.command, .shift], [.command, .option], [.command, .control]] {
+            #expect(!BibleVersionKeyboardRouting.KeyView.isCloseReadingShortcut(try event(flags)))
+        }
+        #expect(!BibleVersionKeyboardRouting.KeyView.isCloseReadingShortcut(try event(.command, "t")))
+    }
+    @Test func findShortcutKeepsGlobalSearchAndOtherModifiedKeysDistinct() throws {
+        func event(_ flags: NSEvent.ModifierFlags, _ characters: String = "f") throws -> NSEvent {
+            try #require(NSEvent.keyEvent(with: .keyDown, location: .zero, modifierFlags: flags,
+                timestamp: 0, windowNumber: 0, context: nil, characters: characters,
+                charactersIgnoringModifiers: characters, isARepeat: false, keyCode: 3))
+        }
+        #expect(BibleVersionKeyboardRouting.KeyView.isFindReadingShortcut(try event(.command)))
+        #expect(BibleVersionKeyboardRouting.KeyView.isFindReadingShortcut(try event([.command, .capsLock], "F")))
+        for flags: NSEvent.ModifierFlags in [[], [.command, .shift], [.command, .option], [.command, .control]] {
+            #expect(!BibleVersionKeyboardRouting.KeyView.isFindReadingShortcut(try event(flags)))
+        }
+        #expect(!BibleVersionKeyboardRouting.KeyView.isFindReadingShortcut(try event(.command, "g")))
+    }
+    @Test func newNoteCreatesAnEditableNoteAndRetainsTheActivePassageAndSelection() throws {
+        let fixture = try AuthoredReaderFixture(documents: [["Authored text for a note."]]); defer { fixture.remove() }
+        let personal = WorkspacePersonalState(url: fixture.root.appendingPathComponent("personal.json"))
+        let workspace = StudyWorkspace(personal: personal)
+        workspace.newNote()
+        #expect(personal.documents.count == 1 && personal.documents[0].notes.count == 1)
+        #expect(workspace.pendingNoteID == personal.documents[0].notes[0].id && workspace.activeTool == .documents)
+        let reader = workspace.open(fixture.resources[0], startReading: false)
+        let content = try LegacyContentReader.readSection(lsfURL: fixture.resources[0].location, ordinal: 0)
+        reader.page = .init(destination: .init(ordinal: 0), text: content.plainText, sectionCount: 1, content: content)
+        reader.visibleBibleReference = "Ge 1:2"; reader.selectedRange = .init(location: 0, length: 8)
+        workspace.newNote()
+        let note = try #require(personal.documents[0].notes.last)
+        #expect(personal.documents[0].notes.count == 2 && note.sourceContentType == "text/plain")
+        #expect(note.sourceBody == "Authored" && note.effectiveAnchor.location?.reference == "Ge 1:2")
+        #expect(workspace.pendingNoteID == note.id && personal.loadError == nil)
+        workspace.closeAll()
+    }
+    @Test func resourceChooserSwitchesTheExistingDictionaryToTheChosenEdition() async throws {
+        let fixture = try AuthoredReaderFixture(documents: [["First definition"], ["Second definition"]])
+        defer { fixture.remove() }
+        let workspace = workspace()
+        workspace.resources = fixture.resources.map { source in
+            var metadata = LibronMetadata(title: source.title, origin: "Authored test")
+            metadata.resourceType = "Diccionario o enciclopedia"
+            return LibraryResource(location: source.location, title: source.title, byteCount: source.byteCount,
+                format: source.format, support: source.support, provenance: source.provenance, libron: metadata)
+        }
+        let first = workspace.resources[0], chosen = workspace.resources[1]
+        StudyResourceKind.dictionary.open(first, in: workspace)
+        let reader = try #require(workspace.activeReader)
+        for _ in 0..<500 where reader.isLoading { try await Task.sleep(for: .milliseconds(10)) }
+        StudyResourceKind.dictionary.open(chosen, in: workspace)
+        for _ in 0..<500 where reader.isLoading { try await Task.sleep(for: .milliseconds(10)) }
+        #expect(workspace.readers.count == 1 && workspace.activeReader === reader)
+        #expect(reader.resource.id == chosen.id && reader.page?.text == "Second definition")
+        #expect(workspace.dictionary.resourceID == chosen.id && reader.isDictionary)
+        StudyResourceKind.bible.open(chosen, in: workspace)
+        #expect(workspace.readers.count == 1 && workspace.activeReader === reader)
+        workspace.closeAll()
+    }
     private func workspace() -> StudyWorkspace {
         StudyWorkspace(personal: WorkspacePersonalState(url: FileManager.default.temporaryDirectory
             .appendingPathComponent("libronx-windows-\(UUID()).json")))

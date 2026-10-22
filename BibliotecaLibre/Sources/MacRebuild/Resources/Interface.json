@@ -467,6 +467,18 @@
     "ur": "اپ ڈیٹ منسوخ ہو گئی۔",
     "zh-Hans": "更新已取消。"
   },
+  "Actualizados": {
+    "ar": "محدّثة",
+    "bn": "হালনাগাদ",
+    "en": "Updated",
+    "es": "Actualizados",
+    "fr": "Mis à jour",
+    "hi": "अपडेट किए गए",
+    "id": "Diperbarui",
+    "pt": "Atualizados",
+    "ur": "تازہ کردہ",
+    "zh-Hans": "已更新"
+  },
   "Adelante": {
     "ar": "تقدم",
     "bn": "সামনে",
@@ -1259,6 +1271,18 @@
     "ur": "اصل بائبل",
     "zh-Hans": "来源圣经"
   },
+  "Biblias": {
+    "ar": "الكتب المقدسة",
+    "bn": "বাইবেলসমূহ",
+    "en": "Bibles",
+    "es": "Biblias",
+    "fr": "Bibles",
+    "hi": "बाइबलें",
+    "id": "Alkitab",
+    "pt": "Bíblias",
+    "ur": "بائبلیں",
+    "zh-Hans": "圣经"
+  },
   "Biblias y texto bíblico": {
     "ar": "الكتاب المقدس ونصوصه",
     "bn": "বাইবেল ও বাইবেলের পাঠ",
@@ -1343,6 +1367,18 @@
     "ur": "متوازی مطالعے، تلاش اور ذاتی دستاویزات کے ساتھ بائبل کے مطالعے کی لائبریری۔",
     "zh-Hans": "支持平行阅读、搜索和个人文档的圣经研读资料库。"
   },
+  "Biblioteca ordenable y selección de recursos unificada.": {
+    "ar": "مكتبة قابلة للفرز واختيار موحد للموارد.",
+    "bn": "সাজানো যায় এমন গ্রন্থাগার ও অভিন্ন সম্পদ নির্বাচন।",
+    "en": "Sortable library and consistent resource selection.",
+    "es": "Biblioteca ordenable y selección de recursos unificada.",
+    "fr": "Bibliothèque triable et sélection cohérente des ressources.",
+    "hi": "क्रमबद्ध करने योग्य पुस्तकालय और एकसमान संसाधन चयन।",
+    "id": "Pustaka yang dapat diurutkan dan pemilihan sumber yang seragam.",
+    "pt": "Biblioteca ordenável e seleção unificada de recursos.",
+    "ur": "ترتیب دی جانے والی لائبریری اور وسائل کا یکساں انتخاب۔",
+    "zh-Hans": "可排序的书库与统一的资源选择。"
+  },
   "Borde derecho": {
     "ar": "الحافة اليمنى",
     "bn": "ডান প্রান্ত",
@@ -1414,6 +1450,18 @@
     "pt": "Apagar realce selecionado",
     "ur": "منتخب نمایاں نشان مٹائیں",
     "zh-Hans": "清除选中高亮"
+  },
+  "Borrar notas": {
+    "ar": "حذف الملاحظات",
+    "bn": "নোট মুছুন",
+    "en": "Delete notes",
+    "es": "Borrar notas",
+    "fr": "Supprimer les notes",
+    "hi": "नोट हटाएँ",
+    "id": "Hapus catatan",
+    "pt": "Excluir notas",
+    "ur": "نوٹس حذف کریں",
+    "zh-Hans": "删除笔记"
   },
   "Borrar todos los vínculos": {
     "ar": "إزالة جميع الروابط",
@@ -2339,6 +2387,18 @@
     "ur": "کالم، فلٹر، زبان سے تلاش اور خودکار بائبل گروپ۔",
     "zh-Hans": "可配置列、筛选、按语言搜索及自动圣经组。"
   },
+  "Comentario anterior": {
+    "ar": "التفسير السابق",
+    "bn": "আগের ভাষ্য",
+    "en": "Previous commentary",
+    "es": "Comentario anterior",
+    "fr": "Commentaire précédent",
+    "hi": "पिछली टीका",
+    "id": "Komentar sebelumnya",
+    "pt": "Comentário anterior",
+    "ur": "پچھلی تفسیر",
+    "zh-Hans": "上一篇注释"
+  },
   "Comentario bíblico": {
     "ar": "تفسير كتابي",
     "bn": "বাইবেলের ভাষ্য",
@@ -2350,6 +2410,18 @@
     "pt": "Comentário bíblico",
     "ur": "بائبل کی تفسیر",
     "zh-Hans": "圣经注释"
+  },
+  "Comentario siguiente": {
+    "ar": "التفسير التالي",
+    "bn": "পরের ভাষ্য",
+    "en": "Next commentary",
+    "es": "Comentario siguiente",
+    "fr": "Commentaire suivant",
+    "hi": "अगली टीका",
+    "id": "Komentar berikutnya",
+    "pt": "Comentário seguinte",
+    "ur": "اگلی تفسیر",
+    "zh-Hans": "下一篇注释"
   },
   "Comentarios": {
     "ar": "التعليقات",
@@ -2831,6 +2903,18 @@
     "ur": "متن",
     "zh-Hans": "正文"
   },
+  "Código de descarga": {
+    "ar": "رمز التنزيل",
+    "bn": "ডাউনলোড কোড",
+    "en": "Download code",
+    "es": "Código de descarga",
+    "fr": "Code de téléchargement",
+    "hi": "डाउनलोड कोड",
+    "id": "Kode unduhan",
+    "pt": "Código de download",
+    "ur": "ڈاؤن لوڈ کوڈ",
+    "zh-Hans": "下载代码"
+  },
   "Código de idioma (opcional)": {
     "ar": "رمز اللغة (اختياري)",
     "bn": "ভাষার কোড (ঐচ্ছিক)",
@@ -2963,6 +3047,18 @@
     "ur": "ڈویلپر",
     "zh-Hans": "开发者"
   },
+  "Descarga de colecciones con códigos cifrados, comprobación de integridad y caché.": {
+    "ar": "تنزيل المجموعات برموز مشفرة والتحقق من سلامة الملفات والتخزين المؤقت.",
+    "bn": "এনক্রিপ্ট করা কোড, অখণ্ডতা যাচাই ও ক্যাশসহ সংগ্রহ ডাউনলোড।",
+    "en": "Collection downloads with encrypted codes, integrity checks and caching.",
+    "es": "Descarga de colecciones con códigos cifrados, comprobación de integridad y caché.",
+    "fr": "Téléchargement de collections avec codes chiffrés, contrôle d’intégrité et cache.",
+    "hi": "एन्क्रिप्टेड कोड, अखंडता जाँच और कैश के साथ संग्रह डाउनलोड।",
+    "id": "Unduhan koleksi dengan kode terenkripsi, pemeriksaan integritas, dan cache.",
+    "pt": "Download de coleções com códigos criptografados, verificação de integridade e cache.",
+    "ur": "خفیہ کردہ کوڈ، سالمیت کی جانچ اور کیش کے ساتھ مجموعوں کا ڈاؤن لوڈ۔",
+    "zh-Hans": "使用加密代码下载资源集，支持完整性检查和缓存。"
+  },
   "Descargando y verificando la actualización…": {
     "ar": "جارٍ تنزيل التحديث والتحقق منه…",
     "bn": "আপডেট ডাউনলোড ও যাচাই করা হচ্ছে…",
@@ -2998,6 +3094,30 @@
     "pt": "Baixar e instalar automaticamente ao sair",
     "ur": "خودکار ڈاؤن لوڈ اور بند کرتے وقت انسٹال کریں",
     "zh-Hans": "自动下载并在退出时安装"
+  },
+  "Descargar recursos": {
+    "ar": "تنزيل الموارد",
+    "bn": "রিসোর্স ডাউনলোড করুন",
+    "en": "Download resources",
+    "es": "Descargar recursos",
+    "fr": "Télécharger les ressources",
+    "hi": "संसाधन डाउनलोड करें",
+    "id": "Unduh sumber daya",
+    "pt": "Baixar recursos",
+    "ur": "وسائل ڈاؤن لوڈ کریں",
+    "zh-Hans": "下载资源"
+  },
+  "Descargas": {
+    "ar": "التنزيلات",
+    "bn": "ডাউনলোড",
+    "en": "Downloads",
+    "es": "Descargas",
+    "fr": "Téléchargements",
+    "hi": "डाउनलोड",
+    "id": "Unduhan",
+    "pt": "Downloads",
+    "ur": "ڈاؤن لوڈز",
+    "zh-Hans": "下载"
   },
   "Desconocido": {
     "ar": "غير معروف",
@@ -3478,6 +3598,18 @@
     "pt": "Editar",
     "ur": "تدوین کریں",
     "zh-Hans": "编辑"
+  },
+  "Editar nota": {
+    "ar": "تحرير الملاحظة",
+    "bn": "নোট সম্পাদনা করুন",
+    "en": "Edit note",
+    "es": "Editar nota",
+    "fr": "Modifier la note",
+    "hi": "नोट संपादित करें",
+    "id": "Edit catatan",
+    "pt": "Editar nota",
+    "ur": "نوٹ میں ترمیم کریں",
+    "zh-Hans": "编辑笔记"
   },
   "Editorial": {
     "ar": "الناشر",
@@ -4402,6 +4534,18 @@
     "pt": "Exportar leitura",
     "ur": "مطالعہ برآمد کریں",
     "zh-Hans": "导出阅读内容"
+  },
+  "Fallidos": {
+    "ar": "فاشلة",
+    "bn": "ব্যর্থ",
+    "en": "Failed",
+    "es": "Fallidos",
+    "fr": "Échecs",
+    "hi": "विफल",
+    "id": "Gagal",
+    "pt": "Falhas",
+    "ur": "ناکام",
+    "zh-Hans": "失败"
   },
   "Favorito": {
     "ar": "مفضلة",
@@ -6107,6 +6251,18 @@
     "ur": "بڑے چھوٹے حروف میں فرق",
     "zh-Hans": "区分大小写"
   },
+  "Mejoras en comentarios, sincronización y navegación entre Biblias.": {
+    "ar": "تحسينات في التفاسير والمزامنة والتنقل بين نسخ الكتاب المقدس.",
+    "bn": "ভাষ্য, সমন্বয় ও বাইবেলের সংস্করণগুলোর মধ্যে চলাচলে উন্নতি।",
+    "en": "Improved commentaries, synchronization and navigation between Bibles.",
+    "es": "Mejoras en comentarios, sincronización y navegación entre Biblias.",
+    "fr": "Amélioration des commentaires, de la synchronisation et de la navigation entre Bibles.",
+    "hi": "टीकाओं, समन्वयन और बाइबलों के बीच नेविगेशन में सुधार।",
+    "id": "Perbaikan tafsiran, sinkronisasi, dan navigasi antar-Alkitab.",
+    "pt": "Melhorias nos comentários, na sincronização e na navegação entre Bíblias.",
+    "ur": "تفاسیر، ہم وقت سازی اور بائبل کے نسخوں کے درمیان نقل و حرکت میں بہتری۔",
+    "zh-Hans": "改进注释、同步和圣经版本间的导航。"
+  },
   "Metadatos": {
     "ar": "البيانات الوصفية",
     "bn": "মেটাডেটা",
@@ -6190,6 +6346,18 @@
     "pt": "Ministério e igreja",
     "ur": "خدمت اور کلیسیا",
     "zh-Hans": "事工与教会"
+  },
+  "Mis notas": {
+    "ar": "ملاحظاتي",
+    "bn": "আমার নোট",
+    "en": "My notes",
+    "es": "Mis notas",
+    "fr": "Mes notes",
+    "hi": "मेरे नोट्स",
+    "id": "Catatan saya",
+    "pt": "Minhas notas",
+    "ur": "میرے نوٹس",
+    "zh-Hans": "我的笔记"
   },
   "Misiones y evangelización": {
     "ar": "الإرساليات والتبشير",
@@ -6707,6 +6875,30 @@
     "ur": "باب کے نوٹس، مضامین اور تصاویر نظر آنے والی آیت کے ساتھ ہم آہنگ ہیں۔",
     "zh-Hans": "章节注释、文章和图片与可见经节同步。"
   },
+  "Notas personales vinculadas al texto, con edición y gestión desde Documentos.": {
+    "ar": "ملاحظات شخصية مرتبطة بالنص، مع تحريرها وإدارتها من المستندات.",
+    "bn": "পাঠ্যের সঙ্গে যুক্ত ব্যক্তিগত নোট, নথি থেকে সম্পাদনা ও ব্যবস্থাপনা।",
+    "en": "Personal notes linked to the text, with editing and management in Documents.",
+    "es": "Notas personales vinculadas al texto, con edición y gestión desde Documentos.",
+    "fr": "Notes personnelles liées au texte, modifiables et gérables dans Documents.",
+    "hi": "पाठ से जुड़े निजी नोट्स, जिन्हें दस्तावेज़ों में संपादित और प्रबंधित किया जा सकता है।",
+    "id": "Catatan pribadi yang tertaut ke teks, dapat diedit dan dikelola di Dokumen.",
+    "pt": "Notas pessoais vinculadas ao texto, com edição e gerenciamento em Documentos.",
+    "ur": "متن سے منسلک ذاتی نوٹس، دستاویزات میں تدوین اور انتظام کے ساتھ۔",
+    "zh-Hans": "个人笔记关联正文，可在“文档”中编辑和管理。"
+  },
+  "Notas que se borrarán: {count}. ¿Quieres continuar?": {
+    "ar": "الملاحظات التي سيتم حذفها: {count}. هل تريد المتابعة؟",
+    "bn": "যে নোটগুলি মোছা হবে: {count}। আপনি কি চালিয়ে যেতে চান?",
+    "en": "Notes to delete: {count}. Do you want to continue?",
+    "es": "Notas que se borrarán: {count}. ¿Quieres continuar?",
+    "fr": "Notes à supprimer : {count}. Voulez-vous continuer ?",
+    "hi": "हटाए जाने वाले नोट: {count}। क्या आप जारी रखना चाहते हैं?",
+    "id": "Catatan yang akan dihapus: {count}. Ingin melanjutkan?",
+    "pt": "Notas a excluir: {count}. Deseja continuar?",
+    "ur": "حذف کیے جانے والے نوٹس: {count}۔ کیا آپ جاری رکھنا چاہتے ہیں؟",
+    "zh-Hans": "将删除 {count} 条笔记。要继续吗？"
+  },
   "Notas y referencias": {
     "ar": "الملاحظات والمراجع",
     "bn": "টীকা ও সূত্র",
@@ -6754,6 +6946,18 @@
     "pt": "Nova coleção por regras",
     "ur": "قواعد پر مبنی نیا مجموعہ",
     "zh-Hans": "新建规则集合"
+  },
+  "Nueva lectura": {
+    "ar": "قراءة جديدة",
+    "bn": "নতুন পাঠ",
+    "en": "New Reading",
+    "es": "Nueva lectura",
+    "fr": "Nouvelle lecture",
+    "hi": "नया पठन",
+    "id": "Bacaan baru",
+    "pt": "Nova leitura",
+    "ur": "نئی قرأت",
+    "zh-Hans": "新建阅读窗格"
   },
   "Nueva lista de versículos": {
     "ar": "قائمة آيات جديدة",
@@ -6815,6 +7019,18 @@
     "ur": "نیا گروپ",
     "zh-Hans": "新建分组"
   },
+  "Nuevos": {
+    "ar": "جديدة",
+    "bn": "নতুন",
+    "en": "New",
+    "es": "Nuevos",
+    "fr": "Nouveaux",
+    "hi": "नए",
+    "id": "Baru",
+    "pt": "Novos",
+    "ur": "نئے",
+    "zh-Hans": "新增"
+  },
   "Número de artículo": {
     "ar": "رقم المقال",
     "bn": "নিবন্ধ নম্বর",
@@ -6838,6 +7054,18 @@
     "pt": "Número interno para distinguir revisões da mesma versão.",
     "ur": "ایک ہی نسخے کی مختلف نظرثانیوں کی شناخت کے لیے اندرونی نمبر۔",
     "zh-Hans": "用于区分同一版本不同修订的内部编号。"
+  },
+  "Números Strong": {
+    "ar": "أرقام سترونغ",
+    "bn": "স্ট্রং নম্বর",
+    "en": "Strong numbers",
+    "es": "Números Strong",
+    "fr": "Numéros Strong",
+    "hi": "स्ट्रॉन्ग संख्याएँ",
+    "id": "Nomor Strong",
+    "pt": "Números Strong",
+    "ur": "اسٹرانگ نمبرز",
+    "zh-Hans": "Strong 编号"
   },
   "Ocultar recurso": {
     "ar": "إخفاء المورد",
@@ -7222,6 +7450,18 @@
     "pt": "A pausa espera o artigo ou versículo atual terminar. Fechar esta janela pausa a pesquisa.",
     "ur": "وقفہ موجودہ مضمون یا آیت کے مکمل ہونے کا انتظار کرتا ہے۔ اس ونڈو کو بند کرنے سے تلاش رک جاتی ہے۔",
     "zh-Hans": "暂停会等待当前文章或经文处理完毕。关闭此窗口将暂停搜索。"
+  },
+  "Pega tu código de descarga": {
+    "ar": "الصق رمز التنزيل",
+    "bn": "আপনার ডাউনলোড কোড পেস্ট করুন",
+    "en": "Paste your download code",
+    "es": "Pega tu código de descarga",
+    "fr": "Collez votre code de téléchargement",
+    "hi": "अपना डाउनलोड कोड पेस्ट करें",
+    "id": "Tempel kode unduhan Anda",
+    "pt": "Cole seu código de download",
+    "ur": "اپنا ڈاؤن لوڈ کوڈ چسپاں کریں",
+    "zh-Hans": "粘贴下载代码"
   },
   "Por reglas": {
     "ar": "حسب القواعد",
@@ -7786,6 +8026,18 @@
     "pt": "Preencher e organizar",
     "ur": "بھریں اور ترتیب دیں",
     "zh-Hans": "填充和排列"
+  },
+  "Renombrar nota": {
+    "ar": "إعادة تسمية الملاحظة",
+    "bn": "নোটের নাম পরিবর্তন করুন",
+    "en": "Rename note",
+    "es": "Renombrar nota",
+    "fr": "Renommer la note",
+    "hi": "नोट का नाम बदलें",
+    "id": "Ubah nama catatan",
+    "pt": "Renomear nota",
+    "ur": "نوٹ کا نام بدلیں",
+    "zh-Hans": "重命名笔记"
   },
   "Reportar un problema": {
     "ar": "الإبلاغ عن مشكلة",
@@ -9574,6 +9826,18 @@
     "pt": "Vínculos",
     "ur": "روابط",
     "zh-Hans": "联动"
+  },
+  "Ya instalados": {
+    "ar": "مثبّتة مسبقًا",
+    "bn": "ইতিমধ্যে ইনস্টল করা",
+    "en": "Already installed",
+    "es": "Ya instalados",
+    "fr": "Déjà installés",
+    "hi": "पहले से इंस्टॉल",
+    "id": "Sudah terpasang",
+    "pt": "Já instalados",
+    "ur": "پہلے سے نصب",
+    "zh-Hans": "已安装"
   },
   "Zoom de lectura de 0 a 300 % y sincronización desde la barra principal.": {
     "ar": "تكبير القراءة من 0 إلى 300% والمزامنة من شريط الأدوات الرئيسي.",

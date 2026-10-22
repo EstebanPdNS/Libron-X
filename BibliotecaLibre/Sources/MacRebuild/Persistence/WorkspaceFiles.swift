@@ -26,6 +26,7 @@ struct WorkspaceArchive: Codable {
         var followsCommentary: Bool? = nil
         var commentaryReference: String? = nil
         var commentaryFollowsActiveBible: Bool? = nil
+        var strongNumbers: Bool? = nil
     }
     var schemaVersion = 1
     var libraryRoot: URL?
@@ -87,7 +88,7 @@ struct WorkspaceArchive: Codable {
                 commentarySourceIndex: readers.firstIndex { $0.id == reader.commentarySourceID },
                 commentaryResourceID: reader.commentaryResourceID,
                 followsCommentary: reader.commentarySourceID == nil ? nil : reader.followsCommentary,
-                commentaryReference: reader.commentaryReference, commentaryFollowsActiveBible: reader.commentaryFollowsActiveBible) },
+                commentaryReference: reader.commentaryReference, commentaryFollowsActiveBible: reader.commentaryFollowsActiveBible, strongNumbers: reader.showsStrongNumbers) },
             activeIndex: readers.firstIndex { $0.id == activeID }, referenceTargetIndex: readers.firstIndex { $0.id == referenceTargetID }, showsHome: showsHome,
             openingOrder: orderedReaders.compactMap { reader in readers.firstIndex { $0 === reader } })
     }
@@ -102,6 +103,7 @@ struct WorkspaceArchive: Codable {
             reader.showsContents = pane.contents; reader.showsLocator = pane.locator
             reader.locatorIsArticle = pane.articleLocator; reader.textScale = pane.scale; reader.linkGroup = pane.link
             reader.parallelSetID = pane.parallelSetID
+            reader.showsStrongNumbers = pane.strongNumbers ?? false
             reader.commentaryResourceID = pane.commentaryResourceID
             reader.commentaryFollowsActiveBible = pane.commentaryFollowsActiveBible ?? false
             reader.followsCommentary = pane.followsCommentary ?? true

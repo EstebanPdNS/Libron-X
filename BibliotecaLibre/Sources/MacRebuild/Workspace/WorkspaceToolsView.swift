@@ -167,8 +167,10 @@ struct ResourceInformationView: View {
                     let resource = reader.resource
                     let metadata = LibronMetadata.deriving(resource)
                     HStack(alignment: .top, spacing: 14) {
-                        Image(systemName: reader.isDictionary ? "character.book.closed" : "book.closed")
-                            .font(.system(size: 28)).foregroundStyle(.tint).frame(width: 44, height: 48)
+                        Group {
+                            if let kind = StudyResourceKind.identifying(reader) { StudyResourceIcon(kind: kind, size: 28) }
+                            else { Image(systemName: "book.closed").font(.system(size: 28)) }
+                        }.foregroundStyle(.tint).frame(width: 44, height: 48)
                             .background(.quaternary, in: RoundedRectangle(cornerRadius: 10))
                         VStack(alignment: .leading, spacing: 4) {
                             Text(metadata.title).font(.title2.weight(.semibold)).fixedSize(horizontal: false, vertical: true)

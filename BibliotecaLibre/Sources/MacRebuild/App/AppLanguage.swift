@@ -4,8 +4,8 @@ import SwiftUI
 /// Interface languages are independent of the language and typography of a book.
 enum AppLanguage: String, CaseIterable, Identifiable, Sendable {
     static let defaultsKey = "mac.interface.language.v1"
-    case english = "en", mandarin = "zh-Hans", hindi = "hi", spanish = "es"
-    case arabic = "ar", french = "fr", bengali = "bn", portuguese = "pt"
+    case english = "en", spanish = "es", portuguese = "pt", french = "fr"
+    case mandarin = "zh-Hans", hindi = "hi", arabic = "ar", bengali = "bn"
     case indonesian = "id", urdu = "ur"
     var id: String { rawValue }
     var nativeName: String {

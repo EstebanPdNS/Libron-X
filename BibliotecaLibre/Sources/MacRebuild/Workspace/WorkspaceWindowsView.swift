@@ -15,7 +15,10 @@ struct WorkspaceWindowsView: View {
             List(selection: $selection.selectedID) {
                 ForEach(selection.readers) { reader in
                     HStack(spacing: 12) {
-                        Image(systemName: "book.closed").accessibilityHidden(true)
+                        Group {
+                            if let kind = StudyResourceKind.identifying(reader) { StudyResourceIcon(kind: kind) }
+                            else { Image(systemName: "book.closed").accessibilityHidden(true) }
+                        }
                         VStack(alignment: .leading, spacing: 3) {
                             Text(reader.resource.title)
                             Text(reader.currentReference ?? reader.resource.fileName)

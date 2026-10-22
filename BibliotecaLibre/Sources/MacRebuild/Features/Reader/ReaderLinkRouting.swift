@@ -7,7 +7,7 @@ import LibronixCore
         let target = readers.first { $0.id == referenceTargetID && $0.hasObservedBible }
         if let edition = reference.edition {
             func matches(_ resource: LibraryResource) -> Bool {
-                resource.location.deletingPathExtension().lastPathComponent.caseInsensitiveCompare(edition) == .orderedSame
+                ReaderSession.matchesEdition(resource, edition)
             }
             if let target, matches(target.resource) { return target.resource }
             if matches(source) { return source }

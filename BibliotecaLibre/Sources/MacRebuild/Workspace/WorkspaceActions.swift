@@ -47,6 +47,7 @@ struct ReaderHighlight: Identifiable, Codable, Equatable {
         copy.history = reader.history; copy.historyIndex = reader.historyIndex
         copy.showsContents = reader.showsContents; copy.showsLocator = reader.showsLocator
         copy.locatorIsArticle = reader.locatorIsArticle; copy.textScale = reader.textScale
+        copy.showsStrongNumbers = reader.showsStrongNumbers
         copy.parallelSetID = reader.parallelSetID
         copy.commentaryResourceID = reader.commentaryResourceID
         copy.commentaryFollowsActiveBible = reader.commentaryFollowsActiveBible
@@ -68,7 +69,12 @@ struct ReaderHighlight: Identifiable, Codable, Equatable {
     func openSelectedLibraryResource(_ resource: LibraryResource) {
         let destination = pendingLibraryReference.map { ReaderDestination(ordinal: 0, reference: $0) }
         pendingLibraryReference = nil
-        open(resource, destination: destination)
+        if LibronMetadata.deriving(resource).resourceType == "Comentario bíblico" {
+            openCommentary(resource)
+            if let reference = destination?.reference, let target = activeReader {
+                target.load(.init(ordinal: 0, reference: reference))
+            }
+        } else { open(resource, destination: destination) }
     }
     func toggleReferenceTarget(_ reader: ReaderSession) {
         setReferenceTarget(referenceTargetID != reader.id, for: reader)
@@ -180,6 +186,14 @@ struct ReaderHighlight: Identifiable, Codable, Equatable {
         personal.documents[index].notes.append(note); personal.selectedDocumentID = personal.documents[index].id
         pendingNoteID = note.id
         savePersonal(); activeTool = .documents
+    }
+    func newNote() {
+        if let reader = activeReader, reader.page != nil { addNoteForSelection(reader); return }
+        if !personal.documents.contains(where: { $0.kind == .notebook }) { personal.create(.notebook) }
+        guard let index = personal.documents.firstIndex(where: { $0.kind == .notebook }) else { return }
+        var note = StudyNote(); note.sourceContentType = "text/plain"
+        personal.documents[index].notes.append(note); personal.selectedDocumentID = personal.documents[index].id
+        pendingNoteID = note.id; savePersonal(); activeTool = .documents
     }
     func openSearchResult(_ result: LibrarySearchResult, scope: WorkspaceSearchScopeSnapshot? = nil, focus: WorkspaceSearchResultFocus = .automatic) {
         do {

@@ -8,6 +8,7 @@ Documentation applies to the current beta source; historical verification record
 - [Architecture](architecture.md): modules, state ownership and data boundaries.
 - [Source map](source-map.md): every maintained source file, grouped by responsibility.
 - [Bibliographies, citations and editions](library-reports.md): reports, citation templates and reversible duplicate review.
+- [Resource download codes](../BibliotecaLibre/docs/resource-download-codes.md): encrypted collections, public hosting and installation checks.
 - [Verification](verification-v0.1.md): checks performed for this beta.
 - [Contributing](../CONTRIBUTING.md): small changes and useful bug reports.
 

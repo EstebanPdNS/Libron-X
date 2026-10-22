@@ -48,6 +48,7 @@ Maintained sources grouped by responsibility. See [architecture](architecture.md
 
 ## CSQLite
 
+- [module.modulemap](../BibliotecaLibre/Sources/CSQLite/module.modulemap)
 - [shim.h](../BibliotecaLibre/Sources/CSQLite/shim.h)
 
 ## LibronixCore/Domain
@@ -127,6 +128,7 @@ Maintained sources grouped by responsibility. See [architecture](architecture.md
 - [LibronNativeDatabase.swift](../BibliotecaLibre/Sources/LibronixCore/Libron/LibronNativeDatabase.swift)
 - [LibronPackage.swift](../BibliotecaLibre/Sources/LibronixCore/Libron/LibronPackage.swift)
 - [ResourceCitation.swift](../BibliotecaLibre/Sources/LibronixCore/Libron/ResourceCitation.swift)
+- [ResourceDistributionCompression.swift](../BibliotecaLibre/Sources/LibronixCore/Libron/ResourceDistributionCompression.swift)
 
 ## LibronixCore/Metadata
 
@@ -224,23 +226,32 @@ Maintained sources grouped by responsibility. See [architecture](architecture.md
 - [LibraryCollectionsView.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Library/LibraryCollectionsView.swift)
 - [LibraryEditionsView.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Library/LibraryEditionsView.swift)
 - [LibraryPreferences.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Library/LibraryPreferences.swift)
+- [LibraryResourceSort.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Library/LibraryResourceSort.swift)
 
 ## MacRebuild/Features/Reader
 
 - [BibleChapterCatalog.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Reader/BibleChapterCatalog.swift)
+- [CommentaryCoverageCatalog.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Reader/CommentaryCoverageCatalog.swift)
 - [EPUBReader.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Reader/EPUBReader.swift)
 - [ESwordReader.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Reader/ESwordReader.swift)
 - [LibronNativeReader.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Reader/LibronNativeReader.swift)
 - [ReaderArticleFlow.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Reader/ReaderArticleFlow.swift)
 - [ReaderBibleIndex.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Reader/ReaderBibleIndex.swift)
+- [ReaderCommentaryChapter.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Reader/ReaderCommentaryChapter.swift)
+- [ReaderCommentaryFollowing.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Reader/ReaderCommentaryFollowing.swift)
+- [ReaderCommentaryIndex.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Reader/ReaderCommentaryIndex.swift)
+- [ReaderCommentaryView.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Reader/ReaderCommentaryView.swift)
 - [ReaderError.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Reader/ReaderError.swift)
 - [ReaderFind.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Reader/ReaderFind.swift)
 - [ReaderFindBar.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Reader/ReaderFindBar.swift)
 - [ReaderLinkPreview.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Reader/ReaderLinkPreview.swift)
 - [ReaderLinkRouting.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Reader/ReaderLinkRouting.swift)
 - [ReaderPassageParts.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Reader/ReaderPassageParts.swift)
+- [ReaderPersonalNotes.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Reader/ReaderPersonalNotes.swift)
 - [ReaderSession.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Reader/ReaderSession.swift)
+- [ReaderStudyNoteLinks.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Reader/ReaderStudyNoteLinks.swift)
 - [ReaderZoom.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Reader/ReaderZoom.swift)
+- [StandaloneCommentaryReader.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Reader/StandaloneCommentaryReader.swift)
 
 ## MacRebuild/Features/Reader/OEB
 
@@ -299,10 +310,18 @@ Maintained sources grouped by responsibility. See [architecture](architecture.md
 
 ## MacRebuild/Features/Updates
 
+- [AnonymousResourceTransport.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Updates/AnonymousResourceTransport.swift)
 - [AppUpdater.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Updates/AppUpdater.swift)
+- [FilenPublicClient.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Updates/FilenPublicClient.swift)
 - [GitHubUpdateService.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Updates/GitHubUpdateService.swift)
+- [IcedrivePublicDownload.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Updates/IcedrivePublicDownload.swift)
 - [InstalledReleaseNotes.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Updates/InstalledReleaseNotes.swift)
 - [PreparedUpdate.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Updates/PreparedUpdate.swift)
+- [ResourceCollectionManifest.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Updates/ResourceCollectionManifest.swift)
+- [ResourceDownloadCode.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Updates/ResourceDownloadCode.swift)
+- [ResourceDownloadController.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Updates/ResourceDownloadController.swift)
+- [ResourceDownloadKey.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Updates/ResourceDownloadKey.swift)
+- [ResourcePackageInstaller.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Updates/ResourcePackageInstaller.swift)
 - [UpdateRelease.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Updates/UpdateRelease.swift)
 - [UpdateSettingsView.swift](../BibliotecaLibre/Sources/MacRebuild/Features/Updates/UpdateSettingsView.swift)
 
@@ -320,12 +339,22 @@ Maintained sources grouped by responsibility. See [architecture](architecture.md
 - [WorkspacePersonalState.swift](../BibliotecaLibre/Sources/MacRebuild/Persistence/WorkspacePersonalState.swift)
 - [WorkspaceStartup.swift](../BibliotecaLibre/Sources/MacRebuild/Persistence/WorkspaceStartup.swift)
 
+## MacRebuild/Resources
+
+- [HelpTopics.json](../BibliotecaLibre/Sources/MacRebuild/Resources/HelpTopics.json)
+- [Interface.json](../BibliotecaLibre/Sources/MacRebuild/Resources/Interface.json)
+- [ReleaseNotes.json](../BibliotecaLibre/Sources/MacRebuild/Resources/ReleaseNotes.json)
+
 ## MacRebuild/Shared/Controls
 
 - [MacInputPresentation.swift](../BibliotecaLibre/Sources/MacRebuild/Shared/Controls/MacInputPresentation.swift)
 - [MacToolbarPopover.swift](../BibliotecaLibre/Sources/MacRebuild/Shared/Controls/MacToolbarPopover.swift)
 - [MacToolbarPresentation.swift](../BibliotecaLibre/Sources/MacRebuild/Shared/Controls/MacToolbarPresentation.swift)
+- [NativeResourceTableActivation.swift](../BibliotecaLibre/Sources/MacRebuild/Shared/Controls/NativeResourceTableActivation.swift)
+- [NativeStudyResourceTable.swift](../BibliotecaLibre/Sources/MacRebuild/Shared/Controls/NativeStudyResourceTable.swift)
 - [ReaderOutputMenuItems.swift](../BibliotecaLibre/Sources/MacRebuild/Shared/Controls/ReaderOutputMenuItems.swift)
+- [StudyResourceIcon.swift](../BibliotecaLibre/Sources/MacRebuild/Shared/Controls/StudyResourceIcon.swift)
+- [StudyResourcePicker.swift](../BibliotecaLibre/Sources/MacRebuild/Shared/Controls/StudyResourcePicker.swift)
 
 ## MacRebuild/Workspace
 
@@ -339,6 +368,7 @@ Maintained sources grouped by responsibility. See [architecture](architecture.md
 - [StudyWorkspace.swift](../BibliotecaLibre/Sources/MacRebuild/Workspace/StudyWorkspace.swift)
 - [WorkspaceActions.swift](../BibliotecaLibre/Sources/MacRebuild/Workspace/WorkspaceActions.swift)
 - [WorkspaceBibleVersions.swift](../BibliotecaLibre/Sources/MacRebuild/Workspace/WorkspaceBibleVersions.swift)
+- [WorkspaceCommentaries.swift](../BibliotecaLibre/Sources/MacRebuild/Workspace/WorkspaceCommentaries.swift)
 - [WorkspaceToolbars.swift](../BibliotecaLibre/Sources/MacRebuild/Workspace/WorkspaceToolbars.swift)
 - [WorkspaceToolsView.swift](../BibliotecaLibre/Sources/MacRebuild/Workspace/WorkspaceToolsView.swift)
 - [WorkspaceWindowSelection.swift](../BibliotecaLibre/Sources/MacRebuild/Workspace/WorkspaceWindowSelection.swift)

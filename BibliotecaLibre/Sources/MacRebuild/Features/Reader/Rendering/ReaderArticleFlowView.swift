@@ -13,6 +13,7 @@ struct ReaderArticleFlowView: NSViewRepresentable {
     let selectionRevision: Int
     let scale: Double
     let fontsRevision: Int
+    var personalNotes: [ReaderPersonalNoteLink] = []
     let highlights: [ReaderHighlight]
     let visibleLines: Set<Int>?
     func makeCoordinator() -> Coordinator { Coordinator(reader: reader, workspace: workspace) }
@@ -35,6 +36,7 @@ struct ReaderArticleFlowView: NSViewRepresentable {
         return scroll
     }
     func updateNSView(_ scroll: ReaderScrollView, context: Context) {
+        context.coordinator.personalNotes = personalNotes
         context.coordinator.update()
         if !reader.flowEnabled {
             Task { @MainActor [weak coordinator = context.coordinator] in
@@ -133,6 +135,14 @@ struct ReaderArticleFlowView: NSViewRepresentable {
                     workspace.activate(reader); workspace.dictionary.show(word, workspace: workspace, anchor: view, rect: rect)
                 }
                 surface.view.onKeyboardScroll = { [weak self] in self?.userScrolled() }
+                surface.view.personalNotePreview.personal = workspace.personal
+                surface.view.personalNotePreview.edit = { [weak workspace] link in workspace?.editPersonalNote(link) }
+                surface.view.createPersonalNote = { [weak self, weak surface] range in
+                    guard let self, let surface else { return }
+                    self.workspace.activate(self.reader)
+                    self.reader.selectFlowPage(surface.page, selection: range)
+                    self.workspace.addNoteForSelection(self.reader)
+                }
                 surface.view.linkPreview.resource = reader.resource
                 surface.view.linkPreview.resolveResource = { [weak workspace] source, link in
                     guard let workspace else { throw RebuildError.bibleReferenceTargetUnavailable }
@@ -171,11 +181,12 @@ struct ReaderArticleFlowView: NSViewRepresentable {
                 }
             }
         }
+        var personalNotes: [ReaderPersonalNoteLink] = []
         private func render(_ surface: Surface) {
             let page = surface.page, delegate = surface.delegate
             let marks = reader.highlights.filter { $0.ordinal == page.destination.ordinal }
             let revision = AppPreferences.shared.readingFont + ":" + String(reader.renderingScale) + ":" + String(reader.sourceFontsRevision) + ":" +
-                String(describing: reader.visibleInterlinearLines) + ":" + String(describing: marks)
+                String(describing: reader.visibleInterlinearLines) + ":" + String(describing: marks) + ":" + String(describing: personalNotes)
             let graphicHashes = page.graphics.map(\.sha256)
             guard delegate.text != page.text || delegate.identity != page.destination || surface.revision != revision ||
                   surface.sourceStamp != page.sourceStamp || surface.graphicHashes != graphicHashes || delegate.inlineLinks != page.inlineLinks else { return }
@@ -195,6 +206,8 @@ struct ReaderArticleFlowView: NSViewRepresentable {
                 let color: NSColor = switch mark.color { case "green": .systemGreen; case "blue": .systemBlue; case "pink": .systemPink; default: .systemYellow }
                 display.addAttribute(.backgroundColor, value: color.withAlphaComponent(0.35), range: mark.range)
             }
+            surface.view.personalNoteLinks = ReaderPersonalNoteAttributes.matching(personalNotes, text: page.text, ordinal: page.destination.ordinal)
+            ReaderPersonalNoteAttributes.install(surface.view.personalNoteLinks, in: display)
             let images = ReaderImageRenderer.install(page.graphics, in: display)
             surface.warnings = rendered.warnings + images.warnings
             surface.view.sourceLinks = page.inlineLinks

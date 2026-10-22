@@ -14,17 +14,19 @@ enum LibraryField: String, CaseIterable, Identifiable, Codable {
         case .subtitle: "Subtítulo"; case .contributors: "Colaboradores"; case .originalYear: "Año original"
         }
     }
-    @MainActor func value(_ r: LibraryResource) -> String {
+    @MainActor func value(_ r: LibraryResource) -> String { value(r, language: AppPreferences.shared.language) }
+    func value(_ r: LibraryResource, language: AppLanguage) -> String {
+        func translated(_ text: String) -> String { AppStrings.text(text, language: language) }
         let m = LibronMetadata.deriving(r)
         switch self {
         case .format: return r.packageLocation == nil ? r.format.displayName : ".libron · " + r.format.displayName
         case .file: return r.fileName
         case .title: return m.title
         case .author: return m.authors.joined(separator: "; ")
-        case .language: return m.languages.map { LibraryLanguages.name($0) }.joined(separator: ", ")
-        case .type: return L(m.resourceType)
-        case .category: return L(m.category)
-        case .subcategory: return m.subcategories.map { L($0) }.joined(separator: ", ")
+        case .language: return m.languages.map { language.locale.localizedString(forLanguageCode: LibraryLanguages.canonical($0)) ?? $0 }.joined(separator: ", ")
+        case .type: return translated(m.resourceType)
+        case .category: return translated(m.category)
+        case .subcategory: return m.subcategories.map { translated($0) }.joined(separator: ", ")
         case .year: return m.year ?? ""
         case .publisher: return m.publisher ?? ""
         case .collection: return m.collection ?? ""

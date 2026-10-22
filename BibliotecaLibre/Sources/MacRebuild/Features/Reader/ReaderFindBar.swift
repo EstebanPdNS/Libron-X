@@ -34,7 +34,12 @@ struct ReaderFindBar: View {
             Button { reader.hideFind() } label: { MacToolbarLabel(L("Cerrar búsqueda"), "xmark") }
                 .help(L("Cerrar búsqueda (Esc)")).accessibilityLabel(L("Cerrar búsqueda"))
         }.modifier(MacPanelControlPresentation()).padding(7).background(.bar)
-            .onChange(of: reader.findFocusRequest, initial: true) { fieldFocused = true }
+            .task(id: reader.findFocusRequest) {
+                fieldFocused = false
+                await Task.yield()
+                guard !Task.isCancelled else { return }
+                fieldFocused = true
+            }
             .onChange(of: fieldFocused) { if fieldFocused { activate() } }
     }
     private func option(_ title: String, _ key: WritableKeyPath<ReaderFindOptions, Bool>) -> some View {

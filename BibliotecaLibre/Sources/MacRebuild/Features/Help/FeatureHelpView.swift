@@ -108,7 +108,7 @@ struct FeatureHelpVisual: View {
                 }.frame(maxWidth: .infinity)
                 Image(systemName: "cursorarrow").font(.title2).foregroundStyle(.tint)
                 VStack(alignment: .leading, spacing: 6) {
-                    Label(t("Notas y referencias"), systemImage: "text.bubble").font(.caption.bold())
+                    Label { Text(t("Notas y referencias")) } icon: { StudyResourceIcon(kind: .commentary) }.font(.caption.bold())
                     Text(t("Texto de ejemplo")).font(.caption).foregroundStyle(.secondary)
                 }.padding(12).background(.background, in: RoundedRectangle(cornerRadius: 10))
             }
@@ -212,7 +212,12 @@ struct FeatureHelpVisual: View {
     }
     private func step(_ symbol: String, _ title: String) -> some View {
         VStack(spacing: 10) {
-            Image(systemName: symbol).font(.system(size: 28, weight: .regular)).foregroundStyle(.tint).frame(height: 34)
+            Group {
+                if symbol == "character.book.closed" { StudyResourceIcon(kind: .dictionary, size: 28) }
+                else if ["book.closed", "text.book.closed"].contains(symbol), [.bibleReading, .referenceTarget, .bibleCopy, .groups].contains(topic) {
+                    StudyResourceIcon(kind: .bible, size: 28)
+                } else { Image(systemName: symbol).font(.system(size: 28, weight: .regular)) }
+            }.foregroundStyle(.tint).frame(height: 34)
             Text(t(title)).font(.caption).multilineTextAlignment(.center).fixedSize(horizontal: false, vertical: true)
         }.frame(maxWidth: .infinity)
     }

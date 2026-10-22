@@ -16,7 +16,7 @@ open /Applications/Libron-X.app
 The test wrapper supplies Swift Testing macro paths for Command Line Tools installations. It disables XCTest because the suites use Swift Testing. Corpus checks skip unless their explicitly named `LIBRONX_*` environment variables point to owner-supplied local inputs. Do not treat skipped checks as corpus acceptance.
 
 The app builder compiles `LibronXRebuild` in release mode, installs translations,
-approved icons and offline dictionaries, writes v0.4 metadata and ad-hoc signs the
+approved icons and offline dictionaries, writes v0.5.1 metadata and ad-hoc signs the
 bundle. Close Libron-X before building. It preserves source snapshots and replaces
 `/Applications/Libron-X.app`, moving the previous bundle to Trash.
 
@@ -58,3 +58,7 @@ The [source map](source-map.md) lists all source files. Keep Core portable, UI s
 For a release: freeze a revision, run tests and a release build, inspect bundle version/architecture/resources/signature, exercise the app, package the app with LICENSE and third-party notices, and verify a fresh extraction. Publish the exact tested revision as a prerelease until compatibility gates are met. Download uploaded assets and compare their checksums. Do not replace historical release bytes.
 
 The [v0.1 verification record](verification-v0.1.md) states the checks actually performed. Build output and raw private corpus reports stay outside Git. Code Atlas D01–D18 guides these documentation and publication boundaries.
+
+Encrypted resource distribution builds use the existing private key supplied through
+`LIBRONX_RESOURCE_KEY_FILE`. See [download codes](../BibliotecaLibre/docs/resource-download-codes.md)
+for catalog preparation and opt-in anonymous release checks.

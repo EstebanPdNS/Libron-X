@@ -25,6 +25,7 @@ enum PaneArrangement { case cascade, horizontal, vertical }
     var keepLibraryOpen = false
     var librarySortByAuthor = false
     var librarySortField = LibraryField.title
+    var librarySortOrder = SortOrder.forward
     var libraryGroup = "all"
     var libraryFacet = LibraryField.category
     var libraryFacetValue = ""
@@ -103,12 +104,9 @@ enum PaneArrangement { case cascade, horizontal, vertical }
                 groupMatches = collections.sets.first { $0.id == id }?.contains(resource) == true
             } else { groupMatches = true }
             return queryMatches && groupMatches && (libraryFacetValue.isEmpty || libraryFacet.value(resource) == libraryFacetValue)
-        }.sorted { lhs, rhs in
-            let field = librarySortByAuthor ? LibraryField.author : librarySortField
-            let order = field.value(lhs).localizedStandardCompare(field.value(rhs))
-            return order == .orderedSame ? lhs.id < rhs.id : order == .orderedAscending
-        }
+        }.sortedForLibrary(using: [LibraryResourceSort(librarySortByAuthor ? .author : librarySortField, order: librarySortOrder)])
     }
+
     var bibleGroups: [ParallelBibleSet] {
         let bibles = availableResources.filter { LibronMetadata.deriving($0).resourceType == "Biblia" }
         let languages = Set(bibles.flatMap { LibronMetadata.deriving($0).languages }.map(LibraryLanguages.canonical)).sorted()
@@ -199,6 +197,10 @@ enum PaneArrangement { case cascade, horizontal, vertical }
         return reader
     }
     func close(_ reader: ReaderSession) {
+        let order = orderedReaders
+        let successor = order.firstIndex(where: { $0 === reader }).flatMap { index in
+            order.dropFirst(index + 1).first ?? order.prefix(index).first
+        }
         reader.cancel(); readers.removeAll { $0 === reader }
         for follower in readers where follower.commentarySourceID == reader.id {
             let replacement = follower.commentaryFollowsActiveBible ? bibleReaders.last : nil
@@ -208,7 +210,10 @@ enum PaneArrangement { case cascade, horizontal, vertical }
             }
         }
         readerOrder.removeAll { $0 == reader.id }
-        if activeID == reader.id { activeID = visibleReaders.last?.id }
+        if activeID == reader.id {
+            activeID = nil
+            if let successor { activate(successor) }
+        }
         if referenceTargetID == reader.id { referenceTargetID = nil }
     }
     func closeAll() { for reader in readers { reader.cancel() }; readers = []; readerOrder = []; activeID = nil; referenceTargetID = nil }
