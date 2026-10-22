@@ -2,6 +2,8 @@
 
 ## v0.5 — 2026-10-21
 
+### Changelog
+
 - Open independent Bible commentary panes and switch resources in place.
 - Follow the active Bible or choose a specific source, with pause and workspace restoration.
 - Read whole-chapter notes with explicit verse ranges, linked articles and original illustrations.
@@ -48,7 +50,13 @@
 - Close the active reading pane with Command-W while keeping the desktop open.
 - Focus in-resource search with Command-F.
 
+### Bug reports
+
+[Open an issue](https://github.com/EstebanPdNS/Libron-X/issues/new?template=bug_report.md) with the app version, macOS version, reproduction steps and a screenshot or available logs. Remove private paths and personal content. Do not attach books or license files.
+
 ## v0.4 — 2026-10-18
+
+### Changelog
 
 - Search the managed library with persistent, source-bound indexes.
 - Create and edit manual collections of mixed resources.
@@ -79,7 +87,13 @@
 - Preserve native EPUB study indexes, notes, images and tables when copying packages.
 - Restore Bible selectors and keyboard version switching across supported native Bibles.
 
+### Bug reports
+
+[Open an issue](https://github.com/EstebanPdNS/Libron-X/issues/new?template=bug_report.md) with the app version, macOS version, reproduction steps and a screenshot or available logs. Remove private paths and personal content. Do not attach books or license files.
+
 ## v0.3 — 2026-10-17
+
+### Changelog
 
 - Use standard reader panes for dictionaries.
 - Bundle twelve offline dictionaries across four languages.
@@ -106,7 +120,13 @@
 - Prioritize active-pane borders and stabilize resize cursors.
 - Add elastic edge snapping between reader panes.
 
+### Bug reports
+
+[Open an issue](https://github.com/EstebanPdNS/Libron-X/issues/new?template=bug_report.md) with the app version, macOS version, reproduction steps and a screenshot or available logs. Remove private paths and personal content. Do not attach books or license files.
+
 ## v0.2 — 2026-10-17
+
+### Changelog
 
 - Add reader resizing from every edge and corner.
 - Add drag-to-edge pane placement.
@@ -132,6 +152,10 @@
 - Add library folder and import actions.
 - Reorganize Settings, installation details, release notes and app icons.
 - Add verified GitHub updates with Stable and Beta channels.
+
+### Bug reports
+
+[Open an issue](https://github.com/EstebanPdNS/Libron-X/issues/new?template=bug_report.md) with the app version, macOS version, reproduction steps and a screenshot or available logs. Remove private paths and personal content. Do not attach books or license files.
 
 ## v0.1 — 2026-10-16
 
