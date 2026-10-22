@@ -16,7 +16,7 @@ open /Applications/Libron-X.app
 The test wrapper supplies Swift Testing macro paths for Command Line Tools installations. It disables XCTest because the suites use Swift Testing. Corpus checks skip unless their explicitly named `LIBRONX_*` environment variables point to owner-supplied local inputs. Do not treat skipped checks as corpus acceptance.
 
 The app builder compiles `LibronXRebuild` in release mode, installs translations,
-approved icons and offline dictionaries, writes v0.5.1 metadata and ad-hoc signs the
+approved icons and offline dictionaries, writes v0.5 metadata and ad-hoc signs the
 bundle. Close Libron-X before building. It preserves source snapshots and replaces
 `/Applications/Libron-X.app`, moving the previous bundle to Trash.
 
