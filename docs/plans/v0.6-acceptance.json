@@ -262,14 +262,18 @@
         "BibliotecaLibre/Sources/LibronixCore/Study/TextComparison.swift",
         "BibliotecaLibre/Sources/LibronixCore/Study/BiblePassageReport.swift",
         "BibliotecaLibre/Sources/MacRebuild/Features/Comparison/PassageComparisonController.swift",
-        "BibliotecaLibre/Sources/MacRebuild/Features/Comparison/PassageComparisonView.swift"
+        "BibliotecaLibre/Sources/MacRebuild/Features/Comparison/PassageComparisonView.swift",
+        "BibliotecaLibre/Sources/LibronixCore/Study/CSVOutput.swift",
+        "BibliotecaLibre/Sources/MacRebuild/Features/Search/WorkspaceSearchExport.swift",
+        "BibliotecaLibre/Sources/MacRebuild/Features/Search/WorkspaceSearchResultsController.swift",
+        "BibliotecaLibre/Sources/MacRebuild/Features/Search/WorkspaceSearchResultsView.swift"
       ],
       "verification": [
-        "16 comparison, native integration and localization tests passed in 5 suites; installed native UI acceptance pending."
+        "16 comparison, native integration and localization tests passed in 5 suites; installed native UI acceptance pending.",
+        "24 tests passed in 7 suites: CSV round-trip, exact Unicode coordinates, visible ordering, metadata fields, partial coverage, source-change rejection, source destination protection, comparison, result navigation and localization."
       ],
       "limitations": [
-        "Installed native UI acceptance remains pending.",
-        "Comparison CSV exists; search-result export is still pending."
+        "Installed native UI acceptance for comparison and search-result export remains pending."
       ]
     },
     {

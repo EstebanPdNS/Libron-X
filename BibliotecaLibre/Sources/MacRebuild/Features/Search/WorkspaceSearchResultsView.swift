@@ -1,4 +1,5 @@
 import SwiftUI
+import UniformTypeIdentifiers
 import LibronixCore
 
 struct WorkspaceSearchResultsView: View {
@@ -6,6 +7,9 @@ struct WorkspaceSearchResultsView: View {
     @Bindable var search: WorkspaceSearchController
     @Bindable var presentation: WorkspaceSearchResultsController
     @FocusState private var listFocused: Bool
+    @RebuildViewState private var exportError: String?
+    @RebuildViewState private var exportTask: Task<Void, Never>?
+    @RebuildViewState private var exporting = false
     private func open(_ row: WorkspaceSearchResultRow) {
         guard search.canOpenResults else { return }
         presentation.selectedID = row.id
@@ -44,8 +48,12 @@ struct WorkspaceSearchResultsView: View {
                     Text(LF("Resultado {current} de {total}", ["current": String((presentation.selectedIndex ?? -1) + 1), "total": String(presentation.rows.count)]))
                         .font(.caption).monospacedDigit()
                     Spacer()
+                    Button(L("Exportar resultados…"), action: export)
+                        .disabled(!search.canExportResults || exporting)
                     Button(L("Abrir selección")) { _ = openSelected() }.disabled(presentation.selected == nil || !search.canOpenResults)
                 }
+                if exporting { ProgressView().controlSize(.small) }
+                if let exportError { Text(exportError).foregroundStyle(.red).textSelection(.enabled) }
             }
             ScrollViewReader { proxy in
                 List(selection: $presentation.selectedID) {
@@ -66,7 +74,26 @@ struct WorkspaceSearchResultsView: View {
                 Text(L("Algunos contextos no se muestran por el límite de presentación. Puedes abrir las coincidencias."))
                     .font(.caption).foregroundStyle(.secondary)
             }
-        }
+        }.onDisappear { exportTask?.cancel(); exportTask = nil; exporting = false }
+    }
+    private func export() {
+        exportError = nil
+        do {
+            let snapshot = try search.exportSnapshot(), panel = NSSavePanel()
+            panel.allowedContentTypes = [.commaSeparatedText]
+            panel.nameFieldStringValue = "Libron-X-search.csv"
+            guard panel.runModal() == .OK, let url = panel.url else { return }
+            exporting = true
+            exportTask = Task {
+                let writer = Task.detached(priority: .userInitiated) { try snapshot.write(to: url) }
+                do {
+                    try await withTaskCancellationHandler { try await writer.value } onCancel: { writer.cancel() }
+                } catch {
+                    if !(error is CancellationError) { exportError = L(error.localizedDescription) }
+                }
+                exporting = false; exportTask = nil
+            }
+        } catch { exportError = L(error.localizedDescription) }
     }
     @ViewBuilder private func rows(_ value: [WorkspaceSearchResultRow]) -> some View {
         ForEach(value) { row in

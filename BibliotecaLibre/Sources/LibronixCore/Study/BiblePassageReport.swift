@@ -95,10 +95,6 @@ public enum BiblePassageReport {
 
     /// RFC 4180 cells, with spreadsheet formula interpretation disabled.
     public static func csv(editions: [BiblePassageEdition], requested: String) -> String {
-        func cell(_ value: String) -> String {
-            let dangerous = value.first.map { "=+-@\t\r".contains($0) } ?? false
-            return "\"" + (dangerous ? "'" : "") + value.replacingOccurrences(of: "\"", with: "\"\"") + "\""
-        }
         var rows = [["reference", "edition", "resource_id", "source_reference", "text", "status"]]
         let indexes = editions.map { Dictionary(uniqueKeysWithValues: $0.verses.map { ($0.key, $0) }) }
         for reference in references(in: editions, requested: requested) {
@@ -108,6 +104,6 @@ public enum BiblePassageReport {
                     verse?.reference ?? "", verse?.text ?? "", verse == nil ? edition.complete ? "missing" : "unverified" : "present"])
             }
         }
-        return rows.map { $0.map(cell).joined(separator: ",") }.joined(separator: "\r\n") + "\r\n"
+        return rows.map(CSVOutput.row).joined()
     }
 }

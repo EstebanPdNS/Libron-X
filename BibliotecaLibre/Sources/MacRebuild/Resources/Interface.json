@@ -4067,6 +4067,18 @@
     "ur": "کالم منتخب کریں، عنوان، مصنف یا زبان سے ترتیب دیں اور گروپ سے فہرست محدود کریں۔ ہسپانوی وسائل کے لیے español تلاش کریں۔",
     "zh-Hans": "选择显示列，按标题、作者或语言排序，用组筛选列表。搜索 español 可查找西班牙语资源。"
   },
+  "Elige otro destino. La exportación no puede sustituir un recurso de la biblioteca.": {
+    "ar": "اختر وجهة أخرى. لا يمكن للتصدير استبدال مورد في المكتبة.",
+    "bn": "অন্য গন্তব্য বেছে নিন। রপ্তানি গ্রন্থাগারের কোনো সম্পদ প্রতিস্থাপন করতে পারে না।",
+    "en": "Choose another destination. The export cannot replace a library resource.",
+    "es": "Elige otro destino. La exportación no puede sustituir un recurso de la biblioteca.",
+    "fr": "Choisissez une autre destination. L’exportation ne peut pas remplacer une ressource de la bibliothèque.",
+    "hi": "दूसरा गंतव्य चुनें। निर्यात किसी पुस्तकालय संसाधन को प्रतिस्थापित नहीं कर सकता।",
+    "id": "Pilih tujuan lain. Ekspor tidak dapat mengganti sumber daya pustaka.",
+    "pt": "Escolha outro destino. A exportação não pode substituir um recurso da biblioteca.",
+    "ur": "دوسری منزل منتخب کریں۔ برآمد لائبریری کے کسی وسیلے کی جگہ نہیں لے سکتی۔",
+    "zh-Hans": "请选择其他位置。导出不能覆盖书库资源。"
+  },
   "Elige qué Biblias abiertas pertenecen al mismo grupo de vínculo. Al navegar a un versículo, las otras lecturas vinculadas siguen esa referencia. Los grupos de versiones y el destino de referencias son opciones independientes.": {
     "ar": "اختر القراءات المرتبطة في مجموعة واحدة. الانتقال إلى آية يحرك القراءات المرتبطة إلى المرجع نفسه. مجموعات الترجمات ووجهات المراجع خيارات منفصلة.",
     "bn": "একই লিংক গোষ্ঠীতে খোলা বাইবেলগুলো বাছুন। একটিতে পদে গেলে অন্যগুলো একই নির্দেশে যায়। সংস্করণ গোষ্ঠী ও নির্দেশের গন্তব্য আলাদা বিকল্প।",
@@ -4630,6 +4642,18 @@
     "pt": "Exportar leitura",
     "ur": "مطالعہ برآمد کریں",
     "zh-Hans": "导出阅读内容"
+  },
+  "Exportar resultados…": {
+    "ar": "تصدير النتائج…",
+    "bn": "ফলাফল রপ্তানি করুন…",
+    "en": "Export results…",
+    "es": "Exportar resultados…",
+    "fr": "Exporter les résultats…",
+    "hi": "परिणाम निर्यात करें…",
+    "id": "Ekspor hasil…",
+    "pt": "Exportar resultados…",
+    "ur": "نتائج برآمد کریں…",
+    "zh-Hans": "导出结果…"
   },
   "Fallidos": {
     "ar": "فاشلة",
@@ -5759,6 +5783,18 @@
     "ur": "تعریف میں کوئی فعال تعلق نہیں ہے۔",
     "zh-Hans": "该定义不包含有效关联。"
   },
+  "La exportación supera el límite de tamaño. Reduce el ámbito de búsqueda.": {
+    "ar": "يتجاوز التصدير الحد الأقصى للحجم. قلّص نطاق البحث.",
+    "bn": "রপ্তানি আকারের সীমা অতিক্রম করেছে। অনুসন্ধানের পরিসর কমান।",
+    "en": "The export exceeds the size limit. Narrow the search scope.",
+    "es": "La exportación supera el límite de tamaño. Reduce el ámbito de búsqueda.",
+    "fr": "L’exportation dépasse la taille limite. Réduisez le périmètre de recherche.",
+    "hi": "निर्यात आकार सीमा से अधिक है। खोज का दायरा घटाएँ।",
+    "id": "Ekspor melebihi batas ukuran. Persempit cakupan pencarian.",
+    "pt": "A exportação excede o limite de tamanho. Reduza o âmbito da pesquisa.",
+    "ur": "برآمد کا حجم حد سے زیادہ ہے۔ تلاش کا دائرہ کم کریں۔",
+    "zh-Hans": "导出内容超过大小限制。请缩小搜索范围。"
+  },
   "La identidad del recurso cambió.": {
     "ar": "تغيّرت هوية المورد.",
     "bn": "রিসোর্সের পরিচয় বদলেছে।",
@@ -6226,6 +6262,18 @@
     "pt": "Recursos ocultos não aparecem em Minha biblioteca, novas buscas, temas ou Copiar versículos. Os arquivos são preservados. Leituras abertas e documentos continuam disponíveis.",
     "ur": "پوشیدہ وسائل میری لائبریری، نئی تلاش، موضوعات اور آیات کی نقل میں نظر نہیں آتے۔ فائلیں محفوظ رہتی ہیں۔ کھلے مطالعے اور دستاویزات دستیاب رہتے ہیں۔",
     "zh-Hans": "隐藏的资源不会显示在“我的书库”、新搜索、主题浏览或经文复制中。文件会保留，已打开的阅读和您的文档仍可使用。"
+  },
+  "Los resultados cambiaron. Ejecuta la búsqueda de nuevo antes de exportar.": {
+    "ar": "تغيّرت النتائج. أعد البحث قبل التصدير.",
+    "bn": "ফলাফল পরিবর্তিত হয়েছে। রপ্তানির আগে আবার অনুসন্ধান করুন।",
+    "en": "The results changed. Run the search again before exporting.",
+    "es": "Los resultados cambiaron. Ejecuta la búsqueda de nuevo antes de exportar.",
+    "fr": "Les résultats ont changé. Relancez la recherche avant d’exporter.",
+    "hi": "परिणाम बदल गए हैं। निर्यात करने से पहले फिर से खोजें।",
+    "id": "Hasil telah berubah. Jalankan pencarian lagi sebelum mengekspor.",
+    "pt": "Os resultados mudaram. Execute a pesquisa novamente antes de exportar.",
+    "ur": "نتائج بدل گئے ہیں۔ برآمد کرنے سے پہلے دوبارہ تلاش کریں۔",
+    "zh-Hans": "结果已更改。请重新搜索后再导出。"
   },
   "Léxico": {
     "ar": "معجم",

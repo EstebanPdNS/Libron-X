@@ -17,7 +17,7 @@ enum WorkspaceSearchResultLayout: String, CaseIterable { case context, aligned }
 enum WorkspaceSearchResultGrouping: String, CaseIterable { case none, resource }
 enum WorkspaceSearchResultOrder: String, CaseIterable { case source, titleAscending, titleDescending, mostHits }
 
-struct WorkspaceSearchContextParts: Hashable {
+struct WorkspaceSearchContextParts: Hashable, Sendable {
     let before: String
     let match: String
     let after: String
@@ -39,8 +39,8 @@ struct WorkspaceSearchContextParts: Hashable {
             partialStart: focus.location < extent.location, partialEnd: focus.upperBound > extent.upperBound)
     }
 }
-struct WorkspaceSearchResultRow: Identifiable {
-    struct ID: Hashable { let resultID: String; let focus: WorkspaceSearchResultFocus }
+struct WorkspaceSearchResultRow: Identifiable, Sendable {
+    struct ID: Hashable, Sendable { let resultID: String; let focus: WorkspaceSearchResultFocus }
     let result: LibrarySearchResult
     let focus: WorkspaceSearchResultFocus
     let parts: WorkspaceSearchContextParts?
