@@ -22,11 +22,7 @@ struct LibraryCollectionsView: View {
     }
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            HStack {
-                Text(L("Colecciones")).font(.title2.bold())
-                Spacer()
-                Button(L("Cerrar")) { dismiss() }.keyboardShortcut(.cancelAction)
-            }
+            MacToolHeader(title: "Colecciones") { dismiss() }
             HSplitView {
                 VStack(alignment: .leading, spacing: 8) {
                     List(store.sets, selection: $selectedID) { collection in

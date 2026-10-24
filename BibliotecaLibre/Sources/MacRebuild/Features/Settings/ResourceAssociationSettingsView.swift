@@ -71,7 +71,7 @@ struct ResourceAssociationSettingsView: View {
                         Spacer()
                         Button(L("Subir"), systemImage: "chevron.up") { move(-1) }.disabled(!canMove(-1))
                         Button(L("Bajar"), systemImage: "chevron.down") { move(1) }.disabled(!canMove(1))
-                    }.controlSize(.small)
+                    }
                     originalMemberControls(selected)
                     candidatePicker(selected)
                     Text(L("Las asociaciones conservan su orden y los recursos ausentes. Los grupos de Biblias se administran por separado."))
@@ -89,13 +89,14 @@ struct ResourceAssociationSettingsView: View {
                     Button(L("Eliminar asociación"), systemImage: "trash", role: .destructive) {
                         if let id = selectedID { perform { try store.remove(id); selectValidGroup() } }
                     }.disabled(selected == nil)
-                }.controlSize(.small)
+                }
             }.padding(14).frame(minWidth: 430)
         }
         .onAppear { catalog = .init(resources:resources); selectValidGroup(); loadDraft() }
         .onChange(of: resources) { catalog = .init(resources:resources) }
         .sheet(isPresented:$showsImport) {
             ResourceAssociationImportView(workspace:workspace) { id in selectedID = id }
+                .modifier(AppInterfaceLanguage())
         }
         .onChange(of: selectedID) { loadDraft(); selectedMemberID = nil; selectedCandidateID = nil; query = ""; error = nil }
     }
@@ -162,7 +163,7 @@ struct ResourceAssociationSettingsView: View {
                     if selected.originalBindings?[member.id] != nil {
                         Button(L("Resolución automática")) { perform { try store.bind(member.id,in:selected.id,to:nil,resources:resources) } }
                     }
-                }.controlSize(.small)
+                }
             }
         }
     }

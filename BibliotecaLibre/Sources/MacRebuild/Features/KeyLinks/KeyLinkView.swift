@@ -70,7 +70,9 @@ struct KeyLinkView: View {
             .onChange(of: controller.scope) { controller.clear() }
             .onChange(of: controller.query) { controller.clear() }
             .onDisappear { controller.cancel() }
-            .sheet(isPresented: $showsPriorities) { ResourcePrioritiesView(workspace: workspace, initialScope: controller.scope) }
+            .sheet(isPresented: $showsPriorities) {
+                ResourcePrioritiesView(workspace: workspace, initialScope: controller.scope).modifier(AppInterfaceLanguage())
+            }
     }
 }
 
@@ -91,10 +93,7 @@ struct ResourcePrioritiesView: View {
     }
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            HStack {
-                Text(L("Prioridades")).font(.title2.bold()); Spacer()
-                Button(L("Cerrar")) { dismiss() }.keyboardShortcut(.cancelAction)
-            }
+            MacToolHeader(title: "Prioridades") { dismiss() }
             KeyLinkScopePicker(scope: $scope, workspace: workspace)
             HStack {
                 Text(L("Ventanas"))

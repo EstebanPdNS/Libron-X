@@ -7,10 +7,7 @@ struct WorkspaceToolsView: View {
     @Bindable var workspace: StudyWorkspace
     var body: some View {
         VStack(spacing: 0) {
-            HStack {
-                Text(L(title)).font(.headline); Spacer()
-                Button(L("Cerrar")) { workspace.activeTool = nil }.keyboardShortcut(.cancelAction)
-            }.padding(14).background(.bar)
+            MacToolHeader(title: title) { workspace.activeTool = nil }.padding(16)
             Divider()
             switch tool {
             case .search: WorkspaceSearchView(workspace: workspace, search: workspace.search)
@@ -31,9 +28,12 @@ struct WorkspaceToolsView: View {
             case .passageComparison: PassageComparisonView(workspace: workspace, controller: workspace.passageComparison)
             }
         }.frame(minWidth: tool == .information ? 700 : 680, idealWidth: tool == .information ? 700 : 820,
-                minHeight: tool == .information ? nil : tool == .bibliography ? 640 : tool == .search ? 680 : expandedScope ? 620 : 520,
-                idealHeight: tool == .information ? nil : tool == .bibliography ? 820 : tool == .search ? 820 : expandedScope ? 720 : 620)
+                minHeight: compactComparison || tool == .information ? nil : tool == .bibliography ? 640 : tool == .search ? 680 : expandedScope ? 620 : 520,
+                idealHeight: compactComparison || tool == .information ? nil : tool == .bibliography ? 820 : tool == .search ? 820 : expandedScope ? 720 : 620)
             .modifier(MacPanelControlPresentation())
+    }
+    private var compactComparison: Bool {
+        tool == .passageComparison && !workspace.passageComparison.completed && !workspace.passageComparison.isLoading
     }
     private var expandedScope: Bool {
         let kind: WorkspaceSearchScopeKind?
@@ -281,7 +281,7 @@ struct ResourceManagerView: View {
                 HStack {
                     VStack(alignment: .leading) { Text(resource.title); Text(resource.fileName).font(.caption).foregroundStyle(.secondary) }
                     Spacer()
-                    Text(resource.format == .legacyLSF ? "Lector LSF disponible" : resource.format == .libronixLLS ? "Contenedor Libronix disponible" : "Lector OEB pendiente").font(.caption).foregroundStyle(.secondary)
+                    Text(L("Formato") + ": " + resource.format.displayName).font(.caption).foregroundStyle(.secondary)
                     Button(L("Abrir")) { workspace.open(resource); workspace.activeTool = nil }
                 }
             }

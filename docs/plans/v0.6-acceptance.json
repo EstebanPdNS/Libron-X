@@ -1,6 +1,6 @@
 {
   "version": "0.6",
-  "updated": "2026-10-21",
+  "updated": "2026-10-24",
   "authorization": "All outstanding inventory items are assigned to 0.6 by the owner; new future suggestions remain 0.7. Historical version plans remain evidence, not the current allocation.",
   "baselineRelease": "v0.5",
   "count": 111,
@@ -140,10 +140,12 @@
         "BibliotecaLibre/Sources/MacRebuild/Features/Comparison/PassageComparisonView.swift"
       ],
       "verification": [
-        "16 comparison, native integration and localization tests passed in 5 suites; installed native UI acceptance pending."
+        "925 tests passed in 165 suites in an optimized build, including comparison, Unicode, source identity, CSV and localization checks.",
+        "Native builds 101–105: selected editions, missing verses, source-bound opening, case sensitivity, accents, punctuation, changing the base edition, CSV SavePanel and light/dark presentation checked with runtime screenshots.",
+        "Optimized-only punctuation classification defect reproduced in the installed application and fixed using Unicode general categories; optimized regression suite passed."
       ],
       "limitations": [
-        "Installed native UI acceptance remains pending."
+        "Final RTL presentation acceptance for build 106 remains pending: native automation reports timeoutReached."
       ]
     },
     {
@@ -163,10 +165,12 @@
         "BibliotecaLibre/Sources/MacRebuild/Features/Comparison/PassageComparisonView.swift"
       ],
       "verification": [
-        "16 comparison, native integration and localization tests passed in 5 suites; installed native UI acceptance pending."
+        "925 tests passed in 165 suites in an optimized build, including comparison, Unicode, source identity, CSV and localization checks.",
+        "Native builds 101–105: selected editions, missing verses, source-bound opening, case sensitivity, accents, punctuation, changing the base edition, CSV SavePanel and light/dark presentation checked with runtime screenshots.",
+        "Optimized-only punctuation classification defect reproduced in the installed application and fixed using Unicode general categories; optimized regression suite passed."
       ],
       "limitations": [
-        "Installed native UI acceptance remains pending."
+        "Final RTL presentation acceptance for build 106 remains pending: native automation reports timeoutReached."
       ]
     },
     {
@@ -186,10 +190,12 @@
         "BibliotecaLibre/Sources/MacRebuild/Features/Comparison/PassageComparisonView.swift"
       ],
       "verification": [
-        "16 comparison, native integration and localization tests passed in 5 suites; installed native UI acceptance pending."
+        "925 tests passed in 165 suites in an optimized build, including comparison, Unicode, source identity, CSV and localization checks.",
+        "Native builds 101–105: selected editions, missing verses, source-bound opening, case sensitivity, accents, punctuation, changing the base edition, CSV SavePanel and light/dark presentation checked with runtime screenshots.",
+        "Optimized-only punctuation classification defect reproduced in the installed application and fixed using Unicode general categories; optimized regression suite passed."
       ],
       "limitations": [
-        "Installed native UI acceptance remains pending."
+        "Final RTL presentation acceptance for build 106 remains pending: native automation reports timeoutReached."
       ]
     },
     {
@@ -229,10 +235,20 @@
       "sourceKey": "study-expansion-comparison-06",
       "acceptance": "Representar cuentas por libro, capítulo y rango con acceso a los resultados que las componen.",
       "baseline": "Resultados y contadores de búsqueda disponibles.",
-      "status": "pending",
-      "implementation": [],
-      "verification": [],
-      "limitations": []
+      "status": "in_progress",
+      "implementation": [
+        "BibliotecaLibre/Sources/LibronixCore/Search/BibleSearchDistribution.swift",
+        "BibliotecaLibre/Sources/MacRebuild/Features/Search/WorkspaceSearchDistributionView.swift",
+        "BibliotecaLibre/Sources/MacRebuild/Features/Search/WorkspaceSearchResultsView.swift"
+      ],
+      "verification": [
+        "Core tests verify book/chapter grouping, independent physical editions, overlapping and empty ranges, retained versus observed occurrences, partial coverage and rejection of article-mode results.",
+        "Installed native build 101: books, chapters, custom overlapping ranges, zero results, metric toggle and opening the exact source hit verified with real screenshots; original authored book hashes unchanged.",
+        "Included in the optimized 925-test regression run; final report header uses the shared native Glass controls."
+      ],
+      "limitations": [
+        "Final build 106 report-header and RTL runtime acceptance remains pending: native automation reports timeoutReached."
+      ]
     },
     {
       "id": "F163",
@@ -270,10 +286,11 @@
       ],
       "verification": [
         "16 comparison, native integration and localization tests passed in 5 suites; installed native UI acceptance pending.",
-        "24 tests passed in 7 suites: CSV round-trip, exact Unicode coordinates, visible ordering, metadata fields, partial coverage, source-change rejection, source destination protection, comparison, result navigation and localization."
+        "24 tests passed in 7 suites: CSV round-trip, exact Unicode coordinates, visible ordering, metadata fields, partial coverage, source-change rejection, source destination protection, comparison, result navigation and localization.",
+        "Comparison CSV exported through the installed native SavePanel and independently parsed: header plus six source-bound rows; original authored source hashes unchanged."
       ],
       "limitations": [
-        "Installed native UI acceptance for comparison and search-result export remains pending."
+        "Search-result CSV still needs a native SavePanel check; final RTL acceptance remains pending."
       ]
     },
     {

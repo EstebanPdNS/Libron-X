@@ -66,3 +66,11 @@ left and large source images on the right, adapting vertically in narrow panes.
 Image enlargement uses the shared native image viewer. Suppress only the
 publisher's explicitly identified decorative rule and badge files; retain
 illustrations, maps, original assets and every source UTF-16 address.
+
+Study tools, collection editors, priority editors, imports, downloads and result reports use `MacToolHeader` for one title hierarchy and the shared native Glass close control. Single-line inputs use the same real Glass capsule as toolbar search. Initial comparison sheets fit their controls; result lists expand only once a report exists. Compact result actions retain tooltips, accessibility labels, keyboard shortcuts and native menus. Dictionary and image-viewer navigation use the reader toolbar control groups. Native settings forms, checkboxes, links and system open/save/print panels retain their appropriate system semantics.
+
+Apply `AppInterfaceLanguage` explicitly at each sheet, popover and AppKit hosting
+boundary. A translated label alone does not prove the presented view inherited
+the interface direction. Check an actual Arabic or Urdu presentation: headers,
+form labels and action groups must follow RTL while source books and physical
+workspace coordinates retain their own direction.

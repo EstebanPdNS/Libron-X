@@ -15,10 +15,7 @@ struct ResourceAssociationImportView: View {
     @RebuildViewState private var task: Task<Void, Never>?
     var body: some View {
         VStack(alignment:.leading,spacing:14) {
-            HStack {
-                Text(L("Importar asociación original")).font(.headline); Spacer()
-                Button(L("Cerrar")) { task?.cancel(); dismiss() }.keyboardShortcut(.cancelAction)
-            }
+            MacToolHeader(title: "Importar asociación original") { task?.cancel(); dismiss() }
             Button(L("Elegir archivo .lbxras…"),action:choose).disabled(loading)
             if let document {
                 Text(document.definition.title).font(.title3).textSelection(.enabled)

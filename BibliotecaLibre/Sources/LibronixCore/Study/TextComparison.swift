@@ -80,7 +80,15 @@ public enum TextComparison {
             let isWord = character.unicodeScalars.contains { CharacterSet.alphanumerics.contains($0) || CharacterSet.nonBaseCharacters.contains($0) }
             if isWord { if wordStart == nil { wordStart = index }; continue }
             if let start = wordStart { append(start..<index); wordStart = nil }
-            let punctuation = character.unicodeScalars.allSatisfy(CharacterSet.punctuationCharacters.contains)
+            // Classify scalars directly. A bound predicate on a temporary
+            // bridged CharacterSet produced different optimized-build results.
+            let punctuation = character.unicodeScalars.allSatisfy { scalar in
+                switch scalar.properties.generalCategory {
+                case .connectorPunctuation, .dashPunctuation, .openPunctuation, .closePunctuation,
+                     .initialPunctuation, .finalPunctuation, .otherPunctuation: true
+                default: false
+                }
+            }
             if !character.isWhitespace && (options.punctuationSensitive || !punctuation) {
                 append(index..<text.index(after: index))
             }

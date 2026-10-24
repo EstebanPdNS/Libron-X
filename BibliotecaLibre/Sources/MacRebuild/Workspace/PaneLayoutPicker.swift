@@ -7,7 +7,7 @@ struct PaneLayoutPicker: View {
         Button { expanded.toggle() } label: { MacToolbarMenuLabel(L("Organizar ventanas"), "rectangle.split.2x1") }
             .help(L("Organizar ventanas"))
             .popover(isPresented: $expanded, arrowEdge: .bottom) {
-                PaneLayoutPanel(workspace: workspace) { expanded = false }
+                PaneLayoutPanel(workspace: workspace) { expanded = false }.modifier(AppInterfaceLanguage())
             }
     }
 }
@@ -43,50 +43,51 @@ struct PaneLayoutPanel: View {
                 }
             }
             Divider()
-            HStack {
-            Menu {
-                ForEach(PaneLayout.allCases) { layout in
-                    Menu(L(layout.title)) {
-                        ForEach(Array(layout.frames.indices), id: \.self) { slot in
-                            Button(LF("Posición {number}", ["number": String(slot + 1)])) {
-                                if let targetReader { workspace.place(targetReader, layout: layout, slot: slot) }
-                                else { workspace.apply(layout, activeSlot: slot) }
-                                dismiss()
+            MacReaderToolbarSurface {
+                HStack {
+                    MacReaderControlGroup {
+                        Menu {
+                            ForEach(PaneLayout.allCases) { layout in
+                                Menu(L(layout.title)) {
+                                    ForEach(Array(layout.frames.indices), id: \.self) { slot in
+                                        Button(LF("Posición {number}", ["number": String(slot + 1)])) {
+                                            if let targetReader { workspace.place(targetReader, layout: layout, slot: slot) }
+                                            else { workspace.apply(layout, activeSlot: slot) }
+                                            dismiss()
+                                        }
+                                    }
+                                }
+                            }
+                            Divider()
+                            if let targetReader {
+                                action("Ampliar o restaurar panel", "arrow.up.left.and.arrow.down.right") {
+                                    workspace.toggleMaximized(targetReader)
+                                }
+                                action("Minimizar panel", "minus") { workspace.minimize(targetReader) }
+                                action("Cerrar panel", "xmark") { workspace.close(targetReader) }
+                            } else {
+                                action("Cascada", "square.3.layers.3d") { workspace.arrange(.cascade) }
+                                action("Mosaico vertical", "rectangle.split.2x1") { workspace.arrange(.vertical) }
+                                action("Mosaico horizontal", "rectangle.split.1x2") { workspace.arrange(.horizontal) }
+                                Divider()
+                                action("Siguiente lectura", "arrow.right") { workspace.cycleReader() }
+                                action("Lectura anterior", "arrow.left") { workspace.cycleReader(backwards: true) }
+                                action("Ventanas…", "macwindow.on.rectangle") { workspace.activeTool = .windows }
+                                Divider()
+                                action("Cerrar todo y abrir Inicio", "house") { workspace.closeAll(); workspace.showsHome = true }
                             }
                         }
+                        label: {
+                            Label(L("Más opciones"), systemImage: "ellipsis").font(.callout)
+                        }
+                        .menuIndicator(.visible)
+                    }
+                    Spacer(minLength: 8)
+                    MacReaderControlGroup {
+                        MacToolbarButton("¿Qué es esto?", "questionmark.circle") { FeatureHelp.shared.show(.workspace) }
                     }
                 }
-            Divider()
-            if let targetReader {
-                action("Ampliar o restaurar panel", "arrow.up.left.and.arrow.down.right") {
-                    workspace.toggleMaximized(targetReader)
-                }
-                action("Minimizar panel", "minus") { workspace.minimize(targetReader) }
-                action("Cerrar panel", "xmark") { workspace.close(targetReader) }
-            } else {
-                action("Cascada", "square.3.layers.3d") { workspace.arrange(.cascade) }
-                action("Mosaico vertical", "rectangle.split.2x1") { workspace.arrange(.vertical) }
-                action("Mosaico horizontal", "rectangle.split.1x2") { workspace.arrange(.horizontal) }
-                Divider()
-                action("Siguiente lectura", "arrow.right") { workspace.cycleReader() }
-                action("Lectura anterior", "arrow.left") { workspace.cycleReader(backwards: true) }
-                action("Ventanas…", "macwindow.on.rectangle") { workspace.activeTool = .windows }
-                Divider()
-                action("Cerrar todo y abrir Inicio", "house") { workspace.closeAll(); workspace.showsHome = true }
             }
-            }
-            label: {
-                Text(L("Más opciones")).font(.callout)
-            }
-            .menuStyle(.borderlessButton).menuIndicator(.visible)
-            .padding(.horizontal, 10).frame(height: 30)
-            .background(.quaternary.opacity(0.35), in: RoundedRectangle(cornerRadius: 8))
-            Spacer(minLength: 8)
-            Button { FeatureHelp.shared.show(.workspace) } label: {
-                Label(L("¿Qué es esto?"), systemImage: "questionmark.circle").font(.callout)
-            }.buttonStyle(.borderless).padding(.horizontal, 10).frame(height: 30)
-                .background(.quaternary.opacity(0.35), in: RoundedRectangle(cornerRadius: 8))
-            }.controlSize(.regular)
         }.padding(16).frame(width: 310).controlSize(.regular).modifier(MacPanelControlPresentation())
     }
     private func snapButton(_ snap: PaneSnap, title: String) -> some View {

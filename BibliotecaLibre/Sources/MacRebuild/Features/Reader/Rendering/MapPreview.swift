@@ -3,7 +3,7 @@ import SwiftUI
 
 @MainActor enum MapPreview {
     static func show(image: NSImage, title: String) {
-        let controller = NSHostingController(rootView: MapPreviewView(image: image))
+        let controller = NSHostingController(rootView: MapPreviewView(image: image).modifier(AppInterfaceLanguage()))
         let window = NSWindow(contentViewController: controller)
         window.title = title
         window.setContentSize(NSSize(width: 960, height: 720))
@@ -33,16 +33,26 @@ private struct MapPreviewView: View {
     @RebuildViewState private var fitsWidth = true
     var body: some View {
         VStack(spacing: 0) {
-            HStack {
-                Toggle(L("Ajustar al ancho"), isOn: $fitsWidth).toggleStyle(.button)
-                Button(L("100 %")) { fitsWidth = false; zoom = 1 }
-                Slider(value: $zoom, in: 0.25...3).frame(width: 180).disabled(fitsWidth).accessibilityLabel(L("Ampliación del mapa"))
-                Text("\(Int(zoom * 100)) %").monospacedDigit().frame(width: 50)
-                Spacer()
-                Button(L("Copiar imagen")) {
-                    NSPasteboard.general.clearContents(); NSPasteboard.general.writeObjects([image])
+            MacReaderToolbarSurface {
+                HStack(spacing: 8) {
+                    MacReaderControlGroup {
+                        Toggle(isOn: $fitsWidth) { MacToolbarLabel("Ajustar al ancho", "arrow.left.and.right") }
+                            .toggleStyle(.button).help(L("Ajustar al ancho"))
+                        Button(L("100 %")) { fitsWidth = false; zoom = 1 }
+                    }
+                    MacReaderControlGroup {
+                        Slider(value: $zoom, in: 0.25...3).frame(minWidth: 60, idealWidth: 180, maxWidth: 180)
+                            .disabled(fitsWidth).accessibilityLabel(L("Ampliación del mapa"))
+                        Text("\(Int(zoom * 100)) %").monospacedDigit().frame(width: 50)
+                    }
+                    Spacer(minLength: 0)
+                    MacReaderControlGroup {
+                        MacToolbarButton("Copiar imagen", "doc.on.doc") {
+                            NSPasteboard.general.clearContents(); NSPasteboard.general.writeObjects([image])
+                        }
+                    }
                 }
-            }.padding(10).background(.bar)
+            }.padding(10)
             Divider()
             GeometryReader { geometry in
                 let factor = fitsWidth ? min(1, max(1, geometry.size.width - 32) / image.size.width) : zoom

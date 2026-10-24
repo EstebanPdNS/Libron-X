@@ -46,7 +46,7 @@ struct ParallelBibleSettingsView: View {
                         Label(L("Nuevo grupo"), systemImage: "plus.circle")
                             .frame(maxWidth: .infinity, alignment: .center)
                     }
-                    .labelStyle(.titleAndIcon).controlSize(.small)
+                    .labelStyle(.titleAndIcon)
                     .padding(.bottom, 8)
                 }
                 // The sidebar spans from the window edge to its divider. Both
@@ -62,7 +62,7 @@ struct ParallelBibleSettingsView: View {
                             Menu {
                                 Button(L("Eliminar grupo"), systemImage: "trash", role: .destructive) { removeGroup(selected.id) }
                             } label: { Label(L("Acciones del grupo"), systemImage: "ellipsis.circle") }
-                                .labelStyle(.iconOnly).menuIndicator(.hidden).controlSize(.small)
+                                .labelStyle(.iconOnly).menuIndicator(.hidden)
                                 .help(L("Acciones del grupo"))
                         }
                         HStack {
@@ -91,7 +91,7 @@ struct ParallelBibleSettingsView: View {
                             Spacer()
                             Button(L("Subir"), systemImage: "chevron.up") { move(-1) }.labelStyle(.iconOnly).help(L("Subir")).disabled(!canMove(-1))
                             Button(L("Bajar"), systemImage: "chevron.down") { move(1) }.labelStyle(.iconOnly).help(L("Bajar")).disabled(!canMove(1))
-                        }.controlSize(.small)
+                        }
                     } else {
                         Text(L("Crea un grupo para elegir sus Biblias.")).foregroundStyle(.secondary)
                             .frame(maxWidth: .infinity, maxHeight: .infinity)

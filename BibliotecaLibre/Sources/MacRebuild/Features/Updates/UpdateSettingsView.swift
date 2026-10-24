@@ -79,11 +79,7 @@ struct UpdatePanel: View {
     @Bindable var downloads = ResourceDownloadController.shared
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            HStack {
-                Label(L("Descargas"), systemImage: "arrow.down.circle").font(.headline)
-                Spacer()
-                Button(L("Cerrar")) { updater.showsPanel = false }.keyboardShortcut(.cancelAction)
-            }
+            MacToolHeader(title: "Descargas") { updater.showsPanel = false }
             GroupBox(L("Actualizaciones de Libron-X")) {
                 VStack(alignment: .leading, spacing: 10) {
                     Text(updater.installedVersion + " · " + updater.channel.title).foregroundStyle(.secondary)

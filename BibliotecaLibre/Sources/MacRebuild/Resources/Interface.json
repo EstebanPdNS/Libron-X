@@ -335,6 +335,18 @@
     "ur": "مطالعے کے اقدامات",
     "zh-Hans": "阅读操作"
   },
+  "Acciones de resultados": {
+    "ar": "إجراءات النتائج",
+    "bn": "ফলাফলের কার্যক্রম",
+    "en": "Result actions",
+    "es": "Acciones de resultados",
+    "fr": "Actions sur les résultats",
+    "hi": "परिणाम की कार्रवाइयाँ",
+    "id": "Tindakan hasil",
+    "pt": "Ações dos resultados",
+    "ur": "نتائج کے اقدامات",
+    "zh-Hans": "结果操作"
+  },
   "Acciones del grupo": {
     "ar": "إجراءات المجموعة",
     "bn": "গোষ্ঠীর কার্যক্রম",
@@ -490,6 +502,18 @@
     "pt": "Atualizados",
     "ur": "تازہ کردہ",
     "zh-Hans": "已更新"
+  },
+  "Actualizar gráfico": {
+    "ar": "تحديث الرسم البياني",
+    "bn": "চার্ট হালনাগাদ করুন",
+    "en": "Update chart",
+    "es": "Actualizar gráfico",
+    "fr": "Actualiser le graphique",
+    "hi": "चार्ट अपडेट करें",
+    "id": "Perbarui grafik",
+    "pt": "Atualizar gráfico",
+    "ur": "چارٹ تازہ کریں",
+    "zh-Hans": "更新图表"
   },
   "Adelante": {
     "ar": "تقدم",
@@ -2603,6 +2627,18 @@
     "ur": "مشاورت اور پاسبانی",
     "zh-Hans": "辅导与牧养"
   },
+  "Contar coincidencias conservadas": {
+    "ar": "حساب التطابقات المحفوظة",
+    "bn": "সংরক্ষিত মিল গণনা করুন",
+    "en": "Count retained matches",
+    "es": "Contar coincidencias conservadas",
+    "fr": "Compter les occurrences conservées",
+    "hi": "संरक्षित मिलानों की गणना करें",
+    "id": "Hitung kecocokan yang disimpan",
+    "pt": "Contar correspondências mantidas",
+    "ur": "محفوظ مماثلتیں شمار کریں",
+    "zh-Hans": "统计保留的匹配项"
+  },
   "Contenido": {
     "ar": "المحتويات",
     "bn": "সূচিপত্র",
@@ -2950,6 +2986,18 @@
     "pt": "Qualquer condição",
     "ur": "کوئی بھی شرط",
     "zh-Hans": "任一条件"
+  },
+  "Cuenta": {
+    "ar": "العدد",
+    "bn": "গণনা",
+    "en": "Count",
+    "es": "Cuenta",
+    "fr": "Nombre",
+    "hi": "गणना",
+    "id": "Jumlah",
+    "pt": "Contagem",
+    "ur": "گنتی",
+    "zh-Hans": "计数"
   },
   "Cuerpo": {
     "ar": "المتن",
@@ -3490,6 +3538,30 @@
     "pt": "Diferenciar maiúsculas",
     "ur": "بڑے چھوٹے حروف میں فرق",
     "zh-Hans": "区分大小写"
+  },
+  "Distribución de resultados": {
+    "ar": "توزيع النتائج",
+    "bn": "ফলাফলের বণ্টন",
+    "en": "Result distribution",
+    "es": "Distribución de resultados",
+    "fr": "Distribution des résultats",
+    "hi": "परिणामों का वितरण",
+    "id": "Distribusi hasil",
+    "pt": "Distribuição de resultados",
+    "ur": "نتائج کی تقسیم",
+    "zh-Hans": "结果分布"
+  },
+  "Distribución parcial: la búsqueda no cubrió todo el ámbito.": {
+    "ar": "توزيع جزئي: لم يشمل البحث النطاق بأكمله.",
+    "bn": "আংশিক বণ্টন: অনুসন্ধান পুরো পরিসর অন্তর্ভুক্ত করেনি।",
+    "en": "Partial distribution: the search did not cover the entire scope.",
+    "es": "Distribución parcial: la búsqueda no cubrió todo el ámbito.",
+    "fr": "Distribution partielle : la recherche n’a pas couvert tout le périmètre.",
+    "hi": "आंशिक वितरण: खोज पूरे दायरे में नहीं हुई।",
+    "id": "Distribusi parsial: pencarian tidak mencakup seluruh cakupan.",
+    "pt": "Distribuição parcial: a pesquisa não cobriu todo o âmbito.",
+    "ur": "جزوی تقسیم: تلاش نے پورے دائرے کا احاطہ نہیں کیا۔",
+    "zh-Hans": "部分分布：搜索未涵盖整个范围。"
   },
   "Documento": {
     "ar": "مستند",
@@ -4343,6 +4415,18 @@
     "ur": "برابر ہے",
     "zh-Hans": "等于"
   },
+  "Escribe entre uno y veinte rangos, uno por línea, sin duplicados.": {
+    "ar": "أدخل من نطاق واحد إلى عشرين نطاقًا، واحدًا في كل سطر، دون تكرار.",
+    "bn": "এক থেকে বিশটি পরিসর লিখুন, প্রতি লাইনে একটি, পুনরাবৃত্তি ছাড়া।",
+    "en": "Enter one to twenty ranges, one per line, without duplicates.",
+    "es": "Escribe entre uno y veinte rangos, uno por línea, sin duplicados.",
+    "fr": "Saisissez un à vingt passages, un par ligne, sans doublons.",
+    "hi": "एक से बीस दायरे दर्ज करें, हर पंक्ति में एक, बिना दोहराव के।",
+    "id": "Masukkan satu hingga dua puluh rentang, satu per baris, tanpa duplikat.",
+    "pt": "Digite de um a vinte intervalos, um por linha, sem duplicados.",
+    "ur": "ایک سے بیس دائرے درج کریں، ہر سطر میں ایک، بغیر تکرار کے۔",
+    "zh-Hans": "请输入一至二十个范围，每行一个，不要重复。"
+  },
   "Escribe un número de artículo válido.": {
     "ar": "أدخل رقم مقال صالحًا.",
     "bn": "বৈধ নিবন্ধ নম্বর লিখুন।",
@@ -4978,6 +5062,18 @@
     "pt": "Grupos de Bíblias paralelas",
     "ur": "متوازی بائبل کے گروپ",
     "zh-Hans": "平行圣经分组"
+  },
+  "Grupos: {count}": {
+    "ar": "المجموعات: {count}",
+    "bn": "গোষ্ঠী: {count}",
+    "en": "Groups: {count}",
+    "es": "Grupos: {count}",
+    "fr": "Groupes : {count}",
+    "hi": "समूह: {count}",
+    "id": "Grup: {count}",
+    "pt": "Grupos: {count}",
+    "ur": "گروپ: {count}",
+    "zh-Hans": "分组：{count}"
   },
   "Guarda la ubicación de lectura como favorito para volver después. Puedes organizar los favoritos en carpetas. Al abrir uno, vuelves al recurso y a la ubicación guardados.": {
     "ar": "احفظ موضع القراءة في المفضلة للعودة إليه. نظّم المفضلة في مجلدات. يفتح كل عنصر المورد والموضع المحفوظين.",
@@ -5783,6 +5879,18 @@
     "ur": "تعریف میں کوئی فعال تعلق نہیں ہے۔",
     "zh-Hans": "该定义不包含有效关联。"
   },
+  "La distribución bíblica requiere una búsqueda por versículo.": {
+    "ar": "يتطلب التوزيع الكتابي بحثًا حسب الآية.",
+    "bn": "বাইবেলের বণ্টনের জন্য পদ অনুযায়ী অনুসন্ধান প্রয়োজন।",
+    "en": "Bible distribution requires a verse search.",
+    "es": "La distribución bíblica requiere una búsqueda por versículo.",
+    "fr": "La distribution biblique nécessite une recherche par verset.",
+    "hi": "बाइबल वितरण के लिए पद के अनुसार खोज आवश्यक है।",
+    "id": "Distribusi Alkitab memerlukan pencarian per ayat.",
+    "pt": "A distribuição bíblica requer uma pesquisa por versículo.",
+    "ur": "بائبل کی تقسیم کے لیے آیت کے مطابق تلاش ضروری ہے۔",
+    "zh-Hans": "圣经分布需要按经节搜索。"
+  },
   "La exportación supera el límite de tamaño. Reduce el ámbito de búsqueda.": {
     "ar": "يتجاوز التصدير الحد الأقصى للحجم. قلّص نطاق البحث.",
     "bn": "রপ্তানি আকারের সীমা অতিক্রম করেছে। অনুসন্ধানের পরিসর কমান।",
@@ -6274,6 +6382,18 @@
     "pt": "Os resultados mudaram. Execute a pesquisa novamente antes de exportar.",
     "ur": "نتائج بدل گئے ہیں۔ برآمد کرنے سے پہلے دوبارہ تلاش کریں۔",
     "zh-Hans": "结果已更改。请重新搜索后再导出。"
+  },
+  "Los resultados no conservan referencias bíblicas e identidades válidas.": {
+    "ar": "لا تحتفظ النتائج بمراجع كتابية وهويات صالحة.",
+    "bn": "ফলাফলে বৈধ বাইবেলীয় উল্লেখ ও পরিচয় সংরক্ষিত নেই।",
+    "en": "The results do not retain valid Bible references and identities.",
+    "es": "Los resultados no conservan referencias bíblicas e identidades válidas.",
+    "fr": "Les résultats ne conservent pas de références bibliques et d’identités valides.",
+    "hi": "परिणामों में मान्य बाइबल संदर्भ और पहचान नहीं हैं।",
+    "id": "Hasil tidak menyimpan referensi Alkitab dan identitas yang valid.",
+    "pt": "Os resultados não mantêm referências bíblicas e identidades válidas.",
+    "ur": "نتائج میں بائبل کے درست حوالے اور شناختیں محفوظ نہیں ہیں۔",
+    "zh-Hans": "结果未保留有效的圣经引用和标识。"
   },
   "Léxico": {
     "ar": "معجم",
@@ -7847,6 +7967,30 @@
     "ur": "رموز اوقاف",
     "zh-Hans": "标点符号"
   },
+  "Página anterior": {
+    "ar": "الصفحة السابقة",
+    "bn": "আগের পৃষ্ঠা",
+    "en": "Previous page",
+    "es": "Página anterior",
+    "fr": "Page précédente",
+    "hi": "पिछला पृष्ठ",
+    "id": "Halaman sebelumnya",
+    "pt": "Página anterior",
+    "ur": "پچھلا صفحہ",
+    "zh-Hans": "上一页"
+  },
+  "Página siguiente": {
+    "ar": "الصفحة التالية",
+    "bn": "পরের পৃষ্ঠা",
+    "en": "Next page",
+    "es": "Página siguiente",
+    "fr": "Page suivante",
+    "hi": "अगला पृष्ठ",
+    "id": "Halaman berikutnya",
+    "pt": "Página seguinte",
+    "ur": "اگلا صفحہ",
+    "zh-Hans": "下一页"
+  },
   "Párrafos": {
     "ar": "فقرات",
     "bn": "অনুচ্ছেদ",
@@ -7942,6 +8086,18 @@
     "pt": "Intervalo: {range}",
     "ur": "دائرہ: {range}",
     "zh-Hans": "范围：{range}"
+  },
+  "Rangos personalizados": {
+    "ar": "نطاقات مخصصة",
+    "bn": "কাস্টম পরিসর",
+    "en": "Custom ranges",
+    "es": "Rangos personalizados",
+    "fr": "Passages personnalisés",
+    "hi": "कस्टम दायरे",
+    "id": "Rentang khusus",
+    "pt": "Intervalos personalizados",
+    "ur": "حسب ضرورت دائرے",
+    "zh-Hans": "自定义范围"
   },
   "Reanudar": {
     "ar": "استئناف",
@@ -8495,6 +8651,18 @@
     "ur": "زیادہ سے زیادہ نتائج",
     "zh-Hans": "最多结果数"
   },
+  "Resultados: {results} · Coincidencias conservadas: {retained}/{observed}": {
+    "ar": "النتائج: {results} · التطابقات المحفوظة: {retained}/{observed}",
+    "bn": "ফলাফল: {results} · সংরক্ষিত মিল: {retained}/{observed}",
+    "en": "Results: {results} · Retained matches: {retained}/{observed}",
+    "es": "Resultados: {results} · Coincidencias conservadas: {retained}/{observed}",
+    "fr": "Résultats : {results} · Occurrences conservées : {retained}/{observed}",
+    "hi": "परिणाम: {results} · संरक्षित मिलान: {retained}/{observed}",
+    "id": "Hasil: {results} · Kecocokan tersimpan: {retained}/{observed}",
+    "pt": "Resultados: {results} · Correspondências mantidas: {retained}/{observed}",
+    "ur": "نتائج: {results} · محفوظ مماثلتیں: {retained}/{observed}",
+    "zh-Hans": "结果：{results} · 保留的匹配项：{retained}/{observed}"
+  },
   "Revisión interna": {
     "ar": "المراجعة الداخلية",
     "bn": "অভ্যন্তরীণ সংশোধন",
@@ -8615,6 +8783,18 @@
     "ur": "اصل دستاویز، اس کا ماخذ، ترتیب اور غیر موجود ارکان محفوظ رہیں گے۔ منتخب تعلق فائل کے تمام گروپوں پر لاگو ہوگا۔",
     "zh-Hans": "将保留原始文档、来源、顺序和缺失成员。所选关系将应用于文件中的所有分组。"
   },
+  "Se cuentan los resultados conservados de cada edición. Las cuentas parciales no representan toda la biblioteca.": {
+    "ar": "يُحسب ما حُفظ من نتائج كل طبعة. لا تمثل الأعداد الجزئية المكتبة بأكملها.",
+    "bn": "প্রতিটি সংস্করণের সংরক্ষিত ফলাফল গণনা করা হয়। আংশিক গণনা সমগ্র গ্রন্থাগারকে উপস্থাপন করে না।",
+    "en": "Counts use the retained results of each edition. Partial counts do not represent the entire library.",
+    "es": "Se cuentan los resultados conservados de cada edición. Las cuentas parciales no representan toda la biblioteca.",
+    "fr": "Les comptes utilisent les résultats conservés de chaque édition. Les comptes partiels ne représentent pas toute la bibliothèque.",
+    "hi": "गणना हर संस्करण के संरक्षित परिणामों पर आधारित है। आंशिक गणना पूरे पुस्तकालय का प्रतिनिधित्व नहीं करती।",
+    "id": "Hitungan menggunakan hasil tersimpan setiap edisi. Hitungan parsial tidak mewakili seluruh pustaka.",
+    "pt": "As contagens usam os resultados mantidos de cada edição. Contagens parciais não representam toda a biblioteca.",
+    "ur": "ہر ایڈیشن کے محفوظ نتائج شمار ہوتے ہیں۔ جزوی گنتی پوری لائبریری کی نمائندگی نہیں کرتی۔",
+    "zh-Hans": "计数使用各版本保留的结果。部分计数不代表整个书库。"
+  },
   "Se muestran las primeras {count} entradas; quedan resultados o recursos por consultar.": {
     "ar": "تُعرض أول {count} مدخلات؛ توجد نتائج أو موارد أخرى لم تُفحص.",
     "bn": "প্রথম {count}টি প্রবেশ দেখানো হয়েছে; আরও ফলাফল বা রিসোর্স বাকি আছে।",
@@ -8722,6 +8902,18 @@
     "pt": "Selecione um documento",
     "ur": "دستاویز منتخب کریں",
     "zh-Hans": "选择文档"
+  },
+  "Selecciona un grupo para ver sus resultados.": {
+    "ar": "اختر مجموعة لعرض نتائجها.",
+    "bn": "ফলাফল দেখতে একটি গোষ্ঠী নির্বাচন করুন।",
+    "en": "Select a group to see its results.",
+    "es": "Selecciona un grupo para ver sus resultados.",
+    "fr": "Sélectionnez un groupe pour voir ses résultats.",
+    "hi": "परिणाम देखने के लिए एक समूह चुनें।",
+    "id": "Pilih grup untuk melihat hasilnya.",
+    "pt": "Selecione um grupo para ver os resultados.",
+    "ur": "نتائج دیکھنے کے لیے ایک گروپ منتخب کریں۔",
+    "zh-Hans": "选择一个分组以查看其结果。"
   },
   "Selecciona un recurso": {
     "ar": "اختر موردًا",
@@ -9682,6 +9874,18 @@
     "pt": "Localização",
     "ur": "مقام",
     "zh-Hans": "位置"
+  },
+  "Un rango por línea; los rangos solapados se cuentan por separado.": {
+    "ar": "نطاق واحد في كل سطر؛ تُحسب النطاقات المتداخلة بشكل منفصل.",
+    "bn": "প্রতি লাইনে একটি পরিসর; ওভারল্যাপ করা পরিসর আলাদাভাবে গণনা করা হয়।",
+    "en": "One range per line; overlapping ranges are counted separately.",
+    "es": "Un rango por línea; los rangos solapados se cuentan por separado.",
+    "fr": "Un passage par ligne ; les passages qui se chevauchent sont comptés séparément.",
+    "hi": "हर पंक्ति में एक दायरा; अतिव्यापी दायरे अलग-अलग गिने जाते हैं।",
+    "id": "Satu rentang per baris; rentang yang tumpang tindih dihitung terpisah.",
+    "pt": "Um intervalo por linha; intervalos sobrepostos são contados separadamente.",
+    "ur": "ہر سطر میں ایک دائرہ؛ باہم ملتے دائروں کو الگ الگ شمار کیا جاتا ہے۔",
+    "zh-Hans": "每行一个范围；重叠范围分别计数。"
   },
   "Un solo párrafo": {
     "ar": "فقرة واحدة",

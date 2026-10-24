@@ -10,6 +10,7 @@ struct WorkspaceSearchResultsView: View {
     @RebuildViewState private var exportError: String?
     @RebuildViewState private var exportTask: Task<Void, Never>?
     @RebuildViewState private var exporting = false
+    @RebuildViewState private var showsDistribution = false
     private func open(_ row: WorkspaceSearchResultRow) {
         guard search.canOpenResults else { return }
         presentation.selectedID = row.id
@@ -41,15 +42,22 @@ struct WorkspaceSearchResultsView: View {
                 HStack {
                     Button { presentation.previous(); listFocused = true } label: {
                         Label(L("Resultado anterior"), systemImage: "chevron.up")
-                    }.disabled(!presentation.canPrevious).keyboardShortcut(.upArrow, modifiers: [.command, .option])
+                    }.labelStyle(.iconOnly).help(L("Resultado anterior"))
+                        .disabled(!presentation.canPrevious).keyboardShortcut(.upArrow, modifiers: [.command, .option])
                     Button { presentation.next(); listFocused = true } label: {
                         Label(L("Resultado siguiente"), systemImage: "chevron.down")
-                    }.disabled(!presentation.canNext).keyboardShortcut(.downArrow, modifiers: [.command, .option])
+                    }.labelStyle(.iconOnly).help(L("Resultado siguiente"))
+                        .disabled(!presentation.canNext).keyboardShortcut(.downArrow, modifiers: [.command, .option])
                     Text(LF("Resultado {current} de {total}", ["current": String((presentation.selectedIndex ?? -1) + 1), "total": String(presentation.rows.count)]))
                         .font(.caption).monospacedDigit()
                     Spacer()
-                    Button(L("Exportar resultados…"), action: export)
-                        .disabled(!search.canExportResults || exporting)
+                    Menu {
+                        Button(L("Exportar resultados…"), action: export)
+                            .disabled(!search.canExportResults || exporting)
+                        Button(L("Distribución de resultados")) { showsDistribution = true }
+                            .disabled(search.report?.unit != .bibleVerse || search.isSearching || !search.canOpenResults)
+                    } label: { Label(L("Acciones de resultados"), systemImage: "ellipsis.circle").labelStyle(.iconOnly) }
+                        .help(L("Acciones de resultados"))
                     Button(L("Abrir selección")) { _ = openSelected() }.disabled(presentation.selected == nil || !search.canOpenResults)
                 }
                 if exporting { ProgressView().controlSize(.small) }
@@ -75,6 +83,9 @@ struct WorkspaceSearchResultsView: View {
                     .font(.caption).foregroundStyle(.secondary)
             }
         }.onDisappear { exportTask?.cancel(); exportTask = nil; exporting = false }
+            .sheet(isPresented: $showsDistribution) {
+                WorkspaceSearchDistributionView(workspace: workspace, search: search).modifier(AppInterfaceLanguage())
+            }
     }
     private func export() {
         exportError = nil

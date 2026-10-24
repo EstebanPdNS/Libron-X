@@ -22,8 +22,8 @@ import CSQLite
         let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
         try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
         defer { try? FileManager.default.removeItem(at: root) }
-        let a = try bible(root, name: "Edition A", rows: "(1,1,1,'😀 In the beginning'),(1,1,2,'Light'),(1,1,3,'Third')")
-        let b = try bible(root, name: "Edition B", rows: "(1,1,1,'😀 in beginning'),(1,1,3,'Third')")
+        let a = try bible(root, name: "Edition A", rows: "(1,1,1,'😀 In the beginning'),(1,1,2,'Light'),(1,1,3,'Third.')")
+        let b = try bible(root, name: "Edition B", rows: "(1,1,1,'😀 in beginning'),(1,1,3,'Third!')")
         let before = try [a,b].map { try Data(contentsOf: $0.location) }
         let controller = PassageComparisonController()
         controller.selectedIDs = [a.id,b.id]; controller.baseID = a.id; controller.reference = "Ge1:1-3"
@@ -32,8 +32,15 @@ import CSQLite
         #expect(controller.rows.count == 3 && controller.rows[1].cells[1].verse == nil)
         #expect(!controller.rows[0].cells[1].differences.isEmpty)
         #expect(try controller.exportCSV().contains("\"missing\""))
-        controller.options.caseSensitive = false; controller.compareAgain(); try await settle { !controller.isLoading }
+        let export = root.appendingPathComponent("comparison.csv")
+        try controller.writeCSV(to: export)
+        #expect(try String(contentsOf: export, encoding: .utf8) == controller.exportCSV())
+        #expect(throws: (any Error).self) { try controller.writeCSV(to: a.location) }
+        controller.setSensitivity(\.caseSensitive, to: false); try await settle { !controller.isLoading }
         #expect(controller.completed && controller.rows[0].cells[1].differences.count == 1)
+        #expect(!controller.rows[2].cells[1].differences.isEmpty)
+        controller.setSensitivity(\.punctuationSensitive, to: false); try await settle { !controller.isLoading }
+        #expect(controller.rows[2].cells[1].differences.isEmpty)
         let workspace = StudyWorkspace(personal: .init(url: root.appendingPathComponent("personal.json")),
             resourceVisibility: .init(url: root.appendingPathComponent("visibility.json")),
             parallelBibleSets: .init(url: root.appendingPathComponent("parallel.json")),

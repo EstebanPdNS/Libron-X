@@ -42,4 +42,12 @@ struct TextComparisonTests {
         do { _ = try await task.value; Issue.record("Cancelled comparison returned a result") }
         catch is CancellationError {}
     }
+    @Test func ignoringPunctuationRetainsSymbolsAndEmojiInOptimizedBuilds() throws {
+        var options = TextComparisonOptions(); options.punctuationSensitive = false
+        #expect(try TextComparison.differences(base: "Word.", compared: "Word!", options: options).isEmpty)
+        #expect(try TextComparison.differences(base: "«word»—", compared: "word", options: options).isEmpty)
+        #expect(try !TextComparison.differences(base: "$", compared: "€", options: options).isEmpty)
+        let differences = try TextComparison.differences(base: "👩🏽‍💻", compared: "👨🏽‍💻", options: options)
+        #expect(differences.count == 1 && differences[0].base.length == "👩🏽‍💻".utf16.count)
+    }
 }

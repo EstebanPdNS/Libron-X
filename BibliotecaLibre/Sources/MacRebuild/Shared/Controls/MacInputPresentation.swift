@@ -1,24 +1,10 @@
 import AppKit
 import SwiftUI
 
-/// Use the system's text-input bezel and focus ring instead of drawing a field
-/// over a simulated glass image. One shape/size is shared by all single-line
-/// inputs; older supported systems keep their native editing behavior.
+/// The same real Glass capsule used by toolbar search, with native text editing.
+/// Older supported systems keep their native field presentation.
 private struct MacInputPresentation: ViewModifier {
     @ViewBuilder func body(content: Content) -> some View {
-        #if compiler(>=6.4)
-        if #available(macOS 27, *) {
-            content.textFieldStyle(.bordered).textInputBorderShape(.capsule).controlSize(.large)
-        } else {
-            compatibleInput(content)
-        }
-        #else
-        compatibleInput(content)
-        #endif
-    }
-
-    // Runtime availability alone cannot hide SDK 27 symbols from older compilers.
-    @ViewBuilder private func compatibleInput(_ content: Content) -> some View {
         if #available(macOS 26, *) {
             content.textFieldStyle(.plain).controlSize(.large)
                 .padding(.horizontal, 12).padding(.vertical, 7)

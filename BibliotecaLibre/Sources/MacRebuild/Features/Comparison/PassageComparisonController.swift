@@ -59,6 +59,15 @@ private actor PassageComparisonFormatting {
     }
     func cancel() { generation += 1; task?.cancel(); task = nil; isLoading = false }
     func invalidate() { cancel(); editions = []; rows = []; completed = false; error = nil }
+    func setSensitivity(_ field: WritableKeyPath<TextComparisonOptions, Bool>, to value: Bool) {
+        guard options[keyPath: field] != value else { return }
+        options[keyPath: field] = value
+        compareAgain()
+    }
+    func setBase(_ value: String) {
+        guard baseID != value else { return }
+        baseID = value; compareAgain()
+    }
     func run(resources: [LibraryResource]) {
         invalidate()
         let requested = reference.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -120,6 +129,17 @@ private actor PassageComparisonFormatting {
         guard completed else { throw PersonalStateError.invalid(L("El informe todavía no está completo.")) }
         try verifySources()
         return BiblePassageReport.csv(editions: editions, requested: submittedReference)
+    }
+    func writeCSV(to url: URL) throws {
+        let destination = url.resolvingSymlinksInPath().standardizedFileURL
+        guard !editions.flatMap(\.sourceStamps).contains(where: {
+            $0.url.resolvingSymlinksInPath().standardizedFileURL == destination
+        }) else {
+            throw PersonalStateError.invalid(L("Elige otro destino. La exportación no puede sustituir un recurso de la biblioteca."))
+        }
+        let data = Data(try exportCSV().utf8)
+        try verifySources(); try Task.checkCancellation()
+        try data.write(to: url, options: .atomic)
     }
     deinit { task?.cancel() }
 }

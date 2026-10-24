@@ -217,8 +217,12 @@ struct DictionaryQuickView: View {
                 Text(controller.word).font(.title2.bold())
                 Spacer()
                 if controller.isLoading { ProgressView().controlSize(.small) }
-                Button { controller.cycleQuick(backwards: true, workspace: workspace) } label: { Image(systemName: "chevron.left") }.disabled(controller.matches.count < 2)
-                Button { controller.cycleQuick(backwards: false, workspace: workspace) } label: { Image(systemName: "chevron.right") }.disabled(controller.matches.count < 2)
+                MacReaderToolbarSurface {
+                    MacReaderControlGroup {
+                        MacToolbarButton("Diccionario anterior", "chevron.left") { controller.cycleQuick(backwards: true, workspace: workspace) }
+                        MacToolbarButton("Diccionario siguiente", "chevron.right") { controller.cycleQuick(backwards: false, workspace: workspace) }
+                    }.disabled(controller.matches.count < 2)
+                }
             }
             if !controller.matches.isEmpty {
                 Picker(L("Diccionario"), selection: Binding(get: { controller.resourceID }, set: { controller.lookup(controller.word, workspace: workspace, preferredID: $0) })) {

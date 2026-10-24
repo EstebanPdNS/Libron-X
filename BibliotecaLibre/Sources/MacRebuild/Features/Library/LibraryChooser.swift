@@ -27,13 +27,8 @@ struct LibraryChooser: View {
                     .textFieldStyle(.plain).focused($searchFocused)
                     .accessibilityIdentifier("library.search")
             }
-            .padding(.horizontal, 12).frame(height: 36)
-            .background(Color(nsColor: .textBackgroundColor), in: RoundedRectangle(cornerRadius: 9))
-            .overlay {
-                RoundedRectangle(cornerRadius: 9).strokeBorder(
-                    searchFocused ? Color.accentColor : Color(nsColor: .separatorColor),
-                    lineWidth: searchFocused ? 2 : 1)
-            }
+            .padding(.horizontal, 11).frame(height: 32)
+            .modifier(MacToolbarSearchSurface())
             ViewThatFits(in: .horizontal) {
                 HStack(spacing: 12) {
                     sortAndGroup
@@ -86,7 +81,9 @@ struct LibraryChooser: View {
         }.padding(16).font(.system(size: 13)).controlSize(.regular)
             .modifier(MacPanelControlPresentation()).featureHelpTarget(.library)
             .onAppear { searchFocused = true }
-            .sheet(isPresented: $showsCollections) { LibraryCollectionsView(workspace: workspace) }
+            .sheet(isPresented: $showsCollections) {
+                LibraryCollectionsView(workspace: workspace).modifier(AppInterfaceLanguage())
+            }
     }
     private var libraryHeading: some View {
         HStack(spacing: 10) {

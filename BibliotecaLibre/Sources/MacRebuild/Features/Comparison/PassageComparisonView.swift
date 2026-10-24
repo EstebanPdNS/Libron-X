@@ -15,7 +15,8 @@ struct PassageComparisonView: View {
                 TextField(L("Pasaje, capítulo o libro"), text: $controller.reference).macInputStyle()
                     .onSubmit(run)
                 if controller.isLoading { Button(L("Cancelar"), action: controller.cancel) }
-                else { Button(L("Comparar"), action: run).disabled(controller.reference.isEmpty || controller.selectedIDs.isEmpty) }
+                else { Button(L("Comparar"), systemImage: "arrow.left.arrow.right", action: run)
+                        .disabled(controller.reference.isEmpty || controller.selectedIDs.isEmpty) }
             }
             DisclosureGroup(L("Versiones bíblicas"), isExpanded: $selectionExpanded) {
                 ScrollView {
@@ -37,19 +38,25 @@ struct PassageComparisonView: View {
                     }
                 }.frame(maxHeight: 150)
             }
-            Picker(L("Versión base"), selection: $controller.baseID) {
+            Picker(L("Versión base"), selection: Binding(get: { controller.baseID }, set: controller.setBase)) {
                 Text(L("Selecciona un recurso")).tag("")
                 ForEach(bibles.filter { controller.selectedIDs.contains($0.id) }) { Text($0.title).tag($0.id) }
             }.disabled(controller.isLoading)
             HStack {
-                Toggle(L("Mayúsculas"), isOn: $controller.options.caseSensitive)
-                Toggle(L("Acentos"), isOn: $controller.options.accentSensitive)
-                Toggle(L("Puntuación"), isOn: $controller.options.punctuationSensitive)
+                MacReaderToolbarSurface {
+                    MacReaderControlGroup {
+                        Toggle(L("Mayúsculas"), isOn: sensitivity(\.caseSensitive))
+                        Toggle(L("Acentos"), isOn: sensitivity(\.accentSensitive))
+                        Toggle(L("Puntuación"), isOn: sensitivity(\.punctuationSensitive))
+                    }
+                }
+                Spacer(minLength: 0)
             }.disabled(controller.isLoading)
             Text(L("Se comparan las referencias de cada edición. No se convierten las versificaciones. Las diferencias de espacios se omiten."))
                 .font(.caption).foregroundStyle(.secondary)
             if let error = controller.error ?? actionError { Text(error).foregroundStyle(.red).textSelection(.enabled) }
             if controller.isLoading { HStack { ProgressView().controlSize(.small); Text(controller.progress).font(.caption) } }
+            if controller.completed || controller.isLoading {
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 18) {
                     ForEach(controller.editions, id: \.resource.id) { edition in
@@ -75,10 +82,12 @@ struct PassageComparisonView: View {
                     if controller.completed, controller.rows.isEmpty { Text(L("No se encontraron referencias en el rango solicitado.")) }
                 }.padding(.vertical, 4)
             }
+            }
             HStack {
-                Text(LF("{count} referencias", ["count": String(controller.rows.count)])).font(.caption)
+                Text(LF("{count} referencias", ["count": String(controller.rows.count)])).font(.caption).foregroundStyle(.secondary)
                 Spacer()
-                Button(L("Exportar CSV…"), action: export).disabled(!controller.completed || controller.rows.isEmpty)
+                Button(L("Exportar CSV…"), systemImage: "square.and.arrow.up", action: export)
+                    .disabled(!controller.completed || controller.rows.isEmpty)
             }
         }.padding(16)
             .onAppear {
@@ -89,10 +98,12 @@ struct PassageComparisonView: View {
                 if controller.reference.isEmpty { controller.reference = workspace.activeReader?.currentReference ?? "" }
             }
             .onChange(of: controller.reference) { controller.invalidate() }
-            .onChange(of: controller.options) { controller.compareAgain() }
-            .onChange(of: controller.baseID) { controller.compareAgain() }
             .onChange(of: workspace.availableResources) { controller.invalidate() }
             .onDisappear { controller.cancel() }
+    }
+
+    private func sensitivity(_ field: WritableKeyPath<TextComparisonOptions, Bool>) -> Binding<Bool> {
+        Binding(get: { controller.options[keyPath: field] }, set: { controller.setSensitivity(field, to: $0) })
     }
 
     @ViewBuilder private func cellView(_ cell: PassageComparisonRow.Cell, edition: BiblePassageEdition) -> some View {
@@ -135,10 +146,10 @@ struct PassageComparisonView: View {
     }
     private func export() {
         do {
-            let csv = try controller.exportCSV(), panel = NSSavePanel()
+            let panel = NSSavePanel()
             panel.allowedContentTypes = [.commaSeparatedText]; panel.nameFieldStringValue = "Libron-X-comparison.csv"
             guard panel.runModal() == .OK, let url = panel.url else { return }
-            try controller.verifySources(); try Data(csv.utf8).write(to: url, options: .atomic)
+            try controller.writeCSV(to: url)
         } catch { actionError = error.localizedDescription }
     }
 }

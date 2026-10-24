@@ -67,11 +67,15 @@ struct StudyDesktop: View {
             await workspace.refreshBibleVersionChoices()
             await workspace.dictionary.prepare(workspace.availableResources)
         }
-        .sheet(isPresented: $updater.showsPanel) { UpdatePanel(workspace: workspace) }
+        .sheet(isPresented: $updater.showsPanel) {
+            UpdatePanel(workspace: workspace).modifier(AppInterfaceLanguage())
+        }
         .toolbar { MainWorkspaceToolbar(workspace: workspace) }
         .toolbarRole(.editor)
         .modifier(MacWorkspaceTitlePresentation())
-        .sheet(item: $workspace.activeTool) { tool in WorkspaceToolsView(tool: tool, workspace: workspace) }
+        .sheet(item: $workspace.activeTool) { tool in
+            WorkspaceToolsView(tool: tool, workspace: workspace).modifier(AppInterfaceLanguage())
+        }
         .alert("Libron-X", isPresented: Binding(get: { workspace.error != nil }, set: { if !$0 { workspace.error = nil } })) {
             Button(L("Aceptar")) { workspace.error = nil }
         } message: { Text(workspace.error ?? "") }
