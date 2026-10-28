@@ -54,6 +54,40 @@ import Testing
         #expect(personal.bookmarks.slots[1] == location)
     }
 
+    @Test func favoritesRestoreExactPositionAndRejectChangedText() async throws {
+        let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: root) }
+        let resource = LibraryResource(location: root.appendingPathComponent("owned.LSF"), title: "Owned", byteCount: 0,
+            format: .legacyLSF, support: .metadataOnly, provenance: .fileName)
+        let text = "😀 Alpha beta", location = ReaderLocation(resourceID: resource.id, format: resource.format, sectionOrdinal: 1,
+            textFingerprint: LibrarySearchService.textFingerprint(text), characterOffset: 3)
+        let favorite = LibraryFavorite(title: "Owned", kind: .location, location: location)
+        let workspace = StudyWorkspace(personal: WorkspacePersonalState(url: root.appendingPathComponent("personal.json")))
+        workspace.resources = [resource]
+        workspace.openFavorite(favorite, loader: { _, destination in ReaderPage(destination: destination, text: text, sectionCount: 2) })
+        let first = try #require(workspace.activeReader)
+        for _ in 0..<100 where first.isLoading { try await Task.sleep(for: .milliseconds(10)) }
+        #expect(first.error == nil && first.page?.destination.ordinal == 1 && first.selectedRange == NSRange(location: 3, length: 0))
+        workspace.openFavorite(favorite, loader: { _, destination in ReaderPage(destination: destination, text: "different", sectionCount: 2) })
+        let second = try #require(workspace.activeReader)
+        for _ in 0..<100 where second.isLoading { try await Task.sleep(for: .milliseconds(10)) }
+        #expect(second.error != nil && second.page == nil && favorite.location == location)
+    }
+
+    @Test func favoriteEditsAreAtomicWhenPersonalStateChangesExternally() throws {
+        let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: root) }
+        let url = root.appendingPathComponent("personal.json")
+        let first = WorkspacePersonalState(url: url), second = WorkspacePersonalState(url: url)
+        let folder = LibraryFavorite(title: "Own", kind: .folder)
+        try first.editFavorites { try $0.insert(folder) }
+        #expect(throws: PersonalStateError.self) { try second.editFavorites { try $0.insert(.init(title: "Other", kind: .folder)) } }
+        #expect(second.favorites.items.isEmpty)
+        #expect(WorkspacePersonalState(url: url).favorites.items == [folder])
+    }
+
     @Test func concurrentBookmarkWritersDoNotOverwriteNewerPositions() throws {
         let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
         try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)

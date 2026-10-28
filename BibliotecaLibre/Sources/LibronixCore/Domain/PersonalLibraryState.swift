@@ -101,6 +101,20 @@ public struct FavoritesDocument: Codable, Equatable, Sendable {
         guard let index = items.firstIndex(where: { $0.id == id }) else { throw PersonalStateError.invalid("El favorito ya no está disponible.") }
         var next = self; next.items[index].parentID = parent; try next.validate(); self = next
     }
+    /// Move one item among its siblings without altering its descendants or
+    /// the order of other folders. The array remains the persisted order.
+    public mutating func reorder(_ id: UUID, by delta: Int) throws {
+        guard [-1, 1].contains(delta), let index = items.firstIndex(where: { $0.id == id }) else {
+            throw PersonalStateError.invalid("El favorito ya no está disponible.")
+        }
+        let siblings = items.indices.filter { items[$0].parentID == items[index].parentID }
+        guard let position = siblings.firstIndex(of: index) else { return }
+        let target = position + delta
+        guard siblings.indices.contains(target) else { return }
+        var next = self
+        next.items.swapAt(index, siblings[target])
+        try next.validate(); self = next
+    }
     public mutating func remove(_ id: UUID) {
         var removed: Set<UUID> = [id]
         while true {

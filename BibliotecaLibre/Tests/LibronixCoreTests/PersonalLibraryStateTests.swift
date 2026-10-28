@@ -23,6 +23,20 @@ import Testing
         #expect(doc.items.last?.title == "שלום — λόγος")
         doc.remove(folder.id); #expect(doc.items.map(\.id) == [favorite.id])
     }
+    @Test func siblingReorderingPreservesDescendantsDestinationsAndOtherFolders() throws {
+        let a = LibraryFavorite(title: "A", kind: .folder), b = LibraryFavorite(title: "B", kind: .folder)
+        let child = LibraryFavorite(parentID: a.id, title: "Child", kind: .location, location: location())
+        let other = LibraryFavorite(parentID: b.id, title: "Other", kind: .location, location: location())
+        var doc = FavoritesDocument(); for item in [a, child, b, other] { try doc.insert(item) }
+        try doc.reorder(b.id, by: -1)
+        #expect(doc.children(of: nil).map(\.id) == [b.id, a.id])
+        #expect(doc.children(of: a.id) == [child] && doc.children(of: b.id) == [other])
+        let before = doc
+        try doc.reorder(b.id, by: -1); #expect(doc == before)
+        #expect(throws: PersonalStateError.self) { try doc.reorder(child.id, by: 2) }
+        #expect(doc == before)
+        #expect(try JSONDecoder().decode(FavoritesDocument.self, from: JSONEncoder().encode(doc)) == doc)
+    }
     @Test func importedFavoritesKeepNestedTitlesAndOpaqueOriginalCoordinates() throws {
         let source = Data("""
         <favorites-collection><title>Favorites</title><favorites-collection><title>Study</title>

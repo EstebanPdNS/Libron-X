@@ -157,9 +157,9 @@ struct ReaderHighlight: Identifiable, Codable, Equatable, Sendable {
             sectionOrdinal: page.destination.ordinal, reference: reader.currentReference,
             textFingerprint: LibrarySearchService.textFingerprint(page.text), characterOffset: reader.selectedRange.location)
         do {
-            try personal.favorites.insert(.init(title: reader.resource.title + " · " + (reader.currentReference ?? "Artículo \(page.destination.ordinal + 1)"),
-                                               kind: .location, location: location))
-            savePersonal()
+            let favorite = LibraryFavorite(title: reader.resource.title + " · " + (reader.currentReference ?? "Artículo \(page.destination.ordinal + 1)"),
+                                           kind: .location, location: location)
+            try personal.editFavorites { try $0.insert(favorite) }
         } catch { self.error = error.localizedDescription }
     }
     /// Bookmarks are bound to the exact edition and visible UTF-16 position.
@@ -192,11 +192,14 @@ struct ReaderHighlight: Identifiable, Codable, Equatable, Sendable {
                     selection: selection, expectedFingerprint: location.textFingerprint)
         activeTool = nil
     }
-    func openFavorite(_ favorite: LibraryFavorite) {
+    func openFavorite(_ favorite: LibraryFavorite, loader: ReaderSession.Loader? = nil) {
         guard let location = favorite.location, let resource = location.resolve(in: resources) else {
             error = L("El recurso de este favorito no está disponible en la biblioteca abierta."); return
         }
-        open(resource, destination: .init(ordinal: location.sectionOrdinal, reference: location.reference))
+        let reader = open(resource, startReading: false, loader: loader)
+        let selection = location.characterOffset.map { NSRange(location: $0, length: 0) }
+        reader.load(.init(ordinal: location.sectionOrdinal, reference: location.reference),
+                    selection: selection, expectedFingerprint: location.textFingerprint)
         activeTool = nil
     }
     func savePersonal() {

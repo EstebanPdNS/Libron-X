@@ -383,6 +383,18 @@
     "ur": "گروپ کی کارروائیاں",
     "zh-Hans": "分组操作"
   },
+  "Acción original sin resolver": {
+    "ar": "الإجراء الأصلي غير محلول",
+    "bn": "মূল ক্রিয়া অমীমাংসিত",
+    "en": "Original action unresolved",
+    "es": "Acción original sin resolver",
+    "fr": "Action originale non résolue",
+    "hi": "मूल क्रिया अनसुलझी",
+    "id": "Tindakan asli belum diselesaikan",
+    "pt": "Ação original não resolvida",
+    "ur": "اصل کارروائی حل نہیں ہوئی",
+    "zh-Hans": "原始操作未解析"
+  },
   "Acentos": {
     "ar": "علامات التشكيل",
     "bn": "উচ্চারণচিহ্ন",
@@ -1607,6 +1619,18 @@
     "ur": "صاف کریں",
     "zh-Hans": "清除"
   },
+  "Borrar favorito": {
+    "ar": "حذف المفضلة",
+    "bn": "প্রিয়টি মুছুন",
+    "en": "Delete Favorite",
+    "es": "Borrar favorito",
+    "fr": "Supprimer le favori",
+    "hi": "पसंदीदा हटाएँ",
+    "id": "Hapus Favorit",
+    "pt": "Excluir favorito",
+    "ur": "پسندیدہ حذف کریں",
+    "zh-Hans": "删除收藏"
+  },
   "Borrar marcación seleccionada": {
     "ar": "إزالة التمييز المحدّد",
     "bn": "বাছাই করা হাইলাইট মুছুন",
@@ -2182,6 +2206,18 @@
     "pt": "Pasta",
     "ur": "فولڈر",
     "zh-Hans": "文件夹"
+  },
+  "Carpeta de destino": {
+    "ar": "مجلد الوجهة",
+    "bn": "গন্তব্য ফোল্ডার",
+    "en": "Destination Folder",
+    "es": "Carpeta de destino",
+    "fr": "Dossier de destination",
+    "hi": "गंतव्य फ़ोल्डर",
+    "id": "Folder Tujuan",
+    "pt": "Pasta de destino",
+    "ur": "منزل کا فولڈر",
+    "zh-Hans": "目标文件夹"
   },
   "Carpeta de recursos…": {
     "ar": "مجلد الموارد…",
@@ -7319,6 +7355,30 @@
     "ur": "منتقل کریں",
     "zh-Hans": "移动"
   },
+  "Mover favorito": {
+    "ar": "نقل المفضلة",
+    "bn": "প্রিয়টি সরান",
+    "en": "Move Favorite",
+    "es": "Mover favorito",
+    "fr": "Déplacer le favori",
+    "hi": "पसंदीदा स्थानांतरित करें",
+    "id": "Pindahkan Favorit",
+    "pt": "Mover favorito",
+    "ur": "پسندیدہ منتقل کریں",
+    "zh-Hans": "移动收藏"
+  },
+  "Mover favorito…": {
+    "ar": "نقل المفضلة…",
+    "bn": "প্রিয়টি সরান…",
+    "en": "Move Favorite…",
+    "es": "Mover favorito…",
+    "fr": "Déplacer le favori…",
+    "hi": "पसंदीदा स्थानांतरित करें…",
+    "id": "Pindahkan Favorit…",
+    "pt": "Mover favorito…",
+    "ur": "پسندیدہ منتقل کریں…",
+    "zh-Hans": "移动收藏…"
+  },
   "Mover notas": {
     "ar": "نقل الملاحظات",
     "bn": "নোট সরান",
@@ -7835,6 +7895,18 @@
     "ur": "تعلق کا نام",
     "zh-Hans": "关联名称"
   },
+  "Nombre de la carpeta": {
+    "ar": "اسم المجلد",
+    "bn": "ফোল্ডারের নাম",
+    "en": "Folder Name",
+    "es": "Nombre de la carpeta",
+    "fr": "Nom du dossier",
+    "hi": "फ़ोल्डर का नाम",
+    "id": "Nama Folder",
+    "pt": "Nome da pasta",
+    "ur": "فولڈر کا نام",
+    "zh-Hans": "文件夹名称"
+  },
   "Nombre de la colección": {
     "ar": "اسم المجموعة",
     "bn": "সংগ্রহের নাম",
@@ -7990,6 +8062,18 @@
     "pt": "Nova associação",
     "ur": "نیا تعلق",
     "zh-Hans": "新建关联"
+  },
+  "Nueva carpeta": {
+    "ar": "مجلد جديد",
+    "bn": "নতুন ফোল্ডার",
+    "en": "New Folder",
+    "es": "Nueva carpeta",
+    "fr": "Nouveau dossier",
+    "hi": "नया फ़ोल्डर",
+    "id": "Folder Baru",
+    "pt": "Nova pasta",
+    "ur": "نیا فولڈر",
+    "zh-Hans": "新建文件夹"
   },
   "Nueva colección": {
     "ar": "مجموعة جديدة",
@@ -9323,6 +9407,18 @@
     "ur": "بھریں اور ترتیب دیں",
     "zh-Hans": "填充和排列"
   },
+  "Renombrar favorito": {
+    "ar": "إعادة تسمية المفضلة",
+    "bn": "প্রিয়টির নাম পরিবর্তন",
+    "en": "Rename Favorite",
+    "es": "Renombrar favorito",
+    "fr": "Renommer le favori",
+    "hi": "पसंदीदा का नाम बदलें",
+    "id": "Ubah Nama Favorit",
+    "pt": "Renomear favorito",
+    "ur": "پسندیدہ کا نام بدلیں",
+    "zh-Hans": "重命名收藏"
+  },
   "Renombrar nota": {
     "ar": "إعادة تسمية الملاحظة",
     "bn": "নোটের নাম পরিবর্তন করুন",
@@ -10174,6 +10270,18 @@
     "pt": "Sermões ou esboços",
     "ur": "وعظ یا خاکے",
     "zh-Hans": "讲章或提纲"
+  },
+  "Si es una carpeta, también se borrarán sus contenidos.": {
+    "ar": "إذا كان مجلدًا فستُحذف محتوياته أيضًا.",
+    "bn": "এটি ফোল্ডার হলে এর বিষয়বস্তুও মুছে যাবে।",
+    "en": "If this is a folder, its contents will also be deleted.",
+    "es": "Si es una carpeta, también se borrarán sus contenidos.",
+    "fr": "S’il s’agit d’un dossier, son contenu sera également supprimé.",
+    "hi": "यदि यह फ़ोल्डर है तो उसकी सामग्री भी हटेगी।",
+    "id": "Jika berupa folder, isinya juga akan dihapus.",
+    "pt": "Se for uma pasta, seu conteúdo também será excluído.",
+    "ur": "اگر یہ فولڈر ہے تو اس کا مواد بھی حذف ہو جائے گا۔",
+    "zh-Hans": "如果是文件夹，其内容也将被删除。"
   },
   "Siguiente lectura": {
     "ar": "القراءة التالية",

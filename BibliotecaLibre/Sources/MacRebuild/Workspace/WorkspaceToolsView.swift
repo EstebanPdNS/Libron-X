@@ -294,24 +294,3 @@ struct ResourceManagerView: View {
         }.padding(16)
     }
 }
-
-struct WorkspaceFavoritesView: View {
-    @Bindable var workspace: StudyWorkspace
-    var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack { Button(L("Agregar ubicación actual"), action: workspace.addFavorite).disabled(workspace.activeReader?.page == nil); Spacer() }
-            List {
-                ForEach(workspace.personal.favorites.items) { favorite in
-                    HStack {
-                        MacToolbarLabel(favorite.kind == .folder ? "Carpeta" : "Favorito", favorite.kind == .folder ? "folder" : "bookmark")
-                        TextField(L("Título"), text: Binding(get: { workspace.personal.favorites.items.first { $0.id == favorite.id }?.title ?? "" }, set: { value in
-                            do { try workspace.personal.favorites.rename(favorite.id, title: value); workspace.savePersonal() } catch { workspace.error = error.localizedDescription }
-                        }))
-                        Button(L("Abrir")) { workspace.openFavorite(favorite) }.disabled(favorite.kind != .location)
-                        Button { workspace.personal.favorites.remove(favorite.id); workspace.savePersonal() } label: { MacToolbarLabel(L("Eliminar favorito"), "trash") }.help(L("Eliminar favorito"))
-                    }
-                }
-            }
-        }.padding(16)
-    }
-}

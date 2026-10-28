@@ -438,10 +438,19 @@
       "sourceKey": "study-expansion-annotations-09",
       "acceptance": "Exponer carpetas, movimiento y orden sin perder destinos; completar recuperación de acciones.",
       "baseline": "Modelo con jerarquía; la vista actual permite una lista plana.",
-      "status": "pending",
-      "implementation": [],
-      "verification": [],
-      "limitations": []
+      "status": "in_progress",
+      "implementation": [
+        "Display a native expandable hierarchy; create and rename folders, move items with descendants, reorder siblings and confirm deletion; retain imported commands without inventing destinations.",
+        "Save favorite edits atomically with conflict detection; restore verified locations using their exact saved UTF-16 offset and source fingerprint."
+      ],
+      "verification": [
+        "Seven PersonalLibraryStateTests and six QuickBookmarkTests passed, including cycles, order, conflict rollback, exact position and changed-source rejection.",
+        "Native build 128: created nested folders, moved a folder to the root, reordered, moved an authored Bible location into a nested folder and opened it; new and moved descendants were made visible. Inspected dark/light English and dark Arabic."
+      ],
+      "limitations": [
+        "Imported legacy commands remain unresolved and are labeled as such; full recovery of their actions is pending.",
+        "The full range of original resource formats and old macOS hardware still requires validation."
+      ]
     },
     {
       "id": "F174",

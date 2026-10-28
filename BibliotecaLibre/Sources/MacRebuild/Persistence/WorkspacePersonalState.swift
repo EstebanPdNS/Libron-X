@@ -82,6 +82,17 @@ struct WorkspacePersonalSnapshot: Codable {
             catch is CancellationError {} catch { self?.loadError = error.localizedDescription }
         }
     }
+    /// Apply a favorite edit only after the complete personal snapshot is
+    /// accepted and written. A conflict restores the in-memory hierarchy.
+    func editFavorites(_ edit: (inout FavoritesDocument) throws -> Void) throws {
+        var updated = favorites
+        try edit(&updated); try updated.validate()
+        guard updated != favorites else { return }
+        let previous = favorites
+        favorites = updated
+        do { try save() }
+        catch { favorites = previous; throw error }
+    }
     func renameNote(_ id: UUID, in documentID: UUID, title: String) throws {
         let title = title.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !title.isEmpty, let document = documents.firstIndex(where: { $0.id == documentID }),
