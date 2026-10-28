@@ -89,4 +89,36 @@ import CSQLite
         #expect(controller.matches[0].kind == .commentary && controller.references == nil)
         controller.clear(); #expect(!controller.isLoading && controller.matches.isEmpty)
     }
+    @Test func referenceSearchCanFinishWhileDictionaryIsSlowAndAccentsStayDistinct() async throws {
+        let (root, workspace) = try fixture(); defer { try? FileManager.default.removeItem(at: root) }
+        let controller = PassageGuideController(lookup: { resource, scope, query in
+            if scope.kind != .commentary { try await Task.sleep(for: .milliseconds(200)) }
+            return .init(resource: resource, destination: .init(ordinal: 0), label: query,
+                page: .init(destination: .init(ordinal: 0), text: "Owned", sectionCount: 1), stamps: [])
+        }, referenceLookup: { _, _ in
+            try await Task.sleep(for: .milliseconds(10))
+            return .init(results: [], complete: true, warnings: [])
+        })
+        controller.passage = "Ge 1:1"; controller.terms = "si, sí, SI"
+        controller.run(workspace: workspace)
+        for _ in 0..<100 where controller.references == nil { try await Task.sleep(for: .milliseconds(5)) }
+        #expect(controller.isLoading && !controller.completed && controller.references?.complete == true)
+        #expect(controller.searchedTerms == ["si", "sí"])
+        controller.clear()
+        try await Task.sleep(for: .milliseconds(20))
+        #expect(!controller.isLoading && controller.matches.isEmpty && controller.references == nil)
+    }
+    @Test func referenceScopeUsesOnlySelectedSourceAndRejectsMissingSelection() async throws {
+        let (root, workspace) = try fixture(); defer { try? FileManager.default.removeItem(at: root) }
+        let controller = PassageGuideController(lookup: { _, _, _ in nil }, referenceLookup: { resources, _ in
+            .init(results: [], complete: true, warnings: resources.map(\.id))
+        })
+        controller.passage = "Ge 1:1"; controller.referenceResourceID = workspace.resources[1].id
+        controller.run(workspace: workspace); try await wait(controller)
+        #expect(controller.completed && controller.referenceSourceCount == 1)
+        #expect(controller.references?.warnings == [workspace.resources[1].id])
+        #expect(controller.commentaryCount == 1 && controller.dictionaryCount == 2)
+        controller.referenceResourceID = "missing"; controller.run(workspace: workspace)
+        #expect(!controller.isLoading && !controller.completed && controller.error != nil)
+    }
 }

@@ -42,7 +42,7 @@ struct WorkspaceToolsView: View {
         tool == .annotationSearch && workspace.annotationSearch.report == nil && !workspace.annotationSearch.isSearching
     }
     private var compactReadingPlans: Bool { tool == .readingPlans && workspace.personal.readingPlans.plans.isEmpty }
-    private var compactPassageGuide: Bool { tool == .passageGuide && !workspace.passageGuide.completed && workspace.passageGuide.matches.isEmpty }
+    private var compactPassageGuide: Bool { tool == .passageGuide && !workspace.passageGuide.completed && workspace.passageGuide.matches.isEmpty && workspace.passageGuide.references == nil }
     private var compactComparison: Bool {
         tool == .passageComparison && !workspace.passageComparison.completed && !workspace.passageComparison.isLoading
     }

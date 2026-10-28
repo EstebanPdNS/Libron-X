@@ -23,16 +23,18 @@
       "status": "in_progress",
       "implementation": [
         "Added a native passage guide that checks commentary resources and optional user-supplied dictionary/lexicon terms in priority order, searches explicit references across available resources, exposes source-backed opening and displays incomplete coverage and failures.",
-        "The guide publishes verified commentary results while reference scanning continues, names the current resource or reference-search phase, and cancels stale work when inputs, library, or view change."
+        "The guide publishes verified commentary results while reference scanning continues, names the current resource or reference-search phase, and cancels stale work when inputs, library, or view change.",
+        "Search explicit references concurrently with commentary and dictionary lookups; allow reference search across the library or one selected resource; preserve accent-sensitive dictionary terms."
       ],
       "verification": [
         "Four PassageGuideControllerTests cover a real authored e-Sword commentary and explicit-reference scan, source identity, mixed results, incomplete coverage, failures, invalid input, partial results and cancellation. Existing KeyLinkControllerTests verify real dictionary and lexicon lookups and changed-source rejection.",
-        "Native build 137 displayed and opened the authored commentary while references were still being scanned. The user catalog and personal files were restored; the test resource was retained separately."
+        "Native build 137 displayed and opened the authored commentary while references were still being scanned. The user catalog and personal files were restored; the test resource was retained separately.",
+        "Six PassageGuideControllerTests pass, including concurrent partial results, accent-sensitive terms, a selected resource and missing-source handling. Native build 138 completed a scoped search against an authored commentary and opened the reference with its text selected. The test resource was removed and the original catalog and personal state restored."
       ],
       "limitations": [
         "Long dictionary and library scans can still be slow; the guide displays partial matches and supports cancellation, but lookup duration is not independently bounded.",
         "The guide uses user-supplied dictionary terms and explicit citation syntax; automatic terms from a passage and richer relationships are not yet implemented.",
-        "Final reference-search completion and result opening need an end-to-end native check; light, RTL, narrow-window and older macOS visual coverage remain pending."
+        "Light, RTL, narrow-window and older macOS visual coverage remain pending; complete-library searches also need further performance evaluation."
       ]
     },
     {

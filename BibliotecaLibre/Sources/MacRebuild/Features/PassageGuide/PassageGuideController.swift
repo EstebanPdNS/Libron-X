@@ -21,6 +21,8 @@ struct PassageGuideReferences: Sendable {
     typealias ReferenceLookup = @Sendable ([LibraryResource], BibleReferenceQuery) async throws -> PassageGuideReferences
     var passage = ""
     var terms = ""
+    /// Reference scanning can be restricted without changing commentary or dictionary priorities.
+    var referenceResourceID: String?
     private(set) var matches: [PassageGuideMatch] = []
     private(set) var references: PassageGuideReferences?
     private(set) var failures: [String] = []
@@ -55,17 +57,21 @@ struct PassageGuideReferences: Sendable {
                 throw PersonalStateError.invalid("Introduce hasta ocho palabras de diccionario válidas.")
             }
             var seen = Set<String>()
-            let words = raw.filter { seen.insert($0.folding(options: [.caseInsensitive, .diacriticInsensitive], locale: Locale(identifier: "en_US_POSIX"))).inserted }
+            let words = raw.filter { seen.insert(LibronDictionaryIndex.key($0)).inserted }
             let commentary = workspace.resourcePriorities.ordered(workspace.availableResources, in: .init(kind: .commentary))
             let dictionaries = workspace.resourcePriorities.ordered(workspace.availableResources, in: .init(kind: .dictionary))
             let lexicons = workspace.resourcePriorities.ordered(workspace.availableResources, in: .init(kind: .lexicon))
-            let sources = workspace.availableResources.filter { !$0.isHelp }
+            let library = workspace.availableResources.filter { !$0.isHelp }
+            let sources = referenceResourceID.map { id in library.filter { $0.id == id } } ?? library
+            if referenceResourceID != nil && sources.count != 1 { throw PersonalStateError.invalid("El recurso seleccionado ya no está disponible.") }
             let token = generation, lookup = lookup, referenceLookup = referenceLookup
             searchedTerms = words; commentaryCount = commentary.count; dictionaryCount = dictionaries.count + lexicons.count; referenceSourceCount = sources.count
             isLoading = true
             task = Task { [weak self, weak workspace] in
                 guard let self else { return }
                 do {
+                    guard let workspace else { throw PersonalStateError.invalid("La biblioteca cambió. Vuelve a generar la guía.") }
+                    async let referencesTask: Void = self.collectReferences(workspace: workspace, library: library, sources: sources, query: query, token: token, referenceLookup: referenceLookup)
                     for (kind, resources, items) in [(KeyLinkKind.commentary, commentary, [requested]), (.dictionary, dictionaries, words), (.lexicon, lexicons, words)] {
                         for resource in resources {
                             for term in items {
@@ -74,23 +80,23 @@ struct PassageGuideReferences: Sendable {
                                 do {
                                     let found = try await lookup(resource, .init(kind: kind), term)
                                     guard self.generation == token else { return }
-                                    guard let workspace, workspace.availableResources.contains(resource) else { throw PersonalStateError.invalid("La biblioteca cambió. Vuelve a generar la guía.") }
+                                    guard workspace.availableResources.contains(resource) else { throw PersonalStateError.invalid("La biblioteca cambió. Vuelve a generar la guía.") }
                                     if let found, found.resource == resource { self.matches.append(.init(term: term, kind: kind, match: found)) }
                                 } catch is CancellationError { throw CancellationError() }
                                 catch {
                                     guard self.generation == token else { return }
-                                    guard let workspace, workspace.availableResources.contains(resource) else { throw error }
+                                    guard workspace.availableResources.contains(resource) else { throw error }
                                     self.failures.append(resource.title + ": " + error.localizedDescription)
                                 }
                             }
                         }
                     }
                     self.currentSource = nil
-                    let citations = try await referenceLookup(sources, query)
+                    try await referencesTask
                     try Task.checkCancellation()
                     guard self.generation == token else { return }
-                    guard let workspace, workspace.availableResources.filter({ !$0.isHelp }) == sources else { throw PersonalStateError.invalid("La biblioteca cambió. Vuelve a generar la guía.") }
-                    self.references = citations; self.completed = true; self.isLoading = false; self.task = nil; self.currentSource = nil
+                    guard workspace.availableResources.filter({ !$0.isHelp }) == library else { throw PersonalStateError.invalid("La biblioteca cambió. Vuelve a generar la guía.") }
+                    self.completed = true; self.isLoading = false; self.task = nil; self.currentSource = nil
                 } catch is CancellationError {
                     if self.generation == token { self.isLoading = false; self.task = nil; self.currentSource = nil }
                 }
@@ -100,6 +106,14 @@ struct PassageGuideReferences: Sendable {
                 }
             }
         } catch { self.error = error.localizedDescription }
+    }
+    private func collectReferences(workspace: StudyWorkspace, library: [LibraryResource], sources: [LibraryResource], query: BibleReferenceQuery,
+                                   token: Int, referenceLookup: ReferenceLookup) async throws {
+        let citations = try await referenceLookup(sources, query)
+        try Task.checkCancellation()
+        guard generation == token else { throw CancellationError() }
+        guard workspace.availableResources.filter({ !$0.isHelp }) == library else { throw PersonalStateError.invalid("La biblioteca cambió. Vuelve a generar la guía.") }
+        references = citations
     }
     nonisolated private static func findReferences(_ resources: [LibraryResource], _ query: BibleReferenceQuery) async throws -> PassageGuideReferences {
         let service = BibleReferenceSearchService(provider: PersistentLibrarySearchProvider(source: WorkspaceSearchReader()))

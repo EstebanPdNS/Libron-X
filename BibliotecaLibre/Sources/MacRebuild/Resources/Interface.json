@@ -1931,6 +1931,18 @@
     "ur": "بائبل کے حوالے تلاش کریں…",
     "zh-Hans": "查找圣经引用…"
   },
+  "Buscar referencias en": {
+    "ar": "البحث عن المراجع في",
+    "bn": "রেফারেন্স খুঁজুন",
+    "en": "Search references in",
+    "es": "Buscar referencias en",
+    "fr": "Rechercher les références dans",
+    "hi": "इसमें संदर्भ खोजें",
+    "id": "Cari referensi di",
+    "pt": "Buscar referências em",
+    "ur": "حوالے یہاں تلاش کریں",
+    "zh-Hans": "搜索引用的范围"
+  },
   "Buscar siguiente": {
     "ar": "بحث عن التالي",
     "bn": "পরেরটি খুঁজুন",
@@ -4486,6 +4498,18 @@
     "pt": "O recurso será aberto em uma nova leitura.",
     "ur": "وسیلہ نئے مطالعے میں کھلے گا۔",
     "zh-Hans": "资源将在新阅读面板中打开。"
+  },
+  "El recurso seleccionado ya no está disponible.": {
+    "ar": "لم يعد المورد المحدد متاحًا.",
+    "bn": "নির্বাচিত রিসোর্স আর উপলব্ধ নেই।",
+    "en": "The selected resource is no longer available.",
+    "es": "El recurso seleccionado ya no está disponible.",
+    "fr": "La ressource sélectionnée n’est plus disponible.",
+    "hi": "चयनित संसाधन अब उपलब्ध नहीं है।",
+    "id": "Sumber yang dipilih tidak lagi tersedia.",
+    "pt": "O recurso selecionado não está mais disponível.",
+    "ur": "منتخب وسیلہ اب دستیاب نہیں ہے۔",
+    "zh-Hans": "所选资源已不可用。"
   },
   "El servicio original de desbloqueo de licencias todavía no tiene una implementación verificada.": {
     "ar": "لا تتوفر بعد نسخة مُتحقّق منها لخدمة فتح التراخيص الأصلية.",

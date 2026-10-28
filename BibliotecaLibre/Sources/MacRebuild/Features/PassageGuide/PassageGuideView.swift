@@ -17,6 +17,12 @@ struct PassageGuideView: View {
                 if controller.isLoading { Button(L("Cancelar")) { controller.clear() } }
             }
             TextField(L("Palabras para diccionarios, separadas por comas (opcional)"), text: $controller.terms).macInputStyle()
+            Picker(L("Buscar referencias en"), selection: $controller.referenceResourceID) {
+                Text(L("Toda la biblioteca")).tag(Optional<String>.none)
+                ForEach(workspace.availableResources.filter { !$0.isHelp }) { resource in
+                    Text(resource.title + " · " + resource.fileName).tag(Optional(resource.id))
+                }
+            }
             Text(L("Las referencias se buscan en los recursos disponibles; no se convierten versificaciones."))
                 .font(.caption).foregroundStyle(.secondary)
             if controller.isLoading {
@@ -24,7 +30,7 @@ struct PassageGuideView: View {
             }
             if let error = controller.error { Text(L(error)).font(.caption).foregroundStyle(.red).textSelection(.enabled) }
             if let openingError { Text(L(openingError)).font(.caption).foregroundStyle(.red).textSelection(.enabled) }
-            if controller.completed || !controller.matches.isEmpty {
+            if controller.completed || !controller.matches.isEmpty || controller.references != nil {
                 ScrollView {
                     LazyVStack(alignment: .leading, spacing: 16) {
                         sectionTitle("Comentarios", count: commentaries.count)
@@ -67,6 +73,7 @@ struct PassageGuideView: View {
         }.padding(16)
             .onChange(of: controller.passage) { controller.clear() }
             .onChange(of: controller.terms) { controller.clear() }
+            .onChange(of: controller.referenceResourceID) { controller.clear() }
             .onChange(of: workspace.availableResources) { controller.clear() }
             .onDisappear { controller.clear() }
     }
