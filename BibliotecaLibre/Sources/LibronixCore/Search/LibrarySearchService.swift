@@ -208,7 +208,15 @@ private actor LibrarySearchExecution {
                 let articles: AnySequence<LibrarySearchArticleDescriptor>
                 do {
                     let ordered = prepared.orderedArticles()
-                    if let candidates = try await provider.candidates(resource, prepared: prepared, query: query, options: options, unit: unit) {
+                    if let exclusions = try await provider.excludedCandidates(resource, prepared: prepared, query: query, options: options, unit: unit) {
+                        let valid = prepared.isCompactDirectory
+                            ? exclusions.allSatisfy { (0..<prepared.articleCount).contains($0) }
+                            : exclusions.isSubset(of: Set(ordered.map(\.sectionOrdinal)))
+                        guard valid else { throw LibrarySearchError.invalidArticleDirectory }
+                        articles = AnySequence(ordered.lazy.filter { !exclusions.contains($0.sectionOrdinal) })
+                        counters.articlesRuledOutByIndex += exclusions.count
+                        resourceReports[index].articlesRuledOutByIndex = exclusions.count
+                    } else if let candidates = try await provider.candidates(resource, prepared: prepared, query: query, options: options, unit: unit) {
                         let valid = prepared.isCompactDirectory
                             ? candidates.allSatisfy { (0..<prepared.articleCount).contains($0) }
                             : candidates.isSubset(of: Set(ordered.map(\.sectionOrdinal)))

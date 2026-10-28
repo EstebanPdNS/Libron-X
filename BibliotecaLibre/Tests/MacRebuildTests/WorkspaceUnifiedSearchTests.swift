@@ -7,6 +7,23 @@ import CSQLite
 
 @Suite(.serialized) @MainActor struct WorkspaceUnifiedSearchTests {
     private func query(_ text: String) throws -> SearchQuery { try SearchQueryParser.parse(text) }
+    @Test func bundledDictionaryWarmIndexMatchesLinearSearch() async throws {
+        guard let path = ProcessInfo.processInfo.environment["LIBRONX_BUNDLED_CORPUS"] else { return }
+        let resources = try BundledDictionaries.resources(at: URL(fileURLWithPath: path))
+        let resource = try #require(resources.first { $0.packageLocation?.lastPathComponent == "en-easton.libron" })
+        let root = FileManager.default.temporaryDirectory.appendingPathComponent("owned-bundled-search-" + UUID().uuidString)
+        defer { try? FileManager.default.removeItem(at: root) }
+        let provider = PersistentLibrarySearchProvider(source: WorkspaceSearchReader(), directory: root)
+        let service = LibrarySearchService(provider: provider)
+        let parsed = try query("faith")
+        let cold = try await service.search(resources: [resource], query: parsed)
+        let warm = try await service.search(resources: [resource], query: parsed)
+        #expect(cold.coverageComplete && warm.coverageComplete && !cold.results.isEmpty)
+        #expect(cold.results.map(\.sectionOrdinal) == warm.results.map(\.sectionOrdinal))
+        #expect(cold.results.map(\.hits) == warm.results.map(\.hits))
+        #expect(warm.counters.articlesRuledOutByIndex > 0 && warm.counters.articlesExamined < cold.counters.articlesExamined)
+        print("Bundled Easton search: cold \(cold.elapsedSeconds)s / \(cold.counters.articlesExamined) articles; warm \(warm.elapsedSeconds)s / \(warm.counters.articlesExamined) articles, excluded \(warm.counters.articlesRuledOutByIndex)")
+    }
     private func bible(in root: URL) throws -> LibraryResource {
         let source = root.appendingPathComponent("owned.bbli")
         var db: OpaquePointer?
@@ -173,6 +190,10 @@ import CSQLite
         let indexed = PersistentLibrarySearchProvider(source: WorkspaceSearchReader(), directory: root.appendingPathComponent("cache"))
         let cachedReport = try await LibrarySearchService(provider: indexed).search(resources: [dict], query: query("Amor"), options: .init(wholeWords: false))
         #expect(cachedReport.coverageComplete && cachedReport.results.map(\.hits) == report.results.filter { $0.resourceID == dict.id }.map(\.hits))
+        let warmReport = try await LibrarySearchService(provider: indexed).search(resources: [dict], query: query("Amor"), options: .init(wholeWords: false))
+        #expect(warmReport.coverageComplete && warmReport.results.map(\.hits) == cachedReport.results.map(\.hits))
+        #expect(warmReport.counters.articlesRuledOutByIndex == 1 && warmReport.counters.articlesExamined == 1)
+        #expect(await indexed.metrics.indexedExclusions == 1)
         let package = try LibronPackage.create(epub, in: root.appendingPathComponent("library"), backup: false)
         let native = try LibronPackage.read(package).1
         _ = try await LibronNativeNormalizer().convert(native)

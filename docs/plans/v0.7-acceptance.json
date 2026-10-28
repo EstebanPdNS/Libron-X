@@ -47,7 +47,6 @@
         "The guide uses user-supplied dictionary terms and explicit citation syntax; automatic terms from a passage and richer relationships are not yet implemented.",
         "Narrow host-window, RTL results with actual matches, older macOS, complete-library time and memory consumption require further verification.",
         "A single large dictionary search still uses substantial memory for its article directory and may reach its duration limit; this optimization removes repeated counting, not all search cost.",
-        "Compact dictionary directories currently skip index-based candidate pruning to avoid allocating a full ordinal set; every candidate is still checked and coverage limits remain explicit. Optimize pruning without sacrificing correctness or bounded memory.",
         "Diagnostic messages not supplied by the app catalog may remain in their source language; the status labels and known incompatible-resource explanation are translated."
       ]
     },
@@ -1708,10 +1707,17 @@
       "sourceKey": "mac-rebuild-acceptance-performance",
       "acceptance": "Medir importación, apertura, búsqueda, memoria y sesiones prolongadas en hardware real.",
       "baseline": "Hay pruebas de scroll y controles de presupuesto.",
-      "status": "pending",
-      "implementation": [],
-      "verification": [],
-      "limitations": []
+      "status": "in_progress",
+      "implementation": [
+        "Compact dictionary searches may now exclude only source-verified, indexed ASCII entries absent from the conservative candidate set, without materializing the whole directory. Unindexed and Unicode entries remain candidates."
+      ],
+      "verification": [
+        "Search regression suites passed (36 core tests and 10 MacRebuild tests; two corpus-dependent cases skipped). A separate real bundled Easton test returned identical cold/warm hits: 3962 articles in 3.92 seconds cold, 2523 in 1.73 seconds warm, excluding 1439. A partial index, Unicode matches, short queries, and an index with a missing FTS row were exercised against linear results.",
+        "Native build 144: an Easton search returned 59 matching articles on both cold and warm runs, examining 3962 articles in 4.1 seconds and 2523 in 2.0 seconds respectively. Opening the first result selected the matching source text in the reader; the test reading and query were closed afterward."
+      ],
+      "limitations": [
+        "The compact-index check retains metadata sets proportional to indexed entries; representative large, fully indexed libraries still need memory and long-session measurements."
+      ]
     },
     {
       "id": "F257",

@@ -332,9 +332,15 @@ public protocol LibrarySearchContentProvider: Sendable {
     /// article must be evaluated. Consumers still verify each candidate's text.
     func candidates(_ resource: LibraryResource, prepared: LibrarySearchPreparedResource,
                     query: SearchQuery, options: TextSearchOptions, unit: LibrarySearchUnit) async throws -> Set<Int>?
+    /// Only ordinals proved unable to match. Unindexed or uncertain articles
+    /// must not appear here. nil means no exclusion information is available.
+    func excludedCandidates(_ resource: LibraryResource, prepared: LibrarySearchPreparedResource,
+                            query: SearchQuery, options: TextSearchOptions, unit: LibrarySearchUnit) async throws -> Set<Int>?
 }
 
 public extension LibrarySearchContentProvider {
+    func excludedCandidates(_ resource: LibraryResource, prepared: LibrarySearchPreparedResource,
+                            query: SearchQuery, options: TextSearchOptions, unit: LibrarySearchUnit) async throws -> Set<Int>? { nil }
     func candidates(_ resource: LibraryResource, prepared: LibrarySearchPreparedResource,
                     query: SearchQuery, options: TextSearchOptions, unit: LibrarySearchUnit) async throws -> Set<Int>? { nil }
     func supports(_ resource: LibraryResource) async -> Bool {

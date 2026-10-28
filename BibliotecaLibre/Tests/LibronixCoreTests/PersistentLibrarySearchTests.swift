@@ -26,13 +26,16 @@ import CSQLite
         var reads = 0
         let projectionVersion: String?
         let projectedLink: BibleReferenceSourceLink?
-        init(projectionVersion: String? = nil, projectedLink: BibleReferenceSourceLink? = nil) {
+        let compact: Bool
+        init(projectionVersion: String? = nil, projectedLink: BibleReferenceSourceLink? = nil, compact: Bool = false) {
             self.projectionVersion = projectionVersion; self.projectedLink = projectedLink
+            self.compact = compact
         }
         func blockReads() { failReads = true }
         func prepare(_ resource: LibraryResource) async throws -> LibrarySearchPreparedResource {
             let stamp = try LibrarySearchFileStamp.capture(resource.location)
             let articles = try JSONDecoder().decode([LibrarySearchDecodedArticle].self, from: Data(contentsOf: resource.location))
+            if compact { return .init(contiguousArticleCount: articles.count, titlePrefix: resource.title, sourceStamps: [stamp], projectionVersion: projectionVersion) }
             return .init(articles: articles.indices.map { .init(sectionOrdinal: $0, title: String($0)) }, sourceStamps: [stamp], projectionVersion: projectionVersion)
         }
         func read(_ resource: LibraryResource, article: LibrarySearchArticleDescriptor, prepared: LibrarySearchPreparedResource) async throws -> LibrarySearchDecodedArticle {
@@ -102,6 +105,28 @@ import CSQLite
         #expect(decoded.article(at: 837_660)?.title == "Dictionary · 837661")
         #expect(decoded.article(at: 837_661) == nil)
         #expect(throws: (any Error).self) { try LibrarySearchPreparedResource(contiguousArticleCount: 0, titlePrefix: "Empty").validateDirectory() }
+    }
+
+    @Test func compactIndexKeepsUnicodeAndUnindexedMatchesWithPartialCache() async throws {
+        let fixture = try Fixture(["unrelated ascii", "café faith", "faith later", "other ascii"]); defer { fixture.remove() }
+        let provider = PersistentLibrarySearchProvider(source: Source(compact: true), directory: fixture.cache)
+        let partial = try await search(provider, fixture.resource, "faith", budget: .init(maximumArticles: 1))
+        #expect(!partial.coverageComplete && partial.limitReason == .articles)
+        let warm = try await search(provider, fixture.resource, "faith")
+        let linear = try await search(Source(compact: true), fixture.resource, "faith")
+        #expect(warm.coverageComplete && warm.results.map(\.sectionOrdinal) == [1, 2])
+        #expect(warm.results.map(\.hits) == linear.results.map(\.hits))
+        #expect(warm.counters.articlesRuledOutByIndex == 1 && warm.counters.articlesExamined == 3)
+        let completeCache = try await search(provider, fixture.resource, "faith")
+        #expect(completeCache.coverageComplete && completeCache.results.map(\.hits) == linear.results.map(\.hits))
+        #expect(completeCache.counters.articlesRuledOutByIndex == 2)
+        let short = try await search(provider, fixture.resource, "fa")
+        #expect(short.coverageComplete && short.counters.articlesRuledOutByIndex == 0)
+        try modify(fixture, sql: "DELETE FROM terms WHERE rowid=3")
+        let corrupted = PersistentLibrarySearchProvider(source: Source(compact: true), directory: fixture.cache)
+        let fallback = try await search(corrupted, fixture.resource, "faith")
+        #expect(fallback.coverageComplete && fallback.results.map(\.hits) == linear.results.map(\.hits))
+        #expect(fallback.counters.articlesRuledOutByIndex == 0)
     }
 
     @Test func reopeningTheIndexReusesTextAndPrunesOnlyProvenNonmatches() async throws {

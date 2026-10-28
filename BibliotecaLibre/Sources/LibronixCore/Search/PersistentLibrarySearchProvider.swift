@@ -126,6 +126,24 @@ public actor PersistentLibrarySearchProvider: LibrarySearchContentProvider {
         #endif
         return nil
     }
+    public func excludedCandidates(_ resource: LibraryResource, prepared: LibrarySearchPreparedResource,
+                                   query: SearchQuery, options: TextSearchOptions, unit: LibrarySearchUnit) async throws -> Set<Int>? {
+        try await source.verifyUnchanged(resource, prepared: prepared)
+        #if canImport(CSQLite)
+        if prepared.isCompactDirectory, options.maximumEditDistance == 0, unit == .article,
+           !query.expression.requiresVerseContext, query.expression.requiredFields.isEmpty, let index = indexes[resource.id] {
+            do {
+                if let excluded = try index.excludedCandidates(query.expression, articleCount: prepared.articleCount) {
+                    try await source.verifyUnchanged(resource, prepared: prepared)
+                    metrics.indexedExclusions += excluded.count
+                    return excluded
+                }
+            } catch is CancellationError { throw CancellationError() }
+            catch { indexes[resource.id] = nil; metrics.cacheFailures += 1 }
+        }
+        #endif
+        return nil
+    }
     fileprivate static func digest(_ data: Data) -> String {
         SHA256.hash(data: data).map { String(format: "%02x", $0) }.joined()
     }
@@ -311,11 +329,9 @@ private final class SearchIndexDatabase {
             try execute("INSERT INTO terms(rowid,value) VALUES(?,?)", strings: [String(ordinal + 1), ascii ? text.lowercased() : ""])
         }
     }
-    func candidates(_ expression: SearchExpression, articles: [LibrarySearchArticleDescriptor]) throws -> Set<Int>? {
-        // Unicode equivalences in NSString and SQLite are not assumed equal.
-        // Non-ASCII text, short terms, negation and unindexed articles are kept
-        // as candidates. This sacrifices pruning, never observable matches.
-        func possible(_ expression: SearchExpression) throws -> Set<Int>? {
+    // Unicode equivalences in NSString and SQLite are not assumed equal.
+    // Non-ASCII text, short terms, negation and unindexed articles remain candidates.
+    private func possible(_ expression: SearchExpression) throws -> Set<Int>? {
             switch expression {
             case .term(let operand), .phrase(let operand):
                 guard operand.text.utf8.count >= 3,
@@ -331,7 +347,8 @@ private final class SearchIndexDatabase {
                 return left.union(right)
             case .negation, .field: return nil
             }
-        }
+    }
+    func candidates(_ expression: SearchExpression, articles: [LibrarySearchArticleDescriptor]) throws -> Set<Int>? {
         // All component sets must see one SQLite snapshot. A concurrent writer
         // must not turn an unknown article into an excluded cached article
         // between collecting the FTS hits and the cached-ordinal set.
@@ -341,6 +358,19 @@ private final class SearchIndexDatabase {
             let cached = try auditedOrdinals()
             guard cached.all.isSubset(of: all) else { throw SearchIndexFailure.corrupt }
             return all.subtracting(cached.all).union(cached.unicode).union(hits)
+        }
+    }
+    func excludedCandidates(_ expression: SearchExpression, articleCount: Int) throws -> Set<Int>? {
+        // Read hits and audited metadata from one snapshot. Only already indexed
+        // ASCII articles absent from a conservative hit set can be excluded.
+        try transaction("BEGIN DEFERRED") {
+            guard let hits = try possible(expression) else { return nil }
+            let cached = try auditedOrdinals()
+            let indexed = try ordinals("SELECT rowid-1 FROM terms")
+            guard (1...2_000_000).contains(articleCount),
+                  cached.all.allSatisfy({ (0..<articleCount).contains($0) }),
+                  indexed == cached.all, hits.isSubset(of: cached.all) else { throw SearchIndexFailure.corrupt }
+            return cached.all.subtracting(cached.unicode).subtracting(hits)
         }
     }
 }
