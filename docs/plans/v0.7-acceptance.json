@@ -492,11 +492,10 @@
       ],
       "verification": [
         "Six StudyDocumentTests passed, including stable ordering, preserved identifiers, unknown reference rollback and serialization.",
-        "Native builds 114–115: sorted Genesis before John, moved the selected entry and confirmed persistence after restart; separated control groups visually inspected in dark English."
+        "Native builds 114–115: sorted Genesis before John, moved the selected entry and confirmed persistence after restart; separated control groups visually inspected in dark and light English and dark Arabic."
       ],
       "limitations": [
-        "Display modes for verse text and reference plus text remain to be implemented; canonical sorting does not translate between versification systems.",
-        "The new list controls still need light appearance and right-to-left visual checks."
+        "Display modes for verse text and reference plus text remain to be implemented; canonical sorting does not translate between versification systems."
       ]
     },
     {
