@@ -21,23 +21,41 @@ struct WorkspacePersonalSnapshot: Codable {
 
 @MainActor @Observable final class WorkspacePersonalState {
     var favorites = FavoritesDocument()
+    private(set) var bookmarks = NumberedBookmarks()
+    private(set) var bookmarkLoadError: String?
     var highlights: [ReaderHighlight] = []
     var documents: [StudyDocument] = []
     var selectedDocumentID: UUID?
     var loadError: String?
     @ObservationIgnored private let file: PersonalStateFile<WorkspacePersonalSnapshot>
+    @ObservationIgnored private let bookmarkFile: PersonalStateFile<NumberedBookmarks>
+    @ObservationIgnored private var bookmarksWritable = false
     @ObservationIgnored private var canSave = false
     @ObservationIgnored private var saveTask: Task<Void, Never>?
     init(url: URL? = nil) {
         let path = url ?? FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
             .appendingPathComponent("org.libronx.mac.rebuild/personal.json")
         file = PersonalStateFile(url: path)
+        bookmarkFile = PersonalStateFile(url: path.deletingLastPathComponent().appendingPathComponent("numbered-bookmarks.json"))
         do {
             if let saved = try file.load() {
                 try saved.validate(); favorites = saved.favorites; highlights = saved.highlights; documents = saved.documents
             }
             canSave = true; selectedDocumentID = documents.first?.id
         } catch { loadError = error.localizedDescription }
+        do {
+            if let saved = try bookmarkFile.load() { try saved.validate(); bookmarks = saved }
+            bookmarksWritable = true
+        } catch { bookmarkLoadError = error.localizedDescription }
+    }
+    func setBookmark(_ slot: Int, location: ReaderLocation?) throws {
+        guard bookmarksWritable else { throw PersonalStateError.invalid(bookmarkLoadError ?? "No se pudo abrir el archivo de marcadores.") }
+        var updated = bookmarks
+        try updated.set(slot, location: location)
+        try updated.validate()
+        guard updated != bookmarks else { return }
+        try bookmarkFile.save(updated)
+        bookmarks = updated
     }
     func save() throws {
         saveTask?.cancel()

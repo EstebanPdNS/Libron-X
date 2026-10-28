@@ -140,7 +140,10 @@ public struct NumberedBookmarks: Codable, Equatable, Sendable {
     }
     public func validate() throws {
         guard schemaVersion == 1 else { throw PersonalStateError.futureVersion }
-        guard slots.keys.allSatisfy({ (1...9).contains($0) }), slots.values.allSatisfy({ $0.sectionOrdinal >= 0 }) else { throw PersonalStateError.invalid("El archivo de marcadores no es válido.") }
+        guard slots.keys.allSatisfy({ (1...9).contains($0) }),
+              slots.values.allSatisfy({ $0.sectionOrdinal >= 0 && ($0.characterOffset.map { $0 >= 0 } ?? true) }) else {
+            throw PersonalStateError.invalid("El archivo de marcadores no es válido.")
+        }
     }
     public mutating func clear() { slots.removeAll() }
 }

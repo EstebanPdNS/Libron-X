@@ -1103,6 +1103,18 @@
     "ur": "زیادہ سے زیادہ مضامین",
     "zh-Hans": "最多文章数"
   },
+  "Asignar marcador": {
+    "ar": "تعيين إشارة",
+    "bn": "বুকমার্ক নির্ধারণ",
+    "en": "Assign Bookmark",
+    "es": "Asignar marcador",
+    "fr": "Définir un signet",
+    "hi": "बुकमार्क निर्धारित करें",
+    "id": "Tetapkan penanda",
+    "pt": "Atribuir marcador",
+    "ur": "نشان مقرر کریں",
+    "zh-Hans": "设置书签"
+  },
   "Asociaciones de recursos": {
     "ar": "ارتباطات الموارد",
     "bn": "রিসোর্সের সংযোগ",
@@ -4079,6 +4091,18 @@
     "ur": "اس پسندیدہ کا وسیلہ کھلی لائبریری میں دستیاب نہیں۔",
     "zh-Hans": "当前书库中没有此收藏对应的资源。"
   },
+  "El recurso de este marcador no está disponible en la biblioteca abierta.": {
+    "ar": "مورد هذه الإشارة غير متاح في المكتبة المفتوحة.",
+    "bn": "এই বুকমার্কের রিসোর্স খোলা লাইব্রেরিতে নেই।",
+    "en": "The resource for this bookmark is not available in the open library.",
+    "es": "El recurso de este marcador no está disponible en la biblioteca abierta.",
+    "fr": "La ressource de ce signet n’est pas disponible dans la bibliothèque ouverte.",
+    "hi": "इस बुकमार्क का संसाधन खुली लाइब्रेरी में उपलब्ध नहीं है।",
+    "id": "Sumber penanda ini tidak tersedia di perpustakaan terbuka.",
+    "pt": "O recurso deste marcador não está disponível na biblioteca aberta.",
+    "ur": "اس نشان کا وسیلہ کھلی لائبریری میں دستیاب نہیں ہے۔",
+    "zh-Hans": "此书签对应的资源在当前资源库中不可用。"
+  },
   "El recurso del resultado ya no conserva su identidad o disponibilidad.": {
     "ar": "تغيرت هوية مورد النتيجة أو لم يعد متاحًا.",
     "bn": "ফলাফলের সম্পদের পরিচয় বদলেছে বা সেটি আর উপলব্ধ নেই।",
@@ -5891,6 +5915,18 @@
     "ur": "حوالے پر جائیں",
     "zh-Hans": "前往经文"
   },
+  "Ir al marcador {number}": {
+    "ar": "الانتقال إلى الإشارة {number}",
+    "bn": "বুকমার্ক {number} এ যান",
+    "en": "Go to Bookmark {number}",
+    "es": "Ir al marcador {number}",
+    "fr": "Aller au signet {number}",
+    "hi": "बुकमार्क {number} पर जाएँ",
+    "id": "Buka penanda {number}",
+    "pt": "Ir ao marcador {number}",
+    "ur": "نشان {number} پر جائیں",
+    "zh-Hans": "前往书签 {number}"
+  },
   "Izquierda": {
     "ar": "يسار",
     "bn": "বাম",
@@ -6827,6 +6863,30 @@
     "ur": "نمایاں نشان",
     "zh-Hans": "高亮标记"
   },
+  "Marcador {number}": {
+    "ar": "الإشارة {number}",
+    "bn": "বুকমার্ক {number}",
+    "en": "Bookmark {number}",
+    "es": "Marcador {number}",
+    "fr": "Signet {number}",
+    "hi": "बुकमार्क {number}",
+    "id": "Penanda {number}",
+    "pt": "Marcador {number}",
+    "ur": "نشان {number}",
+    "zh-Hans": "书签 {number}"
+  },
+  "Marcadores rápidos": {
+    "ar": "الإشارات السريعة",
+    "bn": "দ্রুত বুকমার্ক",
+    "en": "Quick Bookmarks",
+    "es": "Marcadores rápidos",
+    "fr": "Signets rapides",
+    "hi": "त्वरित बुकमार्क",
+    "id": "Penanda cepat",
+    "pt": "Marcadores rápidos",
+    "ur": "فوری نشان",
+    "zh-Hans": "快捷书签"
+  },
   "Mayúsculas": {
     "ar": "مطابقة حالة الأحرف",
     "bn": "বড় ছোট অক্ষর মিলান",
@@ -7426,6 +7486,18 @@
     "pt": "Não foi possível ler os grupos de Bíblias.",
     "ur": "بائبل کے گروپ پڑھے نہیں جا سکے۔",
     "zh-Hans": "无法读取圣经分组。"
+  },
+  "No se pudo abrir el archivo de marcadores.": {
+    "ar": "تعذر فتح ملف الإشارات.",
+    "bn": "বুকমার্ক ফাইল খোলা যায়নি।",
+    "en": "The bookmark file could not be opened.",
+    "es": "No se pudo abrir el archivo de marcadores.",
+    "fr": "Impossible d’ouvrir le fichier des signets.",
+    "hi": "बुकमार्क फ़ाइल नहीं खुल सकी।",
+    "id": "Berkas penanda tidak dapat dibuka.",
+    "pt": "Não foi possível abrir o arquivo de marcadores.",
+    "ur": "نشانات کی فائل نہیں کھل سکی۔",
+    "zh-Hans": "无法打开书签文件。"
   },
   "No se pudo abrir el directorio en Finder.": {
     "ar": "تعذر فتح المجلد في Finder.",
@@ -8530,6 +8602,18 @@
     "pt": "Remover link",
     "ur": "رابطہ ہٹائیں",
     "zh-Hans": "移除链接"
+  },
+  "Quitar marcador": {
+    "ar": "إزالة إشارة",
+    "bn": "বুকমার্ক সরান",
+    "en": "Remove Bookmark",
+    "es": "Quitar marcador",
+    "fr": "Supprimer un signet",
+    "hi": "बुकमार्क हटाएँ",
+    "id": "Hapus penanda",
+    "pt": "Remover marcador",
+    "ur": "نشان ہٹائیں",
+    "zh-Hans": "移除书签"
   },
   "Quitar prioridad": {
     "ar": "إزالة الأولوية",

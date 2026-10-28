@@ -162,6 +162,36 @@ struct ReaderHighlight: Identifiable, Codable, Equatable {
             savePersonal()
         } catch { self.error = error.localizedDescription }
     }
+    /// Bookmarks are bound to the exact edition and visible UTF-16 position.
+    /// Web-backed pages are excluded until their rendered projection is stable.
+    var currentBookmarkLocation: ReaderLocation? {
+        guard let reader = activeReader, !reader.isLoading, let page = reader.page, page.oeb == nil else { return nil }
+        let offset = reader.viewportCharacterOffset ?? reader.selectedRange.location
+        guard offset >= 0, Range(NSRange(location: offset, length: 0), in: page.text) != nil else { return nil }
+        return ReaderLocation(resourceID: reader.resource.id, legacyIdentifier: reader.resource.legacyIdentifier,
+            format: reader.resource.format, sectionOrdinal: page.destination.ordinal, reference: page.destination.reference,
+            textFingerprint: LibrarySearchService.textFingerprint(page.text), characterOffset: offset)
+    }
+    func assignBookmark(_ slot: Int) {
+        guard let location = currentBookmarkLocation else { return }
+        do { try personal.setBookmark(slot, location: location) }
+        catch { self.error = L(error.localizedDescription) }
+    }
+    func removeBookmark(_ slot: Int) {
+        do { try personal.setBookmark(slot, location: nil) }
+        catch { self.error = L(error.localizedDescription) }
+    }
+    func openBookmark(_ slot: Int, loader: ReaderSession.Loader? = nil) {
+        guard let location = personal.bookmarks.slots[slot] else { return }
+        guard let resource = location.resolve(in: resources) else {
+            error = L("El recurso de este marcador no está disponible en la biblioteca abierta."); return
+        }
+        let reader = open(resource, startReading: false, loader: loader)
+        let selection = location.characterOffset.map { NSRange(location: $0, length: 0) }
+        reader.load(.init(ordinal: location.sectionOrdinal, reference: location.reference),
+                    selection: selection, expectedFingerprint: location.textFingerprint)
+        activeTool = nil
+    }
     func openFavorite(_ favorite: LibraryFavorite) {
         guard let location = favorite.location, let resource = location.resolve(in: resources) else {
             error = L("El recurso de este favorito no está disponible en la biblioteca abierta."); return

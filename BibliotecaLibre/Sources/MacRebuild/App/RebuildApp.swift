@@ -167,6 +167,26 @@ struct RebuildCommands: Commands {
         CommandMenu(L("Favoritos")) {
             Button(L("Agregar ubicación actual"), action: workspace.addFavorite).disabled(workspace.activeReader?.page == nil)
             Button(L("Organizar favoritos…")) { workspace.activeTool = .favorites }
+            Divider()
+            Menu(L("Marcadores rápidos")) {
+                ForEach(1...9, id: \.self) { slot in
+                    Button(LF("Ir al marcador {number}", ["number": String(slot)])) { workspace.openBookmark(slot) }
+                        .keyboardShortcut(KeyEquivalent(Character(String(slot))), modifiers: [.control])
+                        .disabled(workspace.personal.bookmarks.slots[slot] == nil)
+                }
+                Divider()
+                Menu(L("Asignar marcador")) {
+                    ForEach(1...9, id: \.self) { slot in
+                        Button(LF("Marcador {number}", ["number": String(slot)])) { workspace.assignBookmark(slot) }
+                    }
+                }.disabled(workspace.currentBookmarkLocation == nil)
+                Menu(L("Quitar marcador")) {
+                    ForEach(1...9, id: \.self) { slot in
+                        Button(LF("Marcador {number}", ["number": String(slot)])) { workspace.removeBookmark(slot) }
+                            .disabled(workspace.personal.bookmarks.slots[slot] == nil)
+                    }
+                }
+            }
         }
         CommandMenu(L("Herramientas")) {
             Button(L("Comparar pasajes bíblicos…")) { workspace.activeTool = .passageComparison }
