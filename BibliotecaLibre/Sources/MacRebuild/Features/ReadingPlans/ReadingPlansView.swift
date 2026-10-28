@@ -243,6 +243,7 @@ private struct ReadingPlanCreationView: View {
     @RebuildViewState private var references = ""
     @RebuildViewState private var start = Date()
     @RebuildViewState private var weekdays: Set<Int> = Set(1...7)
+    @RebuildViewState private var passagesPerDay = 1
     @RebuildViewState private var error: String?
     private var symbols: [String] {
         let formatter = DateFormatter(); formatter.locale = locale; return formatter.shortWeekdaySymbols
@@ -259,6 +260,9 @@ private struct ReadingPlanCreationView: View {
                         if value { weekdays.insert(day) } else { weekdays.remove(day) }
                     }))
                 }
+            }
+            Picker(L("Pasajes por día"), selection: $passagesPerDay) {
+                ForEach(1...10, id: \.self) { Text(String($0)).tag($0) }
             }
             Text(L("Un pasaje por línea"))
             TextEditor(text: $references).frame(minHeight: 100, idealHeight: 130, maxHeight: 180)
@@ -278,7 +282,7 @@ private struct ReadingPlanCreationView: View {
             let parts = calendar.dateComponents([.year, .month, .day], from: start)
             guard let year = parts.year, let month = parts.month, let day = parts.day else { throw PersonalStateError.invalid("La fecha de lectura no es válida.") }
             let passages = references.components(separatedBy: .newlines).map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { !$0.isEmpty }
-            let plan = try ReadingPlan.schedule(title: title, references: passages, start: ReadingDay(year: year, month: month, day: day), weekdays: weekdays)
+            let plan = try ReadingPlan.schedule(title: title, references: passages, start: ReadingDay(year: year, month: month, day: day), weekdays: weekdays, passagesPerDay: passagesPerDay)
             try personal.editReadingPlans { $0.plans.append(plan) }
             created(plan.id); dismiss()
         } catch { self.error = error.localizedDescription }

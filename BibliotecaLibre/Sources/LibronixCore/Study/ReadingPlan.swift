@@ -55,17 +55,17 @@ public struct ReadingPlan: Codable, Equatable, Identifiable, Sendable {
     }
     /// Distribute explicit passages in their original order on selected days.
     /// Weekdays use Foundation's Gregorian convention: Sunday 1, Saturday 7.
-    public static func schedule(title: String, references: [String], start: ReadingDay, weekdays: Set<Int>) throws -> Self {
+    public static func schedule(title: String, references: [String], start: ReadingDay, weekdays: Set<Int>, passagesPerDay: Int = 1) throws -> Self {
         try start.validate()
         guard !references.isEmpty, references.count <= 10_000, !weekdays.isEmpty,
-              weekdays.allSatisfy({ (1...7).contains($0) }) else { throw PersonalStateError.invalid("El plan necesita pasajes y días de lectura válidos.") }
+              weekdays.allSatisfy({ (1...7).contains($0) }), (1...100).contains(passagesPerDay) else { throw PersonalStateError.invalid("El plan necesita pasajes y días de lectura válidos.") }
         var day = start, readings: [ScheduledReading] = []
         for (index, raw) in references.enumerated() {
             let reference = raw.trimmingCharacters(in: .whitespacesAndNewlines)
             _ = try BibleReferenceQuery.parse(reference)
             while try !weekdays.contains(day.weekday()) { day = try day.adding(days: 1) }
             readings.append(.init(day: day, reference: reference))
-            if index < references.count - 1 { day = try day.adding(days: 1) }
+            if index < references.count - 1 && (index + 1).isMultiple(of: passagesPerDay) { day = try day.adding(days: 1) }
         }
         let result = Self(title: title.trimmingCharacters(in: .whitespacesAndNewlines), readings: readings)
         try result.validate(); return result

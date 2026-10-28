@@ -8999,6 +8999,18 @@
     "ur": "عبارات یا کتابیں",
     "zh-Hans": "经文或书卷"
   },
+  "Pasajes por día": {
+    "ar": "المقاطع في اليوم",
+    "bn": "প্রতিদিনের অংশ",
+    "en": "Passages per day",
+    "es": "Pasajes por día",
+    "fr": "Passages par jour",
+    "hi": "प्रति दिन अंश",
+    "id": "Bagian per hari",
+    "pt": "Passagens por dia",
+    "ur": "روزانہ عبارات",
+    "zh-Hans": "每天的经文段数"
+  },
   "Pasajes, por ejemplo Gn 1–3; Juan 3:16–18; Romanos": {
     "ar": "مقاطع، مثل Gen 1–3; John 3:16–18; Romans",
     "bn": "অংশ, যেমন Gen 1–3; John 3:16–18; Romans",

@@ -3,6 +3,19 @@ import Testing
 @testable import LibronixCore
 
 @Suite struct ReadingPlanTests {
+    @Test func multiplePassagesKeepTheirOrderAndShareOnlySelectedDays() throws {
+        let start = try ReadingDay(year: 2024, month: 2, day: 28)
+        let passages = ["John 1", "John 2", "John 3", "John 4", "John 5"]
+        let plan = try ReadingPlan.schedule(title: "Own", references: passages, start: start, weekdays: [2, 5], passagesPerDay: 2)
+        let thursday = try ReadingDay(year: 2024, month: 2, day: 29), monday = try ReadingDay(year: 2024, month: 3, day: 4), next = try ReadingDay(year: 2024, month: 3, day: 7)
+        #expect(plan.readings.map(\.day) == [thursday, thursday, monday, monday, next])
+        #expect(plan.visibleReadings(hideCompleted: false).map(\.reference) == passages)
+        let calendar = String(decoding: try ReadingPlanCalendar.export(plan, timestamp: Date(timeIntervalSince1970: 0)), as: UTF8.self)
+        #expect(calendar.components(separatedBy: "DTSTART;VALUE=DATE:20240229").count == 3)
+        #expect(calendar.components(separatedBy: "DTSTART;VALUE=DATE:20240304").count == 3)
+        #expect(throws: PersonalStateError.self) { try ReadingPlan.schedule(title: "Own", references: passages, start: start, weekdays: [2], passagesPerDay: 0) }
+        #expect(throws: PersonalStateError.self) { try ReadingPlan.schedule(title: "Own", references: passages, start: start, weekdays: [2], passagesPerDay: 101) }
+    }
     @Test func scheduleUsesCivilDaysAndSkipsUnselectedWeekdays() throws {
         let start = try ReadingDay(year: 2024, month: 2, day: 28)
         let plan = try ReadingPlan.schedule(title: "Own plan", references: ["John 1", "John 2", "John 3"], start: start, weekdays: [2, 4, 6])
