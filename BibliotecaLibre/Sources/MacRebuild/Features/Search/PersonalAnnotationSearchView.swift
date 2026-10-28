@@ -45,10 +45,6 @@ struct PersonalAnnotationSearchView: View {
                     Text(L("Todos los cuadernos")).tag(Optional<UUID>.none)
                     ForEach(workspace.personal.documents.filter { $0.kind == .notebook }) { Text($0.title).tag(Optional($0.id)) }
                 }
-                Picker(L("Recurso"), selection: $search.filter.resourceID) {
-                    Text(L("Todos los recursos")).tag(Optional<String>.none)
-                    ForEach(workspace.availableResources) { Text($0.title).tag(Optional($0.id)) }
-                }
                 Picker(L("Color"), selection: $search.filter.color) {
                     Text(L("Todos los colores")).tag(Optional<String>.none)
                     Text(L("Amarillo")).tag(Optional("yellow"))
@@ -56,6 +52,10 @@ struct PersonalAnnotationSearchView: View {
                     Text(L("Azul")).tag(Optional("blue"))
                     Text(L("Rosa")).tag(Optional("pink"))
                 }
+            }
+            Picker(L("Recurso"), selection: $search.filter.resourceID) {
+                Text(L("Todos los recursos")).tag(Optional<String>.none)
+                ForEach(workspace.availableResources) { Text($0.title).tag(Optional($0.id)) }
             }
             Text(L("El filtro de cuaderno incluye notas; el de color incluye resaltados. El texto se busca sin distinguir mayúsculas ni acentos."))
                 .font(.caption).foregroundStyle(.secondary)

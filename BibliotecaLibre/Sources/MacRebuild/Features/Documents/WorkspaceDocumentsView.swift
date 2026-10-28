@@ -182,7 +182,8 @@ struct WorkspaceDocumentsView: View {
                 if let note = personal.documents[index].notes.firstIndex(where: { $0.id == selectedNote }) {
                     let documentID = personal.documents[index].id
                     let noteID = personal.documents[index].notes[note].id
-                    TextField(L("Título de la nota"), text: $personal.documents[index].notes[note].title).macInputStyle()
+                    StudyNoteTitleField(title: $personal.documents[index].notes[note].title, noteID: noteID,
+                                        destination: workspace.personalSearchDestination, navigationID: workspace.personalNavigationID)
                     WorkspaceNoteEditor(note: personal.documents[index].notes[note], destination: workspace.personalSearchDestination,
                                         navigationID: workspace.personalNavigationID) { data in
                         do { try personal.updateNoteRichText(noteID, in: documentID, data: data) }

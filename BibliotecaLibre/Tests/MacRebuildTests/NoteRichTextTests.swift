@@ -41,6 +41,22 @@ import LibronixCore
         #expect(unsafe == nil && NoteRichTextCodec.webURL("file:///private/owned") == nil)
     }
 
+    @Test func titleSearchTargetPreservesUnicodeAndRejectsStaleOrWrongNote() throws {
+        let id = UUID(), title = "😀 Café y estudio", match = (title as NSString).range(of: "Café")
+        let target = BibleReferencePersonalDestination(documentID: UUID(), entryID: id, field: .noteTitle,
+            textSHA256: LibrarySearchService.textFingerprint(title), projectionSHA256: "unused",
+            range: .init(location: match.location, length: match.length))
+        let range = try #require(StudyNoteTitleSearchTarget.range(target, noteID: id, title: title))
+        #expect(String(title[range]) == "Café")
+        #expect(StudyNoteTitleSearchTarget.range(target, noteID: id, title: title + " edited") == nil)
+        #expect(StudyNoteTitleSearchTarget.range(target, noteID: UUID(), title: title) == nil)
+        let fieldEditor = NSTextView(); fieldEditor.isFieldEditor = true; fieldEditor.string = title
+        #expect(StudyNoteTitleSearchTarget.apply(target, noteID: id, title: title, editor: fieldEditor))
+        #expect(fieldEditor.selectedRange() == match)
+        fieldEditor.string = title + " changed"
+        #expect(!StudyNoteTitleSearchTarget.apply(target, noteID: id, title: title, editor: fieldEditor))
+    }
+
     @Test func searchSelectionRequiresUnchangedEditorTextAndDoesNotOverrideUserSelection() throws {
         var note = StudyNote(title: "Owned"); note.sourceContentType = "text/plain"; note.sourceBody = "😀 Alpha café"
         let (window, view, controller) = editor(note); defer { window.close() }
