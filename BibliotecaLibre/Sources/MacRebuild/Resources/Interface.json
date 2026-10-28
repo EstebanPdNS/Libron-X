@@ -827,6 +827,18 @@
     "ur": "Libron-X کھولنے پر",
     "zh-Hans": "打开 Libron-X 时"
   },
+  "Algunas partes del documento no se pudieron analizar por completo.": {
+    "ar": "تعذر تحليل بعض أجزاء المستند بالكامل.",
+    "bn": "নথির কিছু অংশ সম্পূর্ণ বিশ্লেষণ করা যায়নি।",
+    "en": "Some parts of the document could not be fully analyzed.",
+    "es": "Algunas partes del documento no se pudieron analizar por completo.",
+    "fr": "Certaines parties du document n’ont pas pu être entièrement analysées.",
+    "hi": "दस्तावेज़ के कुछ भाग पूरी तरह नहीं जाँचे जा सके।",
+    "id": "Sebagian dokumen tidak dapat dianalisis sepenuhnya.",
+    "pt": "Algumas partes do documento não puderam ser analisadas por completo.",
+    "ur": "دستاویز کے کچھ حصوں کا مکمل تجزیہ نہیں ہو سکا۔",
+    "zh-Hans": "文档的某些部分无法完全分析。"
+  },
   "Algunos contextos no se muestran por el límite de presentación. Puedes abrir las coincidencias.": {
     "ar": "بعض السياقات غير معروضة بسبب حد العرض. لا يزال بإمكانك فتح التطابقات.",
     "bn": "প্রদর্শনের সীমার কারণে কিছু প্রসঙ্গ দেখানো হয়নি। তবুও মিলগুলো খুলতে পারবেন।",
@@ -3947,6 +3959,18 @@
     "ur": "ناشر",
     "zh-Hans": "出版社"
   },
+  "El HTML original conserva objetos no compatibles; se analiza el texto visible.": {
+    "ar": "يحتفظ HTML الأصلي بعناصر غير مدعومة؛ يُحلّل النص الظاهر.",
+    "bn": "মূল HTML অসমর্থিত বস্তু সংরক্ষণ করে; দৃশ্যমান পাঠ বিশ্লেষণ করা হয়।",
+    "en": "The original HTML retains unsupported objects; visible text is analyzed.",
+    "es": "El HTML original conserva objetos no compatibles; se analiza el texto visible.",
+    "fr": "Le HTML original conserve des objets non pris en charge ; le texte visible est analysé.",
+    "hi": "मूल HTML में असमर्थित वस्तुएँ सुरक्षित हैं; दिखाई देने वाला पाठ जाँचा जाता है।",
+    "id": "HTML asli menyimpan objek yang tidak didukung; teks terlihat dianalisis.",
+    "pt": "O HTML original conserva objetos não suportados; o texto visível é analisado.",
+    "ur": "اصل HTML میں غیر معاون اشیا محفوظ ہیں؛ نظر آنے والا متن جانچا جاتا ہے۔",
+    "zh-Hans": "原始 HTML 保留不受支持的对象；将分析可见文本。"
+  },
   "El HTML original se conserva; los objetos no compatibles no se editan.": {
     "ar": "يُحفظ HTML الأصلي؛ ولا تُعدَّل العناصر غير المدعومة.",
     "bn": "মূল HTML সংরক্ষিত থাকে; অসমর্থিত বস্তু সম্পাদনা করা হয় না।",
@@ -5002,6 +5026,42 @@
     "pt": "Exportar resultados…",
     "ur": "نتائج برآمد کریں…",
     "zh-Hans": "导出结果…"
+  },
+  "Extraer": {
+    "ar": "استخراج",
+    "bn": "বের করুন",
+    "en": "Extract",
+    "es": "Extraer",
+    "fr": "Extraire",
+    "hi": "निकालें",
+    "id": "Ekstrak",
+    "pt": "Extrair",
+    "ur": "نکالیں",
+    "zh-Hans": "提取"
+  },
+  "Extraer referencias": {
+    "ar": "استخراج المراجع",
+    "bn": "সূত্র বের করুন",
+    "en": "Extract References",
+    "es": "Extraer referencias",
+    "fr": "Extraire les références",
+    "hi": "संदर्भ निकालें",
+    "id": "Ekstrak referensi",
+    "pt": "Extrair referências",
+    "ur": "حوالے نکالیں",
+    "zh-Hans": "提取经文引用"
+  },
+  "Extraer referencias…": {
+    "ar": "استخراج المراجع…",
+    "bn": "সূত্র বের করুন…",
+    "en": "Extract References…",
+    "es": "Extraer referencias…",
+    "fr": "Extraire les références…",
+    "hi": "संदर्भ निकालें…",
+    "id": "Ekstrak referensi…",
+    "pt": "Extrair referências…",
+    "ur": "حوالے نکالیں…",
+    "zh-Hans": "提取经文引用…"
   },
   "Fallidos": {
     "ar": "فاشلة",
@@ -6239,6 +6299,18 @@
     "ur": "موضوعات کی فہرست جزوی ہے؛ دیگر وسائل میں مزید مضامین ہو سکتے ہیں۔",
     "zh-Hans": "主题列表不完整；其他资源中可能还有更多文章。"
   },
+  "La lista de versículos ya no está disponible.": {
+    "ar": "قائمة الآيات لم تعد متاحة.",
+    "bn": "পদের তালিকা আর উপলভ্য নয়।",
+    "en": "The verse list is no longer available.",
+    "es": "La lista de versículos ya no está disponible.",
+    "fr": "La liste de versets n’est plus disponible.",
+    "hi": "पदों की सूची अब उपलब्ध नहीं है।",
+    "id": "Daftar ayat tidak lagi tersedia.",
+    "pt": "A lista de versículos não está mais disponível.",
+    "ur": "آیات کی فہرست اب دستیاب نہیں ہے۔",
+    "zh-Hans": "经文列表不再可用。"
+  },
   "La lista de áreas recientes contiene entradas incompatibles.": {
     "ar": "تحتوي قائمة مساحات العمل الأخيرة على إدخالات غير متوافقة.",
     "bn": "সাম্প্রতিক কর্মক্ষেত্রের তালিকায় অসঙ্গত এন্ট্রি রয়েছে।",
@@ -7343,6 +7415,18 @@
     "ur": "شامل کرنے کے لیے کوئی موافق وسیلہ نہیں ہے۔",
     "zh-Hans": "没有可添加的兼容资源。"
   },
+  "No hay texto en el portapapeles.": {
+    "ar": "لا يوجد نص في الحافظة.",
+    "bn": "ক্লিপবোর্ডে কোনো পাঠ নেই।",
+    "en": "There is no text on the clipboard.",
+    "es": "No hay texto en el portapapeles.",
+    "fr": "Le presse-papiers ne contient pas de texte.",
+    "hi": "क्लिपबोर्ड पर कोई पाठ नहीं है।",
+    "id": "Tidak ada teks di papan klip.",
+    "pt": "Não há texto na área de transferência.",
+    "ur": "کلپ بورڈ میں متن نہیں ہے۔",
+    "zh-Hans": "剪贴板中没有文本。"
+  },
   "No hay un registro de cambios incluido para esta versión.": {
     "ar": "لا يتضمن هذا الإصدار سجل تغييرات.",
     "bn": "এই সংস্করণে পরিবর্তনের বিবরণ অন্তর্ভুক্ত নেই।",
@@ -7415,6 +7499,18 @@
     "ur": "مطلوبہ دائرے میں کوئی حوالہ نہیں ملا۔",
     "zh-Hans": "在指定范围内未找到经文。"
   },
+  "No se encontraron referencias reconocidas.": {
+    "ar": "لم يُعثر على مراجع معروفة.",
+    "bn": "কোনো শনাক্ত সূত্র পাওয়া যায়নি।",
+    "en": "No recognized references were found.",
+    "es": "No se encontraron referencias reconocidas.",
+    "fr": "Aucune référence reconnue n’a été trouvée.",
+    "hi": "कोई पहचाना गया संदर्भ नहीं मिला।",
+    "id": "Tidak ada referensi yang dikenali.",
+    "pt": "Nenhuma referência reconhecida foi encontrada.",
+    "ur": "کوئی شناخت شدہ حوالہ نہیں ملا۔",
+    "zh-Hans": "未找到可识别的经文引用。"
+  },
   "No se encontró esta referencia en el recurso.": {
     "ar": "لم يُعثر على هذا المرجع في المورد.",
     "bn": "এই সূত্র রিসোর্সে পাওয়া যায়নি।",
@@ -7486,6 +7582,18 @@
     "pt": "Não foi possível ler os grupos de Bíblias.",
     "ur": "بائبل کے گروپ پڑھے نہیں جا سکے۔",
     "zh-Hans": "无法读取圣经分组。"
+  },
+  "No se pudo abrir el RTF guardado; se analiza la vista de solo lectura del original.": {
+    "ar": "تعذر فتح RTF المحفوظ؛ يُحلّل العرض الأصلي للقراءة فقط.",
+    "bn": "সংরক্ষিত RTF খোলা যায়নি; মূলের শুধু-পাঠ দৃশ্য বিশ্লেষণ করা হয়।",
+    "en": "The saved RTF could not be opened; the read-only original is analyzed.",
+    "es": "No se pudo abrir el RTF guardado; se analiza la vista de solo lectura del original.",
+    "fr": "Le RTF enregistré n’a pas pu être ouvert ; la vue en lecture seule de l’original est analysée.",
+    "hi": "सहेजा गया RTF नहीं खुल सका; मूल का केवल-पठन दृश्य जाँचा जाता है।",
+    "id": "RTF tersimpan tidak dapat dibuka; tampilan asli hanya-baca dianalisis.",
+    "pt": "Não foi possível abrir o RTF salvo; a visualização somente leitura do original é analisada.",
+    "ur": "محفوظ RTF نہیں کھل سکا؛ اصل کا صرف مطالعے والا منظر جانچا جاتا ہے۔",
+    "zh-Hans": "无法打开已保存的 RTF；将分析原文的只读视图。"
   },
   "No se pudo abrir el archivo de marcadores.": {
     "ar": "تعذر فتح ملف الإشارات.",
@@ -8291,6 +8399,18 @@
     "ur": "وقفہ موجودہ مضمون یا آیت کے مکمل ہونے کا انتظار کرتا ہے۔ اس ونڈو کو بند کرنے سے تلاش رک جاتی ہے۔",
     "zh-Hans": "暂停会等待当前文章或经文处理完毕。关闭此窗口将暂停搜索。"
   },
+  "Pega o escribe el texto que quieres analizar.": {
+    "ar": "الصق النص المراد تحليله أو اكتبه.",
+    "bn": "বিশ্লেষণের পাঠ পেস্ট করুন বা লিখুন।",
+    "en": "Paste or type the text to analyze.",
+    "es": "Pega o escribe el texto que quieres analizar.",
+    "fr": "Collez ou saisissez le texte à analyser.",
+    "hi": "विश्लेषण के लिए पाठ चिपकाएँ या लिखें।",
+    "id": "Tempel atau ketik teks yang akan dianalisis.",
+    "pt": "Cole ou digite o texto a analisar.",
+    "ur": "تجزیے کے لیے متن چسپاں کریں یا لکھیں۔",
+    "zh-Hans": "粘贴或输入要分析的文本。"
+  },
   "Pega tu código de descarga": {
     "ar": "الصق رمز التنزيل",
     "bn": "আপনার ডাউনলোড কোড পেস্ট করুন",
@@ -8302,6 +8422,18 @@
     "pt": "Cole seu código de download",
     "ur": "اپنا ڈاؤن لوڈ کوڈ چسپاں کریں",
     "zh-Hans": "粘贴下载代码"
+  },
+  "Pegar del portapapeles": {
+    "ar": "لصق من الحافظة",
+    "bn": "ক্লিপবোর্ড থেকে পেস্ট করুন",
+    "en": "Paste from Clipboard",
+    "es": "Pegar del portapapeles",
+    "fr": "Coller depuis le presse-papiers",
+    "hi": "क्लिपबोर्ड से चिपकाएँ",
+    "id": "Tempel dari papan klip",
+    "pt": "Colar da área de transferência",
+    "ur": "کلپ بورڈ سے چسپاں کریں",
+    "zh-Hans": "从剪贴板粘贴"
   },
   "Por reglas": {
     "ar": "حسب القواعد",
@@ -9922,6 +10054,18 @@
     "pt": "Apenas ocultos",
     "ur": "صرف پوشیدہ",
     "zh-Hans": "仅显示隐藏资源"
+  },
+  "Solo se incluyen referencias reconocidas; revisa el resultado antes de agregarlo.": {
+    "ar": "تُضمّن المراجع المعروفة فقط؛ راجع النتيجة قبل إضافتها.",
+    "bn": "শুধু শনাক্ত সূত্র অন্তর্ভুক্ত হয়; যোগ করার আগে ফল যাচাই করুন।",
+    "en": "Only recognized references are included; review the results before adding them.",
+    "es": "Solo se incluyen referencias reconocidas; revisa el resultado antes de agregarlo.",
+    "fr": "Seules les références reconnues sont incluses ; vérifiez le résultat avant de l’ajouter.",
+    "hi": "केवल पहचाने गए संदर्भ शामिल हैं; जोड़ने से पहले परिणाम जाँचें।",
+    "id": "Hanya referensi yang dikenali disertakan; periksa hasil sebelum menambahkannya.",
+    "pt": "Apenas referências reconhecidas são incluídas; revise o resultado antes de adicionar.",
+    "ur": "صرف شناخت شدہ حوالے شامل ہیں؛ شامل کرنے سے پہلے نتیجہ دیکھیں۔",
+    "zh-Hans": "仅包含可识别的经文引用；添加前请检查结果。"
   },
   "Stable recibe versiones estables. Beta incluye también versiones de prueba.": {
     "ar": "تستقبل Stable الإصدارات المستقرة. وتشمل Beta الإصدارات التجريبية أيضًا.",

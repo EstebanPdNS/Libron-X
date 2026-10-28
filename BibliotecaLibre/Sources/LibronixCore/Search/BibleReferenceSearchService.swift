@@ -36,6 +36,11 @@ public struct BibleReferencePersonalDestination: Sendable {
     public let textSHA256: String
     public let projectionSHA256: String
     public let range: SearchTextRange
+    public init(documentID: UUID, entryID: UUID?, field: BibleReferencePersonalField.Kind,
+                textSHA256: String, projectionSHA256: String, range: SearchTextRange) {
+        self.documentID = documentID; self.entryID = entryID; self.field = field
+        self.textSHA256 = textSHA256; self.projectionSHA256 = projectionSHA256; self.range = range
+    }
 }
 public struct BibleReferenceSearchResult: Identifiable, Sendable {
     public let mention: BibleReferenceMention

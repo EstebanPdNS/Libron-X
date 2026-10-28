@@ -794,10 +794,18 @@
       "sourceKey": "study-expansion-queries-06",
       "acceptance": "Exponer extracción desde portapapeles y documentos con casos ambiguos e inválidos.",
       "baseline": "Core detecta menciones para la búsqueda de referencias.",
-      "status": "pending",
-      "implementation": [],
-      "verification": [],
-      "limitations": []
+      "status": "in_progress",
+      "implementation": [
+        "Recognize visible citations and explicit Bible links from pasted text or personal documents, preserving edition, original source positions and projection fingerprints; add selected results to a verse list atomically."
+      ],
+      "verification": [
+        "Core citation tests and extraction tests passed, including malformed references, UTF-16 offsets, explicit editions, incompatible rich text and rollback on invalid input.",
+        "Native app: pasted text and notebook extraction, selecting citations and adding results verified; compact and expanded sheets inspected in dark English and dark Arabic, compact sheet in light English."
+      ],
+      "limitations": [
+        "Only recognized reference syntax is included; incompatible document objects are reported and require review.",
+        "The dedicated Paste from Clipboard button still needs an end-to-end interaction check."
+      ]
     },
     {
       "id": "F199",

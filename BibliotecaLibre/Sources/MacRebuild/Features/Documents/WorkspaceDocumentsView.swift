@@ -28,6 +28,7 @@ struct WorkspaceDocumentsView: View {
     @RebuildViewState private var showsDelete = false
     @RebuildViewState private var moveRequest: NoteMoveRequest?
     @RebuildViewState private var propertiesRequest: NotePropertiesRequest?
+    @RebuildViewState private var extractionRequest: ReferenceExtractionRequest?
     @RebuildViewState private var selectedVerse: UUID?
     @RebuildViewState private var verseReference = ""
     @FocusState private var noteBodyFocused: Bool
@@ -105,6 +106,9 @@ struct WorkspaceDocumentsView: View {
             .sheet(item: $propertiesRequest) { request in
                 NotePropertiesView(personal: personal, documentID: request.documentID, note: request.note)
                     .modifier(AppInterfaceLanguage())
+            }
+            .sheet(item: $extractionRequest) { request in
+                StudyReferenceExtractionView(personal: personal, destinationID: request.id)
             }
     }
     private func selectPendingNote() {
@@ -247,6 +251,7 @@ struct WorkspaceDocumentsView: View {
                     guard !verseReference.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
                     personal.documents[index].verses.append(.init(reference: verseReference)); verseReference = ""
                 }
+                Button(L("Extraer referencias…")) { extractionRequest = .init(id: personal.documents[index].id) }
             }
             ScrollViewReader { scroll in
             List(personal.documents[index].verses, selection: $selectedVerse) { verse in

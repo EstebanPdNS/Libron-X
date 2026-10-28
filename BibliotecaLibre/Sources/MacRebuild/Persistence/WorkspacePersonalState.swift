@@ -57,6 +57,18 @@ struct WorkspacePersonalSnapshot: Codable {
         try bookmarkFile.save(updated)
         bookmarks = updated
     }
+    func appendExtractedReferences(_ references: [String], to documentID: UUID) throws {
+        guard !references.isEmpty else { return }
+        guard let index = documents.firstIndex(where: { $0.id == documentID && $0.kind == .verseList }) else {
+            throw PersonalStateError.invalid("La lista de versículos ya no está disponible.")
+        }
+        guard references.count <= 100_000 - documents[index].verses.count else { throw PersonalStateError.tooLarge }
+        for reference in references { _ = try BibleReferenceQuery.parse(reference) }
+        var updated = documents
+        updated[index].verses.append(contentsOf: references.map { StudyVerseEntry(reference: $0) })
+        try updated[index].validate()
+        try replaceDocuments(updated)
+    }
     func save() throws {
         saveTask?.cancel()
         guard canSave else { throw PersonalStateError.invalid(loadError ?? "No se pudo abrir el archivo personal; se conservaron sus datos.") }
