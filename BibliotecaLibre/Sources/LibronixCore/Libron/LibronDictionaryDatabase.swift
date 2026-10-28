@@ -65,6 +65,12 @@ public enum LibronDictionaryDatabase {
     }
     public static func page(_ url: URL, ordinal: Int) throws -> Page {
         let count = try count(url)
+        return try page(url, ordinal: ordinal, verifiedCount: count)
+    }
+    /// Reuse a count obtained from the same unchanged database during a search.
+    /// The caller must verify the source has not changed since obtaining it.
+    public static func page(_ url: URL, ordinal: Int, verifiedCount count: Int) throws -> Page {
+        guard (1...2_000_000).contains(count) else { throw LibronError.invalid("Invalid dictionary entry count") }
         guard (0..<count).contains(ordinal), let row = try Database(url).rows("SELECT headword,body FROM entries WHERE ordinal=? LIMIT 1", integer: ordinal).first,
               row.count == 2, !row[1].isEmpty else { throw LibronError.invalid("Dictionary entry not found") }
         return .init(ordinal: ordinal, headword: row[0], body: row[1], count: count)
@@ -74,5 +80,6 @@ public enum LibronDictionaryDatabase {
     public static func entries(_ url: URL) throws -> [LibronDictionaryEntry] { throw LibronError.invalid("SQLite is unavailable") }
     public static func match(_ word: String, at url: URL) throws -> LibronDictionaryEntry? { throw LibronError.invalid("SQLite is unavailable") }
     public static func page(_ url: URL, ordinal: Int) throws -> Page { throw LibronError.invalid("SQLite is unavailable") }
+    public static func page(_ url: URL, ordinal: Int, verifiedCount: Int) throws -> Page { throw LibronError.invalid("SQLite is unavailable") }
 #endif
 }

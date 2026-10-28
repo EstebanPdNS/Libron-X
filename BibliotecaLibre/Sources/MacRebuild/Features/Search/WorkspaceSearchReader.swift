@@ -11,11 +11,11 @@ actor WorkspaceSearchReader: LibrarySearchContentProvider {
         [.legacyLSF, .libronixLLS, .libronixOEB, .eSwordSQLite, .epub, .libronDictionary].contains(resource.format)
     }
 
-    private func page(_ resource: LibraryResource, ordinal: Int) async throws -> ReaderPage {
+    private func page(_ resource: LibraryResource, ordinal: Int, verifiedDictionaryCount: Int? = nil) async throws -> ReaderPage {
         if LibronNativeReader.location(resource) != nil {
             return try await nativeReader.read(resource, .init(ordinal: ordinal))
         }
-        return try await ReaderSession.readOriginal(resource, .init(ordinal: ordinal))
+        return try await ReaderSession.readOriginal(resource, .init(ordinal: ordinal), verifiedDictionaryCount: verifiedDictionaryCount)
     }
 
     func prepare(_ resource: LibraryResource) async throws -> LibrarySearchPreparedResource {
@@ -50,7 +50,7 @@ actor WorkspaceSearchReader: LibrarySearchContentProvider {
     func read(_ resource: LibraryResource, article: LibrarySearchArticleDescriptor,
               prepared: LibrarySearchPreparedResource) async throws -> LibrarySearchDecodedArticle {
         try await verifyUnchanged(resource, prepared: prepared)
-        let result = try await page(resource, ordinal: article.sectionOrdinal)
+        let result = try await page(resource, ordinal: article.sectionOrdinal, verifiedDictionaryCount: prepared.articles.count)
         guard result.destination.ordinal == article.sectionOrdinal else { throw LibrarySearchError.invalidArticleDirectory }
         let warnings = result.warning.map { [$0] } ?? []
         let decoded: LibrarySearchDecodedArticle

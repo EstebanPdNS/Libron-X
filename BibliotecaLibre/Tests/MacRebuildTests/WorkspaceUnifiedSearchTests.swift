@@ -152,6 +152,15 @@ import CSQLite
         #expect(sqlite3_exec(db, "PRAGMA user_version=1; CREATE TABLE entries(ordinal INTEGER PRIMARY KEY,headword TEXT,body TEXT); INSERT INTO entries VALUES(0,'amor','Amor 😀 definición'),(1,'other','Other definition');", nil, nil, nil) == SQLITE_OK)
         sqlite3_close(db)
         let dict = LibraryResource(location: dictURL, title: "Owned dictionary", byteCount: 0, format: .libronDictionary, support: .metadataOnly, provenance: .fileName)
+        let provider = WorkspaceSearchReader(), prepared = try await provider.prepare(dict)
+        #expect(prepared.articles.count == 2)
+        #expect(throws: (any Error).self) { try LibronDictionaryDatabase.page(dictURL, ordinal: 0, verifiedCount: 0) }
+        #expect(throws: (any Error).self) { try LibronDictionaryDatabase.page(dictURL, ordinal: 2, verifiedCount: 2) }
+        for article in prepared.articles {
+            let original = try await ReaderSession.readOriginal(dict, .init(ordinal: article.sectionOrdinal))
+            let decoded = try await provider.read(dict, article: article, prepared: prepared)
+            #expect(decoded.text == original.text && decoded.fieldDirectory == original.fieldDirectory)
+        }
         let report = try await LibrarySearchService(provider: WorkspaceSearchReader()).search(resources: [epub, dict], query: query("Amor"), options: .init(wholeWords: false))
         #expect(report.coverageComplete && Set(report.results.map(\.resourceID)) == Set([epub.id, dict.id]))
         #expect(report.results.allSatisfy { $0.hits.allSatisfy { $0.range.length == 4 } })

@@ -599,13 +599,15 @@ struct ReaderPage: Sendable {
         if LibronNativeReader.location(resource) != nil { return try await LibronNativeReader.shared.read(resource,requested) }
         return try await readOriginal(resource,requested)
     }
-    nonisolated static func readOriginal(_ resource: LibraryResource, _ requested: ReaderDestination) async throws -> ReaderPage {
+    nonisolated static func readOriginal(_ resource: LibraryResource, _ requested: ReaderDestination, verifiedDictionaryCount: Int? = nil) async throws -> ReaderPage {
         if let edition = requested.requiredEdition,
            !matchesEdition(resource, edition) {
             throw RebuildError.referenceEditionUnavailable(edition)
         }
         if resource.format == .libronDictionary {
-            let source = try LibronDictionaryDatabase.page(resource.location, ordinal: requested.ordinal)
+            let source: LibronDictionaryDatabase.Page
+            if let count = verifiedDictionaryCount { source = try LibronDictionaryDatabase.page(resource.location, ordinal: requested.ordinal, verifiedCount: count) }
+            else { source = try LibronDictionaryDatabase.page(resource.location, ordinal: requested.ordinal) }
             let content = LegacySectionContent.imported(text: source.body, ordinal: source.ordinal, anchors: [], rtf: nil)
             return ReaderPage(destination: .init(ordinal: source.ordinal), text: source.body, sectionCount: source.count, content: content,
                 fieldDirectory: .init(regions: [.body: source.body.isEmpty ? [] : [.init(location: 0, length: source.body.utf16.count)]],
