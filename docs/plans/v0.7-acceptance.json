@@ -659,13 +659,16 @@
       "baseline": "Las notas generales pueden almacenar texto, sin modelo propio de oración.",
       "status": "in_progress",
       "implementation": [
-        "Added a separate local prayer journal with categories, private presentation flags, once/daily/weekly/monthly schedules, prayed and answered dates, validation and transactional persistence."
+        "Added a separate local prayer journal with categories, private presentation flags, once/daily/weekly/monthly schedules, prayed and answered dates, validation and transactional persistence.",
+        "Added a native prayer list and editor with category management, repetition, private presentation, completion and answered-state controls; filtered-out or hidden selections do not expose their details or actions."
       ],
       "verification": [
-        "PrayerJournalTests and PrayerJournalPersistenceTests pass for leap/month-end schedules, answer and reopen state, categories, private flags, future schemas and concurrent writes; ReadingPlanPersistenceTests also pass."
+        "PrayerJournalTests and PrayerJournalPersistenceTests pass for leap/month-end schedules, answer and reopen state, categories, private flags, future schemas and concurrent writes; ReadingPlanPersistenceTests also pass.",
+        "PrayerJournalTests, PrayerJournalPersistenceTests and AppLanguageTests passed; native app testing covered private visibility, creation, persistence after reopening, completion, answer/reopen and protection of categories containing prayers. Dark-mode editor visually inspected.",
+        "Native build 150: filtered selections no longer show details or actions; the empty state, prayer list and editor were inspected in dark English and light Arabic with right-to-left layout. Test-only records were archived and original preferences restored."
       ],
       "limitations": [
-        "The journal has no user-facing interface yet. The private flag is a presentation preference, not encryption or access control; local data is stored in a separate JSON file. UI, accessibility and visual review remain pending."
+        "The private flag is a presentation preference, not encryption or access control; local data is stored in a separate JSON file. Narrow-window visual review and broader accessibility verification remain pending."
       ]
     },
     {

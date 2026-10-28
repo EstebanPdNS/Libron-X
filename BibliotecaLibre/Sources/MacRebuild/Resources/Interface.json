@@ -1379,6 +1379,30 @@
     "ur": "لغات اور فرہنگ تلاش کرنے کے لیے الفاظ شامل کریں۔",
     "zh-Hans": "添加词语以查询词典和词汇书。"
   },
+  "Añadir categoría": {
+    "ar": "إضافة فئة",
+    "bn": "বিভাগ যোগ করুন",
+    "en": "Add category",
+    "es": "Añadir categoría",
+    "fr": "Ajouter une catégorie",
+    "hi": "श्रेणी जोड़ें",
+    "id": "Tambah kategori",
+    "pt": "Adicionar categoria",
+    "ur": "زمرہ شامل کریں",
+    "zh-Hans": "添加类别"
+  },
+  "Añadir oración": {
+    "ar": "إضافة صلاة",
+    "bn": "প্রার্থনা যোগ করুন",
+    "en": "Add prayer",
+    "es": "Añadir oración",
+    "fr": "Ajouter une prière",
+    "hi": "प्रार्थना जोड़ें",
+    "id": "Tambah doa",
+    "pt": "Adicionar oração",
+    "ur": "دعا شامل کریں",
+    "zh-Hans": "添加祷告"
+  },
   "Año": {
     "ar": "السنة",
     "bn": "বছর",
@@ -2350,6 +2374,30 @@
     "pt": "Categoria",
     "ur": "زمرہ",
     "zh-Hans": "分类"
+  },
+  "Categorías de oración": {
+    "ar": "فئات الصلاة",
+    "bn": "প্রার্থনার বিভাগ",
+    "en": "Prayer categories",
+    "es": "Categorías de oración",
+    "fr": "Catégories de prière",
+    "hi": "प्रार्थना श्रेणियाँ",
+    "id": "Kategori doa",
+    "pt": "Categorias de oração",
+    "ur": "دعاؤں کے زمرے",
+    "zh-Hans": "祷告类别"
+  },
+  "Categorías…": {
+    "ar": "الفئات…",
+    "bn": "বিভাগ…",
+    "en": "Categories…",
+    "es": "Categorías…",
+    "fr": "Catégories…",
+    "hi": "श्रेणियाँ…",
+    "id": "Kategori…",
+    "pt": "Categorias…",
+    "ur": "زمرے…",
+    "zh-Hans": "类别…"
   },
   "Catálogo": {
     "ar": "الفهرس",
@@ -3791,6 +3839,18 @@
     "ur": "تمام بائبل کے روابط ختم کریں",
     "zh-Hans": "取消所有圣经的联动"
   },
+  "Detalles": {
+    "ar": "التفاصيل",
+    "bn": "বিবরণ",
+    "en": "Details",
+    "es": "Detalles",
+    "fr": "Détails",
+    "hi": "विवरण",
+    "id": "Detail",
+    "pt": "Detalhes",
+    "ur": "تفصیلات",
+    "zh-Hans": "详情"
+  },
   "Detalles de lectura y formato": {
     "ar": "تفاصيل القراءة والتنسيق",
     "bn": "পাঠ ও বিন্যাসের বিবরণ",
@@ -3826,6 +3886,18 @@
     "pt": "Devocional",
     "ur": "عبادتی مطالعہ",
     "zh-Hans": "灵修"
+  },
+  "Diaria": {
+    "ar": "يوميًا",
+    "bn": "প্রতিদিন",
+    "en": "Daily",
+    "es": "Diaria",
+    "fr": "Quotidienne",
+    "hi": "प्रतिदिन",
+    "id": "Harian",
+    "pt": "Diária",
+    "ur": "روزانہ",
+    "zh-Hans": "每天"
   },
   "Diccionario": {
     "ar": "القاموس",
@@ -4294,6 +4366,18 @@
     "pt": "Edite notas formatadas com listas, links e desfazer.",
     "ur": "فارمیٹنگ، فہرستوں، روابط اور واپس کرنے کے ساتھ نوٹس میں ترمیم کریں۔",
     "zh-Hans": "使用格式、列表、链接和撤销功能编辑富文本笔记。"
+  },
+  "Editar oración": {
+    "ar": "تحرير الصلاة",
+    "bn": "প্রার্থনা সম্পাদনা করুন",
+    "en": "Edit prayer",
+    "es": "Editar oración",
+    "fr": "Modifier la prière",
+    "hi": "प्रार्थना संपादित करें",
+    "id": "Edit doa",
+    "pt": "Editar oração",
+    "ur": "دعا میں ترمیم کریں",
+    "zh-Hans": "编辑祷告"
   },
   "Editorial": {
     "ar": "الناشر",
@@ -4883,6 +4967,18 @@
     "ur": "سسٹم کا فونٹ منتخب کریں یا اصل انداز برقرار رکھنے کے لیے طے شدہ اختیار رکھیں۔ متبادل فونٹ Times New Roman ہے۔",
     "zh-Hans": "选择系统字体，或保留默认选项以保留原始样式。备用字体为 Times New Roman。"
   },
+  "Eliminar": {
+    "ar": "حذف",
+    "bn": "মুছুন",
+    "en": "Delete",
+    "es": "Eliminar",
+    "fr": "Supprimer",
+    "hi": "हटाएँ",
+    "id": "Hapus",
+    "pt": "Excluir",
+    "ur": "حذف کریں",
+    "zh-Hans": "删除"
+  },
   "Eliminar asociación": {
     "ar": "حذف الارتباط",
     "bn": "সংযোগ মুছুন",
@@ -4894,6 +4990,30 @@
     "pt": "Excluir associação",
     "ur": "تعلق حذف کریں",
     "zh-Hans": "删除关联"
+  },
+  "Eliminar categoría": {
+    "ar": "حذف الفئة",
+    "bn": "বিভাগ মুছুন",
+    "en": "Delete category",
+    "es": "Eliminar categoría",
+    "fr": "Supprimer la catégorie",
+    "hi": "श्रेणी हटाएँ",
+    "id": "Hapus kategori",
+    "pt": "Excluir categoria",
+    "ur": "زمرہ حذف کریں",
+    "zh-Hans": "删除类别"
+  },
+  "Eliminar categoría…": {
+    "ar": "حذف الفئة…",
+    "bn": "বিভাগ মুছুন…",
+    "en": "Delete category…",
+    "es": "Eliminar categoría…",
+    "fr": "Supprimer la catégorie…",
+    "hi": "श्रेणी हटाएँ…",
+    "id": "Hapus kategori…",
+    "pt": "Excluir categoria…",
+    "ur": "زمرہ حذف کریں…",
+    "zh-Hans": "删除类别…"
   },
   "Eliminar colección": {
     "ar": "حذف المجموعة",
@@ -4942,6 +5062,18 @@
     "pt": "Excluir leitura",
     "ur": "مطالعہ حذف کریں",
     "zh-Hans": "删除阅读"
+  },
+  "Eliminar oración": {
+    "ar": "حذف الصلاة",
+    "bn": "প্রার্থনা মুছুন",
+    "en": "Delete prayer",
+    "es": "Eliminar oración",
+    "fr": "Supprimer la prière",
+    "hi": "प्रार्थना हटाएँ",
+    "id": "Hapus doa",
+    "pt": "Excluir oração",
+    "ur": "دعا حذف کریں",
+    "zh-Hans": "删除祷告"
   },
   "Eliminar plan…": {
     "ar": "حذف الخطة…",
@@ -6803,6 +6935,30 @@
     "ur": "تلاش کے نتائج جزوی ہیں یا وسائل زیر التوا ہیں",
     "zh-Hans": "搜索结果不完整或有待处理资源"
   },
+  "La categoría contiene oraciones.": {
+    "ar": "تحتوي الفئة على صلوات.",
+    "bn": "বিভাগটিতে প্রার্থনা রয়েছে।",
+    "en": "The category contains prayers.",
+    "es": "La categoría contiene oraciones.",
+    "fr": "La catégorie contient des prières.",
+    "hi": "श्रेणी में प्रार्थनाएँ हैं।",
+    "id": "Kategori berisi doa.",
+    "pt": "A categoria contém orações.",
+    "ur": "زمرے میں دعائیں موجود ہیں۔",
+    "zh-Hans": "该类别包含祷告。"
+  },
+  "La categoría de la oración ya no existe.": {
+    "ar": "فئة الصلاة لم تعد موجودة.",
+    "bn": "প্রার্থনার বিভাগ আর নেই।",
+    "en": "The prayer category no longer exists.",
+    "es": "La categoría de la oración ya no existe.",
+    "fr": "La catégorie de la prière n’existe plus.",
+    "hi": "प्रार्थना की श्रेणी अब मौजूद नहीं है।",
+    "id": "Kategori doa sudah tidak ada.",
+    "pt": "A categoria da oração já não existe.",
+    "ur": "دعا کا زمرہ اب موجود نہیں ہے۔",
+    "zh-Hans": "祷告类别已不存在。"
+  },
   "La colección ya no está disponible.": {
     "ar": "لم تعد المجموعة متاحة.",
     "bn": "সংগ্রহটি আর উপলভ্য নেই।",
@@ -6935,6 +7091,18 @@
     "ur": "مطالعہ اب دستیاب نہیں ہے۔",
     "zh-Hans": "该阅读已不可用。"
   },
+  "La lista de oración contiene datos incompatibles.": {
+    "ar": "تحتوي قائمة الصلاة على بيانات غير صالحة.",
+    "bn": "প্রার্থনার তালিকায় অবৈধ তথ্য রয়েছে।",
+    "en": "The prayer list contains invalid data.",
+    "es": "La lista de oración contiene datos incompatibles.",
+    "fr": "La liste de prière contient des données invalides.",
+    "hi": "प्रार्थना सूची में अमान्य डेटा है।",
+    "id": "Daftar doa berisi data yang tidak valid.",
+    "pt": "A lista de oração contém dados inválidos.",
+    "ur": "دعاؤں کی فہرست میں غلط معلومات ہیں۔",
+    "zh-Hans": "祷告清单包含无效数据。"
+  },
   "La lista de temas es parcial; puede haber más artículos en otros recursos.": {
     "ar": "قائمة الموضوعات جزئية؛ قد توجد مقالات أخرى في موارد أخرى.",
     "bn": "বিষয়ের তালিকা আংশিক; অন্য রিসোর্সে আরও নিবন্ধ থাকতে পারে।",
@@ -6970,6 +7138,42 @@
     "pt": "A lista de áreas recentes contém entradas incompatíveis.",
     "ur": "حالیہ کام کی جگہوں کی فہرست میں غیر موافق اندراجات ہیں۔",
     "zh-Hans": "最近工作区列表包含不兼容的条目。"
+  },
+  "La oración contiene datos incompatibles.": {
+    "ar": "تحتوي الصلاة على بيانات غير صالحة.",
+    "bn": "প্রার্থনায় অবৈধ তথ্য রয়েছে।",
+    "en": "The prayer contains invalid data.",
+    "es": "La oración contiene datos incompatibles.",
+    "fr": "La prière contient des données invalides.",
+    "hi": "प्रार्थना में अमान्य डेटा है।",
+    "id": "Doa berisi data yang tidak valid.",
+    "pt": "A oração contém dados inválidos.",
+    "ur": "دعا میں غلط معلومات ہیں۔",
+    "zh-Hans": "祷告包含无效数据。"
+  },
+  "La oración contiene fechas incompatibles.": {
+    "ar": "تواريخ الصلاة غير متوافقة.",
+    "bn": "প্রার্থনার তারিখগুলো অসঙ্গত।",
+    "en": "The prayer dates are inconsistent.",
+    "es": "La oración contiene fechas incompatibles.",
+    "fr": "Les dates de la prière sont incohérentes.",
+    "hi": "प्रार्थना की तिथियाँ असंगत हैं।",
+    "id": "Tanggal doa tidak konsisten.",
+    "pt": "As datas da oração são incompatíveis.",
+    "ur": "دعا کی تاریخیں مطابقت نہیں رکھتیں۔",
+    "zh-Hans": "祷告日期不一致。"
+  },
+  "La oración no está pendiente para esta fecha.": {
+    "ar": "الصلاة غير مستحقة في هذا التاريخ.",
+    "bn": "এই তারিখে প্রার্থনাটি বাকি নেই।",
+    "en": "The prayer is not due on this date.",
+    "es": "La oración no está pendiente para esta fecha.",
+    "fr": "La prière n’est pas prévue à cette date.",
+    "hi": "इस तिथि पर प्रार्थना लंबित नहीं है।",
+    "id": "Doa tidak tertunda pada tanggal ini.",
+    "pt": "A oração não está pendente nesta data.",
+    "ur": "دعا اس تاریخ کو زیر التوا نہیں ہے۔",
+    "zh-Hans": "此日期不需要进行此祷告。"
   },
   "La organización de notas requiere la versión 2 del documento.": {
     "ar": "يتطلب تنظيم الملاحظات الإصدار 2 من المستند.",
@@ -7031,6 +7235,18 @@
     "ur": "تعلقات اپنی ترتیب اور غیر موجود وسائل برقرار رکھتے ہیں۔ بائبل کے گروپ الگ منظم کیے جاتے ہیں۔",
     "zh-Hans": "关联会保留顺序和缺失的资源。圣经分组单独管理。"
   },
+  "Las categorías de oración no son válidas o están duplicadas.": {
+    "ar": "فئات الصلاة غير صالحة أو مكررة.",
+    "bn": "প্রার্থনার বিভাগ অবৈধ বা পুনরাবৃত্ত।",
+    "en": "Prayer categories are invalid or duplicated.",
+    "es": "Las categorías de oración no son válidas o están duplicadas.",
+    "fr": "Les catégories de prière sont invalides ou en double.",
+    "hi": "प्रार्थना श्रेणियाँ अमान्य या दोहराई गई हैं।",
+    "id": "Kategori doa tidak valid atau duplikat.",
+    "pt": "As categorias de oração são inválidas ou duplicadas.",
+    "ur": "دعاؤں کے زمرے غلط یا دہرائے گئے ہیں۔",
+    "zh-Hans": "祷告类别无效或重复。"
+  },
   "Las colecciones contienen datos incompatibles.": {
     "ar": "تحتوي المجموعات على بيانات غير متوافقة.",
     "bn": "সংগ্রহে অসামঞ্জস্যপূর্ণ ডেটা রয়েছে।",
@@ -7090,6 +7306,18 @@
     "pt": "As leituras repetem-se todos os anos.",
     "ur": "مطالعے ہر سال دہرائے جاتے ہیں۔",
     "zh-Hans": "读经内容每年重复。"
+  },
+  "Las oraciones se guardan localmente. Ocultar una oración no cifra el archivo.": {
+    "ar": "تُحفظ الصلوات محليًا. إخفاء الصلاة لا يشفّر الملف.",
+    "bn": "প্রার্থনা স্থানীয়ভাবে সংরক্ষিত হয়। লুকালে ফাইল এনক্রিপ্ট হয় না।",
+    "en": "Prayers are stored locally. Hiding a prayer does not encrypt the file.",
+    "es": "Las oraciones se guardan localmente. Ocultar una oración no cifra el archivo.",
+    "fr": "Les prières sont stockées localement. Masquer une prière ne chiffre pas le fichier.",
+    "hi": "प्रार्थनाएँ स्थानीय रूप से सहेजी जाती हैं। छिपाने से फ़ाइल एन्क्रिप्ट नहीं होती।",
+    "id": "Doa disimpan secara lokal. Menyembunyikan doa tidak mengenkripsi berkas.",
+    "pt": "As orações são guardadas localmente. Ocultar uma oração não cifra o arquivo.",
+    "ur": "دعائیں مقامی طور پر محفوظ ہوتی ہیں۔ دعا چھپانے سے فائل خفیہ نہیں ہوتی۔",
+    "zh-Hans": "祷告保存在本地。隐藏祷告不会加密文件。"
   },
   "Las referencias se buscan en los recursos disponibles; no se convierten versificaciones.": {
     "ar": "تُبحث المراجع في الموارد المتاحة؛ لا تُحوّل أنظمة ترقيم الآيات.",
@@ -7294,6 +7522,30 @@
     "pt": "Lista com marcadores",
     "ur": "علامتی فہرست",
     "zh-Hans": "项目符号列表"
+  },
+  "Lista de oración": {
+    "ar": "قائمة الصلاة",
+    "bn": "প্রার্থনার তালিকা",
+    "en": "Prayer List",
+    "es": "Lista de oración",
+    "fr": "Liste de prière",
+    "hi": "प्रार्थना सूची",
+    "id": "Daftar doa",
+    "pt": "Lista de oração",
+    "ur": "دعاؤں کی فہرست",
+    "zh-Hans": "祷告清单"
+  },
+  "Lista de oración…": {
+    "ar": "قائمة الصلاة…",
+    "bn": "প্রার্থনার তালিকা…",
+    "en": "Prayer List…",
+    "es": "Lista de oración…",
+    "fr": "Liste de prière…",
+    "hi": "प्रार्थना सूची…",
+    "id": "Daftar doa…",
+    "pt": "Lista de oração…",
+    "ur": "دعاؤں کی فہرست…",
+    "zh-Hans": "祷告清单…"
   },
   "Lista de versículos": {
     "ar": "قائمة آيات",
@@ -7667,6 +7919,30 @@
     "ur": "فوری نشان",
     "zh-Hans": "快捷书签"
   },
+  "Marcar oración hecha": {
+    "ar": "تحديد كصلاة أُديت",
+    "bn": "প্রার্থিত হিসেবে চিহ্নিত করুন",
+    "en": "Mark as prayed",
+    "es": "Marcar oración hecha",
+    "fr": "Marquer comme priée",
+    "hi": "प्रार्थना की गई चिह्नित करें",
+    "id": "Tandai sudah didoakan",
+    "pt": "Marcar como orada",
+    "ur": "دعا کی گئی نشان زد کریں",
+    "zh-Hans": "标记为已祷告"
+  },
+  "Marcar respondida": {
+    "ar": "تحديد كمستجابة",
+    "bn": "উত্তর পেয়েছে চিহ্নিত করুন",
+    "en": "Mark answered",
+    "es": "Marcar respondida",
+    "fr": "Marquer comme exaucée",
+    "hi": "उत्तर मिली चिह्नित करें",
+    "id": "Tandai terjawab",
+    "pt": "Marcar como respondida",
+    "ur": "قبول شدہ نشان زد کریں",
+    "zh-Hans": "标记为已回应"
+  },
   "Mayúsculas": {
     "ar": "مطابقة حالة الأحرف",
     "bn": "বড় ছোট অক্ষর মিলান",
@@ -7690,6 +7966,18 @@
     "pt": "Melhorias nos comentários, na sincronização e na navegação entre Bíblias.",
     "ur": "تفاسیر، ہم وقت سازی اور بائبل کے نسخوں کے درمیان نقل و حرکت میں بہتری۔",
     "zh-Hans": "改进注释、同步和圣经版本间的导航。"
+  },
+  "Mensual": {
+    "ar": "شهريًا",
+    "bn": "মাসিক",
+    "en": "Monthly",
+    "es": "Mensual",
+    "fr": "Mensuelle",
+    "hi": "मासिक",
+    "id": "Bulanan",
+    "pt": "Mensal",
+    "ur": "ماہانہ",
+    "zh-Hans": "每月"
   },
   "Metadatos": {
     "ar": "البيانات الوصفية",
@@ -7870,6 +8158,18 @@
     "pt": "Mostrar notas ao passar o cursor",
     "ur": "اشارہ رکھنے پر نوٹس دکھائیں",
     "zh-Hans": "悬停时显示注释"
+  },
+  "Mostrar privadas": {
+    "ar": "إظهار الصلوات الخاصة",
+    "bn": "ব্যক্তিগত প্রার্থনা দেখান",
+    "en": "Show private prayers",
+    "es": "Mostrar privadas",
+    "fr": "Afficher les prières privées",
+    "hi": "निजी प्रार्थनाएँ दिखाएँ",
+    "id": "Tampilkan doa pribadi",
+    "pt": "Mostrar orações privadas",
+    "ur": "نجی دعائیں دکھائیں",
+    "zh-Hans": "显示私人祷告"
   },
   "Mostrar todas las líneas": {
     "ar": "إظهار جميع الأسطر",
@@ -8111,6 +8411,18 @@
     "ur": "لائبریری میں کوئی موافق بائبل نہیں ہے۔",
     "zh-Hans": "书库中没有兼容的圣经。"
   },
+  "No hay categorías de oración.": {
+    "ar": "لا توجد فئات للصلاة.",
+    "bn": "কোনো প্রার্থনার বিভাগ নেই।",
+    "en": "No prayer categories.",
+    "es": "No hay categorías de oración.",
+    "fr": "Aucune catégorie de prière.",
+    "hi": "कोई प्रार्थना श्रेणी नहीं है।",
+    "id": "Tidak ada kategori doa.",
+    "pt": "Não há categorias de oração.",
+    "ur": "دعاؤں کے زمرے موجود نہیں ہیں۔",
+    "zh-Hans": "没有祷告类别。"
+  },
   "No hay comentario para {reference}.": {
     "ar": "لا يوجد تعليق على {reference}.",
     "bn": "{reference} এর জন্য কোনো ভাষ্য নেই।",
@@ -8170,6 +8482,18 @@
     "pt": "Não há dicionários nem léxicos disponíveis.",
     "ur": "کوئی لغت یا فرہنگ دستیاب نہیں ہے۔",
     "zh-Hans": "没有可用的词典或词汇书。"
+  },
+  "No hay oraciones en esta vista.": {
+    "ar": "لا توجد صلوات في هذا العرض.",
+    "bn": "এই দৃশ্যে কোনো প্রার্থনা নেই।",
+    "en": "No prayers in this view.",
+    "es": "No hay oraciones en esta vista.",
+    "fr": "Aucune prière dans cette vue.",
+    "hi": "इस दृश्य में कोई प्रार्थना नहीं है।",
+    "id": "Tidak ada doa dalam tampilan ini.",
+    "pt": "Não há orações nesta visualização.",
+    "ur": "اس منظر میں کوئی دعا نہیں ہے۔",
+    "zh-Hans": "此视图中没有祷告。"
   },
   "No hay recursos compatibles para agregar.": {
     "ar": "لا توجد موارد متوافقة لإضافتها.",
@@ -8459,6 +8783,18 @@
     "ur": "نوٹ کا وضع شدہ متن نہیں کھل سکا۔ اس کی اصل صورت محفوظ ہے۔",
     "zh-Hans": "无法打开笔记的富文本。原始内容会保留。"
   },
+  "No se pudo abrir la lista de oración.": {
+    "ar": "تعذّر فتح قائمة الصلاة.",
+    "bn": "প্রার্থনার তালিকা খোলা যায়নি।",
+    "en": "Could not open the prayer list.",
+    "es": "No se pudo abrir la lista de oración.",
+    "fr": "Impossible d’ouvrir la liste de prière.",
+    "hi": "प्रार्थना सूची नहीं खुल सकी।",
+    "id": "Daftar doa tidak dapat dibuka.",
+    "pt": "Não foi possível abrir a lista de oração.",
+    "ur": "دعاؤں کی فہرست نہیں کھل سکی۔",
+    "zh-Hans": "无法打开祷告清单。"
+  },
   "No se pudo buscar el recurso": {
     "ar": "تعذّر البحث في المورد",
     "bn": "সংস্থানে অনুসন্ধান করা যায়নি",
@@ -8518,6 +8854,18 @@
     "pt": "Não perguntar novamente",
     "ur": "دوبارہ نہ پوچھیں",
     "zh-Hans": "不再询问"
+  },
+  "Nombre de categoría": {
+    "ar": "اسم الفئة",
+    "bn": "বিভাগের নাম",
+    "en": "Category name",
+    "es": "Nombre de categoría",
+    "fr": "Nom de catégorie",
+    "hi": "श्रेणी का नाम",
+    "id": "Nama kategori",
+    "pt": "Nome da categoria",
+    "ur": "زمرے کا نام",
+    "zh-Hans": "类别名称"
   },
   "Nombre de la asociación": {
     "ar": "اسم الارتباط",
@@ -8963,6 +9311,18 @@
     "ur": "تلاش کے آپریٹرز",
     "zh-Hans": "搜索运算符"
   },
+  "Oración privada": {
+    "ar": "صلاة خاصة",
+    "bn": "ব্যক্তিগত প্রার্থনা",
+    "en": "Private prayer",
+    "es": "Oración privada",
+    "fr": "Prière privée",
+    "hi": "निजी प्रार्थना",
+    "id": "Doa pribadi",
+    "pt": "Oração privada",
+    "ur": "نجی دعا",
+    "zh-Hans": "私人祷告"
+  },
   "Orden": {
     "ar": "الترتيب",
     "bn": "ক্রম",
@@ -9239,6 +9599,18 @@
     "ur": "مطالعہ کھولنے سے پہلے کھلی بائبل منتخب کریں۔",
     "zh-Hans": "打开阅读前请先选择已打开的圣经。"
   },
+  "Para esta fecha": {
+    "ar": "مستحقة في هذا التاريخ",
+    "bn": "এই তারিখে বাকি",
+    "en": "Due on this date",
+    "es": "Para esta fecha",
+    "fr": "Prévue à cette date",
+    "hi": "इस तिथि के लिए लंबित",
+    "id": "Jatuh tempo pada tanggal ini",
+    "pt": "Pendente nesta data",
+    "ur": "اس تاریخ کو زیر التوا",
+    "zh-Hans": "此日期待办"
+  },
   "Paralelos": {
     "ar": "المتوازيات",
     "bn": "সমান্তরাল",
@@ -9431,6 +9803,18 @@
     "ur": "کلپ بورڈ سے چسپاں کریں",
     "zh-Hans": "从剪贴板粘贴"
   },
+  "Pendiente": {
+    "ar": "قيد الانتظار",
+    "bn": "অপেক্ষমাণ",
+    "en": "Pending",
+    "es": "Pendiente",
+    "fr": "En attente",
+    "hi": "लंबित",
+    "id": "Tertunda",
+    "pt": "Pendente",
+    "ur": "زیر التوا",
+    "zh-Hans": "待处理"
+  },
   "Plan de lectura": {
     "ar": "خطة القراءة",
     "bn": "পাঠ পরিকল্পনা",
@@ -9586,6 +9970,18 @@
     "pt": "Prioridades",
     "ur": "ترجیحات",
     "zh-Hans": "优先级"
+  },
+  "Privada": {
+    "ar": "خاصة",
+    "bn": "ব্যক্তিগত",
+    "en": "Private",
+    "es": "Privada",
+    "fr": "Privée",
+    "hi": "निजी",
+    "id": "Pribadi",
+    "pt": "Privada",
+    "ur": "نجی",
+    "zh-Hans": "私人"
   },
   "Procedencia de la asociación": {
     "ar": "مصدر الارتباط",
@@ -9838,6 +10234,18 @@
     "pt": "Intervalos personalizados",
     "ur": "حسب ضرورت دائرے",
     "zh-Hans": "自定义范围"
+  },
+  "Reabrir oración": {
+    "ar": "إعادة فتح الصلاة",
+    "bn": "প্রার্থনা পুনরায় খুলুন",
+    "en": "Reopen prayer",
+    "es": "Reabrir oración",
+    "fr": "Rouvrir la prière",
+    "hi": "प्रार्थना फिर खोलें",
+    "id": "Buka kembali doa",
+    "pt": "Reabrir oração",
+    "ur": "دعا دوبارہ کھولیں",
+    "zh-Hans": "重新打开祷告"
   },
   "Reanudar": {
     "ar": "استئناف",
@@ -10259,6 +10667,18 @@
     "ur": "منصوبے کا نام بدلیں",
     "zh-Hans": "重命名计划"
   },
+  "Repetición": {
+    "ar": "التكرار",
+    "bn": "পুনরাবৃত্তি",
+    "en": "Repeat",
+    "es": "Repetición",
+    "fr": "Répétition",
+    "hi": "दोहराव",
+    "id": "Pengulangan",
+    "pt": "Repetição",
+    "ur": "دہراؤ",
+    "zh-Hans": "重复"
+  },
   "Reportar un problema": {
     "ar": "الإبلاغ عن مشكلة",
     "bn": "সমস্যা জানান",
@@ -10366,6 +10786,18 @@
     "pt": "Resolução automática",
     "ur": "خودکار مطابقت",
     "zh-Hans": "自动解析"
+  },
+  "Respondida": {
+    "ar": "مستجابة",
+    "bn": "উত্তর পেয়েছে",
+    "en": "Answered",
+    "es": "Respondida",
+    "fr": "Exaucée",
+    "hi": "उत्तर मिली",
+    "id": "Terjawab",
+    "pt": "Respondida",
+    "ur": "قبول شدہ",
+    "zh-Hans": "已回应"
   },
   "Restablecer": {
     "ar": "إعادة تعيين",
@@ -10702,6 +11134,18 @@
     "pt": "As contagens usam os resultados mantidos de cada edição. Contagens parciais não representam toda a biblioteca.",
     "ur": "ہر ایڈیشن کے محفوظ نتائج شمار ہوتے ہیں۔ جزوی گنتی پوری لائبریری کی نمائندگی نہیں کرتی۔",
     "zh-Hans": "计数使用各版本保留的结果。部分计数不代表整个书库。"
+  },
+  "Se eliminará esta oración.": {
+    "ar": "ستُحذف هذه الصلاة.",
+    "bn": "এই প্রার্থনাটি মুছে যাবে।",
+    "en": "This prayer will be deleted.",
+    "es": "Se eliminará esta oración.",
+    "fr": "Cette prière sera supprimée.",
+    "hi": "यह प्रार्थना हटा दी जाएगी।",
+    "id": "Doa ini akan dihapus.",
+    "pt": "Esta oração será excluída.",
+    "ur": "یہ دعا حذف کر دی جائے گی۔",
+    "zh-Hans": "将删除此祷告。"
   },
   "Se eliminarán esta lectura y su progreso.": {
     "ar": "ستُحذف هذه القراءة وتقدمها.",
@@ -11111,6 +11555,18 @@
     "ur": "ہر ونڈو کے لیے ترتیب کا انتخاب اور سائز تبدیل کرنے والے کرسر۔",
     "zh-Hans": "每个窗口的布局选择器和大小调整光标。"
   },
+  "Semanal": {
+    "ar": "أسبوعيًا",
+    "bn": "সাপ্তাহিক",
+    "en": "Weekly",
+    "es": "Semanal",
+    "fr": "Hebdomadaire",
+    "hi": "साप्ताहिक",
+    "id": "Mingguan",
+    "pt": "Semanal",
+    "ur": "ہفتہ وار",
+    "zh-Hans": "每周"
+  },
   "Serie": {
     "ar": "السلسلة",
     "bn": "সিরিজ",
@@ -11170,6 +11626,18 @@
     "pt": "Sem agrupamento",
     "ur": "بغیر گروہ",
     "zh-Hans": "不分组"
+  },
+  "Sin categoría": {
+    "ar": "بلا فئة",
+    "bn": "কোনো বিভাগ নেই",
+    "en": "No category",
+    "es": "Sin categoría",
+    "fr": "Sans catégorie",
+    "hi": "कोई श्रेणी नहीं",
+    "id": "Tanpa kategori",
+    "pt": "Sem categoria",
+    "ur": "کوئی زمرہ نہیں",
+    "zh-Hans": "无类别"
   },
   "Sin coincidencias": {
     "ar": "لا توجد تطابقات",
@@ -11315,6 +11783,18 @@
     "ur": "صرف پوشیدہ",
     "zh-Hans": "仅显示隐藏资源"
   },
+  "Solo pendientes": {
+    "ar": "المستحقة فقط",
+    "bn": "শুধু বাকি",
+    "en": "Due only",
+    "es": "Solo pendientes",
+    "fr": "À faire seulement",
+    "hi": "केवल लंबित",
+    "id": "Hanya yang tertunda",
+    "pt": "Somente pendentes",
+    "ur": "صرف زیر التوا",
+    "zh-Hans": "仅待完成"
+  },
   "Solo se incluyen referencias reconocidas; revisa el resultado antes de agregarlo.": {
     "ar": "تُضمّن المراجع المعروفة فقط؛ راجع النتيجة قبل إضافتها.",
     "bn": "শুধু শনাক্ত সূত্র অন্তর্ভুক্ত হয়; যোগ করার আগে ফল যাচাই করুন।",
@@ -11326,6 +11806,18 @@
     "pt": "Apenas referências reconhecidas são incluídas; revise o resultado antes de adicionar.",
     "ur": "صرف شناخت شدہ حوالے شامل ہیں؛ شامل کرنے سے پہلے نتیجہ دیکھیں۔",
     "zh-Hans": "仅包含可识别的经文引用；添加前请检查结果。"
+  },
+  "Solo se pueden eliminar categorías sin oraciones.": {
+    "ar": "يمكن حذف الفئات التي لا تحتوي على صلوات فقط.",
+    "bn": "শুধু প্রার্থনাহীন বিভাগ মুছে ফেলা যায়।",
+    "en": "Only categories without prayers can be deleted.",
+    "es": "Solo se pueden eliminar categorías sin oraciones.",
+    "fr": "Seules les catégories sans prière peuvent être supprimées.",
+    "hi": "केवल बिना प्रार्थना वाली श्रेणियाँ हटाई जा सकती हैं।",
+    "id": "Hanya kategori tanpa doa yang dapat dihapus.",
+    "pt": "Só é possível excluir categorias sem orações.",
+    "ur": "صرف وہ زمرے حذف کیے جا سکتے ہیں جن میں دعائیں نہ ہوں۔",
+    "zh-Hans": "只能删除没有祷告的类别。"
   },
   "Solo texto": {
     "ar": "النص فقط",
@@ -11699,6 +12191,18 @@
     "ur": "تمام بائبل",
     "zh-Hans": "所有圣经"
   },
+  "Todas las categorías": {
+    "ar": "كل الفئات",
+    "bn": "সব বিভাগ",
+    "en": "All categories",
+    "es": "Todas las categorías",
+    "fr": "Toutes les catégories",
+    "hi": "सभी श्रेणियाँ",
+    "id": "Semua kategori",
+    "pt": "Todas as categorias",
+    "ur": "تمام زمرے",
+    "zh-Hans": "所有类别"
+  },
   "Todas las condiciones": {
     "ar": "كل الشروط",
     "bn": "সব শর্ত",
@@ -12010,6 +12514,18 @@
     "pt": "Uma parte da passagem não conserva uma referência ou intervalo de texto válido.",
     "ur": "عبارت کا ایک حصہ درست حوالہ یا متن کی حد برقرار نہیں رکھتا۔",
     "zh-Hans": "某部分经文没有保留有效的经文引用或文本范围。"
+  },
+  "Una vez": {
+    "ar": "مرة واحدة",
+    "bn": "একবার",
+    "en": "Once",
+    "es": "Una vez",
+    "fr": "Une fois",
+    "hi": "एक बार",
+    "id": "Sekali",
+    "pt": "Uma vez",
+    "ur": "ایک بار",
+    "zh-Hans": "一次"
   },
   "Unificar controles y ventanas de estudio con Liquid Glass.": {
     "ar": "وحّد أدوات ونوافذ الدراسة باستخدام Liquid Glass.",
