@@ -191,7 +191,7 @@ struct WorkspaceDocumentsView: View {
                 } else {
                     Color.clear
                 }
-            }.padding(.leading, 12).padding(.vertical, 8)
+            }.padding(.horizontal, 12).padding(.vertical, 8)
                 .frame(minWidth: 332, idealWidth: 440, maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         }
     }
