@@ -537,10 +537,16 @@
       "sourceKey": "study-expansion-daily-01",
       "acceptance": "Programar pasajes, fechas, distribución y progreso persistente.",
       "baseline": "Sin planificador integrado identificado.",
-      "status": "pending",
-      "implementation": [],
-      "verification": [],
-      "limitations": []
+      "status": "in_progress",
+      "implementation": [
+        "Added civil-date reading plans with ordered explicit passages and weekday distribution, plus a separate atomic versioned personal store."
+      ],
+      "verification": [
+        "ReadingPlanTests and ReadingPlanPersistenceTests pass for weekday distribution, leap dates, round-trip persistence, stale writers and future schemas."
+      ],
+      "limitations": [
+        "No user interface, navigation to a selected edition or broader distribution modes yet; source-reference validity does not verify passage availability in a particular Bible."
+      ]
     },
     {
       "id": "F178",
@@ -551,10 +557,16 @@
       "sourceKey": "study-expansion-daily-02",
       "acceptance": "Marcar lecturas realizadas y ocultar completadas sin perder progreso al reabrir.",
       "baseline": "Sin seguimiento de sesiones de plan identificado.",
-      "status": "pending",
-      "implementation": [],
-      "verification": [],
-      "limitations": []
+      "status": "in_progress",
+      "implementation": [
+        "Reading entries retain completion state and can filter completed items without discarding them."
+      ],
+      "verification": [
+        "Persistence tests save and reopen completion; filtering tests retain all readings in the plan."
+      ],
+      "limitations": [
+        "The pending-readings UI and real navigation remain to be implemented and tested."
+      ]
     },
     {
       "id": "F179",
@@ -565,10 +577,16 @@
       "sourceKey": "study-expansion-daily-03",
       "acceptance": "Generar calendario interoperable con fechas y comportamiento temporal correctos.",
       "baseline": "Sin exportación de planes identificada.",
-      "status": "pending",
-      "implementation": [],
-      "verification": [],
-      "limitations": []
+      "status": "in_progress",
+      "implementation": [
+        "Calendar serializer emits all-day VEVENTs with stable IDs, UTC timestamps, exclusive end dates, escaping and UTF-8 line folding."
+      ],
+      "verification": [
+        "ReadingPlanTests verify date boundaries over the DST transition, escaping, stable identifiers and 75-octet line folding."
+      ],
+      "limitations": [
+        "Export UI and interoperability in an external calendar application remain to be tested."
+      ]
     },
     {
       "id": "F180",

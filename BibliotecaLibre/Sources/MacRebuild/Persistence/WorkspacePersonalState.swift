@@ -23,13 +23,17 @@ struct WorkspacePersonalSnapshot: Codable {
     var favorites = FavoritesDocument()
     private(set) var bookmarks = NumberedBookmarks()
     private(set) var bookmarkLoadError: String?
+    private(set) var readingPlans = ReadingPlans()
+    private(set) var readingPlansLoadError: String?
     var highlights: [ReaderHighlight] = []
     var documents: [StudyDocument] = []
     var selectedDocumentID: UUID?
     var loadError: String?
     @ObservationIgnored private let file: PersonalStateFile<WorkspacePersonalSnapshot>
     @ObservationIgnored private let bookmarkFile: PersonalStateFile<NumberedBookmarks>
+    @ObservationIgnored private let readingPlansFile: PersonalStateFile<ReadingPlans>
     @ObservationIgnored private var bookmarksWritable = false
+    @ObservationIgnored private var readingPlansWritable = false
     @ObservationIgnored private var canSave = false
     @ObservationIgnored private var saveTask: Task<Void, Never>?
     init(url: URL? = nil) {
@@ -37,6 +41,7 @@ struct WorkspacePersonalSnapshot: Codable {
             .appendingPathComponent("org.libronx.mac.rebuild/personal.json")
         file = PersonalStateFile(url: path)
         bookmarkFile = PersonalStateFile(url: path.deletingLastPathComponent().appendingPathComponent("numbered-bookmarks.json"))
+        readingPlansFile = PersonalStateFile(url: path.deletingLastPathComponent().appendingPathComponent("reading-plans.json"))
         do {
             if let saved = try file.load() {
                 try saved.validate(); favorites = saved.favorites; highlights = saved.highlights; documents = saved.documents
@@ -47,6 +52,18 @@ struct WorkspacePersonalSnapshot: Codable {
             if let saved = try bookmarkFile.load() { try saved.validate(); bookmarks = saved }
             bookmarksWritable = true
         } catch { bookmarkLoadError = error.localizedDescription }
+        do {
+            if let saved = try readingPlansFile.load() { try saved.validate(); readingPlans = saved }
+            readingPlansWritable = true
+        } catch { readingPlansLoadError = error.localizedDescription }
+    }
+    func editReadingPlans(_ edit: (inout ReadingPlans) throws -> Void) throws {
+        guard readingPlansWritable else { throw PersonalStateError.invalid(readingPlansLoadError ?? "No se pudieron abrir los planes de lectura.") }
+        var next = readingPlans
+        try edit(&next); try next.validate()
+        guard next != readingPlans else { return }
+        try readingPlansFile.save(next)
+        readingPlans = next
     }
     func setBookmark(_ slot: Int, location: ReaderLocation?) throws {
         guard bookmarksWritable else { throw PersonalStateError.invalid(bookmarkLoadError ?? "No se pudo abrir el archivo de marcadores.") }
