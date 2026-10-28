@@ -851,6 +851,18 @@
     "ur": "نمائش کی حد کے باعث کچھ سیاق نہیں دکھائے گئے۔ مماثلتیں اب بھی کھولی جا سکتی ہیں۔",
     "zh-Hans": "部分上下文因显示限额而未展示。仍可打开匹配结果。"
   },
+  "Algunos versículos del rango no aparecen en esta edición.": {
+    "ar": "بعض آيات النطاق غير موجودة في هذه الطبعة.",
+    "bn": "এই সংস্করণে পরিসরের কিছু পদ নেই।",
+    "en": "Some verses in the range are missing from this edition.",
+    "es": "Algunos versículos del rango no aparecen en esta edición.",
+    "fr": "Certains versets de la plage sont absents de cette édition.",
+    "hi": "इस सीमा के कुछ पद इस संस्करण में नहीं हैं।",
+    "id": "Beberapa ayat dalam rentang tidak ada dalam edisi ini.",
+    "pt": "Alguns versículos do intervalo não aparecem nesta edição.",
+    "ur": "اس حد کی کچھ آیات اس ایڈیشن میں موجود نہیں ہیں۔",
+    "zh-Hans": "此版本中缺少范围内的部分经节。"
+  },
   "Alternativos": {
     "ar": "بدائل",
     "bn": "বিকল্প",
@@ -2062,6 +2074,18 @@
     "pt": "Capítulo",
     "ur": "باب",
     "zh-Hans": "章"
+  },
+  "Cargar textos": {
+    "ar": "تحميل النصوص",
+    "bn": "পাঠ্য লোড করুন",
+    "en": "Load Text",
+    "es": "Cargar textos",
+    "fr": "Charger les textes",
+    "hi": "पाठ लोड करें",
+    "id": "Muat Teks",
+    "pt": "Carregar textos",
+    "ur": "متن لوڈ کریں",
+    "zh-Hans": "载入经文"
   },
   "Cargar área de trabajo": {
     "ar": "تحميل مساحة العمل",
@@ -8543,6 +8567,18 @@
     "ur": ".libron میں تبدیلی سے پہلے پوچھیں",
     "zh-Hans": "转换为 .libron 前询问"
   },
+  "Presentación": {
+    "ar": "العرض",
+    "bn": "প্রদর্শন",
+    "en": "Display",
+    "es": "Presentación",
+    "fr": "Présentation",
+    "hi": "प्रदर्शन",
+    "id": "Tampilan",
+    "pt": "Apresentação",
+    "ur": "نمائش",
+    "zh-Hans": "显示方式"
+  },
   "Primera beta pública.": {
     "ar": "أول إصدار تجريبي عام.",
     "bn": "প্রথম সর্বজনীন বিটা।",
@@ -9059,6 +9095,18 @@
     "ur": "عمومی مراجع",
     "zh-Hans": "综合参考"
   },
+  "Referencia no reconocida.": {
+    "ar": "المرجع غير معروف.",
+    "bn": "তথ্যসূত্র চেনা যায়নি।",
+    "en": "Reference not recognized.",
+    "es": "Referencia no reconocida.",
+    "fr": "Référence non reconnue.",
+    "hi": "संदर्भ पहचाना नहीं गया।",
+    "id": "Referensi tidak dikenali.",
+    "pt": "Referência não reconhecida.",
+    "ur": "حوالہ شناخت نہیں ہوا۔",
+    "zh-Hans": "无法识别引用。"
+  },
   "Referencia o entrada": {
     "ar": "مرجع أو مدخل",
     "bn": "উল্লেখ বা শিরোশব্দ",
@@ -9082,6 +9130,30 @@
     "pt": "Referência, por exemplo Jn 3:16 ou Jn 3:16(RVR60)",
     "ur": "حوالہ، مثلاً Jn 3:16 یا Jn 3:16(RVR60)",
     "zh-Hans": "引用，例如 Jn 3:16 或 Jn 3:16(RVR60)"
+  },
+  "Referencias": {
+    "ar": "المراجع",
+    "bn": "তথ্যসূত্র",
+    "en": "References",
+    "es": "Referencias",
+    "fr": "Références",
+    "hi": "संदर्भ",
+    "id": "Referensi",
+    "pt": "Referências",
+    "ur": "حوالہ جات",
+    "zh-Hans": "经文引用"
+  },
+  "Referencias y texto": {
+    "ar": "المراجع والنص",
+    "bn": "তথ্যসূত্র ও পাঠ্য",
+    "en": "References and Text",
+    "es": "Referencias y texto",
+    "fr": "Références et texte",
+    "hi": "संदर्भ और पाठ",
+    "id": "Referensi dan Teks",
+    "pt": "Referências e texto",
+    "ur": "حوالہ جات اور متن",
+    "zh-Hans": "引用和文本"
   },
   "Rehacer": {
     "ar": "إعادة",
@@ -9695,6 +9767,18 @@
     "ur": "متعلقہ مضامین دیکھنے کے لیے موضوع منتخب کریں۔",
     "zh-Hans": "选择主题以查看关联文章。"
   },
+  "Selecciona una Biblia y carga los textos.": {
+    "ar": "اختر كتابًا مقدسًا وحمّل النصوص.",
+    "bn": "একটি বাইবেল বেছে পাঠ্য লোড করুন।",
+    "en": "Select a Bible and load the text.",
+    "es": "Selecciona una Biblia y carga los textos.",
+    "fr": "Sélectionnez une Bible et chargez les textes.",
+    "hi": "बाइबल चुनें और पाठ लोड करें।",
+    "id": "Pilih Alkitab dan muat teks.",
+    "pt": "Selecione uma Bíblia e carregue os textos.",
+    "ur": "بائبل منتخب کریں اور متن لوڈ کریں۔",
+    "zh-Hans": "选择圣经并载入经文。"
+  },
   "Selecciona una asociación": {
     "ar": "اختر ارتباطًا",
     "bn": "একটি সংযোগ বেছে নিন",
@@ -10090,6 +10174,18 @@
     "pt": "Apenas referências reconhecidas são incluídas; revise o resultado antes de adicionar.",
     "ur": "صرف شناخت شدہ حوالے شامل ہیں؛ شامل کرنے سے پہلے نتیجہ دیکھیں۔",
     "zh-Hans": "仅包含可识别的经文引用；添加前请检查结果。"
+  },
+  "Solo texto": {
+    "ar": "النص فقط",
+    "bn": "শুধু পাঠ্য",
+    "en": "Text Only",
+    "es": "Solo texto",
+    "fr": "Texte uniquement",
+    "hi": "केवल पाठ",
+    "id": "Hanya Teks",
+    "pt": "Somente texto",
+    "ur": "صرف متن",
+    "zh-Hans": "仅文本"
   },
   "Stable recibe versiones estables. Beta incluye también versiones de prueba.": {
     "ar": "تستقبل Stable الإصدارات المستقرة. وتشمل Beta الإصدارات التجريبية أيضًا.",

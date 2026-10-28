@@ -488,14 +488,19 @@
       "baseline": "Crear, añadir, borrar y abrir referencias; servir como rango de búsqueda.",
       "status": "in_progress",
       "implementation": [
-        "Move selected verse entries one position and sort recognized, unambiguous references in canonical book order without changing entry identity, destinations or original metadata."
+        "Move selected verse entries one position and sort recognized, unambiguous references in canonical book order without changing entry identity, destinations or original metadata.",
+        "Select an edition and display source-backed text, references, or both; retain the chosen presentation, cancel stale loads, distinguish missing and unverified results, and open the verified edition and source range."
       ],
       "verification": [
         "Six StudyDocumentTests passed, including stable ordering, preserved identifiers, unknown reference rollback and serialization.",
-        "Native builds 114–115: sorted Genesis before John, moved the selected entry and confirmed persistence after restart; separated control groups visually inspected in dark and light English and dark Arabic."
+        "Native builds 114–115: sorted Genesis before John, moved the selected entry and confirmed persistence after restart; separated control groups visually inspected in dark and light English and dark Arabic.",
+        "Five BiblePassageReportTests and a cancellation/supersession controller test passed, including duplicate entries, invalid references, edition identity, changed sources and partial ranges.",
+        "Native build 119: inspected references and text in dark English, light English and dark Arabic, and text-only in dark English; two authored editions, missing verses, partial range, persisted presentation, and exact-edition opening verified."
       ],
       "limitations": [
-        "Display modes for verse text and reference plus text remain to be implemented; canonical sorting does not translate between versification systems."
+        "Canonical sorting does not translate between versification systems.",
+        "Partial range absence is identified for bounded ranges within one chapter; coverage for other interval forms remains dependent on source scan completeness and cannot be inferred from verse counts.",
+        "The chosen Bible must be selected again and text reloaded after reopening; unavailable source formats are reported rather than fabricated."
       ]
     },
     {

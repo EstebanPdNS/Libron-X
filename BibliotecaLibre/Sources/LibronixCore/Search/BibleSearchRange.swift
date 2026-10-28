@@ -24,7 +24,7 @@ public struct BibleSearchRange: Sendable {
     public let sourceDocumentID: UUID?
     public let sourceDocumentFingerprint: String?
     public var intervalCount: Int { intervals.values.reduce(0) { $0 + $1.count } }
-    fileprivate let intervals: [String: [BibleReferenceSpan]]
+    let intervals: [String: [BibleReferenceSpan]]
     private static let maximumEntries = 100_000
     private static let maximumUTF16 = 16_000_000
 

@@ -55,6 +55,30 @@ struct BiblePassageReportTests {
         let duplicate = try await BiblePassageReportService(provider: Source([decoded, decoded])).read(resource(), range: .parse("Ge1"))
         #expect(!duplicate.complete && duplicate.verses.isEmpty && duplicate.failure != nil)
     }
+    @Test func listReportPreservesDuplicatesAndSeparatesInvalidMissingAndChangedSources() async throws {
+        let decoded = try article([("Ge1:1", "First"), ("Ge1:3", "Third")])
+        let source = Source([decoded]), service = StudyVerseListReportService(provider: source)
+        var doc = StudyDocument(title: "Own list", kind: .verseList)
+        doc.verses = [StudyVerseEntry(reference: "Ge1:1-3"), StudyVerseEntry(reference: "Ge1:1"),
+                      StudyVerseEntry(reference: "Ge1:2"), StudyVerseEntry(reference: "unknown")]
+        let report = try await service.read(doc, resource: resource())
+        #expect(report.rows.map(\.entryID) == doc.verses.map(\.id))
+        #expect(report.rows.map(\.state) == [.partial, .available, .missing, .invalid])
+        #expect(report.rows[0].verses.map(\.text) == ["First", "Third"])
+        #expect(report.rows[1].verses.map(\.text) == ["First"])
+        await source.change()
+        let changed = try await service.read(doc, resource: resource())
+        #expect(changed.rows.map(\.state) == [.unverified, .unverified, .unverified, .invalid])
+        #expect(changed.rows.allSatisfy { $0.verses.isEmpty })
+    }
+    @Test func listReportHonorsExplicitEditions() async throws {
+        let decoded = try article([("bible+esv.64.3.16", "Source edition text")])
+        var doc = StudyDocument(title: "Editions", kind: .verseList)
+        doc.verses = [StudyVerseEntry(reference: "John 3:16(esv)"), StudyVerseEntry(reference: "John 3:16(other)")]
+        let report = try await StudyVerseListReportService(provider: Source([decoded])).read(doc, resource: resource())
+        #expect(report.rows.map(\.state) == [.available, .unverified])
+        #expect(report.rows[0].verses.first?.reference == "bible+esv.64.3.16")
+    }
     @Test func sourceFieldsExcludeEditorialTextAndExportPreservesQuotesAndUnicode() async throws {
         let decoded = try article([("Ge1:1", "=formula,\"owned\" 😀\nnote")])
         let verse = decoded.bibleVerses[0], range = SearchTextRange(location: verse.range.location, length: verse.range.length - 4)
