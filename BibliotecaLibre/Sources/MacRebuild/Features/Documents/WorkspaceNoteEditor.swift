@@ -18,6 +18,7 @@ import LibronixCore
     @ObservationIgnored private var loadedBody = ""
     @ObservationIgnored private var loadedType = ""
     @ObservationIgnored private var applying = false
+    @ObservationIgnored private var appliedSearchID: UUID?
     @ObservationIgnored private var changed: ((Data) -> Void)?
 
     func configure(_ note: StudyNote, editor: NSTextView, changed: @escaping (Data) -> Void) {
@@ -40,6 +41,17 @@ import LibronixCore
         editor.undoManager?.removeAllActions()
         let range = !differentNote && NSMaxRange(previousSelection) <= editor.string.utf16.count ? previousSelection : NSRange(location: 0, length: 0)
         editor.setSelectedRange(range)
+    }
+
+    func selectSearchResult(_ destination: BibleReferencePersonalDestination?, navigationID: UUID, editor: NSTextView) {
+        guard let destination, destination.field == .noteBody, destination.entryID == noteID,
+              appliedSearchID != navigationID,
+              LibrarySearchService.textFingerprint(editor.string) == destination.textSHA256,
+              Range(destination.range.nsRange, in: editor.string) != nil else { return }
+        appliedSearchID = navigationID
+        editor.setSelectedRange(destination.range.nsRange)
+        editor.scrollRangeToVisible(destination.range.nsRange)
+        editor.window?.makeFirstResponder(editor)
     }
 
     func textDidChange(_ notification: Notification) {
@@ -165,6 +177,8 @@ import LibronixCore
 private struct NativeNoteTextView: NSViewRepresentable {
     let note: StudyNote
     let controller: NoteEditorController
+    let destination: BibleReferencePersonalDestination?
+    let navigationID: UUID
     let changed: (Data) -> Void
     func makeNSView(context: Context) -> NSScrollView {
         let scroll = NSScrollView(); scroll.hasVerticalScroller = true; scroll.autohidesScrollers = true
@@ -182,11 +196,14 @@ private struct NativeNoteTextView: NSViewRepresentable {
         guard let editor = scroll.documentView as? NSTextView else { return }
         editor.setAccessibilityLabel(L("Contenido de la nota"))
         controller.configure(note, editor: editor, changed: changed)
+        controller.selectSearchResult(destination, navigationID: navigationID, editor: editor)
     }
 }
 
 struct WorkspaceNoteEditor: View {
     let note: StudyNote
+    let destination: BibleReferencePersonalDestination?
+    let navigationID: UUID
     let changed: (Data) -> Void
     @RebuildViewState private var controller = NoteEditorController()
     @RebuildViewState private var showsLink = false
@@ -221,7 +238,7 @@ struct WorkspaceNoteEditor: View {
                 Text(L("El HTML original se conserva; los objetos no compatibles no se editan.")).font(.caption).foregroundStyle(.secondary)
             }
             if let error = controller.error { Text(L(error)).font(.caption).foregroundStyle(.red).textSelection(.enabled) }
-            NativeNoteTextView(note: note, controller: controller, changed: changed)
+            NativeNoteTextView(note: note, controller: controller, destination: destination, navigationID: navigationID, changed: changed)
         }
         .onChange(of: note.id) { showsLink = false }
         .sheet(isPresented: $showsLink) {

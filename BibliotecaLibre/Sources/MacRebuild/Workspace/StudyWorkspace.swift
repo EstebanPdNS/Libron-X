@@ -44,6 +44,7 @@ enum PaneArrangement { case cascade, horizontal, vertical }
     var dictionary = DictionaryController()
     var search = WorkspaceSearchController()
     var referenceSearch = WorkspaceReferenceSearchController()
+    var annotationSearch = PersonalAnnotationSearchController()
     var personal: WorkspacePersonalState
     var resourceVisibility: LibraryResourceVisibility
     var availableBibleVersions: [LibraryResource] = []

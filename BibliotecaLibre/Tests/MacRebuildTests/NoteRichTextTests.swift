@@ -41,6 +41,23 @@ import LibronixCore
         #expect(unsafe == nil && NoteRichTextCodec.webURL("file:///private/owned") == nil)
     }
 
+    @Test func searchSelectionRequiresUnchangedEditorTextAndDoesNotOverrideUserSelection() throws {
+        var note = StudyNote(title: "Owned"); note.sourceContentType = "text/plain"; note.sourceBody = "😀 Alpha café"
+        let (window, view, controller) = editor(note); defer { window.close() }
+        let text = view.string, range = (text as NSString).range(of: "café")
+        let destination = BibleReferencePersonalDestination(documentID: UUID(), entryID: note.id, field: .noteBody,
+            textSHA256: LibrarySearchService.textFingerprint(text), projectionSHA256: "unused",
+            range: .init(location: range.location, length: range.length))
+        let token = UUID(); controller.selectSearchResult(destination, navigationID: token, editor: view)
+        #expect(view.selectedRange() == range)
+        view.setSelectedRange(NSRange(location: 0, length: 0))
+        controller.selectSearchResult(destination, navigationID: token, editor: view)
+        #expect(view.selectedRange() == NSRange(location: 0, length: 0))
+        view.textStorage?.replaceCharacters(in: range, with: "changed")
+        controller.selectSearchResult(destination, navigationID: UUID(), editor: view)
+        #expect(view.selectedRange() == NSRange(location: 0, length: 0))
+    }
+
     @Test func nativeFormattingUndoRedoAndListsKeepUnicodeAndLinkCoordinates() throws {
         var note = StudyNote(); note.sourceContentType = "text/plain"; note.sourceBody = "😀 John3:16\nSecond"
         var saved: Data?

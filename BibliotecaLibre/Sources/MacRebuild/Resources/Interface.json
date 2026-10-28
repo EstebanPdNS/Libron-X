@@ -827,6 +827,18 @@
     "ur": "Libron-X کھولنے پر",
     "zh-Hans": "打开 Libron-X 时"
   },
+  "Algunas notas antiguas no tienen un recurso verificado.": {
+    "ar": "بعض الملاحظات القديمة ليس لها مورد موثّق.",
+    "bn": "কিছু পুরোনো নোটের যাচাই করা উৎস নেই।",
+    "en": "Some older notes do not have a verified resource.",
+    "es": "Algunas notas antiguas no tienen un recurso verificado.",
+    "fr": "Certaines anciennes notes n’ont pas de ressource vérifiée.",
+    "hi": "कुछ पुराने नोट में सत्यापित संसाधन नहीं है।",
+    "id": "Beberapa catatan lama tidak memiliki sumber terverifikasi.",
+    "pt": "Algumas notas antigas não têm um recurso verificado.",
+    "ur": "کچھ پرانے نوٹس کا تصدیق شدہ وسیلہ نہیں ہے۔",
+    "zh-Hans": "部分旧笔记没有经过验证的资源。"
+  },
   "Algunas partes del documento no se pudieron analizar por completo.": {
     "ar": "تعذر تحليل بعض أجزاء المستند بالكامل.",
     "bn": "নথির কিছু অংশ সম্পূর্ণ বিশ্লেষণ করা যায়নি।",
@@ -874,6 +886,18 @@
     "pt": "Alternativos",
     "ur": "متبادل",
     "zh-Hans": "替代资源"
+  },
+  "Amarillo": {
+    "ar": "أصفر",
+    "bn": "হলুদ",
+    "en": "Yellow",
+    "es": "Amarillo",
+    "fr": "Jaune",
+    "hi": "पीला",
+    "id": "Kuning",
+    "pt": "Amarelo",
+    "ur": "پیلا",
+    "zh-Hans": "黄色"
   },
   "Ampliación del mapa": {
     "ar": "تكبير الخريطة",
@@ -1306,6 +1330,18 @@
     "pt": "Ajuda visual de importação e dicionários nos dez idiomas.",
     "ur": "دس زبانوں میں درآمد اور لغت کی بصری مدد۔",
     "zh-Hans": "十种语言的导入和词典图示帮助。"
+  },
+  "Azul": {
+    "ar": "أزرق",
+    "bn": "নীল",
+    "en": "Blue",
+    "es": "Azul",
+    "fr": "Bleu",
+    "hi": "नीला",
+    "id": "Biru",
+    "pt": "Azul",
+    "ur": "نیلا",
+    "zh-Hans": "蓝色"
   },
   "Año": {
     "ar": "السنة",
@@ -1774,6 +1810,30 @@
     "pt": "Buscar neste recurso…",
     "ur": "اس وسیلے میں تلاش کریں…",
     "zh-Hans": "在此资源中查找…"
+  },
+  "Buscar notas y resaltados": {
+    "ar": "البحث في الملاحظات والتمييزات",
+    "bn": "নোট ও হাইলাইটে খুঁজুন",
+    "en": "Search Notes and Highlights",
+    "es": "Buscar notas y resaltados",
+    "fr": "Rechercher dans les notes et surlignages",
+    "hi": "नोट और हाइलाइट खोजें",
+    "id": "Cari Catatan dan Sorotan",
+    "pt": "Buscar notas e destaques",
+    "ur": "نوٹس اور نمایاں متن تلاش کریں",
+    "zh-Hans": "搜索笔记和高亮"
+  },
+  "Buscar notas y resaltados…": {
+    "ar": "البحث في الملاحظات والتمييزات…",
+    "bn": "নোট ও হাইলাইটে খুঁজুন…",
+    "en": "Search Notes and Highlights…",
+    "es": "Buscar notas y resaltados…",
+    "fr": "Rechercher dans les notes et surlignages…",
+    "hi": "नोट और हाइलाइट खोजें…",
+    "id": "Cari Catatan dan Sorotan…",
+    "pt": "Buscar notas e destaques…",
+    "ur": "نوٹس اور نمایاں متن تلاش کریں…",
+    "zh-Hans": "搜索笔记和高亮…"
   },
   "Buscar referencias bíblicas": {
     "ar": "البحث عن مراجع الكتاب المقدس",
@@ -2507,6 +2567,18 @@
     "ur": "مجموعہ دستیاب نہیں",
     "zh-Hans": "集合不可用"
   },
+  "Color": {
+    "ar": "اللون",
+    "bn": "রং",
+    "en": "Color",
+    "es": "Color",
+    "fr": "Couleur",
+    "hi": "रंग",
+    "id": "Warna",
+    "pt": "Cor",
+    "ur": "رنگ",
+    "zh-Hans": "颜色"
+  },
   "Columna amplia": {
     "ar": "عمود عريض",
     "bn": "প্রশস্ত কলাম",
@@ -3118,6 +3190,18 @@
     "pt": "Créditos e fontes",
     "ur": "انتساب اور ماخذ",
     "zh-Hans": "鸣谢与来源"
+  },
+  "Cuaderno": {
+    "ar": "دفتر الملاحظات",
+    "bn": "নোটবুক",
+    "en": "Notebook",
+    "es": "Cuaderno",
+    "fr": "Carnet",
+    "hi": "नोटबुक",
+    "id": "Buku Catatan",
+    "pt": "Caderno",
+    "ur": "نوٹ بک",
+    "zh-Hans": "笔记本"
   },
   "Cuaderno de destino": {
     "ar": "دفتر الملاحظات الوجهة",
@@ -4042,6 +4126,18 @@
     "pt": "O caderno de origem ou destino não está disponível.",
     "ur": "ماخذ یا منزل کی نوٹ بک دستیاب نہیں ہے۔",
     "zh-Hans": "源笔记本或目标笔记本不可用。"
+  },
+  "El filtro de cuaderno incluye notas; el de color incluye resaltados. El texto se busca sin distinguir mayúsculas ni acentos.": {
+    "ar": "يتضمن مرشح الدفتر الملاحظات ومرشح اللون التمييزات. يتجاهل البحث حالة الأحرف والعلامات.",
+    "bn": "নোটবুক ফিল্টারে নোট এবং রং ফিল্টারে হাইলাইট থাকে। খোঁজে বড় হাতের অক্ষর ও উচ্চারণ উপেক্ষা করা হয়।",
+    "en": "The notebook filter includes notes; the color filter includes highlights. Text search ignores case and accents.",
+    "es": "El filtro de cuaderno incluye notas; el de color incluye resaltados. El texto se busca sin distinguir mayúsculas ni acentos.",
+    "fr": "Le filtre de carnet inclut les notes ; celui de couleur inclut les surlignages. La recherche ignore la casse et les accents.",
+    "hi": "नोटबुक फ़िल्टर में नोट और रंग फ़िल्टर में हाइलाइट शामिल हैं। खोज में बड़े अक्षर और उच्चारण नहीं देखे जाते।",
+    "id": "Filter buku catatan mencakup catatan; filter warna mencakup sorotan. Pencarian mengabaikan kapital dan aksen.",
+    "pt": "O filtro de caderno inclui notas; o de cor inclui destaques. A busca ignora maiúsculas e acentos.",
+    "ur": "نوٹ بک فلٹر میں نوٹس اور رنگ فلٹر میں نمایاں متن شامل ہے۔ تلاش میں بڑے حروف اور اعراب نظر انداز ہوتے ہیں۔",
+    "zh-Hans": "笔记本筛选用于笔记，颜色筛选用于高亮。搜索忽略大小写和重音。"
   },
   "El grupo de Biblias ya no está disponible.": {
     "ar": "لم تعد مجموعة الترجمات متاحة.",
@@ -5963,6 +6059,18 @@
     "ur": "بائبلی تشریح",
     "zh-Hans": "圣经诠释"
   },
+  "Introduce un texto de búsqueda válido.": {
+    "ar": "أدخل نص بحث صالحًا.",
+    "bn": "বৈধ অনুসন্ধান পাঠ্য লিখুন।",
+    "en": "Enter valid search text.",
+    "es": "Introduce un texto de búsqueda válido.",
+    "fr": "Saisissez un texte de recherche valide.",
+    "hi": "मान्य खोज पाठ दर्ज करें।",
+    "id": "Masukkan teks pencarian yang valid.",
+    "pt": "Insira um texto de busca válido.",
+    "ur": "درست تلاش کا متن درج کریں۔",
+    "zh-Hans": "请输入有效的搜索文本。"
+  },
   "Introduce una referencia o entrada válida.": {
     "ar": "أدخل مرجعًا أو مدخلًا صالحًا.",
     "bn": "একটি বৈধ উল্লেখ বা ভুক্তি লিখুন।",
@@ -7487,6 +7595,18 @@
     "ur": "کوئی حالیہ کام کی جگہ نہیں۔",
     "zh-Hans": "没有最近的工作区。"
   },
+  "No se encontraron coincidencias.": {
+    "ar": "لم يُعثر على نتائج مطابقة.",
+    "bn": "কোনো মিল পাওয়া যায়নি।",
+    "en": "No matches found.",
+    "es": "No se encontraron coincidencias.",
+    "fr": "Aucune correspondance trouvée.",
+    "hi": "कोई मिलान नहीं मिला।",
+    "id": "Tidak ada kecocokan.",
+    "pt": "Nenhuma correspondência encontrada.",
+    "ur": "کوئی مطابقت نہیں ملی۔",
+    "zh-Hans": "未找到匹配项。"
+  },
   "No se encontraron duplicados ni ediciones coincidentes.": {
     "ar": "لم توجد نسخ مكررة أو طبعات مطابقة.",
     "bn": "সদৃশ বা মিলযুক্ত সংস্করণ পাওয়া যায়নি।",
@@ -7786,6 +7906,18 @@
     "pt": "Nota superior",
     "ur": "بنیادی نوٹ",
     "zh-Hans": "父笔记"
+  },
+  "Notas": {
+    "ar": "الملاحظات",
+    "bn": "নোট",
+    "en": "Notes",
+    "es": "Notas",
+    "fr": "Notes",
+    "hi": "नोट",
+    "id": "Catatan",
+    "pt": "Notas",
+    "ur": "نوٹس",
+    "zh-Hans": "笔记"
   },
   "Notas al pie": {
     "ar": "حواشي",
@@ -9227,6 +9359,30 @@
     "ur": "تقاضے",
     "zh-Hans": "系统要求"
   },
+  "Resaltado no verificable": {
+    "ar": "تعذر التحقق من التمييز",
+    "bn": "হাইলাইট যাচাই করা যায়নি",
+    "en": "Highlight could not be verified",
+    "es": "Resaltado no verificable",
+    "fr": "Surlignage non vérifiable",
+    "hi": "हाइलाइट सत्यापित नहीं हुआ",
+    "id": "Sorotan tidak dapat diverifikasi",
+    "pt": "Destaque não verificável",
+    "ur": "نمایاں متن کی تصدیق نہیں ہو سکی",
+    "zh-Hans": "无法验证高亮"
+  },
+  "Resaltados": {
+    "ar": "التمييزات",
+    "bn": "হাইলাইট",
+    "en": "Highlights",
+    "es": "Resaltados",
+    "fr": "Surlignages",
+    "hi": "हाइलाइट",
+    "id": "Sorotan",
+    "pt": "Destaques",
+    "ur": "نمایاں متن",
+    "zh-Hans": "高亮"
+  },
   "Resaltar en amarillo": {
     "ar": "تمييز بالأصفر",
     "bn": "হলুদে হাইলাইট",
@@ -9503,6 +9659,18 @@
     "ur": "سرخ طے شدہ آئیکن ہے۔ آپ کا انتخاب اگلی بار کے لیے محفوظ رہتا ہے۔",
     "zh-Hans": "红色为默认图标。您的选择会保留到下次启动。"
   },
+  "Rosa": {
+    "ar": "وردي",
+    "bn": "গোলাপি",
+    "en": "Pink",
+    "es": "Rosa",
+    "fr": "Rose",
+    "hi": "गुलाबी",
+    "id": "Merah Muda",
+    "pt": "Rosa",
+    "ur": "گلابی",
+    "zh-Hans": "粉色"
+  },
   "Se abrirá el inicio del recurso; los números de artículo no se transfieren entre libros.": {
     "ar": "ستُفتح بداية المورد؛ لا تُنقل أرقام المقالات بين الكتب.",
     "bn": "রিসোর্সের শুরু খুলবে; বইয়ের মধ্যে নিবন্ধের সংখ্যা স্থানান্তরিত হয় না।",
@@ -9634,6 +9802,18 @@
     "pt": "Seções verificadas",
     "ur": "تصدیق شدہ حصے",
     "zh-Hans": "已验证章节"
+  },
+  "Sección no disponible": {
+    "ar": "القسم غير متاح",
+    "bn": "বিভাগ অনুপলব্ধ",
+    "en": "Section unavailable",
+    "es": "Sección no disponible",
+    "fr": "Section indisponible",
+    "hi": "अनुभाग उपलब्ध नहीं",
+    "id": "Bagian tidak tersedia",
+    "pt": "Seção indisponível",
+    "ur": "حصہ دستیاب نہیں",
+    "zh-Hans": "章节不可用"
   },
   "Seguir la Biblia de origen": {
     "ar": "متابعة الكتاب المقدس الأصلي",
@@ -10439,6 +10619,18 @@
     "ur": "وسائل کا متن",
     "zh-Hans": "资源文本"
   },
+  "Texto en notas o resaltados": {
+    "ar": "نص في الملاحظات أو التمييزات",
+    "bn": "নোট বা হাইলাইটের পাঠ্য",
+    "en": "Text in notes or highlights",
+    "es": "Texto en notas o resaltados",
+    "fr": "Texte des notes ou surlignages",
+    "hi": "नोट या हाइलाइट में पाठ",
+    "id": "Teks dalam catatan atau sorotan",
+    "pt": "Texto em notas ou destaques",
+    "ur": "نوٹس یا نمایاں متن میں عبارت",
+    "zh-Hans": "笔记或高亮中的文本"
+  },
   "Texto…": {
     "ar": "نص…",
     "bn": "পাঠ…",
@@ -10582,6 +10774,30 @@
     "pt": "Todos",
     "ur": "سب",
     "zh-Hans": "全部"
+  },
+  "Todos los colores": {
+    "ar": "كل الألوان",
+    "bn": "সব রং",
+    "en": "All Colors",
+    "es": "Todos los colores",
+    "fr": "Toutes les couleurs",
+    "hi": "सभी रंग",
+    "id": "Semua Warna",
+    "pt": "Todas as cores",
+    "ur": "تمام رنگ",
+    "zh-Hans": "所有颜色"
+  },
+  "Todos los cuadernos": {
+    "ar": "كل دفاتر الملاحظات",
+    "bn": "সব নোটবুক",
+    "en": "All Notebooks",
+    "es": "Todos los cuadernos",
+    "fr": "Tous les carnets",
+    "hi": "सभी नोटबुक",
+    "id": "Semua Buku Catatan",
+    "pt": "Todos os cadernos",
+    "ur": "تمام نوٹ بکس",
+    "zh-Hans": "所有笔记本"
   },
   "Todos los recursos": {
     "ar": "جميع الموارد",
@@ -10966,6 +11182,18 @@
     "pt": "Ver versões no GitHub",
     "ur": "GitHub پر نسخے دیکھیں",
     "zh-Hans": "在 GitHub 查看版本"
+  },
+  "Verde": {
+    "ar": "أخضر",
+    "bn": "সবুজ",
+    "en": "Green",
+    "es": "Verde",
+    "fr": "Vert",
+    "hi": "हरा",
+    "id": "Hijau",
+    "pt": "Verde",
+    "ur": "سبز",
+    "zh-Hans": "绿色"
   },
   "Verificar": {
     "ar": "تحقق",
@@ -11398,6 +11626,18 @@
     "pt": "{count} referências",
     "ur": "{count} حوالے",
     "zh-Hans": "{count} 处经文"
+  },
+  "{count} resultados": {
+    "ar": "{count} نتائج",
+    "bn": "{count} ফলাফল",
+    "en": "{count} results",
+    "es": "{count} resultados",
+    "fr": "{count} résultats",
+    "hi": "{count} परिणाम",
+    "id": "{count} hasil",
+    "pt": "{count} resultados",
+    "ur": "{count} نتائج",
+    "zh-Hans": "{count} 条结果"
   },
   "{current} de {total}": {
     "ar": "{current} من {total}",

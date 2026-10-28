@@ -12,6 +12,7 @@ struct WorkspaceToolsView: View {
             switch tool {
             case .search: WorkspaceSearchView(workspace: workspace, search: workspace.search)
             case .referenceSearch: WorkspaceReferenceSearchView(workspace: workspace, search: workspace.referenceSearch)
+            case .annotationSearch: PersonalAnnotationSearchView(workspace: workspace, search: workspace.annotationSearch)
             case .documents: WorkspaceDocumentsView(workspace: workspace, personal: workspace.personal)
             case .favorites: WorkspaceFavoritesView(workspace: workspace)
             case .information: ResourceInformationView(reader: workspace.activeReader)
@@ -28,9 +29,12 @@ struct WorkspaceToolsView: View {
             case .passageComparison: PassageComparisonView(workspace: workspace, controller: workspace.passageComparison)
             }
         }.frame(minWidth: tool == .information ? 700 : 680, idealWidth: tool == .information ? 700 : 820,
-                minHeight: compactComparison || tool == .information ? nil : tool == .bibliography ? 640 : tool == .search ? 680 : expandedScope ? 620 : 520,
-                idealHeight: compactComparison || tool == .information ? nil : tool == .bibliography ? 820 : tool == .search ? 820 : expandedScope ? 720 : 620)
+                minHeight: compactComparison || compactAnnotationSearch || tool == .information ? nil : tool == .bibliography ? 640 : tool == .search ? 680 : expandedScope ? 620 : 520,
+                idealHeight: compactComparison || compactAnnotationSearch || tool == .information ? nil : tool == .bibliography ? 820 : tool == .search ? 820 : expandedScope ? 720 : 620)
             .modifier(MacPanelControlPresentation())
+    }
+    private var compactAnnotationSearch: Bool {
+        tool == .annotationSearch && workspace.annotationSearch.report == nil && !workspace.annotationSearch.isSearching
     }
     private var compactComparison: Bool {
         tool == .passageComparison && !workspace.passageComparison.completed && !workspace.passageComparison.isLoading
@@ -46,6 +50,7 @@ struct WorkspaceToolsView: View {
         switch tool {
         case .search: "Buscar"
         case .referenceSearch: "Buscar referencias bíblicas"
+        case .annotationSearch: "Buscar notas y resaltados"
         case .documents: "Documentos de estudio"
         case .favorites: "Favoritos"
         case .information: "Propiedades del recurso"

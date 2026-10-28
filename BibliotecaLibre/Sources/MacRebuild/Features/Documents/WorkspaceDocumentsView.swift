@@ -183,7 +183,8 @@ struct WorkspaceDocumentsView: View {
                     let documentID = personal.documents[index].id
                     let noteID = personal.documents[index].notes[note].id
                     TextField(L("Título de la nota"), text: $personal.documents[index].notes[note].title).macInputStyle()
-                    WorkspaceNoteEditor(note: personal.documents[index].notes[note]) { data in
+                    WorkspaceNoteEditor(note: personal.documents[index].notes[note], destination: workspace.personalSearchDestination,
+                                        navigationID: workspace.personalNavigationID) { data in
                         do { try personal.updateNoteRichText(noteID, in: documentID, data: data) }
                         catch { workspace.error = error.localizedDescription }
                     }.focused($noteBodyFocused)

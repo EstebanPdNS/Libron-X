@@ -472,10 +472,20 @@
       "sourceKey": "study-expansion-product-02",
       "acceptance": "Buscar texto de anotaciones con filtros de recurso, cuaderno y color y destino exacto.",
       "baseline": "La búsqueda de referencias incluye documentos personales.",
-      "status": "pending",
-      "implementation": [],
-      "verification": [],
-      "limitations": []
+      "status": "in_progress",
+      "implementation": [
+        "Literal case- and accent-insensitive search of note titles and bodies and source-backed highlighted text; filter by notebook, resource and highlight color, with partial coverage warnings and checked navigation.",
+        "Search results preserve UTF-16 coordinates, select exact body matches in notes and exact source matches in verified highlights; changed or missing sources are not silently substituted."
+      ],
+      "verification": [
+        "Six annotation service/controller tests passed for filters, case and accents, Unicode offsets, result limits, cancellation, stale highlights, changed sources and unresolved legacy associations; five note-editor tests passed including exact selection and stale text protection.",
+        "Native build 122: authored note and highlight found, notebook and color filters exercised, separate occurrences visually marked, exact note and highlight destinations opened; inspected dark English, light English and dark Arabic."
+      ],
+      "limitations": [
+        "A title match selects its note and displays the matching excerpt, but does not yet select the exact characters in the title field.",
+        "Search is literal rather than the full library query grammar; results are capped at 500 with an explicit partial-coverage notice.",
+        "Unresolved legacy anchors, changed resources and unsupported projections are reported rather than guessed; resource-filter interaction requires broader end-to-end coverage."
+      ]
     },
     {
       "id": "F176",
