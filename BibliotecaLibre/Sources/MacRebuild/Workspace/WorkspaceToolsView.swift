@@ -16,6 +16,7 @@ struct WorkspaceToolsView: View {
             case .documents: WorkspaceDocumentsView(workspace: workspace, personal: workspace.personal)
             case .favorites: WorkspaceFavoritesView(workspace: workspace)
             case .readingPlans: ReadingPlansView(workspace: workspace)
+            case .passageGuide: PassageGuideView(workspace: workspace, controller: workspace.passageGuide)
             case .information: ResourceInformationView(reader: workspace.activeReader)
             case .resources: ResourceManagerView(workspace: workspace)
             case .topics: TopicBrowserView(workspace: workspace)
@@ -30,8 +31,8 @@ struct WorkspaceToolsView: View {
             case .passageComparison: PassageComparisonView(workspace: workspace, controller: workspace.passageComparison)
             }
         }.frame(minWidth: tool == .information ? 700 : 680, idealWidth: tool == .information ? 700 : 820,
-                minHeight: compactComparison || compactAnnotationSearch || compactReadingPlans || tool == .information ? nil : tool == .bibliography ? 640 : tool == .search ? 680 : expandedScope ? 620 : 520,
-                idealHeight: compactComparison || compactAnnotationSearch || compactReadingPlans || tool == .information ? nil : tool == .bibliography ? 820 : tool == .search ? 820 : expandedScope ? 720 : 620)
+                minHeight: compactComparison || compactAnnotationSearch || compactReadingPlans || compactPassageGuide || tool == .information ? nil : tool == .bibliography ? 640 : tool == .search ? 680 : expandedScope ? 620 : 520,
+                idealHeight: compactComparison || compactAnnotationSearch || compactReadingPlans || compactPassageGuide || tool == .information ? nil : tool == .bibliography ? 820 : tool == .search ? 820 : expandedScope ? 720 : 620)
             .modifier(MacPanelControlPresentation())
             .alert("Libron-X", isPresented: Binding(get: { tool == .favorites && workspace.error != nil }, set: { if !$0 { workspace.error = nil } })) {
                 Button(L("Aceptar")) { workspace.error = nil }
@@ -41,6 +42,7 @@ struct WorkspaceToolsView: View {
         tool == .annotationSearch && workspace.annotationSearch.report == nil && !workspace.annotationSearch.isSearching
     }
     private var compactReadingPlans: Bool { tool == .readingPlans && workspace.personal.readingPlans.plans.isEmpty }
+    private var compactPassageGuide: Bool { tool == .passageGuide && !workspace.passageGuide.completed && workspace.passageGuide.matches.isEmpty }
     private var compactComparison: Bool {
         tool == .passageComparison && !workspace.passageComparison.completed && !workspace.passageComparison.isLoading
     }
@@ -59,6 +61,7 @@ struct WorkspaceToolsView: View {
         case .documents: "Documentos de estudio"
         case .favorites: "Favoritos"
         case .readingPlans: "Planes de lectura"
+        case .passageGuide: "Guía de pasajes"
         case .information: "Propiedades del recurso"
         case .resources: "Recursos y licencias"
         case .topics: "Explorador temático"

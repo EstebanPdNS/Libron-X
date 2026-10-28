@@ -51,6 +51,7 @@ enum PaneArrangement { case cascade, horizontal, vertical }
     var resourcePriorities: ResourcePriorities
     var keyLinks = KeyLinkController()
     var passageComparison = PassageComparisonController()
+    var passageGuide = PassageGuideController()
     var associationNavigation = AssociationNavigationController()
     var bibliography = BibliographyController()
     var editions = LibraryEditionsController()
@@ -164,6 +165,7 @@ enum PaneArrangement { case cascade, horizontal, vertical }
         search.clear()
         keyLinks.clear()
         passageComparison.invalidate()
+        passageGuide.clear()
         associationNavigation.cancel()
         referenceSearch.clear()
         if !availableResources.contains(where: { $0.id == search.resourceID }) { search.resourceID = nil }
@@ -328,6 +330,7 @@ enum PaneArrangement { case cascade, horizontal, vertical }
         search.cancel()
         keyLinks.cancel()
         passageComparison.cancel()
+        passageGuide.clear()
         associationNavigation.cancel()
         bibliography.cancel()
         referenceSearch.cancel()

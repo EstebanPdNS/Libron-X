@@ -1367,6 +1367,18 @@
     "ur": "نیلا",
     "zh-Hans": "蓝色"
   },
+  "Añade palabras para consultar diccionarios y léxicos.": {
+    "ar": "أضف كلمات للبحث في القواميس والمعاجم.",
+    "bn": "অভিধান ও শব্দকোষ খুঁজতে শব্দ যোগ করুন।",
+    "en": "Add words to search dictionaries and lexicons.",
+    "es": "Añade palabras para consultar diccionarios y léxicos.",
+    "fr": "Ajoutez des mots pour consulter dictionnaires et lexiques.",
+    "hi": "शब्दकोश और कोश खोजने के लिए शब्द जोड़ें।",
+    "id": "Tambahkan kata untuk mencari kamus dan leksikon.",
+    "pt": "Adicione palavras para consultar dicionários e léxicos.",
+    "ur": "لغات اور فرہنگ تلاش کرنے کے لیے الفاظ شامل کریں۔",
+    "zh-Hans": "添加词语以查询词典和词汇书。"
+  },
   "Año": {
     "ar": "السنة",
     "bn": "বছর",
@@ -1738,6 +1750,18 @@
     "pt": "Verificando atualizações…",
     "ur": "اپ ڈیٹس چیک ہو رہی ہیں…",
     "zh-Hans": "正在检查更新…"
+  },
+  "Buscando referencias…": {
+    "ar": "جارٍ البحث عن المراجع…",
+    "bn": "রেফারেন্স খোঁজা হচ্ছে…",
+    "en": "Searching references…",
+    "es": "Buscando referencias…",
+    "fr": "Recherche de références…",
+    "hi": "संदर्भ खोजे जा रहे हैं…",
+    "id": "Mencari referensi…",
+    "pt": "Buscando referências…",
+    "ur": "حوالے تلاش کیے جا رہے ہیں…",
+    "zh-Hans": "正在搜索引用…"
   },
   "Buscando…": {
     "ar": "جارٍ البحث…",
@@ -3887,6 +3911,18 @@
     "ur": "لغات اور دائرۃ المعارف",
     "zh-Hans": "词典与百科全书"
   },
+  "Diccionarios y léxicos": {
+    "ar": "القواميس والمعاجم",
+    "bn": "অভিধান ও শব্দকোষ",
+    "en": "Dictionaries and Lexicons",
+    "es": "Diccionarios y léxicos",
+    "fr": "Dictionnaires et lexiques",
+    "hi": "शब्दकोश और कोश",
+    "id": "Kamus dan leksikon",
+    "pt": "Dicionários e léxicos",
+    "ur": "لغات اور فرہنگ",
+    "zh-Hans": "词典和词汇书"
+  },
   "Dirección web o referencia bíblica": {
     "ar": "عنوان ويب أو مرجع كتابي",
     "bn": "ওয়েব ঠিকানা বা বাইবেলের উল্লেখ",
@@ -5663,6 +5699,18 @@
     "ur": "کتابیات بنائیں",
     "zh-Hans": "生成参考书目"
   },
+  "Generar guía": {
+    "ar": "إنشاء الدليل",
+    "bn": "নির্দেশিকা তৈরি করুন",
+    "en": "Generate Guide",
+    "es": "Generar guía",
+    "fr": "Générer le guide",
+    "hi": "मार्गदर्शिका बनाएँ",
+    "id": "Buat panduan",
+    "pt": "Gerar guia",
+    "ur": "رہنمائی بنائیں",
+    "zh-Hans": "生成指南"
+  },
   "Gramática": {
     "ar": "قواعد اللغة",
     "bn": "ব্যাকরণ",
@@ -5866,6 +5914,30 @@
     "pt": "Salvar área de trabalho…",
     "ur": "کام کی جگہ محفوظ کریں…",
     "zh-Hans": "保存工作区…"
+  },
+  "Guía de pasajes": {
+    "ar": "دليل المقاطع",
+    "bn": "অংশ নির্দেশিকা",
+    "en": "Passage Guide",
+    "es": "Guía de pasajes",
+    "fr": "Guide de passages",
+    "hi": "अंश मार्गदर्शिका",
+    "id": "Panduan bagian",
+    "pt": "Guia de passagens",
+    "ur": "عبارات کی رہنمائی",
+    "zh-Hans": "经文指南"
+  },
+  "Guía de pasajes…": {
+    "ar": "دليل المقاطع…",
+    "bn": "অংশ নির্দেশিকা…",
+    "en": "Passage Guide…",
+    "es": "Guía de pasajes…",
+    "fr": "Guide de passages…",
+    "hi": "अंश मार्गदर्शिका…",
+    "id": "Panduan bagian…",
+    "pt": "Guia de passagens…",
+    "ur": "عبارات کی رہنمائی…",
+    "zh-Hans": "经文指南…"
   },
   "HTML": {
     "ar": "HTML",
@@ -6335,6 +6407,18 @@
     "ur": "بائبلی تشریح",
     "zh-Hans": "圣经诠释"
   },
+  "Introduce hasta ocho palabras de diccionario válidas.": {
+    "ar": "أدخل حتى ثماني كلمات قاموس صالحة.",
+    "bn": "সর্বোচ্চ আটটি বৈধ অভিধান শব্দ লিখুন।",
+    "en": "Enter up to eight valid dictionary words.",
+    "es": "Introduce hasta ocho palabras de diccionario válidas.",
+    "fr": "Saisissez jusqu’à huit mots valides pour les dictionnaires.",
+    "hi": "अधिकतम आठ मान्य शब्दकोश शब्द दर्ज करें।",
+    "id": "Masukkan hingga delapan kata kamus yang valid.",
+    "pt": "Insira até oito palavras válidas para o dicionário.",
+    "ur": "لغت کے زیادہ سے زیادہ آٹھ درست الفاظ درج کریں۔",
+    "zh-Hans": "请输入最多八个有效的词典查询词。"
+  },
   "Introduce un texto de búsqueda válido.": {
     "ar": "أدخل نص بحث صالحًا.",
     "bn": "বৈধ অনুসন্ধান পাঠ্য লিখুন।",
@@ -6515,6 +6599,18 @@
     "ur": "لائبریری بدل گئی ہے۔ دوبارہ تلاش کریں۔",
     "zh-Hans": "书库已更改。请重新搜索。"
   },
+  "La biblioteca cambió. Vuelve a generar la guía.": {
+    "ar": "تغيرت المكتبة. أعد إنشاء الدليل.",
+    "bn": "লাইব্রেরি পরিবর্তিত হয়েছে। আবার নির্দেশিকা তৈরি করুন।",
+    "en": "The library changed. Generate the guide again.",
+    "es": "La biblioteca cambió. Vuelve a generar la guía.",
+    "fr": "La bibliothèque a changé. Générez à nouveau le guide.",
+    "hi": "लाइब्रेरी बदल गई। मार्गदर्शिका फिर बनाएँ।",
+    "id": "Perpustakaan berubah. Buat panduan lagi.",
+    "pt": "A biblioteca mudou. Gere o guia novamente.",
+    "ur": "لائبریری بدل گئی ہے۔ رہنمائی دوبارہ بنائیں۔",
+    "zh-Hans": "书库已更改，请重新生成指南。"
+  },
   "La búsqueda alcanzó el límite de artículos antes de encontrar la referencia. El pasaje puede existir en este recurso.": {
     "ar": "بلغ البحث حد المقالات قبل العثور على المرجع. قد يكون المقطع موجودًا في هذا المورد.",
     "bn": "সূত্র খুঁজে পাওয়ার আগে অনুসন্ধান নিবন্ধের সীমায় পৌঁছেছে। পাঠাংশটি এই রিসোর্সে থাকতে পারে।",
@@ -6550,6 +6646,18 @@
     "pt": "A busca continuou a partir do outro extremo do recurso.",
     "ur": "تلاش وسیلے کے دوسرے سرے سے جاری ہوئی۔",
     "zh-Hans": "已从资源的另一端继续查找。"
+  },
+  "La búsqueda de referencias no está completa.": {
+    "ar": "البحث عن المراجع غير مكتمل.",
+    "bn": "রেফারেন্স অনুসন্ধান অসম্পূর্ণ।",
+    "en": "The reference search is incomplete.",
+    "es": "La búsqueda de referencias no está completa.",
+    "fr": "La recherche de références est incomplète.",
+    "hi": "संदर्भ खोज अधूरी है।",
+    "id": "Pencarian referensi belum lengkap.",
+    "pt": "A busca de referências está incompleta.",
+    "ur": "حوالوں کی تلاش مکمل نہیں ہے۔",
+    "zh-Hans": "引用搜索未完成。"
   },
   "La búsqueda falló. Inicia una búsqueda nueva para abrir resultados.": {
     "ar": "فشل البحث. ابدأ بحثًا جديدًا لفتح النتائج.",
@@ -6850,6 +6958,18 @@
     "pt": "As leituras abrem no início da passagem na Bíblia ativa.",
     "ur": "مطالعہ فعال بائبل میں عبارت کے آغاز سے کھلے گا۔",
     "zh-Hans": "阅读将在当前圣经中从经文开头打开。"
+  },
+  "Las referencias se buscan en los recursos disponibles; no se convierten versificaciones.": {
+    "ar": "تُبحث المراجع في الموارد المتاحة؛ لا تُحوّل أنظمة ترقيم الآيات.",
+    "bn": "উপলব্ধ রিসোর্সে রেফারেন্স খোঁজা হয়; পদসংখ্যা রূপান্তর করা হয় না।",
+    "en": "References are searched in available resources; versifications are not converted.",
+    "es": "Las referencias se buscan en los recursos disponibles; no se convierten versificaciones.",
+    "fr": "Les références sont recherchées dans les ressources disponibles ; les versifications ne sont pas converties.",
+    "hi": "संदर्भ उपलब्ध संसाधनों में खोजे जाते हैं; पद क्रम नहीं बदला जाता।",
+    "id": "Referensi dicari dalam sumber tersedia; penomoran ayat tidak dikonversi.",
+    "pt": "As referências são buscadas nos recursos disponíveis; as versificações não são convertidas.",
+    "ur": "حوالے دستیاب وسائل میں تلاش ہوتے ہیں؛ آیات کی ترتیب تبدیل نہیں ہوتی۔",
+    "zh-Hans": "在可用资源中搜索引用；不转换经文编号。"
   },
   "Las reglas necesitan entre 1 y 32 condiciones válidas.": {
     "ar": "تتطلب القواعد من شرط واحد إلى 32 شرطًا صالحًا.",
@@ -7871,6 +7991,18 @@
     "ur": "{reference} کے لیے کوئی تفسیر نہیں ہے۔",
     "zh-Hans": "{reference} 没有注释。"
   },
+  "No hay comentarios disponibles.": {
+    "ar": "لا تتوفر تفاسير.",
+    "bn": "কোনো ভাষ্য উপলব্ধ নেই।",
+    "en": "No commentaries are available.",
+    "es": "No hay comentarios disponibles.",
+    "fr": "Aucun commentaire disponible.",
+    "hi": "कोई टीका उपलब्ध नहीं है।",
+    "id": "Tidak ada tafsir yang tersedia.",
+    "pt": "Não há comentários disponíveis.",
+    "ur": "کوئی تفاسیر دستیاب نہیں ہیں۔",
+    "zh-Hans": "没有可用的注释书。"
+  },
   "No hay diccionarios disponibles.": {
     "ar": "لا توجد قواميس متاحة.",
     "bn": "কোনো অভিধান উপলব্ধ নেই।",
@@ -7883,6 +8015,18 @@
     "ur": "کوئی لغت دستیاب نہیں ہے۔",
     "zh-Hans": "没有可用词典。"
   },
+  "No hay diccionarios ni léxicos disponibles.": {
+    "ar": "لا تتوفر قواميس أو معاجم.",
+    "bn": "কোনো অভিধান বা শব্দকোষ উপলব্ধ নেই।",
+    "en": "No dictionaries or lexicons are available.",
+    "es": "No hay diccionarios ni léxicos disponibles.",
+    "fr": "Aucun dictionnaire ni lexique disponible.",
+    "hi": "कोई शब्दकोश या कोश उपलब्ध नहीं है।",
+    "id": "Tidak ada kamus atau leksikon yang tersedia.",
+    "pt": "Não há dicionários nem léxicos disponíveis.",
+    "ur": "کوئی لغت یا فرہنگ دستیاب نہیں ہے۔",
+    "zh-Hans": "没有可用的词典或词汇书。"
+  },
   "No hay recursos compatibles para agregar.": {
     "ar": "لا توجد موارد متوافقة لإضافتها.",
     "bn": "যোগ করার মতো সামঞ্জস্যপূর্ণ রিসোর্স নেই।",
@@ -7894,6 +8038,18 @@
     "pt": "Não há recursos compatíveis para adicionar.",
     "ur": "شامل کرنے کے لیے کوئی موافق وسیلہ نہیں ہے۔",
     "zh-Hans": "没有可添加的兼容资源。"
+  },
+  "No hay recursos disponibles para buscar referencias.": {
+    "ar": "لا تتوفر موارد للبحث عن المراجع.",
+    "bn": "রেফারেন্স খোঁজার জন্য কোনো রিসোর্স নেই।",
+    "en": "No resources are available to search for references.",
+    "es": "No hay recursos disponibles para buscar referencias.",
+    "fr": "Aucune ressource disponible pour rechercher des références.",
+    "hi": "संदर्भ खोजने के लिए कोई संसाधन उपलब्ध नहीं है।",
+    "id": "Tidak ada sumber untuk mencari referensi.",
+    "pt": "Não há recursos disponíveis para buscar referências.",
+    "ur": "حوالے تلاش کرنے کے لیے کوئی وسیلہ دستیاب نہیں ہے۔",
+    "zh-Hans": "没有可用于搜索引用的资源。"
   },
   "No hay texto en el portapapeles.": {
     "ar": "لا يوجد نص في الحافظة.",
@@ -7943,6 +8099,18 @@
     "ur": "کوئی حالیہ کام کی جگہ نہیں۔",
     "zh-Hans": "没有最近的工作区。"
   },
+  "No se encontraron coincidencias verificadas.": {
+    "ar": "لم تُعثر على نتائج مؤكدة.",
+    "bn": "কোনো যাচাই করা মিল পাওয়া যায়নি।",
+    "en": "No verified matches were found.",
+    "es": "No se encontraron coincidencias verificadas.",
+    "fr": "Aucune correspondance vérifiée trouvée.",
+    "hi": "कोई सत्यापित मेल नहीं मिला।",
+    "id": "Tidak ditemukan hasil terverifikasi.",
+    "pt": "Nenhuma correspondência verificada foi encontrada.",
+    "ur": "کوئی تصدیق شدہ مطابقت نہیں ملی۔",
+    "zh-Hans": "未找到经过验证的匹配项。"
+  },
   "No se encontraron coincidencias.": {
     "ar": "لم يُعثر على نتائج مطابقة.",
     "bn": "কোনো মিল পাওয়া যায়নি।",
@@ -7990,6 +8158,18 @@
     "pt": "Não foram encontradas referências no intervalo solicitado.",
     "ur": "مطلوبہ دائرے میں کوئی حوالہ نہیں ملا۔",
     "zh-Hans": "在指定范围内未找到经文。"
+  },
+  "No se encontraron referencias explícitas.": {
+    "ar": "لم تُعثر على مراجع صريحة.",
+    "bn": "কোনো স্পষ্ট রেফারেন্স পাওয়া যায়নি।",
+    "en": "No explicit references were found.",
+    "es": "No se encontraron referencias explícitas.",
+    "fr": "Aucune référence explicite trouvée.",
+    "hi": "कोई स्पष्ट संदर्भ नहीं मिला।",
+    "id": "Tidak ditemukan referensi eksplisit.",
+    "pt": "Nenhuma referência explícita foi encontrada.",
+    "ur": "کوئی واضح حوالہ نہیں ملا۔",
+    "zh-Hans": "未找到明确引用。"
   },
   "No se encontraron referencias reconocidas.": {
     "ar": "لم يُعثر على مراجع معروفة.",
@@ -8854,6 +9034,18 @@
     "pt": "Palavras inteiras",
     "ur": "مکمل الفاظ",
     "zh-Hans": "全字匹配"
+  },
+  "Palabras para diccionarios, separadas por comas (opcional)": {
+    "ar": "كلمات القاموس مفصولة بفواصل (اختياري)",
+    "bn": "অভিধানের শব্দ, কমা দিয়ে আলাদা করুন (ঐচ্ছিক)",
+    "en": "Dictionary words, separated by commas (optional)",
+    "es": "Palabras para diccionarios, separadas por comas (opcional)",
+    "fr": "Mots pour les dictionnaires, séparés par des virgules (facultatif)",
+    "hi": "शब्दकोश के शब्द, अल्पविराम से अलग (वैकल्पिक)",
+    "id": "Kata kamus, dipisahkan koma (opsional)",
+    "pt": "Palavras para dicionários, separadas por vírgulas (opcional)",
+    "ur": "لغت کے الفاظ، کوما سے الگ (اختیاری)",
+    "zh-Hans": "词典查询词，以逗号分隔（可选）"
   },
   "Panel localizador": {
     "ar": "لوحة الموقع",
@@ -9778,6 +9970,18 @@
     "pt": "Referências",
     "ur": "حوالہ جات",
     "zh-Hans": "经文引用"
+  },
+  "Referencias en recursos": {
+    "ar": "المراجع في الموارد",
+    "bn": "রিসোর্সের রেফারেন্স",
+    "en": "References in Resources",
+    "es": "Referencias en recursos",
+    "fr": "Références dans les ressources",
+    "hi": "संसाधनों में संदर्भ",
+    "id": "Referensi dalam sumber",
+    "pt": "Referências em recursos",
+    "ur": "وسائل میں حوالے",
+    "zh-Hans": "资源中的引用"
   },
   "Referencias y texto": {
     "ar": "المراجع والنص",
