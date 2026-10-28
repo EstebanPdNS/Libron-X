@@ -539,13 +539,16 @@
       "baseline": "Sin planificador integrado identificado.",
       "status": "in_progress",
       "implementation": [
-        "Added civil-date reading plans with ordered explicit passages and weekday distribution, plus a separate atomic versioned personal store."
+        "Added civil-date reading plans with ordered explicit passages and weekday distribution, plus a separate atomic versioned personal store.",
+        "Added the native reading-plans tool with plan creation, weekday selection, civil start date, passage entry, removal and active-Bible start navigation; edition-qualified references are not silently redirected."
       ],
       "verification": [
-        "ReadingPlanTests and ReadingPlanPersistenceTests pass for weekday distribution, leap dates, round-trip persistence, stale writers and future schemas."
+        "ReadingPlanTests and ReadingPlanPersistenceTests pass for weekday distribution, leap dates, round-trip persistence, stale writers and future schemas.",
+        "Build 132/133 native dark English UI created a two-passage plan; after restarting build 133 the plan remained visible. ReadingPlanNavigationTests cover chapter, range, book and edition-qualified references."
       ],
       "limitations": [
-        "No user interface, navigation to a selected edition or broader distribution modes yet; source-reference validity does not verify passage availability in a particular Bible."
+        "Plan editing, broader distribution modes, exact edition selection and opening passages against actual source resources remain to be verified or implemented.",
+        "The new interface needs light, RTL, narrow-window and older macOS verification."
       ]
     },
     {
@@ -559,13 +562,15 @@
       "baseline": "Sin seguimiento de sesiones de plan identificado.",
       "status": "in_progress",
       "implementation": [
-        "Reading entries retain completion state and can filter completed items without discarding them."
+        "Reading entries retain completion state and can filter completed items without discarding them.",
+        "The plan view offers completion toggles, a completed count and a hide-completed filter."
       ],
       "verification": [
-        "Persistence tests save and reopen completion; filtering tests retain all readings in the plan."
+        "Persistence tests save and reopen completion; filtering tests retain all readings in the plan.",
+        "Native UI marked one of two readings complete, hid it, and confirmed its completion remained after reopening the app."
       ],
       "limitations": [
-        "The pending-readings UI and real navigation remain to be implemented and tested."
+        "Additional plans, editing and display edge cases remain to be validated; light and RTL visual checks are pending."
       ]
     },
     {
@@ -579,13 +584,15 @@
       "baseline": "Sin exportación de planes identificada.",
       "status": "in_progress",
       "implementation": [
-        "Calendar serializer emits all-day VEVENTs with stable IDs, UTC timestamps, exclusive end dates, escaping and UTF-8 line folding."
+        "Calendar serializer emits all-day VEVENTs with stable IDs, UTC timestamps, exclusive end dates, escaping and UTF-8 line folding.",
+        "The native save panel exports the selected plan as an .ics file and protects resource paths."
       ],
       "verification": [
-        "ReadingPlanTests verify date boundaries over the DST transition, escaping, stable identifiers and 75-octet line folding."
+        "ReadingPlanTests verify date boundaries over the DST transition, escaping, stable identifiers and 75-octet line folding.",
+        "Native UI exported the authored two-reading plan to a temporary .ics file; inspection found two all-day events and both references."
       ],
       "limitations": [
-        "Export UI and interoperability in an external calendar application remain to be tested."
+        "Import and date interpretation in an independent calendar application still require verification."
       ]
     },
     {

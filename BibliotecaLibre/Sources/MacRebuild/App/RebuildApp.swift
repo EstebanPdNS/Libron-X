@@ -190,6 +190,7 @@ struct RebuildCommands: Commands {
             }
         }
         CommandMenu(L("Herramientas")) {
+            Button(L("Planes de lectura…")) { workspace.activeTool = .readingPlans }
             Button(L("Comparar pasajes bíblicos…")) { workspace.activeTool = .passageComparison }
             Button(L("Enlaces clave…")) { workspace.activeTool = .keyLinks }
             Button(L("Asociaciones de recursos…")) { workspace.activeTool = .associations }

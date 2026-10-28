@@ -1,7 +1,7 @@
 import AppKit
 import LibronixCore
 
-enum WorkspaceTool: String, Identifiable { case search, referenceSearch, annotationSearch, documents, favorites, information, resources, topics, bibleCopy, windows, parallelSets, keyLinks, associations, associationLinks, bibliography, editions, passageComparison
+enum WorkspaceTool: String, Identifiable { case search, referenceSearch, annotationSearch, documents, favorites, information, resources, topics, bibleCopy, windows, parallelSets, keyLinks, associations, associationLinks, bibliography, editions, passageComparison, readingPlans
     var id: String { rawValue }
 }
 struct ReaderHighlight: Identifiable, Codable, Equatable, Sendable {

@@ -1655,6 +1655,18 @@
     "ur": "نوٹس حذف کریں",
     "zh-Hans": "删除笔记"
   },
+  "Borrar plan de lectura": {
+    "ar": "حذف خطة القراءة",
+    "bn": "পাঠ পরিকল্পনা মুছুন",
+    "en": "Delete Reading Plan",
+    "es": "Borrar plan de lectura",
+    "fr": "Supprimer le plan de lecture",
+    "hi": "पठन योजना हटाएँ",
+    "id": "Hapus rencana bacaan",
+    "pt": "Excluir plano de leitura",
+    "ur": "مطالعے کا منصوبہ حذف کریں",
+    "zh-Hans": "删除阅读计划"
+  },
   "Borrar todos los vínculos": {
     "ar": "إزالة جميع الروابط",
     "bn": "সব সংযোগ মুছুন",
@@ -2807,6 +2819,18 @@
     "ur": "تکمیلی",
     "zh-Hans": "配套资源"
   },
+  "Completada": {
+    "ar": "مكتملة",
+    "bn": "সম্পন্ন",
+    "en": "Completed",
+    "es": "Completada",
+    "fr": "Terminée",
+    "hi": "पूर्ण",
+    "id": "Selesai",
+    "pt": "Concluída",
+    "ur": "مکمل",
+    "zh-Hans": "已完成"
+  },
   "Concordancia": {
     "ar": "فهرس ألفاظ",
     "bn": "শব্দসূচি",
@@ -3179,6 +3203,18 @@
     "ur": "بائبل منتخب کرنے کے لیے گروپ بنائیں۔",
     "zh-Hans": "创建分组以选择圣经。"
   },
+  "Crea un plan con pasajes y días de lectura.": {
+    "ar": "أنشئ خطة بالمقاطع وأيام القراءة.",
+    "bn": "অংশ ও পাঠের দিন দিয়ে পরিকল্পনা তৈরি করুন।",
+    "en": "Create a plan with passages and reading days.",
+    "es": "Crea un plan con pasajes y días de lectura.",
+    "fr": "Créez un plan avec des passages et des jours de lecture.",
+    "hi": "अंशों और पठन दिनों के साथ योजना बनाएँ।",
+    "id": "Buat rencana dengan bagian dan hari bacaan.",
+    "pt": "Crie um plano com passagens e dias de leitura.",
+    "ur": "عبارات اور مطالعے کے دنوں سے منصوبہ بنائیں۔",
+    "zh-Hans": "创建包含经文和阅读日的计划。"
+  },
   "Crea una asociación para elegir recursos alternativos o complementarios.": {
     "ar": "أنشئ ارتباطًا لاختيار موارد بديلة أو مكملة.",
     "bn": "বিকল্প বা পরিপূরক রিসোর্স বেছে নিতে একটি সংযোগ তৈরি করুন।",
@@ -3202,6 +3238,18 @@
     "pt": "Crie uma coleção para escolher seus recursos.",
     "ur": "وسائل منتخب کرنے کے لیے ایک مجموعہ بنائیں۔",
     "zh-Hans": "创建收藏集以选择其资源。"
+  },
+  "Crear": {
+    "ar": "إنشاء",
+    "bn": "তৈরি করুন",
+    "en": "Create",
+    "es": "Crear",
+    "fr": "Créer",
+    "hi": "बनाएँ",
+    "id": "Buat",
+    "pt": "Criar",
+    "ur": "بنائیں",
+    "zh-Hans": "创建"
   },
   "Crear una nota editable con este texto": {
     "ar": "إنشاء ملاحظة قابلة للتحرير من هذا النص",
@@ -4043,6 +4091,18 @@
     "ur": "فعال دورانیہ (سیکنڈ)",
     "zh-Hans": "活动时长（秒）"
   },
+  "Días de lectura": {
+    "ar": "أيام القراءة",
+    "bn": "পাঠের দিন",
+    "en": "Reading Days",
+    "es": "Días de lectura",
+    "fr": "Jours de lecture",
+    "hi": "पठन के दिन",
+    "id": "Hari bacaan",
+    "pt": "Dias de leitura",
+    "ur": "مطالعے کے دن",
+    "zh-Hans": "阅读日"
+  },
   "Edición": {
     "ar": "الطبعة",
     "bn": "সংস্করণ",
@@ -4258,6 +4318,42 @@
     "pt": "A passagem excede o limite de leitura. Escolha um intervalo menor.",
     "ur": "عبارت مطالعے کی حد سے بڑی ہے۔ چھوٹی حد منتخب کریں۔",
     "zh-Hans": "经文超出阅读限制。请选择较短的范围。"
+  },
+  "El plan cambió. Vuelve a exportarlo.": {
+    "ar": "تغيرت الخطة. أعد تصديرها.",
+    "bn": "পরিকল্পনা পরিবর্তিত হয়েছে। আবার রপ্তানি করুন।",
+    "en": "The plan changed. Export it again.",
+    "es": "El plan cambió. Vuelve a exportarlo.",
+    "fr": "Le plan a changé. Exportez-le à nouveau.",
+    "hi": "योजना बदल गई है। इसे फिर निर्यात करें।",
+    "id": "Rencana berubah. Ekspor lagi.",
+    "pt": "O plano mudou. Exporte-o novamente.",
+    "ur": "منصوبہ بدل گیا ہے۔ دوبارہ برآمد کریں۔",
+    "zh-Hans": "计划已更改，请重新导出。"
+  },
+  "El plan de lectura contiene datos incompatibles.": {
+    "ar": "تحتوي خطة القراءة على بيانات غير متوافقة.",
+    "bn": "পাঠ পরিকল্পনায় অসামঞ্জস্যপূর্ণ তথ্য আছে।",
+    "en": "The reading plan contains incompatible data.",
+    "es": "El plan de lectura contiene datos incompatibles.",
+    "fr": "Le plan de lecture contient des données incompatibles.",
+    "hi": "पठन योजना में असंगत डेटा है।",
+    "id": "Rencana bacaan berisi data yang tidak kompatibel.",
+    "pt": "O plano de leitura contém dados incompatíveis.",
+    "ur": "مطالعے کے منصوبے میں غیر مطابقت پذیر ڈیٹا ہے۔",
+    "zh-Hans": "阅读计划包含不兼容的数据。"
+  },
+  "El plan necesita pasajes y días de lectura válidos.": {
+    "ar": "تحتاج الخطة إلى مقاطع وأيام قراءة صالحة.",
+    "bn": "পরিকল্পনার জন্য বৈধ অংশ ও পাঠের দিন প্রয়োজন।",
+    "en": "The plan needs valid passages and reading days.",
+    "es": "El plan necesita pasajes y días de lectura válidos.",
+    "fr": "Le plan nécessite des passages et jours valides.",
+    "hi": "योजना के लिए मान्य अंश और पठन दिन चाहिए।",
+    "id": "Rencana memerlukan bagian dan hari bacaan yang valid.",
+    "pt": "O plano precisa de passagens e dias válidos.",
+    "ur": "منصوبے کے لیے درست عبارات اور مطالعے کے دن چاہییں۔",
+    "zh-Hans": "计划需要有效的经文和阅读日。"
   },
   "El recurso de este favorito no está disponible en la biblioteca abierta.": {
     "ar": "مورد هذه المفضلة غير متاح في المكتبة المفتوحة.",
@@ -4667,6 +4763,18 @@
     "ur": "گروپ حذف کریں",
     "zh-Hans": "删除分组"
   },
+  "Eliminar plan…": {
+    "ar": "حذف الخطة…",
+    "bn": "পরিকল্পনা মুছুন…",
+    "en": "Delete Plan…",
+    "es": "Eliminar plan…",
+    "fr": "Supprimer le plan…",
+    "hi": "योजना हटाएँ…",
+    "id": "Hapus rencana…",
+    "pt": "Excluir plano…",
+    "ur": "منصوبہ حذف کریں…",
+    "zh-Hans": "删除计划…"
+  },
   "Eliminar versículo": {
     "ar": "حذف الآية",
     "bn": "পদ সরান",
@@ -4967,6 +5075,18 @@
     "ur": "یہ مجموعہ دستی ہے۔",
     "zh-Hans": "此集合为手动集合。"
   },
+  "Esta referencia no se puede abrir directamente. Revísala en la Biblia.": {
+    "ar": "لا يمكن فتح هذا المرجع مباشرة. راجعه في الكتاب المقدس.",
+    "bn": "এই রেফারেন্স সরাসরি খোলা যায় না। বাইবেলে দেখুন।",
+    "en": "This reference cannot be opened directly. Check it in the Bible.",
+    "es": "Esta referencia no se puede abrir directamente. Revísala en la Biblia.",
+    "fr": "Cette référence ne peut pas être ouverte directement. Vérifiez-la dans la Bible.",
+    "hi": "यह संदर्भ सीधे नहीं खुल सकता। इसे बाइबल में जाँचें।",
+    "id": "Referensi ini tidak dapat dibuka langsung. Periksa di Alkitab.",
+    "pt": "Esta referência não pode ser aberta diretamente. Confira na Bíblia.",
+    "ur": "یہ حوالہ براہ راست نہیں کھل سکتا۔ اسے بائبل میں دیکھیں۔",
+    "zh-Hans": "无法直接打开此引用，请在圣经中查看。"
+  },
   "Esta ventana muestra una Biblia. Escribe una referencia y pulsa Intro, o elige libro y capítulo. Las flechas junto al icono de Biblia cambian de versión conservando el versículo; el icono permite elegir una Biblia o cambiar de grupo. Usa el zoom para ajustar el texto y el menú de acciones para las demás herramientas.": {
     "ar": "تعرض هذه النافذة الكتاب المقدس. اكتب مرجعًا واضغط على مفتاح الإدخال، أو اختر السفر والإصحاح. تغيّر الأسهم بجانب أيقونة الكتاب المقدس الترجمة مع الاحتفاظ بالآية؛ وتتيح الأيقونة اختيار ترجمة أو تغيير المجموعة. استخدم التكبير لضبط النص وقائمة الإجراءات لبقية الأدوات.",
     "bn": "এই উইন্ডোতে বাইবেল দেখানো হয়। একটি রেফারেন্স লিখে এন্টার চাপুন, অথবা বই ও অধ্যায় বেছে নিন। বাইবেলের আইকনের পাশের তীর দিয়ে একই পদ রেখে সংস্করণ বদলানো যায়; আইকন থেকে বাইবেল বা দল বেছে নিতে পারেন। লেখার আকারের জন্য জুম এবং অন্য সরঞ্জামের জন্য কাজের মেনু ব্যবহার করুন।",
@@ -5147,6 +5267,30 @@
     "ur": "کتابیات برآمد کریں",
     "zh-Hans": "导出参考书目"
   },
+  "Exportar calendario": {
+    "ar": "تصدير التقويم",
+    "bn": "ক্যালেন্ডার রপ্তানি করুন",
+    "en": "Export Calendar",
+    "es": "Exportar calendario",
+    "fr": "Exporter le calendrier",
+    "hi": "कैलेंडर निर्यात करें",
+    "id": "Ekspor kalender",
+    "pt": "Exportar calendário",
+    "ur": "کیلنڈر برآمد کریں",
+    "zh-Hans": "导出日历"
+  },
+  "Exportar calendario…": {
+    "ar": "تصدير التقويم…",
+    "bn": "ক্যালেন্ডার রপ্তানি করুন…",
+    "en": "Export Calendar…",
+    "es": "Exportar calendario…",
+    "fr": "Exporter le calendrier…",
+    "hi": "कैलेंडर निर्यात करें…",
+    "id": "Ekspor kalender…",
+    "pt": "Exportar calendário…",
+    "ur": "کیلنڈر برآمد کریں…",
+    "zh-Hans": "导出日历…"
+  },
   "Exportar comparaciones y resultados de búsqueda a CSV.": {
     "ar": "صدّر المقارنات ونتائج البحث إلى CSV.",
     "bn": "তুলনা ও অনুসন্ধানের ফল CSV হিসেবে রপ্তানি করুন।",
@@ -5254,6 +5398,18 @@
     "pt": "Favoritos",
     "ur": "پسندیدہ",
     "zh-Hans": "收藏夹"
+  },
+  "Fecha de inicio": {
+    "ar": "تاريخ البدء",
+    "bn": "শুরুর তারিখ",
+    "en": "Start Date",
+    "es": "Fecha de inicio",
+    "fr": "Date de début",
+    "hi": "आरंभ तिथि",
+    "id": "Tanggal mulai",
+    "pt": "Data de início",
+    "ur": "شروع کی تاریخ",
+    "zh-Hans": "开始日期"
   },
   "Filtrar por": {
     "ar": "تصفية حسب",
@@ -6443,6 +6599,18 @@
     "ur": "برآمد کا حجم حد سے زیادہ ہے۔ تلاش کا دائرہ کم کریں۔",
     "zh-Hans": "导出内容超过大小限制。请缩小搜索范围。"
   },
+  "La fecha de lectura no es válida.": {
+    "ar": "تاريخ القراءة غير صالح.",
+    "bn": "পাঠের তারিখ অবৈধ।",
+    "en": "The reading date is invalid.",
+    "es": "La fecha de lectura no es válida.",
+    "fr": "La date de lecture est invalide.",
+    "hi": "पठन तिथि अमान्य है।",
+    "id": "Tanggal bacaan tidak valid.",
+    "pt": "A data de leitura é inválida.",
+    "ur": "مطالعے کی تاریخ درست نہیں ہے۔",
+    "zh-Hans": "阅读日期无效。"
+  },
   "La identidad del recurso cambió.": {
     "ar": "تغيّرت هوية المورد.",
     "bn": "রিসোর্সের পরিচয় বদলেছে।",
@@ -6478,6 +6646,18 @@
     "pt": "A leitura de origem mudou. Reabra os recursos associados.",
     "ur": "اصل مطالعہ بدل گیا ہے۔ متعلقہ وسائل دوبارہ کھولیں۔",
     "zh-Hans": "来源阅读已更改。请重新打开关联资源。"
+  },
+  "La lectura ya no está disponible.": {
+    "ar": "لم تعد القراءة متاحة.",
+    "bn": "পাঠটি আর উপলব্ধ নেই।",
+    "en": "The reading is no longer available.",
+    "es": "La lectura ya no está disponible.",
+    "fr": "La lecture n’est plus disponible.",
+    "hi": "पठन अब उपलब्ध नहीं है।",
+    "id": "Bacaan tidak lagi tersedia.",
+    "pt": "A leitura não está mais disponível.",
+    "ur": "مطالعہ اب دستیاب نہیں ہے۔",
+    "zh-Hans": "该阅读已不可用。"
   },
   "La lista de temas es parcial; puede haber más artículos en otros recursos.": {
     "ar": "قائمة الموضوعات جزئية؛ قد توجد مقالات أخرى في موارد أخرى.",
@@ -6598,6 +6778,18 @@
     "pt": "As cópias exatas são verificadas pelo conteúdo. Possíveis edições exigem revisão. Ocultar é reversível.",
     "ur": "نقول مواد سے جانچی جاتی ہیں۔ ممکنہ ایڈیشن کا جائزہ لیں۔ چھپانا واپس ہو سکتا ہے۔",
     "zh-Hans": "按内容验证相同副本。可能的版本需审核。隐藏可撤销。"
+  },
+  "Las lecturas se abren al principio del pasaje en la Biblia activa.": {
+    "ar": "تُفتح القراءات من بداية المقطع في الكتاب المقدس النشط.",
+    "bn": "সক্রিয় বাইবেলে অংশের শুরু থেকে পাঠ খুলবে।",
+    "en": "Readings open at the start of the passage in the active Bible.",
+    "es": "Las lecturas se abren al principio del pasaje en la Biblia activa.",
+    "fr": "Les lectures s’ouvrent au début du passage dans la Bible active.",
+    "hi": "पठन सक्रिय बाइबल में अंश के आरंभ से खुलेगा।",
+    "id": "Bacaan dibuka pada awal bagian di Alkitab aktif.",
+    "pt": "As leituras abrem no início da passagem na Bíblia ativa.",
+    "ur": "مطالعہ فعال بائبل میں عبارت کے آغاز سے کھلے گا۔",
+    "zh-Hans": "阅读将在当前圣经中从经文开头打开。"
   },
   "Las reglas necesitan entre 1 y 32 condiciones válidas.": {
     "ar": "تتطلب القواعد من شرط واحد إلى 32 شرطًا صالحًا.",
@@ -6970,6 +7162,18 @@
     "pt": "Os metadados excedem os limites do relatório ou contêm dados inválidos.",
     "ur": "میٹاڈیٹا رپورٹ کی حدود سے تجاوز کرتا ہے یا اس میں غلط معلومات ہیں۔",
     "zh-Hans": "元数据超出报告限制或包含无效数据。"
+  },
+  "Los planes de lectura contienen datos incompatibles.": {
+    "ar": "تحتوي خطط القراءة على بيانات غير متوافقة.",
+    "bn": "পাঠ পরিকল্পনাগুলিতে অসামঞ্জস্যপূর্ণ তথ্য আছে।",
+    "en": "The reading plans contain incompatible data.",
+    "es": "Los planes de lectura contienen datos incompatibles.",
+    "fr": "Les plans de lecture contiennent des données incompatibles.",
+    "hi": "पठन योजनाओं में असंगत डेटा है।",
+    "id": "Rencana bacaan berisi data yang tidak kompatibel.",
+    "pt": "Os planos de leitura contêm dados incompatíveis.",
+    "ur": "مطالعے کے منصوبوں میں غیر مطابقت پذیر ڈیٹا ہے۔",
+    "zh-Hans": "阅读计划包含不兼容的数据。"
   },
   "Los recursos LSF disponibles se abren localmente. Los formatos que aún requieren un lector y los servicios de licencias que no están disponibles se indican en cada recurso.": {
     "ar": "تُفتح موارد LSF المتاحة محليًا. يوضّح كل مورد التنسيقات التي تحتاج قارئًا وخدمات التراخيص غير المتاحة.",
@@ -7775,6 +7979,18 @@
     "ur": "یہ آئیکن لوڈ نہیں ہو سکا۔ پچھلا انتخاب برقرار ہے۔",
     "zh-Hans": "无法加载此图标。将保留之前的选择。"
   },
+  "No se pudieron abrir los planes de lectura.": {
+    "ar": "تعذر فتح خطط القراءة.",
+    "bn": "পাঠ পরিকল্পনা খোলা যায়নি।",
+    "en": "The reading plans could not be opened.",
+    "es": "No se pudieron abrir los planes de lectura.",
+    "fr": "Impossible d’ouvrir les plans de lecture.",
+    "hi": "पठन योजनाएँ नहीं खोली जा सकीं।",
+    "id": "Rencana bacaan tidak dapat dibuka.",
+    "pt": "Não foi possível abrir os planos de leitura.",
+    "ur": "مطالعے کے منصوبے نہیں کھل سکے۔",
+    "zh-Hans": "无法打开阅读计划。"
+  },
   "No se pudieron leer las asociaciones.": {
     "ar": "تعذرت قراءة الارتباطات.",
     "bn": "সংযোগ পড়া যায়নি।",
@@ -7978,6 +8194,18 @@
     "pt": "Nome do grupo",
     "ur": "گروپ کا نام",
     "zh-Hans": "分组名称"
+  },
+  "Nombre del plan": {
+    "ar": "اسم الخطة",
+    "bn": "পরিকল্পনার নাম",
+    "en": "Plan Name",
+    "es": "Nombre del plan",
+    "fr": "Nom du plan",
+    "hi": "योजना का नाम",
+    "id": "Nama rencana",
+    "pt": "Nome do plano",
+    "ur": "منصوبے کا نام",
+    "zh-Hans": "计划名称"
   },
   "Nota o referencia {label}": {
     "ar": "ملاحظة أو مرجع {label}",
@@ -8195,6 +8423,18 @@
     "ur": "نیا گروپ",
     "zh-Hans": "新建分组"
   },
+  "Nuevo plan de lectura": {
+    "ar": "خطة قراءة جديدة",
+    "bn": "নতুন পাঠ পরিকল্পনা",
+    "en": "New Reading Plan",
+    "es": "Nuevo plan de lectura",
+    "fr": "Nouveau plan de lecture",
+    "hi": "नई पठन योजना",
+    "id": "Rencana bacaan baru",
+    "pt": "Novo plano de leitura",
+    "ur": "نیا مطالعے کا منصوبہ",
+    "zh-Hans": "新建阅读计划"
+  },
   "Nuevos": {
     "ar": "جديدة",
     "bn": "নতুন",
@@ -8242,6 +8482,18 @@
     "pt": "Números Strong",
     "ur": "اسٹرانگ نمبرز",
     "zh-Hans": "Strong 编号"
+  },
+  "Ocultar lecturas completadas": {
+    "ar": "إخفاء القراءات المكتملة",
+    "bn": "সম্পন্ন পাঠ লুকান",
+    "en": "Hide completed readings",
+    "es": "Ocultar lecturas completadas",
+    "fr": "Masquer les lectures terminées",
+    "hi": "पूर्ण पठन छिपाएँ",
+    "id": "Sembunyikan bacaan selesai",
+    "pt": "Ocultar leituras concluídas",
+    "ur": "مکمل مطالعے چھپائیں",
+    "zh-Hans": "隐藏已完成的阅读"
   },
   "Ocultar recurso": {
     "ar": "إخفاء المورد",
@@ -8567,6 +8819,18 @@
     "ur": ".libron پیکیج",
     "zh-Hans": ".libron 包"
   },
+  "Para abrir una lectura, selecciona primero una Biblia abierta.": {
+    "ar": "اختر كتابًا مقدسًا مفتوحًا قبل فتح القراءة.",
+    "bn": "পাঠ খোলার আগে একটি খোলা বাইবেল নির্বাচন করুন।",
+    "en": "Select an open Bible before opening a reading.",
+    "es": "Para abrir una lectura, selecciona primero una Biblia abierta.",
+    "fr": "Sélectionnez une Bible ouverte avant d’ouvrir une lecture.",
+    "hi": "पठन खोलने से पहले खुली बाइबल चुनें।",
+    "id": "Pilih Alkitab yang terbuka sebelum membuka bacaan.",
+    "pt": "Selecione uma Bíblia aberta antes de abrir uma leitura.",
+    "ur": "مطالعہ کھولنے سے پہلے کھلی بائبل منتخب کریں۔",
+    "zh-Hans": "打开阅读前请先选择已打开的圣经。"
+  },
   "Paralelos": {
     "ar": "المتوازيات",
     "bn": "সমান্তরাল",
@@ -8638,6 +8902,18 @@
     "pt": "Passagem, por exemplo João 1:1-5",
     "ur": "عبارت، مثلاً John 1:1-5",
     "zh-Hans": "经文，例如 John 1:1-5"
+  },
+  "Pasajes": {
+    "ar": "المقاطع",
+    "bn": "অংশ",
+    "en": "Passages",
+    "es": "Pasajes",
+    "fr": "Passages",
+    "hi": "अंश",
+    "id": "Bagian",
+    "pt": "Passagens",
+    "ur": "عبارات",
+    "zh-Hans": "经文"
   },
   "Pasajes o libros": {
     "ar": "مقاطع أو أسفار",
@@ -8722,6 +8998,42 @@
     "pt": "Colar da área de transferência",
     "ur": "کلپ بورڈ سے چسپاں کریں",
     "zh-Hans": "从剪贴板粘贴"
+  },
+  "Plan de lectura": {
+    "ar": "خطة القراءة",
+    "bn": "পাঠ পরিকল্পনা",
+    "en": "Reading Plan",
+    "es": "Plan de lectura",
+    "fr": "Plan de lecture",
+    "hi": "पठन योजना",
+    "id": "Rencana bacaan",
+    "pt": "Plano de leitura",
+    "ur": "مطالعے کا منصوبہ",
+    "zh-Hans": "阅读计划"
+  },
+  "Planes de lectura": {
+    "ar": "خطط القراءة",
+    "bn": "পাঠ পরিকল্পনা",
+    "en": "Reading Plans",
+    "es": "Planes de lectura",
+    "fr": "Plans de lecture",
+    "hi": "पठन योजनाएँ",
+    "id": "Rencana bacaan",
+    "pt": "Planos de leitura",
+    "ur": "مطالعے کے منصوبے",
+    "zh-Hans": "阅读计划"
+  },
+  "Planes de lectura…": {
+    "ar": "خطط القراءة…",
+    "bn": "পাঠ পরিকল্পনা…",
+    "en": "Reading Plans…",
+    "es": "Planes de lectura…",
+    "fr": "Plans de lecture…",
+    "hi": "पठन योजनाएँ…",
+    "id": "Rencana bacaan…",
+    "pt": "Planos de leitura…",
+    "ur": "مطالعے کے منصوبے…",
+    "zh-Hans": "阅读计划…"
   },
   "Por reglas": {
     "ar": "حسب القواعد",
@@ -9839,6 +10151,18 @@
     "ur": "نئے مطالعے پر لاگو ہوتا ہے۔ 100% پر پڑھنے کا بڑا سائز اور اصل فائل کے انداز برقرار رہتے ہیں۔",
     "zh-Hans": "适用于新打开的阅读。100% 保留放大的阅读字号，并保留原始文件的样式。"
   },
+  "Se borrarán el plan y su progreso.": {
+    "ar": "ستُحذف الخطة وتقدمها.",
+    "bn": "পরিকল্পনা ও তার অগ্রগতি মুছে যাবে।",
+    "en": "The plan and its progress will be deleted.",
+    "es": "Se borrarán el plan y su progreso.",
+    "fr": "Le plan et sa progression seront supprimés.",
+    "hi": "योजना और उसकी प्रगति हट जाएगी।",
+    "id": "Rencana dan progresnya akan dihapus.",
+    "pt": "O plano e seu progresso serão excluídos.",
+    "ur": "منصوبہ اور اس کی پیش رفت حذف ہو جائے گی۔",
+    "zh-Hans": "计划及其进度将被删除。"
+  },
   "Se buscan los recursos completos de los lectores abiertos, incluidos los minimizados.": {
     "ar": "يُبحث في الموارد الكاملة للقارئات المفتوحة، بما فيها المصغّرة.",
     "bn": "খোলা পাঠকের সম্পূর্ণ সম্পদে অনুসন্ধান হয়, ছোট করা পাঠকও অন্তর্ভুক্ত।",
@@ -10030,6 +10354,18 @@
     "pt": "Selecione um grupo para ver os resultados.",
     "ur": "نتائج دیکھنے کے لیے ایک گروپ منتخب کریں۔",
     "zh-Hans": "选择一个分组以查看其结果。"
+  },
+  "Selecciona un plan": {
+    "ar": "اختر خطة",
+    "bn": "পরিকল্পনা নির্বাচন করুন",
+    "en": "Select a plan",
+    "es": "Selecciona un plan",
+    "fr": "Sélectionner un plan",
+    "hi": "योजना चुनें",
+    "id": "Pilih rencana",
+    "pt": "Selecione um plano",
+    "ur": "منصوبہ منتخب کریں",
+    "zh-Hans": "选择计划"
   },
   "Selecciona un recurso": {
     "ar": "اختر موردًا",
@@ -11087,6 +11423,18 @@
     "ur": "مقام",
     "zh-Hans": "位置"
   },
+  "Un pasaje por línea": {
+    "ar": "مقطع واحد في كل سطر",
+    "bn": "প্রতি লাইনে একটি অংশ",
+    "en": "One passage per line",
+    "es": "Un pasaje por línea",
+    "fr": "Un passage par ligne",
+    "hi": "प्रति पंक्ति एक अंश",
+    "id": "Satu bagian per baris",
+    "pt": "Uma passagem por linha",
+    "ur": "ہر سطر میں ایک عبارت",
+    "zh-Hans": "每行一段经文"
+  },
   "Un rango por línea; los rangos solapados se cuentan por separado.": {
     "ar": "نطاق واحد في كل سطر؛ تُحسب النطاقات المتداخلة بشكل منفصل.",
     "bn": "প্রতি লাইনে একটি পরিসর; ওভারল্যাপ করা পরিসর আলাদাভাবে গণনা করা হয়।",
@@ -11626,6 +11974,18 @@
     "pt": "{articles} artigos · {fields} campos pessoais",
     "ur": "{articles} مضامین · {fields} ذاتی خانے",
     "zh-Hans": "{articles} 篇文章 · {fields} 个个人字段"
+  },
+  "{completed} de {total} lecturas": {
+    "ar": "{completed} من {total} قراءة",
+    "bn": "{total}টির মধ্যে {completed}টি পাঠ",
+    "en": "{completed} of {total} readings",
+    "es": "{completed} de {total} lecturas",
+    "fr": "{completed} lectures sur {total}",
+    "hi": "{total} में से {completed} पठन",
+    "id": "{completed} dari {total} bacaan",
+    "pt": "{completed} de {total} leituras",
+    "ur": "{total} میں سے {completed} مطالعے",
+    "zh-Hans": "已完成 {completed} / {total} 项阅读"
   },
   "{count} artículos examinados": {
     "ar": "المقالات المفحوصة: {count}",
