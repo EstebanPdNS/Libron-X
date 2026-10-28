@@ -60,10 +60,10 @@ struct PassageGuideView: View {
                                 }
                             }
                         }
-                        if !controller.failures.isEmpty || !(controller.references?.warnings.isEmpty ?? true) {
+                        if !controller.failures.isEmpty || !(controller.references?.warnings.isEmpty ?? true) || !(controller.references?.resources.isEmpty ?? true) {
                             Divider()
                             DisclosureGroup(L("Advertencias")) {
-                                Text((controller.failures + (controller.references?.warnings ?? [])).joined(separator: "\n"))
+                                Text(warningLines.joined(separator: "\n"))
                                     .font(.caption).textSelection(.enabled).frame(maxWidth: .infinity, alignment: .leading)
                             }
                         }
@@ -76,6 +76,14 @@ struct PassageGuideView: View {
             .onChange(of: controller.referenceResourceID) { controller.clear() }
             .onChange(of: workspace.availableResources) { controller.clear() }
             .onDisappear { controller.clear() }
+    }
+    private var warningLines: [String] {
+        var lines = controller.failures + (controller.references?.warnings ?? [])
+        for resource in controller.references?.resources ?? [] {
+            lines.append(resource.title + ": " + L(resource.statusKey))
+            lines += resource.details.map { L($0) }
+        }
+        return lines
     }
     private func sectionTitle(_ title: String, count: Int) -> some View {
         HStack { Text(L(title)).font(.headline); Spacer(); Text(String(count)).foregroundStyle(.secondary) }

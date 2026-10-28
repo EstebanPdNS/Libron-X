@@ -5,6 +5,25 @@ import CSQLite
 @testable import MacRebuild
 
 @MainActor struct PassageGuideControllerTests {
+    @Test func resourceWarningsKeepIdentityAndHaveTranslationsForEveryStatus() throws {
+        let statuses: [LibrarySearchResourceStatus] = [.complete, .partial, .incompatible, .failed, .notExamined]
+        let expected = ["Búsqueda completa", "Búsqueda parcial", "Recurso incompatible", "No se pudo buscar el recurso", "Recurso no examinado"]
+        for (status, key) in zip(statuses, expected) {
+            let warning = PassageGuideResourceWarning(id: "owned-id", title: "Owned title", status: status, details: ["Source detail"])
+            #expect(warning.id == "owned-id" && warning.title == "Owned title" && warning.details == ["Source detail"])
+            #expect(warning.statusKey == key)
+            for language in AppLanguage.allCases { #expect(AppStrings.catalog[key]?[language.rawValue]?.isEmpty == false) }
+        }
+    }
+    @Test func incompatibleReferenceResourceKeepsStatusAndReason() async throws {
+        let resource = LibraryResource(location: URL(fileURLWithPath: "/nonexistent/owned.logos4"), title: "Owned source",
+                                       byteCount: 0, format: .logosModern, support: .opaqueContainer, provenance: .fileName)
+        let result = try await PassageGuideController.findReferences([resource], BibleReferenceQuery.parse("Ge 1:1"))
+        let warning = try #require(result.resources.first)
+        #expect(!result.complete && result.results.isEmpty && result.resources.count == 1)
+        #expect(warning.id == resource.id && warning.title == resource.title && warning.status == .incompatible)
+        #expect(!warning.details.isEmpty)
+    }
     @Test func realCommentaryAndExplicitReferencesRetainTheirSource() async throws {
         let (root, workspace) = try fixture(); defer { try? FileManager.default.removeItem(at: root) }
         let url = root.appendingPathComponent("owned.cmti")

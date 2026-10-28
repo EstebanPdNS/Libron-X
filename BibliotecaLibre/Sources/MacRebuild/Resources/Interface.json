@@ -2051,6 +2051,18 @@
     "ur": "تلاش منسوخ؛ جزوی نتائج محفوظ ہیں۔",
     "zh-Hans": "搜索已取消；已保留部分结果。"
   },
+  "Búsqueda completa": {
+    "ar": "اكتمل البحث",
+    "bn": "অনুসন্ধান সম্পূর্ণ",
+    "en": "Search complete",
+    "es": "Búsqueda completa",
+    "fr": "Recherche terminée",
+    "hi": "खोज पूरी हुई",
+    "id": "Pencarian selesai",
+    "pt": "Pesquisa concluída",
+    "ur": "تلاش مکمل",
+    "zh-Hans": "搜索完成"
+  },
   "Búsqueda de biblioteca con índices persistentes, rangos, campos, operadores y control de ejecución.": {
     "ar": "بحث المكتبة بفهارس دائمة ونطاقات وحقول وعوامل وتحكم بالتشغيل.",
     "bn": "স্থায়ী সূচি, পরিসর, ক্ষেত্র, অপারেটর ও নিয়ন্ত্রণসহ অনুসন্ধান।",
@@ -2074,6 +2086,18 @@
     "pt": "Busca reiniciada no outro extremo",
     "ur": "دوسرے سرے سے تلاش",
     "zh-Hans": "已从另一端继续查找"
+  },
+  "Búsqueda parcial": {
+    "ar": "بحث جزئي",
+    "bn": "আংশিক অনুসন্ধান",
+    "en": "Partial search",
+    "es": "Búsqueda parcial",
+    "fr": "Recherche partielle",
+    "hi": "आंशिक खोज",
+    "id": "Pencarian sebagian",
+    "pt": "Pesquisa parcial",
+    "ur": "جزوی تلاش",
+    "zh-Hans": "部分搜索"
   },
   "Búsqueda pausada": {
     "ar": "البحث متوقف مؤقتًا",
@@ -2986,6 +3010,18 @@
     "pt": "Conteúdo da nota",
     "ur": "نوٹ کا متن",
     "zh-Hans": "笔记内容"
+  },
+  "Contenido incompatible con la búsqueda de referencias.": {
+    "ar": "المحتوى غير متوافق مع البحث عن المراجع.",
+    "bn": "বিষয়বস্তু রেফারেন্স অনুসন্ধানের সঙ্গে সামঞ্জস্যপূর্ণ নয়।",
+    "en": "Content is incompatible with reference search.",
+    "es": "Contenido incompatible con la búsqueda de referencias.",
+    "fr": "Contenu incompatible avec la recherche de références.",
+    "hi": "सामग्री संदर्भ खोज के अनुकूल नहीं है।",
+    "id": "Konten tidak kompatibel dengan pencarian referensi.",
+    "pt": "Conteúdo incompatível com a pesquisa de referências.",
+    "ur": "مواد حوالہ تلاش کے ساتھ مطابقت نہیں رکھتا۔",
+    "zh-Hans": "内容与引用搜索不兼容。"
   },
   "Contenido nativo verificado": {
     "ar": "محتوى أصلي تم التحقق منه",
@@ -8351,6 +8387,18 @@
     "ur": "نوٹ کا وضع شدہ متن نہیں کھل سکا۔ اس کی اصل صورت محفوظ ہے۔",
     "zh-Hans": "无法打开笔记的富文本。原始内容会保留。"
   },
+  "No se pudo buscar el recurso": {
+    "ar": "تعذّر البحث في المورد",
+    "bn": "সংস্থানে অনুসন্ধান করা যায়নি",
+    "en": "Could not search the resource",
+    "es": "No se pudo buscar el recurso",
+    "fr": "Impossible de rechercher dans la ressource",
+    "hi": "संसाधन में खोज नहीं की जा सकी",
+    "id": "Sumber tidak dapat dicari",
+    "pt": "Não foi possível pesquisar o recurso",
+    "ur": "وسیلے میں تلاش نہیں ہو سکی",
+    "zh-Hans": "无法搜索该资源"
+  },
   "No se pudo conservar el contenido de la nota al guardarlo.": {
     "ar": "تعذّر الحفاظ على محتوى الملاحظة عند الحفظ.",
     "bn": "সংরক্ষণের সময় নোটের বিষয়বস্তু অক্ষুণ্ণ রাখা যায়নি।",
@@ -9743,6 +9791,18 @@
     "ur": "وسیلہ",
     "zh-Hans": "资源"
   },
+  "Recurso incompatible": {
+    "ar": "مورد غير متوافق",
+    "bn": "অসামঞ্জস্যপূর্ণ সংস্থান",
+    "en": "Incompatible resource",
+    "es": "Recurso incompatible",
+    "fr": "Ressource incompatible",
+    "hi": "असंगत संसाधन",
+    "id": "Sumber tidak kompatibel",
+    "pt": "Recurso incompatível",
+    "ur": "غیر مطابقت پذیر وسیلہ",
+    "zh-Hans": "资源不兼容"
+  },
   "Recurso no disponible": {
     "ar": "المورد غير متاح",
     "bn": "সম্পদ অনুপলব্ধ",
@@ -9766,6 +9826,18 @@
     "pt": "Recurso indisponível ou incompatível",
     "ur": "وسیلہ غیر دستیاب یا ناموافق ہے",
     "zh-Hans": "资源不可用或不兼容"
+  },
+  "Recurso no examinado": {
+    "ar": "لم يُفحص المورد",
+    "bn": "সংস্থান পরীক্ষা করা হয়নি",
+    "en": "Resource not searched",
+    "es": "Recurso no examinado",
+    "fr": "Ressource non examinée",
+    "hi": "संसाधन की जाँच नहीं हुई",
+    "id": "Sumber belum diperiksa",
+    "pt": "Recurso não examinado",
+    "ur": "وسیلہ جانچا نہیں گیا",
+    "zh-Hans": "未搜索该资源"
   },
   "Recursos asociados": {
     "ar": "الموارد المرتبطة",

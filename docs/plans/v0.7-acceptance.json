@@ -27,7 +27,8 @@
         "Search explicit references concurrently with commentary and dictionary lookups; allow reference search across the library or one selected resource; preserve accent-sensitive dictionary terms.",
         "Do not claim that explicit references were absent when a reference scan did not complete; show resource-opening failures in the guide itself.",
         "Reuse the source-verified native dictionary entry count during search instead of recounting the database for every article; source stamps are checked around reads.",
-        "Use compact contiguous native-dictionary search directories and iterate descriptors lazily; preserve source-stamp validation, results, ordering and explicit coverage limits."
+        "Use compact contiguous native-dictionary search directories and iterate descriptors lazily; preserve source-stamp validation, results, ordering and explicit coverage limits.",
+        "Keep source identifiers, coverage statuses and diagnostic details separately; localize status labels at display time without changing resource titles."
       ],
       "verification": [
         "Four PassageGuideControllerTests cover a real authored e-Sword commentary and explicit-reference scan, source identity, mixed results, incomplete coverage, failures, invalid input, partial results and cancellation. Existing KeyLinkControllerTests verify real dictionary and lexicon lookups and changed-source rejection.",
@@ -38,15 +39,16 @@
         "WorkspaceUnifiedSearchTests: seven executed tests passed, two corpus-dependent tests skipped; the dictionary test compares search projections with the original reader and validates count bounds. Native build 140 profiling of Spanish Wiktionary showed reference extraction and page reads, replacing the previous profile dominated by repeated SQLite COUNT operations.",
         "Native build 140: a scoped search of the 837,661-entry Spanish Wiktionary reached the time limit, visibly marked reference coverage incomplete without claiming no references, and identified the partial source; a second search was cancelled successfully. Approximately 730 MB resident memory was observed during this single-resource run; it is not comparable to the earlier whole-library run.",
         "Build 141 searched Spanish Wiktionary using a compact 837,661-entry directory; early process memory was approximately 200–225 MB versus approximately 770 MB observed in build 140 for the same scoped search. These are point observations, not controlled peak-memory benchmarks. PersistentLibrarySearchTests pass 13 tests including compact directory encoding and old identity decoding; WorkspaceUnifiedSearchTests compare source and indexed searches and exact citation results. A full test run passed 472 core tests and 46 BibliotecaMac tests; one topic concurrency test in the 460-test MacRebuild target failed under suite load and passed when rerun alone.",
-        "Build 141 reached the search time limit in the Spanish Wiktionary and displayed an incomplete reference report without claiming no matches. During the run, process resident memory was sampled at about 200–225 MB; results do not constitute a controlled peak-memory benchmark."
+        "Build 141 reached the search time limit in the Spanish Wiktionary and displayed an incomplete reference report without claiming no matches. During the run, process resident memory was sampled at about 200–225 MB; results do not constitute a controlled peak-memory benchmark.",
+        "PassageGuideControllerTests and AppLanguageTests passed (13 tests), including a real incompatible-resource report and all status labels in ten languages. Build 143 displayed the same incomplete Wiktionary report in Spanish dark, Arabic light and English dark, preserving the resource name and updating the warning when the language changed. Original English/automatic settings were restored."
       ],
       "limitations": [
         "Long dictionary and library scans can still be slow; the guide displays partial matches and supports cancellation, but lookup duration is not independently bounded.",
         "The guide uses user-supplied dictionary terms and explicit citation syntax; automatic terms from a passage and richer relationships are not yet implemented.",
         "Narrow host-window, RTL results with actual matches, older macOS, complete-library time and memory consumption require further verification.",
         "A single large dictionary search still uses substantial memory for its article directory and may reach its duration limit; this optimization removes repeated counting, not all search cost.",
-        "Reference warning resource statuses currently expose English technical raw values and need localized, user-facing descriptions.",
-        "Compact dictionary directories currently skip index-based candidate pruning to avoid allocating a full ordinal set; every candidate is still checked and coverage limits remain explicit. Optimize pruning without sacrificing correctness or bounded memory."
+        "Compact dictionary directories currently skip index-based candidate pruning to avoid allocating a full ordinal set; every candidate is still checked and coverage limits remain explicit. Optimize pruning without sacrificing correctness or bounded memory.",
+        "Diagnostic messages not supplied by the app catalog may remain in their source language; the status labels and known incompatible-resource explanation are translated."
       ]
     },
     {

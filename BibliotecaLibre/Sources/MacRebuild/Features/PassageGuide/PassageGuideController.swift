@@ -12,6 +12,22 @@ struct PassageGuideReferences: Sendable {
     let results: [BibleReferenceSearchResult]
     let complete: Bool
     let warnings: [String]
+    var resources: [PassageGuideResourceWarning] = []
+}
+struct PassageGuideResourceWarning: Sendable, Identifiable {
+    let id: String
+    let title: String
+    let status: LibrarySearchResourceStatus
+    let details: [String]
+    var statusKey: String {
+        switch status {
+        case .complete: return "Búsqueda completa"
+        case .partial: return "Búsqueda parcial"
+        case .incompatible: return "Recurso incompatible"
+        case .failed: return "No se pudo buscar el recurso"
+        case .notExamined: return "Recurso no examinado"
+        }
+    }
 }
 
 /// A guide combines verified source lookups with explicit reference mentions.
@@ -116,12 +132,15 @@ struct PassageGuideReferences: Sendable {
         guard workspace.availableResources.filter({ !$0.isHelp }) == library else { throw PersonalStateError.invalid("La biblioteca cambió. Vuelve a generar la guía.") }
         references = citations
     }
-    nonisolated private static func findReferences(_ resources: [LibraryResource], _ query: BibleReferenceQuery) async throws -> PassageGuideReferences {
+    nonisolated static func findReferences(_ resources: [LibraryResource], _ query: BibleReferenceQuery) async throws -> PassageGuideReferences {
         let service = BibleReferenceSearchService(provider: PersistentLibrarySearchProvider(source: WorkspaceSearchReader()))
         let report = try await service.search(resources: resources, query: query,
             budget: .init(maximumDurationSeconds: 60, maximumArticles: 50_000, maximumResults: 250))
-        let warnings = report.resources.filter { $0.status != .complete }.map { $0.resourceTitle + ": " + $0.status.rawValue }
-        return .init(results: report.results, complete: report.coverageComplete, warnings: warnings)
+        let resources = report.resources.filter { $0.status != .complete }.map {
+            PassageGuideResourceWarning(id: $0.resourceID, title: $0.resourceTitle, status: $0.status,
+                                        details: $0.warnings + $0.errors.map(\.message))
+        }
+        return .init(results: report.results, complete: report.coverageComplete, warnings: [], resources: resources)
     }
     deinit { task?.cancel() }
 }
