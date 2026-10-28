@@ -25,6 +25,8 @@ struct WorkspacePersonalSnapshot: Codable {
     private(set) var bookmarkLoadError: String?
     private(set) var readingPlans = ReadingPlans()
     private(set) var readingPlansLoadError: String?
+    private(set) var prayerJournal = PrayerJournal()
+    private(set) var prayerJournalLoadError: String?
     var highlights: [ReaderHighlight] = []
     var documents: [StudyDocument] = []
     var selectedDocumentID: UUID?
@@ -32,8 +34,10 @@ struct WorkspacePersonalSnapshot: Codable {
     @ObservationIgnored private let file: PersonalStateFile<WorkspacePersonalSnapshot>
     @ObservationIgnored private let bookmarkFile: PersonalStateFile<NumberedBookmarks>
     @ObservationIgnored private let readingPlansFile: PersonalStateFile<ReadingPlans>
+    @ObservationIgnored private let prayerJournalFile: PersonalStateFile<PrayerJournal>
     @ObservationIgnored private var bookmarksWritable = false
     @ObservationIgnored private var readingPlansWritable = false
+    @ObservationIgnored private var prayerJournalWritable = false
     @ObservationIgnored private var canSave = false
     @ObservationIgnored private var saveTask: Task<Void, Never>?
     init(url: URL? = nil) {
@@ -42,6 +46,7 @@ struct WorkspacePersonalSnapshot: Codable {
         file = PersonalStateFile(url: path)
         bookmarkFile = PersonalStateFile(url: path.deletingLastPathComponent().appendingPathComponent("numbered-bookmarks.json"))
         readingPlansFile = PersonalStateFile(url: path.deletingLastPathComponent().appendingPathComponent("reading-plans.json"))
+        prayerJournalFile = PersonalStateFile(url: path.deletingLastPathComponent().appendingPathComponent("prayer-journal.json"))
         do {
             if let saved = try file.load() {
                 try saved.validate(); favorites = saved.favorites; highlights = saved.highlights; documents = saved.documents
@@ -56,6 +61,27 @@ struct WorkspacePersonalSnapshot: Codable {
             if let saved = try readingPlansFile.load() { try saved.validate(); readingPlans = saved }
             readingPlansWritable = true
         } catch { readingPlansLoadError = error.localizedDescription }
+        do {
+            if let saved = try prayerJournalFile.load() { try saved.validate(); prayerJournal = saved }
+            prayerJournalWritable = true
+        } catch { prayerJournalLoadError = error.localizedDescription }
+    }
+    func editPrayerJournal(_ edit: (inout PrayerJournal) throws -> Void) throws {
+        guard prayerJournalWritable else { throw PersonalStateError.invalid(prayerJournalLoadError ?? "No se pudo abrir la lista de oración.") }
+        var next = prayerJournal
+        try edit(&next); try next.validate()
+        guard next != prayerJournal else { return }
+        try prayerJournalFile.save(next)
+        prayerJournal = next
+    }
+    func savePrayerRequest(original: PrayerRequest?, replacement: PrayerRequest) throws {
+        try editPrayerJournal { state in
+            if let original {
+                guard replacement.id == original.id, let index = state.requests.firstIndex(where: { $0.id == original.id }),
+                      state.requests[index] == original else { throw PersonalStateError.concurrentChange }
+                state.requests[index] = replacement
+            } else { state.requests.append(replacement) }
+        }
     }
     func editReadingPlans(_ edit: (inout ReadingPlans) throws -> Void) throws {
         guard readingPlansWritable else { throw PersonalStateError.invalid(readingPlansLoadError ?? "No se pudieron abrir los planes de lectura.") }

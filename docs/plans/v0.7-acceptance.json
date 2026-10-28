@@ -657,10 +657,16 @@
       "sourceKey": "study-expansion-daily-05",
       "acceptance": "Categorías, repetición, privacidad y estado de respuesta persistentes.",
       "baseline": "Las notas generales pueden almacenar texto, sin modelo propio de oración.",
-      "status": "pending",
-      "implementation": [],
-      "verification": [],
-      "limitations": []
+      "status": "in_progress",
+      "implementation": [
+        "Added a separate local prayer journal with categories, private presentation flags, once/daily/weekly/monthly schedules, prayed and answered dates, validation and transactional persistence."
+      ],
+      "verification": [
+        "PrayerJournalTests and PrayerJournalPersistenceTests pass for leap/month-end schedules, answer and reopen state, categories, private flags, future schemas and concurrent writes; ReadingPlanPersistenceTests also pass."
+      ],
+      "limitations": [
+        "The journal has no user-facing interface yet. The private flag is a presentation preference, not encryption or access control; local data is stored in a separate JSON file. UI, accessibility and visual review remain pending."
+      ]
     },
     {
       "id": "F182",
