@@ -36,10 +36,8 @@ private struct FavoriteRows: View {
                 .foregroundStyle(.secondary)
             Text(node.favorite.title).lineLimit(1)
             Spacer()
-            if node.favorite.kind == .location {
+            if node.favorite.kind == .location || node.favorite.kind == .legacyCommand {
                 Button(L("Abrir")) { workspace.openFavorite(node.favorite) }
-            } else if node.favorite.kind == .legacyCommand {
-                Text(L("Acción original sin resolver")).font(.caption).foregroundStyle(.secondary)
             }
         }
     }

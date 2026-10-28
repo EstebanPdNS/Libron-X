@@ -193,6 +193,11 @@ struct ReaderHighlight: Identifiable, Codable, Equatable, Sendable {
         activeTool = nil
     }
     func openFavorite(_ favorite: LibraryFavorite, loader: ReaderSession.Loader? = nil) {
+        cancelOriginalFavoriteNavigation()
+        if favorite.kind == .legacyCommand, let command = favorite.legacyCommand {
+            openOriginalFavorite(command, loader: loader)
+            return
+        }
         guard let location = favorite.location, let resource = location.resolve(in: resources) else {
             error = L("El recurso de este favorito no está disponible en la biblioteca abierta."); return
         }
@@ -201,6 +206,46 @@ struct ReaderHighlight: Identifiable, Codable, Equatable, Sendable {
         reader.load(.init(ordinal: location.sectionOrdinal, reference: location.reference),
                     selection: selection, expectedFingerprint: location.textFingerprint)
         activeTool = nil
+    }
+    func cancelOriginalFavoriteNavigation() {
+        originalFavoriteGeneration += 1
+        originalFavoriteTask?.cancel()
+        originalFavoriteTask = nil
+    }
+    private func openOriginalFavorite(_ command: String, loader: ReaderSession.Loader?) {
+        do {
+            let destination = try LegacyJumpDestination.parse(command)
+            let matches = resources.filter {
+                $0.format == .legacyLSF && LegacyNumericResourceID.fromBKIDHex($0.legacyIdentifier)?.identifier == destination.resourceID
+            }
+            guard matches.count == 1, let resource = matches.first else {
+                error = L(matches.isEmpty ? "El recurso de este favorito no está disponible en la biblioteca abierta." : "Hay varias copias de este recurso. Se conserva el destino hasta confirmar la edición.")
+                return
+            }
+            let generation = originalFavoriteGeneration
+            let readerID = activeID, readerGeneration = activeReader?.associationGeneration
+            originalFavoriteTask = Task { [weak self] in
+                do {
+                    let result = try await LegacyContentService().resolveArticleLocator(resource, originalResourceID: destination.resourceID, position: destination.position)
+                    try Task.checkCancellation()
+                    guard let self, self.originalFavoriteGeneration == generation else { return }
+                    self.originalFavoriteTask = nil
+                    guard self.activeID == readerID, self.activeReader?.associationGeneration == readerGeneration,
+                          self.resources.filter({ $0.format == .legacyLSF && LegacyNumericResourceID.fromBKIDHex($0.legacyIdentifier)?.identifier == destination.resourceID }).count == 1,
+                          result.location.resolve(in: self.resources) != nil else { return }
+                    let reader = self.open(resource, startReading: false, loader: loader)
+                    reader.load(.init(ordinal: result.location.sectionOrdinal, reference: result.location.reference),
+                                selection: result.range.nsRange, expectedFingerprint: result.location.textFingerprint)
+                    self.activeTool = nil
+                } catch is CancellationError { }
+                catch {
+                    guard let self, self.originalFavoriteGeneration == generation else { return }
+                    self.originalFavoriteTask = nil
+                    guard self.activeID == readerID, self.activeReader?.associationGeneration == readerGeneration else { return }
+                    self.error = L(error.localizedDescription)
+                }
+            }
+        } catch { self.error = L(error.localizedDescription) }
     }
     func savePersonal() {
         do { try personal.save() } catch { self.error = error.localizedDescription }

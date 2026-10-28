@@ -5711,6 +5711,18 @@
     "ur": "ایک اپ ڈیٹ دستیاب ہے۔",
     "zh-Hans": "有可用更新。"
   },
+  "Hay varias copias de este recurso. Se conserva el destino hasta confirmar la edición.": {
+    "ar": "توجد نسخ متعددة من هذا المورد. تُحفظ الوجهة حتى تأكيد الإصدار.",
+    "bn": "এই রিসোর্সের একাধিক কপি আছে। সংস্করণ নিশ্চিত না হওয়া পর্যন্ত গন্তব্য সংরক্ষিত থাকবে।",
+    "en": "There are multiple copies of this resource. The destination is preserved until the edition is confirmed.",
+    "es": "Hay varias copias de este recurso. Se conserva el destino hasta confirmar la edición.",
+    "fr": "Plusieurs copies de cette ressource existent. La destination est conservée jusqu’à confirmation de l’édition.",
+    "hi": "इस संसाधन की कई प्रतियां हैं। संस्करण की पुष्टि होने तक गंतव्य सुरक्षित रहेगा।",
+    "id": "Ada beberapa salinan sumber ini. Tujuan disimpan hingga edisinya dikonfirmasi.",
+    "pt": "Existem várias cópias deste recurso. O destino é preservado até confirmar a edição.",
+    "ur": "اس وسیلے کی متعدد کاپیاں ہیں۔ ایڈیشن کی تصدیق تک منزل محفوظ رہے گی۔",
+    "zh-Hans": "此资源有多个副本。确认版本之前将保留目标位置。"
+  },
   "Herramientas": {
     "ar": "أدوات",
     "bn": "সরঞ্জাম",

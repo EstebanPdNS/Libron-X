@@ -76,7 +76,7 @@ struct StudyDesktop: View {
         .sheet(item: $workspace.activeTool) { tool in
             WorkspaceToolsView(tool: tool, workspace: workspace).modifier(AppInterfaceLanguage())
         }
-        .alert("Libron-X", isPresented: Binding(get: { workspace.error != nil }, set: { if !$0 { workspace.error = nil } })) {
+        .alert("Libron-X", isPresented: Binding(get: { workspace.error != nil && workspace.activeTool != .favorites }, set: { if !$0 { workspace.error = nil } })) {
             Button(L("Aceptar")) { workspace.error = nil }
         } message: { Text(workspace.error ?? "") }
     }

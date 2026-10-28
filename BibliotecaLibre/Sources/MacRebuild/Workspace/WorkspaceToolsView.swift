@@ -32,6 +32,9 @@ struct WorkspaceToolsView: View {
                 minHeight: compactComparison || compactAnnotationSearch || tool == .information ? nil : tool == .bibliography ? 640 : tool == .search ? 680 : expandedScope ? 620 : 520,
                 idealHeight: compactComparison || compactAnnotationSearch || tool == .information ? nil : tool == .bibliography ? 820 : tool == .search ? 820 : expandedScope ? 720 : 620)
             .modifier(MacPanelControlPresentation())
+            .alert("Libron-X", isPresented: Binding(get: { tool == .favorites && workspace.error != nil }, set: { if !$0 { workspace.error = nil } })) {
+                Button(L("Aceptar")) { workspace.error = nil }
+            } message: { Text(workspace.error ?? "") }
     }
     private var compactAnnotationSearch: Bool {
         tool == .annotationSearch && workspace.annotationSearch.report == nil && !workspace.annotationSearch.isSearching

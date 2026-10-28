@@ -59,6 +59,8 @@ enum PaneArrangement { case cascade, horizontal, vertical }
     var parallelBibleSets: ParallelBibleSets
     var recentWorkspaces: RecentWorkspaces
     @ObservationIgnored var bibleVersionTask: Task<Void, Never>?
+    @ObservationIgnored var originalFavoriteTask: Task<Void, Never>?
+    @ObservationIgnored var originalFavoriteGeneration = 0
     @ObservationIgnored let bibleVersionCatalog = BibleVersionCatalog()
     @ObservationIgnored private let importer = LibraryImporter()
     @ObservationIgnored private var importTask: Task<Void, Never>?
@@ -171,6 +173,7 @@ enum PaneArrangement { case cascade, horizontal, vertical }
         // Wheel events can arrive at the display refresh rate. An already
         // frontmost reader must not invalidate/reorder the whole workspace.
         if activeID == reader.id, readers.last === reader, !reader.isMinimized, !showsHome { return }
+        cancelOriginalFavoriteNavigation()
         guard readers.contains(where: { $0 === reader }) else { return }
         reader.isMinimized = false; activeID = reader.id
         if reader.canSynchronizeBible {
@@ -181,6 +184,7 @@ enum PaneArrangement { case cascade, horizontal, vertical }
         readers.removeAll { $0 === reader }; readers.append(reader)
     }
     @discardableResult func open(_ resource: LibraryResource, startReading: Bool = true, destination: ReaderDestination? = nil, loader: ReaderSession.Loader? = nil) -> ReaderSession {
+        cancelOriginalFavoriteNavigation()
         let reader = ReaderSession(resource: resource, loader: loader ?? ReaderSession.read)
         showsHome = false
         connect(reader)
@@ -200,6 +204,7 @@ enum PaneArrangement { case cascade, horizontal, vertical }
         return reader
     }
     func close(_ reader: ReaderSession) {
+        cancelOriginalFavoriteNavigation()
         let order = orderedReaders
         let successor = order.firstIndex(where: { $0 === reader }).flatMap { index in
             order.dropFirst(index + 1).first ?? order.prefix(index).first
@@ -219,8 +224,9 @@ enum PaneArrangement { case cascade, horizontal, vertical }
         }
         if referenceTargetID == reader.id { referenceTargetID = nil }
     }
-    func closeAll() { for reader in readers { reader.cancel() }; readers = []; readerOrder = []; activeID = nil; referenceTargetID = nil }
+    func closeAll() { cancelOriginalFavoriteNavigation(); for reader in readers { reader.cancel() }; readers = []; readerOrder = []; activeID = nil; referenceTargetID = nil }
     func minimize(_ reader: ReaderSession) {
+        cancelOriginalFavoriteNavigation()
         reader.isMinimized = true
         if activeID == reader.id { activeID = visibleReaders.last?.id }
     }
@@ -317,6 +323,7 @@ enum PaneArrangement { case cascade, horizontal, vertical }
         importProgress = "\(value.completed) / \(value.total)"
     }
     func shutdown() {
+        cancelOriginalFavoriteNavigation()
         bibleVersionTask?.cancel()
         search.cancel()
         keyLinks.cancel()
