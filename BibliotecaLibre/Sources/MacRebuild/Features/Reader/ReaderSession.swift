@@ -59,6 +59,7 @@ struct ReaderPage: Sendable {
     var isCommentary: Bool { commentaryResourceID != nil }
     var displayTitle: String { isCommentary ? LF("Comentarios · {title}", ["title": resource.title]) : resource.title }
     var isDictionary: Bool { LibronDictionaryIndex.supports(resource) }
+    var isDevotional: Bool { resource.format == .eSwordSQLite && resource.libron?.resourceType == "Devocional" }
     var showsStrongNumbers = false
     var strongVariant: LibraryResource? {
         guard let location = resource.libron?.evidence.first(where: { $0.field == "strongVariantPackage" })?.value else { return nil }
@@ -458,6 +459,38 @@ struct ReaderPage: Sendable {
             } catch {
                 guard let self, token == self.generation, !Task.isCancelled else { return }
                 self.error = error.localizedDescription; self.isLoading = false
+            }
+        }
+    }
+    /// Resolve dates from the original source each time and verify the reader's
+    /// directory still describes the same resource before committing navigation.
+    func openDevotional(_ day: ReadingDay) {
+        guard isDevotional, page != nil else { return }
+        cancel(); let token = generation, resource = readingResource
+        isLoading = true; error = nil
+        task = Task { [weak self, loader] in
+            do {
+                let stamp = try LibrarySearchFileStamp.capture(resource.location)
+                let source = try await Task.detached(priority: .userInitiated) { try ESwordResource.page(resource.location, ordinal: 0) }.value
+                try Task.checkCancellation(); try LibrarySearchFileStamp.verify([stamp])
+                let directory = try DevotionalDirectory(entries: source.contents.enumerated().map { ($0.offset, $0.element) })
+                guard let ordinal = try directory.ordinal(for: day) else {
+                    guard let self, self.generation == token else { return }
+                    self.error = L("No hay devocional para esta fecha. La lectura actual permanece abierta.")
+                    self.isLoading = false; self.task = nil; return
+                }
+                let result = try await loader(resource, .init(ordinal: ordinal))
+                try Task.checkCancellation(); try LibrarySearchFileStamp.verify([stamp])
+                guard result.destination.ordinal == ordinal, result.entries.map(\.title) == source.contents else { throw LegacyIndicesError.sourceChanged }
+                guard let self, self.generation == token, self.resource == resource else { return }
+                self.commit(result, historyTarget: nil, recordHistory: true)
+                self.isLoading = false; self.task = nil
+                if self.flowEnabled { self.fillReadingFlow() }
+            } catch {
+                guard let self, self.generation == token, !Task.isCancelled else { return }
+                if error is DevotionalDirectoryError { self.error = L("Las fechas del devocional son inválidas o están duplicadas.") }
+                else { self.error = L(error.localizedDescription) }
+                self.isLoading = false; self.task = nil
             }
         }
     }

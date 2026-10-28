@@ -637,13 +637,15 @@
       "baseline": "El formato .devi se importa y se lee.",
       "status": "in_progress",
       "implementation": [
-        "Added a checked recurring Gregorian month/day directory for e-Sword devotional entries; missing and ambiguous dates do not resolve to another article."
+        "Added a checked recurring Gregorian month/day directory for e-Sword devotional entries; missing and ambiguous dates do not resolve to another article.",
+        "Added a native date picker, Today and previous/next day controls for e-Sword devotional readers. Each jump rechecks the original date directory and file stamp before committing; absent or ambiguous dates leave the current reading and history intact."
       ],
       "verification": [
-        "Two DevotionalDirectoryTests cover exact dates, missing days, invalid and duplicate dates, leap years, and an authored .devi SQLite resource without altering its bytes."
+        "Two DevotionalDirectoryTests cover exact dates, missing days, invalid and duplicate dates, leap years, and an authored .devi SQLite resource without altering its bytes.",
+        "DevotionalDirectoryTests and DevotionalNavigationTests pass, including authored .devi and normalized packages, leap dates, missing dates, source-change rejection and history. AppLanguageTests pass in ten languages. Builds 145–146 were checked in the real app: Today, direct date selection, next/previous and a missing day; English dark and Arabic light were inspected and RTL arrows corrected. The test resource was removed and original catalog and workspace restored."
       ],
       "limitations": [
-        "The reader still needs native Today, date selection and previous/next day controls; end-to-end UI and resource restoration checks remain pending."
+        "Narrow reader panes, other macOS versions, physical keyboard/VoiceOver coverage and source formats beyond e-Sword .devi remain to be verified; the feature is intentionally enabled only for verified e-Sword devotional metadata."
       ]
     },
     {

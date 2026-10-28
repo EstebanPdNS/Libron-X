@@ -11,6 +11,9 @@ struct DevotionalDirectoryTests {
         #expect(try index.ordinal(for: ReadingDay(year: 2025, month: 1, day: 1)) == 0)
         #expect(try index.ordinal(for: ReadingDay(year: 2024, month: 2, day: 29)) == 2)
         #expect(try index.ordinal(for: ReadingDay(year: 2025, month: 2, day: 28)) == nil)
+        #expect(index.day(forOrdinal: 2, preferredYear: 2025) == (try ReadingDay(year: 2024, month: 2, day: 29)))
+        #expect(index.day(forOrdinal: 0, preferredYear: 2025) == (try ReadingDay(year: 2025, month: 1, day: 1)))
+        #expect(index.day(forOrdinal: 9, preferredYear: 2025) == nil)
         #expect(throws: (any Error).self) { try ReadingDay(year: 2025, month: 2, day: 29) }
         #expect(throws: DevotionalDirectoryError.duplicateDate) { try DevotionalDirectory(entries: [(0, "1/1"), (1, "01/01")]) }
         #expect(throws: DevotionalDirectoryError.invalidDirectory) { try DevotionalDirectory(entries: [(0, "2/30")]) }

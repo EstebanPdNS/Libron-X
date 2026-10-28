@@ -95,6 +95,7 @@ struct InternalReaderPane: View {
             titleBar
             if reader.isCommentary { ReaderCommentaryToolbar(reader: reader, workspace: workspace) }
             else { ResourceReaderToolbar(reader: reader, workspace: workspace) }
+            if reader.isDevotional { DevotionalDateBar(reader: reader, workspace: workspace) }
             Divider()
             if reader.showsLocator {
                 HStack {

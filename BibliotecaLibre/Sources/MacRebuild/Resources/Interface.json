@@ -4199,6 +4199,30 @@
     "ur": "فعال دورانیہ (سیکنڈ)",
     "zh-Hans": "活动时长（秒）"
   },
+  "Día anterior": {
+    "ar": "اليوم السابق",
+    "bn": "আগের দিন",
+    "en": "Previous day",
+    "es": "Día anterior",
+    "fr": "Jour précédent",
+    "hi": "पिछला दिन",
+    "id": "Hari sebelumnya",
+    "pt": "Dia anterior",
+    "ur": "پچھلا دن",
+    "zh-Hans": "前一天"
+  },
+  "Día siguiente": {
+    "ar": "اليوم التالي",
+    "bn": "পরের দিন",
+    "en": "Next day",
+    "es": "Día siguiente",
+    "fr": "Jour suivant",
+    "hi": "अगला दिन",
+    "id": "Hari berikutnya",
+    "pt": "Dia seguinte",
+    "ur": "اگلا دن",
+    "zh-Hans": "后一天"
+  },
   "Días de lectura": {
     "ar": "أيام القراءة",
     "bn": "পাঠের দিন",
@@ -6131,6 +6155,18 @@
     "ur": "مطالعے کی تاریخ",
     "zh-Hans": "阅读历史"
   },
+  "Hoy": {
+    "ar": "اليوم",
+    "bn": "আজ",
+    "en": "Today",
+    "es": "Hoy",
+    "fr": "Aujourd’hui",
+    "hi": "आज",
+    "id": "Hari ini",
+    "pt": "Hoje",
+    "ur": "آج",
+    "zh-Hans": "今天"
+  },
   "Icono": {
     "ar": "الأيقونة",
     "bn": "আইকন",
@@ -7019,6 +7055,18 @@
     "ur": "نقول مواد سے جانچی جاتی ہیں۔ ممکنہ ایڈیشن کا جائزہ لیں۔ چھپانا واپس ہو سکتا ہے۔",
     "zh-Hans": "按内容验证相同副本。可能的版本需审核。隐藏可撤销。"
   },
+  "Las fechas del devocional son inválidas o están duplicadas.": {
+    "ar": "تواريخ القراءات التعبدية غير صالحة أو مكررة.",
+    "bn": "ভক্তিমূলক পাঠের তারিখ অবৈধ বা পুনরাবৃত্ত।",
+    "en": "The devotional dates are invalid or duplicated.",
+    "es": "Las fechas del devocional son inválidas o están duplicadas.",
+    "fr": "Les dates du texte de méditation sont invalides ou en double.",
+    "hi": "दैनिक भक्ति पाठ की तिथियाँ अमान्य या दोहराई गई हैं।",
+    "id": "Tanggal renungan tidak valid atau duplikat.",
+    "pt": "As datas do devocional são inválidas ou duplicadas.",
+    "ur": "عبادتی مطالعے کی تاریخیں غلط یا دہرائی گئی ہیں۔",
+    "zh-Hans": "灵修日期无效或重复。"
+  },
   "Las lecturas se abren al principio del pasaje en la Biblia activa.": {
     "ar": "تُفتح القراءات من بداية المقطع في الكتاب المقدس النشط.",
     "bn": "সক্রিয় বাইবেলে অংশের শুরু থেকে পাঠ খুলবে।",
@@ -7030,6 +7078,18 @@
     "pt": "As leituras abrem no início da passagem na Bíblia ativa.",
     "ur": "مطالعہ فعال بائبل میں عبارت کے آغاز سے کھلے گا۔",
     "zh-Hans": "阅读将在当前圣经中从经文开头打开。"
+  },
+  "Las lecturas se repiten cada año.": {
+    "ar": "تتكرر القراءات كل عام.",
+    "bn": "পাঠ প্রতি বছর পুনরাবৃত্ত হয়।",
+    "en": "Readings repeat each year.",
+    "es": "Las lecturas se repiten cada año.",
+    "fr": "Les lectures se répètent chaque année.",
+    "hi": "पाठ हर वर्ष दोहराए जाते हैं।",
+    "id": "Bacaan berulang setiap tahun.",
+    "pt": "As leituras repetem-se todos os anos.",
+    "ur": "مطالعے ہر سال دہرائے جاتے ہیں۔",
+    "zh-Hans": "读经内容每年重复。"
   },
   "Las referencias se buscan en los recursos disponibles; no se convierten versificaciones.": {
     "ar": "تُبحث المراجع في الموارد المتاحة؛ لا تُحوّل أنظمة ترقيم الآيات.",
@@ -8074,6 +8134,18 @@
     "pt": "Não há comentários disponíveis.",
     "ur": "کوئی تفاسیر دستیاب نہیں ہیں۔",
     "zh-Hans": "没有可用的注释书。"
+  },
+  "No hay devocional para esta fecha. La lectura actual permanece abierta.": {
+    "ar": "لا توجد قراءة تعبدية لهذا التاريخ. تبقى القراءة الحالية مفتوحة.",
+    "bn": "এই তারিখে কোনো ভক্তিমূলক পাঠ নেই। বর্তমান পাঠ খোলা থাকবে।",
+    "en": "No devotional is available for this date. The current reading remains open.",
+    "es": "No hay devocional para esta fecha. La lectura actual permanece abierta.",
+    "fr": "Aucun texte de méditation pour cette date. La lecture actuelle reste ouverte.",
+    "hi": "इस तिथि के लिए कोई दैनिक भक्ति पाठ नहीं है। वर्तमान पाठ खुला रहेगा।",
+    "id": "Tidak ada bacaan renungan untuk tanggal ini. Bacaan saat ini tetap terbuka.",
+    "pt": "Não há devocional para esta data. A leitura atual permanece aberta.",
+    "ur": "اس تاریخ کے لیے کوئی عبادتی مطالعہ نہیں۔ موجودہ مطالعہ کھلا رہے گا۔",
+    "zh-Hans": "此日期没有灵修内容。当前阅读保持打开。"
   },
   "No hay diccionarios disponibles.": {
     "ar": "لا توجد قواميس متاحة.",
