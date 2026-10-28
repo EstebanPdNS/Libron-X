@@ -24,17 +24,20 @@
       "implementation": [
         "Added a native passage guide that checks commentary resources and optional user-supplied dictionary/lexicon terms in priority order, searches explicit references across available resources, exposes source-backed opening and displays incomplete coverage and failures.",
         "The guide publishes verified commentary results while reference scanning continues, names the current resource or reference-search phase, and cancels stale work when inputs, library, or view change.",
-        "Search explicit references concurrently with commentary and dictionary lookups; allow reference search across the library or one selected resource; preserve accent-sensitive dictionary terms."
+        "Search explicit references concurrently with commentary and dictionary lookups; allow reference search across the library or one selected resource; preserve accent-sensitive dictionary terms.",
+        "Do not claim that explicit references were absent when a reference scan did not complete; show resource-opening failures in the guide itself."
       ],
       "verification": [
         "Four PassageGuideControllerTests cover a real authored e-Sword commentary and explicit-reference scan, source identity, mixed results, incomplete coverage, failures, invalid input, partial results and cancellation. Existing KeyLinkControllerTests verify real dictionary and lexicon lookups and changed-source rejection.",
         "Native build 137 displayed and opened the authored commentary while references were still being scanned. The user catalog and personal files were restored; the test resource was retained separately.",
-        "Six PassageGuideControllerTests pass, including concurrent partial results, accent-sensitive terms, a selected resource and missing-source handling. Native build 138 completed a scoped search against an authored commentary and opened the reference with its text selected. The test resource was removed and the original catalog and personal state restored."
+        "Six PassageGuideControllerTests pass, including concurrent partial results, accent-sensitive terms, a selected resource and missing-source handling. Native build 138 completed a scoped search against an authored commentary and opened the reference with its text selected. The test resource was removed and the original catalog and personal state restored.",
+        "Native build 138: the light Arabic interface displayed the initial form, scoped source and completed empty report with RTL headers and actions. Original English and automatic appearance settings were restored. Build 139 compiled the incomplete-report correction; its initial and searching states were inspected in dark appearance.",
+        "Native build 139: completed empty scoped report in dark appearance retained the accurate empty message. A whole-library search was cancelled after roughly one minute, with the process near 1.4 GB resident; cancellation returned the form to idle. This does not verify final partial-report rendering."
       ],
       "limitations": [
         "Long dictionary and library scans can still be slow; the guide displays partial matches and supports cancellation, but lookup duration is not independently bounded.",
         "The guide uses user-supplied dictionary terms and explicit citation syntax; automatic terms from a passage and richer relationships are not yet implemented.",
-        "Light, RTL, narrow-window and older macOS visual coverage remain pending; complete-library searches also need further performance evaluation."
+        "Narrow host-window, RTL results with actual matches, older macOS, final incomplete-report rendering, and complete-library time and memory consumption require further verification."
       ]
     },
     {

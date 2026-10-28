@@ -48,7 +48,7 @@ struct PassageGuideView: View {
                         if let report = controller.references {
                             if !report.complete { Text(L("La búsqueda de referencias no está completa.")).font(.caption).foregroundStyle(.secondary) }
                             if controller.referenceSourceCount == 0 { Text(L("No hay recursos disponibles para buscar referencias.")).foregroundStyle(.secondary) }
-                            else if report.results.isEmpty { Text(L("No se encontraron referencias explícitas.")).foregroundStyle(.secondary) }
+                            else if report.complete && report.results.isEmpty { Text(L("No se encontraron referencias explícitas.")).foregroundStyle(.secondary) }
                             ForEach(report.results) { result in
                                 VStack(alignment: .leading, spacing: 4) {
                                     HStack {
