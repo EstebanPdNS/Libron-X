@@ -50,6 +50,39 @@ public struct StudyVerseEntry: Identifiable, Codable, Equatable, Sendable {
     public init(reference: String, location: ReaderLocation? = nil) { self.reference = reference; self.location = location }
 }
 
+/// Editing operations preserve entry identities, source metadata and destinations.
+public enum StudyVerseOrganization {
+    /// Move one entry by one position. Boundary moves leave the list unchanged.
+    public static func move(_ id: UUID, by offset: Int, in document: inout StudyDocument) throws {
+        guard document.kind == .verseList, [-1, 1].contains(offset),
+              let index = document.verses.firstIndex(where: { $0.id == id }) else {
+            throw PersonalStateError.invalid("No se puede mover la referencia seleccionada.")
+        }
+        let destination = index + offset
+        guard document.verses.indices.contains(destination) else { return }
+        document.verses.swapAt(index, destination)
+    }
+
+    /// Sort only when every entry has one unambiguous, recognized starting
+    /// address. Never silently move an unknown entry or convert versifications.
+    public static func sortCanonically(_ document: inout StudyDocument) throws {
+        guard document.kind == .verseList else {
+            throw PersonalStateError.invalid("El documento no es una lista de versículos.")
+        }
+        let keyed = try document.verses.enumerated().map { index, entry in
+            let query = try BibleReferenceQuery.parse(entry.reference)
+            guard query.citations.count == 1, query.citations[0].spans.count == 1,
+                  let span = query.citations[0].spans.first else {
+                throw PersonalStateError.invalid("Una referencia no tiene un orden bíblico inequívoco.")
+            }
+            return (index: index, entry: entry, address: span.lower)
+        }
+        document.verses = keyed.sorted { lhs, rhs in
+            lhs.address == rhs.address ? lhs.index < rhs.index : lhs.address < rhs.address
+        }.map(\.entry)
+    }
+}
+
 /// The imported XML and original attributes remain immutable provenance data.
 /// Native edits use a separate representation and never rewrite the original.
 public struct StudyDocument: Identifiable, Codable, Equatable, Sendable {

@@ -32,6 +32,21 @@ import Testing
         #expect(doc.referenceAttributes == ["type1":"LLS:1.0.3", "type2":"LLS:1.0.71", "style":"BothTwoColumns", "canonical-sort":"no"])
         #expect(try JSONDecoder().decode(StudyDocument.self, from: JSONEncoder().encode(doc)) == doc)
     }
+    @Test func verseOrganizationPreservesIdentitiesAndRejectsUnrecognizedEntriesWithoutChangingOrder() throws {
+        var doc = StudyDocument(title: "Own", kind: .verseList)
+        doc.verses = [StudyVerseEntry(reference: "Juan 3:16"), StudyVerseEntry(reference: "Génesis 1:1"), StudyVerseEntry(reference: "John 3:16")]
+        let original = doc.verses
+        try StudyVerseOrganization.move(original[1].id, by: 1, in: &doc)
+        #expect(doc.verses.map(\.id) == [original[0].id, original[2].id, original[1].id])
+        try StudyVerseOrganization.sortCanonically(&doc)
+        #expect(doc.verses.map(\.id) == [original[1].id, original[0].id, original[2].id])
+        doc.verses.append(StudyVerseEntry(reference: "unknown reference"))
+        let before = doc
+        #expect(throws: (any Error).self) { try StudyVerseOrganization.sortCanonically(&doc) }
+        #expect(doc == before)
+        let encoded = try JSONEncoder().encode(doc)
+        #expect(try JSONDecoder().decode(StudyDocument.self, from: encoded) == doc)
+    }
     @Test func inertRichTextProjectionKeepsNestedFormattingLinksAndUnicodeEntities() {
         let spans = NoteHTMLProjection.spans(#"<P align=left><STRONG>Alpha <SPAN lbxrt:xref="bible.64.1.1"><I>John &amp; &#x1F989;</I></SPAN></STRONG><BR>שלום&nbsp;λόγος</P>"#)
         #expect(spans.map(\.text).joined() == "Alpha John & 🦉\nשלום\u{a0}λόγος\n")

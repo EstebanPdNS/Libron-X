@@ -265,6 +265,32 @@ struct WorkspaceDocumentsView: View {
             .onAppear { if let selectedVerse { scroll.scrollTo(selectedVerse, anchor: .center) } }
             .onChange(of: selectedVerse) { if let selectedVerse { scroll.scrollTo(selectedVerse, anchor: .center) } }
             }
+            MacReaderToolbarSurface {
+                HStack {
+                    MacReaderControlGroup {
+                        Button(L("Ordenar referencias")) {
+                            do { try StudyVerseOrganization.sortCanonically(&personal.documents[index]) }
+                            catch { workspace.error = L("No se pueden ordenar todas las referencias. Revisa las referencias desconocidas o ambiguas.") }
+                        }.disabled(personal.documents[index].verses.count < 2)
+                    }
+                    Spacer(minLength: 12)
+                    MacReaderControlGroup {
+                        MacToolbarButton("Subir", "chevron.up") { moveVerse(-1, index: index) }
+                            .disabled(!canMoveVerse(-1, index: index))
+                        MacToolbarButton("Bajar", "chevron.down") { moveVerse(1, index: index) }
+                            .disabled(!canMoveVerse(1, index: index))
+                    }
+                }
+            }.padding(.horizontal, 12).padding(.bottom, 8)
         }
+    }
+    private func canMoveVerse(_ offset: Int, index: Int) -> Bool {
+        guard let selectedVerse, let position = personal.documents[index].verses.firstIndex(where: { $0.id == selectedVerse }) else { return false }
+        return personal.documents[index].verses.indices.contains(position + offset)
+    }
+    private func moveVerse(_ offset: Int, index: Int) {
+        guard let selectedVerse else { return }
+        do { try StudyVerseOrganization.move(selectedVerse, by: offset, in: &personal.documents[index]) }
+        catch { workspace.error = error.localizedDescription }
     }
 }

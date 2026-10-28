@@ -7655,6 +7655,18 @@
     "ur": "حالیہ کام کی جگہوں کی فہرست پڑھی نہیں جا سکی۔",
     "zh-Hans": "无法读取最近工作区列表。"
   },
+  "No se pueden ordenar todas las referencias. Revisa las referencias desconocidas o ambiguas.": {
+    "ar": "تعذر ترتيب جميع المراجع. راجع المراجع غير المعروفة أو الملتبسة.",
+    "bn": "সব তথ্যসূত্র সাজানো যায়নি। অজানা বা অস্পষ্ট তথ্যসূত্র যাচাই করুন।",
+    "en": "Not all references can be sorted. Review unknown or ambiguous references.",
+    "es": "No se pueden ordenar todas las referencias. Revisa las referencias desconocidas o ambiguas.",
+    "fr": "Impossible de trier toutes les références. Vérifiez les références inconnues ou ambiguës.",
+    "hi": "सभी संदर्भों को क्रमबद्ध नहीं किया जा सकता। अज्ञात या अस्पष्ट संदर्भ जाँचें।",
+    "id": "Tidak semua referensi dapat diurutkan. Periksa referensi yang tidak dikenal atau ambigu.",
+    "pt": "Não é possível ordenar todas as referências. Revise as referências desconhecidas ou ambíguas.",
+    "ur": "تمام حوالہ جات ترتیب نہیں دیے جا سکتے۔ نامعلوم یا مبہم حوالہ جات دیکھیں۔",
+    "zh-Hans": "无法排序所有引用。请检查未知或含糊的引用。"
+  },
   "No volver a preguntar": {
     "ar": "عدم السؤال مجددًا",
     "bn": "আবার জিজ্ঞাসা করবেন না",
@@ -8122,6 +8134,18 @@
     "pt": "Ordenar por:",
     "ur": "ترتیب دیں:",
     "zh-Hans": "排序方式："
+  },
+  "Ordenar referencias": {
+    "ar": "ترتيب المراجع",
+    "bn": "তথ্যসূত্র সাজান",
+    "en": "Sort References",
+    "es": "Ordenar referencias",
+    "fr": "Trier les références",
+    "hi": "संदर्भ क्रमबद्ध करें",
+    "id": "Urutkan Referensi",
+    "pt": "Ordenar referências",
+    "ur": "حوالہ جات ترتیب دیں",
+    "zh-Hans": "排序经文引用"
   },
   "Organizar favoritos…": {
     "ar": "تنظيم المفضلة…",

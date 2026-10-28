@@ -486,10 +486,18 @@
       "sourceKey": "study-expansion-queries-05",
       "acceptance": "Reordenar, ordenar y mostrar referencias, texto o ambos conservando presentación.",
       "baseline": "Crear, añadir, borrar y abrir referencias; servir como rango de búsqueda.",
-      "status": "pending",
-      "implementation": [],
-      "verification": [],
-      "limitations": []
+      "status": "in_progress",
+      "implementation": [
+        "Move selected verse entries one position and sort recognized, unambiguous references in canonical book order without changing entry identity, destinations or original metadata."
+      ],
+      "verification": [
+        "Six StudyDocumentTests passed, including stable ordering, preserved identifiers, unknown reference rollback and serialization.",
+        "Native builds 114–115: sorted Genesis before John, moved the selected entry and confirmed persistence after restart; separated control groups visually inspected in dark English."
+      ],
+      "limitations": [
+        "Display modes for verse text and reference plus text remain to be implemented; canonical sorting does not translate between versification systems.",
+        "The new list controls still need light appearance and right-to-left visual checks."
+      ]
     },
     {
       "id": "F177",
