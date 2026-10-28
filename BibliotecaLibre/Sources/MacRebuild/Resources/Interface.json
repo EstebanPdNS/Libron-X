@@ -5903,6 +5903,18 @@
     "ur": "اصل تعلق درآمد کریں…",
     "zh-Hans": "导入原始关联…"
   },
+  "Importar favoritos originales…": {
+    "ar": "استيراد المفضلة الأصلية…",
+    "bn": "মূল পছন্দের তালিকা আমদানি করুন…",
+    "en": "Import Original Favorites…",
+    "es": "Importar favoritos originales…",
+    "fr": "Importer les favoris d’origine…",
+    "hi": "मूल पसंदीदा आयात करें…",
+    "id": "Impor Favorit Asli…",
+    "pt": "Importar favoritos originais…",
+    "ur": "اصل پسندیدہ درآمد کریں…",
+    "zh-Hans": "导入原始收藏…"
+  },
   "Importar recursos": {
     "ar": "استيراد الموارد",
     "bn": "রিসোর্স আমদানি করুন",

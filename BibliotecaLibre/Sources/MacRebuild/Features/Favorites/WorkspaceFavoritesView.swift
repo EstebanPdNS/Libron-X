@@ -1,5 +1,6 @@
 import SwiftUI
 import LibronixCore
+import UniformTypeIdentifiers
 
 private struct FavoriteNode: Identifiable {
     let favorite: LibraryFavorite
@@ -52,6 +53,7 @@ struct WorkspaceFavoritesView: View {
     @RebuildViewState private var creating = false
     @RebuildViewState private var renaming = false
     @RebuildViewState private var deleting = false
+    @RebuildViewState private var importing = false
     @RebuildViewState private var moveRequest: FavoriteMoveRequest?
     private var favorites: FavoritesDocument { workspace.personal.favorites }
     private var item: LibraryFavorite? { favorites.items.first { $0.id == selected } }
@@ -73,6 +75,8 @@ struct WorkspaceFavoritesView: View {
                     MacReaderControlGroup {
                         MacToolbarButton("Nueva carpeta", "folder.badge.plus") { draft = ""; creating = true }
                         Menu {
+                            Button(L("Importar favoritos originales…")) { importing = true }
+                            Divider()
                             Button(L("Renombrar favorito")) { draft = item?.title ?? ""; renaming = true }.disabled(item == nil)
                             Button(L("Mover favorito…")) { if let selected { moveRequest = .init(id: selected) } }.disabled(item == nil)
                             Divider()
@@ -118,6 +122,12 @@ struct WorkspaceFavoritesView: View {
             } message: { Text(L("Si es una carpeta, también se borrarán sus contenidos.")) }
             .sheet(item: $moveRequest, onDismiss: expandSelectedAncestors) { request in
                 FavoriteMoveView(personal: workspace.personal, id: request.id).modifier(AppInterfaceLanguage())
+            }
+            .fileImporter(isPresented: $importing, allowedContentTypes: [.data], allowsMultipleSelection: false) { result in
+                do {
+                    guard let url = try result.get().first else { return }
+                    try workspace.personal.importOriginalFavorites(from: url)
+                } catch { workspace.error = error.localizedDescription }
             }
     }
     private func expandSelectedAncestors() {

@@ -442,17 +442,19 @@
       "implementation": [
         "Display a native expandable hierarchy; create and rename folders, move items with descendants, reorder siblings and confirm deletion; retain imported commands without inventing destinations.",
         "Save favorite edits atomically with conflict detection; restore verified locations using their exact saved UTF-16 offset and source fingerprint.",
-        "Open supported legacy jump commands by checking the unique numeric resource identity, paired LSF/LIX indices, original character counts, position and decoded-text fingerprint; cancel stale navigation and display errors within the favorites sheet."
+        "Open supported legacy jump commands by checking the unique numeric resource identity, paired LSF/LIX indices, original character counts, position and decoded-text fingerprint; cancel stale navigation and display errors within the favorites sheet.",
+        "Import original XML favorites through the native file picker, preserving nested folders and opaque commands while merging atomically with existing favorites; input size is bounded."
       ],
       "verification": [
         "Seven PersonalLibraryStateTests and six QuickBookmarkTests passed, including cycles, order, conflict rollback, exact position and changed-source rejection.",
         "Native build 128: created nested folders, moved a folder to the root, reordered, moved an authored Bible location into a nested folder and opened it; new and moved descendants were made visible. Inspected dark/light English and dark Arabic.",
-        "Four OriginalFavoriteNavigationTests passed using authored paired LSF/LIX data: exact imported position, missing or ambiguous resources, invalid command, damaged index and newer-navigation cancellation. Native build 130 shows the missing-resource alert immediately above the favorites sheet; the sheet remains open after dismissal."
+        "Four OriginalFavoriteNavigationTests passed using authored paired LSF/LIX data: exact imported position, missing or ambiguous resources, invalid command, damaged index and newer-navigation cancellation. Native build 130 shows the missing-resource alert immediately above the favorites sheet; the sheet remains open after dismissal.",
+        "Two OriginalFavoriteImportTests cover nested merge and persisted state, repeated import with distinct IDs, invalid and oversized input, and concurrent-writer conflict. Native build 131 imported an authored XML through the file picker and displayed its nested folder and position; original personal state was restored afterward."
       ],
       "limitations": [
-        "Recovery supports measured jump commands and checked LSF/LIX projections only; other original actions and incompatible formats remain unresolved. The current app still needs a complete import workflow for original favorites.",
+        "Recovery supports measured jump commands and checked LSF/LIX projections only; other original actions and incompatible formats remain unresolved. Additional original-file variants require validation.",
         "The full range of original resource formats and old macOS hardware still requires validation.",
-        "The latest imported-favorite row and error were visually checked in dark English; light and RTL coverage for this changed state remains pending."
+        "The latest imported-favorite row, import menu and error were visually checked in dark English; light and RTL coverage for these changed states remains pending."
       ]
     },
     {

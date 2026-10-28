@@ -93,6 +93,17 @@ struct WorkspacePersonalSnapshot: Codable {
         do { try save() }
         catch { favorites = previous; throw error }
     }
+    /// Preserve the existing hierarchy unless the entire import and save succeed.
+    func importOriginalFavorites(from url: URL) throws {
+        let access = url.startAccessingSecurityScopedResource()
+        defer { if access { url.stopAccessingSecurityScopedResource() } }
+        let input = try FileHandle(forReadingFrom: url)
+        defer { try? input.close() }
+        let bytes = try input.read(upToCount: MetadataXMLReader.maximumFileBytes + 1) ?? Data()
+        guard bytes.count <= MetadataXMLReader.maximumFileBytes else { throw PersonalStateError.tooLarge }
+        let imported = try FavoritesDocument.importingLegacyXML(bytes)
+        try editFavorites { $0.items.append(contentsOf: imported.items) }
+    }
     func renameNote(_ id: UUID, in documentID: UUID, title: String) throws {
         let title = title.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !title.isEmpty, let document = documents.firstIndex(where: { $0.id == documentID }),
