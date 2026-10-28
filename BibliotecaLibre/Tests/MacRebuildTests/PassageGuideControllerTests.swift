@@ -22,6 +22,11 @@ import CSQLite
         #expect(controller.matches.count == 1 && controller.matches[0].match.resource == resource)
         #expect(controller.matches[0].match.page.text.contains("Owned note"))
         #expect(controller.references?.results.contains { $0.sourceTitle == resource.title && $0.resourceDestination != nil } == true)
+        let destination = try #require(controller.references?.results.first?.resourceDestination)
+        try workspace.resourceVisibility.hide([resource]); workspace.activeTool = .passageGuide
+        workspace.openSearchResult(destination)
+        #expect(workspace.activeTool == .passageGuide && workspace.passageGuide.error != nil)
+        #expect(workspace.search.error == nil)
     }
     private func fixture() throws -> (URL, StudyWorkspace) {
         let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)

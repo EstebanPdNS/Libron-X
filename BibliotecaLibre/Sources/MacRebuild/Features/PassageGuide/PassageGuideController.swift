@@ -33,6 +33,7 @@ struct PassageGuideReferences: Sendable {
     private(set) var isLoading = false
     private(set) var completed = false
     private(set) var error: String?
+    func showOpeningError(_ message: String) { error = message }
     private(set) var currentSource: String?
     @ObservationIgnored private var task: Task<Void, Never>?
     @ObservationIgnored private var generation = 0

@@ -284,6 +284,7 @@ struct ReaderHighlight: Identifiable, Codable, Equatable, Sendable {
             activate(reader); reader.loadSearchResult(result, focus: focus); activeTool = nil
         } catch {
             if activeTool == .referenceSearch { referenceSearch.showOpeningError(error.localizedDescription) }
+            else if activeTool == .passageGuide { passageGuide.showOpeningError(error.localizedDescription) }
             else { search.error = error.localizedDescription }
         }
     }
