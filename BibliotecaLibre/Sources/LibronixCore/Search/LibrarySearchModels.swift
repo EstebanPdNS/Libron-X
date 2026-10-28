@@ -246,16 +246,55 @@ public struct LibrarySearchPreparedResource: Sendable, Codable {
     /// Producer-owned projection contract. A changed decoder/link projection
     /// must invalidate cached articles even when the original files did not change.
     public let projectionVersion: String?
-    public let articles: [LibrarySearchArticleDescriptor]
+    private let explicitArticles: [LibrarySearchArticleDescriptor]
+    private let contiguousCount: Int?
+    private let contiguousTitle: String?
+    private enum CodingKeys: String, CodingKey {
+        case explicitArticles = "articles", contiguousCount, contiguousTitle
+        case availableFields, projectionVersion, sourceStamps, warnings
+    }
+    /// Compatibility accessor. Search engines should use orderedArticles() so
+    /// large, consecutive directories do not have to be materialized.
+    public var articles: [LibrarySearchArticleDescriptor] { isCompactDirectory ? Array(orderedArticles()) : explicitArticles }
+    public var articleCount: Int { contiguousCount ?? explicitArticles.count }
+    public var isCompactDirectory: Bool { contiguousCount != nil }
     public let sourceStamps: [LibrarySearchFileStamp]
     public let warnings: [String]
     public init(articles: [LibrarySearchArticleDescriptor], sourceStamps: [LibrarySearchFileStamp] = [],
                 warnings: [String] = [], projectionVersion: String? = nil, availableFields: [SearchField]? = nil) {
         self.availableFields = availableFields
         self.projectionVersion = projectionVersion
-        self.articles = articles
+        self.explicitArticles = articles
+        self.contiguousCount = nil
+        self.contiguousTitle = nil
         self.sourceStamps = sourceStamps
         self.warnings = warnings
+    }
+    public init(contiguousArticleCount: Int, titlePrefix: String, sourceStamps: [LibrarySearchFileStamp] = [],
+                warnings: [String] = [], projectionVersion: String? = nil, availableFields: [SearchField]? = nil) {
+        self.availableFields = availableFields; self.projectionVersion = projectionVersion
+        self.explicitArticles = []; self.contiguousCount = contiguousArticleCount; self.contiguousTitle = titlePrefix
+        self.sourceStamps = sourceStamps; self.warnings = warnings
+    }
+    public func validateDirectory() throws {
+        if let count = contiguousCount {
+            guard (1...2_000_000).contains(count), contiguousTitle != nil, explicitArticles.isEmpty else { throw LibrarySearchError.invalidArticleDirectory }
+        } else {
+            let ordinals = explicitArticles.map(\.sectionOrdinal)
+            guard !ordinals.isEmpty, ordinals.count <= 2_000_000, ordinals.allSatisfy({ $0 >= 0 }), Set(ordinals).count == ordinals.count else { throw LibrarySearchError.invalidArticleDirectory }
+        }
+    }
+    public func orderedArticles() -> AnySequence<LibrarySearchArticleDescriptor> {
+        if let count = contiguousCount, let title = contiguousTitle, count >= 0 {
+            return AnySequence((0..<count).lazy.map { .init(sectionOrdinal: $0, title: title + " · " + String($0 + 1)) })
+        }
+        return AnySequence(explicitArticles.sorted { $0.sectionOrdinal < $1.sectionOrdinal })
+    }
+    public func article(at ordinal: Int) -> LibrarySearchArticleDescriptor? {
+        if let count = contiguousCount, let title = contiguousTitle, (0..<max(0, count)).contains(ordinal) {
+            return .init(sectionOrdinal: ordinal, title: title + " · " + String(ordinal + 1))
+        }
+        return explicitArticles.first { $0.sectionOrdinal == ordinal }
     }
 }
 

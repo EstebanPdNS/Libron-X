@@ -60,7 +60,7 @@ public actor BiblePassageReportService {
             }
             try Task.checkCancellation(); try await provider.verifyUnchanged(resource, prepared: prepared)
             return .init(resource: resource, verses: verses, sourceStamps: prepared.sourceStamps, examinedArticles: examined,
-                complete: examined == prepared.articles.count && warnings.isEmpty,
+                complete: examined == prepared.articleCount && warnings.isEmpty,
                 warnings: Array(Set(warnings)).sorted(), failure: nil)
         } catch is CancellationError { throw CancellationError() }
         catch {

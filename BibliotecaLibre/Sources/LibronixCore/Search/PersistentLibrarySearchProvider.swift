@@ -113,7 +113,7 @@ public actor PersistentLibrarySearchProvider: LibrarySearchContentProvider {
         #if canImport(CSQLite)
         // Verse mode must still inspect anchors, including on non-Bible books,
         // so incompatible verse scopes cannot masquerade as complete no-hits.
-        if options.maximumEditDistance == 0, unit == .article, !query.expression.requiresVerseContext, query.expression.requiredFields.isEmpty, let index = indexes[resource.id] {
+        if !prepared.isCompactDirectory, options.maximumEditDistance == 0, unit == .article, !query.expression.requiresVerseContext, query.expression.requiredFields.isEmpty, let index = indexes[resource.id] {
             do {
                 if let selected = try index.candidates(query.expression, articles: prepared.articles) {
                     try await source.verifyUnchanged(resource, prepared: prepared)

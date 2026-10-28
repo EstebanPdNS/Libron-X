@@ -4511,6 +4511,18 @@
     "ur": "منتخب وسیلہ اب دستیاب نہیں ہے۔",
     "zh-Hans": "所选资源已不可用。"
   },
+  "El resultado cambió o ya no está disponible. Repite la búsqueda antes de abrirlo.": {
+    "ar": "تغيّرت النتيجة أو لم تعد متاحة. أعد البحث قبل فتحها.",
+    "bn": "ফলাফল পরিবর্তিত হয়েছে বা আর উপলব্ধ নেই। খোলার আগে আবার অনুসন্ধান করুন।",
+    "en": "The result has changed or is no longer available. Search again before opening it.",
+    "es": "El resultado cambió o ya no está disponible. Repite la búsqueda antes de abrirlo.",
+    "fr": "Le résultat a changé ou n’est plus disponible. Relancez la recherche avant de l’ouvrir.",
+    "hi": "परिणाम बदल गया है या अब उपलब्ध नहीं है। खोलने से पहले फिर से खोजें।",
+    "id": "Hasil telah berubah atau tidak lagi tersedia. Cari lagi sebelum membukanya.",
+    "pt": "O resultado mudou ou já não está disponível. Pesquise novamente antes de o abrir.",
+    "ur": "نتیجہ تبدیل ہو گیا ہے یا اب دستیاب نہیں۔ کھولنے سے پہلے دوبارہ تلاش کریں۔",
+    "zh-Hans": "结果已更改或不再可用。请重新搜索后再打开。"
+  },
   "El servicio original de desbloqueo de licencias todavía no tiene una implementación verificada.": {
     "ar": "لا تتوفر بعد نسخة مُتحقّق منها لخدمة فتح التراخيص الأصلية.",
     "bn": "মূল লাইসেন্স খোলার পরিষেবার যাচাইকৃত বাস্তবায়ন এখনও নেই।",

@@ -91,6 +91,19 @@ import CSQLite
         #expect(try JSONDecoder().decode(LibrarySearchPreparedResource.self, from: JSONEncoder().encode(upgraded)).projectionVersion == "checked-links-v1")
     }
 
+    @Test func compactDirectoryKeepsLargeOrdinalsAndIdentityWithoutMaterializingEntries() throws {
+        let original = LibrarySearchPreparedResource(contiguousArticleCount: 837_661, titlePrefix: "Dictionary")
+        try original.validateDirectory()
+        let encoded = try JSONEncoder().encode(original)
+        #expect(encoded.count < 1_024)
+        let decoded = try JSONDecoder().decode(LibrarySearchPreparedResource.self, from: encoded)
+        #expect(decoded.articleCount == 837_661 && decoded.isCompactDirectory)
+        #expect(decoded.orderedArticles().prefix(2).map(\.sectionOrdinal) == [0, 1])
+        #expect(decoded.article(at: 837_660)?.title == "Dictionary · 837661")
+        #expect(decoded.article(at: 837_661) == nil)
+        #expect(throws: (any Error).self) { try LibrarySearchPreparedResource(contiguousArticleCount: 0, titlePrefix: "Empty").validateDirectory() }
+    }
+
     @Test func reopeningTheIndexReusesTextAndPrunesOnlyProvenNonmatches() async throws {
         let fixture = try Fixture(["faith hope", "no related term", "FAITH", "another entry"]); defer { fixture.remove() }
         let before = try Data(contentsOf: fixture.resource.location)

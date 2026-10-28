@@ -110,16 +110,11 @@ actor PersonalAnnotationSearch {
                     guard await provider.supports(resource) else { throw ReaderOutputError.unsupportedFormat }
                     let prepared = try await provider.prepare(resource)
                     if !prepared.warnings.isEmpty { report.complete = false; report.warnings += prepared.warnings }
-                    var descriptors: [Int: LibrarySearchArticleDescriptor] = [:]
-                    for article in prepared.articles {
-                        guard article.sectionOrdinal >= 0, descriptors.updateValue(article, forKey: article.sectionOrdinal) == nil else {
-                            throw LibrarySearchError.invalidArticleDirectory
-                        }
-                    }
+                    try prepared.validateDirectory()
                     var resourceResults: [PersonalAnnotationResult] = []
                     for (ordinal, group) in Dictionary(grouping: marks, by: \.ordinal).sorted(by: { $0.key < $1.key }) {
                         try Task.checkCancellation()
-                        guard let article = descriptors[ordinal] else { report.complete = false; report.warnings.append(resource.title + ": " + "Sección no disponible"); continue }
+                        guard let article = prepared.article(at: ordinal) else { report.complete = false; report.warnings.append(resource.title + ": " + "Sección no disponible"); continue }
                         let decoded = try await provider.read(resource, article: article, prepared: prepared)
                         if !decoded.warnings.isEmpty { report.complete = false; report.warnings += decoded.warnings }
                         let text = decoded.text, fingerprint = LibrarySearchService.textFingerprint(text), source = text as NSString

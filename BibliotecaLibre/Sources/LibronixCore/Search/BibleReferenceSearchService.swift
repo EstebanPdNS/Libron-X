@@ -179,17 +179,16 @@ public actor BibleReferenceSearchService {
             let source: LibrarySearchPreparedResource
             do {
                 source = try await provider.prepare(resource)
-                let ordinals = source.articles.map(\.sectionOrdinal)
-                guard !ordinals.isEmpty, ordinals.count <= 2_000_000, ordinals.allSatisfy({ $0 >= 0 }), Set(ordinals).count == ordinals.count else { throw LibrarySearchError.invalidArticleDirectory }
+                try source.validateDirectory()
                 try await provider.verifyUnchanged(resource,prepared:source)
             } catch {
                 try critical(error);reports[index].status = .failed;counters.resourcesFailed += 1
                 reports[index].errors.append(.init(sectionOrdinal:nil,code:"reference-source",message:error.localizedDescription));continue
             }
             prepared.append((resource,source));counters.resourcesPrepared += 1;counters.resourcesWithUnknownArticleTotal -= 1
-            counters.articlesTotalKnown += source.articles.count;reports[index].totalArticles = source.articles.count
+            counters.articlesTotalKnown += source.articleCount;reports[index].totalArticles = source.articleCount
             reports[index].status = .partial;reports[index].warnings = source.warnings
-            for article in source.articles.sorted(by: { $0.sectionOrdinal < $1.sectionOrdinal }) {
+            for article in source.orderedArticles() {
                 try Task.checkCancellation()
                 if let value = reached() { limit = value;break resourceLoop }
                 counters.articlesExamined += 1;reports[index].articlesExamined += 1
@@ -219,7 +218,7 @@ public actor BibleReferenceSearchService {
                 }
                 if counters.articlesExamined.isMultiple(of:budget.progressBatchSize) { await onProgress?(progress(resource.title)) }
             }
-            if reports[index].articlesExamined == source.articles.count, reports[index].articlesFailed == 0 {
+            if reports[index].articlesExamined == source.articleCount, reports[index].articlesFailed == 0 {
                 reports[index].status = .complete;counters.resourcesCompleted += 1
             }
             await onProgress?(progress(resource.title))

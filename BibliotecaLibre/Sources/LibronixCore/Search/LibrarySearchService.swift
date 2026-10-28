@@ -175,11 +175,7 @@ private actor LibrarySearchExecution {
                 let prepared: LibrarySearchPreparedResource
                 do {
                     prepared = try await provider.prepare(resource)
-                    let ordinals = prepared.articles.map(\.sectionOrdinal)
-                    guard !ordinals.isEmpty, ordinals.count <= 2_000_000,
-                          ordinals.allSatisfy({ $0 >= 0 }), Set(ordinals).count == ordinals.count else {
-                        throw LibrarySearchError.invalidArticleDirectory
-                    }
+                    try prepared.validateDirectory()
                     try await provider.verifyUnchanged(resource, prepared: prepared)
                 } catch {
                     try propagateCritical(error)
@@ -193,8 +189,8 @@ private actor LibrarySearchExecution {
                 preparedSources.append((resource, prepared))
                 counters.resourcesPrepared += 1
                 counters.resourcesWithUnknownArticleTotal -= 1
-                counters.articlesTotalKnown += prepared.articles.count
-                resourceReports[index].totalArticles = prepared.articles.count
+                counters.articlesTotalKnown += prepared.articleCount
+                resourceReports[index].totalArticles = prepared.articleCount
                 resourceReports[index].warnings = prepared.warnings
                 resourceReports[index].status = .partial
                 if let available = prepared.availableFields {
@@ -209,13 +205,16 @@ private actor LibrarySearchExecution {
                         continue
                     }
                 }
-                let articles: [LibrarySearchArticleDescriptor]
+                let articles: AnySequence<LibrarySearchArticleDescriptor>
                 do {
-                    let ordered = prepared.articles.sorted { $0.sectionOrdinal < $1.sectionOrdinal }
+                    let ordered = prepared.orderedArticles()
                     if let candidates = try await provider.candidates(resource, prepared: prepared, query: query, options: options, unit: unit) {
-                        guard candidates.isSubset(of: Set(ordered.map(\.sectionOrdinal))) else { throw LibrarySearchError.invalidArticleDirectory }
-                        articles = ordered.filter { candidates.contains($0.sectionOrdinal) }
-                        let excluded = ordered.count - articles.count
+                        let valid = prepared.isCompactDirectory
+                            ? candidates.allSatisfy { (0..<prepared.articleCount).contains($0) }
+                            : candidates.isSubset(of: Set(ordered.map(\.sectionOrdinal)))
+                        guard valid else { throw LibrarySearchError.invalidArticleDirectory }
+                        articles = AnySequence(ordered.lazy.filter { candidates.contains($0.sectionOrdinal) })
+                        let excluded = prepared.articleCount - candidates.count
                         counters.articlesRuledOutByIndex += excluded
                         resourceReports[index].articlesRuledOutByIndex = excluded
                     } else { articles = ordered }
@@ -378,7 +377,7 @@ private actor LibrarySearchExecution {
                         try await provider.verifyUnchanged(resource, prepared: prepared)
                     }
                 }
-                if resourceReports[index].articlesExamined == articles.count {
+                if resourceReports[index].articlesExamined == prepared.articleCount - resourceReports[index].articlesRuledOutByIndex {
                     resourceReports[index].status = resourceReports[index].articlesFailed == 0 ? .complete : .partial
                     if (unit == .bibleVerse || requiresBibleDirectory) && !hasVerseIntervals && resourceReports[index].articlesFailed == 0 {
                         resourceReports[index].status = .incompatible

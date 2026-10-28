@@ -40,9 +40,13 @@ actor WorkspaceSearchReader: LibrarySearchContentProvider {
         default: fields = [.body, .title, .bibleText]
         }
         }
-        let result = LibrarySearchPreparedResource(articles: (0..<first.sectionCount).map {
+        let result: LibrarySearchPreparedResource
+        if resource.format == .libronDictionary && first.entries.isEmpty {
+            result = .init(contiguousArticleCount: first.sectionCount, titlePrefix: resource.title,
+                           sourceStamps: stamps, projectionVersion: "workspace-search-block-boundaries-v5", availableFields: fields)
+        } else { result = LibrarySearchPreparedResource(articles: (0..<first.sectionCount).map {
             .init(sectionOrdinal: $0, title: titles[$0] ?? resource.title + " · " + String($0 + 1))
-        }, sourceStamps: stamps, warnings: [], projectionVersion: "workspace-search-block-boundaries-v5", availableFields: fields)
+        }, sourceStamps: stamps, warnings: [], projectionVersion: "workspace-search-block-boundaries-v5", availableFields: fields) }
         try await verifyUnchanged(resource, prepared: result)
         return result
     }
@@ -50,7 +54,7 @@ actor WorkspaceSearchReader: LibrarySearchContentProvider {
     func read(_ resource: LibraryResource, article: LibrarySearchArticleDescriptor,
               prepared: LibrarySearchPreparedResource) async throws -> LibrarySearchDecodedArticle {
         try await verifyUnchanged(resource, prepared: prepared)
-        let result = try await page(resource, ordinal: article.sectionOrdinal, verifiedDictionaryCount: prepared.articles.count)
+        let result = try await page(resource, ordinal: article.sectionOrdinal, verifiedDictionaryCount: prepared.articleCount)
         guard result.destination.ordinal == article.sectionOrdinal else { throw LibrarySearchError.invalidArticleDirectory }
         let warnings = result.warning.map { [$0] } ?? []
         let decoded: LibrarySearchDecodedArticle
