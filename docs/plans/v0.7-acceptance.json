@@ -635,10 +635,16 @@
       "sourceKey": "study-expansion-daily-04",
       "acceptance": "Añadir Hoy, selector de fecha y navegación diaria anterior/siguiente.",
       "baseline": "El formato .devi se importa y se lee.",
-      "status": "pending",
-      "implementation": [],
-      "verification": [],
-      "limitations": []
+      "status": "in_progress",
+      "implementation": [
+        "Added a checked recurring Gregorian month/day directory for e-Sword devotional entries; missing and ambiguous dates do not resolve to another article."
+      ],
+      "verification": [
+        "Two DevotionalDirectoryTests cover exact dates, missing days, invalid and duplicate dates, leap years, and an authored .devi SQLite resource without altering its bytes."
+      ],
+      "limitations": [
+        "The reader still needs native Today, date selection and previous/next day controls; end-to-end UI and resource restoration checks remain pending."
+      ]
     },
     {
       "id": "F181",
