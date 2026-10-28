@@ -540,15 +540,17 @@
       "status": "in_progress",
       "implementation": [
         "Added civil-date reading plans with ordered explicit passages and weekday distribution, plus a separate atomic versioned personal store.",
-        "Added the native reading-plans tool with plan creation, weekday selection, civil start date, passage entry, removal and active-Bible start navigation; edition-qualified references are not silently redirected."
+        "Added the native reading-plans tool with plan creation, weekday selection, civil start date, passage entry, removal and active-Bible start navigation; edition-qualified references are not silently redirected.",
+        "Added plan renaming and individual reading creation, editing and deletion; changing only the date retains completion, changing a passage marks it pending, and stale edits cannot overwrite newer data."
       ],
       "verification": [
         "ReadingPlanTests and ReadingPlanPersistenceTests pass for weekday distribution, leap dates, round-trip persistence, stale writers and future schemas.",
-        "Build 132/133 native dark English UI created a two-passage plan; after restarting build 133 the plan remained visible. ReadingPlanNavigationTests cover chapter, range, book and edition-qualified references."
+        "Build 132/133 native dark English UI created a two-passage plan; after restarting build 133 the plan remained visible. ReadingPlanNavigationTests cover chapter, range, book and edition-qualified references.",
+        "Build 134: edited a completed reading and observed the completion reset; added a third reading; opened the beginning of Genesis 1:3–4 at Genesis 1:3 in an isolated authored Bible. Reviewed the main view in dark/light English and light Arabic, and the editor in light Arabic and dark English. Persistence tests cover changed references, retained completion, invalid data and stale edits."
       ],
       "limitations": [
-        "Plan editing, broader distribution modes, exact edition selection and opening passages against actual source resources remain to be verified or implemented.",
-        "The new interface needs light, RTL, narrow-window and older macOS verification."
+        "Broader automatic distribution modes and explicit selection or verification of an edition-qualified reference remain pending.",
+        "Narrow-window and older macOS verification are still pending; the creation form needs an Arabic visual check."
       ]
     },
     {
@@ -567,10 +569,11 @@
       ],
       "verification": [
         "Persistence tests save and reopen completion; filtering tests retain all readings in the plan.",
-        "Native UI marked one of two readings complete, hid it, and confirmed its completion remained after reopening the app."
+        "Native UI marked one of two readings complete, hid it, and confirmed its completion remained after reopening the app.",
+        "Build 134 displayed the edited plan in light English and light Arabic; changing a completed passage returned the reading to pending."
       ],
       "limitations": [
-        "Additional plans, editing and display edge cases remain to be validated; light and RTL visual checks are pending."
+        "Additional plans and display edge cases, narrow-window and older macOS testing remain pending."
       ]
     },
     {

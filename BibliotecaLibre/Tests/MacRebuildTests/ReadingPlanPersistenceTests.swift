@@ -4,6 +4,30 @@ import Testing
 @testable import MacRebuild
 
 @MainActor struct ReadingPlanPersistenceTests {
+    @Test func editingPreservesIdentityAndCompletionOnlyForTheSamePassage() throws {
+        let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: root) }
+        let url = root.appendingPathComponent("personal.json"), state = WorkspacePersonalState(url: url)
+        let day = try ReadingDay(year: 2024, month: 2, day: 29)
+        var plan = try ReadingPlan.schedule(title: "Own", references: ["John 1"], start: day, weekdays: Set(1...7))
+        plan.readings[0].completed = true
+        try state.editReadingPlans { $0.plans.append(plan) }
+        let original = plan.readings[0]
+        var moved = original; moved.day = try day.adding(days: 1); moved.completed = false
+        try state.saveScheduledReading(planID: plan.id, original: original, replacement: moved)
+        let afterMove = try #require(state.readingPlans.plans.first?.readings.first)
+        #expect(afterMove.id == original.id && afterMove.completed && afterMove.day == moved.day)
+        #expect(throws: PersonalStateError.self) { try state.saveScheduledReading(planID: plan.id, original: original, replacement: moved) }
+        var changed = afterMove; changed.reference = "John 2"
+        try state.saveScheduledReading(planID: plan.id, original: afterMove, replacement: changed)
+        #expect(state.readingPlans.plans[0].readings[0].id == original.id && !state.readingPlans.plans[0].readings[0].completed)
+        #expect(WorkspacePersonalState(url: url).readingPlans == state.readingPlans)
+        var invalid = changed; invalid.reference = "invalid"
+        let current = state.readingPlans.plans[0].readings[0]
+        #expect(throws: (any Error).self) { try state.saveScheduledReading(planID: plan.id, original: current, replacement: invalid) }
+        #expect(state.readingPlans.plans[0].readings[0] == current)
+    }
     @Test func saveCompletionReopenAndRejectConcurrentWrites() throws {
         let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
         try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)

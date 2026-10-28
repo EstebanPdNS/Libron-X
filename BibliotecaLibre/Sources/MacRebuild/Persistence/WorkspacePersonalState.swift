@@ -65,6 +65,22 @@ struct WorkspacePersonalSnapshot: Codable {
         try readingPlansFile.save(next)
         readingPlans = next
     }
+    func saveScheduledReading(planID: UUID, original: ScheduledReading?, replacement: ScheduledReading) throws {
+        try editReadingPlans { state in
+            guard let index = state.plans.firstIndex(where: { $0.id == planID }) else { throw PersonalStateError.concurrentChange }
+            if let original {
+                guard replacement.id == original.id,
+                      let item = state.plans[index].readings.firstIndex(where: { $0.id == original.id }),
+                      state.plans[index].readings[item] == original else { throw PersonalStateError.concurrentChange }
+                var updated = replacement
+                if original.reference != replacement.reference { updated.completed = false }
+                else { updated.completed = original.completed }
+                state.plans[index].readings[item] = updated
+            } else {
+                state.plans[index].readings.append(replacement)
+            }
+        }
+    }
     func setBookmark(_ slot: Int, location: ReaderLocation?) throws {
         guard bookmarksWritable else { throw PersonalStateError.invalid(bookmarkLoadError ?? "No se pudo abrir el archivo de marcadores.") }
         var updated = bookmarks

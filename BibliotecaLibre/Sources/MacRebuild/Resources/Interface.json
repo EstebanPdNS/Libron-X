@@ -695,6 +695,18 @@
     "ur": "شرط شامل کریں",
     "zh-Hans": "添加条件"
   },
+  "Agregar lectura": {
+    "ar": "إضافة قراءة",
+    "bn": "পাঠ যোগ করুন",
+    "en": "Add Reading",
+    "es": "Agregar lectura",
+    "fr": "Ajouter une lecture",
+    "hi": "पठन जोड़ें",
+    "id": "Tambah bacaan",
+    "pt": "Adicionar leitura",
+    "ur": "مطالعہ شامل کریں",
+    "zh-Hans": "添加阅读"
+  },
   "Agregar nota": {
     "ar": "إضافة ملاحظة",
     "bn": "টীকা যোগ করুন",
@@ -2062,6 +2074,18 @@
     "pt": "Pesquisa concluída com cobertura parcial",
     "ur": "تلاش جزوی تکمیل کے ساتھ ختم ہوئی",
     "zh-Hans": "搜索已结束，覆盖不完整"
+  },
+  "Cambiar el pasaje vuelve a marcar la lectura como pendiente.": {
+    "ar": "تغيير المقطع يعيد القراءة إلى حالة الانتظار.",
+    "bn": "অংশ বদলালে পাঠ আবার অসম্পন্ন হবে।",
+    "en": "Changing the passage marks the reading as pending again.",
+    "es": "Cambiar el pasaje vuelve a marcar la lectura como pendiente.",
+    "fr": "Modifier le passage remet la lecture en attente.",
+    "hi": "अंश बदलने पर पठन फिर लंबित हो जाएगा।",
+    "id": "Mengubah bagian menandai bacaan sebagai belum selesai.",
+    "pt": "Alterar a passagem marca a leitura como pendente novamente.",
+    "ur": "عبارت بدلنے سے مطالعہ دوبارہ نامکمل ہو جائے گا۔",
+    "zh-Hans": "更改经文会将阅读重新标记为待完成。"
   },
   "Cambiar tamaño del panel": {
     "ar": "تغيير حجم اللوحة",
@@ -4127,6 +4151,18 @@
     "ur": "تدوین کریں",
     "zh-Hans": "编辑"
   },
+  "Editar lectura": {
+    "ar": "تعديل القراءة",
+    "bn": "পাঠ সম্পাদনা করুন",
+    "en": "Edit Reading",
+    "es": "Editar lectura",
+    "fr": "Modifier la lecture",
+    "hi": "पठन संपादित करें",
+    "id": "Edit bacaan",
+    "pt": "Editar leitura",
+    "ur": "مطالعہ میں ترمیم کریں",
+    "zh-Hans": "编辑阅读"
+  },
   "Editar nota": {
     "ar": "تحرير الملاحظة",
     "bn": "নোট সম্পাদনা করুন",
@@ -4763,6 +4799,18 @@
     "ur": "گروپ حذف کریں",
     "zh-Hans": "删除分组"
   },
+  "Eliminar lectura": {
+    "ar": "حذف القراءة",
+    "bn": "পাঠ মুছুন",
+    "en": "Delete Reading",
+    "es": "Eliminar lectura",
+    "fr": "Supprimer la lecture",
+    "hi": "पठन हटाएँ",
+    "id": "Hapus bacaan",
+    "pt": "Excluir leitura",
+    "ur": "مطالعہ حذف کریں",
+    "zh-Hans": "删除阅读"
+  },
   "Eliminar plan…": {
     "ar": "حذف الخطة…",
     "bn": "পরিকল্পনা মুছুন…",
@@ -5398,6 +5446,18 @@
     "pt": "Favoritos",
     "ur": "پسندیدہ",
     "zh-Hans": "收藏夹"
+  },
+  "Fecha": {
+    "ar": "التاريخ",
+    "bn": "তারিখ",
+    "en": "Date",
+    "es": "Fecha",
+    "fr": "Date",
+    "hi": "तारीख",
+    "id": "Tanggal",
+    "pt": "Data",
+    "ur": "تاریخ",
+    "zh-Hans": "日期"
   },
   "Fecha de inicio": {
     "ar": "تاريخ البدء",
@@ -8879,6 +8939,18 @@
     "ur": "حصہ {current} از {total}",
     "zh-Hans": "第 {current} 部分，共 {total} 部分"
   },
+  "Pasaje": {
+    "ar": "المقطع",
+    "bn": "অংশ",
+    "en": "Passage",
+    "es": "Pasaje",
+    "fr": "Passage",
+    "hi": "अंश",
+    "id": "Bagian",
+    "pt": "Passagem",
+    "ur": "عبارت",
+    "zh-Hans": "经文"
+  },
   "Pasaje, capítulo o libro": {
     "ar": "مقطع أو إصحاح أو سفر",
     "bn": "অংশ, অধ্যায় বা পুস্তক",
@@ -9743,6 +9815,18 @@
     "ur": "بھریں اور ترتیب دیں",
     "zh-Hans": "填充和排列"
   },
+  "Renombrar": {
+    "ar": "إعادة التسمية",
+    "bn": "নাম পরিবর্তন",
+    "en": "Rename",
+    "es": "Renombrar",
+    "fr": "Renommer",
+    "hi": "नाम बदलें",
+    "id": "Ganti nama",
+    "pt": "Renomear",
+    "ur": "نام بدلیں",
+    "zh-Hans": "重命名"
+  },
   "Renombrar favorito": {
     "ar": "إعادة تسمية المفضلة",
     "bn": "প্রিয়টির নাম পরিবর্তন",
@@ -9766,6 +9850,18 @@
     "pt": "Renomear nota",
     "ur": "نوٹ کا نام بدلیں",
     "zh-Hans": "重命名笔记"
+  },
+  "Renombrar plan": {
+    "ar": "إعادة تسمية الخطة",
+    "bn": "পরিকল্পনার নাম পরিবর্তন",
+    "en": "Rename Plan",
+    "es": "Renombrar plan",
+    "fr": "Renommer le plan",
+    "hi": "योजना का नाम बदलें",
+    "id": "Ganti nama rencana",
+    "pt": "Renomear plano",
+    "ur": "منصوبے کا نام بدلیں",
+    "zh-Hans": "重命名计划"
   },
   "Reportar un problema": {
     "ar": "الإبلاغ عن مشكلة",
@@ -10210,6 +10306,18 @@
     "pt": "As contagens usam os resultados mantidos de cada edição. Contagens parciais não representam toda a biblioteca.",
     "ur": "ہر ایڈیشن کے محفوظ نتائج شمار ہوتے ہیں۔ جزوی گنتی پوری لائبریری کی نمائندگی نہیں کرتی۔",
     "zh-Hans": "计数使用各版本保留的结果。部分计数不代表整个书库。"
+  },
+  "Se eliminarán esta lectura y su progreso.": {
+    "ar": "ستُحذف هذه القراءة وتقدمها.",
+    "bn": "এই পাঠ ও তার অগ্রগতি মুছে যাবে।",
+    "en": "This reading and its progress will be deleted.",
+    "es": "Se eliminarán esta lectura y su progreso.",
+    "fr": "Cette lecture et sa progression seront supprimées.",
+    "hi": "यह पठन और इसकी प्रगति हट जाएगी।",
+    "id": "Bacaan ini dan progresnya akan dihapus.",
+    "pt": "Esta leitura e seu progresso serão excluídos.",
+    "ur": "یہ مطالعہ اور اس کی پیش رفت حذف ہو جائے گی۔",
+    "zh-Hans": "此阅读及其进度将被删除。"
   },
   "Se muestran las primeras {count} entradas; quedan resultados o recursos por consultar.": {
     "ar": "تُعرض أول {count} مدخلات؛ توجد نتائج أو موارد أخرى لم تُفحص.",
