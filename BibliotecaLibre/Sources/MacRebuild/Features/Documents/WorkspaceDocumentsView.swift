@@ -1,6 +1,17 @@
 import SwiftUI
 import LibronixCore
 
+private struct NoteMoveRequest: Identifiable {
+    let id = UUID()
+    let documentID: UUID
+    let noteIDs: Set<UUID>
+}
+private struct NotePropertiesRequest: Identifiable {
+    var id: UUID { note.id }
+    let documentID: UUID
+    let note: StudyNote
+}
+
 struct WorkspaceDocumentsView: View {
     @Bindable var workspace: StudyWorkspace
     @Bindable var personal: WorkspacePersonalState
@@ -15,6 +26,8 @@ struct WorkspaceDocumentsView: View {
     @RebuildViewState private var showsRename = false
     @RebuildViewState private var deletionIDs: Set<UUID> = []
     @RebuildViewState private var showsDelete = false
+    @RebuildViewState private var moveRequest: NoteMoveRequest?
+    @RebuildViewState private var propertiesRequest: NotePropertiesRequest?
     @RebuildViewState private var selectedVerse: UUID?
     @RebuildViewState private var verseReference = ""
     @FocusState private var noteBodyFocused: Bool
@@ -58,7 +71,10 @@ struct WorkspaceDocumentsView: View {
                 applySearchNavigation()
             }
             .onChange(of: personal.documents) { workspace.personalSearchDestination = nil; personal.scheduleSave() }
-            .onChange(of: personal.selectedDocumentID) { selectedNote = nil; selectedVerse = nil; applySearchNavigation() }
+            .onChange(of: personal.selectedDocumentID) {
+                let available = documentIndex.map { Set(personal.documents[$0].notes.map(\.id)) } ?? []
+                selectedNotes.formIntersection(available); selectedVerse = nil; applySearchNavigation()
+            }
             .onChange(of: workspace.personalNavigationID) { applySearchNavigation() }
             .onChange(of: workspace.pendingNoteID) { selectPendingNote() }
             .alert(L("Renombrar nota"), isPresented: $showsRename) {
@@ -82,6 +98,14 @@ struct WorkspaceDocumentsView: View {
             } message: {
                 Text(LF("Notas que se borrarán: {count}. ¿Quieres continuar?", ["count": String(deletionIDs.count)]))
             }
+            .sheet(item: $moveRequest) { request in
+                NoteMoveView(personal: personal, sourceID: request.documentID, ids: request.noteIDs)
+                    .modifier(AppInterfaceLanguage())
+            }
+            .sheet(item: $propertiesRequest) { request in
+                NotePropertiesView(personal: personal, documentID: request.documentID, note: request.note)
+                    .modifier(AppInterfaceLanguage())
+            }
     }
     private func selectPendingNote() {
         guard let id = workspace.pendingNoteID else { return }
@@ -98,30 +122,62 @@ struct WorkspaceDocumentsView: View {
     }
     private func notebook(_ index: Int) -> some View {
         HSplitView {
-            VStack {
-                List(personal.documents[index].notes, selection: $selectedNotes) { note in Text(note.title).tag(note.id) }
+            VStack(spacing: 8) {
+                let entries = (try? StudyNoteOrganization.outline(personal.documents[index].notes)) ?? []
+                ScrollViewReader { scroll in
+                List(entries, selection: $selectedNotes) { entry in
+                    HStack(spacing: 6) {
+                        Image(systemName: "note.text").foregroundStyle(.secondary)
+                        Text(entry.note.title).lineLimit(2)
+                    }.padding(.leading, CGFloat(min(entry.depth, 8)) * 12)
+                        .help(entry.note.title).tag(entry.id).id(entry.id)
+                        .accessibilityLabel(entry.note.title + ", " + LF("Nivel {number}", ["number": String(entry.depth + 1)]))
+                }
                     .accessibilityIdentifier("notes.list")
                     .contextMenu(forSelectionType: UUID.self) { ids in
                         Button(L("Renombrar nota")) { requestRename(ids, index: index) }.disabled(ids.count != 1)
+                        Button(L("Duplicar notas")) { duplicate(ids, index: index) }.disabled(ids.isEmpty)
+                        Button(L("Mover notas…")) { requestMove(ids, index: index) }.disabled(ids.isEmpty)
+                        Button(L("Propiedades de la nota")) { requestProperties(ids, index: index) }.disabled(ids.count != 1)
                         Button(L("Borrar notas"), role: .destructive) { requestDeletion(ids, index: index) }.disabled(ids.isEmpty)
                     }
                     .onDeleteCommand { requestDeletion(selectedNotes, index: index) }
-                Button(L("Agregar nota")) {
-                    var note = StudyNote(); note.sourceContentType = "text/plain"
-                    personal.documents[index].notes.append(note); selectedNote = note.id
+                    .onAppear { if let selectedNote { scroll.scrollTo(selectedNote, anchor: .center) } }
+                    .onChange(of: selectedNote) { if let selectedNote { scroll.scrollTo(selectedNote, anchor: .center) } }
                 }
-            }.frame(minWidth: 150, idealWidth: 220)
+                MacReaderToolbarSurface {
+                    MacReaderControlGroup {
+                        MacToolbarButton("Agregar nota", "plus") { addNote(index: index) }
+                        Menu {
+                            Button(L("Agregar subnota")) { addNote(index: index, parentID: selectedNote) }.disabled(selectedNote == nil)
+                            Button(L("Renombrar nota")) { requestRename(selectedNotes, index: index) }.disabled(selectedNote == nil)
+                            Button(L("Duplicar notas")) { duplicate(selectedNotes, index: index) }.disabled(selectedNotes.isEmpty)
+                            Button(L("Mover notas…")) { requestMove(selectedNotes, index: index) }.disabled(selectedNotes.isEmpty)
+                            Button(L("Propiedades de la nota")) { requestProperties(selectedNotes, index: index) }.disabled(selectedNote == nil)
+                            Menu(L("Ordenar notas")) {
+                                Button(L("Título")) { sort(.title, index: index) }
+                                Button(L("Referencia")) { sort(.reference, index: index) }
+                                Button(L("Última modificación")) { sort(.modified, index: index) }
+                            }.disabled(entries.isEmpty)
+                            Divider()
+                            Button(L("Borrar notas"), role: .destructive) { requestDeletion(selectedNotes, index: index) }.disabled(selectedNotes.isEmpty)
+                        } label: { Text(L("Acciones")).font(.callout) }
+                            .fixedSize().help(L("Acciones de notas"))
+                        Spacer(minLength: 8)
+                        MacToolbarButton("Subir", "chevron.up") { move(-1, index: index) }.disabled(!canMove(-1, index: index))
+                        MacToolbarButton("Bajar", "chevron.down") { move(1, index: index) }.disabled(!canMove(1, index: index))
+                    }
+                }.padding(.horizontal, 12).padding(.bottom, 8)
+            }.frame(minWidth: 240, idealWidth: 250, maxWidth: 260)
             VStack(alignment: .leading) {
                 if let note = personal.documents[index].notes.firstIndex(where: { $0.id == selectedNote }) {
+                    let documentID = personal.documents[index].id
+                    let noteID = personal.documents[index].notes[note].id
                     TextField(L("Título de la nota"), text: $personal.documents[index].notes[note].title).macInputStyle()
-                    if personal.documents[index].notes[note].sourceContentType == "text/html" {
-                        ScrollView { Text(PersonalReferenceProjection.body(personal.documents[index].notes[note]).text).textSelection(.enabled) }
-                        Button(L("Crear una nota editable con este texto")) {
-                            var copy = StudyNote(title: personal.documents[index].notes[note].title)
-                            copy.sourceContentType = "text/plain"; copy.sourceBody = NoteHTMLProjection.spans(personal.documents[index].notes[note].sourceBody).map(\.text).joined()
-                            personal.documents[index].notes.append(copy); selectedNote = copy.id
-                        }
-                    } else { TextEditor(text: $personal.documents[index].notes[note].sourceBody).font(.body).focused($noteBodyFocused) }
+                    WorkspaceNoteEditor(note: personal.documents[index].notes[note]) { data in
+                        do { try personal.updateNoteRichText(noteID, in: documentID, data: data) }
+                        catch { workspace.error = error.localizedDescription }
+                    }.focused($noteBodyFocused)
                     if let reference = PersonalReferenceProjection.anchor(personal.documents[index].notes[note]) {
                         Text(reference).font(.caption).foregroundStyle(.secondary).textSelection(.enabled)
                     }
@@ -135,8 +191,42 @@ struct WorkspaceDocumentsView: View {
                 } else {
                     Color.clear
                 }
-            }.padding(8).frame(minWidth: 300, idealWidth: 300, maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            }.padding(.leading, 12).padding(.vertical, 8)
+                .frame(minWidth: 332, idealWidth: 440, maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         }
+    }
+    private func addNote(index: Int, parentID: UUID? = nil) {
+        var note = StudyNote(); note.sourceContentType = "text/plain"; note.parentID = parentID
+        if parentID != nil { personal.documents[index].schemaVersion = 2 }
+        personal.documents[index].notes.append(note); selectedNote = note.id; noteBodyFocused = true
+    }
+    private func duplicate(_ ids: Set<UUID>, index: Int) {
+        do { selectedNotes = try personal.duplicateNotes(ids, in: personal.documents[index].id) }
+        catch { workspace.error = error.localizedDescription }
+    }
+    private func requestMove(_ ids: Set<UUID>, index: Int) {
+        guard !ids.isEmpty else { return }
+        moveRequest = NoteMoveRequest(documentID: personal.documents[index].id, noteIDs: ids)
+    }
+    private func requestProperties(_ ids: Set<UUID>, index: Int) {
+        guard ids.count == 1 else { return }
+        guard let note = personal.documents[index].notes.first(where: { ids.contains($0.id) }) else { return }
+        propertiesRequest = NotePropertiesRequest(documentID: personal.documents[index].id, note: note)
+    }
+    private func sort(_ order: StudyNoteSort, index: Int) {
+        do { try personal.sortNotes(in: personal.documents[index].id, by: order) }
+        catch { workspace.error = error.localizedDescription }
+    }
+    private func canMove(_ delta: Int, index: Int) -> Bool {
+        guard let id = selectedNote, let note = personal.documents[index].notes.first(where: { $0.id == id }) else { return false }
+        let siblings = personal.documents[index].notes.filter { $0.parentID == note.parentID }
+        guard let position = siblings.firstIndex(where: { $0.id == id }) else { return false }
+        return siblings.indices.contains(position + delta)
+    }
+    private func move(_ delta: Int, index: Int) {
+        guard let id = selectedNote else { return }
+        do { try personal.moveNote(id, in: personal.documents[index].id, by: delta) }
+        catch { workspace.error = error.localizedDescription }
     }
     private func requestRename(_ ids: Set<UUID>, index: Int) {
         guard ids.count == 1, let note = personal.documents[index].notes.first(where: { ids.contains($0.id) }) else { return }

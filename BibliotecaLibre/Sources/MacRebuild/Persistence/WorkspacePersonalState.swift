@@ -62,14 +62,70 @@ struct WorkspacePersonalSnapshot: Codable {
         do { try save() }
         catch { documents[document].notes[note] = previous; throw error }
     }
+    /// Source markup and provenance remain untouched; only the owned native
+    /// editing representation changes. The normal debounced save keeps typing
+    /// responsive and preserves unsaved edits in memory if a disk write fails.
+    func updateNoteRichText(_ id: UUID, in documentID: UUID, data: Data) throws {
+        guard let document = documents.firstIndex(where: { $0.id == documentID }),
+              let note = documents[document].notes.firstIndex(where: { $0.id == id }) else { return }
+        _ = try NoteRichTextCodec.decode(data)
+        guard documents[document].notes[note].editedRTF != data else { return }
+        documents[document].schemaVersion = 2
+        documents[document].notes[note].editedRTF = data
+        documents[document].notes[note].modifiedUTC = ISO8601DateFormatter().string(from: Date())
+        scheduleSave()
+    }
     /// The caller must obtain confirmation before invoking this mutation.
     func deleteNotes(_ ids: Set<UUID>, in documentID: UUID) throws {
         guard !ids.isEmpty, let document = documents.firstIndex(where: { $0.id == documentID }) else { return }
-        let previous = documents[document].notes
-        guard previous.contains(where: { ids.contains($0.id) }) else { return }
-        documents[document].notes.removeAll { ids.contains($0.id) }
+        guard documents[document].notes.contains(where: { ids.contains($0.id) }) else { return }
+        var updated = documents
+        updated[document] = try StudyNoteOrganization.deleting(ids, from: documents[document])
+        try replaceDocuments(updated)
+    }
+    func moveNotes(_ ids: Set<UUID>, from sourceID: UUID, to destinationID: UUID,
+                   parentID: UUID? = nil, beforeID: UUID? = nil) throws {
+        let updated = try StudyNoteOrganization.moving(ids, from: sourceID, to: destinationID,
+            parentID: parentID, beforeID: beforeID, documents: documents)
+        try replaceDocuments(updated)
+        selectedDocumentID = destinationID
+    }
+    @discardableResult func duplicateNotes(_ ids: Set<UUID>, in documentID: UUID) throws -> Set<UUID> {
+        guard let index = documents.firstIndex(where: { $0.id == documentID }) else { return [] }
+        let previousIDs = Set(documents[index].notes.map(\.id))
+        var updated = documents
+        updated[index] = try StudyNoteOrganization.duplicating(ids, in: documents[index], titleSuffix: L("Copia"))
+        try replaceDocuments(updated)
+        return Set(updated[index].notes.map(\.id)).subtracting(previousIDs)
+    }
+    func sortNotes(in documentID: UUID, by order: StudyNoteSort) throws {
+        guard let index = documents.firstIndex(where: { $0.id == documentID }) else { return }
+        var updated = documents
+        updated[index] = try StudyNoteOrganization.sorting(documents[index], by: order)
+        try replaceDocuments(updated)
+    }
+    func setNoteProperties(_ id: UUID, in documentID: UUID, values: [String: String]) throws {
+        guard let document = documents.firstIndex(where: { $0.id == documentID }),
+              let note = documents[document].notes.firstIndex(where: { $0.id == id }) else { return }
+        var updated = documents
+        updated[document].schemaVersion = 2
+        updated[document].notes[note].properties = values
+        updated[document].notes[note].modifiedUTC = ISO8601DateFormatter().string(from: Date())
+        try replaceDocuments(updated)
+    }
+    func moveNote(_ id: UUID, in documentID: UUID, by delta: Int) throws {
+        guard [-1, 1].contains(delta), let document = documents.first(where: { $0.id == documentID }),
+              let note = document.notes.first(where: { $0.id == id }) else { return }
+        let siblings = document.notes.filter { $0.parentID == note.parentID }
+        guard let index = siblings.firstIndex(where: { $0.id == id }), siblings.indices.contains(index + delta) else { return }
+        let before = delta < 0 ? siblings[index - 1].id : siblings.indices.contains(index + 2) ? siblings[index + 2].id : nil
+        try moveNotes([id], from: documentID, to: documentID, parentID: note.parentID, beforeID: before)
+    }
+    private func replaceDocuments(_ updated: [StudyDocument]) throws {
+        let previous = documents
+        documents = updated
         do { try save() }
-        catch { documents[document].notes = previous; throw error }
+        catch { documents = previous; throw error }
     }
     @discardableResult func create(_ kind: StudyDocumentKind) -> UUID {
         let document = StudyDocument(title: kind == .notebook ? "Mis notas" : "Lista de versículos", kind: kind)

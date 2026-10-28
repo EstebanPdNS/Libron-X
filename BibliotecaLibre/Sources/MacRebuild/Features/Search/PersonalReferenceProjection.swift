@@ -5,6 +5,7 @@ import LibronixCore
 /// rich-edit provenance are never rewritten or treated as visible editor text.
 enum PersonalReferenceProjection {
     static func body(_ note: StudyNote) -> (text: String, links: [BibleReferenceSourceLink]) {
+        if let data = note.editedRTF, let projection = try? NoteRichTextCodec.projection(data) { return projection }
         guard note.sourceContentType == "text/html" else { return (note.sourceBody, []) }
         var text = "", links: [BibleReferenceSourceLink] = [], offset = 0
         for span in NoteHTMLProjection.spans(note.sourceBody) {
@@ -38,8 +39,10 @@ enum PersonalReferenceProjection {
             if let reference = anchor(note), !reference.isEmpty {
                 fields.append(.init(entryID: note.id, kind: .noteAnchor, text: reference))
             }
-            if note.editedRTF != nil {
-                warnings.append(note.title + ": el editor actual no presenta la representación RTF guardada; se busca el texto que muestra.")
+            if let data = note.editedRTF, (try? NoteRichTextCodec.decode(data)) == nil {
+                warnings.append(note.title + ": no se pudo abrir el RTF guardado; se busca la vista de solo lectura del original.")
+            } else if note.editedRTF == nil && NoteRichTextCodec.hasUnsupportedHTMLObjects(note) {
+                warnings.append(note.title + ": el HTML original conserva objetos no compatibles; se busca el texto visible.")
             }
         }
         for verse in document.verses {

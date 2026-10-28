@@ -21,6 +21,14 @@ struct InstalledReleaseNotesTests {
                 #expect(AppStrings.catalog[key]?[language.rawValue]?.isEmpty == false)
             }
         }
+        let latest = try #require(InstalledReleaseNotes.current(version: "0.6"))
+        #expect(latest.changes.count == 8)
+        #expect(Set(latest.changes).count == latest.changes.count)
+        for key in latest.changes {
+            for language in AppLanguage.allCases {
+                #expect(AppStrings.catalog[key]?[language.rawValue]?.isEmpty == false)
+            }
+        }
         #expect(InstalledReleaseNotes.current(version: "0.1.1-beta.2") == nil)
         #expect(InstalledReleaseNotes.current(version: "0.5.1") == nil)
         #expect(InstalledReleaseNotes.current(version: "99.0.0") == nil)

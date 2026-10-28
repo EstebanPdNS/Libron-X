@@ -1,6 +1,6 @@
 {
   "version": "0.6",
-  "updated": "2026-10-24",
+  "updated": "2026-10-28",
   "authorization": "All outstanding inventory items are assigned to 0.6 by the owner; new future suggestions remain 0.7. Historical version plans remain evidence, not the current allocation.",
   "baselineRelease": "v0.5",
   "count": 111,
@@ -302,10 +302,16 @@
       "sourceKey": "study-expansion-annotations-01",
       "acceptance": "Integrar negrita, listas, enlaces, deshacer y guardar/reabrir sin pérdida en la app actual.",
       "baseline": "MacRebuild usa TextEditor de texto plano; hay editor RTF en BibliotecaMac.",
-      "status": "pending",
-      "implementation": [],
-      "verification": [],
-      "limitations": []
+      "status": "in_progress",
+      "implementation": [
+        "Rich note editor and persistent hierarchy and organization are integrated in MacRebuild."
+      ],
+      "verification": [
+        "22 focused note and organization tests passed; the complete optimized suite passed 935 tests. Native macOS checks covered rich formatting, keyboard undo/redo, saving, reopening, nested notes, reordering, and properties."
+      ],
+      "limitations": [
+        "Further native testing, imported-object fidelity and remaining acceptance work continue in 0.7."
+      ]
     },
     {
       "id": "F166",
@@ -316,10 +322,16 @@
       "sourceKey": "study-expansion-annotations-02",
       "acceptance": "Editar una representación enriquecida conservando el original y los objetos soportados.",
       "baseline": "Se visualiza texto y se crea una copia plana editable.",
-      "status": "pending",
-      "implementation": [],
-      "verification": [],
-      "limitations": []
+      "status": "in_progress",
+      "implementation": [
+        "Rich note editor and persistent hierarchy and organization are integrated in MacRebuild."
+      ],
+      "verification": [
+        "22 focused note and organization tests passed; the complete optimized suite passed 935 tests. Native macOS checks covered rich formatting, keyboard undo/redo, saving, reopening, nested notes, reordering, and properties."
+      ],
+      "limitations": [
+        "Further native testing, imported-object fidelity and remaining acceptance work continue in 0.7."
+      ]
     },
     {
       "id": "F167",
@@ -330,10 +342,16 @@
       "sourceKey": "study-expansion-annotations-03",
       "acceptance": "Mover, anidar y reordenar entre cuadernos conservando IDs y estado persistente.",
       "baseline": "Cuadernos con lista plana de notas.",
-      "status": "pending",
-      "implementation": [],
-      "verification": [],
-      "limitations": []
+      "status": "in_progress",
+      "implementation": [
+        "Rich note editor and persistent hierarchy and organization are integrated in MacRebuild."
+      ],
+      "verification": [
+        "22 focused note and organization tests passed; the complete optimized suite passed 935 tests. Native macOS checks covered rich formatting, keyboard undo/redo, saving, reopening, nested notes, reordering, and properties."
+      ],
+      "limitations": [
+        "Further native testing, imported-object fidelity and remaining acceptance work continue in 0.7."
+      ]
     },
     {
       "id": "F168",
@@ -344,10 +362,16 @@
       "sourceKey": "study-expansion-annotations-04",
       "acceptance": "Añadir duplicación, orden por referencia y edición de propiedades que faltan.",
       "baseline": "Crear, editar, renombrar y borrar varias notas ya existen.",
-      "status": "pending",
-      "implementation": [],
-      "verification": [],
-      "limitations": []
+      "status": "in_progress",
+      "implementation": [
+        "Rich note editor and persistent hierarchy and organization are integrated in MacRebuild."
+      ],
+      "verification": [
+        "22 focused note and organization tests passed; the complete optimized suite passed 935 tests. Native macOS checks covered rich formatting, keyboard undo/redo, saving, reopening, nested notes, reordering, and properties."
+      ],
+      "limitations": [
+        "Further native testing, imported-object fidelity and remaining acceptance work continue in 0.7."
+      ]
     },
     {
       "id": "F169",
@@ -1623,5 +1647,6 @@
       "verification": [],
       "limitations": []
     }
-  ]
+  ],
+  "continuationVersion": "0.7"
 }

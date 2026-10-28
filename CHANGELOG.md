@@ -1,5 +1,39 @@
 # Changelog
 
+## v0.6 — 2026-10-28
+
+### Changelog
+
+- Compare passages, chapters or books across selected Bible editions.
+- Choose the base edition and recalculate differences when it changes.
+- Highlight additions, substitutions and omissions while preserving the original verse text.
+- Choose whether case, accents and punctuation affect comparison.
+- Distinguish missing verses from editions whose coverage could not be verified.
+- Open a compared verse in its original edition and export the report as CSV.
+- Show search distribution charts by book, chapter or custom Bible ranges.
+- Choose an edition and count results or retained occurrences in each group.
+- Inspect grouped search results and open their exact source locations.
+- Page through large charts and identify partial search coverage.
+- Export search occurrences and metadata matches to CSV with context and source identities.
+- Check source files before export and prevent exports from replacing library resources.
+- Edit notes with bold, italic, underline, lists and links.
+- Undo and redo note edits and reopen their saved rich text.
+- Import HTML note formatting while retaining the original source representation.
+- Keep unsupported HTML objects in the original source and show an editing notice.
+- Create nested notes and move notes with their subnotes between notebooks.
+- Reorder and sort notes by title, reference or modification date.
+- Duplicate selected notes and edit author, type, style and tags.
+- Preserve surviving children when a selected parent note is deleted.
+- Use compact Liquid Glass study headers, search fields and result actions.
+- Unify resource, collection, association, priority and download controls.
+- Update dictionary navigation, image-viewer controls and pane-layout actions.
+- Apply interface direction consistently to study sheets and popovers.
+- Add a translated overview of this version in Settings.
+
+### Bug reports
+
+[Open an issue](https://github.com/EstebanPdNS/Libron-X/issues/new?template=bug_report.md) with the app/macOS versions, reproduction steps and available logs or screenshots. Remove private content; do not attach books or license files.
+
 ## v0.5 — 2026-10-21
 
 ### Changelog

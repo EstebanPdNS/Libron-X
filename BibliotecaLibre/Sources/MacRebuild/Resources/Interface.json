@@ -323,6 +323,18 @@
     "ur": "لائبریری سے وسائل کا فولڈر کھولیں۔",
     "zh-Hans": "从资料库访问资源文件夹。"
   },
+  "Acciones": {
+    "ar": "إجراءات",
+    "bn": "কার্যক্রম",
+    "en": "Actions",
+    "es": "Acciones",
+    "fr": "Actions",
+    "hi": "कार्रवाइयाँ",
+    "id": "Tindakan",
+    "pt": "Ações",
+    "ur": "اقدامات",
+    "zh-Hans": "操作"
+  },
   "Acciones de lectura": {
     "ar": "إجراءات القراءة",
     "bn": "পাঠের কাজ",
@@ -334,6 +346,18 @@
     "pt": "Ações de leitura",
     "ur": "مطالعے کے اقدامات",
     "zh-Hans": "阅读操作"
+  },
+  "Acciones de notas": {
+    "ar": "إجراءات الملاحظات",
+    "bn": "নোটের কাজ",
+    "en": "Note actions",
+    "es": "Acciones de notas",
+    "fr": "Actions sur les notes",
+    "hi": "नोट की कार्रवाइयाँ",
+    "id": "Tindakan catatan",
+    "pt": "Ações das notas",
+    "ur": "نوٹس کے اعمال",
+    "zh-Hans": "笔记操作"
   },
   "Acciones de resultados": {
     "ar": "إجراءات النتائج",
@@ -731,6 +755,18 @@
     "ur": "منتخب شامل کریں",
     "zh-Hans": "添加所选项"
   },
+  "Agregar subnota": {
+    "ar": "إضافة ملاحظة فرعية",
+    "bn": "উপনোট যোগ করুন",
+    "en": "Add subnote",
+    "es": "Agregar subnota",
+    "fr": "Ajouter une sous-note",
+    "hi": "उपनोट जोड़ें",
+    "id": "Tambah subcatatan",
+    "pt": "Adicionar subnota",
+    "ur": "ذیلی نوٹ شامل کریں",
+    "zh-Hans": "添加子笔记"
+  },
   "Agregar ubicación actual": {
     "ar": "إضافة الموقع الحالي",
     "bn": "বর্তমান অবস্থান যোগ করুন",
@@ -766,6 +802,18 @@
     "pt": "Ajustar à largura",
     "ur": "چوڑائی کے مطابق کریں",
     "zh-Hans": "适合宽度"
+  },
+  "Ajustar versión base, mayúsculas, acentos y puntuación en las comparaciones.": {
+    "ar": "اضبط النسخة الأساسية وحالة الأحرف والعلامات والترقيم في المقارنات.",
+    "bn": "তুলনায় মূল সংস্করণ, বড় হাতের অক্ষর, উচ্চারণচিহ্ন ও বিরামচিহ্ন নির্ধারণ করুন।",
+    "en": "Adjust the base edition, case, accents and punctuation in comparisons.",
+    "es": "Ajustar versión base, mayúsculas, acentos y puntuación en las comparaciones.",
+    "fr": "Réglez la version de base, la casse, les accents et la ponctuation.",
+    "hi": "तुलना में आधार संस्करण, अक्षर, उच्चारण चिह्न और विराम चिह्न समायोजित करें।",
+    "id": "Atur edisi dasar, huruf besar, aksen, dan tanda baca dalam perbandingan.",
+    "pt": "Ajuste a edição base, maiúsculas, acentos e pontuação nas comparações.",
+    "ur": "موازنے میں بنیادی نسخہ، حروف، اعراب اور رموزِ اوقاف مقرر کریں۔",
+    "zh-Hans": "调整比较的基准版本、大小写、重音和标点。"
   },
   "Al abrir Libron-X": {
     "ar": "عند فتح Libron-X",
@@ -874,6 +922,18 @@
     "pt": "Aparência",
     "ur": "ظاہری شکل",
     "zh-Hans": "外观"
+  },
+  "Aplicar": {
+    "ar": "تطبيق",
+    "bn": "প্রয়োগ করুন",
+    "en": "Apply",
+    "es": "Aplicar",
+    "fr": "Appliquer",
+    "hi": "लागू करें",
+    "id": "Terapkan",
+    "pt": "Aplicar",
+    "ur": "لاگو کریں",
+    "zh-Hans": "应用"
   },
   "Aplicar a las lecturas abiertas": {
     "ar": "تطبيق على القراءات المفتوحة",
@@ -2555,6 +2615,18 @@
     "ur": "بائبل کے اقتباسات کا موازنہ…",
     "zh-Hans": "比较圣经段落…"
   },
+  "Comparar pasajes entre Biblias y resaltar diferencias textuales.": {
+    "ar": "قارن المقاطع بين نسخ الكتاب المقدس وأبرز اختلافات النص.",
+    "bn": "বাইবেলের সংস্করণে অংশ তুলনা করুন ও পাঠের পার্থক্য দেখুন।",
+    "en": "Compare passages across Bibles and highlight textual differences.",
+    "es": "Comparar pasajes entre Biblias y resaltar diferencias textuales.",
+    "fr": "Comparez des passages entre Bibles et mettez en évidence les différences.",
+    "hi": "बाइबल संस्करणों में अंशों की तुलना करें और पाठ के अंतर दिखाएँ।",
+    "id": "Bandingkan bagian antar Alkitab dan sorot perbedaan teks.",
+    "pt": "Compare passagens entre Bíblias e destaque diferenças textuais.",
+    "ur": "بائبل کے نسخوں میں اقتباسات کا موازنہ اور متنی فرق نمایاں کریں۔",
+    "zh-Hans": "比较不同圣经版本的经文并突出文本差异。"
+  },
   "Compilación": {
     "ar": "البنية",
     "bn": "বিল্ড",
@@ -2627,6 +2699,18 @@
     "ur": "مشاورت اور پاسبانی",
     "zh-Hans": "辅导与牧养"
   },
+  "Conservar el contenido original de las notas HTML importadas al editarlas.": {
+    "ar": "احتفظ بالمحتوى الأصلي لملاحظات HTML المستوردة عند تحريرها.",
+    "bn": "আমদানি করা HTML নোট সম্পাদনার সময় মূল বিষয়বস্তু সংরক্ষণ করুন।",
+    "en": "Preserve original imported HTML notes when editing.",
+    "es": "Conservar el contenido original de las notas HTML importadas al editarlas.",
+    "fr": "Conservez le contenu original des notes HTML importées lors de la modification.",
+    "hi": "आयातित HTML नोट संपादित करते समय मूल सामग्री सुरक्षित रखें।",
+    "id": "Pertahankan isi asli catatan HTML yang diimpor saat menyunting.",
+    "pt": "Preserve o conteúdo original das notas HTML importadas ao editá-las.",
+    "ur": "درآمد شدہ HTML نوٹس میں ترمیم کرتے وقت اصل مواد محفوظ رکھیں۔",
+    "zh-Hans": "编辑导入的 HTML 笔记时保留原始内容。"
+  },
   "Contar coincidencias conservadas": {
     "ar": "حساب التطابقات المحفوظة",
     "bn": "সংরক্ষিত মিল গণনা করুন",
@@ -2650,6 +2734,18 @@
     "pt": "Sumário",
     "ur": "فہرست مضامین",
     "zh-Hans": "目录"
+  },
+  "Contenido de la nota": {
+    "ar": "محتوى الملاحظة",
+    "bn": "নোটের বিষয়বস্তু",
+    "en": "Note content",
+    "es": "Contenido de la nota",
+    "fr": "Contenu de la note",
+    "hi": "नोट की सामग्री",
+    "id": "Isi catatan",
+    "pt": "Conteúdo da nota",
+    "ur": "نوٹ کا متن",
+    "zh-Hans": "笔记内容"
   },
   "Contenido nativo verificado": {
     "ar": "محتوى أصلي تم التحقق منه",
@@ -2758,6 +2854,18 @@
     "pt": "Converter para .libron",
     "ur": ".libron میں تبدیل کریں",
     "zh-Hans": "转换为 .libron"
+  },
+  "Copia": {
+    "ar": "نسخة",
+    "bn": "অনুলিপি",
+    "en": "Copy",
+    "es": "Copia",
+    "fr": "Copie",
+    "hi": "प्रतिलिपि",
+    "id": "Salinan",
+    "pt": "Cópia",
+    "ur": "نقل",
+    "zh-Hans": "副本"
   },
   "Copia el texto seleccionado o el artículo si no hay selección. Exportar e imprimir usan la lectura actual; los formatos dependen del recurso. Elige el destino en el diálogo del sistema.": {
     "ar": "انسخ النص المحدد أو المقالة عند عدم التحديد. يستخدم التصدير والطباعة القراءة الحالية، وتعتمد الصيغ على المورد. اختر الوجهة في حوار النظام.",
@@ -2963,6 +3071,18 @@
     "ur": "انتساب اور ماخذ",
     "zh-Hans": "鸣谢与来源"
   },
+  "Cuaderno de destino": {
+    "ar": "دفتر الملاحظات الوجهة",
+    "bn": "গন্তব্য নোটবুক",
+    "en": "Destination notebook",
+    "es": "Cuaderno de destino",
+    "fr": "Carnet de destination",
+    "hi": "गंतव्य नोटबुक",
+    "id": "Buku catatan tujuan",
+    "pt": "Caderno de destino",
+    "ur": "منزل کی نوٹ بک",
+    "zh-Hans": "目标笔记本"
+  },
   "Cuadrícula de cuatro": {
     "ar": "شبكة من أربع نوافذ",
     "bn": "চার ঘরের গ্রিড",
@@ -3010,6 +3130,18 @@
     "pt": "Corpo",
     "ur": "متن",
     "zh-Hans": "正文"
+  },
+  "Cursiva": {
+    "ar": "مائل",
+    "bn": "তির্যক",
+    "en": "Italic",
+    "es": "Cursiva",
+    "fr": "Italique",
+    "hi": "तिरछा",
+    "id": "Miring",
+    "pt": "Itálico",
+    "ur": "ترچھا",
+    "zh-Hans": "斜体"
   },
   "Código de descarga": {
     "ar": "رمز التنزيل",
@@ -3238,6 +3370,18 @@
     "pt": "Desconhecido",
     "ur": "نامعلوم",
     "zh-Hans": "未知"
+  },
+  "Deshacer": {
+    "ar": "تراجع",
+    "bn": "পূর্বাবস্থায় ফেরান",
+    "en": "Undo",
+    "es": "Deshacer",
+    "fr": "Annuler",
+    "hi": "पूर्ववत करें",
+    "id": "Urungkan",
+    "pt": "Desfazer",
+    "ur": "کالعدم کریں",
+    "zh-Hans": "撤销"
   },
   "Desmarcar todos": {
     "ar": "إلغاء تحديد الكل",
@@ -3503,6 +3647,18 @@
     "ur": "لغات اور دائرۃ المعارف",
     "zh-Hans": "词典与百科全书"
   },
+  "Dirección web o referencia bíblica": {
+    "ar": "عنوان ويب أو مرجع كتابي",
+    "bn": "ওয়েব ঠিকানা বা বাইবেলের উল্লেখ",
+    "en": "Web address or Bible reference",
+    "es": "Dirección web o referencia bíblica",
+    "fr": "Adresse web ou référence biblique",
+    "hi": "वेब पता या बाइबल संदर्भ",
+    "id": "Alamat web atau referensi Alkitab",
+    "pt": "Endereço web ou referência bíblica",
+    "ur": "ویب پتہ یا بائبل کا حوالہ",
+    "zh-Hans": "网址或圣经经文引用"
+  },
   "Disponible": {
     "ar": "متاح",
     "bn": "উপলভ্য",
@@ -3695,6 +3851,18 @@
     "ur": "مطالعہ کی نقل بنائیں",
     "zh-Hans": "复制阅读窗口"
   },
+  "Duplicar notas": {
+    "ar": "تكرار الملاحظات",
+    "bn": "নোটের প্রতিলিপি করুন",
+    "en": "Duplicate notes",
+    "es": "Duplicar notas",
+    "fr": "Dupliquer les notes",
+    "hi": "नोट की प्रतिलिपि बनाएँ",
+    "id": "Duplikat catatan",
+    "pt": "Duplicar notas",
+    "ur": "نوٹس کی نقل بنائیں",
+    "zh-Hans": "复制笔记"
+  },
   "Duración activa (s)": {
     "ar": "المدة النشطة (ث)",
     "bn": "সক্রিয় সময় (সে)",
@@ -3743,6 +3911,18 @@
     "ur": "نوٹ میں ترمیم کریں",
     "zh-Hans": "编辑笔记"
   },
+  "Editar notas enriquecidas con formato, listas, enlaces y deshacer.": {
+    "ar": "حرر الملاحظات المنسقة بالقوائم والروابط والتراجع.",
+    "bn": "বিন্যাস, তালিকা, লিংক ও পূর্বাবস্থাসহ সমৃদ্ধ নোট সম্পাদনা করুন।",
+    "en": "Edit rich notes with formatting, lists, links and undo.",
+    "es": "Editar notas enriquecidas con formato, listas, enlaces y deshacer.",
+    "fr": "Modifiez des notes enrichies avec mise en forme, listes, liens et annulation.",
+    "hi": "स्वरूपण, सूचियों, लिंक और पूर्ववत सहित समृद्ध नोट संपादित करें।",
+    "id": "Sunting catatan kaya dengan format, daftar, tautan, dan urungkan.",
+    "pt": "Edite notas formatadas com listas, links e desfazer.",
+    "ur": "فارمیٹنگ، فہرستوں، روابط اور واپس کرنے کے ساتھ نوٹس میں ترمیم کریں۔",
+    "zh-Hans": "使用格式、列表、链接和撤销功能编辑富文本笔记。"
+  },
   "Editorial": {
     "ar": "الناشر",
     "bn": "প্রকাশক",
@@ -3754,6 +3934,18 @@
     "pt": "Editora",
     "ur": "ناشر",
     "zh-Hans": "出版社"
+  },
+  "El HTML original se conserva; los objetos no compatibles no se editan.": {
+    "ar": "يُحفظ HTML الأصلي؛ ولا تُعدَّل العناصر غير المدعومة.",
+    "bn": "মূল HTML সংরক্ষিত থাকে; অসমর্থিত বস্তু সম্পাদনা করা হয় না।",
+    "en": "The original HTML is preserved; unsupported objects are not edited.",
+    "es": "El HTML original se conserva; los objetos no compatibles no se editan.",
+    "fr": "Le HTML original est conservé ; les objets non pris en charge ne sont pas modifiés.",
+    "hi": "मूल HTML सुरक्षित रहता है; असमर्थित वस्तुओं को संपादित नहीं किया जाता।",
+    "id": "HTML asli dipertahankan; objek yang tidak didukung tidak diedit.",
+    "pt": "O HTML original é preservado; objetos incompatíveis não são editados.",
+    "ur": "اصل HTML محفوظ رہتا ہے؛ غیر معاون اشیاء میں ترمیم نہیں ہوتی۔",
+    "zh-Hans": "原始 HTML 会保留；不支持的对象不会被编辑。"
   },
   "El archivo del área de trabajo ya no está disponible.": {
     "ar": "لم يعد ملف مساحة العمل متاحًا.",
@@ -3778,6 +3970,18 @@
     "pt": "O catálogo mudou. Analise a biblioteca novamente.",
     "ur": "فہرست بدل گئی ہے۔ دوبارہ تجزیہ کریں۔",
     "zh-Hans": "目录已更改。请重新分析书库。"
+  },
+  "El cuaderno de origen o destino no está disponible.": {
+    "ar": "دفتر الملاحظات المصدر أو الوجهة غير متاح.",
+    "bn": "উৎস বা গন্তব্য নোটবুক উপলব্ধ নেই।",
+    "en": "The source or destination notebook is unavailable.",
+    "es": "El cuaderno de origen o destino no está disponible.",
+    "fr": "Le carnet source ou de destination n’est pas disponible.",
+    "hi": "स्रोत या गंतव्य नोटबुक उपलब्ध नहीं है।",
+    "id": "Buku catatan sumber atau tujuan tidak tersedia.",
+    "pt": "O caderno de origem ou destino não está disponível.",
+    "ur": "ماخذ یا منزل کی نوٹ بک دستیاب نہیں ہے۔",
+    "zh-Hans": "源笔记本或目标笔记本不可用。"
   },
   "El grupo de Biblias ya no está disponible.": {
     "ar": "لم تعد مجموعة الترجمات متاحة.",
@@ -4331,6 +4535,18 @@
     "ur": "عبارات کے واضح حوالے تلاش کریں۔ قوسین میں ایڈیشن دینے سے تلاش صرف اسی ایڈیشن کا نام بتانے والے حوالوں تک محدود رہتی ہے۔",
     "zh-Hans": "查找明确的经文引用。在括号中指定版本后，仅搜索标明该版本的引用。"
   },
+  "Enlaces": {
+    "ar": "روابط",
+    "bn": "লিংক",
+    "en": "Links",
+    "es": "Enlaces",
+    "fr": "Liens",
+    "hi": "लिंक",
+    "id": "Tautan",
+    "pt": "Links",
+    "ur": "روابط",
+    "zh-Hans": "链接"
+  },
   "Enlaces azules y tarjetas de notas persistentes con controles Liquid Glass.": {
     "ar": "روابط زرقاء وبطاقات ملاحظات ثابتة بعناصر Liquid Glass.",
     "bn": "নীল লিংক ও Liquid Glass নিয়ন্ত্রণসহ স্থায়ী নোট কার্ড।",
@@ -4595,6 +4811,18 @@
     "ur": "یہ حصہ خودکار طور پر جاری رکھنے کے لیے بہت بڑا ہے۔ اگلا مضمون استعمال کریں۔",
     "zh-Hans": "此部分过大，无法自动继续。请使用“下一篇”。"
   },
+  "Estilo": {
+    "ar": "النمط",
+    "bn": "শৈলী",
+    "en": "Style",
+    "es": "Estilo",
+    "fr": "Style",
+    "hi": "शैली",
+    "id": "Gaya",
+    "pt": "Estilo",
+    "ur": "انداز",
+    "zh-Hans": "样式"
+  },
   "Estilo de cita": {
     "ar": "نمط الاستشهاد",
     "bn": "উদ্ধৃতির ধরন",
@@ -4714,6 +4942,18 @@
     "pt": "Exportar bibliografia",
     "ur": "کتابیات برآمد کریں",
     "zh-Hans": "导出参考书目"
+  },
+  "Exportar comparaciones y resultados de búsqueda a CSV.": {
+    "ar": "صدّر المقارنات ونتائج البحث إلى CSV.",
+    "bn": "তুলনা ও অনুসন্ধানের ফল CSV হিসেবে রপ্তানি করুন।",
+    "en": "Export comparisons and search results to CSV.",
+    "es": "Exportar comparaciones y resultados de búsqueda a CSV.",
+    "fr": "Exportez les comparaisons et résultats de recherche en CSV.",
+    "hi": "तुलनाएँ और खोज परिणाम CSV में निर्यात करें।",
+    "id": "Ekspor perbandingan dan hasil pencarian ke CSV.",
+    "pt": "Exporte comparações e resultados de busca para CSV.",
+    "ur": "موازنے اور تلاش کے نتائج CSV میں برآمد کریں۔",
+    "zh-Hans": "将比较和搜索结果导出为 CSV。"
   },
   "Exportar lectura": {
     "ar": "تصدير القراءة",
@@ -5567,6 +5807,18 @@
     "ur": "موضوع کا آغاز",
     "zh-Hans": "主题开头"
   },
+  "Insertar enlace": {
+    "ar": "إدراج رابط",
+    "bn": "লিংক যোগ করুন",
+    "en": "Insert link",
+    "es": "Insertar enlace",
+    "fr": "Insérer un lien",
+    "hi": "लिंक डालें",
+    "id": "Sisipkan tautan",
+    "pt": "Inserir link",
+    "ur": "رابطہ داخل کریں",
+    "zh-Hans": "插入链接"
+  },
   "Instalar": {
     "ar": "تثبيت",
     "bn": "ইনস্টল",
@@ -5915,6 +6167,18 @@
     "ur": "وسیلے کی شناخت بدل گئی ہے۔",
     "zh-Hans": "资源身份已更改。"
   },
+  "La jerarquía de notas contiene un destino ausente, un ciclo o demasiados niveles.": {
+    "ar": "يتضمن تسلسل الملاحظات وجهة مفقودة أو حلقة أو مستويات كثيرة جدًا.",
+    "bn": "নোটের স্তরবিন্যাসে অনুপস্থিত গন্তব্য, চক্র বা অতিরিক্ত স্তর রয়েছে।",
+    "en": "The note hierarchy contains a missing destination, a cycle, or too many levels.",
+    "es": "La jerarquía de notas contiene un destino ausente, un ciclo o demasiados niveles.",
+    "fr": "La hiérarchie des notes contient une destination absente, un cycle ou trop de niveaux.",
+    "hi": "नोट पदानुक्रम में कोई गंतव्य गायब है, चक्र है या बहुत अधिक स्तर हैं।",
+    "id": "Hierarki catatan berisi tujuan yang hilang, siklus, atau terlalu banyak tingkat.",
+    "pt": "A hierarquia de notas contém um destino ausente, um ciclo ou níveis demais.",
+    "ur": "نوٹس کی درجہ بندی میں منزل غائب ہے، چکر ہے یا بہت زیادہ سطحیں ہیں۔",
+    "zh-Hans": "笔记层级包含缺失目标、循环或过多层级。"
+  },
   "La lectura de origen cambió. Vuelve a abrir los recursos asociados.": {
     "ar": "تغيّرت القراءة الأصلية. أعد فتح الموارد المرتبطة.",
     "bn": "মূল পাঠ বদলেছে। সংযুক্ত রিসোর্স আবার খুলুন।",
@@ -5950,6 +6214,18 @@
     "pt": "A lista de áreas recentes contém entradas incompatíveis.",
     "ur": "حالیہ کام کی جگہوں کی فہرست میں غیر موافق اندراجات ہیں۔",
     "zh-Hans": "最近工作区列表包含不兼容的条目。"
+  },
+  "La organización de notas requiere la versión 2 del documento.": {
+    "ar": "يتطلب تنظيم الملاحظات الإصدار 2 من المستند.",
+    "bn": "নোট সংগঠনের জন্য নথির সংস্করণ 2 প্রয়োজন।",
+    "en": "Note organization requires document version 2.",
+    "es": "La organización de notas requiere la versión 2 del documento.",
+    "fr": "L’organisation des notes nécessite la version 2 du document.",
+    "hi": "नोट व्यवस्थित करने के लिए दस्तावेज़ का संस्करण 2 आवश्यक है।",
+    "id": "Pengaturan catatan memerlukan dokumen versi 2.",
+    "pt": "A organização de notas requer a versão 2 do documento.",
+    "ur": "نوٹس کی تنظیم کے لیے دستاویز کا ورژن 2 درکار ہے۔",
+    "zh-Hans": "笔记组织功能需要文档版本 2。"
   },
   "La pertenencia de esta colección se calcula mediante reglas.": {
     "ar": "تُحسب عضوية هذه المجموعة باستخدام القواعد.",
@@ -6034,6 +6310,18 @@
     "pt": "As regras exigem entre 1 e 32 condições válidas.",
     "ur": "قواعد کے لیے 1 سے 32 درست شرائط درکار ہیں۔",
     "zh-Hans": "规则需要 1 至 32 个有效条件。"
+  },
+  "Las subnotas se trasladan junto con sus notas superiores.": {
+    "ar": "تُنقل الملاحظات الفرعية مع ملاحظاتها الأصلية.",
+    "bn": "উপনোট তাদের মূল নোটের সঙ্গে সরানো হয়।",
+    "en": "Subnotes move with their parent notes.",
+    "es": "Las subnotas se trasladan junto con sus notas superiores.",
+    "fr": "Les sous-notes sont déplacées avec leurs notes parentes.",
+    "hi": "उपनोट अपने मूल नोट के साथ स्थानांतरित होते हैं।",
+    "id": "Subcatatan dipindahkan bersama catatan induknya.",
+    "pt": "As subnotas são movidas junto com suas notas superiores.",
+    "ur": "ذیلی نوٹس اپنے بنیادی نوٹس کے ساتھ منتقل ہوتے ہیں۔",
+    "zh-Hans": "子笔记会随其父笔记一起移动。"
   },
   "Lectores abiertos": {
     "ar": "القارئات المفتوحة",
@@ -6191,6 +6479,18 @@
     "ur": "انتخاب صاف کریں",
     "zh-Hans": "清除选择"
   },
+  "Lista con viñetas": {
+    "ar": "قائمة نقطية",
+    "bn": "বুলেট তালিকা",
+    "en": "Bulleted list",
+    "es": "Lista con viñetas",
+    "fr": "Liste à puces",
+    "hi": "बुलेट सूची",
+    "id": "Daftar berpoin",
+    "pt": "Lista com marcadores",
+    "ur": "علامتی فہرست",
+    "zh-Hans": "项目符号列表"
+  },
   "Lista de versículos": {
     "ar": "قائمة آيات",
     "bn": "পদতালিকা",
@@ -6214,6 +6514,30 @@
     "pt": "Lista salva",
     "ur": "محفوظ فہرست",
     "zh-Hans": "已保存的列表"
+  },
+  "Lista numerada": {
+    "ar": "قائمة مرقمة",
+    "bn": "সংখ্যাযুক্ত তালিকা",
+    "en": "Numbered list",
+    "es": "Lista numerada",
+    "fr": "Liste numérotée",
+    "hi": "क्रमांकित सूची",
+    "id": "Daftar bernomor",
+    "pt": "Lista numerada",
+    "ur": "نمبر وار فہرست",
+    "zh-Hans": "编号列表"
+  },
+  "Listas": {
+    "ar": "قوائم",
+    "bn": "তালিকা",
+    "en": "Lists",
+    "es": "Listas",
+    "fr": "Listes",
+    "hi": "सूचियाँ",
+    "id": "Daftar",
+    "pt": "Listas",
+    "ur": "فہرستیں",
+    "zh-Hans": "列表"
   },
   "Listo": {
     "ar": "جاهز",
@@ -6719,6 +7043,42 @@
     "ur": "تمام سطریں دکھائیں",
     "zh-Hans": "显示所有行"
   },
+  "Mover": {
+    "ar": "نقل",
+    "bn": "সরান",
+    "en": "Move",
+    "es": "Mover",
+    "fr": "Déplacer",
+    "hi": "स्थानांतरित करें",
+    "id": "Pindahkan",
+    "pt": "Mover",
+    "ur": "منتقل کریں",
+    "zh-Hans": "移动"
+  },
+  "Mover notas": {
+    "ar": "نقل الملاحظات",
+    "bn": "নোট সরান",
+    "en": "Move notes",
+    "es": "Mover notas",
+    "fr": "Déplacer les notes",
+    "hi": "नोट स्थानांतरित करें",
+    "id": "Pindahkan catatan",
+    "pt": "Mover notas",
+    "ur": "نوٹس منتقل کریں",
+    "zh-Hans": "移动笔记"
+  },
+  "Mover notas…": {
+    "ar": "نقل الملاحظات…",
+    "bn": "নোট সরান…",
+    "en": "Move notes…",
+    "es": "Mover notas…",
+    "fr": "Déplacer les notes…",
+    "hi": "नोट स्थानांतरित करें…",
+    "id": "Pindahkan catatan…",
+    "pt": "Mover notas…",
+    "ur": "نوٹس منتقل کریں…",
+    "zh-Hans": "移动笔记…"
+  },
   "Más coincidencias por artículo": {
     "ar": "الأكثر تطابقًا لكل مقالة",
     "bn": "প্রতি নিবন্ধে সর্বাধিক মিল",
@@ -6767,6 +7127,18 @@
     "ur": "NEAR میں 48 UTF-16 اکائیاں ہیں۔ WORDS درمیانی الفاظ گنتا ہے۔ VERSES ایک ہی باب کے حقیقی حوالوں کو استعمال کرتا ہے۔ ہر مضمون یا آیت کا اپنا دائرہ رہتا ہے۔",
     "zh-Hans": "NEAR 使用 48 个 UTF-16 单位。WORDS 计算中间单词。VERSES 使用同一章的实际经节引用。每篇文章或经节保留各自的范围。"
   },
+  "Negrita": {
+    "ar": "عريض",
+    "bn": "গাঢ়",
+    "en": "Bold",
+    "es": "Negrita",
+    "fr": "Gras",
+    "hi": "मोटा",
+    "id": "Tebal",
+    "pt": "Negrito",
+    "ur": "جلی",
+    "zh-Hans": "粗体"
+  },
   "Negro y rojo": {
     "ar": "أسود وأحمر",
     "bn": "কালো ও লাল",
@@ -6790,6 +7162,30 @@
     "pt": "Nenhuma área selecionada",
     "ur": "کوئی کام کی جگہ منتخب نہیں",
     "zh-Hans": "未选择工作区"
+  },
+  "Nivel principal": {
+    "ar": "المستوى الأعلى",
+    "bn": "শীর্ষ স্তর",
+    "en": "Top level",
+    "es": "Nivel principal",
+    "fr": "Niveau principal",
+    "hi": "शीर्ष स्तर",
+    "id": "Tingkat teratas",
+    "pt": "Nível principal",
+    "ur": "اعلیٰ سطح",
+    "zh-Hans": "顶层"
+  },
+  "Nivel {number}": {
+    "ar": "المستوى {number}",
+    "bn": "স্তর {number}",
+    "en": "Level {number}",
+    "es": "Nivel {number}",
+    "fr": "Niveau {number}",
+    "hi": "स्तर {number}",
+    "id": "Tingkat {number}",
+    "pt": "Nível {number}",
+    "ur": "سطح {number}",
+    "zh-Hans": "第 {number} 级"
   },
   "No": {
     "ar": "لا",
@@ -7043,6 +7439,30 @@
     "ur": "Finder میں فولڈر نہیں کھولا جا سکا۔",
     "zh-Hans": "无法在访达中打开文件夹。"
   },
+  "No se pudo abrir el texto enriquecido de la nota. Se conserva su representación original.": {
+    "ar": "تعذّر فتح النص المنسّق للملاحظة. يُحفظ تمثيلها الأصلي.",
+    "bn": "নোটের সমৃদ্ধ পাঠ খোলা যায়নি। মূল রূপ সংরক্ষিত আছে।",
+    "en": "The note's rich text could not be opened. Its original representation is preserved.",
+    "es": "No se pudo abrir el texto enriquecido de la nota. Se conserva su representación original.",
+    "fr": "Le texte enrichi de la note n’a pas pu être ouvert. Sa représentation originale est conservée.",
+    "hi": "नोट का समृद्ध पाठ नहीं खुल सका। उसका मूल रूप सुरक्षित है।",
+    "id": "Teks kaya catatan tidak dapat dibuka. Bentuk aslinya dipertahankan.",
+    "pt": "Não foi possível abrir o texto enriquecido da nota. Sua representação original é preservada.",
+    "ur": "نوٹ کا وضع شدہ متن نہیں کھل سکا۔ اس کی اصل صورت محفوظ ہے۔",
+    "zh-Hans": "无法打开笔记的富文本。原始内容会保留。"
+  },
+  "No se pudo conservar el contenido de la nota al guardarlo.": {
+    "ar": "تعذّر الحفاظ على محتوى الملاحظة عند الحفظ.",
+    "bn": "সংরক্ষণের সময় নোটের বিষয়বস্তু অক্ষুণ্ণ রাখা যায়নি।",
+    "en": "The note's content could not be preserved while saving.",
+    "es": "No se pudo conservar el contenido de la nota al guardarlo.",
+    "fr": "Le contenu de la note n’a pas pu être préservé lors de l’enregistrement.",
+    "hi": "सहेजते समय नोट की सामग्री सुरक्षित नहीं रखी जा सकी।",
+    "id": "Isi catatan tidak dapat dipertahankan saat menyimpan.",
+    "pt": "Não foi possível preservar o conteúdo da nota ao salvar.",
+    "ur": "محفوظ کرتے وقت نوٹ کا متن برقرار نہیں رکھا جا سکا۔",
+    "zh-Hans": "保存时无法保留笔记内容。"
+  },
   "No se pudo leer la lista de áreas recientes.": {
     "ar": "تعذرت قراءة قائمة مساحات العمل الأخيرة.",
     "bn": "সাম্প্রতিক কর্মক্ষেত্রের তালিকা পড়া যায়নি।",
@@ -7138,6 +7558,18 @@
     "pt": "Nota ou referência {label}",
     "ur": "نوٹ یا حوالہ {label}",
     "zh-Hans": "注释或经文 {label}"
+  },
+  "Nota superior": {
+    "ar": "الملاحظة الأصلية",
+    "bn": "মূল নোট",
+    "en": "Parent note",
+    "es": "Nota superior",
+    "fr": "Note parente",
+    "hi": "मूल नोट",
+    "id": "Catatan induk",
+    "pt": "Nota superior",
+    "ur": "بنیادی نوٹ",
+    "zh-Hans": "父笔记"
   },
   "Notas al pie": {
     "ar": "حواشي",
@@ -7475,6 +7907,18 @@
     "ur": "متعلقہ وسائل کی ترتیب",
     "zh-Hans": "关联资源顺序"
   },
+  "Ordenar notas": {
+    "ar": "ترتيب الملاحظات",
+    "bn": "নোট সাজান",
+    "en": "Sort notes",
+    "es": "Ordenar notas",
+    "fr": "Trier les notes",
+    "hi": "नोट क्रमबद्ध करें",
+    "id": "Urutkan catatan",
+    "pt": "Ordenar notas",
+    "ur": "نوٹس ترتیب دیں",
+    "zh-Hans": "排序笔记"
+  },
   "Ordenar por": {
     "ar": "ترتيب حسب",
     "bn": "সাজানোর ধরন",
@@ -7510,6 +7954,18 @@
     "pt": "Organizar favoritos…",
     "ur": "پسندیدہ ترتیب دیں…",
     "zh-Hans": "整理收藏夹…"
+  },
+  "Organizar notas y subnotas, moverlas, duplicarlas y editar sus propiedades.": {
+    "ar": "نظّم الملاحظات وملاحظاتها الفرعية وانقلها أو انسخها وحرر خصائصها.",
+    "bn": "নোট ও উপনোট সাজান, স্থানান্তর বা অনুলিপি করুন এবং বৈশিষ্ট্য সম্পাদনা করুন।",
+    "en": "Organize notes and subnotes, move or duplicate them and edit their properties.",
+    "es": "Organizar notas y subnotas, moverlas, duplicarlas y editar sus propiedades.",
+    "fr": "Organisez les notes et sous-notes, déplacez-les, dupliquez-les et modifiez leurs propriétés.",
+    "hi": "नोट और उपनोट व्यवस्थित करें, स्थानांतरित या नकल करें और गुण संपादित करें।",
+    "id": "Atur catatan dan subcatatan, pindahkan atau gandakan, lalu sunting propertinya.",
+    "pt": "Organize notas e subnotas, mova ou duplique e edite suas propriedades.",
+    "ur": "نوٹس اور ذیلی نوٹس منظم کریں، منتقل یا نقل کریں اور خصوصیات بدلیں۔",
+    "zh-Hans": "整理笔记和子笔记，移动、复制并编辑其属性。"
   },
   "Organizar ventanas": {
     "ar": "ترتيب النوافذ",
@@ -7919,6 +8375,18 @@
     "ur": "ترجیح دیں",
     "zh-Hans": "提升优先级"
   },
+  "Propiedades de la nota": {
+    "ar": "خصائص الملاحظة",
+    "bn": "নোটের বৈশিষ্ট্য",
+    "en": "Note properties",
+    "es": "Propiedades de la nota",
+    "fr": "Propriétés de la note",
+    "hi": "नोट के गुण",
+    "id": "Properti catatan",
+    "pt": "Propriedades da nota",
+    "ur": "نوٹ کی خصوصیات",
+    "zh-Hans": "笔记属性"
+  },
   "Propiedades del recurso": {
     "ar": "خصائص المورد",
     "bn": "রিসোর্সের বৈশিষ্ট্য",
@@ -8050,6 +8518,18 @@
     "pt": "Remover do grupo",
     "ur": "گروپ سے نکالیں",
     "zh-Hans": "从分组移除"
+  },
+  "Quitar enlace": {
+    "ar": "إزالة الرابط",
+    "bn": "লিংক সরান",
+    "en": "Remove link",
+    "es": "Quitar enlace",
+    "fr": "Supprimer le lien",
+    "hi": "लिंक हटाएँ",
+    "id": "Hapus tautan",
+    "pt": "Remover link",
+    "ur": "رابطہ ہٹائیں",
+    "zh-Hans": "移除链接"
   },
   "Quitar prioridad": {
     "ar": "إزالة الأولوية",
@@ -8362,6 +8842,18 @@
     "pt": "Referência, por exemplo Jn 3:16 ou Jn 3:16(RVR60)",
     "ur": "حوالہ، مثلاً Jn 3:16 یا Jn 3:16(RVR60)",
     "zh-Hans": "引用，例如 Jn 3:16 或 Jn 3:16(RVR60)"
+  },
+  "Rehacer": {
+    "ar": "إعادة",
+    "bn": "পুনরায় করুন",
+    "en": "Redo",
+    "es": "Rehacer",
+    "fr": "Rétablir",
+    "hi": "फिर से करें",
+    "id": "Ulangi",
+    "pt": "Refazer",
+    "ur": "دوبارہ کریں",
+    "zh-Hans": "重做"
   },
   "Relación": {
     "ar": "العلاقة",
@@ -8867,6 +9359,18 @@
     "ur": "ایک سے سولہ بائبل اور ایک بنیادی ترجمہ منتخب کریں۔",
     "zh-Hans": "请选择一至十六本圣经及一个基准版本。"
   },
+  "Selecciona notas que sigan disponibles.": {
+    "ar": "اختر ملاحظات ما زالت متاحة.",
+    "bn": "এখনও উপলব্ধ নোট নির্বাচন করুন।",
+    "en": "Select notes that are still available.",
+    "es": "Selecciona notas que sigan disponibles.",
+    "fr": "Sélectionnez des notes toujours disponibles.",
+    "hi": "ऐसे नोट चुनें जो अभी उपलब्ध हैं।",
+    "id": "Pilih catatan yang masih tersedia.",
+    "pt": "Selecione notas que ainda estejam disponíveis.",
+    "ur": "ایسے نوٹس منتخب کریں جو اب بھی دستیاب ہیں۔",
+    "zh-Hans": "请选择仍然可用的笔记。"
+  },
   "Selecciona recursos para la bibliografía.": {
     "ar": "اختر موارد لقائمة المراجع.",
     "bn": "গ্রন্থপঞ্জির জন্য রিসোর্স বেছে নিন।",
@@ -9370,6 +9874,18 @@
     "pt": "Mover para cima",
     "ur": "اوپر منتقل کریں",
     "zh-Hans": "上移"
+  },
+  "Subrayado": {
+    "ar": "تسطير",
+    "bn": "নিচে দাগ",
+    "en": "Underline",
+    "es": "Subrayado",
+    "fr": "Souligné",
+    "hi": "रेखांकित",
+    "id": "Garis bawah",
+    "pt": "Sublinhado",
+    "ur": "خط کشیدہ",
+    "zh-Hans": "下划线"
   },
   "Subtítulo": {
     "ar": "العنوان الفرعي",
@@ -9947,6 +10463,18 @@
     "ur": "عبارت کا ایک حصہ درست حوالہ یا متن کی حد برقرار نہیں رکھتا۔",
     "zh-Hans": "某部分经文没有保留有效的经文引用或文本范围。"
   },
+  "Unificar controles y ventanas de estudio con Liquid Glass.": {
+    "ar": "وحّد أدوات ونوافذ الدراسة باستخدام Liquid Glass.",
+    "bn": "Liquid Glass দিয়ে অধ্যয়নের নিয়ন্ত্রণ ও জানালাগুলো একরূপ করুন।",
+    "en": "Unify study controls and windows with Liquid Glass.",
+    "es": "Unificar controles y ventanas de estudio con Liquid Glass.",
+    "fr": "Harmonisez les commandes et fenêtres d’étude avec Liquid Glass.",
+    "hi": "अध्ययन नियंत्रण और विंडो को Liquid Glass से एकरूप करें।",
+    "id": "Seragamkan kontrol dan jendela studi dengan Liquid Glass.",
+    "pt": "Unifique controles e janelas de estudo com Liquid Glass.",
+    "ur": "Liquid Glass کے ساتھ مطالعے کے کنٹرول اور کھڑکیاں یکساں کریں۔",
+    "zh-Hans": "使用 Liquid Glass 统一研读控件和窗口。"
+  },
   "Usa Atrás, Adelante e Historial para volver a ubicaciones visitadas. Contenido abre el índice del recurso; Artículo cambia el modo del campo de referencia.": {
     "ar": "استخدم السابق والتالي والسجل للعودة إلى المواضع السابقة. يفتح المحتوى فهرس المورد ويغير المقال وضع حقل المرجع.",
     "bn": "পেছনে, সামনে ও ইতিহাস দিয়ে দেখা স্থানে ফিরুন। বিষয়বস্তু রিসোর্সের সূচি খোলে; নিবন্ধ নির্দেশের ঘরের মোড বদলায়।",
@@ -10054,6 +10582,18 @@
     "pt": "Visualizar",
     "ur": "منظر",
     "zh-Hans": "显示"
+  },
+  "Ver gráficos de búsqueda por libro, capítulo o rangos personalizados.": {
+    "ar": "اعرض مخططات البحث حسب السفر أو الإصحاح أو النطاق المخصص.",
+    "bn": "বই, অধ্যায় বা নির্ধারিত সীমা অনুযায়ী অনুসন্ধানের চার্ট দেখুন।",
+    "en": "View search charts by book, chapter or custom ranges.",
+    "es": "Ver gráficos de búsqueda por libro, capítulo o rangos personalizados.",
+    "fr": "Affichez les graphiques de recherche par livre, chapitre ou plages personnalisées.",
+    "hi": "पुस्तक, अध्याय या चुनी गई सीमाओं के अनुसार खोज ग्राफ़ देखें।",
+    "id": "Lihat grafik pencarian menurut kitab, pasal, atau rentang pilihan.",
+    "pt": "Veja gráficos de busca por livro, capítulo ou intervalos personalizados.",
+    "ur": "کتاب، باب یا منتخب حدود کے لحاظ سے تلاش کے چارٹ دیکھیں۔",
+    "zh-Hans": "按书卷、章节或自定义范围查看搜索图表。"
   },
   "Ver proyecto en GitHub": {
     "ar": "عرض المشروع على GitHub",
@@ -10690,5 +11230,17 @@
     "pt": "Última verificação",
     "ur": "آخری جانچ",
     "zh-Hans": "上次检查"
+  },
+  "Última modificación": {
+    "ar": "آخر تعديل",
+    "bn": "সর্বশেষ পরিবর্তন",
+    "en": "Last modified",
+    "es": "Última modificación",
+    "fr": "Dernière modification",
+    "hi": "अंतिम संशोधन",
+    "id": "Terakhir diubah",
+    "pt": "Última modificação",
+    "ur": "آخری ترمیم",
+    "zh-Hans": "最后修改"
   }
 }

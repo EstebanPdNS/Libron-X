@@ -23,10 +23,23 @@ public struct StudyNote: Identifiable, Codable, Equatable, Sendable {
     public var editedRTF: Data?
     public var anchor: StudyNoteAnchor
     public var resolvedAnchor: StudyNoteAnchor?
+    public var parentID: UUID?
+    public var properties: [String: String]?
+    public var origin: StudyNoteOrigin?
     public var effectiveAnchor: StudyNoteAnchor { resolvedAnchor ?? anchor }
     public var modifiedUTC: String
     public init(title: String = "Nueva nota", anchor: StudyNoteAnchor = StudyNoteAnchor()) {
         self.title = title; self.anchor = anchor; self.modifiedUTC = ISO8601DateFormatter().string(from: Date())
+    }
+}
+
+public struct StudyNoteOrigin: Codable, Equatable, Sendable {
+    public let documentID: UUID
+    public let noteID: UUID
+    public let documentTitle: String
+    public let sourceSHA256: String?
+    public init(document: StudyDocument, note: StudyNote) {
+        documentID = document.id; noteID = note.id; documentTitle = document.title; sourceSHA256 = document.sourceSHA256
     }
 }
 
@@ -54,7 +67,12 @@ public struct StudyDocument: Identifiable, Codable, Equatable, Sendable {
         self.title = title; self.kind = kind; presentation = kind == .verseList ? "ReferencesOnly" : "Notes"
     }
     public func validate() throws {
-        guard schemaVersion == 1 else { throw PersonalStateError.futureVersion }
+        guard (1...2).contains(schemaVersion) else { throw PersonalStateError.futureVersion }
+        // Version 2 prevents older applications from loading and then silently
+        // dropping hierarchy, properties or move/copy provenance on save.
+        guard schemaVersion >= 2 || notes.allSatisfy({ $0.parentID == nil && $0.properties == nil && $0.origin == nil }) else {
+            throw PersonalStateError.invalid("La organización de notas requiere la versión 2 del documento.")
+        }
         guard !title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty, title.utf8.count <= 4_096,
               notes.count <= 10_000, verses.count <= 100_000,
               Set(notes.map(\.id)).count == notes.count, Set(verses.map(\.id)).count == verses.count,
@@ -64,6 +82,12 @@ public struct StudyDocument: Identifiable, Codable, Equatable, Sendable {
         for note in notes {
             guard note.title.utf8.count <= 4_096, note.sourceBody.utf8.count <= MetadataXMLReader.maximumFileBytes,
                   (note.editedRTF?.count ?? 0) <= MetadataXMLReader.maximumFileBytes else { throw PersonalStateError.tooLarge }
+            if let properties = note.properties {
+                guard properties.count <= 64, properties.allSatisfy({ !$0.key.isEmpty && $0.key.utf8.count <= 128 && $0.value.utf8.count <= 4_096 }) else { throw PersonalStateError.tooLarge }
+            }
+            if let origin = note.origin {
+                guard origin.documentTitle.utf8.count <= 4_096, (origin.sourceSHA256?.utf8.count ?? 0) <= 128 else { throw PersonalStateError.tooLarge }
+            }
             if [.nativeSelection, .nativeReference].contains(note.anchor.kind) {
                 guard let location = note.anchor.location, location.sectionOrdinal >= 0, location.textFingerprint != nil else {
                     throw PersonalStateError.invalid("La nota no conserva la identidad comprobada de su texto fuente.")
@@ -81,6 +105,7 @@ public struct StudyDocument: Identifiable, Codable, Equatable, Sendable {
                 }
             }
         }
+        _ = try StudyNoteOrganization.outline(notes)
         for verse in verses {
             guard !verse.reference.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
                   verse.reference.utf8.count <= 4_096, verse.location.map({ $0.sectionOrdinal >= 0 }) ?? true else {
@@ -127,8 +152,9 @@ public struct NoteTextSpan: Equatable, Sendable {
     public var italic = false
     public var underline = false
     public var reference: String?
-    public init(text: String, bold: Bool = false, italic: Bool = false, underline: Bool = false, reference: String? = nil) {
-        self.text = text; self.bold = bold; self.italic = italic; self.underline = underline; self.reference = reference
+    public var hyperlink: String?
+    public init(text: String, bold: Bool = false, italic: Bool = false, underline: Bool = false, reference: String? = nil, hyperlink: String? = nil) {
+        self.text = text; self.bold = bold; self.italic = italic; self.underline = underline; self.reference = reference; self.hyperlink = hyperlink
     }
 }
 
@@ -137,12 +163,14 @@ public struct NoteTextSpan: Equatable, Sendable {
 public enum NoteHTMLProjection {
     public static func spans(_ html: String) -> [NoteTextSpan] {
         guard html.utf8.count <= MetadataXMLReader.maximumFileBytes else { return [] }
-        struct Style { var tag: String; var bold: Bool; var italic: Bool; var underline: Bool; var reference: String? }
+        struct Style { var tag: String; var bold: Bool; var italic: Bool; var underline: Bool; var reference: String?; var hyperlink: String? }
         var stack: [Style] = [], result: [NoteTextSpan] = [], cursor = html.startIndex, suppressed: String?
+        var lists: [(tag: String, next: Int)] = []
         func append(_ text: String) {
             guard !text.isEmpty, suppressed == nil else { return }
             result.append(NoteTextSpan(text: decodeEntities(text), bold: stack.contains(where: \.bold),
-                italic: stack.contains(where: \.italic), underline: stack.contains(where: \.underline), reference: stack.last(where: { $0.reference != nil })?.reference))
+                italic: stack.contains(where: \.italic), underline: stack.contains(where: \.underline), reference: stack.last(where: { $0.reference != nil })?.reference,
+                hyperlink: stack.last(where: { $0.hyperlink != nil })?.hyperlink))
         }
         while cursor < html.endIndex {
             guard html[cursor] == "<" else {
@@ -170,15 +198,24 @@ public enum NoteHTMLProjection {
             }
             guard suppressed == nil else { continue }
             if closing {
+                if ["ul", "ol"].contains(tag), let index = lists.lastIndex(where: { $0.tag == tag }) { lists.removeSubrange(index...) }
                 if let index = stack.lastIndex(where: { $0.tag == tag }) { stack.removeSubrange(index...) }
                 if ["p", "div", "li"].contains(tag), result.last?.text.hasSuffix("\n") != true { append("\n") }
             } else if tag == "br" { append("\n") }
+            else if ["ul", "ol"].contains(tag), lists.count < 32 {
+                let start = Int(attributes(raw)["start"] ?? "1") ?? 1
+                lists.append((tag, max(1, min(start, 1_000_000))))
+            }
             else if ["p", "div", "li"].contains(tag) {
                 if !result.isEmpty && result.last?.text.hasSuffix("\n") != true { append("\n") }
+                if tag == "li", let list = lists.last {
+                    append(String(repeating: "  ", count: lists.count - 1) + (list.tag == "ol" ? "\(list.next). " : "• "))
+                    lists[lists.count - 1].next += 1
+                }
             } else if !["img", "link", "meta", "hr"].contains(tag), stack.count < 128 {
                 let attrs = attributes(raw)
                 stack.append(Style(tag: tag, bold: ["b", "strong"].contains(tag), italic: ["i", "em"].contains(tag),
-                    underline: tag == "u", reference: attrs["lbxrt:xref"]))
+                    underline: tag == "u", reference: attrs["lbxrt:xref"], hyperlink: tag == "a" ? attrs["href"] : nil))
             }
         }
         return result

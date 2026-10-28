@@ -1,5 +1,18 @@
 [
   {
+    "version": "0.6",
+    "changes": [
+      "Comparar pasajes entre Biblias y resaltar diferencias textuales.",
+      "Ajustar versión base, mayúsculas, acentos y puntuación en las comparaciones.",
+      "Ver gráficos de búsqueda por libro, capítulo o rangos personalizados.",
+      "Exportar comparaciones y resultados de búsqueda a CSV.",
+      "Editar notas enriquecidas con formato, listas, enlaces y deshacer.",
+      "Organizar notas y subnotas, moverlas, duplicarlas y editar sus propiedades.",
+      "Conservar el contenido original de las notas HTML importadas al editarlas.",
+      "Unificar controles y ventanas de estudio con Liquid Glass."
+    ]
+  },
+  {
     "version": "0.5",
     "changes": [
       "Comentarios independientes que siguen cualquier Biblia, con selección de recurso y pausa.",
