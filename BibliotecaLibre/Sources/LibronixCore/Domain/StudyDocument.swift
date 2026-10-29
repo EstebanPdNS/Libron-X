@@ -242,7 +242,8 @@ public enum NoteHTMLProjection {
             let weight = declarations["font-weight"] ?? "", decoration = declarations["text-decoration"] ?? ""
             let color = declarations["color"] ?? attrs["color"] ?? ""
             let hex = color.hasPrefix("#") ? String(color.dropFirst()) : ""
-            let rgb: UInt32? = hex.count == 6 ? UInt32(hex, radix: 16) : nil
+            let expanded = hex.count == 3 ? hex.map { String(repeating: String($0), count: 2) }.joined() : hex
+            let rgb: UInt32? = expanded.count == 6 ? UInt32(expanded, radix: 16) : namedColors[color]
             let bold: Bool? = weight == "normal" ? false : weight == "bold" ? true : Int(weight).map { $0 >= 600 } ?? (["b", "strong"].contains(tag) ? true : nil)
             let italic: Bool? = declarations["font-style"] == "normal" ? false : declarations["font-style"] == "italic" || ["i", "em"].contains(tag) ? true : nil
             let underline: Bool? = decoration == "none" ? false : tag == "u" || decoration.contains("underline") ? true : nil
@@ -298,6 +299,7 @@ public enum NoteHTMLProjection {
         }
         return result
     }
+    private static let namedColors: [String: UInt32] = ["black": 0x000000, "white": 0xffffff, "red": 0xff0000, "green": 0x008000, "blue": 0x0000ff, "yellow": 0xffff00, "gray": 0x808080, "grey": 0x808080]
     private static let attributeRegex = try? NSRegularExpression(pattern: #"([\w:-]+)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))"#)
     private static let entityRegex = try? NSRegularExpression(pattern: #"&(?:amp|lt|gt|quot|apos|nbsp|#\d+|#x[0-9a-fA-F]+);"#)
     private static func attributes(_ token: String) -> [String: String] {

@@ -402,7 +402,8 @@
       "implementation": [
         "Rich note editor and persistent hierarchy and organization are integrated in MacRebuild.",
         "Preserve strikeout formatting from inert imported HTML in both native note projections and the saved editable RTF; retain the original HTML.",
-        "Preserve supported HTML inline and paragraph styles, including color, when creating an editable rich-text representation; original HTML remains intact."
+        "Preserve supported HTML inline and paragraph styles, including color, when creating an editable rich-text representation; original HTML remains intact.",
+        "Retain inherited bold, italic, decoration and standard HTML colors including short hexadecimal forms; cache reusable markup expressions."
       ],
       "verification": [
         "22 focused note and organization tests passed; the complete optimized suite passed 935 tests. Native macOS checks covered rich formatting, keyboard undo/redo, saving, reopening, nested notes, reordering, and properties.",
@@ -2303,7 +2304,8 @@
         "2026-10-29: 37 focused tests passed in five suites: production-size repeated templates, intermediate growth, exact Unicode boundaries, trim/spaces, both source-paragraph paths, repeated notes and citation accounting, structural-element limit, invalid bounds, cancellation, native RTF/HTML/text output, unchanged private pasteboard after rejection, style persistence and all ten interface translations. The oversized-template fixture contains 1100 owned verses with an individually valid 16000-byte pattern; the aggregate request throws rather than returning partial output.",
         "Local build log 226: compiled, signed and replaced the single installed /Applications/Libron-X.app. Reopened the original reading and the native Bible-copy tool; its empty-resource state correctly disabled preview/copy/export. No compatible Bible is installed in this restored user library, so the over-limit copy path is verified by the authored Core/AppKit tests, not claimed as a live-library UI test.",
         "Focused functional tests pass with cooperative yielding between e-Sword rows; this is not evidence of long-session or representative peak-memory performance.",
-        "Focused health checks pass; the bound does not substitute for long-session measurements."
+        "Focused health checks pass; the bound does not substitute for long-session measurements.",
+        "On this Mac, an Easton dictionary search over 3,962 articles took 3.09 seconds cold and 1.41 seconds warm (2,523 articles examined; 1,439 excluded by index). These are single observations and do not establish long-session performance or process peak memory."
       ],
       "limitations": [
         "The compact-index check retains metadata sets proportional to indexed entries; representative large, fully indexed libraries still need memory and long-session measurements.",

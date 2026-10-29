@@ -118,6 +118,8 @@ import Testing
         #expect(paragraph.contains { $0.text == " text" && !$0.bold && $0.foregroundRGB == 0x123456 })
         let override = NoteHTMLProjection.spans("<b>bold <span style=\"font-weight:normal\">normal</span> bold</b>")
         #expect(override.map(\.bold) == [true, false, true])
+        let colors = NoteHTMLProjection.spans("<span style=\"color:#abc\">A</span><font color=\"red\">B</font>")
+        #expect(colors.map(\.foregroundRGB) == [0xaabbcc, 0xff0000])
     }
 
 }
