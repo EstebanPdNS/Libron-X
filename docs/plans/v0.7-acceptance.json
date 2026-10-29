@@ -704,10 +704,16 @@
       "sourceKey": "study-expansion-daily-07",
       "acceptance": "Preguntas, respuestas, progreso y calificación con resultados esperados; distinguirlo del complemento técnico SelfTest.",
       "baseline": "Sin módulo educativo integrado identificado.",
-      "status": "pending",
-      "implementation": [],
-      "verification": [],
-      "limitations": []
+      "status": "in_progress",
+      "implementation": [
+        "Added user-authored assessment questions with expected answers, exact grading ignoring case and whitespace, aggregate results and separate transactional local persistence. Incomplete responses are rejected without recording results."
+      ],
+      "verification": [
+        "StudyAssessmentTests and StudyAssessmentPersistenceTests passed for grading, validation, persistence, concurrent-write protection and future schema preservation."
+      ],
+      "limitations": [
+        "The assessment editor and practice interface are not yet implemented or visually verified."
+      ]
     },
     {
       "id": "F184",
