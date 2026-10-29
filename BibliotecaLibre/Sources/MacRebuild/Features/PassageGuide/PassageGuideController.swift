@@ -93,7 +93,10 @@ struct PassageGuideResourceWarning: Sendable, Identifiable {
                     guard let workspace else { throw PersonalStateError.invalid("La biblioteca cambió. Vuelve a generar la guía.") }
                     async let referencesTask: Void = self.collectReferences(workspace: workspace, library: library, sources: sources, query: query, token: token, referenceLookup: referenceLookup)
                     var searchWords = words
-                    if searchWords.isEmpty, !dictionaries.isEmpty || !lexicons.isEmpty, let bible = bibles.first {
+                    if searchWords.isEmpty, !dictionaries.isEmpty || !lexicons.isEmpty {
+                        for bible in bibles {
+                        try Task.checkCancellation()
+                        self.currentSource = bible.title
                         do {
                             let document = try await WorkspaceBibleCopy.prepare(bible, passage: passage, includeFootnotes: false)
                             let text = document.verses.map(\.text).joined(separator: " ")
@@ -107,8 +110,10 @@ struct PassageGuideResourceWarning: Sendable, Identifiable {
                             try Task.checkCancellation()
                             guard self.generation == token else { throw CancellationError() }
                             self.searchedTerms = searchWords
+                            if !searchWords.isEmpty { break }
                         } catch is CancellationError { throw CancellationError() }
                         catch { self.failures.append(bible.title + ": " + error.localizedDescription) }
+                        }
                     }
                     for (kind, resources, items) in [(KeyLinkKind.commentary, commentary, [requested]), (.dictionary, dictionaries, searchWords), (.lexicon, lexicons, searchWords)] {
                         for resource in resources {

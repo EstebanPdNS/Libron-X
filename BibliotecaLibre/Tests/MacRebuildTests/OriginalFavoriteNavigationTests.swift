@@ -91,7 +91,7 @@ import Testing
             encrypted += words([a,b])
         }
         try encrypted.write(to: url)
-        let resource = LibraryResource(location: url, title: "Owned LLS", byteCount: Int64(encrypted.count), format: .libronixLLS, support: .metadataOnly, provenance: .fileName, legacyIdentifier: original.legacyIdentifier)
+        let resource = LibraryResource(location: url, title: "Owned LLS", byteCount: Int64(encrypted.count), format: .libronixLLS, support: .metadataOnly, provenance: .fileName, legacyIdentifier: "LLS:1.0.3")
         let workspace = StudyWorkspace(personal: WorkspacePersonalState(url: fixture.root.appendingPathComponent("personal.json")))
         workspace.resources = [resource]
         workspace.openFavorite(.init(title: "Own", kind: .legacyCommand, legacyCommand: "jump|pos=LLS-AOL:0.12.0|res=LLS:1.0.3"))

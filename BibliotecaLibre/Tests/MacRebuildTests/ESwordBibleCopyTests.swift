@@ -39,6 +39,10 @@ import Testing
         let before = try LibrarySearchFileStamp.capture(url)
         let document = try await WorkspaceBibleCopy.prepare(resource, passage: .parse("Ge 1:1"), includeFootnotes: false)
         #expect(document.resourceID == resource.id && document.verses.first?.text.localizedCaseInsensitiveContains("principio") == true)
+        let chapter = try await WorkspaceBibleCopy.prepare(resource, passage: .parse("Ge 1"), includeFootnotes: false)
+        #expect(chapter.verses.count == 31)
+        let span = try await WorkspaceBibleCopy.prepare(resource, passage: .parse("Ge 1:31-2:1"), includeFootnotes: false)
+        #expect(span.verses.map(\.address.key) == ["ge 1:31", "ge 2:1"])
         try LibrarySearchFileStamp.verify([before])
     }
 

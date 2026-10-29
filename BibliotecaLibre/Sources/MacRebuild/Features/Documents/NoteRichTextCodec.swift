@@ -37,6 +37,7 @@ enum NoteRichTextCodec {
             if span.bold { font = NSFontManager.shared.convert(font, toHaveTrait: .boldFontMask) }
             if span.italic { font = NSFontManager.shared.convert(font, toHaveTrait: .italicFontMask) }
             var attributes: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: NSColor.textColor]
+            if let rgb = span.foregroundRGB { attributes[.foregroundColor] = NSColor(red: Double(rgb >> 16 & 255) / 255, green: Double(rgb >> 8 & 255) / 255, blue: Double(rgb & 255) / 255, alpha: 1) }
             if span.underline { attributes[.underlineStyle] = NSUnderlineStyle.single.rawValue }
             if span.strikeout { attributes[.strikethroughStyle] = NSUnderlineStyle.single.rawValue }
             if span.superscript { attributes[.superscript] = 1 }

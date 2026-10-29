@@ -152,13 +152,16 @@ import CSQLite
         #expect(sqlite3_open(url.path, &db) == SQLITE_OK)
         #expect(sqlite3_exec(db, "CREATE TABLE Details(Title,Abbreviation,Information); INSERT INTO Details VALUES('Owned Bible','OB','Fixture'); CREATE TABLE Bible(Book,Chapter,Verse,Scripture); INSERT INTO Bible VALUES(1,1,1,'<b>Wisdom shines brightly</b>'),(1,1,2,'unselected');", nil, nil, nil) == SQLITE_OK)
         sqlite3_close(db)
+        var metadata = LibronMetadata(title: "A missing Bible", origin: "Owned fixture")
+        metadata.resourceType = "Biblia"
+        workspace.resources.append(.init(location: root.appendingPathComponent("missing.bbli"), title: "A missing Bible", byteCount: 0, format: .eSwordSQLite, support: .metadataOnly, provenance: .fileName, libron: metadata))
         workspace.resources.append(try ESwordResource.inspect(url))
         let controller = PassageGuideController(lookup: { resource, _, query in
             .init(resource: resource, destination: .init(ordinal: 0), label: query, page: .init(destination: .init(ordinal: 0), text: "Owned", sectionCount: 1), stamps: [])
         }, referenceLookup: { _, _ in .init(results: [], complete: true, warnings: []) })
         controller.passage = "Ge 1:1"; controller.run(workspace: workspace); try await wait(controller)
         #expect(controller.completed && controller.searchedTerms == ["Wisdom", "shines", "brightly"])
-        #expect(!controller.searchedTerms.contains("unselected"))
+        #expect(!controller.searchedTerms.contains("unselected") && controller.failures.contains { $0.contains("A missing Bible") })
     }
 
 }

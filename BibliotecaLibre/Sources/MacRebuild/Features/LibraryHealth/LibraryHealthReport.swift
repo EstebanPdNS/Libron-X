@@ -14,6 +14,7 @@ struct LibraryHealthReport: Equatable, Sendable {
     let omittedIssueCount: Int
     static func inspect(resources: [LibraryResource], documents: [StudyDocument], highlights: [ReaderHighlight],
                         favorites: [LibraryFavorite] = [], bookmarks: [Int: ReaderLocation] = [:],
+                        plans: [ReadingPlan] = [], memoryCards: [ScriptureMemoryCard] = [],
                         indexDirectory: URL? = nil,
                         exists: (URL) -> Bool = { FileManager.default.fileExists(atPath: $0.path) }) -> Self {
         let limit = 5000
@@ -90,8 +91,20 @@ struct LibraryHealthReport: Equatable, Sendable {
         }
         let legacyCounts = Dictionary(resources.compactMap { resource -> String? in
             guard [.legacyLSF, .libronixLLS].contains(resource.format) else { return nil }
-            return LegacyNumericResourceID.fromBKIDHex(resource.legacyIdentifier)?.identifier
+            return LegacyNumericResourceID.fromBKIDHex(resource.legacyIdentifier)?.identifier ?? (resource.format == .libronixLLS ? resource.legacyIdentifier : nil)
         }.map { ($0, 1) }, uniquingKeysWith: +)
+        for plan in plans {
+            if Task.isCancelled { break }
+            if let edition = plan.edition, !identities.contains(Identity(id: edition.resourceID, format: edition.format, legacy: edition.legacyIdentifier)) {
+                add(.init(id: "plan:" + plan.id.uuidString, kind: .unresolvedLink, title: plan.title, detail: edition.title))
+            }
+        }
+        for card in memoryCards {
+            if Task.isCancelled { break }
+            if let edition = card.sourceEdition, !identities.contains(Identity(id: edition.resourceID, format: edition.format, legacy: edition.legacyIdentifier)) {
+                add(.init(id: "memory:" + card.id.uuidString, kind: .unresolvedLink, title: card.reference, detail: edition.title))
+            }
+        }
         for favorite in favorites {
             if Task.isCancelled { break }
             if let location = favorite.location, !identities.contains(Identity(id: location.resourceID, format: location.format, legacy: location.legacyIdentifier)) {

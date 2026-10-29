@@ -265,7 +265,8 @@ struct ReaderHighlight: Identifiable, Codable, Equatable, Sendable {
         do {
             let destination = try LegacyJumpDestination.parse(command)
             let matches = resources.filter {
-                [.legacyLSF, .libronixLLS].contains($0.format) && LegacyNumericResourceID.fromBKIDHex($0.legacyIdentifier)?.identifier == destination.resourceID
+                ($0.format == .legacyLSF && LegacyNumericResourceID.fromBKIDHex($0.legacyIdentifier)?.identifier == destination.resourceID) ||
+                ($0.format == .libronixLLS && ($0.legacyIdentifier == destination.resourceID || LegacyNumericResourceID.fromBKIDHex($0.legacyIdentifier)?.identifier == destination.resourceID))
             }
             guard matches.count == 1, let resource = matches.first else {
                 error = L(matches.isEmpty ? "El recurso de este favorito no está disponible en la biblioteca abierta." : "Hay varias copias de este recurso. Se conserva el destino hasta confirmar la edición.")
@@ -283,7 +284,8 @@ struct ReaderHighlight: Identifiable, Codable, Equatable, Sendable {
                     guard let self, self.originalFavoriteGeneration == generation else { return }
                     self.originalFavoriteTask = nil
                     guard self.activeID == readerID, self.activeReader?.associationGeneration == readerGeneration,
-                          self.resources.filter({ [.legacyLSF, .libronixLLS].contains($0.format) && LegacyNumericResourceID.fromBKIDHex($0.legacyIdentifier)?.identifier == destination.resourceID }).count == 1,
+                          self.resources.filter({ ($0.format == .legacyLSF && LegacyNumericResourceID.fromBKIDHex($0.legacyIdentifier)?.identifier == destination.resourceID) ||
+                ($0.format == .libronixLLS && ($0.legacyIdentifier == destination.resourceID || LegacyNumericResourceID.fromBKIDHex($0.legacyIdentifier)?.identifier == destination.resourceID)) }).count == 1,
                           self.resources.contains(resource) else { return }
                     let reader = self.open(resource, startReading: false, loader: loader)
                     reader.load(.init(ordinal: result.location.sectionOrdinal, reference: result.location.reference),

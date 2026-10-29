@@ -109,4 +109,10 @@ import Testing
         doc.notes = [StudyNote(anchor: StudyNoteAnchor(kind: .nativeSelection))]
         #expect(throws: PersonalStateError.self) { try doc.validate() }
     }
+    @Test func importedInlineStylesProjectWithoutLoadingExternalContent() {
+        let spans = NoteHTMLProjection.spans("<span style=\"font-weight:700;font-style:italic;text-decoration:underline line-through;color:#c01020\">Owned</span>")
+        #expect(spans.count == 1 && spans[0].text == "Owned")
+        #expect(spans[0].bold && spans[0].italic && spans[0].underline && spans[0].strikeout && spans[0].foregroundRGB == 0xc01020)
+    }
+
 }

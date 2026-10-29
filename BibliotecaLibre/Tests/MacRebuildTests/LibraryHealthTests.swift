@@ -81,4 +81,13 @@ struct LibraryHealthTests {
         #expect(report.issues.contains { $0.kind == .unresolvedLink && $0.title == "John 3:16" })
     }
 
+    @Test func reportsMissingEditionsInPlansAndMemoryCards() {
+        let resource = LibraryResource(location: URL(fileURLWithPath: "/owned/bible"), title: "Edition", byteCount: 0, format: .legacyLSF, support: .metadataOnly, provenance: .fileName)
+        let edition = StudyBibleEdition(resource)
+        let plan = ReadingPlan(title: "Owned plan", readings: [], edition: edition)
+        let card = ScriptureMemoryCard(reference: "John 3:16", passage: "Owned text", sourceEdition: edition)
+        let report = LibraryHealthReport.inspect(resources: [], documents: [], highlights: [], plans: [plan], memoryCards: [card])
+        #expect(report.issues.filter { $0.kind == .unresolvedLink }.count == 2)
+    }
+
 }
