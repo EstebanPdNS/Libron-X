@@ -224,13 +224,13 @@ public struct NoteTextSpan: Equatable, Sendable {
 public enum NoteHTMLProjection {
     public static func spans(_ html: String) -> [NoteTextSpan] {
         guard html.utf8.count <= MetadataXMLReader.maximumFileBytes else { return [] }
-        struct Style { var tag: String; var bold: Bool; var italic: Bool; var underline: Bool; var strikeout: Bool; var superscript: Bool; var subscriptText: Bool; var foregroundRGB: UInt32?; var reference: String?; var hyperlink: String? }
+        struct Style { var tag: String; var bold: Bool?; var italic: Bool?; var underline: Bool?; var strikeout: Bool?; var superscript: Bool; var subscriptText: Bool; var foregroundRGB: UInt32?; var reference: String?; var hyperlink: String? }
         var stack: [Style] = [], result: [NoteTextSpan] = [], cursor = html.startIndex, suppressed: String?
         var lists: [(tag: String, next: Int)] = []
         func append(_ text: String) {
             guard !text.isEmpty, suppressed == nil else { return }
-            result.append(NoteTextSpan(text: decodeEntities(text), bold: stack.contains(where: \.bold),
-                italic: stack.contains(where: \.italic), underline: stack.contains(where: \.underline), strikeout: stack.contains(where: \.strikeout), superscript: stack.last(where: { $0.superscript || $0.subscriptText })?.superscript == true, subscriptText: stack.last(where: { $0.superscript || $0.subscriptText })?.subscriptText == true, foregroundRGB: stack.last(where: { $0.foregroundRGB != nil })?.foregroundRGB, reference: stack.last(where: { $0.reference != nil })?.reference,
+            result.append(NoteTextSpan(text: decodeEntities(text), bold: stack.last(where: { $0.bold != nil })?.bold ?? false,
+                italic: stack.last(where: { $0.italic != nil })?.italic ?? false, underline: stack.last(where: { $0.underline != nil })?.underline ?? false, strikeout: stack.last(where: { $0.strikeout != nil })?.strikeout ?? false, superscript: stack.last(where: { $0.superscript || $0.subscriptText })?.superscript == true, subscriptText: stack.last(where: { $0.superscript || $0.subscriptText })?.subscriptText == true, foregroundRGB: stack.last(where: { $0.foregroundRGB != nil })?.foregroundRGB, reference: stack.last(where: { $0.reference != nil })?.reference,
                 hyperlink: stack.last(where: { $0.hyperlink != nil })?.hyperlink))
         }
         func pushStyle(_ tag: String, _ raw: String) {
@@ -243,9 +243,11 @@ public enum NoteHTMLProjection {
             let color = declarations["color"] ?? attrs["color"] ?? ""
             let hex = color.hasPrefix("#") ? String(color.dropFirst()) : ""
             let rgb: UInt32? = hex.count == 6 ? UInt32(hex, radix: 16) : nil
-            stack.append(Style(tag: tag, bold: ["b", "strong"].contains(tag) || weight == "bold" || (Int(weight) ?? 0) >= 600,
-                italic: ["i", "em"].contains(tag) || declarations["font-style"] == "italic",
-                underline: tag == "u" || decoration.contains("underline"), strikeout: ["s", "strike", "del"].contains(tag) || decoration.contains("line-through"),
+            let bold: Bool? = weight == "normal" ? false : weight == "bold" ? true : Int(weight).map { $0 >= 600 } ?? (["b", "strong"].contains(tag) ? true : nil)
+            let italic: Bool? = declarations["font-style"] == "normal" ? false : declarations["font-style"] == "italic" || ["i", "em"].contains(tag) ? true : nil
+            let underline: Bool? = decoration == "none" ? false : tag == "u" || decoration.contains("underline") ? true : nil
+            let strikeout: Bool? = decoration == "none" ? false : ["s", "strike", "del"].contains(tag) || decoration.contains("line-through") ? true : nil
+            stack.append(Style(tag: tag, bold: bold, italic: italic, underline: underline, strikeout: strikeout,
                 superscript: tag == "sup", subscriptText: tag == "sub", foregroundRGB: rgb, reference: attrs["lbxrt:xref"], hyperlink: tag == "a" ? attrs["href"] : nil))
         }
         while cursor < html.endIndex {
