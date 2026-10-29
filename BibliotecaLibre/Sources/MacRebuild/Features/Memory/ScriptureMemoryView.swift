@@ -1,5 +1,4 @@
 import SwiftUI
-import NaturalLanguage
 import LibronixCore
 
 private struct MemoryEdit: Identifiable {
@@ -160,9 +159,7 @@ private struct MemoryPractice: View {
             if let result {
                 Text(L(result ? "Respuesta correcta" : "Respuesta diferente")).font(.headline)
                 ScrollView {
-                    let language = NLLanguageRecognizer.dominantLanguage(for: String(original.passage.prefix(1024)))?.rawValue
-                    Text(verbatim: original.passage).textSelection(.enabled).frame(maxWidth: .infinity, alignment: .leading)
-                        .environment(\.layoutDirection, NSParagraphStyle.defaultWritingDirection(forLanguage: language) == .rightToLeft ? .rightToLeft : .leftToRight)
+                    MacSourceText(text: original.passage).textSelection(.enabled)
                 }.frame(maxHeight: 100)
             }
             if let error { Text(L(error)).font(.caption).foregroundStyle(.red).textSelection(.enabled) }

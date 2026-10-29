@@ -81,3 +81,15 @@ cannot consume the result area; keep its heading outside its independent scroll
 view. Expanding word lists, limits or
 operators must not move the result toolbar or reduce the result list's height.
 Result navigation, export and Open stay visible beside the selection counter.
+
+Assessment fields use `MacBoundTextField` inside `macInputStyle()`. Native
+keyboard edits and accessibility value writes must update both the active
+field editor and its binding before an action reads the draft. Retain native
+Tab traversal, undo/redo, enabled states and the system focus ring; the ring
+uses the shared capsule padding on macOS 26 and the native bezel fallback on
+older systems.
+
+Use `MacSourceText` for literal practice material and expected answers. Keep a
+translated label separate from its source value so an RTL interface cannot
+reorder mixed Greek, Hebrew, Latin or emoji content through a concatenated
+bidirectional paragraph.

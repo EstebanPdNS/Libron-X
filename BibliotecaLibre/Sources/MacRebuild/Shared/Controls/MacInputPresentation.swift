@@ -3,11 +3,13 @@ import SwiftUI
 
 /// The same real Glass capsule used by toolbar search, with native text editing.
 /// Older supported systems keep their native field presentation.
-private struct MacInputPresentation: ViewModifier {
+struct MacInputPresentation: ViewModifier {
+    static let horizontalPadding: CGFloat = 12
+    static let verticalPadding: CGFloat = 7
     @ViewBuilder func body(content: Content) -> some View {
         if #available(macOS 26, *) {
             content.textFieldStyle(.plain).controlSize(.large)
-                .padding(.horizontal, 12).padding(.vertical, 7)
+                .padding(.horizontal, Self.horizontalPadding).padding(.vertical, Self.verticalPadding)
                 .glassEffect(.regular, in: .capsule)
         } else {
             content.textFieldStyle(.roundedBorder).controlSize(.large)

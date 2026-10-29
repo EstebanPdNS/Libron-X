@@ -898,17 +898,25 @@
       "sourceKey": "study-expansion-daily-07",
       "acceptance": "Preguntas, respuestas, progreso y calificación con resultados esperados; distinguirlo del complemento técnico SelfTest.",
       "baseline": "Sin módulo educativo integrado identificado.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "Added user-authored assessment questions with expected answers, exact grading ignoring case and whitespace, aggregate results and separate transactional local persistence. Incomplete responses are rejected without recording results.",
-        "Added native assessment creation, question editing, practice, grading and result display; edits to questions reset prior scores, and answers are not retained."
+        "Added native assessment creation, question editing, practice, grading and result display; edits to questions reset prior scores, and answers are not retained.",
+        "Use the native MacBoundTextField for assessment title, prompt, expected-answer and practice-answer bindings. Accessibility value writes synchronously update both the field editor and binding, preventing a visibly changed answer from saving an older value; keyboard edits retain native Tab, undo/redo and enabled states.",
+        "Bound the question-list height to 96-240 points instead of reserving a fixed 550-point editor; retain visible prompt/expected-answer captions, shared Glass capsules, native rounded focus rings and RTL placeholders/actions.",
+        "Keep translated expected-answer labels separate from literal source text. Reuse MacSourceText in assessment questions, expected answers and memory feedback so source writing direction is independent of interface direction."
       ],
       "verification": [
         "StudyAssessmentTests and StudyAssessmentPersistenceTests passed for grading, validation, persistence, concurrent-write protection and future schema preservation.",
-        "Native builds 161 and 162 were reviewed visually in dark mode; incomplete responses were rejected, a multi-question assessment was graded, and keyboard-entered questions retained their distinct expected answers. Synthetic data was archived. AppLanguageTests passed."
+        "Native builds 161 and 162 were reviewed visually in dark mode; incomplete responses were rejected, a multi-question assessment was graded, and keyboard-entered questions retained their distinct expected answers. Synthetic data was archived. AppLanguageTests passed.",
+        "2026-10-29: reproduced the prior rapid AX write sequence in the installed application: the second expected answer displayed its new value while saving the first answer. Repeating the identical sequence after the correction saved two distinct answers, verified directly in the persisted file.",
+        "MacBoundTextFieldTests, StudyAssessmentTests, StudyAssessmentPersistenceTests and AppLanguageTests passed: 11 tests in four suites covering unfocused accessibility writes through persistence, nontext/disabled input rejection, grading, integrity, concurrent writes, future schemas and the ten-language catalog.",
+        "Installed native build logs 234-237: created two questions by rapid AX writes and a third by native paste/Tab, undo and redo. Incomplete grading was rejected; two correct answers and one different answer yielded 2/3. The exact three expected answers and aggregate-only result were checked after normal quit, and 2/3 was restored after restart.",
+        "In light Arabic, renaming retained 2/3; editing the second expected answer through AX saved the new value, retained the assessment ID and reset prior scores. A mixed Latin/Greek/Hebrew/emoji answer then graded correctly at 3/3. Final build-log-237 rendering kept source order and selectable expected text independent of Arabic labels; scrolling reached the last answer without moving the fixed result/action footer. Compact 650-point editors, RTL actions/placeholders and the native capsule focus ring were visually inspected.",
+        "Original assessment, personal and workspace files were restored byte-for-byte; synthetic exercises and reproduction evidence were archived. English/Automatic appearance and the original one-reader/13-resource library were verified after restart."
       ],
       "limitations": [
-        "A rapid sequence using accessibility setValue displayed a new answer while the previous answer was saved; keyboard entry did not reproduce it. Further accessibility input investigation and light, right-to-left and narrow-window review remain pending."
+        "The all-screen VoiceOver, ten-language execution and older-platform/hardware acceptance gates remain tracked separately in F253/F254/F257; this feature does not close those project-wide gates."
       ]
     },
     {

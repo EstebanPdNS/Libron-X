@@ -67,11 +67,18 @@ private struct AssessmentEditor: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             MacToolHeader(title: original == nil ? "Añadir autoevaluación" : "Editar autoevaluación") { dismiss() }
-            TextField(L("Título"), text: $title).macInputStyle()
-            List(questions, selection: $selectedID) { question in Text(question.prompt).lineLimit(2).tag(question.id) }
+            MacBoundTextField(title: L("Título"), text: $title).macInputStyle()
+            List(questions, selection: $selectedID) { question in MacSourceText(text: question.prompt).lineLimit(2).tag(question.id) }
+                .frame(height: min(240, max(96, CGFloat(questions.count) * 36)))
                 .overlay { if questions.isEmpty { Text(L("No hay preguntas.")).foregroundStyle(.secondary).allowsHitTesting(false) } }
-            TextField(L("Pregunta"), text: $prompt).macInputStyle()
-            TextField(L("Respuesta esperada"), text: $expected).macInputStyle()
+            VStack(alignment: .leading, spacing: 4) {
+                Text(L("Pregunta")).font(.caption).foregroundStyle(.secondary)
+                MacBoundTextField(title: L("Pregunta"), text: $prompt).macInputStyle()
+            }
+            VStack(alignment: .leading, spacing: 4) {
+                Text(L("Respuesta esperada")).font(.caption).foregroundStyle(.secondary)
+                MacBoundTextField(title: L("Respuesta esperada"), text: $expected).macInputStyle()
+            }
             HStack {
                 Button(L("Añadir pregunta")) { changeQuestion(add: true) }
                 Button(L("Actualizar pregunta")) { changeQuestion(add: false) }.disabled(selected == nil)
@@ -81,7 +88,7 @@ private struct AssessmentEditor: View {
             if original != nil { Text(L("Cambiar las preguntas reinicia los resultados anteriores.")).font(.caption).foregroundStyle(.secondary) }
             if let error { Text(L(error)).font(.caption).foregroundStyle(.red).textSelection(.enabled) }
             HStack { Spacer(); Button(L("Cancelar")) { dismiss() }; Button(L("Guardar"), action: save) }
-        }.padding(16).frame(width: 650, height: 550).modifier(MacPanelControlPresentation())
+        }.padding(16).frame(width: 650).modifier(MacPanelControlPresentation())
             .onAppear { if let original { title = original.title; questions = original.questions } }
             .onChange(of: selectedID) {
                 if selectedID != nil && selectedID == addedSelectionID { addedSelectionID = nil; return }
@@ -137,12 +144,13 @@ private struct AssessmentPractice: View {
                 VStack(alignment: .leading, spacing: 14) {
                     ForEach(original.questions) { question in
                         VStack(alignment: .leading, spacing: 6) {
-                            Text(question.prompt)
-                            TextField(L("Respuesta"), text: Binding(get: { answers[question.id] ?? "" }, set: { answers[question.id] = $0 })).macInputStyle().disabled(result != nil)
+                            MacSourceText(text: question.prompt)
+                            MacBoundTextField(title: L("Respuesta"), text: Binding(get: { answers[question.id] ?? "" }, set: { answers[question.id] = $0 })).macInputStyle().disabled(result != nil)
                             if result != nil {
                                 Text(L(question.matches(answers[question.id] ?? "") ? "Respuesta correcta" : "Respuesta diferente"))
                                     .font(.caption).foregroundStyle(.secondary)
-                                Text(L("Respuesta esperada") + ": " + question.expectedAnswer).font(.caption).textSelection(.enabled)
+                                Text(L("Respuesta esperada")).font(.caption).foregroundStyle(.secondary)
+                                MacSourceText(text: question.expectedAnswer).font(.caption).textSelection(.enabled)
                             }
                         }
                     }
