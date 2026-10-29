@@ -2,6 +2,7 @@ import AppKit
 import Foundation
 import LibronixCore
 import Testing
+import WebKit
 @testable import MacRebuild
 
 @Suite(.serialized) @MainActor struct AnnotationNavigationTests {
@@ -78,6 +79,37 @@ import Testing
         try reader.acceptOEBProjection(chapter.text, at: next.url)
         #expect(reader.page?.destination.ordinal == 1 && reader.selectedText == "Gamma")
         workspace.shutdown()
+    }
+
+    @Test func webAnnotationNavigationSelectsTheRenderedText() async throws {
+        _ = NSApplication.shared
+        let fixture = try AuthoredOEBFixture(); defer { fixture.remove() }
+        let personal = WorkspacePersonalState(url: fixture.root.appendingPathComponent("personal.json"))
+        let workspace = StudyWorkspace(personal: personal), reader = workspace.open(fixture.resource, startReading: false)
+        let coordinator = ReaderOEBView.Coordinator(reader: reader, activate: {})
+        let view = ReaderOEBView.makeWebView(reader: reader, coordinator: coordinator)
+        view.setFrameSize(NSSize(width: 760, height: 900))
+        defer {
+            view.stopLoading(); view.navigationDelegate = nil
+            view.configuration.userContentController.removeScriptMessageHandler(forName: "reader", contentWorld: .defaultClient)
+            workspace.shutdown()
+        }
+        reader.load(.init(ordinal: 0)); try await settle(reader)
+        let cover = try #require(reader.page?.oeb)
+        coordinator.begin(cover, in: view)
+        var deadline = Date().addingTimeInterval(10)
+        while !coordinator.ready && Date() < deadline { try await Task.sleep(for: .milliseconds(10)) }
+        try #require(coordinator.ready && reader.error == nil)
+        let chapter = try await ReaderOEBTextSource.shared.read(book: cover.book, path: "Chapter.html", viewport: .init())
+        let range = (chapter.text as NSString).range(of: "Gamma")
+        personal.highlights = [.init(resourceID: fixture.resource.id, ordinal: 1, fingerprint: chapter.fingerprint, range: range, color: "yellow")]
+        workspace.navigateAnnotation(backwards: false); try await settle(reader)
+        coordinator.begin(try #require(reader.page?.oeb), in: view)
+        deadline = Date().addingTimeInterval(10)
+        while !coordinator.ready && Date() < deadline { try await Task.sleep(for: .milliseconds(10)) }
+        try #require(coordinator.ready && reader.error == nil)
+        let selected = try await view.callAsyncJavaScript("return getSelection().toString();", in: nil, contentWorld: .defaultClient) as? String
+        #expect(selected == "Gamma" && reader.selectedRange == range)
     }
 
 }
