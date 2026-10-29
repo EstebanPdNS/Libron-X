@@ -63,6 +63,7 @@ private struct SearchWordListsManager: View {
             Text(L("Una palabra o frase por línea"))
             TextEditor(text: $terms).scrollContentBackground(.hidden).padding(8).frame(minHeight: 100, maxHeight: 140)
                 .macEditorSurface()
+                .accessibilityLabel(L("Una palabra o frase por línea"))
             if let message = error ?? personal.searchWordListsLoadError { Text(L(message)).font(.caption).foregroundStyle(.red).textSelection(.enabled) }
             HStack {
                 Button(L("Añadir lista")) { save(add: true) }

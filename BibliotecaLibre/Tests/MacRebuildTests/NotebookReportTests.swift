@@ -32,4 +32,18 @@ import Testing
         document.notes = [note]
         #expect(throws: (any Error).self) { try NotebookReport.make(document: document, selected: [note.id], includeBody: true, includeReferences: true) }
     }
+    @Test func rtfdExportPreservesReportText() throws {
+        _ = NSApplication.shared
+        var document = StudyDocument(title: "Notebook", kind: .notebook)
+        var note = StudyNote(title: "First"); note.sourceContentType = "text/plain"; note.sourceBody = "A note"
+        document.notes = [note]
+        let report = try NotebookReport.make(document: document, selected: [note.id], includeBody: true, includeReferences: true)
+        let directory = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString, isDirectory: true)
+        try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: directory) }
+        let destination = directory.appendingPathComponent("report.rtfd")
+        try ReaderOutputActions.write(report, to: destination, type: "rtfd")
+        let restored = try NSAttributedString(url: destination, options: [.documentType: NSAttributedString.DocumentType.rtfd], documentAttributes: nil)
+        #expect(restored.string == report.string)
+    }
 }

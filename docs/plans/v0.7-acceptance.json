@@ -450,7 +450,8 @@
       ],
       "verification": [
         "NotebookReportTests verify selection, edited text, reference options, unsupported objects and corrupt RTF. AppLanguageTests passed for the new interface strings.",
-        "Native builds 185–186: inspected the report and study-document controls in dark appearance, toggled body inclusion, exported a temporary note to TXT and PDF, and verified both outputs contain the note. Original personal data were restored. RTFD and physical printing remain unverified."
+        "Native builds 185–186: inspected the report and study-document controls in dark appearance, toggled body inclusion, exported a temporary note to TXT and PDF, and verified both outputs contain the note. Original personal data were restored. RTFD and physical printing remain unverified.",
+        "NotebookReportTests additionally write and reopen an RTFD report and verify its text. Physical printing remains unverified."
       ],
       "limitations": []
     },

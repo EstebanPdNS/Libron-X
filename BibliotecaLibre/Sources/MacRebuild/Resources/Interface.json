@@ -8603,6 +8603,18 @@
     "ur": "قدیم پیمائشیں تخمینی ہیں اور زمانے اور مقام کے لحاظ سے مختلف تھیں۔",
     "zh-Hans": "古代计量值为近似值，因时代和地点而异。"
   },
+  "Las notas seleccionadas ya no están disponibles.": {
+    "ar": "الملاحظات المحددة لم تعد متاحة.",
+    "bn": "নির্বাচিত নোটগুলি আর উপলব্ধ নেই।",
+    "en": "The selected notes are no longer available.",
+    "es": "Las notas seleccionadas ya no están disponibles.",
+    "fr": "Les notes sélectionnées ne sont plus disponibles.",
+    "hi": "चयनित नोट अब उपलब्ध नहीं हैं।",
+    "id": "Catatan yang dipilih tidak lagi tersedia.",
+    "pt": "As notas selecionadas não estão mais disponíveis.",
+    "ur": "منتخب نوٹس اب دستیاب نہیں ہیں۔",
+    "zh-Hans": "所选笔记已不可用。"
+  },
   "Las oraciones se guardan localmente. Ocultar una oración no cifra el archivo.": {
     "ar": "تُحفظ الصلوات محليًا. إخفاء الصلاة لا يشفّر الملف.",
     "bn": "প্রার্থনা স্থানীয়ভাবে সংরক্ষিত হয়। লুকালে ফাইল এনক্রিপ্ট হয় না।",
@@ -15058,6 +15070,18 @@
     "pt": "Uma fonte mudou ou não pôde ser verificada após a pausa. Inicie uma nova pesquisa.",
     "ur": "وقفے کے بعد کوئی ماخذ بدل گیا یا اس کی تصدیق نہ ہو سکی۔ نئی تلاش شروع کریں۔",
     "zh-Hans": "暂停后有来源已更改或无法验证。请开始新搜索。"
+  },
+  "Una nota contiene objetos que no se pueden incluir en el informe sin pérdida.": {
+    "ar": "تحتوي ملاحظة على عناصر لا يمكن تضمينها في التقرير دون فقدان.",
+    "bn": "একটি নোটে এমন উপাদান আছে যা ক্ষতি ছাড়া প্রতিবেদনে রাখা যায় না।",
+    "en": "A note contains objects that cannot be included in the report without loss.",
+    "es": "Una nota contiene objetos que no se pueden incluir en el informe sin pérdida.",
+    "fr": "Une note contient des objets qui ne peuvent pas être inclus dans le rapport sans perte.",
+    "hi": "एक नोट में ऐसी वस्तुएँ हैं जिन्हें बिना नुकसान रिपोर्ट में शामिल नहीं किया जा सकता।",
+    "id": "Sebuah catatan berisi objek yang tidak dapat dimasukkan ke laporan tanpa kehilangan data.",
+    "pt": "Uma nota contém objetos que não podem ser incluídos no relatório sem perdas.",
+    "ur": "ایک نوٹ میں ایسی اشیا ہیں جنہیں نقصان کے بغیر رپورٹ میں شامل نہیں کیا جا سکتا۔",
+    "zh-Hans": "一条笔记包含无法无损加入报告的对象。"
   },
   "Una palabra o frase por línea": {
     "ar": "كلمة أو عبارة في كل سطر",

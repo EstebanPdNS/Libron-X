@@ -39,7 +39,10 @@ struct NotebookReportView: View {
     @RebuildViewState private var includeBody = true
     @RebuildViewState private var includeReferences = true
     @RebuildViewState private var error: String?
-    private var report: NSAttributedString? { try? NotebookReport.make(document: document, selected: selected, includeBody: includeBody, includeReferences: includeReferences) }
+    private var reportResult: Result<NSAttributedString, Error> {
+        Result { try NotebookReport.make(document: document, selected: selected, includeBody: includeBody, includeReferences: includeReferences) }
+    }
+    private var report: NSAttributedString? { try? reportResult.get() }
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             MacToolHeader(title: "Informe del cuaderno") { dismiss() }
@@ -57,8 +60,12 @@ struct NotebookReportView: View {
             }.frame(minHeight: 130, idealHeight: 180, maxHeight: 180)
             Text(L("Vista previa")).font(.headline)
             ScrollView {
-                if let report { Text(BibleCopyPreview.text(report)).textSelection(.enabled).frame(maxWidth: .infinity, alignment: .leading).padding(12) }
-                else { Text(L("No se pudo preparar el informe con estas opciones.")).foregroundStyle(.secondary).padding(12) }
+                switch reportResult {
+                case .success(let report):
+                    Text(BibleCopyPreview.text(report)).textSelection(.enabled).frame(maxWidth: .infinity, alignment: .leading).padding(12)
+                case .failure(let error):
+                    Text(L(error.localizedDescription)).foregroundStyle(.secondary).textSelection(.enabled).padding(12)
+                }
             }.frame(minHeight: 140).macEditorSurface()
             if let error { Text(error).foregroundStyle(.red).textSelection(.enabled) }
             HStack {
