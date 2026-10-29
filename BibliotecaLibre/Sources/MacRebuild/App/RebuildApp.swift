@@ -166,8 +166,10 @@ struct RebuildCommands: Commands {
                 .disabled(workspace.activeReader?.canGoForward != true)
             Divider()
             Button(L("Anotación anterior")) { workspace.navigateAnnotation(backwards: true) }
+                .keyboardShortcut("n", modifiers: [.command, .option, .shift])
                 .disabled(workspace.activeReader.flatMap { workspace.adjacentAnnotation(for: $0, backwards: true) } == nil)
             Button(L("Anotación siguiente")) { workspace.navigateAnnotation(backwards: false) }
+                .keyboardShortcut("n", modifiers: [.command, .option])
                 .disabled(workspace.activeReader.flatMap { workspace.adjacentAnnotation(for: $0, backwards: false) } == nil)
             Button(L("Copiar enlace a esta ubicación"), action: workspace.copyReaderLocationLink)
                 .disabled(workspace.currentBookmarkLocation == nil)
