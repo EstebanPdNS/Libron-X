@@ -123,15 +123,16 @@ struct ReaderOEBView: NSViewRepresentable {
                 case .success(let value):
                     guard let index = value as? [String: Any], let text = index["text"] as? String else { return }
                     let anchors = index["anchors"] as? [String: Int]
+                    let previousRequest = reader.selectionRequest
                     do { try reader.acceptOEBProjection(text, at: self.url!, initialOffset: anchors?[fragment]) }
-                    catch { reader.rejectOEBProjection(error, pageID: loadedID) }
+                    catch { reader.rejectOEBProjection(error, pageID: loadedID); return }
                     self.ready = true
                     reader.presentationWarnings = self.assetFailures.isEmpty ? [] : ["No se pudieron cargar estos archivos de la página: " + self.assetFailures.joined(separator: ", ")]
                     // Fragment navigation is native WebKit; do not replace it
                     // with an initial empty selection at the top of the page.
                     self.selectionRequest = reader.selectionRequest
                     let range = reader.selectedRange
-                    if range.length > 0 {
+                    if range.length > 0 || reader.selectionRequest != previousRequest {
                         // Readiness is coordinator state, not observed SwiftUI state.
                         // Deliver a pending search/find range after DOM validation;
                         // a representable update can otherwise run before ready.
@@ -299,10 +300,10 @@ struct ReaderOEBView: NSViewRepresentable {
             fieldValues: {title: fields.title.length ? [] : (document.title ? [document.title] : [])}};
         },
         select: (start, length) => {
-          if (!length) return false;
           const range = document.createRange(); let offset = 0, a = false, b = false;
-          for (const node of nodes()) {
-            if (!a && start < offset + node.length) { range.setStart(node, Math.max(0, start - offset)); a = true; }
+          const textNodes = nodes();
+          for (const [index, node] of textNodes.entries()) {
+            if (!a && (start < offset + node.length || (index === textNodes.length - 1 && start === offset + node.length))) { range.setStart(node, Math.max(0, start - offset)); a = true; }
             if (a && start + length <= offset + node.length) { range.setEnd(node, start + length - offset); b = true; break; }
             offset += node.length;
           }

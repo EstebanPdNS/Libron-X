@@ -2,6 +2,7 @@ import AppKit
 import Foundation
 import LibronixCore
 import Testing
+import WebKit
 @testable import MacRebuild
 
 @Suite(.serialized) @MainActor struct ReaderLocationLinkWorkflowTests {
@@ -58,6 +59,33 @@ import Testing
         try Data("changed".utf8).write(to: fixture.resource.location)
         #expect(throws: LibronixBookError.sourceChanged) { try target.acceptOEBProjection(projection.text, at: changedPage.url) }
         workspace.shutdown()
+    }
+
+    @Test func webLocationRestoresTheCaretInTheRenderedPage() async throws {
+        _ = NSApplication.shared
+        let fixture = try AuthoredOEBFixture(); defer { fixture.remove() }
+        let initial = try await ReaderSession.read(fixture.resource, .init(ordinal: 0))
+        let book = try #require(initial.oeb?.book)
+        let projection = try await ReaderOEBTextSource.shared.read(book: book, path: "Cover.html", viewport: .init())
+        let reader = ReaderSession(resource: fixture.resource)
+        let coordinator = ReaderOEBView.Coordinator(reader: reader, activate: {})
+        let view = ReaderOEBView.makeWebView(reader: reader, coordinator: coordinator)
+        view.setFrameSize(NSSize(width: 760, height: 900))
+        defer {
+            view.stopLoading(); view.navigationDelegate = nil
+            view.configuration.userContentController.removeScriptMessageHandler(forName: "reader", contentWorld: .defaultClient)
+            reader.cancel()
+        }
+        reader.load(.init(ordinal: 0), selection: NSRange(location: 2, length: 0), expectedFingerprint: projection.fingerprint)
+        try await settle(reader)
+        coordinator.begin(try #require(reader.page?.oeb), in: view)
+        let end = Date().addingTimeInterval(10)
+        while !coordinator.ready && Date() < end { try await Task.sleep(for: .milliseconds(10)) }
+        try #require(coordinator.ready && reader.error == nil)
+        let selection = try await view.callAsyncJavaScript("const s = getSelection(); return {offset:s.anchorOffset, collapsed:s.isCollapsed, text:s.anchorNode?.textContent};", in: nil, contentWorld: .defaultClient) as? [String: Any]
+        #expect(selection?["collapsed"] as? Bool == true)
+        #expect(selection?["offset"] as? Int == 2)
+        #expect(selection?["text"] as? String == "Owned cover")
     }
 
 }
