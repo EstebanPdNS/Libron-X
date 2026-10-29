@@ -3035,6 +3035,18 @@
     "ur": "اقتباسات",
     "zh-Hans": "引文"
   },
+  "Citas bibliográficas": {
+    "ar": "الاستشهادات الببليوغرافية",
+    "bn": "গ্রন্থপঞ্জি উদ্ধৃতি",
+    "en": "Bibliographic Citations",
+    "es": "Citas bibliográficas",
+    "fr": "Citations bibliographiques",
+    "hi": "ग्रंथसूची उद्धरण",
+    "id": "Kutipan Bibliografi",
+    "pt": "Citações bibliográficas",
+    "ur": "کتابی حوالہ جات",
+    "zh-Hans": "书目引用"
+  },
   "Claro": {
     "ar": "فاتح",
     "bn": "হালকা",
@@ -7043,6 +7055,18 @@
     "ur": "فونٹ",
     "zh-Hans": "字体"
   },
+  "Fuente no disponible en la biblioteca.": {
+    "ar": "المصدر غير متاح في المكتبة.",
+    "bn": "উৎসটি লাইব্রেরিতে উপলব্ধ নেই।",
+    "en": "Source unavailable in the library.",
+    "es": "Fuente no disponible en la biblioteca.",
+    "fr": "Source indisponible dans la bibliothèque.",
+    "hi": "स्रोत लाइब्रेरी में उपलब्ध नहीं है।",
+    "id": "Sumber tidak tersedia di pustaka.",
+    "pt": "Fonte indisponível na biblioteca.",
+    "ur": "ماخذ لائبریری میں دستیاب نہیں۔",
+    "zh-Hans": "资料库中没有此来源。"
+  },
   "Fuente o versión": {
     "ar": "المصدر أو النسخة",
     "bn": "উৎস বা সংস্করণ",
@@ -7919,6 +7943,18 @@
     "ur": "مضمون کی تصاویر",
     "zh-Hans": "文章图片"
   },
+  "Incluir en el informe": {
+    "ar": "تضمين في التقرير",
+    "bn": "প্রতিবেদনে অন্তর্ভুক্ত করুন",
+    "en": "Include in Report",
+    "es": "Incluir en el informe",
+    "fr": "Inclure dans le rapport",
+    "hi": "रिपोर्ट में शामिल करें",
+    "id": "Sertakan dalam Laporan",
+    "pt": "Incluir no relatório",
+    "ur": "رپورٹ میں شامل کریں",
+    "zh-Hans": "报告内容"
+  },
   "Incluir palabras": {
     "ar": "تضمين كلمات",
     "bn": "শব্দ অন্তর্ভুক্ত করুন",
@@ -8626,6 +8662,18 @@
     "pt": "A fonte não contém a passagem solicitada.",
     "ur": "ماخذ میں مطلوبہ مقطع موجود نہیں۔",
     "zh-Hans": "来源不包含所请求的经文。"
+  },
+  "La fuente original de esta nota no está identificada.": {
+    "ar": "لم يُحدَّد المصدر الأصلي لهذه الملاحظة.",
+    "bn": "এই নোটের মূল উৎস চিহ্নিত করা হয়নি।",
+    "en": "The original source of this note is unidentified.",
+    "es": "La fuente original de esta nota no está identificada.",
+    "fr": "La source originale de cette note n’est pas identifiée.",
+    "hi": "इस नोट के मूल स्रोत की पहचान नहीं हुई है।",
+    "id": "Sumber asli catatan ini belum teridentifikasi.",
+    "pt": "A fonte original desta nota não está identificada.",
+    "ur": "اس نوٹ کے اصل ماخذ کی شناخت نہیں ہوئی۔",
+    "zh-Hans": "尚未识别此笔记的原始来源。"
   },
   "La identidad del recurso cambió.": {
     "ar": "تغيّرت هوية المورد.",
@@ -14206,6 +14254,18 @@
     "pt": "Selecione a primeira e a última letra de cada palavra.",
     "ur": "ہر لفظ کا پہلا اور آخری حرف منتخب کریں۔",
     "zh-Hans": "选择每个单词的首字母和末字母。"
+  },
+  "Selecciona las notas que quieras incluir.": {
+    "ar": "اختر الملاحظات التي تريد تضمينها.",
+    "bn": "যে নোটগুলি অন্তর্ভুক্ত করতে চান তা নির্বাচন করুন।",
+    "en": "Select the notes you want to include.",
+    "es": "Selecciona las notas que quieras incluir.",
+    "fr": "Sélectionnez les notes à inclure.",
+    "hi": "वे नोट चुनें जिन्हें आप शामिल करना चाहते हैं।",
+    "id": "Pilih catatan yang ingin disertakan.",
+    "pt": "Selecione as notas que deseja incluir.",
+    "ur": "وہ نوٹس منتخب کریں جنہیں آپ شامل کرنا چاہتے ہیں۔",
+    "zh-Hans": "请选择要包含的笔记。"
   },
   "Selecciona notas que sigan disponibles.": {
     "ar": "اختر ملاحظات ما زالت متاحة.",

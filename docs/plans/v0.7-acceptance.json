@@ -507,16 +507,27 @@
       "sourceKey": "study-expansion-annotations-07",
       "acceptance": "Seleccionar y exportar/imprimir comentarios, referencias y citas con controles de inclusión.",
       "baseline": "Exportación JSON del documento disponible.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
-        "Added a snapshot-based notebook report with note selection, body and reference options, attributed preview, printing and TXT, RTFD and PDF export. Unsupported original HTML objects and invalid edited RTF prevent silent loss."
+        "Added a snapshot-based notebook report with note selection, body and reference options, attributed preview, printing and TXT, RTFD and PDF export. Unsupported original HTML objects and invalid edited RTF prevent silent loss.",
+        "Added independent bibliographic-citation inclusion and Catalog, Chicago author–date and MLA choices. Citations resolve the exact resource ID, format and original identifier; missing editions and unidentified legacy sources are explicit, without inferred bibliographic fields.",
+        "Reorganized the native Glass report into inclusion/selection and attributed-preview columns, with select/deselect actions and disabled output for an empty selection. Preview generation occurs once per option change, and the catalog snapshot is retained for the presentation.",
+        "Applied the reference option to sermon passage metadata as well as note anchors. PDF export and printing use private, top-aligned print settings; the shared output writer accepts those settings without changing reader defaults or shared preferences."
       ],
       "verification": [
         "NotebookReportTests verify selection, edited text, reference options, unsupported objects and corrupt RTF. AppLanguageTests passed for the new interface strings.",
         "Native builds 185–186: inspected the report and study-document controls in dark appearance, toggled body inclusion, exported a temporary note to TXT and PDF, and verified both outputs contain the note. Original personal data were restored. RTFD and physical printing remain unverified.",
-        "NotebookReportTests additionally write and reopen an RTFD report and verify its text. Physical printing remains unverified."
+        "NotebookReportTests additionally write and reopen an RTFD report and verify its text. Physical printing remains unverified.",
+        "23 tests in six focused suites passed: NotebookReportTests, SermonArchiveTests, AppLanguageTests and the reader formatting/interlinear suites. The new checks cover exact-edition citations, mismatched format/identifier, duplicate catalog identities, independent options, unchanged source data, sermon passage inclusion, real PDF text and top-of-page geometry without modifying shared print preferences.",
+        "Native build 215: selected one of two notes, toggled body inclusion while retaining reference and citation, selected Chicago author–date and exported TXT, RTFD and PDF through system save panels. TXT and reopened RTFD matched exactly; PDF retained Greek note text, reference and citation, and omitted the unselected note.",
+        "Native build 215 presented the system print panel with a one-page report preview. No printer was selected, so no physical print job was sent.",
+        "Native build 216: reviewed the complete report in light appearance and Arabic RTL with mirrored options, preview column and action groups. Deselect All showed the selection instruction and disabled print/export. English and Automatic appearance were restored.",
+        "Native build 216 exported the corrected PDF. PDFKit verified one page, expected text and a header above 75% of page height; its rendered page was visually inspected. Original personal files were restored and synthetic data retained only in local test output."
       ],
-      "limitations": []
+      "limitations": [
+        "No physical printer was configured during acceptance. System print preview, PDF output and print-view layout were verified; actual paper/printer compatibility remains part of platform acceptance.",
+        "Bibliographic citations use catalog metadata only. General notes have no invented source, and unidentified legacy sources remain explicit rather than being assigned to another edition. General VoiceOver and all-language/platform acceptance remain open in their dedicated requirements."
+      ]
     },
     {
       "id": "F172",

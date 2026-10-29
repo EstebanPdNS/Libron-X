@@ -143,7 +143,7 @@ struct WorkspaceDocumentsView: View {
                 StudyReferenceExtractionView(personal: personal, destinationID: request.id)
             }
             .sheet(item: $reportDocument) { document in
-                NotebookReportView(document: document, initialSelection: selectedNotes).modifier(AppInterfaceLanguage())
+                NotebookReportView(document: document, initialSelection: selectedNotes, resources: workspace.resources).modifier(AppInterfaceLanguage())
             }
             .sheet(isPresented: $showsPreviousDocuments) {
                 PreviousDocumentsView(personal: personal).modifier(AppInterfaceLanguage())

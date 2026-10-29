@@ -88,7 +88,7 @@ import LibronixCore
             } catch { workspace.error = error.localizedDescription }
         }
     }
-    static func write(_ text: NSAttributedString, to url: URL, type: String) throws {
+    static func write(_ text: NSAttributedString, to url: URL, type: String, printInfo: NSPrintInfo? = nil) throws {
         let range = NSRange(location: 0, length: text.length)
         switch type {
         case "txt": try Data(text.string.utf8).write(to: url, options: .atomic)
@@ -97,7 +97,7 @@ import LibronixCore
             let wrapper = try text.fileWrapper(from: range, documentAttributes: [.documentType: NSAttributedString.DocumentType.rtfd])
             try wrapper.write(to: url, options: .atomic, originalContentsURL: nil)
         case "pdf":
-            let info = NSPrintInfo.shared.copy() as! NSPrintInfo
+            let info = (printInfo ?? NSPrintInfo.shared).copy() as! NSPrintInfo
             info.jobDisposition = .save; info.dictionary()[NSPrintInfo.AttributeKey.jobSavingURL] = url
             let operation = NSPrintOperation(view: printView(text, info: info), printInfo: info)
             operation.showsPrintPanel = false; operation.showsProgressPanel = false
