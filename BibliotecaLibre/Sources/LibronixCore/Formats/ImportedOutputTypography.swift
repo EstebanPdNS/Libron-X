@@ -8,8 +8,8 @@ public extension LegacyTypography {
 }
 public extension LegacyCharacterStyle {
     static func importedOutput(bold: Bool, italic: Bool, underline: Bool, strikeout: Bool,
-                               superscript: Bool, subscriptText: Bool, color: UInt32?) -> Self {
-        .init(id: 0, version: 0, flags: (superscript ? 1 : 0) | (subscriptText ? 2 : 0) | (color == nil ? 0 : 0x40),
+                               superscript: Bool, subscriptText: Bool, color: UInt32?, smallCaps: Bool = false) -> Self {
+        .init(id: 0, version: 0, flags: (superscript ? 1 : 0) | (subscriptText ? 2 : 0) | (smallCaps ? 0x20 : 0) | (color == nil ? 0 : 0x40),
             color: color ?? 0, backgroundColor: nil, locale: 0, sourceField: 0, extraField: nil, extraValue: nil,
             font: .init(values: [0,0,0,0,bold ? 700 : 400], attributes: [italic ? 1 : 0,underline ? 1 : 0,strikeout ? 1 : 0], family: "", rawFamily: Data()), alternateFont: nil)
     }

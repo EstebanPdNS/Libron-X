@@ -17,7 +17,7 @@ struct BibleCopyToolView: View {
     @RebuildViewState private var isLoading = false
     @RebuildViewState private var task: Task<Void, Never>?
     @RebuildViewState private var showStyles = false
-    private var resources: [LibraryResource] { workspace.availableResources.filter { $0.format == .legacyLSF || ([.eSwordSQLite, .libronixLLS].contains($0.format) && LibronMetadata.deriving($0).resourceType == "Biblia") } }
+    private var resources: [LibraryResource] { workspace.availableResources.filter { $0.format == .legacyLSF || ([.eSwordSQLite, .libronixLLS, .epub].contains($0.format) && LibronMetadata.deriving($0).resourceType == "Biblia") } }
     private var chosenStyle: BibleCopyOutputStyle {
         workspace.personal.bibleCopyState.styles.first { $0.id == workspace.personal.bibleCopyState.selectedStyleID }!
     }
@@ -150,6 +150,7 @@ struct BibleCopyToolView: View {
         task = Task {
             do {
                 let passage = try BibleCopyPassage.parse(requested)
+                if resource.format == .epub && !style.bibleTextOnly { throw BibleCopyError.unsupportedContent }
                 let document = try await WorkspaceBibleCopy.prepare(resource, passage: passage, includeFootnotes: footnotes)
                 let formatted = try await BibleCopyFormattingService().format(document, style: style, language: language)
                 let output = try NativeBibleCopyOutput.prepare(formatted)

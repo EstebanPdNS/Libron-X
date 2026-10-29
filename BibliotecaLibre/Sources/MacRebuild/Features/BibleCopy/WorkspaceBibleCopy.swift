@@ -6,6 +6,9 @@ import LibronixCore
 @MainActor enum WorkspaceBibleCopy {
     static func prepare(_ resource: LibraryResource, passage: BibleCopyPassage, includeFootnotes: Bool) async throws -> BibleCopyDocument {
         let abbreviation = resource.location.deletingPathExtension().lastPathComponent
+        if resource.format == .epub {
+            return try await EPUBBibleCopy.prepare(resource, passage: passage, includeFootnotes: includeFootnotes)
+        }
         if resource.format == .eSwordSQLite {
             let worker = Task.detached { try ESwordResource.biblePassage(resource, passage: passage) }
             let selection = try await withTaskCancellationHandler { try await worker.value } onCancel: { worker.cancel() }

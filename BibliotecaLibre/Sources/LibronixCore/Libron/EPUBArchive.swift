@@ -90,6 +90,17 @@ public struct EPUBArchive: Sendable {
         metadata.authors = all.filter { $0.name == "dc:creator" }.map(\.text)
         metadata.languages = all.filter { $0.name == "dc:language" }.map(\.text)
         metadata.publisher = field("publisher"); metadata.year = field("date")
+        let title = metadata.title.folding(options: [.caseInsensitive, .diacriticInsensitive], locale: Locale(identifier: "en_US_POSIX"))
+        if ["bible", "biblia", "testament"].contains(where: title.contains),
+           !["commentary", "comentario", "dictionary", "diccionario"].contains(where: title.contains),
+           let anchor = try? NSRegularExpression(pattern: #"\bid\s*=\s*[\"']v[0-9]{8}[\"']"#, options: .caseInsensitive),
+           files.contains(where: { path in
+               guard let data = members[path], let html = String(data: data, encoding: .utf8) else { return false }
+               return anchor.firstMatch(in: html, range: NSRange(html.startIndex..., in: html)) != nil
+           }) {
+            metadata.resourceType = "Biblia"; metadata.category = "Estudios bíblicos"
+            metadata.evidence.append(.init(field: "resourceType", value: "Biblia", source: "EPUB title and verse anchors", status: "inferred"))
+        }
         self.source = url; self.metadata = metadata
         book = try LibronixOEBBook(source: url, directory: LibronixOEBDirectory(files: files, titles: titles), members: members)
     }

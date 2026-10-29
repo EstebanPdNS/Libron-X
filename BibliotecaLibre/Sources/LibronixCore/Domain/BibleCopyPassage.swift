@@ -67,6 +67,9 @@ public struct BibleCopyFootnote: Sendable, Equatable {
     public let marker: String
     public let text: String
     public let source: ReaderOutputSource
+    public init(id: String, marker: String, text: String, source: ReaderOutputSource) {
+        self.id = id; self.marker = marker; self.text = text; self.source = source
+    }
 }
 public struct BibleCopySourceMark: Sendable, Equatable {
     public let offset: Int
