@@ -13,6 +13,16 @@ struct BibleCopyToolView: View {
     @RebuildViewState private var error: String?
     @RebuildViewState private var isLoading = false
     @RebuildViewState private var task: Task<Void, Never>?
+    @RebuildViewState private var showStyles = false
+    private var chosenStyle: BibleCopyOutputStyle? {
+        workspace.personal.bibleCopyState.customStyles.first { $0.id == workspace.personal.bibleCopyState.selectedStyleID }
+    }
+    private var chosenStyleID: Binding<UUID?> {
+        Binding(get: { chosenStyle?.id }, set: { value in
+            do { try workspace.personal.editBibleCopyState { $0.selectedStyleID = value ?? BibleCopyOutputStyle.defaults[1].id } }
+            catch { self.error = error.localizedDescription }
+        })
+    }
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             Picker(L("Biblia"), selection: $resourceID) {
@@ -23,6 +33,13 @@ struct BibleCopyToolView: View {
                 TextField(L("Pasaje, por ejemplo Juan 1:1-5"), text: $reference).macInputStyle().onSubmit(prepare)
                 Button(L("Vista previa"), action: prepare).disabled(isLoading || resourceID.isEmpty || reference.isEmpty)
             }
+            HStack {
+                Picker(L("Plantilla"), selection: chosenStyleID) {
+                    Text(L("Formato actual")).tag(Optional<UUID>.none)
+                    ForEach(workspace.personal.bibleCopyState.customStyles) { Text($0.name).tag(Optional($0.id)) }
+                }
+                Button(L("Gestionar plantillas…")) { showStyles = true }
+            }.disabled(isLoading)
             HStack {
                 Picker(L("Párrafos"), selection: $paragraphStyle) {
                     Text(L("Por versículo")).tag(BibleCopyParagraphPolicy.perVerse)
@@ -54,12 +71,14 @@ struct BibleCopyToolView: View {
             .onChange(of: paragraphStyle) { task?.cancel(); result = ""; isLoading = false }
             .onChange(of: citation) { task?.cancel(); result = ""; isLoading = false }
             .onChange(of: footnotes) { task?.cancel(); result = ""; isLoading = false }
+            .onChange(of: workspace.personal.bibleCopyState) { task?.cancel(); result = ""; isLoading = false }
+            .sheet(isPresented: $showStyles) { BibleCopyStylesView(workspace: workspace, personal: workspace.personal).modifier(AppInterfaceLanguage()) }
     }
     private func prepare() {
         task?.cancel()
         guard let resource = workspace.availableResources.first(where: { $0.id == resourceID }) else { return }
         let requested = reference
-        var style = BibleCopyOutputStyle(name: "Copiar versículos")
+        var style = chosenStyle ?? BibleCopyOutputStyle(name: "Copiar versículos")
         style.paragraphs = paragraphStyle; style.citation = citation; style.copyFootnotes = footnotes
         error = nil; result = ""; isLoading = true
         task = Task {

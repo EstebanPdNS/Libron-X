@@ -37,6 +37,8 @@ struct WorkspacePersonalSnapshot: Codable {
     private(set) var namedBibleRangesLoadError: String?
     private(set) var researchInbox = ResearchInbox()
     private(set) var researchInboxLoadError: String?
+    private(set) var bibleCopyState = BibleCopyPersonalState()
+    private(set) var bibleCopyLoadError: String?
     let searchHistory: WorkspaceSearchHistory
     let savedQueries: WorkspaceSavedQueries
     var highlights: [ReaderHighlight] = []
@@ -52,6 +54,7 @@ struct WorkspacePersonalSnapshot: Codable {
     @ObservationIgnored private let searchWordListsFile: PersonalStateFile<SearchWordLists>
     @ObservationIgnored private let namedBibleRangesFile: PersonalStateFile<NamedBibleSearchRanges>
     @ObservationIgnored private let researchInboxFile: PersonalStateFile<ResearchInbox>
+    @ObservationIgnored private let bibleCopyFile: PersonalStateFile<BibleCopyPersonalState>
     @ObservationIgnored private var bookmarksWritable = false
     @ObservationIgnored private var readingPlansWritable = false
     @ObservationIgnored private var prayerJournalWritable = false
@@ -60,6 +63,7 @@ struct WorkspacePersonalSnapshot: Codable {
     @ObservationIgnored private var searchWordListsWritable = false
     @ObservationIgnored private var namedBibleRangesWritable = false
     @ObservationIgnored private var researchInboxWritable = false
+    @ObservationIgnored private var bibleCopyWritable = false
     @ObservationIgnored private var canSave = false
     @ObservationIgnored private var saveTask: Task<Void, Never>?
     init(url: URL? = nil) {
@@ -76,6 +80,7 @@ struct WorkspacePersonalSnapshot: Codable {
         searchWordListsFile = PersonalStateFile(url: path.deletingLastPathComponent().appendingPathComponent("search-word-lists.json"))
         namedBibleRangesFile = PersonalStateFile(url: path.deletingLastPathComponent().appendingPathComponent("named-bible-ranges.json"))
         researchInboxFile = PersonalStateFile(url: path.deletingLastPathComponent().appendingPathComponent("research-inbox.json"))
+        bibleCopyFile = PersonalStateFile(url: path.deletingLastPathComponent().appendingPathComponent("bible-copy-styles.json"))
         do {
             if let saved = try file.load() {
                 try saved.validate(); favorites = saved.favorites; highlights = saved.highlights; documents = saved.documents
@@ -114,6 +119,17 @@ struct WorkspacePersonalSnapshot: Codable {
             if let saved = try researchInboxFile.load() { try saved.validate(); researchInbox = saved }
             researchInboxWritable = true
         } catch { researchInboxLoadError = error.localizedDescription }
+        do {
+            if let saved = try bibleCopyFile.load() { try saved.validate(); bibleCopyState = saved }
+            bibleCopyWritable = true
+        } catch { bibleCopyLoadError = error.localizedDescription }
+    }
+    func editBibleCopyState(_ edit: (inout BibleCopyPersonalState) throws -> Void) throws {
+        guard bibleCopyWritable else { throw PersonalStateError.invalid(bibleCopyLoadError ?? "No se pudieron abrir las plantillas de copia.") }
+        var next = bibleCopyState
+        try edit(&next); try next.validate()
+        guard next != bibleCopyState else { return }
+        try bibleCopyFile.save(next); bibleCopyState = next
     }
     func editResearchInbox(_ edit: (inout ResearchInbox) throws -> Void) throws {
         guard researchInboxWritable else { throw PersonalStateError.invalid(researchInboxLoadError ?? "No se pudo abrir la bandeja de investigación.") }

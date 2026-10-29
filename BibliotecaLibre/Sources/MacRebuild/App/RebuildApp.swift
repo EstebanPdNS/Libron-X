@@ -43,6 +43,7 @@ struct LibronXRebuildApp: App {
     func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
         canInstallUpdate = false
         guard let workspace else { return .terminateNow }
+        guard workspace.canQuitWithCopyStyleDraft() else { return .terminateCancel }
         guard workspace.saveResearchDraftIfNeeded() else { return .terminateCancel }
         do { try startup.save(workspace); try workspace.personal.save(); canInstallUpdate = true; return .terminateNow }
         catch {

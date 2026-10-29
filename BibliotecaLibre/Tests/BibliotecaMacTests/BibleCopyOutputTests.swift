@@ -6,6 +6,17 @@ import Testing
 import LibronixOutputMac
 
 @MainActor @Suite struct BibleCopyOutputTests {
+    @Test func customTemplatePatternsDriveTheActualFormattedPassage() async throws {
+        let fixture = try OutputFixture(); defer { fixture.remove() }
+        let source = try await BibleCopyService().prepare(fixture.resource, passage: .parse("Xy 1:1"), abbreviation: "Own")
+        var style = BibleCopyOutputStyle(name: "Custom")
+        style.citation = false; style.beforePassage.pattern = "START ^P^n"
+        style.beforeVerse.pattern = "VERSE ^v: "; style.afterVerse.pattern = "^n"; style.afterPassage.pattern = "END"
+        let result = try BibleCopyFormatter.format(source, style: style)
+        #expect(result.bodyText.contains("START Xy 1:1"))
+        #expect(result.bodyText.contains("VERSE 1:"))
+        #expect(result.bodyText.contains("END"))
+    }
     @Test func sourceAndBibleOnlyPoliciesKeepHeadingsAndVerseNumbersInTheirSeparatePaths() async throws {
         let fixture=try OutputFixture();defer{fixture.remove()}
         let source=try await BibleCopyService().prepare(fixture.resource,passage:.parse("Xy 1:2-2:1"),abbreviation:"Own")

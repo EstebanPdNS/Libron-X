@@ -785,10 +785,17 @@
       "sourceKey": "study-expansion-fidelity-02",
       "acceptance": "Editor, guardado, carga, duplicación y borrado de plantillas con vista previa comprobada.",
       "baseline": "Core modela estilos y códigos; la herramienta actual expone opciones básicas.",
-      "status": "pending",
-      "implementation": [],
-      "verification": [],
-      "limitations": []
+      "status": "in_progress",
+      "implementation": [
+        "Added independently persisted custom Bible-copy templates, including create, edit, duplicate, delete and selection. Four passage and verse patterns feed the existing formatter and the current passage preview; the previous format remains the default.",
+        "Unsaved template changes require a save, discard or cancel decision before switching or closing; normal application quit can be blocked while a draft is open."
+      ],
+      "verification": [
+        "BibleCopyStylePersistenceTests passed for save, restore, deletion, invalid values, concurrent and future-schema protection and the quit guard. BibleCopyOutputTests passed including a custom template applied to an authored passage. AppLanguageTests passed for ten languages."
+      ],
+      "limitations": [
+        "The new native editor and selection controls have not yet been visually inspected or tested in the installed application; the control service timed out after an open panel was closed. The installed library has no confirmed compatible Bible for a complete on-screen copy preview. Formatting controls and wider language, keyboard and accessibility acceptance remain pending."
+      ]
     },
     {
       "id": "F188",

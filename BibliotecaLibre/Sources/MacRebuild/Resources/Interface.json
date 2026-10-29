@@ -1079,6 +1079,30 @@
     "ur": "اگلی تشریح",
     "zh-Hans": "下一条注释"
   },
+  "Antes de cada versículo": {
+    "ar": "قبل كل آية",
+    "bn": "প্রতি পদের আগে",
+    "en": "Before Each Verse",
+    "es": "Antes de cada versículo",
+    "fr": "Avant chaque verset",
+    "hi": "हर पद से पहले",
+    "id": "Sebelum setiap ayat",
+    "pt": "Antes de cada versículo",
+    "ur": "ہر آیت سے پہلے",
+    "zh-Hans": "每节之前"
+  },
+  "Antes del pasaje": {
+    "ar": "قبل المقطع",
+    "bn": "অনুচ্ছেদের আগে",
+    "en": "Before Passage",
+    "es": "Antes del pasaje",
+    "fr": "Avant le passage",
+    "hi": "अंश से पहले",
+    "id": "Sebelum bagian",
+    "pt": "Antes da passagem",
+    "ur": "حوالے سے پہلے",
+    "zh-Hans": "经文之前"
+  },
   "Apariencia": {
     "ar": "المظهر",
     "bn": "চেহারা",
@@ -4175,6 +4199,30 @@
     "ur": "اس نسخے میں تبدیلیاں کھول کر نصب شدہ نسخے کے نوٹس پڑھیں۔ یہ آف لائن دستیاب ہیں اور اسی نسخے کی وضاحت کرتے ہیں، GitHub کے تازہ ترین کی نہیں۔",
     "zh-Hans": "展开此版本的更改可阅读已安装版本附带的说明。这些说明可离线使用，描述的是本机版本，而不是 GitHub 上的最新版本。"
   },
+  "Después de cada versículo": {
+    "ar": "بعد كل آية",
+    "bn": "প্রতি পদের পরে",
+    "en": "After Each Verse",
+    "es": "Después de cada versículo",
+    "fr": "Après chaque verset",
+    "hi": "हर पद के बाद",
+    "id": "Setelah setiap ayat",
+    "pt": "Depois de cada versículo",
+    "ur": "ہر آیت کے بعد",
+    "zh-Hans": "每节之后"
+  },
+  "Después del pasaje": {
+    "ar": "بعد المقطع",
+    "bn": "অনুচ্ছেদের পরে",
+    "en": "After Passage",
+    "es": "Después del pasaje",
+    "fr": "Après le passage",
+    "hi": "अंश के बाद",
+    "id": "Setelah bagian",
+    "pt": "Depois da passagem",
+    "ur": "حوالے کے بعد",
+    "zh-Hans": "经文之后"
+  },
   "Destino": {
     "ar": "الوجهة",
     "bn": "গন্তব্য",
@@ -4642,6 +4690,18 @@
     "pt": "Duplicados e edições…",
     "ur": "نقول اور ایڈیشن…",
     "zh-Hans": "重复项与版本…"
+  },
+  "Duplicar": {
+    "ar": "تكرار",
+    "bn": "প্রতিলিপি করুন",
+    "en": "Duplicate",
+    "es": "Duplicar",
+    "fr": "Dupliquer",
+    "hi": "प्रतिलिपि बनाएँ",
+    "id": "Duplikat",
+    "pt": "Duplicar",
+    "ur": "نقل بنائیں",
+    "zh-Hans": "复制"
   },
   "Duplicar lectura": {
     "ar": "تكرار القراءة",
@@ -5639,6 +5699,18 @@
     "ur": "مقطع حذف کریں",
     "zh-Hans": "删除经文"
   },
+  "Eliminar plantilla": {
+    "ar": "حذف القالب",
+    "bn": "টেমপ্লেট মুছুন",
+    "en": "Delete Template",
+    "es": "Eliminar plantilla",
+    "fr": "Supprimer le modèle",
+    "hi": "टेम्पलेट हटाएँ",
+    "id": "Hapus templat",
+    "pt": "Excluir modelo",
+    "ur": "سانچہ حذف کریں",
+    "zh-Hans": "删除模板"
+  },
   "Eliminar plan…": {
     "ar": "حذف الخطة…",
     "bn": "পরিকল্পনা মুছুন…",
@@ -6455,6 +6527,18 @@
     "ur": ".libron میں میٹاڈیٹا، ماخذ اور اختیاری backup نقول شامل ہیں۔",
     "zh-Hans": ".libron 格式包含元数据、来源及可选的 backup 副本。"
   },
+  "Formato actual": {
+    "ar": "التنسيق الحالي",
+    "bn": "বর্তমান বিন্যাস",
+    "en": "Current Format",
+    "es": "Formato actual",
+    "fr": "Format actuel",
+    "hi": "वर्तमान प्रारूप",
+    "id": "Format saat ini",
+    "pt": "Formato atual",
+    "ur": "موجودہ فارمیٹ",
+    "zh-Hans": "当前格式"
+  },
   "Formato original": {
     "ar": "التنسيق الأصلي",
     "bn": "মূল বিন্যাস",
@@ -6623,6 +6707,18 @@
     "ur": "رہنمائی بنائیں",
     "zh-Hans": "生成指南"
   },
+  "Gestionar plantillas…": {
+    "ar": "إدارة القوالب…",
+    "bn": "টেমপ্লেট পরিচালনা করুন…",
+    "en": "Manage Templates…",
+    "es": "Gestionar plantillas…",
+    "fr": "Gérer les modèles…",
+    "hi": "टेम्पलेट प्रबंधित करें…",
+    "id": "Kelola templat…",
+    "pt": "Gerenciar modelos…",
+    "ur": "سانچوں کا انتظام کریں…",
+    "zh-Hans": "管理模板…"
+  },
   "Gestionar rangos…": {
     "ar": "إدارة النطاقات…",
     "bn": "সীমা পরিচালনা করুন…",
@@ -6767,6 +6863,18 @@
     "ur": "اقتباس بدلنے سے پہلے تبصرہ محفوظ کریں۔",
     "zh-Hans": "切换摘录前请保存评论。"
   },
+  "Guarda la plantilla antes de continuar.": {
+    "ar": "احفظ القالب قبل المتابعة.",
+    "bn": "চালিয়ে যাওয়ার আগে টেমপ্লেট সংরক্ষণ করুন।",
+    "en": "Save the template before continuing.",
+    "es": "Guarda la plantilla antes de continuar.",
+    "fr": "Enregistrez le modèle avant de continuer.",
+    "hi": "जारी रखने से पहले टेम्पलेट सहेजें।",
+    "id": "Simpan templat sebelum melanjutkan.",
+    "pt": "Salve o modelo antes de continuar.",
+    "ur": "آگے بڑھنے سے پہلے سانچہ محفوظ کریں۔",
+    "zh-Hans": "继续前请保存模板。"
+  },
   "Guarda la ubicación de lectura como favorito para volver después. Puedes organizar los favoritos en carpetas. Al abrir uno, vuelves al recurso y a la ubicación guardados.": {
     "ar": "احفظ موضع القراءة في المفضلة للعودة إليه. نظّم المفضلة في مجلدات. يفتح كل عنصر المورد والموضع المحفوظين.",
     "bn": "পরে ফেরার জন্য বর্তমান স্থান প্রিয়তে রাখুন। ফোল্ডারে প্রিয়গুলো সাজান। খুললে সংরক্ষিত রিসোর্স ও অবস্থানে যায়।",
@@ -6850,6 +6958,18 @@
     "pt": "Copiar originais para backup",
     "ur": "اصل فائلیں backup میں نقل کریں",
     "zh-Hans": "将原件复制到 backup"
+  },
+  "Guardar plantilla": {
+    "ar": "حفظ القالب",
+    "bn": "টেমপ্লেট সংরক্ষণ করুন",
+    "en": "Save Template",
+    "es": "Guardar plantilla",
+    "fr": "Enregistrer le modèle",
+    "hi": "टेम्पलेट सहेजें",
+    "id": "Simpan templat",
+    "pt": "Salvar modelo",
+    "ur": "سانچہ محفوظ کریں",
+    "zh-Hans": "保存模板"
   },
   "Guardar reglas": {
     "ar": "حفظ القواعد",
@@ -9683,6 +9803,18 @@
     "ur": "مشق کے لیے کوئی مقطع نہیں۔",
     "zh-Hans": "没有可练习的经文。"
   },
+  "No hay plantillas guardadas.": {
+    "ar": "لا توجد قوالب محفوظة.",
+    "bn": "কোনো সংরক্ষিত টেমপ্লেট নেই।",
+    "en": "No saved templates.",
+    "es": "No hay plantillas guardadas.",
+    "fr": "Aucun modèle enregistré.",
+    "hi": "कोई सहेजा गया टेम्पलेट नहीं।",
+    "id": "Tidak ada templat tersimpan.",
+    "pt": "Nenhum modelo salvo.",
+    "ur": "کوئی محفوظ سانچہ نہیں۔",
+    "zh-Hans": "没有已保存的模板。"
+  },
   "No hay preguntas.": {
     "ar": "لا توجد أسئلة.",
     "bn": "এখনো কোনো প্রশ্ন নেই।",
@@ -9934,6 +10066,18 @@
     "pt": "Não foi possível abrir as listas de palavras.",
     "ur": "الفاظ کی فہرستیں نہیں کھل سکیں۔",
     "zh-Hans": "无法打开单词列表。"
+  },
+  "No se pudieron abrir las plantillas de copia.": {
+    "ar": "تعذر فتح قوالب النسخ.",
+    "bn": "কপি টেমপ্লেট খোলা যায়নি।",
+    "en": "Copy templates could not be opened.",
+    "es": "No se pudieron abrir las plantillas de copia.",
+    "fr": "Impossible d’ouvrir les modèles de copie.",
+    "hi": "कॉपी टेम्पलेट नहीं खोले जा सके।",
+    "id": "Templat salin tidak dapat dibuka.",
+    "pt": "Não foi possível abrir os modelos de cópia.",
+    "ur": "کاپی کے سانچے نہیں کھولے جا سکے۔",
+    "zh-Hans": "无法打开复制模板。"
   },
   "No se pudieron abrir los ejercicios de memorización.": {
     "ar": "تعذر فتح تمارين الحفظ.",
@@ -10247,6 +10391,18 @@
     "ur": "فہرست کا نام",
     "zh-Hans": "列表名称"
   },
+  "Nombre de plantilla": {
+    "ar": "اسم القالب",
+    "bn": "টেমপ্লেটের নাম",
+    "en": "Template Name",
+    "es": "Nombre de plantilla",
+    "fr": "Nom du modèle",
+    "hi": "टेम्पलेट का नाम",
+    "id": "Nama templat",
+    "pt": "Nome do modelo",
+    "ur": "سانچے کا نام",
+    "zh-Hans": "模板名称"
+  },
   "Nombre del documento": {
     "ar": "اسم المستند",
     "bn": "নথির নাম",
@@ -10462,6 +10618,18 @@
     "pt": "Nova lista de versículos",
     "ur": "آیات کی نئی فہرست",
     "zh-Hans": "新建经文列表"
+  },
+  "Nueva plantilla": {
+    "ar": "قالب جديد",
+    "bn": "নতুন টেমপ্লেট",
+    "en": "New Template",
+    "es": "Nueva plantilla",
+    "fr": "Nouveau modèle",
+    "hi": "नया टेम्पलेट",
+    "id": "Templat baru",
+    "pt": "Novo modelo",
+    "ur": "نیا سانچہ",
+    "zh-Hans": "新建模板"
   },
   "Nuevo": {
     "ar": "جديد",
@@ -11314,6 +11482,30 @@
     "pt": "Planos de leitura…",
     "ur": "مطالعے کے منصوبے…",
     "zh-Hans": "阅读计划…"
+  },
+  "Plantilla": {
+    "ar": "قالب",
+    "bn": "টেমপ্লেট",
+    "en": "Template",
+    "es": "Plantilla",
+    "fr": "Modèle",
+    "hi": "टेम्पलेट",
+    "id": "Templat",
+    "pt": "Modelo",
+    "ur": "سانچہ",
+    "zh-Hans": "模板"
+  },
+  "Plantillas de copia": {
+    "ar": "قوالب النسخ",
+    "bn": "কপি টেমপ্লেট",
+    "en": "Copy Templates",
+    "es": "Plantillas de copia",
+    "fr": "Modèles de copie",
+    "hi": "कॉपी टेम्पलेट",
+    "id": "Templat salin",
+    "pt": "Modelos de cópia",
+    "ur": "کاپی کے سانچے",
+    "zh-Hans": "复制模板"
   },
   "Por reglas": {
     "ar": "حسب القواعد",
@@ -12839,6 +13031,18 @@
     "ur": "یہ دعا حذف کر دی جائے گی۔",
     "zh-Hans": "将删除此祷告。"
   },
+  "Se eliminará esta plantilla de copia.": {
+    "ar": "سيُحذف قالب النسخ هذا.",
+    "bn": "এই কপি টেমপ্লেট মুছে ফেলা হবে।",
+    "en": "This copy template will be deleted.",
+    "es": "Se eliminará esta plantilla de copia.",
+    "fr": "Ce modèle de copie sera supprimé.",
+    "hi": "यह कॉपी टेम्पलेट हटा दिया जाएगा।",
+    "id": "Templat salin ini akan dihapus.",
+    "pt": "Este modelo de cópia será excluído.",
+    "ur": "یہ کاپی کا سانچہ حذف کر دیا جائے گا۔",
+    "zh-Hans": "此复制模板将被删除。"
+  },
   "Se eliminará este ejercicio y su progreso.": {
     "ar": "سيُحذف هذا التمرين وتقدمه.",
     "bn": "এই অনুশীলন ও অগ্রগতি মুছে যাবে।",
@@ -13294,6 +13498,18 @@
     "pt": "Selecione uma palavra e clique com o botão direito em Buscar no dicionário. Troque no seletor. Mantenha a janela aberta para consultar novas palavras automaticamente; frases são ignoradas.",
     "ur": "ایک لفظ منتخب کر کے دایاں کلک کریں اور لغت میں تلاش کریں چنیں۔ منتخب فہرست سے لغت بدلیں۔ نئے منتخب الفاظ خودکار تلاش کرنے کے لیے کھڑکی کھلی رکھیں؛ فقرے نظرانداز ہوں گے۔",
     "zh-Hans": "选中一个词，右键选择“查词典”。用选择器切换词典。保持词典窗口打开可自动查询新选中的词；短语将被忽略。"
+  },
+  "Selecciona una plantilla o crea una nueva.": {
+    "ar": "اختر قالبًا أو أنشئ قالبًا جديدًا.",
+    "bn": "একটি টেমপ্লেট নির্বাচন করুন বা নতুন তৈরি করুন।",
+    "en": "Select a template or create a new one.",
+    "es": "Selecciona una plantilla o crea una nueva.",
+    "fr": "Sélectionnez un modèle ou créez-en un.",
+    "hi": "एक टेम्पलेट चुनें या नया बनाएँ।",
+    "id": "Pilih templat atau buat yang baru.",
+    "pt": "Selecione um modelo ou crie um novo.",
+    "ur": "کوئی سانچہ منتخب کریں یا نیا بنائیں۔",
+    "zh-Hans": "选择模板或新建模板。"
   },
   "Seleccionado": {
     "ar": "محدّد",
@@ -14495,6 +14711,18 @@
     "ur": "پیچھے، آگے اور تاریخ سے دیکھی ہوئی جگہوں پر واپس جائیں۔ مندرجات وسیلے کی فہرست کھولتا ہے؛ مضمون سے حوالہ خانے کی وضع بدلتی ہے۔",
     "zh-Hans": "使用后退、前进和历史记录返回访问过的位置。目录打开资源索引；文章切换引用输入框的模式。"
   },
+  "Usa Vista previa en Copiar versículos para comprobar el resultado con un pasaje.": {
+    "ar": "استخدم المعاينة في نسخ الآيات للتحقق من النتيجة بمقطع.",
+    "bn": "একটি অনুচ্ছেদের ফল যাচাই করতে পদ কপি করার প্রিভিউ ব্যবহার করুন।",
+    "en": "Use Preview in Copy Bible Verses to check the result with a passage.",
+    "es": "Usa Vista previa en Copiar versículos para comprobar el resultado con un pasaje.",
+    "fr": "Utilisez l’aperçu de Copier les versets pour vérifier le résultat avec un passage.",
+    "hi": "किसी अंश के परिणाम की जाँच के लिए पद कॉपी करें में पूर्वावलोकन का उपयोग करें।",
+    "id": "Gunakan Pratinjau di Salin Ayat untuk memeriksa hasil dengan suatu bagian.",
+    "pt": "Use Visualizar em Copiar versículos para conferir o resultado com uma passagem.",
+    "ur": "کسی حوالے کے ساتھ نتیجہ جانچنے کے لیے آیات کاپی کریں میں پیش نظارہ استعمال کریں۔",
+    "zh-Hans": "在“复制经文”中使用预览检查经文的结果。"
+  },
   "Usa de 1 a 30 palabras distintas de 2 a {size} letras, sin espacios.": {
     "ar": "استخدم من 1 إلى 30 كلمة مختلفة من حرفين إلى {size} حرفًا، دون مسافات.",
     "bn": "ফাঁকা স্থান ছাড়া ২ থেকে {size} অক্ষরের ১ থেকে ৩০টি ভিন্ন শব্দ ব্যবহার করুন।",
@@ -14938,6 +15166,18 @@
     "pt": "Zoom do texto",
     "ur": "متن کا زوم",
     "zh-Hans": "文本缩放"
+  },
+  "^P pasaje · ^R referencia · ^B libro · ^c capítulo · ^v versículo · ^a abreviatura · ^n salto de línea · ^^ acento circunflejo": {
+    "ar": "^P المقطع · ^R المرجع · ^B السفر · ^c الإصحاح · ^v الآية · ^a الاختصار · ^n سطر جديد · ^^ علامة الإقحام",
+    "bn": "^P অনুচ্ছেদ · ^R সূত্র · ^B বই · ^c অধ্যায় · ^v পদ · ^a সংক্ষিপ্ত নাম · ^n নতুন লাইন · ^^ ক্যারেট",
+    "en": "^P passage · ^R reference · ^B book · ^c chapter · ^v verse · ^a abbreviation · ^n line break · ^^ caret",
+    "es": "^P pasaje · ^R referencia · ^B libro · ^c capítulo · ^v versículo · ^a abreviatura · ^n salto de línea · ^^ acento circunflejo",
+    "fr": "^P passage · ^R référence · ^B livre · ^c chapitre · ^v verset · ^a abréviation · ^n saut de ligne · ^^ accent circonflexe",
+    "hi": "^P अंश · ^R संदर्भ · ^B पुस्तक · ^c अध्याय · ^v पद · ^a संक्षेप · ^n नई पंक्ति · ^^ कैरेट",
+    "id": "^P bagian · ^R referensi · ^B kitab · ^c pasal · ^v ayat · ^a singkatan · ^n baris baru · ^^ tanda sisipan",
+    "pt": "^P passagem · ^R referência · ^B livro · ^c capítulo · ^v versículo · ^a abreviação · ^n quebra de linha · ^^ circunflexo",
+    "ur": "^P حوالہ · ^R ماخذ · ^B کتاب · ^c باب · ^v آیت · ^a مخفف · ^n نئی سطر · ^^ کیریٹ",
+    "zh-Hans": "^P 经文 · ^R 引用 · ^B 书卷 · ^c 章 · ^v 节 · ^a 缩写 · ^n 换行 · ^^ 脱字符"
   },
   "macOS mínimo": {
     "ar": "الحد الأدنى من macOS",
