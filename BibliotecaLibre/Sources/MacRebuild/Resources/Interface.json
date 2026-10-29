@@ -17230,5 +17230,41 @@
     "bn": "পরিকল্পনার সংস্করণের জন্য পাঠ-পরিকল্পনা স্কিমার সংস্করণ ২ প্রয়োজন।",
     "id": "Edisi rencana memerlukan skema rencana baca versi 2.",
     "ur": "منصوبے کے ایڈیشن کے لیے مطالعہ منصوبوں کے خاکے کا ورژن 2 درکار ہے۔"
+  },
+  "El pasaje supera los 64.000 bytes del ejercicio. Elige un intervalo más corto.": {
+    "ar": "يتجاوز المقطع حد التمرين البالغ 64,000 بايت. اختر نطاقًا أقصر.",
+    "bn": "অংশটি অনুশীলনের ৬৪,০০০ বাইটের সীমা ছাড়িয়েছে। ছোট পরিসর বেছে নিন।",
+    "en": "The passage exceeds the exercise’s 64,000-byte limit. Choose a shorter range.",
+    "es": "El pasaje supera los 64.000 bytes del ejercicio. Elige un intervalo más corto.",
+    "fr": "Le passage dépasse la limite de 64 000 octets de l’exercice. Choisissez une plage plus courte.",
+    "hi": "यह अंश अभ्यास की 64,000 बाइट सीमा से बड़ा है। छोटी सीमा चुनें।",
+    "id": "Bagian ini melebihi batas latihan 64.000 bita. Pilih rentang yang lebih pendek.",
+    "pt": "A passagem excede o limite de 64.000 bytes do exercício. Escolha um intervalo mais curto.",
+    "ur": "یہ اقتباس مشق کی 64,000 بائٹ کی حد سے زیادہ ہے۔ مختصر حد منتخب کریں۔",
+    "zh-Hans": "经文超过了练习的 64,000 字节限制。请选择较短的范围。"
+  },
+  "El texto guardado puede practicarse aunque la Biblia de origen ya no esté disponible.": {
+    "ar": "يمكنك التدرب على النص المحفوظ حتى إن لم يعد الكتاب المقدس المصدر متاحًا.",
+    "bn": "উৎস বাইবেল আর উপলব্ধ না থাকলেও সংরক্ষিত পাঠ অনুশীলন করা যাবে।",
+    "en": "The saved text can still be practiced even if its source Bible is no longer available.",
+    "es": "El texto guardado puede practicarse aunque la Biblia de origen ya no esté disponible.",
+    "fr": "Le texte enregistré peut toujours être pratiqué même si sa Bible source n’est plus disponible.",
+    "hi": "मूल बाइबल उपलब्ध न होने पर भी सहेजे गए पाठ का अभ्यास किया जा सकता है।",
+    "id": "Teks tersimpan tetap dapat dilatih meskipun Alkitab sumbernya tidak lagi tersedia.",
+    "pt": "O texto guardado pode ser praticado mesmo que a Bíblia de origem já não esteja disponível.",
+    "ur": "اگر اصل بائبل دستیاب نہ بھی ہو تو محفوظ شدہ متن کی مشق کی جا سکتی ہے۔",
+    "zh-Hans": "即使原圣经已不可用，仍可使用已保存的经文练习。"
+  },
+  "La fuente guardada requiere una versión compatible del archivo de memorización.": {
+    "ar": "يتطلب المصدر المحفوظ إصدارًا متوافقًا من ملف الحفظ.",
+    "bn": "সংরক্ষিত উৎসের জন্য মুখস্থ অনুশীলন ফাইলের সামঞ্জস্যপূর্ণ সংস্করণ প্রয়োজন।",
+    "en": "The saved source requires a compatible version of the memory file.",
+    "es": "La fuente guardada requiere una versión compatible del archivo de memorización.",
+    "fr": "La source enregistrée nécessite une version compatible du fichier de mémorisation.",
+    "hi": "सहेजे गए स्रोत के लिए स्मरण फ़ाइल का संगत संस्करण आवश्यक है।",
+    "id": "Sumber tersimpan memerlukan versi berkas hafalan yang kompatibel.",
+    "pt": "A fonte guardada requer uma versão compatível do ficheiro de memorização.",
+    "ur": "محفوظ شدہ ماخذ کے لیے حفظ کی فائل کا موافق نسخہ درکار ہے۔",
+    "zh-Hans": "保存的来源需要兼容版本的背诵文件。"
   }
 }

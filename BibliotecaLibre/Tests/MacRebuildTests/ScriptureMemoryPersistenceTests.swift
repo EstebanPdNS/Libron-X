@@ -19,6 +19,24 @@ import Testing
         #expect(loaded.scriptureMemory.cards.first?.correct == 1)
         #expect(!FileManager.default.fileExists(atPath: path.path))
     }
+    @Test func sourceIdentityAndProgressPersistWithoutRequiringTheBookToRemainInstalled() throws {
+        let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        defer { try? FileManager.default.removeItem(at: root) }
+        let resource = LibraryResource(location: root.appendingPathComponent("absent.LSF"), title: "Owned", byteCount: 0,
+            format: .legacyLSF, support: .metadataOnly, provenance: .fileName, legacyIdentifier: "owned")
+        var card = ScriptureMemoryCard(reference: "John1:1", passage: "Own text", source: "Owned", sourceEdition: .init(resource))
+        _ = try card.record(answer: card.passage, on: ReadingDay(year: 2026, month: 10, day: 29))
+        var incompatible = ScriptureMemory(); incompatible.cards = [card]
+        #expect(throws: PersonalStateError.self) { try incompatible.validate() }
+        let path = root.appendingPathComponent("personal.json"), state = WorkspacePersonalState(url: path)
+        try state.editScriptureMemory { $0.cards.append(card) }
+        let reopened = WorkspacePersonalState(url: path)
+        #expect(reopened.scriptureMemoryLoadError == nil && reopened.scriptureMemory.schemaVersion == 2)
+        #expect(reopened.scriptureMemory.cards == [card] && reopened.scriptureMemory.cards[0].correct == 1)
+        let edited = try card.edited(reference: card.reference, passage: "Own edit", source: card.source, loadedSource: card)
+        try reopened.saveScriptureMemoryCard(original: card, replacement: edited)
+        #expect(WorkspacePersonalState(url: path).scriptureMemory.cards[0].sourceEdition == nil)
+    }
     @Test func futureSchemaIsPreserved() throws {
         let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
         try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)

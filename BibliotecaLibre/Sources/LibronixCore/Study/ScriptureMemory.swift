@@ -6,14 +6,16 @@ public struct ScriptureMemoryCard: Codable, Equatable, Identifiable, Sendable {
     public var reference: String
     public var passage: String
     public var source: String
+    public var sourceEdition: StudyBibleEdition?
     public var attempts: Int
     public var correct: Int
     public var lastPracticed: ReadingDay?
-    public init(id: UUID = UUID(), reference: String, passage: String, source: String = "") {
-        self.id = id; self.reference = reference; self.passage = passage; self.source = source
+    public init(id: UUID = UUID(), reference: String, passage: String, source: String = "", sourceEdition: StudyBibleEdition? = nil) {
+        self.id = id; self.reference = reference; self.passage = passage; self.source = source; self.sourceEdition = sourceEdition
         attempts = 0; correct = 0; lastPracticed = nil
     }
     public func validate() throws {
+        try sourceEdition?.validate()
         guard !reference.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
               reference.utf8.count <= 4096, !reference.contains("\0"),
               !passage.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
@@ -47,7 +49,10 @@ public struct ScriptureMemory: Codable, Equatable, Sendable {
     public var cards: [ScriptureMemoryCard] = []
     public init() {}
     public func validate() throws {
-        guard schemaVersion == 1 else { throw PersonalStateError.futureVersion }
+        guard (1...2).contains(schemaVersion) else { throw PersonalStateError.futureVersion }
+        guard schemaVersion >= 2 || cards.allSatisfy({ $0.sourceEdition == nil }) else {
+            throw PersonalStateError.invalid("La fuente guardada requiere una versión compatible del archivo de memorización.")
+        }
         guard cards.count <= 10_000, Set(cards.map(\.id)).count == cards.count else { throw PersonalStateError.tooLarge }
         for card in cards { try card.validate() }
     }

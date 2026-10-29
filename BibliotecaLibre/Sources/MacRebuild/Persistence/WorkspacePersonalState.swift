@@ -181,7 +181,9 @@ struct WorkspacePersonalSnapshot: Codable {
     func editScriptureMemory(_ edit: (inout ScriptureMemory) throws -> Void) throws {
         guard scriptureMemoryWritable else { throw PersonalStateError.invalid(scriptureMemoryLoadError ?? "No se pudieron abrir los ejercicios de memorización.") }
         var next = scriptureMemory
-        try edit(&next); try next.validate()
+        try edit(&next)
+        if next.cards.contains(where: { $0.sourceEdition != nil }) { next.schemaVersion = max(2, next.schemaVersion) }
+        try next.validate()
         guard next != scriptureMemory else { return }
         try scriptureMemoryFile.save(next); scriptureMemory = next
     }

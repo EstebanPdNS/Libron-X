@@ -29,6 +29,17 @@ import Testing
         let alias=try await service.prepare(fixture.resource,passage:.parse("XY 1:1"),abbreviation:"Own")
         #expect(alias.verses.count==1 && alias.verses[0].text=="Own first 🦉.")
     }
+    @Test func memorySourceRetainsTheCheckedEditionAndExactExtractedPassage() async throws {
+        let fixture = try OutputFixture(); defer { fixture.remove() }
+        let document = try await BibleCopyService().prepare(fixture.resource, passage: .parse("Xy 1:1-2:1"), abbreviation: "Own", includeFootnotes: false)
+        let card = try ScriptureMemorySource.card(document: document, resource: fixture.resource)
+        #expect(card.reference == document.passage.original && card.sourceEdition?.resolve(in: [fixture.resource]) == fixture.resource)
+        #expect(card.passage == "Own first 🦉.\nOwn second <tag>.\nOwn next chapter.")
+        #expect(!card.passage.contains("heading"))
+        let other = LibraryResource(location: fixture.root.appendingPathComponent("other.LSF"), title: fixture.resource.title,
+            byteCount: fixture.resource.byteCount, format: .legacyLSF, support: .metadataOnly, provenance: .fileName)
+        #expect(throws: LegacyLocatorError.resourceMismatch) { try ScriptureMemorySource.card(document: document, resource: other) }
+    }
     @Test func missingRangeBoundaryBrokenSequenceAndBudgetsCannotProduceAnApparentlyCompletePassage() async throws {
         let fixture=try OutputFixture();defer{fixture.remove()};let service=BibleCopyService()
         let absent=try await service.prepare(fixture.resource,passage:.parse("Xy 999:1"),abbreviation:"Own")
