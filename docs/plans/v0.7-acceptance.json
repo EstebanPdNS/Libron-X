@@ -1807,24 +1807,26 @@
       "sourceKey": "study-expansion-product-07",
       "acceptance": "Unificar conversiones, errores, recursos ausentes, enlaces no resueltos y dependencias.",
       "baseline": "Hay recibos, advertencias del lector y análisis de ediciones.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "Added a read-only library health report for missing package or source files, invalid or opaque resources, catalog warnings, missing annotation sources and unresolved legacy note anchors. It explicitly says conversions and indexes are not comprehensively checked.",
         "Inspection runs off the main actor, supports cancellation on close and limits displayed issues while reporting the omitted count.",
         "Report missing declared indexes, incomplete conversion receipts, and unavailable favorite and bookmark destinations in the existing bounded health report.",
         "Check existing search-index databases read-only with bounded SQLite integrity and schema checks; report unavailable checks and validate conversion receipt identity and completion against its package manifest.",
         "Report missing editions in verse lists, reading plans and scripture-memory cards and bound total search-index checking time.",
-        "Include unresolved research excerpts, collection members and associated-resource members, with exact identity and original association resolution."
+        "Include unresolved research excerpts, collection members and associated-resource members, with exact identity and original association resolution.",
+        "Check normalized conversion databases read-only for SQLite integrity, schema and version within the shared inspection time budget."
       ],
       "verification": [
         "LibraryHealthTests passed for missing files, warnings, invalid resources, edition identity, unresolved annotations and the 5,000-item display cap. AppLanguageTests and CommandPaletteTests passed.",
         "Native build 184: the health panel checked 13 resources and showed the compact, clearly spaced no-problems state; the issue-list state remains to be checked visually.",
         "LibraryHealthTests cover missing declared index, incomplete receipt and unresolved favorite and bookmark destinations, retaining bounded report behavior.",
         "LibraryHealthTests cover absent, healthy and damaged search-index caches, and the ten-language interface catalog passes AppLanguageTests.",
-        "LibraryHealthTests cover edition references and absent, damaged and healthy caches."
+        "LibraryHealthTests cover edition references and absent, damaged and healthy caches.",
+        "Nine LibraryHealthTests passed, including healthy and damaged converted databases; native health panel was inspected with both the empty and issue-list states."
       ],
       "limitations": [
-        "The panel does not yet verify the full contents of every index or conversion; native visual, accessibility and multilingual acceptance remain pending."
+        "Structural database checks do not read or verify every individual converted record or index entry."
       ]
     },
     {
