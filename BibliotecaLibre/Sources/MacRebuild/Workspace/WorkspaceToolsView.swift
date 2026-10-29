@@ -40,9 +40,11 @@ struct WorkspaceToolsView: View {
             case .keyLinks: KeyLinkView(workspace: workspace, controller: workspace.keyLinks)
             case .passageComparison: PassageComparisonView(workspace: workspace, controller: workspace.passageComparison)
             }
-        }.frame(minWidth: tool == .information ? 700 : 680, idealWidth: tool == .information ? 700 : 820,
-                minHeight: compactComparison || compactAnnotationSearch || compactReadingPlans || compactPassageGuide || tool == .information || tool == .libraryHealth ? nil : tool == .bibliography ? 640 : tool == .search ? 680 : expandedScope ? 620 : 520,
-                idealHeight: compactComparison || compactAnnotationSearch || compactReadingPlans || compactPassageGuide || tool == .information || tool == .libraryHealth ? nil : tool == .bibliography ? 820 : tool == .search ? 820 : expandedScope ? 720 : 620)
+        }.frame(minWidth: tool == .search ? 820 : tool == .information ? 700 : 680, idealWidth: tool == .search ? 960 : tool == .information ? 700 : 820,
+                minHeight: compactComparison || compactAnnotationSearch || compactReadingPlans || compactPassageGuide || tool == .information || tool == .libraryHealth ? nil : tool == .bibliography ? 640 : tool == .search ? 520 : expandedScope ? 620 : 520,
+                idealHeight: compactComparison || compactAnnotationSearch || compactReadingPlans || compactPassageGuide || tool == .information || tool == .libraryHealth ? nil : tool == .bibliography ? 820 : tool == .search ? 640 : expandedScope ? 720 : 620)
+            .frame(width: tool == .search ? min(960, max(820, (NSScreen.main?.visibleFrame.width ?? 1024) - 80)) : nil,
+                   height: tool == .search ? min(680, max(520, (NSScreen.main?.visibleFrame.height ?? 820) - 100)) : nil)
             .modifier(MacPanelControlPresentation())
             .alert("Libron-X", isPresented: Binding(get: { tool == .favorites && workspace.error != nil }, set: { if !$0 { workspace.error = nil } })) {
                 Button(L("Aceptar")) { workspace.error = nil }
@@ -105,115 +107,52 @@ struct WorkspaceSearchView: View {
     @RebuildViewState private var namedRangesOpen = false
     private func run() { search.run(workspace.availableResources, documents: workspace.personal.documents, namedRanges: workspace.personal.namedBibleRanges.ranges, scopeContext: workspace.searchScopeContext()) }
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            ScrollView {
-            VStack(alignment: .leading, spacing: 12) {
-            HStack {
+        VStack(alignment: .leading, spacing: 14) {
+            HStack(spacing: 8) {
                 TextField(L(search.approximatePhrase ? "Frase literal" : "Palabra, frase entre comillas o consulta AND / OR"), text: $search.query).macInputStyle()
                     .onSubmit(run).disabled(search.isSearching)
                 if search.isSearching {
                     if search.phase == .paused { Button(L("Reanudar"), action: search.resume) }
                     else { Button(L("Pausar"), action: search.pause).disabled(search.phase != .running) }
                     Button(L("Cancelar"), action: search.cancel).disabled(search.phase == .cancelling)
-                }
-                else { Button(L("Buscar"), action: run).disabled(search.query.isEmpty) }
+                } else { Button(L("Buscar"), action: run).disabled(search.query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty) }
+                Divider().frame(height: 24)
+                Button { historyOpen = true } label: { Label(L("Historial de búsquedas…"), systemImage: "clock.arrow.circlepath").labelStyle(.iconOnly).frame(width: 22, height: 20) }
+                    .help(L("Historial de búsquedas…")).disabled(search.isSearching)
+                Button { savedQueriesOpen = true } label: { Label(L("Consultas guardadas…"), systemImage: "bookmark").labelStyle(.iconOnly).frame(width: 22, height: 20) }
+                    .help(L("Consultas guardadas…")).disabled(search.isSearching)
+                Button { workspace.activeTool = .transliteration } label: { Label(L("Transliteración"), systemImage: "character.book.closed").labelStyle(.iconOnly).frame(width: 22, height: 20) }
+                    .help(L("Transliteración")).disabled(search.isSearching)
             }
-            HStack {
-                Button(L("Historial de búsquedas…")) { historyOpen = true }
-                Button(L("Consultas guardadas…")) { savedQueriesOpen = true }
-                Button { workspace.activeTool = .transliteration } label: {
-                    Label(L("Transliteración"), systemImage: "character.book.closed")
-                }
-                Spacer()
-            }.disabled(search.isSearching)
-            WorkspaceSearchScopePicker(selection: search.scope, context: workspace.searchScopeContext()).disabled(search.isSearching)
-            WorkspaceSearchFieldPicker(field: $search.searchField).disabled(search.isSearching)
-            WorkspaceSearchMatchingPicker(search: search).disabled(search.isSearching)
-            WorkspaceWordFiltersView(search: search, personal: workspace.personal)
-            WorkspaceSearchLimitsView(search: search)
-            if search.bibleVerses {
-                VStack(alignment: .leading, spacing: 8) {
-                    Picker(L("Rango bíblico"), selection: $search.bibleRangeMode) {
-                        Text(L("Todos los versículos")).tag(WorkspaceBibleRangeMode.all)
-                        Text(L("Pasajes o libros")).tag(WorkspaceBibleRangeMode.custom)
-                        Text(L("Lista guardada")).tag(WorkspaceBibleRangeMode.savedList)
-                        Text(L("Rango guardado")).tag(WorkspaceBibleRangeMode.namedRange)
+            Divider()
+            HStack(alignment: .top, spacing: 16) {
+                WorkspaceSearchOptionsView(workspace: workspace, search: search, namedRangesOpen: $namedRangesOpen, run: run)
+                    .frame(width: 252)
+                Divider()
+                VStack(alignment: .leading, spacing: 10) {
+                    Text(L("Resultados de búsqueda")).font(.headline)
+                    if let message = search.error { Text(message).foregroundStyle(.red).textSelection(.enabled) }
+                    if let message = search.historyError { Text(L(message)).font(.caption).foregroundStyle(.red).textSelection(.enabled) }
+                    WorkspaceSearchRunStatusView(search: search)
+                    if search.configurationChanged {
+                        if let query = search.submittedQuery { Text(LF("Resultados de: {query}", ["query": query])).font(.caption).lineLimit(2) }
+                        Text(L("La configuración cambió. Ejecuta una búsqueda nueva para abrir estos resultados."))
+                            .font(.caption).foregroundStyle(.secondary)
                     }
-                    if search.bibleRangeMode == .custom {
-                        TextField(L("Pasajes, por ejemplo Gn 1–3; Juan 3:16–18; Romanos"), text: $search.customBibleRange)
-                            .macInputStyle().onSubmit(run)
-                    } else if search.bibleRangeMode == .savedList {
-                        Picker(L("Lista de versículos"), selection: $search.referenceListID) {
-                            Text(L("Selecciona una lista de versículos")).tag(Optional<UUID>.none)
-                            ForEach(workspace.personal.documents.filter { $0.kind == .verseList }) {
-                                Text($0.title).tag(Optional($0.id))
+                    if search.report != nil {
+                        WorkspaceSearchResultsView(workspace: workspace, search: search, presentation: search.presentation)
+                            .frame(maxHeight: .infinity).layoutPriority(1)
+                    } else {
+                        VStack(spacing: 12) {
+                            Image(systemName: "magnifyingglass").font(.system(size: 30)).foregroundStyle(.secondary)
+                            Text(L("Escribe una consulta y pulsa Buscar.")).foregroundStyle(.secondary)
+                        }.frame(maxWidth: .infinity, maxHeight: .infinity)
+                        if let scope = search.scopeSnapshot, !scope.complete {
+                            DisclosureGroup(L("La búsqueda tiene resultados parciales o recursos pendientes")) {
+                                ScrollView { Text(scope.issueLines.joined(separator: "\n")).font(.caption).textSelection(.enabled) }.frame(maxHeight: 100)
                             }
                         }
-                    } else if search.bibleRangeMode == .namedRange {
-                        Picker(L("Rango guardado"), selection: $search.namedRangeID) {
-                            Text(L("Selecciona un rango guardado")).tag(Optional<UUID>.none)
-                            ForEach(workspace.personal.namedBibleRanges.ranges) { Text($0.name).tag(Optional($0.id)) }
-                        }
                     }
-                    Picker(L("Excluir referencias"), selection: $search.excludedRange.mode) {
-                        Text(L("Sin exclusiones")).tag(WorkspaceBibleRangeMode.all)
-                        Text(L("Pasajes o libros")).tag(WorkspaceBibleRangeMode.custom)
-                        Text(L("Lista guardada")).tag(WorkspaceBibleRangeMode.savedList)
-                        Text(L("Rango guardado")).tag(WorkspaceBibleRangeMode.namedRange)
-                    }
-                    if search.excludedRange.mode == .custom {
-                        TextField(L("Pasajes, por ejemplo Gn 1–3; Juan 3:16–18; Romanos"), text: $search.excludedRange.customRange)
-                            .macInputStyle().onSubmit(run)
-                    } else if search.excludedRange.mode == .savedList {
-                        Picker(L("Lista de versículos excluidos"), selection: $search.excludedRange.referenceListID) {
-                            Text(L("Selecciona una lista de versículos")).tag(Optional<UUID>.none)
-                            ForEach(workspace.personal.documents.filter { $0.kind == .verseList }) {
-                                Text($0.title).tag(Optional($0.id))
-                            }
-                        }
-                    } else if search.excludedRange.mode == .namedRange {
-                        Picker(L("Rango excluido"), selection: $search.excludedRange.namedRangeID) {
-                            Text(L("Selecciona un rango guardado")).tag(Optional<UUID>.none)
-                            ForEach(workspace.personal.namedBibleRanges.ranges) { Text($0.name).tag(Optional($0.id)) }
-                        }
-                    }
-                    Button(L("Gestionar rangos…")) { namedRangesOpen = true }
-                }.disabled(search.isSearching)
-            }
-            HStack {
-                Toggle(L("Mayúsculas"), isOn: $search.caseSensitive)
-                Toggle(L("Palabras completas"), isOn: $search.wholeWords)
-                Toggle(L("Versículos bíblicos"), isOn: $search.bibleVerses)
-            }.disabled(search.isSearching)
-            if !search.approximatePhrase {
-            DisclosureGroup(L("Operadores de búsqueda")) {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(verbatim: "title:a · body:(a AND b) · footnote:a\nheading:a · bible:a · quote:a")
-                    Text(verbatim: "a NEAR b · a NEAR/2 b · a BEFORE b · a AFTER b\na WITHIN 2 WORDS b · a BEFORE 2 CHARACTERS b\na WITHIN 1 VERSES b · (a OR b) BEFORE/0 c")
-                    Text(L("NEAR usa 48 unidades UTF-16. WORDS cuenta palabras intermedias. VERSES usa referencias reales del mismo capítulo. Cada artículo o versículo conserva su ámbito."))
-                }.font(.caption).textSelection(.enabled)
-            }
-            }
-            }.frame(maxWidth: .infinity, alignment: .leading)
-            }.frame(maxHeight: search.isSearching || search.report != nil ? 300 : 480).layoutPriority(1)
-            if let message = search.error { Text(message).foregroundStyle(.red).textSelection(.enabled) }
-            if let message = search.historyError { Text(L(message)).font(.caption).foregroundStyle(.red).textSelection(.enabled) }
-            if search.report == nil, let scope = search.scopeSnapshot, !scope.complete {
-                DisclosureGroup(L("La búsqueda tiene resultados parciales o recursos pendientes")) {
-                    ScrollView { Text(scope.issueLines.joined(separator: "\n")).font(.caption).textSelection(.enabled) }.frame(maxHeight: 100)
-                }
-            }
-            WorkspaceSearchRunStatusView(search: search)
-            if let query = search.submittedQuery, search.report != nil {
-                Text(LF("Resultados de: {query}", ["query": query])).font(.caption).lineLimit(2)
-            }
-            if search.configurationChanged {
-                Text(L("La configuración cambió. Ejecuta una búsqueda nueva para abrir estos resultados."))
-                    .font(.caption).foregroundStyle(.secondary)
-            }
-            if search.report != nil {
-                WorkspaceSearchResultsView(workspace: workspace, search: search, presentation: search.presentation)
-            }
             if let report = search.report {
                 if let scope = search.scopeSnapshot { Text(scope.description).font(.caption).lineLimit(2) }
                 if report.unit == .bibleVerse {
@@ -223,7 +162,7 @@ struct WorkspaceSearchView: View {
                     }
                     Text(LF("{selected} versículos examinados · {excluded} fuera del rango", ["selected": String(report.counters.versesExamined), "excluded": String(report.counters.versesExcludedByRange)])).font(.caption)
                 }
-                Text(LF("{results} resultados · {articles} artículos examinados", ["results": String(report.counters.resultsReturned), "articles": String(report.counters.articlesExamined)])).font(.caption)
+                Text(LF("{results} resultados · {articles} artículos examinados", ["results": String(search.presentation.rows.count), "articles": String(report.counters.articlesExamined)])).font(.caption)
                 if !search.coverageComplete {
                     DisclosureGroup(L("La búsqueda tiene resultados parciales o recursos pendientes")) {
                         ScrollView {
@@ -233,7 +172,9 @@ struct WorkspaceSearchView: View {
                     }
                 }
             }
-            Spacer(minLength: 0)
+
+                }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            }.frame(maxHeight: .infinity)
         }.padding(16).onDisappear(perform: search.pause)
             .onChange(of: workspace.personal.namedBibleRanges) { old, new in search.namedRangesChanged(from: old, to: new) }
             .sheet(isPresented: $historyOpen) {

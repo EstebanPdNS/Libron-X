@@ -21,11 +21,11 @@ struct WorkspaceWordFiltersView: View {
     var body: some View {
         DisclosureGroup {
             VStack(alignment: .leading, spacing: 8) {
-                HStack {
-                    Picker(L("Incluir palabras"), selection: selection(true)) { options(include: true) }
-                    Picker(L("Excluir palabras"), selection: selection(false)) { options(include: false) }
-                    Button(L("Listas de palabras…")) { managing = true }
-                }
+                Text(L("Incluir palabras")).font(.caption).foregroundStyle(.secondary)
+                MacSelectionMenu(L("Incluir palabras"), value: selectedTitle(true), selection: selection(true)) { options(include: true) }
+                Text(L("Excluir palabras")).font(.caption).foregroundStyle(.secondary)
+                MacSelectionMenu(L("Excluir palabras"), value: selectedTitle(false), selection: selection(false)) { options(include: false) }
+                Button(L("Listas de palabras…")) { managing = true }
                 Text(L("Incluye cualquiera de la primera lista y excluye cualquiera de la segunda."))
                     .font(.caption).foregroundStyle(.secondary)
                 if search.approximatePhrase && search.wordFilter != nil {
@@ -35,6 +35,10 @@ struct WorkspaceWordFiltersView: View {
         } label: {
             Text(L(search.wordFilter == nil ? "Listas de palabras" : "Listas de palabras activas"))
         }.sheet(isPresented: $managing) { SearchWordListsManager(personal: personal).modifier(AppInterfaceLanguage()) }
+    }
+    private func selectedTitle(_ include: Bool) -> String {
+        let choice = selection(include).wrappedValue
+        return personal.searchWordLists.lists.first { $0.id.uuidString == choice }?.name ?? L(choice == "snapshot" ? "Filtro restaurado" : "Sin filtro")
     }
     @ViewBuilder private func options(include: Bool) -> some View {
         Text(L("Sin filtro")).tag("")

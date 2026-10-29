@@ -6203,6 +6203,18 @@
     "ur": "درست مضمون نمبر لکھیں۔",
     "zh-Hans": "请输入有效的文章编号。"
   },
+  "Escribe una consulta y pulsa Buscar.": {
+    "ar": "اكتب استعلامًا واضغط على بحث.",
+    "bn": "একটি অনুসন্ধান লিখে অনুসন্ধান বোতাম চাপুন।",
+    "en": "Enter a query and choose Search.",
+    "es": "Escribe una consulta y pulsa Buscar.",
+    "fr": "Saisissez une requête et lancez la recherche.",
+    "hi": "एक प्रश्न लिखें और खोजें चुनें।",
+    "id": "Masukkan kueri dan pilih Cari.",
+    "pt": "Digite uma consulta e selecione Pesquisar.",
+    "ur": "ایک عبارت لکھیں اور تلاش منتخب کریں۔",
+    "zh-Hans": "输入查询并选择搜索。"
+  },
   "Escribe una referencia como Génesis 4:1, Gen 4.1 o Gn 4,1. También puedes escribir solo el libro y capítulo.": {
     "ar": "أدخل مرجعًا مثل Genesis 4:1 أو Gen 4.1 أو Gn 4,1. يمكنك أيضًا إدخال السفر والإصحاح فقط.",
     "bn": "Genesis 4:1, Gen 4.1 বা Gn 4,1-এর মতো সূত্র লিখুন। শুধু বই ও অধ্যায়ও লিখতে পারেন।",

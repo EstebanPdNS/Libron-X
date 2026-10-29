@@ -4,6 +4,7 @@ import LibronixCore
 struct WorkspaceSearchScopePicker: View {
     @Bindable var selection: WorkspaceSearchScopeSelection
     let context: WorkspaceSearchScopeContext
+    var stacked = false
     @RebuildViewState private var filter = ""
     private var choices: [LibraryResource] {
         context.choices().sorted { a, b in
@@ -22,16 +23,18 @@ struct WorkspaceSearchScopePicker: View {
         })
     }
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack {
-                Picker(L("Ámbito"), selection: $selection.kind) {
-                    ForEach(WorkspaceSearchScopeKind.allCases, id: \.self) { Text($0.title).tag($0) }
-                }.fixedSize()
+        VStack(alignment: .leading, spacing: stacked ? 6 : 8) {
+            if stacked {
+                Text(L("Ámbito")).font(.caption).foregroundStyle(.secondary)
+                scopeMenu
                 if selection.kind == .resource {
-                    Picker(L("Recurso"), selection: $selection.resourceID) {
-                        Text(L("Selecciona un recurso")).tag(Optional<String>.none)
-                        ForEach(choices) { Text($0.title).tag(Optional($0.id)) }
-                    }
+                    Text(L("Recurso")).font(.caption).foregroundStyle(.secondary)
+                    resourceMenu
+                }
+            } else {
+                HStack {
+                    Text(L("Ámbito")); scopeMenu
+                    if selection.kind == .resource { Text(L("Recurso")); resourceMenu }
                 }
             }
             if selection.kind == .collections {
@@ -56,6 +59,17 @@ struct WorkspaceSearchScopePicker: View {
                 Text(L("Se buscan los recursos completos de los lectores abiertos, incluidos los minimizados."))
                     .font(.caption).foregroundStyle(.secondary)
             }
+        }
+    }
+    private var scopeMenu: some View {
+        MacSelectionMenu(L("Ámbito"), value: selection.kind.title, selection: $selection.kind) {
+            ForEach(WorkspaceSearchScopeKind.allCases, id: \.self) { Text($0.title).tag($0) }
+        }
+    }
+    private var resourceMenu: some View {
+        MacSelectionMenu(L("Recurso"), value: choices.first { $0.id == selection.resourceID }?.title ?? L("Selecciona un recurso"), selection: $selection.resourceID) {
+            Text(L("Selecciona un recurso")).tag(Optional<String>.none)
+            ForEach(choices) { Text($0.title).tag(Optional($0.id)) }
         }
     }
 }

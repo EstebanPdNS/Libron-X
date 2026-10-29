@@ -2173,8 +2173,14 @@
       "acceptance": "Revisión continua de animación/esquinas, edición en anchos estrechos y Force Touch físico donde aplique.",
       "baseline": "Snapping y controles tienen código y pruebas parciales.",
       "status": "pending",
-      "implementation": [],
-      "verification": [],
+      "implementation": [
+        "Reorganized Search into a fixed query header, a compact options sidebar and an expanding results area. Added native checked Glass menus, direct export and distribution actions, persistent result navigation, compact word-list/limit forms and a display-bounded window size. Displayed result counts now match the visible occurrence rows."
+      ],
+      "verification": [
+        "Builds 207–208: inspected the real Search window with eight occurrences, all collapsed option sections visible, independent sidebar scrolling, expanded word lists and expanded limits. Native scope changes disabled stale-result actions and restoring the original scope re-enabled them.",
+        "Inspected build 208 in dark and light appearance. Restored English and Automatic appearance after testing. The native language popup again caused an accessibility timeout; captured a local process sample, preserved saved data and restarted the application. The changed Search layout still needs runtime RTL acceptance.",
+        "48 focused tests passed for translations, search history, transliteration, exports, result presentation, scopes, field and approximate matching, word lists and Bible ranges."
+      ],
       "limitations": []
     },
     {

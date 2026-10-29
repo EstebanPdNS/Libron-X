@@ -24,19 +24,23 @@ struct WorkspaceSearchResultsView: View {
         VStack(alignment: .leading, spacing: 8) {
             if search.report != nil {
                 HStack {
-                    Picker(L("Vista"), selection: $presentation.layout) {
-                        Text(L("Contexto")).tag(WorkspaceSearchResultLayout.context)
-                        Text(L("Contexto alineado")).tag(WorkspaceSearchResultLayout.aligned)
+                    VStack(alignment: .leading, spacing: 4) {
+                    Text(L("Vista")).font(.caption).foregroundStyle(.secondary)
+                    MacSelectionMenu(L("Vista"), value: presentation.layout.localizedTitle, selection: $presentation.layout) {
+                        ForEach(WorkspaceSearchResultLayout.allCases, id: \.self) { Text($0.localizedTitle).tag($0) }
                     }
-                    Picker(L("Agrupar"), selection: $presentation.grouping) {
-                        Text(L("Sin agrupar")).tag(WorkspaceSearchResultGrouping.none)
-                        Text(L("Recurso")).tag(WorkspaceSearchResultGrouping.resource)
                     }
-                    Picker(L("Orden"), selection: $presentation.order) {
-                        Text(L("Orden de búsqueda")).tag(WorkspaceSearchResultOrder.source)
-                        Text(L("Título A–Z")).tag(WorkspaceSearchResultOrder.titleAscending)
-                        Text(L("Título Z–A")).tag(WorkspaceSearchResultOrder.titleDescending)
-                        Text(L("Más coincidencias por artículo")).tag(WorkspaceSearchResultOrder.mostHits)
+                    VStack(alignment: .leading, spacing: 4) {
+                    Text(L("Agrupar")).font(.caption).foregroundStyle(.secondary)
+                    MacSelectionMenu(L("Agrupar"), value: presentation.grouping.localizedTitle, selection: $presentation.grouping) {
+                        ForEach(WorkspaceSearchResultGrouping.allCases, id: \.self) { Text($0.localizedTitle).tag($0) }
+                    }
+                    }
+                    VStack(alignment: .leading, spacing: 4) {
+                    Text(L("Orden")).font(.caption).foregroundStyle(.secondary)
+                    MacSelectionMenu(L("Orden"), value: presentation.order.localizedTitle, selection: $presentation.order) {
+                        ForEach(WorkspaceSearchResultOrder.allCases, id: \.self) { Text($0.localizedTitle).tag($0) }
+                    }
                     }
                 }
                 HStack {
@@ -51,14 +55,14 @@ struct WorkspaceSearchResultsView: View {
                     Text(LF("Resultado {current} de {total}", ["current": String((presentation.selectedIndex ?? -1) + 1), "total": String(presentation.rows.count)]))
                         .font(.caption).monospacedDigit()
                     Spacer()
-                    Menu {
-                        Button(L("Exportar resultados…"), action: export)
-                            .disabled(!search.canExportResults || exporting)
-                        Button(L("Distribución de resultados")) { showsDistribution = true }
+                    Button(action: export) { Label(L("Exportar resultados…"), systemImage: "square.and.arrow.up").labelStyle(.iconOnly) }
+                        .help(L("Exportar resultados…")).disabled(!search.canExportResults || exporting)
+                    if search.report?.unit == .bibleVerse {
+                        Button { showsDistribution = true } label: { Label(L("Distribución de resultados"), systemImage: "chart.bar.xaxis").labelStyle(.iconOnly) }
+                            .help(L("Distribución de resultados"))
                             .disabled(search.report?.unit != .bibleVerse || search.isSearching || !search.canOpenResults)
-                    } label: { Label(L("Acciones de resultados"), systemImage: "ellipsis.circle").labelStyle(.iconOnly) }
-                        .help(L("Acciones de resultados"))
-                    Button(L("Abrir selección")) { _ = openSelected() }.disabled(presentation.selected == nil || !search.canOpenResults)
+                    }
+                    Button(L("Abrir")) { _ = openSelected() }.disabled(presentation.selected == nil || !search.canOpenResults)
                 }
                 if exporting { ProgressView().controlSize(.small) }
                 if let exportError { Text(exportError).foregroundStyle(.red).textSelection(.enabled) }
@@ -77,7 +81,7 @@ struct WorkspaceSearchResultsView: View {
                 .onChange(of: presentation.selectedID) { if let id = presentation.selectedID { proxy.scrollTo(id, anchor: .center) } }
                 .onChange(of: presentation.revision) { if let id = presentation.selectedID { proxy.scrollTo(id, anchor: .center) } }
                 .onChange(of: presentation.layout) { if let id = presentation.selectedID { proxy.scrollTo(id, anchor: .center) } }
-            }.frame(minHeight: 150)
+            }.frame(minHeight: 200, maxHeight: .infinity)
             if search.report?.contextCoverageComplete == false {
                 Text(L("Algunos contextos no se muestran por el límite de presentación. Puedes abrir las coincidencias."))
                     .font(.caption).foregroundStyle(.secondary)
@@ -108,7 +112,7 @@ struct WorkspaceSearchResultsView: View {
     }
     @ViewBuilder private func rows(_ value: [WorkspaceSearchResultRow]) -> some View {
         ForEach(value) { row in
-            WorkspaceSearchResultRowView(row: row, layout: presentation.layout, showsResource: presentation.grouping == .none, openingEnabled: search.canOpenResults) { open(row) }
+            WorkspaceSearchResultRowView(row: row, layout: presentation.layout, showsResource: presentation.grouping == .none)
                 .tag(row.id).id(row.id)
                 .contentShape(Rectangle()).onTapGesture(count: 2) { open(row) }
                 .accessibilityAction(named: Text(L("Abrir"))) { open(row) }
@@ -120,8 +124,6 @@ private struct WorkspaceSearchResultRowView: View {
     let row: WorkspaceSearchResultRow
     let layout: WorkspaceSearchResultLayout
     let showsResource: Bool
-    let openingEnabled: Bool
-    let open: () -> Void
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 5) {
@@ -139,7 +141,6 @@ private struct WorkspaceSearchResultRowView: View {
                     Text(L(row.result.hitCount > 0 ? "Coincidencias omitidas por el límite" : "Resultado sin coincidencias positivas")).font(.caption)
                 } else { Text(L("Contexto no disponible")).foregroundStyle(.secondary) }
             }.padding(.vertical, 4).frame(maxWidth: .infinity, alignment: .leading)
-            Button(L("Abrir"), action: open).disabled(!openingEnabled)
         }
     }
     private func context(_ parts: WorkspaceSearchContextParts) -> AttributedString {
@@ -158,6 +159,23 @@ private struct WorkspaceSearchResultRowView: View {
                 .fontWeight(.semibold).lineLimit(2).frame(width: 160, alignment: .center)
             Text(verbatim: parts.after + (parts.omittedAfter ? "…" : ""))
                 .lineLimit(2).truncationMode(.tail).foregroundStyle(.secondary).frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
+}
+
+@MainActor extension WorkspaceSearchResultLayout {
+    var localizedTitle: String { L(self == .context ? "Contexto" : "Contexto alineado") }
+}
+@MainActor extension WorkspaceSearchResultGrouping {
+    var localizedTitle: String { L(self == .none ? "Sin agrupar" : "Recurso") }
+}
+@MainActor extension WorkspaceSearchResultOrder {
+    var localizedTitle: String {
+        switch self {
+        case .source: L("Orden de búsqueda")
+        case .titleAscending: L("Título A–Z")
+        case .titleDescending: L("Título Z–A")
+        case .mostHits: L("Más coincidencias por artículo")
         }
     }
 }

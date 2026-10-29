@@ -8,18 +8,26 @@ struct WorkspaceSearchLimitsView: View {
             VStack(alignment: .leading, spacing: 6) {
                 Grid(alignment: .leading, horizontalSpacing: 12, verticalSpacing: 8) {
                     GridRow {
+                        VStack(alignment: .leading, spacing: 4) {
                         Text(L("Duración activa (s)"))
-                        TextField(L("Duración activa (s)"), value: $search.limits.durationSeconds, format: .number).macInputStyle().frame(width: 80)
+                        TextField(L("Duración activa (s)"), value: $search.limits.durationSeconds, format: .number).macInputStyle()
+                        }
+                        VStack(alignment: .leading, spacing: 4) {
                         Text(L("Artículos máximos"))
-                        TextField(L("Artículos máximos"), value: $search.limits.articles, format: .number).macInputStyle().frame(width: 100)
+                        TextField(L("Artículos máximos"), value: $search.limits.articles, format: .number).macInputStyle()
+                        }
                     }
                     GridRow {
+                        VStack(alignment: .leading, spacing: 4) {
                         Text(L("Resultados máximos"))
-                        TextField(L("Resultados máximos"), value: $search.limits.results, format: .number).macInputStyle().frame(width: 80)
+                        TextField(L("Resultados máximos"), value: $search.limits.results, format: .number).macInputStyle()
+                        }
+                        VStack(alignment: .leading, spacing: 4) {
                         Text(L("Coincidencias máximas"))
-                        TextField(L("Coincidencias máximas"), value: $search.limits.occurrences, format: .number).macInputStyle().frame(width: 100)
+                        TextField(L("Coincidencias máximas"), value: $search.limits.occurrences, format: .number).macInputStyle()
+                        }
                     }
-                }.disabled(search.isSearching)
+                }.font(.caption).disabled(search.isSearching)
                 Text(L("Hasta 3600 s, 500000 artículos, 10000 resultados y 1000000 coincidencias."))
                     .font(.caption).foregroundStyle(.secondary)
                 Text(L("Los cambios se aplican a la próxima búsqueda. Alcanzar un límite termina la búsqueda con cobertura parcial."))
