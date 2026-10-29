@@ -215,7 +215,9 @@ struct WorkspacePersonalSnapshot: Codable {
     func editReadingPlans(_ edit: (inout ReadingPlans) throws -> Void) throws {
         guard readingPlansWritable else { throw PersonalStateError.invalid(readingPlansLoadError ?? "No se pudieron abrir los planes de lectura.") }
         var next = readingPlans
-        try edit(&next); try next.validate()
+        try edit(&next)
+        if next.plans.contains(where: { $0.edition != nil }) { next.schemaVersion = max(2, next.schemaVersion) }
+        try next.validate()
         guard next != readingPlans else { return }
         try readingPlansFile.save(next)
         readingPlans = next

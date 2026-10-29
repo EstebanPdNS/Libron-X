@@ -14,9 +14,10 @@ public enum ReadingPlanCalendar {
         var lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Libron-X//Reading Plans//EN", "CALSCALE:GREGORIAN"]
         for reading in plan.readings {
             let end = try reading.day.adding(days: 1)
+            let description = reading.reference + (plan.edition.map { "\n" + $0.title } ?? "")
             lines += ["BEGIN:VEVENT", "UID:\(reading.id.uuidString.lowercased())@libron-x.local", "DTSTAMP:\(stamp)",
                       "DTSTART;VALUE=DATE:\(reading.day.calendarValue)", "DTEND;VALUE=DATE:\(end.calendarValue)",
-                      "SUMMARY:\(escape(plan.title))", "DESCRIPTION:\(escape(reading.reference))", "TRANSP:TRANSPARENT", "END:VEVENT"]
+                      "SUMMARY:\(escape(plan.title))", "DESCRIPTION:\(escape(description))", "TRANSP:TRANSPARENT", "END:VEVENT"]
         }
         lines.append("END:VCALENDAR")
         return Data((lines.map(fold).joined(separator: "\r\n") + "\r\n").utf8)

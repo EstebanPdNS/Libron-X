@@ -1,8 +1,8 @@
 import Foundation
 
-/// An owned list preference, separate from original XML attributes and verse locations.
+/// An owned Bible preference, separate from original XML attributes and verse locations.
 /// A same-named replacement or a different format is never silently substituted.
-public struct StudyVerseListEdition: Codable, Hashable, Sendable {
+public struct StudyBibleEdition: Codable, Hashable, Sendable {
     public let resourceID: String
     public let title: String
     public let format: ResourceFormat
@@ -28,7 +28,10 @@ public struct StudyVerseListEdition: Codable, Hashable, Sendable {
         guard !resourceID.isEmpty, !resourceID.contains("\0"), resourceID.utf8.count <= 16_384,
               !title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty, title.utf8.count <= 4096,
               (legacyIdentifier?.utf8.count ?? 0) <= 1024 else {
-            throw PersonalStateError.invalid("La edición guardada de la lista contiene una identidad inválida.")
+            throw PersonalStateError.invalid("La edición guardada contiene una identidad inválida.")
         }
     }
 }
+
+/// Retained source compatibility for the first verse-list API.
+public typealias StudyVerseListEdition = StudyBibleEdition

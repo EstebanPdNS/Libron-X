@@ -668,7 +668,7 @@
       "implementation": [
         "Move selected verse entries one position and sort recognized, unambiguous references in canonical book order without changing entry identity, destinations or original metadata.",
         "Select an edition and display source-backed text, references, or both; retain the chosen presentation, cancel stale loads, distinguish missing and unverified results, and open the verified edition and source range.",
-        "BibliotecaLibre/Sources/LibronixCore/Domain/StudyVerseListEdition.swift",
+        "BibliotecaLibre/Sources/LibronixCore/Domain/StudyBibleEdition.swift",
         "BibliotecaLibre/Sources/MacRebuild/Features/Documents/WorkspaceVerseListView.swift",
         "Document schema 4 retains an owned edition identity (resource ID, physical format and legacy identifier) independently of immutable original reference attributes. Every list keeps its own choice; missing editions remain selected and cannot silently fall back. Old documents decode without a preference; older applications reject schema 4 instead of dropping it.",
         "A dedicated native list editor retains references-only/text-only presentation and uses real reference/text columns in BothTwoColumns. Added reference editing with stable entry IDs, stale-edit protection and removal of an obsolete physical destination only after an actual reference change. Selected deletion, canonical sort and move controls use shared Glass groups.",
@@ -703,23 +703,37 @@
       "sourceKey": "study-expansion-daily-01",
       "acceptance": "Programar pasajes, fechas, distribución y progreso persistente.",
       "baseline": "Sin planificador integrado identificado.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "Added civil-date reading plans with ordered explicit passages and weekday distribution, plus a separate atomic versioned personal store.",
         "Added the native reading-plans tool with plan creation, weekday selection, civil start date, passage entry, removal and active-Bible start navigation; edition-qualified references are not silently redirected.",
         "Added plan renaming and individual reading creation, editing and deletion; changing only the date retains completion, changing a passage marks it pending, and stale edits cannot overwrite newer data.",
-        "New plans can distribute one to ten explicit passages per selected day while retaining their order."
+        "New plans can distribute one to ten explicit passages per selected day while retaining their order.",
+        "BibliotecaLibre/Sources/LibronixCore/Domain/StudyBibleEdition.swift",
+        "BibliotecaLibre/Sources/MacRebuild/Features/ReadingPlans/ReadingPlanNavigator.swift",
+        "Plans retain an optional exact Bible identity in reading-plans schema 2. Existing schema-1 plans still load with the active-Bible behavior; older applications reject schema 2 instead of dropping the preference. Changing the edition preserves reading IDs, dates and completion.",
+        "Added balanced distribution through an end date, retaining explicit passage order and selected weekdays. Dense schedules differ by at most one passage per eligible day; sparse schedules span the eligible interval. The scheduling window is bounded to 10000 civil dates. Scheduling runs off the interface actor and can be cancelled.",
+        "Opening verifies the first requested address and its explicit edition qualifier against the selected source projection, then opens its exact resource, fingerprint and UTF-16 range. A later unqualified citation cannot satisfy an unmatched first citation. Missing editions remain selected and do not fall back. File/source/input changes and cancellation prevent stale opening.",
+        "Reorganized native plan controls into shared Glass menus and action groups. The creation form keeps header/footer actions fixed around one scrolling body, wraps weekday controls into four columns and supports both distribution modes in RTL. Calendar descriptions retain the selected edition title."
       ],
       "verification": [
         "ReadingPlanTests and ReadingPlanPersistenceTests pass for weekday distribution, leap dates, round-trip persistence, stale writers and future schemas.",
         "Build 132/133 native dark English UI created a two-passage plan; after restarting build 133 the plan remained visible. ReadingPlanNavigationTests cover chapter, range, book and edition-qualified references.",
         "Build 134: edited a completed reading and observed the completion reset; added a third reading; opened the beginning of Genesis 1:3–4 at Genesis 1:3 in an isolated authored Bible. Reviewed the main view in dark/light English and light Arabic, and the editor in light Arabic and dark English. Persistence tests cover changed references, retained completion, invalid data and stale edits.",
-        "Build 135 native dark English UI scheduled five references in groups of two over three days; tests also cover skipped weekdays, leap day, bounds and same-day order."
+        "Build 135 native dark English UI scheduled five references in groups of two over three days; tests also cover skipped weekdays, leap day, bounds and same-day order.",
+        "2026-10-29: 30 focused tests passed in six suites. They cover manual and balanced distribution, dense/sparse dates, leap day and weekdays, invalid/end-date bounds, cancellation, explicit edition and first-citation matching, changed-source refusal, exact source coordinates, schema-2 preference/progress persistence, stale writers, calendar export and the shared verse-list identity API plus ten-language catalogs.",
+        "Local build log 228, installed app: created a four-reading plan through the new date mode using an owned LSF Bible. Native controls and the saved JSON agreed on 2026-10-29, 2026-11-08, 2026-11-18 and 2026-11-28. Marked the first reading completed. An other-edition qualifier was rejected without closing the plan; the owned qualifier opened the selected Bible and verified source text even though the original active reader was a monograph.",
+        "After normal quit/restart, the stored exact Bible, four dates and 1/4 completion remained visible. Inspected the compact 680-point plan window and 600-point creation form in dark English and light Arabic, including both distribution modes, dates, weekday grid and reachable footer controls. Removed only the owned edition from the temporary catalog and verified the missing-edition warning and disabled Open actions. Restored English/Automatic and original plans, personal data, catalog and one-reader workspace; all owned fixtures were archived outside the library."
       ],
       "limitations": [
-        "Broader automatic distribution modes and explicit selection or verification of an edition-qualified reference remain pending.",
-        "Narrow-window and older macOS verification are still pending; the creation form needs an Arabic visual check."
-      ]
+        "Scheduling uses explicit passages supplied by the user; it does not invent source text, canonical chapter lengths or a versification conversion.",
+        "General older-macOS/platform, full VoiceOver and ten-language acceptance remains open in F253/F254/F257; these focused native states do not prove those release-wide requirements."
+      ],
+      "completionReview": {
+        "date": "2026-10-29",
+        "basis": "Pasajes, fechas, dos modos de distribución, edición comprobada y progreso persistente cubiertos por pruebas y ejecución nativa con reinicio y fuente ausente.",
+        "releaseAcceptance": "La publicación completa de 0.7 sigue condicionada al resto del inventario y sus comprobaciones generales."
+      }
     },
     {
       "id": "F178",

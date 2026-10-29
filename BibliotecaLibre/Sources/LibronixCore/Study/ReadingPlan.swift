@@ -50,8 +50,9 @@ public struct ReadingPlan: Codable, Equatable, Identifiable, Sendable {
     public var id: UUID
     public var title: String
     public var readings: [ScheduledReading]
-    public init(id: UUID = UUID(), title: String, readings: [ScheduledReading]) {
-        self.id = id; self.title = title; self.readings = readings
+    public var edition: StudyBibleEdition?
+    public init(id: UUID = UUID(), title: String, readings: [ScheduledReading], edition: StudyBibleEdition? = nil) {
+        self.id = id; self.title = title; self.readings = readings; self.edition = edition
     }
     /// Distribute explicit passages in their original order on selected days.
     /// Weekdays use Foundation's Gregorian convention: Sunday 1, Saturday 7.
@@ -62,7 +63,7 @@ public struct ReadingPlan: Codable, Equatable, Identifiable, Sendable {
         var day = start, readings: [ScheduledReading] = []
         for (index, raw) in references.enumerated() {
             let reference = raw.trimmingCharacters(in: .whitespacesAndNewlines)
-            _ = try BibleReferenceQuery.parse(reference)
+            try Task.checkCancellation()
             while try !weekdays.contains(day.weekday()) { day = try day.adding(days: 1) }
             readings.append(.init(day: day, reference: reference))
             if index < references.count - 1 && (index + 1).isMultiple(of: passagesPerDay) { day = try day.adding(days: 1) }
@@ -70,13 +71,44 @@ public struct ReadingPlan: Codable, Equatable, Identifiable, Sendable {
         let result = Self(title: title.trimmingCharacters(in: .whitespacesAndNewlines), readings: readings)
         try result.validate(); return result
     }
+    /// Balance explicit passages over eligible civil dates without inventing a
+    /// Bible's chapter lengths. Sparse schedules span the eligible interval.
+    public static func schedule(title: String, references: [String], start: ReadingDay, end: ReadingDay,
+                                weekdays: Set<Int>) throws -> Self {
+        try start.validate(); try end.validate()
+        guard start <= end, !references.isEmpty, references.count <= 10_000, !weekdays.isEmpty,
+              weekdays.allSatisfy({ (1...7).contains($0) }) else {
+            throw PersonalStateError.invalid("El plan necesita pasajes y días de lectura válidos.")
+        }
+        var day = start, dates: [ReadingDay] = [], examined = 0
+        while true {
+            try Task.checkCancellation()
+            guard examined < 10_000 else { throw PersonalStateError.invalid("El intervalo del plan supera los 10.000 días.") }
+            examined += 1
+            if try weekdays.contains(day.weekday()) { dates.append(day) }
+            if day == end { break }
+            day = try day.adding(days: 1)
+        }
+        guard !dates.isEmpty else { throw PersonalStateError.invalid("El plan necesita pasajes y días de lectura válidos.") }
+        let readings = try references.enumerated().map { index, raw -> ScheduledReading in
+            try Task.checkCancellation()
+            let position: Int
+            if references.count >= dates.count { position = index * dates.count / references.count }
+            else { position = references.count == 1 ? 0 : index * (dates.count - 1) / (references.count - 1) }
+            return .init(day: dates[position], reference: raw.trimmingCharacters(in: .whitespacesAndNewlines))
+        }
+        let plan = Self(title: title.trimmingCharacters(in: .whitespacesAndNewlines), readings: readings)
+        try plan.validate(); return plan
+    }
     public func validate() throws {
+        try edition?.validate()
         guard !title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty, title.utf8.count <= 4096,
               !title.unicodeScalars.contains(where: { CharacterSet.controlCharacters.contains($0) && $0 != "\n" && $0 != "\r" }),
               !readings.isEmpty, readings.count <= 10_000, Set(readings.map(\.id)).count == readings.count else {
             throw PersonalStateError.invalid("El plan de lectura contiene datos incompatibles.")
         }
         for reading in readings {
+            try Task.checkCancellation()
             try reading.day.validate()
             _ = try BibleReferenceQuery.parse(reading.reference)
         }
@@ -92,7 +124,10 @@ public struct ReadingPlans: Codable, Equatable, Sendable {
     public var plans: [ReadingPlan] = []
     public init() {}
     public func validate() throws {
-        guard schemaVersion == 1 else { throw PersonalStateError.futureVersion }
+        guard (1...2).contains(schemaVersion) else { throw PersonalStateError.futureVersion }
+        guard schemaVersion >= 2 || plans.allSatisfy({ $0.edition == nil }) else {
+            throw PersonalStateError.invalid("La edición del plan requiere la versión 2 de los planes de lectura.")
+        }
         guard plans.count <= 100, Set(plans.map(\.id)).count == plans.count else { throw PersonalStateError.invalid("Los planes de lectura contienen datos incompatibles.") }
         let entries = plans.flatMap(\.readings)
         guard Set(entries.map(\.id)).count == entries.count else { throw PersonalStateError.invalid("Los planes de lectura contienen datos incompatibles.") }

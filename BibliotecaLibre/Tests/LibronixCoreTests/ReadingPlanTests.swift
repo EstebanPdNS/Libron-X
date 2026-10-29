@@ -38,6 +38,36 @@ import Testing
         #expect(throws: PersonalStateError.self) { try decoded.weekday() }
         #expect(throws: PersonalStateError.self) { try decoded.adding(days: 1) }
     }
+    @Test func endDateDistributionBalancesPassagesAndSpansSparseEligibleDates() throws {
+        let start = try ReadingDay(year: 2024, month: 2, day: 28), end = try ReadingDay(year: 2024, month: 3, day: 7)
+        let refs = (1...5).map { "John \($0)" }
+        let plan = try ReadingPlan.schedule(title: "Owned", references: refs, start: start, end: end, weekdays: [2,5])
+        #expect(plan.readings.map(\.reference) == refs)
+        #expect(plan.readings.map(\.day.calendarValue) == ["20240229","20240229","20240304","20240304","20240307"])
+        let sparse = try ReadingPlan.schedule(title: "Sparse", references: ["John1", "John2"], start: start, end: end, weekdays: Set(1...7))
+        #expect(sparse.readings.map(\.day) == [start,end])
+        #expect(sparse.readings.allSatisfy { !$0.completed })
+    }
+    @Test func endDateDistributionRejectsEmptyWindowsOversizedIntervalsAndCancellation() async throws {
+        let start = try ReadingDay(year: 2024, month: 2, day: 28)
+        #expect(throws: PersonalStateError.self) { try ReadingPlan.schedule(title: "Owned", references: ["John1"], start: start, end: start, weekdays: [2]) }
+        #expect(throws: PersonalStateError.self) { try ReadingPlan.schedule(title: "Owned", references: ["John1"], start: start, end: start.adding(days: -1), weekdays: [4]) }
+        #expect(throws: PersonalStateError.self) { try ReadingPlan.schedule(title: "Owned", references: ["John1"], start: start, end: start.adding(days: 10_000), weekdays: [4]) }
+        let end = try start.adding(days: 10)
+        let task = Task {
+            withUnsafeCurrentTask { $0?.cancel() }
+            return try ReadingPlan.schedule(title: "Owned", references: ["John1"], start: start, end: end, weekdays: [4])
+        }
+        await #expect(throws: CancellationError.self) { try await task.value }
+    }
+    @Test func aSelectedEditionIsRetainedInCalendarDescriptions() throws {
+        let resource = LibraryResource(location: URL(fileURLWithPath: "/owned.LSF"), title: "Owned edition", byteCount: 0,
+            format: .legacyLSF, support: .metadataOnly, provenance: .fileName)
+        var plan = try ReadingPlan.schedule(title: "Owned", references: ["John1:1"], start: ReadingDay(year: 2026, month: 10, day: 29), weekdays: Set(1...7))
+        plan.edition = .init(resource)
+        let calendar = String(decoding: try ReadingPlanCalendar.export(plan), as: UTF8.self)
+        #expect(calendar.contains("DESCRIPTION:John1:1\\nOwned edition"))
+    }
     @Test func calendarExportUsesStableAllDayEventsEscapingAndUtf8Folding() throws {
         let start = try ReadingDay(year: 2024, month: 3, day: 10)
         let title = String(repeating: "É", count: 45) + ",a; b\\c\nnext"

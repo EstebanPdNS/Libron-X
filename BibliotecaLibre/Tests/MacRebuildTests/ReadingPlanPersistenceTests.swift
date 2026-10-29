@@ -44,6 +44,27 @@ import Testing
         #expect(reopened.readingPlans.plans[0].readings[0].completed)
         #expect(reopened.readingPlans.plans[0].visibleReadings(hideCompleted: true).map(\.reference) == ["John 2"])
     }
+    @Test func exactEditionAndProgressSurviveRestartWithAVersionedPreference() throws {
+        let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        defer { try? FileManager.default.removeItem(at: root) }
+        let resource = LibraryResource(location: root.appendingPathComponent("owned.LSF"), title: "Owned", byteCount: 0,
+            format: .legacyLSF, support: .metadataOnly, provenance: .fileName, legacyIdentifier: "owned")
+        let date = try ReadingDay(year: 2026, month: 10, day: 29)
+        var plan = try ReadingPlan.schedule(title: "Owned", references: ["John1:1(owned)"], start: date, weekdays: Set(1...7))
+        plan.edition = .init(resource); plan.readings[0].completed = true
+        var invalid = ReadingPlans(); invalid.plans = [plan]
+        #expect(throws: PersonalStateError.self) { try invalid.validate() }
+        let path = root.appendingPathComponent("personal.json"), state = WorkspacePersonalState(url: path)
+        try state.editReadingPlans { $0.plans.append(plan) }
+        let reopened = WorkspacePersonalState(url: path)
+        #expect(reopened.readingPlansLoadError == nil && reopened.readingPlans.schemaVersion == 2)
+        #expect(reopened.readingPlans.plans == [plan] && reopened.readingPlans.plans[0].readings[0].completed)
+        let replacement = LibraryResource(location: resource.location, title: resource.title, byteCount: 0,
+            format: resource.format, support: resource.support, provenance: resource.provenance, legacyIdentifier: "other")
+        #expect(reopened.readingPlans.plans[0].edition?.resolve(in: [replacement]) == nil)
+        try reopened.editReadingPlans { $0.plans[0].edition = nil }
+        #expect(reopened.readingPlans.schemaVersion == 2 && reopened.readingPlans.plans[0].readings[0].completed)
+    }
     @Test func futureSchemaDoesNotOverwriteOriginalFile() throws {
         let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
         try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
