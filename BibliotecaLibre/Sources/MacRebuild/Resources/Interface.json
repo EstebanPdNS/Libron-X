@@ -5267,6 +5267,18 @@
     "ur": "متن موازنے کی حد سے زیادہ ہے۔ چھوٹا اقتباس منتخب کریں۔",
     "zh-Hans": "文本超出比较限制，请选择更短的段落。"
   },
+  "El texto supera el límite permitido.": {
+    "ar": "يتجاوز النص الحد المسموح.",
+    "bn": "লেখাটি অনুমোদিত সীমা অতিক্রম করেছে।",
+    "en": "The text exceeds the allowed limit.",
+    "es": "El texto supera el límite permitido.",
+    "fr": "Le texte dépasse la limite autorisée.",
+    "hi": "पाठ अनुमत सीमा से अधिक है।",
+    "id": "Teks melebihi batas yang diizinkan.",
+    "pt": "O texto excede o limite permitido.",
+    "ur": "متن اجازت دی گئی حد سے زیادہ ہے۔",
+    "zh-Hans": "文本超过允许的限制。"
+  },
   "El tipo, idioma o serie de la asociación no es válido.": {
     "ar": "نوع الارتباط أو لغته أو سلسلته غير صالح.",
     "bn": "সংযোগের ধরন, ভাষা বা সিরিজ বৈধ নয়।",
@@ -7307,6 +7319,18 @@
     "ur": "انٹرفیس کی زبان",
     "zh-Hans": "界面语言"
   },
+  "Idioma de origen": {
+    "ar": "لغة المصدر",
+    "bn": "উৎসের ভাষা",
+    "en": "Source Language",
+    "es": "Idioma de origen",
+    "fr": "Langue source",
+    "hi": "स्रोत भाषा",
+    "id": "Bahasa sumber",
+    "pt": "Idioma de origem",
+    "ur": "ماخذ کی زبان",
+    "zh-Hans": "源语言"
+  },
   "Idiomas": {
     "ar": "اللغات",
     "bn": "ভাষাসমূহ",
@@ -8014,6 +8038,18 @@
     "pt": "A pesquisa salva precisa de um nome válido.",
     "ur": "محفوظ تلاش کے لیے درست نام درکار ہے۔",
     "zh-Hans": "保存的搜索需要有效名称。"
+  },
+  "La conversión es una aproximación; el texto original se conserva sin cambios.": {
+    "ar": "التحويل تقريبي؛ ويظل النص الأصلي دون تغيير.",
+    "bn": "রূপান্তরটি আনুমানিক; মূল লেখা অপরিবর্তিত থাকে।",
+    "en": "The conversion is approximate; the original text remains unchanged.",
+    "es": "La conversión es una aproximación; el texto original se conserva sin cambios.",
+    "fr": "La conversion est approximative ; le texte original reste inchangé.",
+    "hi": "रूपांतरण अनुमानित है; मूल पाठ अपरिवर्तित रहता है।",
+    "id": "Konversi bersifat perkiraan; teks asli tetap tidak berubah.",
+    "pt": "A conversão é aproximada; o texto original permanece inalterado.",
+    "ur": "تبدیلی تخمینی ہے؛ اصل متن برقرار رہتا ہے۔",
+    "zh-Hans": "转换是近似的；原文保持不变。"
   },
   "La definición no contiene asociaciones activas.": {
     "ar": "لا يحتوي التعريف على ارتباطات نشطة.",
@@ -14542,6 +14578,18 @@
     "pt": "Transliteração",
     "ur": "نقل حرفی",
     "zh-Hans": "音译"
+  },
+  "Transliteración…": {
+    "ar": "نقل صوتي…",
+    "bn": "লিপ্যন্তর…",
+    "en": "Transliteration…",
+    "es": "Transliteración…",
+    "fr": "Translittération…",
+    "hi": "लिप्यंतरण…",
+    "id": "Transliterasi…",
+    "pt": "Transliteração…",
+    "ur": "نقل حرفی…",
+    "zh-Hans": "音译…"
   },
   "Trasladar y redimensionar": {
     "ar": "نقل وتغيير الحجم",

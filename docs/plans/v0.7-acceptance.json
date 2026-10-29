@@ -1096,13 +1096,15 @@
       "baseline": "Core tiene conversiones acotadas griego/hebreo; no integración completa actual.",
       "status": "in_progress",
       "implementation": [
-        "Exposed the existing verified Greek and Hebrew transliteration policies and Hebrew mark options in user-owned Bible-copy templates; source text remains unchanged."
+        "Exposed the existing verified Greek and Hebrew transliteration policies and Hebrew mark options in user-owned Bible-copy templates; source text remains unchanged.",
+        "Added a bounded text-entry tool for Greek and Hebrew transliteration with a separately copyable result; the input is not altered."
       ],
       "verification": [
-        "BibleCopyTests passed for Greek and Hebrew transliteration and distinct Hebrew mark policies. BibleCopyStylePersistenceTests confirmed language settings persist, and AppLanguageTests passed for ten interface languages."
+        "BibleCopyTests passed for Greek and Hebrew transliteration and distinct Hebrew mark policies. BibleCopyStylePersistenceTests confirmed language settings persist, and AppLanguageTests passed for ten interface languages.",
+        "TransliterationInputTests passed for Greek and Hebrew samples, source preservation and bounded invalid input; CommandPaletteTests and AppLanguageTests passed."
       ],
       "limitations": [
-        "This covers Bible-copy templates only; integration in query and other input flows remains pending. Native visual and end-to-end acceptance require the application control to recover and a compatible Bible."
+        "Search-query integration remains pending. The new input tool and copy-template controls still need native visual, keyboard and accessibility acceptance; the native control timed out after an open panel was closed."
       ]
     },
     {
