@@ -20,7 +20,7 @@
       "sourceKey": "study-expansion-guides-01",
       "acceptance": "Reunir comentarios, diccionarios y referencias pertinentes en un informe de pasaje; señalar fuentes ausentes.",
       "baseline": "Lectores, comentarios, prioridades y asociaciones disponibles.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "Added a native passage guide that checks commentary resources and optional user-supplied dictionary/lexicon terms in priority order, searches explicit references across available resources, exposes source-backed opening and displays incomplete coverage and failures.",
         "The guide publishes verified commentary results while reference scanning continues, names the current resource or reference-search phase, and cancels stale work when inputs, library, or view change.",
@@ -44,7 +44,8 @@
         "Build 141 reached the search time limit in the Spanish Wiktionary and displayed an incomplete reference report without claiming no matches. During the run, process resident memory was sampled at about 200–225 MB; results do not constitute a controlled peak-memory benchmark.",
         "PassageGuideControllerTests and AppLanguageTests passed (13 tests), including a real incompatible-resource report and all status labels in ten languages. Build 143 displayed the same incomplete Wiktionary report in Spanish dark, Arabic light and English dark, preserving the resource name and updating the warning when the language changed. Original English/automatic settings were restored.",
         "PassageGuideControllerTests include automatic source-word lookup from an authored e-Sword Bible; the nine focused tests pass, including partial references and cancellation.",
-        "Focused PassageGuideControllerTests cover an unavailable first Bible and terms from a second authored edition."
+        "Focused PassageGuideControllerTests cover an unavailable first Bible and terms from a second authored edition.",
+        "Installed build 239 generated a scoped guide for Efesios 5:8 in the user’s available monograph, displayed two source-backed references and opened a result; absent commentary and dictionary inputs were explicitly shown."
       ],
       "limitations": [
         "Long dictionary and library scans can still be slow; the guide displays partial matches and supports cancellation, but lookup duration is not independently bounded.",
@@ -398,7 +399,7 @@
       "sourceKey": "study-expansion-annotations-02",
       "acceptance": "Editar una representación enriquecida conservando el original y los objetos soportados.",
       "baseline": "Se visualiza texto y se crea una copia plana editable.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "Rich note editor and persistent hierarchy and organization are integrated in MacRebuild.",
         "Preserve strikeout formatting from inert imported HTML in both native note projections and the saved editable RTF; retain the original HTML.",
@@ -408,11 +409,11 @@
       "verification": [
         "22 focused note and organization tests passed; the complete optimized suite passed 935 tests. Native macOS checks covered rich formatting, keyboard undo/redo, saving, reopening, nested notes, reordering, and properties.",
         "NoteRichTextTests preserve imported strikeout through RTF round-trip and retain the untouched original HTML.",
-        "StudyDocumentTests and NoteRichTextTests cover nested paragraph styling, character styles and editable RTF."
+        "StudyDocumentTests and NoteRichTextTests cover nested paragraph styling, character styles and editable RTF.",
+        "Installed build 239 imported an authored HTML note, displayed its color, bold and italic formatting, accepted an edit and retained it when reopened. The test note was removed without changing other documents."
       ],
       "limitations": [
-        "Further native testing, imported-object fidelity and remaining acceptance work continue in 0.7.",
-        "Unsupported HTML objects remain in the original and are not edited; native visual acceptance is still pending."
+        "Original HTML is retained. Images, tables and other unsupported HTML objects remain in the original and are explicitly identified as not editable."
       ]
     },
     {
