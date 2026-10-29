@@ -1,4 +1,10 @@
 {
+  "Todavía no hay favoritos": {
+    "ar": "لا توجد مفضلات بعد", "bn": "এখনও কোনো পছন্দ নেই", "en": "No Favorites Yet", "es": "Todavía no hay favoritos", "fr": "Aucun favori pour le moment", "hi": "अभी कोई पसंदीदा नहीं है", "id": "Belum ada favorit", "pt": "Ainda não há favoritos", "ur": "ابھی کوئی پسندیدہ نہیں", "zh-Hans": "暂无收藏"
+  },
+  "Añade una ubicación o importa tus favoritos originales desde Acciones.": {
+    "ar": "أضف موقعًا أو استورد مفضلاتك الأصلية من الإجراءات.", "bn": "একটি অবস্থান যোগ করুন অথবা অ্যাকশন থেকে পুরোনো পছন্দগুলো আমদানি করুন।", "en": "Add a location or import your original favorites from Actions.", "es": "Añade una ubicación o importa tus favoritos originales desde Acciones.", "fr": "Ajoutez un emplacement ou importez vos favoris d’origine depuis Actions.", "hi": "एक स्थान जोड़ें या क्रियाओं से अपने मूल पसंदीदा आयात करें।", "id": "Tambahkan lokasi atau impor favorit asli dari Tindakan.", "pt": "Adicione uma localização ou importe seus favoritos originais em Ações.", "ur": "ایک مقام شامل کریں یا اقدامات سے اپنے اصل پسندیدہ درآمد کریں۔", "zh-Hans": "添加位置，或从“操作”导入原有收藏。"
+  },
   "Índice de búsqueda dañado": {
     "ar": "فهرس البحث تالف", "bn": "অনুসন্ধান সূচক ক্ষতিগ্রস্ত", "en": "Search index damaged", "es": "Índice de búsqueda dañado", "fr": "Index de recherche endommagé", "hi": "खोज सूचकांक क्षतिग्रस्त", "id": "Indeks pencarian rusak", "pt": "Índice de pesquisa danificado", "ur": "تلاش کا اشاریہ خراب ہے", "zh-Hans": "搜索索引已损坏"
   },

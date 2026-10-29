@@ -70,6 +70,16 @@ struct WorkspaceFavoritesView: View {
             List(selection: $selected) {
                 FavoriteRows(nodes: FavoriteNode.tree(favorites), expanded: $expanded, workspace: workspace)
             }
+            .overlay {
+                if favorites.items.isEmpty {
+                    VStack(spacing: 8) {
+                        Image(systemName: "star").font(.system(size: 32)).foregroundStyle(.secondary)
+                        Text(L("Todavía no hay favoritos")).font(.headline)
+                        Text(L("Añade una ubicación o importa tus favoritos originales desde Acciones."))
+                            .foregroundStyle(.secondary).multilineTextAlignment(.center)
+                    }.padding(24).allowsHitTesting(false)
+                }
+            }
             MacReaderToolbarSurface {
                 HStack {
                     MacReaderControlGroup {
