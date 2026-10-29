@@ -563,6 +563,18 @@
     "ur": "چارٹ تازہ کریں",
     "zh-Hans": "更新图表"
   },
+  "Actualizar pregunta": {
+    "ar": "تحديث السؤال",
+    "bn": "প্রশ্ন আপডেট করুন",
+    "en": "Update Question",
+    "es": "Actualizar pregunta",
+    "fr": "Modifier la question",
+    "hi": "प्रश्न अपडेट करें",
+    "id": "Perbarui pertanyaan",
+    "pt": "Atualizar pergunta",
+    "ur": "سوال اپ ڈیٹ کریں",
+    "zh-Hans": "更新问题"
+  },
   "Adelante": {
     "ar": "تقدم",
     "bn": "সামনে",
@@ -1271,6 +1283,30 @@
     "ur": "پیچھے",
     "zh-Hans": "后退"
   },
+  "Autoevaluaciones": {
+    "ar": "التقييمات الذاتية",
+    "bn": "অধ্যয়ন স্বমূল্যায়ন",
+    "en": "Study Assessments",
+    "es": "Autoevaluaciones",
+    "fr": "Autoévaluations",
+    "hi": "अध्ययन स्वमूल्यांकन",
+    "id": "Penilaian mandiri",
+    "pt": "Autoavaliações",
+    "ur": "مطالعے کی خود تشخیص",
+    "zh-Hans": "学习自测"
+  },
+  "Autoevaluaciones…": {
+    "ar": "التقييمات الذاتية…",
+    "bn": "অধ্যয়ন স্বমূল্যায়ন…",
+    "en": "Study Assessments…",
+    "es": "Autoevaluaciones…",
+    "fr": "Autoévaluations…",
+    "hi": "अध्ययन स्वमूल्यांकन…",
+    "id": "Penilaian mandiri…",
+    "pt": "Autoavaliações…",
+    "ur": "مطالعے کی خود تشخیص…",
+    "zh-Hans": "学习自测…"
+  },
   "Automático": {
     "ar": "تلقائي",
     "bn": "স্বয়ংক্রিয়",
@@ -1391,6 +1427,18 @@
     "ur": "لغات اور فرہنگ تلاش کرنے کے لیے الفاظ شامل کریں۔",
     "zh-Hans": "添加词语以查询词典和词汇书。"
   },
+  "Añadir autoevaluación": {
+    "ar": "إضافة تقييم ذاتي",
+    "bn": "স্বমূল্যায়ন যোগ করুন",
+    "en": "Add Assessment",
+    "es": "Añadir autoevaluación",
+    "fr": "Ajouter une autoévaluation",
+    "hi": "स्वमूल्यांकन जोड़ें",
+    "id": "Tambah penilaian",
+    "pt": "Adicionar autoavaliação",
+    "ur": "خود تشخیص شامل کریں",
+    "zh-Hans": "添加自测"
+  },
   "Añadir categoría": {
     "ar": "إضافة فئة",
     "bn": "বিভাগ যোগ করুন",
@@ -1426,6 +1474,18 @@
     "pt": "Adicionar passagem",
     "ur": "مقطع شامل کریں",
     "zh-Hans": "添加经文"
+  },
+  "Añadir pregunta": {
+    "ar": "إضافة سؤال",
+    "bn": "প্রশ্ন যোগ করুন",
+    "en": "Add Question",
+    "es": "Añadir pregunta",
+    "fr": "Ajouter une question",
+    "hi": "प्रश्न जोड़ें",
+    "id": "Tambah pertanyaan",
+    "pt": "Adicionar pergunta",
+    "ur": "سوال شامل کریں",
+    "zh-Hans": "添加问题"
   },
   "Año": {
     "ar": "السنة",
@@ -2183,6 +2243,18 @@
     "ur": "تلاش جزوی تکمیل کے ساتھ ختم ہوئی",
     "zh-Hans": "搜索已结束，覆盖不完整"
   },
+  "Calificar": {
+    "ar": "تقييم",
+    "bn": "মূল্যায়ন",
+    "en": "Grade",
+    "es": "Calificar",
+    "fr": "Noter",
+    "hi": "मूल्यांकन करें",
+    "id": "Nilai",
+    "pt": "Avaliar",
+    "ur": "درجہ دیں",
+    "zh-Hans": "评分"
+  },
   "Cambiar el pasaje vuelve a marcar la lectura como pendiente.": {
     "ar": "تغيير المقطع يعيد القراءة إلى حالة الانتظار.",
     "bn": "অংশ বদলালে পাঠ আবার অসম্পন্ন হবে।",
@@ -2206,6 +2278,18 @@
     "pt": "Alterar a passagem, referência ou fonte reinicia o progresso.",
     "ur": "مقطع، حوالہ یا ماخذ بدلنے سے پیش رفت دوبارہ شروع ہوگی۔",
     "zh-Hans": "更改经文、引用或来源会重置进度。"
+  },
+  "Cambiar las preguntas reinicia los resultados anteriores.": {
+    "ar": "تغيير الأسئلة يعيد ضبط النتائج السابقة.",
+    "bn": "প্রশ্ন বদলালে আগের ফলাফল মুছে যাবে।",
+    "en": "Changing questions resets previous results.",
+    "es": "Cambiar las preguntas reinicia los resultados anteriores.",
+    "fr": "Modifier les questions réinitialise les résultats précédents.",
+    "hi": "प्रश्न बदलने से पिछले परिणाम रीसेट होंगे।",
+    "id": "Mengubah pertanyaan akan mengatur ulang hasil sebelumnya.",
+    "pt": "Alterar perguntas reinicia os resultados anteriores.",
+    "ur": "سوال بدلنے سے پچھلے نتائج دوبارہ ترتیب ہوں گے۔",
+    "zh-Hans": "更改问题将重置先前结果。"
   },
   "Cambiar tamaño del panel": {
     "ar": "تغيير حجم اللوحة",
@@ -4415,6 +4499,18 @@
     "ur": "تدوین کریں",
     "zh-Hans": "编辑"
   },
+  "Editar autoevaluación": {
+    "ar": "تحرير التقييم الذاتي",
+    "bn": "স্বমূল্যায়ন সম্পাদনা করুন",
+    "en": "Edit Assessment",
+    "es": "Editar autoevaluación",
+    "fr": "Modifier l’autoévaluation",
+    "hi": "स्वमूल्यांकन संपादित करें",
+    "id": "Ubah penilaian",
+    "pt": "Editar autoavaliação",
+    "ur": "خود تشخیص میں ترمیم کریں",
+    "zh-Hans": "编辑自测"
+  },
   "Editar lectura": {
     "ar": "تعديل القراءة",
     "bn": "পাঠ সম্পাদনা করুন",
@@ -5123,6 +5219,18 @@
     "ur": "تعلق حذف کریں",
     "zh-Hans": "删除关联"
   },
+  "Eliminar autoevaluación": {
+    "ar": "حذف التقييم الذاتي",
+    "bn": "স্বমূল্যায়ন মুছুন",
+    "en": "Delete Assessment",
+    "es": "Eliminar autoevaluación",
+    "fr": "Supprimer l’autoévaluation",
+    "hi": "स्वमूल्यांकन हटाएँ",
+    "id": "Hapus penilaian",
+    "pt": "Excluir autoavaliação",
+    "ur": "خود تشخیص حذف کریں",
+    "zh-Hans": "删除自测"
+  },
   "Eliminar categoría": {
     "ar": "حذف الفئة",
     "bn": "বিভাগ মুছুন",
@@ -5230,6 +5338,18 @@
     "pt": "Excluir plano…",
     "ur": "منصوبہ حذف کریں…",
     "zh-Hans": "删除计划…"
+  },
+  "Eliminar pregunta": {
+    "ar": "حذف السؤال",
+    "bn": "প্রশ্ন মুছুন",
+    "en": "Delete Question",
+    "es": "Eliminar pregunta",
+    "fr": "Supprimer la question",
+    "hi": "प्रश्न हटाएँ",
+    "id": "Hapus pertanyaan",
+    "pt": "Excluir pergunta",
+    "ur": "سوال حذف کریں",
+    "zh-Hans": "删除问题"
   },
   "Eliminar versículo": {
     "ar": "حذف الآية",
@@ -7007,6 +7127,18 @@
     "ur": "تعلق اب دستیاب نہیں ہے۔",
     "zh-Hans": "该关联已不可用。"
   },
+  "La autoevaluación contiene datos incompatibles.": {
+    "ar": "يحتوي التقييم على بيانات غير متوافقة.",
+    "bn": "স্বমূল্যায়নে অসংগত তথ্য আছে।",
+    "en": "The assessment contains incompatible data.",
+    "es": "La autoevaluación contiene datos incompatibles.",
+    "fr": "L’autoévaluation contient des données incompatibles.",
+    "hi": "स्वमूल्यांकन में असंगत डेटा है।",
+    "id": "Penilaian berisi data yang tidak kompatibel.",
+    "pt": "A autoavaliação contém dados incompatíveis.",
+    "ur": "خود تشخیص میں غیر مطابقت پذیر ڈیٹا ہے۔",
+    "zh-Hans": "自测包含不兼容的数据。"
+  },
   "La barra de herramientas permite abrir Inicio y Biblioteca, buscar, crear documentos y acceder a las acciones de estudio. Los botones que no caben aparecen en el menú de desbordamiento. Haz clic derecho sobre un botón para conocer su función.": {
     "ar": "يتيح شريط الأدوات فتح الصفحة الرئيسية والمكتبة والبحث وإنشاء المستندات والوصول إلى أدوات الدراسة. تظهر الأزرار التي لا تتسع لها المساحة في قائمة إضافية. انقر بزر الفأرة الأيمن على زر لمعرفة وظيفته.",
     "bn": "টুলবার থেকে মূল পাতা ও লাইব্রেরি খুলতে, অনুসন্ধান করতে, নথি তৈরি করতে এবং অধ্যয়নের সরঞ্জাম ব্যবহার করতে পারেন। জায়গায় না কুলানো বোতামগুলো অতিরিক্ত মেনুতে দেখা যায়। কোনো বোতামের কাজ জানতে সেটিতে ডান-ক্লিক করুন।",
@@ -7450,6 +7582,18 @@
     "pt": "Os membros são atualizados quando os metadados da biblioteca mudam. Nenhum livro é alterado.",
     "ur": "لائبریری کا میٹا ڈیٹا بدلنے پر رکنیت بدلتی ہے۔ کوئی کتاب تبدیل نہیں ہوتی۔",
     "zh-Hans": "成员随书库元数据变化而更新。不会修改任何书籍。"
+  },
+  "La pregunta o respuesta esperada no es válida.": {
+    "ar": "السؤال أو الإجابة المتوقعة غير صالحة.",
+    "bn": "প্রশ্ন বা প্রত্যাশিত উত্তর অবৈধ।",
+    "en": "The question or expected answer is invalid.",
+    "es": "La pregunta o respuesta esperada no es válida.",
+    "fr": "La question ou la réponse attendue est invalide.",
+    "hi": "प्रश्न या अपेक्षित उत्तर अमान्य है।",
+    "id": "Pertanyaan atau jawaban yang diharapkan tidak valid.",
+    "pt": "A pergunta ou resposta esperada é inválida.",
+    "ur": "سوال یا متوقع جواب درست نہیں۔",
+    "zh-Hans": "问题或预期答案无效。"
   },
   "La referencia solicita la edición {edition}. Abre esa edición para seguir este enlace.": {
     "ar": "يتطلب المرجع الإصدار {edition}. افتح ذلك الإصدار لاتباع الرابط.",
@@ -8699,6 +8843,18 @@
     "ur": "لائبریری میں کوئی موافق بائبل نہیں ہے۔",
     "zh-Hans": "书库中没有兼容的圣经。"
   },
+  "No hay autoevaluaciones.": {
+    "ar": "لا توجد تقييمات ذاتية.",
+    "bn": "এখনো কোনো স্বমূল্যায়ন নেই।",
+    "en": "No assessments yet.",
+    "es": "No hay autoevaluaciones.",
+    "fr": "Aucune autoévaluation.",
+    "hi": "अभी कोई स्वमूल्यांकन नहीं।",
+    "id": "Belum ada penilaian.",
+    "pt": "Nenhuma autoavaliação.",
+    "ur": "ابھی کوئی خود تشخیص نہیں۔",
+    "zh-Hans": "暂无自测。"
+  },
   "No hay búsquedas guardadas.": {
     "ar": "لا توجد عمليات بحث محفوظة.",
     "bn": "কোনো সংরক্ষিত অনুসন্ধান নেই।",
@@ -8818,6 +8974,18 @@
     "pt": "Nenhuma passagem para praticar.",
     "ur": "مشق کے لیے کوئی مقطع نہیں۔",
     "zh-Hans": "没有可练习的经文。"
+  },
+  "No hay preguntas.": {
+    "ar": "لا توجد أسئلة.",
+    "bn": "এখনো কোনো প্রশ্ন নেই।",
+    "en": "No questions yet.",
+    "es": "No hay preguntas.",
+    "fr": "Aucune question.",
+    "hi": "अभी कोई प्रश्न नहीं।",
+    "id": "Belum ada pertanyaan.",
+    "pt": "Nenhuma pergunta.",
+    "ur": "ابھی کوئی سوال نہیں۔",
+    "zh-Hans": "暂无问题。"
   },
   "No hay recursos compatibles para agregar.": {
     "ar": "لا توجد موارد متوافقة لإضافتها.",
@@ -9010,6 +9178,18 @@
     "pt": "Não foi possível carregar este ícone. A escolha anterior foi mantida.",
     "ur": "یہ آئیکن لوڈ نہیں ہو سکا۔ پچھلا انتخاب برقرار ہے۔",
     "zh-Hans": "无法加载此图标。将保留之前的选择。"
+  },
+  "No se pudieron abrir las autoevaluaciones.": {
+    "ar": "تعذر فتح التقييمات الذاتية.",
+    "bn": "স্বমূল্যায়ন খোলা যায়নি।",
+    "en": "Could not open assessments.",
+    "es": "No se pudieron abrir las autoevaluaciones.",
+    "fr": "Impossible d’ouvrir les autoévaluations.",
+    "hi": "स्वमूल्यांकन नहीं खोले जा सके।",
+    "id": "Penilaian tidak dapat dibuka.",
+    "pt": "Não foi possível abrir as autoavaliações.",
+    "ur": "خود تشخیص نہیں کھولی جا سکی۔",
+    "zh-Hans": "无法打开自测。"
   },
   "No se pudieron abrir las consultas guardadas.": {
     "ar": "تعذر فتح عمليات البحث المحفوظة.",
@@ -10319,6 +10499,18 @@
     "ur": "وعظ اور ابلاغ",
     "zh-Hans": "讲道与传播"
   },
+  "Pregunta": {
+    "ar": "السؤال",
+    "bn": "প্রশ্ন",
+    "en": "Question",
+    "es": "Pregunta",
+    "fr": "Question",
+    "hi": "प्रश्न",
+    "id": "Pertanyaan",
+    "pt": "Pergunta",
+    "ur": "سوال",
+    "zh-Hans": "问题"
+  },
   "Preguntar antes de convertir a .libron": {
     "ar": "السؤال قبل التحويل إلى .libron",
     "bn": ".libron-এ রূপান্তরের আগে জিজ্ঞাসা করুন",
@@ -11183,6 +11375,18 @@
     "ur": "خودکار مطابقت",
     "zh-Hans": "自动解析"
   },
+  "Responde todas las preguntas antes de calificar.": {
+    "ar": "أجب عن جميع الأسئلة قبل التقييم.",
+    "bn": "মূল্যায়নের আগে সব প্রশ্নের উত্তর দিন।",
+    "en": "Answer every question before grading.",
+    "es": "Responde todas las preguntas antes de calificar.",
+    "fr": "Répondez à toutes les questions avant de noter.",
+    "hi": "मूल्यांकन से पहले सभी प्रश्नों के उत्तर दें।",
+    "id": "Jawab semua pertanyaan sebelum menilai.",
+    "pt": "Responda a todas as perguntas antes de avaliar.",
+    "ur": "درجہ دینے سے پہلے تمام سوالوں کے جواب دیں۔",
+    "zh-Hans": "评分前请回答所有问题。"
+  },
   "Respondida": {
     "ar": "مستجابة",
     "bn": "উত্তর পেয়েছে",
@@ -11194,6 +11398,18 @@
     "pt": "Respondida",
     "ur": "قبول شدہ",
     "zh-Hans": "已回应"
+  },
+  "Respuesta": {
+    "ar": "الإجابة",
+    "bn": "উত্তর",
+    "en": "Answer",
+    "es": "Respuesta",
+    "fr": "Réponse",
+    "hi": "उत्तर",
+    "id": "Jawaban",
+    "pt": "Resposta",
+    "ur": "جواب",
+    "zh-Hans": "答案"
   },
   "Respuesta correcta": {
     "ar": "إجابة صحيحة",
@@ -11218,6 +11434,18 @@
     "pt": "Resposta diferente",
     "ur": "جواب مختلف ہے",
     "zh-Hans": "答案不一致"
+  },
+  "Respuesta esperada": {
+    "ar": "الإجابة المتوقعة",
+    "bn": "প্রত্যাশিত উত্তর",
+    "en": "Expected Answer",
+    "es": "Respuesta esperada",
+    "fr": "Réponse attendue",
+    "hi": "अपेक्षित उत्तर",
+    "id": "Jawaban yang diharapkan",
+    "pt": "Resposta esperada",
+    "ur": "متوقع جواب",
+    "zh-Hans": "预期答案"
   },
   "Restablecer": {
     "ar": "إعادة تعيين",
@@ -11362,6 +11590,18 @@
     "pt": "Resultado {current} de {total}",
     "ur": "نتیجہ {current} از {total}",
     "zh-Hans": "结果 {current}，共 {total} 个"
+  },
+  "Resultado: {correct} de {total}": {
+    "ar": "النتيجة: {correct} من {total}",
+    "bn": "ফলাফল: {total}-এর মধ্যে {correct}",
+    "en": "Score: {correct} of {total}",
+    "es": "Resultado: {correct} de {total}",
+    "fr": "Résultat : {correct} sur {total}",
+    "hi": "परिणाम: {correct}/{total}",
+    "id": "Hasil: {correct} dari {total}",
+    "pt": "Resultado: {correct} de {total}",
+    "ur": "نتیجہ: {total} میں سے {correct}",
+    "zh-Hans": "结果：{correct}/{total}"
   },
   "Resultados de búsqueda": {
     "ar": "نتائج البحث",
@@ -11602,6 +11842,18 @@
     "pt": "Este exercício e seu progresso serão excluídos.",
     "ur": "یہ مشق اور اس کی پیش رفت حذف ہو جائے گی۔",
     "zh-Hans": "将删除此练习及其进度。"
+  },
+  "Se eliminará la autoevaluación y sus resultados.": {
+    "ar": "سيُحذف التقييم ونتائجه.",
+    "bn": "স্বমূল্যায়ন ও তার ফলাফল মুছে যাবে।",
+    "en": "The assessment and its results will be deleted.",
+    "es": "Se eliminará la autoevaluación y sus resultados.",
+    "fr": "L’autoévaluation et ses résultats seront supprimés.",
+    "hi": "स्वमूल्यांकन और उसके परिणाम मिटाए जाएँगे।",
+    "id": "Penilaian dan hasilnya akan dihapus.",
+    "pt": "A autoavaliação e seus resultados serão excluídos.",
+    "ur": "خود تشخیص اور نتائج حذف ہو جائیں گے۔",
+    "zh-Hans": "自测及其结果将被删除。"
   },
   "Se eliminarán esta lectura y su progreso.": {
     "ar": "ستُحذف هذه القراءة وتقدمها.",

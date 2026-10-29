@@ -706,13 +706,15 @@
       "baseline": "Sin módulo educativo integrado identificado.",
       "status": "in_progress",
       "implementation": [
-        "Added user-authored assessment questions with expected answers, exact grading ignoring case and whitespace, aggregate results and separate transactional local persistence. Incomplete responses are rejected without recording results."
+        "Added user-authored assessment questions with expected answers, exact grading ignoring case and whitespace, aggregate results and separate transactional local persistence. Incomplete responses are rejected without recording results.",
+        "Added native assessment creation, question editing, practice, grading and result display; edits to questions reset prior scores, and answers are not retained."
       ],
       "verification": [
-        "StudyAssessmentTests and StudyAssessmentPersistenceTests passed for grading, validation, persistence, concurrent-write protection and future schema preservation."
+        "StudyAssessmentTests and StudyAssessmentPersistenceTests passed for grading, validation, persistence, concurrent-write protection and future schema preservation.",
+        "Native builds 161 and 162 were reviewed visually in dark mode; incomplete responses were rejected, a multi-question assessment was graded, and keyboard-entered questions retained their distinct expected answers. Synthetic data was archived. AppLanguageTests passed."
       ],
       "limitations": [
-        "The assessment editor and practice interface are not yet implemented or visually verified."
+        "A rapid sequence using accessibility setValue displayed a new answer while the previous answer was saved; keyboard entry did not reproduce it. Further accessibility input investigation and light, right-to-left and narrow-window review remain pending."
       ]
     },
     {
