@@ -3695,6 +3695,18 @@
     "ur": "وسیلے کا حوالہ نقل کریں",
     "zh-Hans": "复制资源引用"
   },
+  "Copiar enlace a esta ubicación": {
+    "ar": "نسخ رابط هذا الموضع",
+    "bn": "এই অবস্থানের লিংক কপি করুন",
+    "en": "Copy Link to This Location",
+    "es": "Copiar enlace a esta ubicación",
+    "fr": "Copier le lien vers cet emplacement",
+    "hi": "इस स्थान का लिंक कॉपी करें",
+    "id": "Salin tautan ke lokasi ini",
+    "pt": "Copiar link para esta localização",
+    "ur": "اس مقام کا لنک کاپی کریں",
+    "zh-Hans": "复制此位置的链接"
+  },
   "Copiar imagen": {
     "ar": "نسخ الصورة",
     "bn": "ছবি অনুলিপি",
@@ -5039,6 +5051,30 @@
     "ur": "یاد کرنے کی مشق میں غیر مطابقت پذیر ڈیٹا ہے۔",
     "zh-Hans": "记忆练习包含不兼容的数据。"
   },
+  "El enlace contiene la identidad local del recurso y puede incluir su ruta.": {
+    "ar": "يحتوي الرابط على هوية المورد المحلية وقد يتضمن مساره.",
+    "bn": "লিংকে রিসোর্সের স্থানীয় পরিচয় থাকে এবং এর পথ থাকতে পারে।",
+    "en": "The link contains the resource’s local identity and may include its path.",
+    "es": "El enlace contiene la identidad local del recurso y puede incluir su ruta.",
+    "fr": "Le lien contient l’identité locale de la ressource et peut inclure son chemin.",
+    "hi": "लिंक में संसाधन की स्थानीय पहचान है और इसमें उसका पथ हो सकता है।",
+    "id": "Tautan berisi identitas lokal sumber dan dapat mencakup jalurnya.",
+    "pt": "O link contém a identidade local do recurso e pode incluir seu caminho.",
+    "ur": "لنک میں وسیلے کی مقامی شناخت ہے اور اس میں اس کا راستہ شامل ہو سکتا ہے۔",
+    "zh-Hans": "链接包含资源的本地标识，可能包含其路径。"
+  },
+  "El enlace de ubicación no es válido o no es compatible.": {
+    "ar": "رابط الموضع غير صالح أو غير مدعوم.",
+    "bn": "অবস্থানের লিংক অবৈধ বা অসমর্থিত।",
+    "en": "The location link is invalid or unsupported.",
+    "es": "El enlace de ubicación no es válido o no es compatible.",
+    "fr": "Le lien d’emplacement est invalide ou non pris en charge.",
+    "hi": "स्थान लिंक अमान्य या असमर्थित है।",
+    "id": "Tautan lokasi tidak valid atau tidak didukung.",
+    "pt": "O link de localização é inválido ou não é compatível.",
+    "ur": "مقام کا لنک غلط یا غیر معاون ہے۔",
+    "zh-Hans": "位置链接无效或不受支持。"
+  },
   "El extracto contiene datos incompatibles.": {
     "ar": "يحتوي المقتطف على بيانات غير متوافقة.",
     "bn": "উদ্ধৃতিতে অসামঞ্জস্যপূর্ণ তথ্য রয়েছে।",
@@ -5206,6 +5242,18 @@
     "pt": "O intervalo salvo contém dados incompatíveis.",
     "ur": "محفوظ حد میں غیر مطابقت پذیر ڈیٹا ہے۔",
     "zh-Hans": "已保存的范围包含不兼容的数据。"
+  },
+  "El recurso de este enlace no está disponible en la biblioteca abierta.": {
+    "ar": "مورد هذا الرابط غير متاح في المكتبة المفتوحة.",
+    "bn": "এই লিংকের রিসোর্স খোলা লাইব্রেরিতে উপলভ্য নয়।",
+    "en": "The resource for this link is not available in the open library.",
+    "es": "El recurso de este enlace no está disponible en la biblioteca abierta.",
+    "fr": "La ressource de ce lien n’est pas disponible dans la bibliothèque ouverte.",
+    "hi": "इस लिंक का संसाधन खुली लाइब्रेरी में उपलब्ध नहीं है।",
+    "id": "Sumber tautan ini tidak tersedia di pustaka terbuka.",
+    "pt": "O recurso deste link não está disponível na biblioteca aberta.",
+    "ur": "اس لنک کا وسیلہ کھلی لائبریری میں دستیاب نہیں ہے۔",
+    "zh-Hans": "此链接的资源在当前资料库中不可用。"
   },
   "El recurso de este extracto no está disponible en la biblioteca abierta.": {
     "ar": "مورد هذا المقتطف غير متاح في المكتبة المفتوحة.",

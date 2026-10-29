@@ -198,6 +198,26 @@ struct ReaderHighlight: Identifiable, Codable, Equatable, Sendable {
             format: reader.resource.format, sectionOrdinal: page.destination.ordinal, reference: page.destination.reference,
             textFingerprint: LibrarySearchService.textFingerprint(page.text), characterOffset: offset)
     }
+    func copyReaderLocationLink() {
+        guard let location = currentBookmarkLocation else { return }
+        do {
+            let url = try ReaderLocationLink.make(location)
+            NSPasteboard.general.clearContents(); NSPasteboard.general.setString(url.absoluteString, forType: .string)
+        } catch { self.error = L(error.localizedDescription) }
+    }
+    func openReaderLocationLink(_ url: URL) {
+        guard canQuitWithCopyStyleDraft(), saveResearchDraftIfNeeded() else { return }
+        do {
+            let location = try ReaderLocationLink.parse(url)
+            guard let resource = location.resolve(in: resources), let offset = location.characterOffset else {
+                throw PersonalStateError.invalid(L("El recurso de este enlace no está disponible en la biblioteca abierta."))
+            }
+            let reader = open(resource, startReading: false)
+            reader.load(.init(ordinal: location.sectionOrdinal, reference: location.reference),
+                        selection: NSRange(location: offset, length: 0), expectedFingerprint: location.textFingerprint)
+            activeTool = nil
+        } catch { self.error = L(error.localizedDescription) }
+    }
     func assignBookmark(_ slot: Int) {
         guard let location = currentBookmarkLocation else { return }
         do { try personal.setBookmark(slot, location: location) }

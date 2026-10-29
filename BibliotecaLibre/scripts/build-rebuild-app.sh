@@ -88,6 +88,10 @@ cat > "$bundle_dir/Contents/Info.plist" <<'PLIST'
 <key>LibronXReleaseVersion</key><string>0.7</string>
 <key>LibronXUpdateChannel</key><string>beta</string>
 <key>CFBundleExecutable</key><string>LibronXRebuild</string>
+<key>CFBundleURLTypes</key><array><dict>
+<key>CFBundleURLName</key><string>org.libronx.location</string>
+<key>CFBundleURLSchemes</key><array><string>libronx</string></array>
+</dict></array>
 <key>CFBundleDevelopmentRegion</key><string>es</string>
 <key>CFBundleLocalizations</key><array>
 <string>en</string><string>zh-Hans</string><string>hi</string><string>es</string><string>ar</string>

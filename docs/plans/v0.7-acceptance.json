@@ -1399,10 +1399,17 @@
       "sourceKey": "study-expansion-product-04",
       "acceptance": "Copiar y reabrir enlaces de aplicación estables a ubicación exacta con gestión de recursos ausentes.",
       "baseline": "Navegación interna y favoritos disponibles.",
-      "status": "pending",
-      "implementation": [],
-      "verification": [],
-      "limitations": []
+      "status": "in_progress",
+      "implementation": [
+        "Added versioned, bounded Libron-X location links carrying exact local resource identity, reference, UTF-16 position and source fingerprint. Link opening waits for workspace startup and verifies resource identity and source fingerprint.",
+        "The Go menu exposes link copying and explains that the link can include a local path; the macOS bundle registers the libronx URL scheme."
+      ],
+      "verification": [
+        "ReaderLocationLinkTests and ReaderLocationLinkWorkflowTests passed for round trips, malformed links, bounds, exact selection, changed fingerprints and unavailable resources. The generated app Info.plist passed plutil validation."
+      ],
+      "limitations": [
+        "End-to-end operating-system URL delivery, cold start, clipboard copying and native visual/accessibility acceptance remain pending. Resource identity can include a local path; links may not resolve after moving the resource or on a different installation."
+      ]
     },
     {
       "id": "F226",
