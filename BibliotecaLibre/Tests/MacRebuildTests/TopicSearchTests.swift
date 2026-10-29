@@ -127,11 +127,11 @@ private actor TopicDirectoryGate {
     }
     func finish(_ id: String, entries: [LegacyArticleDirectoryEntry]) { pending.removeValue(forKey: id)?.resume(returning: entries) }
     func waitForStart(_ id: String) async throws {
-        for _ in 0..<400 { if pending[id] != nil { return }; try await Task.sleep(for: .milliseconds(5)) }
+        for _ in 0..<2000 { if pending[id] != nil { return }; try await Task.sleep(for: .milliseconds(5)) }
         Issue.record("Topic loader did not start")
     }
     func waitForCompletion(_ id: String) async throws {
-        for _ in 0..<400 { if completed.contains(id) { return }; try await Task.sleep(for: .milliseconds(5)) }
+        for _ in 0..<2000 { if completed.contains(id) { return }; try await Task.sleep(for: .milliseconds(5)) }
         Issue.record("Topic loader did not return")
     }
 }

@@ -1551,7 +1551,8 @@
       "verification": [
         "PersonalHomeTests check local-day boundaries in two time zones, plan identity and completed status. The language catalog tests pass.",
         "Native build 192 showed two test plans and a test notebook in dark appearance. The second reading opened its own plan and the notebook shortcut opened the corresponding document. Personal files and workspace state were restored.",
-        "Full test run had one timeout in an existing TopicSearchTests gate; rerunning that suite together with the home and language tests passed. The timeout needs further investigation before release."
+        "Full test run had one timeout in an existing TopicSearchTests gate; rerunning that suite together with the home and language tests passed. The timeout needs further investigation before release.",
+        "After extending the existing topic test gate timeout, a complete swift test run passed without concurrent build work."
       ],
       "limitations": [
         "Resume of an active reader and light/right-to-left layouts still need native visual verification."
