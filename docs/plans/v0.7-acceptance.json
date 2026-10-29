@@ -157,7 +157,7 @@
       "sourceKey": "study-expansion-comparison-01",
       "acceptance": "Informe único de versiones elegidas con identidad de edición y versículos ausentes explícitos.",
       "baseline": "Se pueden abrir Biblias vinculadas y cambiar versión.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "BibliotecaLibre/Sources/LibronixCore/Study/TextComparison.swift",
         "BibliotecaLibre/Sources/LibronixCore/Study/BiblePassageReport.swift",
@@ -170,6 +170,14 @@
         "Optimized-only punctuation classification defect reproduced in the installed application and fixed using Unicode general categories; optimized regression suite passed."
       ],
       "limitations": [
+        "Final RTL presentation acceptance for build 106 remains pending: native automation reports timeoutReached."
+      ],
+      "completionReview": {
+        "date": "2026-10-28",
+        "basis": "Informe multiversión, identidad de edición y ausencias comprobados en datos de prueba y en la aplicación.",
+        "releaseAcceptance": "La revisión general de accesibilidad, idiomas y plataformas sigue abierta en sus fichas específicas."
+      },
+      "additionalValidation": [
         "Final RTL presentation acceptance for build 106 remains pending: native automation reports timeoutReached."
       ]
     },
@@ -182,7 +190,7 @@
       "sourceKey": "study-expansion-comparison-02",
       "acceptance": "Elegir versión base y marcar adiciones, omisiones y sustituciones con rangos Unicode correctos.",
       "baseline": "Lectura simultánea disponible.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "BibliotecaLibre/Sources/LibronixCore/Study/TextComparison.swift",
         "BibliotecaLibre/Sources/LibronixCore/Study/BiblePassageReport.swift",
@@ -196,6 +204,14 @@
       ],
       "limitations": [
         "Final RTL presentation acceptance for build 106 remains pending: native automation reports timeoutReached."
+      ],
+      "completionReview": {
+        "date": "2026-10-28",
+        "basis": "Diferencias y coordenadas Unicode verificadas con pruebas y aplicación nativa.",
+        "releaseAcceptance": "La revisión general de accesibilidad, idiomas y plataformas sigue abierta en sus fichas específicas."
+      },
+      "additionalValidation": [
+        "Final RTL presentation acceptance for build 106 remains pending: native automation reports timeoutReached."
       ]
     },
     {
@@ -207,7 +223,7 @@
       "sourceKey": "study-expansion-comparison-03",
       "acceptance": "Controles independientes de mayúsculas, acentos y puntuación para el motor de diferencias.",
       "baseline": "Opciones de sensibilidad existen en búsqueda, no en comparación.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "BibliotecaLibre/Sources/LibronixCore/Study/TextComparison.swift",
         "BibliotecaLibre/Sources/LibronixCore/Study/BiblePassageReport.swift",
@@ -220,6 +236,14 @@
         "Optimized-only punctuation classification defect reproduced in the installed application and fixed using Unicode general categories; optimized regression suite passed."
       ],
       "limitations": [
+        "Final RTL presentation acceptance for build 106 remains pending: native automation reports timeoutReached."
+      ],
+      "completionReview": {
+        "date": "2026-10-28",
+        "basis": "Los tres controles independientes funcionan y la clasificación de puntuación se verificó también en compilación optimizada.",
+        "releaseAcceptance": "La revisión general de accesibilidad, idiomas y plataformas sigue abierta en sus fichas específicas."
+      },
+      "additionalValidation": [
         "Final RTL presentation acceptance for build 106 remains pending: native automation reports timeoutReached."
       ]
     },
@@ -260,7 +284,7 @@
       "sourceKey": "study-expansion-comparison-06",
       "acceptance": "Representar cuentas por libro, capítulo y rango con acceso a los resultados que las componen.",
       "baseline": "Resultados y contadores de búsqueda disponibles.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "BibliotecaLibre/Sources/LibronixCore/Search/BibleSearchDistribution.swift",
         "BibliotecaLibre/Sources/MacRebuild/Features/Search/WorkspaceSearchDistributionView.swift",
@@ -272,6 +296,14 @@
         "Included in the optimized 925-test regression run; final report header uses the shared native Glass controls."
       ],
       "limitations": [
+        "Final build 106 report-header and RTL runtime acceptance remains pending: native automation reports timeoutReached."
+      ],
+      "completionReview": {
+        "date": "2026-10-28",
+        "basis": "Cuentas por libro, capítulo y rango y apertura del resultado comprobadas en la aplicación.",
+        "releaseAcceptance": "La revisión general de accesibilidad, idiomas y plataformas sigue abierta en sus fichas específicas."
+      },
+      "additionalValidation": [
         "Final build 106 report-header and RTL runtime acceptance remains pending: native automation reports timeoutReached."
       ]
     },
@@ -327,7 +359,7 @@
       "sourceKey": "study-expansion-annotations-01",
       "acceptance": "Integrar negrita, listas, enlaces, deshacer y guardar/reabrir sin pérdida en la app actual.",
       "baseline": "MacRebuild usa TextEditor de texto plano; hay editor RTF en BibliotecaMac.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "Rich note editor and persistent hierarchy and organization are integrated in MacRebuild."
       ],
@@ -335,6 +367,14 @@
         "22 focused note and organization tests passed; the complete optimized suite passed 935 tests. Native macOS checks covered rich formatting, keyboard undo/redo, saving, reopening, nested notes, reordering, and properties."
       ],
       "limitations": [
+        "Further native testing, imported-object fidelity and remaining acceptance work continue in 0.7."
+      ],
+      "completionReview": {
+        "date": "2026-10-28",
+        "basis": "Formato, listas, enlaces, deshacer y guardado/reapertura comprobados. La fidelidad de objetos importados corresponde a F166/F192.",
+        "releaseAcceptance": "La revisión general de accesibilidad, idiomas y plataformas sigue abierta en sus fichas específicas."
+      },
+      "additionalValidation": [
         "Further native testing, imported-object fidelity and remaining acceptance work continue in 0.7."
       ]
     },
@@ -367,7 +407,7 @@
       "sourceKey": "study-expansion-annotations-03",
       "acceptance": "Mover, anidar y reordenar entre cuadernos conservando IDs y estado persistente.",
       "baseline": "Cuadernos con lista plana de notas.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "Rich note editor and persistent hierarchy and organization are integrated in MacRebuild."
       ],
@@ -375,6 +415,14 @@
         "22 focused note and organization tests passed; the complete optimized suite passed 935 tests. Native macOS checks covered rich formatting, keyboard undo/redo, saving, reopening, nested notes, reordering, and properties."
       ],
       "limitations": [
+        "Further native testing, imported-object fidelity and remaining acceptance work continue in 0.7."
+      ],
+      "completionReview": {
+        "date": "2026-10-28",
+        "basis": "Jerarquía, movimiento, reordenación e identidad persistente comprobados; las pruebas generales de idiomas siguen en F254.",
+        "releaseAcceptance": "La revisión general de accesibilidad, idiomas y plataformas sigue abierta en sus fichas específicas."
+      },
+      "additionalValidation": [
         "Further native testing, imported-object fidelity and remaining acceptance work continue in 0.7."
       ]
     },
@@ -387,7 +435,7 @@
       "sourceKey": "study-expansion-annotations-04",
       "acceptance": "Añadir duplicación, orden por referencia y edición de propiedades que faltan.",
       "baseline": "Crear, editar, renombrar y borrar varias notas ya existen.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "Rich note editor and persistent hierarchy and organization are integrated in MacRebuild."
       ],
@@ -395,6 +443,14 @@
         "22 focused note and organization tests passed; the complete optimized suite passed 935 tests. Native macOS checks covered rich formatting, keyboard undo/redo, saving, reopening, nested notes, reordering, and properties."
       ],
       "limitations": [
+        "Further native testing, imported-object fidelity and remaining acceptance work continue in 0.7."
+      ],
+      "completionReview": {
+        "date": "2026-10-28",
+        "basis": "Duplicación, orden y propiedades integrados y comprobados.",
+        "releaseAcceptance": "La revisión general de accesibilidad, idiomas y plataformas sigue abierta en sus fichas específicas."
+      },
+      "additionalValidation": [
         "Further native testing, imported-object fidelity and remaining acceptance work continue in 0.7."
       ]
     },
@@ -464,20 +520,30 @@
       "sourceKey": "study-expansion-annotations-08",
       "acceptance": "Crear estilos persistentes de subrayado, contorno y otras marcas soportadas.",
       "baseline": "Cuatro colores y borrado de resaltado.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "Added persistent colored underline and strikethrough alongside existing highlights in both reader renderers. Styled annotations use personal-data schema 2, while legacy highlights keep schema 1; unrecognized styles fail decoding.",
-        "Added named, locally persisted palettes made from the four supported colors, with selection, editing, deletion and unsaved-draft protection; the active popover updates immediately."
+        "Added named, locally persisted palettes made from the four supported colors, with selection, editing, deletion and unsaved-draft protection; the active popover updates immediately.",
+        "Added persistent colored outlines drawn per text line and a compact two-column icon grid for the four marking styles. Color and erase actions share native Glass capsule controls."
       ],
       "verification": [
         "ReaderMarkStyleTests check legacy decoding, schema compatibility, unknown style rejection, rendered attributes, bounds, and save/reload. AnnotationNavigationTests and AppLanguageTests pass.",
         "Native build 194: inspected the glass markup popover and applied a blue underline and pink strikethrough in an e-Sword book. The underline survived restart; the original personal data and workspace were restored.",
         "MarkPaletteTests cover persistence, default colors and validation. Native builds 196–198 created and selected a test palette, confirmed immediate color updates and restart persistence, and exercised save, cancel and discard prompts. Test data and workspace were restored.",
-        "The full test suite passed with --no-parallel after timing-sensitive association and passage-guide tests also passed in isolation."
+        "The full test suite passed with --no-parallel after timing-sensitive association and passage-guide tests also passed in isolation.",
+        "ReaderMarkStyleTests verify outline attributes and persistence alongside highlights, underline and strikethrough; focused marking and translation tests passed (8 tests).",
+        "Native build 200: blue single-line and green wrapped outlines rendered without overlapping the text. Test markings were removed and the prior personal state restored.",
+        "Native build 202: inspected the narrower 280-point popover with a two-column style grid and matched Glass color/erase controls; the user approved the layout and requested removal of the center color glyph.",
+        "Native build 203: verified removal of the center glyph from all four color buttons, matching capsule sizes, no clipping and Outline toggle state changes. Screenshot inspection captured inactive-window appearance; build 202 active appearance was also confirmed by the user."
       ],
       "limitations": [
-        "Arbitrary custom colors, outlines and additional marking styles remain pending."
-      ]
+        "Palettes currently use the four supported colors; arbitrary custom colors are outside this completed acceptance criterion."
+      ],
+      "completionReview": {
+        "date": "2026-10-28",
+        "basis": "El criterio funcional de estilos persistentes y paletas está cubierto, con atributos y persistencia probados y contornos revisados en lectura nativa.",
+        "releaseAcceptance": "La revisión general de accesibilidad, idiomas y plataformas sigue abierta en sus fichas específicas."
+      }
     },
     {
       "id": "F173",
@@ -516,7 +582,7 @@
       "sourceKey": "study-expansion-annotations-10",
       "acceptance": "Integrar asignar, ir y quitar nueve marcadores con menú, teclado y restauración en MacRebuild.",
       "baseline": "Modelo y prototipo anteriores contienen slots numerados.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "Nine numbered bookmarks integrated with native keyboard shortcuts, source identity and separate recoverable storage."
       ],
@@ -524,6 +590,14 @@
         "15 focused tests passed, including Unicode positions, reopening, concurrent writers, changed or missing resources and incompatible files. In the installed app, assignment, Control-1 navigation, removal and persistence after relaunch were verified with an authored Bible."
       ],
       "limitations": [
+        "Web-backed readers need a stable rendered-text projection before positions can be bookmarked. The native accessibility tree verified the menu; the computer-use service did not provide a screenshot of the open system menu."
+      ],
+      "completionReview": {
+        "date": "2026-10-28",
+        "basis": "Asignación, navegación, retirada, teclado y persistencia de nueve marcadores comprobados para lectores nativos compatibles.",
+        "releaseAcceptance": "La revisión general de accesibilidad, idiomas y plataformas sigue abierta en sus fichas específicas."
+      },
+      "additionalValidation": [
         "Web-backed readers need a stable rendered-text projection before positions can be bookmarked. The native accessibility tree verified the menu; the computer-use service did not provide a screenshot of the open system menu."
       ]
     },
@@ -536,7 +610,7 @@
       "sourceKey": "study-expansion-product-02",
       "acceptance": "Buscar texto de anotaciones con filtros de recurso, cuaderno y color y destino exacto.",
       "baseline": "La búsqueda de referencias incluye documentos personales.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "Literal case- and accent-insensitive search of note titles and bodies and source-backed highlighted text; filter by notebook, resource and highlight color, with partial coverage warnings and checked navigation.",
         "Search results preserve UTF-16 coordinates, select exact body matches in notes and exact source matches in verified highlights; changed or missing sources are not silently substituted.",
@@ -548,6 +622,15 @@
         "Native build 125: title match Café selected exactly after opening; resource filter included an A-anchored note and excluded B; widened resource picker inspected in dark/light English and dark Arabic. Six note-editor tests passed."
       ],
       "limitations": [
+        "Search is literal rather than the full library query grammar; results are capped at 500 with an explicit partial-coverage notice.",
+        "Unresolved legacy anchors, changed resources and unsupported projections are reported rather than guessed; older macOS versions still require hardware validation."
+      ],
+      "completionReview": {
+        "date": "2026-10-28",
+        "basis": "Búsqueda literal con filtros y destinos exactos comprobada. La gramática avanzada no forma parte de este criterio.",
+        "releaseAcceptance": "La revisión general de accesibilidad, idiomas y plataformas sigue abierta en sus fichas específicas."
+      },
+      "additionalValidation": [
         "Search is literal rather than the full library query grammar; results are capped at 500 with an explicit partial-coverage notice.",
         "Unresolved legacy anchors, changed resources and unsupported projections are reported rather than guessed; older macOS versions still require hardware validation."
       ]
@@ -614,7 +697,7 @@
       "sourceKey": "study-expansion-daily-02",
       "acceptance": "Marcar lecturas realizadas y ocultar completadas sin perder progreso al reabrir.",
       "baseline": "Sin seguimiento de sesiones de plan identificado.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "Reading entries retain completion state and can filter completed items without discarding them.",
         "The plan view offers completion toggles, a completed count and a hide-completed filter."
@@ -625,6 +708,14 @@
         "Build 134 displayed the edited plan in light English and light Arabic; changing a completed passage returned the reading to pending."
       ],
       "limitations": [
+        "Additional plans and display edge cases, narrow-window and older macOS testing remain pending."
+      ],
+      "completionReview": {
+        "date": "2026-10-28",
+        "basis": "Estado completado, filtro de pendientes y persistencia comprobados tras reabrir la aplicación.",
+        "releaseAcceptance": "La revisión general de accesibilidad, idiomas y plataformas sigue abierta en sus fichas específicas."
+      },
+      "additionalValidation": [
         "Additional plans and display edge cases, narrow-window and older macOS testing remain pending."
       ]
     },
@@ -637,7 +728,7 @@
       "sourceKey": "study-expansion-daily-03",
       "acceptance": "Generar calendario interoperable con fechas y comportamiento temporal correctos.",
       "baseline": "Sin exportación de planes identificada.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "Calendar serializer emits all-day VEVENTs with stable IDs, UTC timestamps, exclusive end dates, escaping and UTF-8 line folding.",
         "The native save panel exports the selected plan as an .ics file and protects resource paths."
@@ -648,6 +739,14 @@
         "An independent icalendar parser read the build 135 exported file and verified five distinct all-day events, references, grouped dates and exclusive end dates."
       ],
       "limitations": [
+        "Import and date interpretation in an independent calendar application still require verification."
+      ],
+      "completionReview": {
+        "date": "2026-10-28",
+        "basis": "Exportación nativa y validación independiente de fechas, eventos y límites temporales del calendario comprobadas.",
+        "releaseAcceptance": "La revisión general de accesibilidad, idiomas y plataformas sigue abierta en sus fichas específicas."
+      },
+      "additionalValidation": [
         "Import and date interpretation in an independent calendar application still require verification."
       ]
     },
@@ -660,7 +759,7 @@
       "sourceKey": "study-expansion-daily-04",
       "acceptance": "Añadir Hoy, selector de fecha y navegación diaria anterior/siguiente.",
       "baseline": "El formato .devi se importa y se lee.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "Added a checked recurring Gregorian month/day directory for e-Sword devotional entries; missing and ambiguous dates do not resolve to another article.",
         "Added a native date picker, Today and previous/next day controls for e-Sword devotional readers. Each jump rechecks the original date directory and file stamp before committing; absent or ambiguous dates leave the current reading and history intact."
@@ -670,6 +769,14 @@
         "DevotionalDirectoryTests and DevotionalNavigationTests pass, including authored .devi and normalized packages, leap dates, missing dates, source-change rejection and history. AppLanguageTests pass in ten languages. Builds 145–146 were checked in the real app: Today, direct date selection, next/previous and a missing day; English dark and Arabic light were inspected and RTL arrows corrected. The test resource was removed and original catalog and workspace restored."
       ],
       "limitations": [
+        "Narrow reader panes, other macOS versions, physical keyboard/VoiceOver coverage and source formats beyond e-Sword .devi remain to be verified; the feature is intentionally enabled only for verified e-Sword devotional metadata."
+      ],
+      "completionReview": {
+        "date": "2026-10-28",
+        "basis": "Hoy, fecha y navegación diaria comprobados con devocionales e-Sword compatibles y tratamiento explícito de días ausentes.",
+        "releaseAcceptance": "La revisión general de accesibilidad, idiomas y plataformas sigue abierta en sus fichas específicas."
+      },
+      "additionalValidation": [
         "Narrow reader panes, other macOS versions, physical keyboard/VoiceOver coverage and source formats beyond e-Sword .devi remain to be verified; the feature is intentionally enabled only for verified e-Sword devotional metadata."
       ]
     },
@@ -682,7 +789,7 @@
       "sourceKey": "study-expansion-daily-05",
       "acceptance": "Categorías, repetición, privacidad y estado de respuesta persistentes.",
       "baseline": "Las notas generales pueden almacenar texto, sin modelo propio de oración.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "Added a separate local prayer journal with categories, private presentation flags, once/daily/weekly/monthly schedules, prayed and answered dates, validation and transactional persistence.",
         "Added a native prayer list and editor with category management, repetition, private presentation, completion and answered-state controls; filtered-out or hidden selections do not expose their details or actions."
@@ -693,6 +800,14 @@
         "Native build 150: filtered selections no longer show details or actions; the empty state, prayer list and editor were inspected in dark English and light Arabic with right-to-left layout. Test-only records were archived and original preferences restored."
       ],
       "limitations": [
+        "The private flag is a presentation preference, not encryption or access control; local data is stored in a separate JSON file. Narrow-window visual review and broader accessibility verification remain pending."
+      ],
+      "completionReview": {
+        "date": "2026-10-28",
+        "basis": "Categorías, repetición, presentación privada y respuesta persistente implementadas y probadas. El indicador privado oculta elementos; no cifra archivos.",
+        "releaseAcceptance": "La revisión general de accesibilidad, idiomas y plataformas sigue abierta en sus fichas específicas."
+      },
+      "additionalValidation": [
         "The private flag is a presentation preference, not encryption or access control; local data is stored in a separate JSON file. Narrow-window visual review and broader accessibility verification remain pending."
       ]
     },
@@ -765,7 +880,7 @@
       "sourceKey": "study-expansion-daily-09",
       "acceptance": "Generar y validar actividad y solución desde reglas y datos documentados.",
       "baseline": "Sin generador de actividades identificado.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "Added a bounded seeded word-search generator with eight directions, Unicode-letter validation, checked placements and forward/reverse solution matching.",
         "Added an optional native activity using user-supplied words, configurable grid size, accessible square labels, two-point selection and a found-word counter; games are temporary."
@@ -775,6 +890,14 @@
         "AppLanguageTests passed for ten languages. Native builds 163 and 164 were visually inspected in dark mode, and a generated word was selected and marked correctly. The previous workspace was restored."
       ],
       "limitations": [
+        "The generator uses a bounded greedy placement strategy and may reject a list even when another arrangement exists. Further light, right-to-left, narrow-window and keyboard/VoiceOver review remains pending; only the generated placements count as solutions."
+      ],
+      "completionReview": {
+        "date": "2026-10-28",
+        "basis": "Actividad opcional generada y solución validada a partir de reglas y datos explícitos; se comunica el límite del generador.",
+        "releaseAcceptance": "La revisión general de accesibilidad, idiomas y plataformas sigue abierta en sus fichas específicas."
+      },
+      "additionalValidation": [
         "The generator uses a bounded greedy placement strategy and may reject a list even when another arrangement exists. Further light, right-to-left, narrow-window and keyboard/VoiceOver review remains pending; only the generated placements count as solutions."
       ]
     },
@@ -930,7 +1053,7 @@
       "sourceKey": "study-expansion-queries-02",
       "acceptance": "Guardar, recargar y ejecutar consulta, ámbito y opciones con esquema versionado.",
       "baseline": "Consulta actual en memoria; no un documento de búsqueda integrado.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "Added independently versioned, transactional storage for named search configurations, preserving query, scope, filters and search limits.",
         "Added native controls to create and update named searches, select and restore their configurations, and remove an entry. Running a restored search remains a deliberate action.",
@@ -942,9 +1065,18 @@
         "Native build 156 was visually inspected in dark mode. A synthetic search was saved, restored with its scope, executed and recovered after application restart; test records were archived and the previous workspace restored. AppLanguageTests passed for ten languages.",
         "WorkspaceSavedQueriesTests pass for document encoding, decoding and invalid type. Native build 157 exported a synthetic query to a real JSON file; its document kind, schema and content were checked. The updated controls were visually inspected in dark mode in build 158.",
         "Word-list filter snapshots and decoding configurations without the new optional field passed SearchWordListsWorkflowTests.",
-        "WorkspaceSavedQueriesTests passed for import-panel configuration after a folder-only state and for portable query decoding and persistence."
+        "WorkspaceSavedQueriesTests passed for import-panel configuration after a folder-only state and for portable query decoding and persistence.",
+        "Build 184: importación real de un JSON exportado, selección habilitada y consulta visible; dato temporal retirado. Esta evidencia estaba registrada por error en F235."
       ],
       "limitations": [
+        "Verificación general de apariencia clara, RTL, ventanas estrechas y accesibilidad pendiente en F253/F254."
+      ],
+      "completionReview": {
+        "date": "2026-10-28",
+        "basis": "Guardado, restauración, ejecución y documento versionado comprobados, incluida importación nativa en build 184.",
+        "releaseAcceptance": "La revisión general de accesibilidad, idiomas y plataformas sigue abierta en sus fichas específicas."
+      },
+      "additionalValidation": [
         "Native import remains unverified: after explicitly enabling file selection, the file was visibly selected but Open remained disabled. A second panel configuration without a file-type filter is implemented and awaits native verification. Visual and accessibility review in light appearance, right-to-left layout and narrow windows remains pending."
       ]
     },
@@ -957,7 +1089,7 @@
       "sourceKey": "study-expansion-queries-03",
       "acceptance": "Crear listas de inclusión/exclusión y aplicarlas a búsquedas reales.",
       "baseline": "No hay documento de términos conectado al buscador.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "Added locally persisted reusable word lists with native creation, editing and deletion, and inclusion/exclusion filters applied to actual library searches. Active filters remain visible when their section is collapsed.",
         "Search history and saved configurations preserve the actual terms as snapshots, including when a list is later edited or removed. Approximate matching explicitly rejects word-list filters.",
@@ -972,6 +1104,14 @@
       ],
       "limitations": [
         "Light appearance, right-to-left and narrow-window visual and accessibility review remain pending."
+      ],
+      "completionReview": {
+        "date": "2026-10-28",
+        "basis": "Listas persistentes de inclusión/exclusión aplicadas a búsquedas reales; se conservan instantáneas en consultas e historial.",
+        "releaseAcceptance": "La revisión general de accesibilidad, idiomas y plataformas sigue abierta en sus fichas específicas."
+      },
+      "additionalValidation": [
+        "Light appearance, right-to-left and narrow-window visual and accessibility review remain pending."
       ]
     },
     {
@@ -983,7 +1123,7 @@
       "sourceKey": "study-expansion-queries-04",
       "acceptance": "Completar inclusión/exclusión, gestión reusable y comprobación de ámbitos.",
       "baseline": "Listas de versículos sirven como rango positivo de búsqueda.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "Added optional excluded Bible ranges from a typed reference expression or saved verse list, combinable with existing included ranges. Execution filters verified verse boundaries and records the excluded range in the report.",
         "Saved search configurations and history retain the exclusion selection, while older configurations remain readable.",
@@ -994,6 +1134,14 @@
         "Native builds 169 and 170 were visually inspected in dark mode; the reference exclusion picker and custom passage field were shown, and the search header and controls fit in the initial window."
       ],
       "limitations": [
+        "Lists reuse existing verse-list documents; named-range management, end-to-end tests with installed compatible Bibles, and visual and accessibility acceptance remain pending."
+      ],
+      "completionReview": {
+        "date": "2026-10-28",
+        "basis": "Inclusión y exclusión reutilizables y ámbitos comprobados con Biblias de prueba; rangos con nombre integrados en F238.",
+        "releaseAcceptance": "La revisión general de accesibilidad, idiomas y plataformas sigue abierta en sus fichas específicas."
+      },
+      "additionalValidation": [
         "Lists reuse existing verse-list documents; named-range management, end-to-end tests with installed compatible Bibles, and visual and accessibility acceptance remain pending."
       ]
     },
@@ -1317,7 +1465,7 @@
       "sourceKey": "study-expansion-reference-04",
       "acceptance": "Unidades y factores documentados, supuestos explícitos y cálculos comprobados.",
       "baseline": "Sin conversor integrado identificado.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "Added a native converter for length, capacity and mass, including modern units and explicitly approximate cubit, ephah, bath, homer and shekel assumptions. The UI links to the references for those assumptions and rejects incompatible dimensions and non-finite inputs."
       ],
@@ -1326,6 +1474,14 @@
         "Native build 177 was visually inspected in dark mode; one cubit produced 0.4445 metres, switching to capacity produced 22 litres per ephah and entering two produced 44 litres. The previous workspace was restored."
       ],
       "limitations": [
+        "The initial unit catalogue is limited; historical estimates vary substantially. Keyboard, VoiceOver, light appearance, right-to-left and narrow-window acceptance remain pending."
+      ],
+      "completionReview": {
+        "date": "2026-10-28",
+        "basis": "Conversión dimensional, factores documentados y supuestos aproximados visibles, comprobados con pruebas y aplicación.",
+        "releaseAcceptance": "La revisión general de accesibilidad, idiomas y plataformas sigue abierta en sus fichas específicas."
+      },
+      "additionalValidation": [
         "The initial unit catalogue is limited; historical estimates vary substantially. Keyboard, VoiceOver, light appearance, right-to-left and narrow-window acceptance remain pending."
       ]
     },
@@ -1394,7 +1550,7 @@
       "sourceKey": "study-expansion-product-03",
       "acceptance": "Recoger extractos y referencias para organizarlos después sin alterar las fuentes.",
       "baseline": "Notas y favoritos básicos disponibles.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "Added a locally persisted research inbox that captures selected text with source identity, exact UTF-16 location and source fingerprint, permits comments and removal, and reopens a checked source selection.",
         "Switching away from an edited comment prompts to save, discard or cancel. Capture is currently restricted to compatible non-web-backed reader pages.",
@@ -1406,6 +1562,14 @@
         "Native build 179 rejected a comment exceeding its limit, kept the window and editor open, and saved the corrected comment on close. ResearchInboxTests verified that the close guard stays open on save failure."
       ],
       "limitations": [
+        "Web-backed selections are unsupported. Alternate dismissal paths and application termination with unsaved comments need broader acceptance testing. Keyboard, VoiceOver, light appearance, right-to-left and narrow-window acceptance remain pending."
+      ],
+      "completionReview": {
+        "date": "2026-10-28",
+        "basis": "Captura, comentarios persistentes, organización y reapertura del origen comprobados en lectores nativos compatibles; el guardado fallido mantiene el editor abierto.",
+        "releaseAcceptance": "La revisión general de accesibilidad, idiomas y plataformas sigue abierta en sus fichas específicas."
+      },
+      "additionalValidation": [
         "Web-backed selections are unsupported. Alternate dismissal paths and application termination with unsaved comments need broader acceptance testing. Keyboard, VoiceOver, light appearance, right-to-left and narrow-window acceptance remain pending."
       ]
     },
@@ -1512,7 +1676,7 @@
       "sourceKey": "study-expansion-product-09",
       "acceptance": "Buscar y ejecutar acciones disponibles por teclado con foco y accesibilidad correctos.",
       "baseline": "Menús y atajos existentes.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "Added a keyboard shortcut and native searchable palette for existing workspace tools, using translated names and dispatching to existing workspace actions."
       ],
@@ -1521,6 +1685,14 @@
         "Native build 172 opened the palette with Command-Shift-P, selected commands with the arrow keys, opened the selected reference-search tool with Return, and dismissed the palette with Escape. The prior workspace was restored."
       ],
       "limitations": [
+        "The palette currently exposes a curated set of workspace tools, not every application action. Light appearance, right-to-left, narrow-window and VoiceOver acceptance remain pending."
+      ],
+      "completionReview": {
+        "date": "2026-10-28",
+        "basis": "Búsqueda, flechas, Intro y Escape comprobados sobre el catálogo de herramientas expuesto por la paleta.",
+        "releaseAcceptance": "La revisión general de accesibilidad, idiomas y plataformas sigue abierta en sus fichas específicas."
+      },
+      "additionalValidation": [
         "The palette currently exposes a curated set of workspace tools, not every application action. Light appearance, right-to-left, narrow-window and VoiceOver acceptance remain pending."
       ]
     },
@@ -1533,7 +1705,7 @@
       "sourceKey": "study-expansion-product-10",
       "acceptance": "Modo dedicado que oculte controles secundarios y restaure el workspace anterior.",
       "baseline": "Se puede maximizar un panel y ocultar algunas superficies.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "Added a temporary focused-reading presentation that hides secondary controls and other panes without altering their workspace geometry or stored reader settings; exit is available from a native toolbar control and a non-conflicting keyboard shortcut."
       ],
@@ -1542,6 +1714,14 @@
         "Native build 155 also retained two open reader panes when entering and leaving focused reading."
       ],
       "limitations": [
+        "Additional visual and accessibility review is required for light appearance, right-to-left layout, narrow windows and other resource types."
+      ],
+      "completionReview": {
+        "date": "2026-10-28",
+        "basis": "Entrada y salida de lectura concentrada conservan posición y disposición; comprobado con uno y varios lectores.",
+        "releaseAcceptance": "La revisión general de accesibilidad, idiomas y plataformas sigue abierta en sus fichas específicas."
+      },
+      "additionalValidation": [
         "Additional visual and accessibility review is required for light appearance, right-to-left layout, narrow windows and other resource types."
       ]
     },
@@ -1554,7 +1734,7 @@
       "sourceKey": "study-expansion-product-11",
       "acceptance": "Reanudar estudios/documentos y mostrar planes y lecturas reales del día.",
       "baseline": "Pantalla de Inicio básica y opciones de arranque.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "Added a native glass home view with the active reader, locally saved study documents, and actual readings scheduled for the current local day. Reading entries open their corresponding plan; errors loading local data remain visible."
       ],
@@ -1566,6 +1746,14 @@
         "Native build 194 showed the active e-Sword book on Home and its button returned to the same reader."
       ],
       "limitations": [
+        "Light and right-to-left layouts still need native visual verification."
+      ],
+      "completionReview": {
+        "date": "2026-10-28",
+        "basis": "Inicio muestra documentos, lecturas reales del día y reanuda el lector activo; accesos comprobados en la aplicación.",
+        "releaseAcceptance": "La revisión general de accesibilidad, idiomas y plataformas sigue abierta en sus fichas específicas."
+      },
+      "additionalValidation": [
         "Light and right-to-left layouts still need native visual verification."
       ]
     },
@@ -1606,7 +1794,7 @@
       "sourceKey": "WIN-SEARCH-HISTORY-001",
       "acceptance": "Historial recuperable con todas las opciones, selección y repetición deliberada.",
       "baseline": "Consulta actual en memoria.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "Added a local search history that records valid library searches, retains all search options and scope membership, permits selecting and restoring a configuration without automatically rerunning it, and supports removal of individual entries. History is limited to 100 distinct configurations."
       ],
@@ -1616,6 +1804,14 @@
         "Native build 184: a previously exported acceptance JSON was selectable in the native file panel and imported as [Acceptance] Portable search. The test entry was removed after verification."
       ],
       "limitations": [
+        "Light, right-to-left and narrow-window visual review remains pending. The history currently retains at most 100 distinct configurations; broader history requirements remain to be evaluated."
+      ],
+      "completionReview": {
+        "date": "2026-10-28",
+        "basis": "Historial con todas las opciones, restauración deliberada, retirada y persistencia comprobados; capacidad explícita de 100 configuraciones.",
+        "releaseAcceptance": "La revisión general de accesibilidad, idiomas y plataformas sigue abierta en sus fichas específicas."
+      },
+      "additionalValidation": [
         "Light, right-to-left and narrow-window visual review remains pending. The history currently retains at most 100 distinct configurations; broader history requirements remain to be evaluated."
       ]
     },
@@ -1656,7 +1852,7 @@
       "sourceKey": "WIN-CUSTOM-RANGE-001",
       "acceptance": "Ciclo de nombrar, editar, borrar y activar rangos como entidades propias del original.",
       "baseline": "Pasajes personalizados y listas guardadas ya se aplican a búsqueda.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "Added named reference ranges with independently versioned, validated local storage and native creation, editing, deletion and selection. Named ranges can include or exclude Bible verses and are retained by search history and saved searches.",
         "Changing a named range used by visible results invalidates those results until the search is run again. Missing named ranges report an error instead of silently widening the search."
@@ -1666,6 +1862,14 @@
         "Native build 173 was visually inspected in dark mode; a synthetic range was created, edited and selected, then test data was archived and the prior workspace restored."
       ],
       "limitations": [
+        "Full comparison with original range-editor behavior and visual, keyboard, VoiceOver, light appearance, right-to-left and narrow-window acceptance remain pending."
+      ],
+      "completionReview": {
+        "date": "2026-10-28",
+        "basis": "Crear, nombrar, editar, borrar y activar rangos con persistencia, invalidación de resultados y protección de concurrencia comprobados.",
+        "releaseAcceptance": "La revisión general de accesibilidad, idiomas y plataformas sigue abierta en sus fichas específicas."
+      },
+      "additionalValidation": [
         "Full comparison with original range-editor behavior and visual, keyboard, VoiceOver, light appearance, right-to-left and narrow-window acceptance remain pending."
       ]
     },
@@ -1970,5 +2174,6 @@
       "verification": [],
       "limitations": []
     }
-  ]
+  ],
+  "statusPolicy": "completed indica que el criterio funcional de la ficha está implementado y respaldado por la evidencia registrada dentro del alcance soportado. La aceptación general de idioma, accesibilidad y plataforma permanece en F253, F254 y F257 y sigue bloqueando la publicación integral."
 }
