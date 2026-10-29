@@ -23,6 +23,29 @@ struct WorkspaceSavedQueriesSnapshot: Codable, Equatable {
         for query in queries { try query.validate() }
     }
 }
+struct WorkspaceSavedQueryDocument: Codable {
+    let kind: String
+    let schemaVersion: Int
+    let query: WorkspaceSavedQuery
+    init(query: WorkspaceSavedQuery) { kind = "libronx-search"; schemaVersion = 1; self.query = query }
+    func encoded() throws -> Data {
+        try validate()
+        let encoder = JSONEncoder(); encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+        let data = try encoder.encode(self)
+        guard data.count <= MetadataXMLReader.maximumFileBytes else { throw PersonalStateError.tooLarge }
+        return data
+    }
+    static func read(_ data: Data) throws -> Self {
+        guard data.count <= MetadataXMLReader.maximumFileBytes else { throw PersonalStateError.tooLarge }
+        let result = try JSONDecoder().decode(Self.self, from: data)
+        try result.validate(); return result
+    }
+    func validate() throws {
+        guard kind == "libronx-search" else { throw PersonalStateError.invalid("El archivo no es una consulta guardada.") }
+        guard schemaVersion == 1 else { throw PersonalStateError.futureVersion }
+        try query.validate()
+    }
+}
 @MainActor @Observable final class WorkspaceSavedQueries {
     private(set) var queries: [WorkspaceSavedQuery] = []
     private(set) var loadError: String?

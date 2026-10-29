@@ -13,6 +13,12 @@ import Testing
         source.bibleVerses = true; source.bibleRangeMode = .custom; source.customBibleRange = "John 3"
         source.wholeWords = false; source.limits.results = 23
         let query = WorkspaceSavedQuery(title: "My study", configuration: source.historyConfiguration)
+        let document = WorkspaceSavedQueryDocument(query: query)
+        #expect(try WorkspaceSavedQueryDocument.read(document.encoded()).query == query)
+        var otherObject = try #require(JSONSerialization.jsonObject(with: document.encoded()) as? [String: Any])
+        otherObject["kind"] = "another-kind"
+        let other = try JSONSerialization.data(withJSONObject: otherObject)
+        #expect(throws: (any Error).self) { try WorkspaceSavedQueryDocument.read(other) }
         let store = WorkspaceSavedQueries(url: url); try store.save(original: nil, replacement: query)
         let loaded = WorkspaceSavedQueries(url: url); let copy = try #require(loaded.queries.first)
         #expect(copy == query)

@@ -4475,6 +4475,18 @@
     "ur": "کام کی جگہ کی فائل اب دستیاب نہیں۔",
     "zh-Hans": "工作区文件已不可用。"
   },
+  "El archivo no es una consulta guardada.": {
+    "ar": "الملف ليس بحثًا محفوظًا.",
+    "bn": "ফাইলটি সংরক্ষিত অনুসন্ধান নয়।",
+    "en": "The file is not a saved search.",
+    "es": "El archivo no es una consulta guardada.",
+    "fr": "Le fichier n’est pas une recherche enregistrée.",
+    "hi": "फ़ाइल सहेजी गई खोज नहीं है।",
+    "id": "Berkas ini bukan pencarian tersimpan.",
+    "pt": "O arquivo não é uma pesquisa salva.",
+    "ur": "فائل محفوظ تلاش نہیں ہے۔",
+    "zh-Hans": "文件不是已保存的搜索。"
+  },
   "El catálogo cambió. Analiza la biblioteca de nuevo.": {
     "ar": "تغير الفهرس. حلل المكتبة مجددًا.",
     "bn": "ক্যাটালগ বদলেছে। আবার বিশ্লেষণ করুন।",

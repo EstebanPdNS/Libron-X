@@ -865,14 +865,16 @@
       "status": "in_progress",
       "implementation": [
         "Added independently versioned, transactional storage for named search configurations, preserving query, scope, filters and search limits.",
-        "Added native controls to create and update named searches, select and restore their configurations, and remove an entry. Running a restored search remains a deliberate action."
+        "Added native controls to create and update named searches, select and restore their configurations, and remove an entry. Running a restored search remains a deliberate action.",
+        "Added versioned JSON query documents and native import/export controls; imports validate size, type and schema and preserve existing entries on identifier collision."
       ],
       "verification": [
         "WorkspaceSavedQueriesTests and WorkspaceSearchHistoryTests passed for save, restore, update, delete, concurrency and future-version protection.",
-        "Native build 156 was visually inspected in dark mode. A synthetic search was saved, restored with its scope, executed and recovered after application restart; test records were archived and the previous workspace restored. AppLanguageTests passed for ten languages."
+        "Native build 156 was visually inspected in dark mode. A synthetic search was saved, restored with its scope, executed and recovered after application restart; test records were archived and the previous workspace restored. AppLanguageTests passed for ten languages.",
+        "WorkspaceSavedQueriesTests pass for document encoding, decoding and invalid type. Native build 157 exported a synthetic query to a real JSON file; its document kind, schema and content were checked. The updated controls were visually inspected in dark mode in build 158."
       ],
       "limitations": [
-        "Visual and accessibility review in light appearance, right-to-left layout and narrow windows remains pending; portable file export/import is not yet implemented."
+        "Native import remains unverified: in two attempts the file appeared in the open panel but the Open button remained disabled after selection, including after allowing other file types. Visual and accessibility review in light appearance, right-to-left layout and narrow windows remains pending."
       ]
     },
     {

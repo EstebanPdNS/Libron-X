@@ -1,4 +1,7 @@
 import SwiftUI
+import AppKit
+import UniformTypeIdentifiers
+import LibronixCore
 
 struct WorkspaceSavedQueriesView: View {
     @Bindable var store: WorkspaceSavedQueries
@@ -37,6 +40,8 @@ struct WorkspaceSavedQueriesView: View {
                         do { try store.remove(selected); selectedID = nil; title = ""; error = nil }
                         catch { self.error = error.localizedDescription }
                     }.disabled(selected == nil)
+                    Button(L("Importar"), action: importDocument)
+                    Button(L("Exportar"), action: exportDocument).disabled(selected == nil)
                     Spacer()
                     Button(L("Cancelar")) { dismiss() }
                     Button(L("Restaurar búsqueda")) {
@@ -58,5 +63,30 @@ struct WorkspaceSavedQueriesView: View {
         query.configuration = search.historyConfiguration
         do { try store.save(original: original, replacement: query); selectedID = query.id; error = nil }
         catch { self.error = error.localizedDescription }
+    }
+    private func importDocument() {
+        let panel = NSOpenPanel(); panel.allowedContentTypes = [.json]; panel.allowsOtherFileTypes = true
+        panel.begin { response in
+            guard response == .OK, let url = panel.url else { return }
+            let accessed = url.startAccessingSecurityScopedResource()
+            defer { if accessed { url.stopAccessingSecurityScopedResource() } }
+            do {
+                let handle = try FileHandle(forReadingFrom: url); defer { try? handle.close() }
+                let data = try handle.read(upToCount: MetadataXMLReader.maximumFileBytes + 1) ?? Data()
+                var query = try WorkspaceSavedQueryDocument.read(data).query
+                if store.queries.contains(where: { $0.id == query.id }) { query.id = UUID() }
+                try store.save(original: nil, replacement: query); selectedID = query.id; error = nil
+            } catch { self.error = error.localizedDescription }
+        }
+    }
+    private func exportDocument() {
+        guard let selected else { return }
+        let panel = NSSavePanel(); panel.allowedContentTypes = [.json]
+        panel.nameFieldStringValue = selected.title.replacingOccurrences(of: "/", with: "-") + ".libronx-search.json"
+        panel.begin { response in
+            guard response == .OK, let url = panel.url else { return }
+            do { try WorkspaceSavedQueryDocument(query: selected).encoded().write(to: url, options: .atomic); error = nil }
+            catch { self.error = error.localizedDescription }
+        }
     }
 }
