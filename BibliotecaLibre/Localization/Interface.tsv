@@ -1219,3 +1219,33 @@ Eliminar rango|Delete Range|Excluir intervalo|Supprimer la plage|删除范围|�
 Se eliminará este rango guardado.|This saved range will be deleted.|Este intervalo salvo será excluído.|Cette plage enregistrée sera supprimée.|将删除此保存的范围。|यह सहेजी गई सीमा हटा दी जाएगी।|سيتم حذف هذا النطاق المحفوظ.|এই সংরক্ষিত সীমা মুছে ফেলা হবে।|Rentang tersimpan ini akan dihapus.|یہ محفوظ حد حذف کر دی جائے گی۔
 El rango guardado contiene datos incompatibles.|The saved range contains incompatible data.|O intervalo salvo contém dados incompatíveis.|La plage enregistrée contient des données incompatibles.|已保存的范围包含不兼容的数据。|सहेजी गई सीमा में असंगत डेटा है।|يحتوي النطاق المحفوظ على بيانات غير متوافقة.|সংরক্ষিত সীমায় অসামঞ্জস্যপূর্ণ তথ্য রয়েছে।|Rentang tersimpan berisi data yang tidak kompatibel.|محفوظ حد میں غیر مطابقت پذیر ڈیٹا ہے۔
 No se pudieron abrir los rangos guardados.|Saved ranges could not be opened.|Não foi possível abrir os intervalos salvos.|Impossible d’ouvrir les plages enregistrées.|无法打开已保存的范围。|सहेजी गई सीमाएँ खोली नहीं जा सकीं।|تعذر فتح النطاقات المحفوظة.|সংরক্ষিত সীমাগুলি খোলা যায়নি।|Rentang tersimpan tidak dapat dibuka.|محفوظ حدود نہیں کھولی جا سکیں۔
+Pesos y medidas bíblicos|Biblical Weights and Measures|Pesos e medidas bíblicos|Poids et mesures bibliques|圣经中的度量衡|बाइबिल के बाट और माप|الأوزان والمقاييس الكتابية|বাইবেলের ওজন ও পরিমাপ|Bobot dan ukuran Alkitab|بائبل کے اوزان اور پیمائشیں
+Pesos y medidas bíblicos…|Biblical Weights and Measures…|Pesos e medidas bíblicos…|Poids et mesures bibliques…|圣经中的度量衡…|बाइबिल के बाट और माप…|الأوزان والمقاييس الكتابية…|বাইবেলের ওজন ও পরিমাপ…|Bobot dan ukuran Alkitab…|بائبل کے اوزان اور پیمائشیں…
+Tipo de medida|Measure Type|Tipo de medida|Type de mesure|计量类型|माप का प्रकार|نوع القياس|পরিমাপের ধরন|Jenis ukuran|پیمائش کی قسم
+Longitud|Length|Comprimento|Longueur|长度|लंबाई|الطول|দৈর্ঘ্য|Panjang|لمبائی
+Capacidad|Capacity|Capacidade|Capacité|容量|क्षमता|السعة|ধারণক্ষমতা|Kapasitas|گنجائش
+Peso|Weight|Peso|Poids|重量|वजन|الوزن|ওজন|Berat|وزن
+Cantidad|Amount|Quantidade|Quantité|数量|मात्रा|الكمية|পরিমাণ|Jumlah|مقدار
+De|From|De|De|从|से|من|থেকে|Dari|سے
+A|To|Para|À|到|तक|إلى|পর্যন্ত|Ke|تک
+Metros|Metres|Metros|Mètres|米|मीटर|أمتار|মিটার|Meter|میٹر
+Centímetros|Centimetres|Centímetros|Centimètres|厘米|सेंटीमीटर|سنتيمترات|সেন্টিমিটার|Sentimeter|سینٹی میٹر
+Pies|Feet|Pés|Pieds|英尺|फीट|أقدام|ফুট|Kaki|فٹ
+Pulgadas|Inches|Polegadas|Pouces|英寸|इंच|بوصات|ইঞ্চি|Inci|انچ
+Codos|Cubits|Côvados|Coudées|肘|हाथ|أذرع|হাত|Hasta|ذراع
+Litros|Litres|Litros|Litres|升|लीटर|لترات|লিটার|Liter|لیٹر
+Mililitros|Millilitres|Mililitros|Millilitres|毫升|मिलीलीटर|ملليلترات|মিলিলিটার|Mililiter|ملی لیٹر
+Efas|Ephahs|Efas|Éphas|伊法|एपा|إيفات|ঐফা|Efa|ایفہ
+Batos|Baths|Batos|Baths|罢特|बत|بث|বৎ|Bat|بت
+Hómeres|Homers|Hômeres|Homers|贺梅珥|होमेर|حومرات|হোমর|Homer|حومر
+Gramos|Grams|Gramas|Grammes|克|ग्राम|غرامات|গ্রাম|Gram|گرام
+Kilogramos|Kilograms|Quilogramas|Kilogrammes|千克|किलोग्राम|كيلوغرامات|কিলোগ্রাম|Kilogram|کلوگرام
+Onzas|Ounces|Onças|Onces|盎司|औंस|أونصات|আউন্স|Ons|اونس
+Siclos|Shekels|Siclos|Sicles|舍客勒|शेकेल|شواقل|শেকেল|Syikal|شیکل
+Resultado|Result|Resultado|Résultat|结果|परिणाम|النتيجة|ফলাফল|Hasil|نتیجہ
+Introduce una cantidad válida.|Enter a valid amount.|Insira uma quantidade válida.|Saisissez une quantité valide.|请输入有效数量。|मान्य मात्रा दर्ज करें।|أدخل كمية صالحة.|একটি বৈধ পরিমাণ লিখুন।|Masukkan jumlah yang valid.|درست مقدار درج کریں۔
+Las medidas antiguas son aproximadas y variaban según la época y el lugar.|Ancient measures are approximate and varied by time and place.|As medidas antigas são aproximadas e variavam conforme a época e o lugar.|Les mesures anciennes sont approximatives et variaient selon l’époque et le lieu.|古代计量值为近似值，因时代和地点而异。|प्राचीन माप अनुमानित हैं और समय तथा स्थान के अनुसार बदलते थे।|المقاييس القديمة تقريبية واختلفت باختلاف الزمان والمكان.|প্রাচীন পরিমাপ আনুমানিক এবং সময় ও স্থান অনুযায়ী পরিবর্তিত হতো।|Ukuran kuno bersifat perkiraan dan berbeda menurut waktu dan tempat.|قدیم پیمائشیں تخمینی ہیں اور زمانے اور مقام کے لحاظ سے مختلف تھیں۔
+Supuestos: codo 44,45 cm; efa y bato 22 L; homer 220 L; siclo 11,4 g.|Assumptions: cubit 44.45 cm; ephah and bath 22 L; homer 220 L; shekel 11.4 g.|Suposições: côvado 44,45 cm; efa e bato 22 L; hômer 220 L; siclo 11,4 g.|Hypothèses : coudée 44,45 cm ; épha et bath 22 L ; homer 220 L ; sicle 11,4 g.|假定：肘为44.45厘米；伊法和罢特为22升；贺梅珥为220升；舍客勒为11.4克。|मान्यताएँ: हाथ 44.45 सेमी; एपा और बत 22 लीटर; होमेर 220 लीटर; शेकेल 11.4 ग्राम।|الافتراضات: الذراع 44.45 سم؛ الإيفة والبث 22 لترًا؛ الحومر 220 لترًا؛ الشاقل 11.4 غرامًا.|অনুমান: হাত 44.45 সেমি; ঐফা ও বৎ 22 লিটার; হোমর 220 লিটার; শেকেল 11.4 গ্রাম।|Asumsi: hasta 44,45 cm; efa dan bat 22 L; homer 220 L; syikal 11,4 g.|مفروضے: ذراع 44.45 سم؛ ایفہ اور بت 22 لیٹر؛ حومر 220 لیٹر؛ شیکل 11.4 گرام۔
+Fuentes y contexto|Sources and Context|Fontes e contexto|Sources et contexte|来源和背景|स्रोत और संदर्भ|المصادر والسياق|উৎস ও প্রেক্ষাপট|Sumber dan konteks|ذرائع اور پس منظر
+Referencia de capacidad|Capacity Reference|Referência de capacidade|Référence de capacité|容量参考|क्षमता का संदर्भ|مرجع السعة|ধারণক্ষমতার সূত্র|Referensi kapasitas|گنجائش کا حوالہ
+Referencia de peso|Weight Reference|Referência de peso|Référence de poids|重量参考|वजन का संदर्भ|مرجع الوزن|ওজনের সূত্র|Referensi berat|وزن کا حوالہ

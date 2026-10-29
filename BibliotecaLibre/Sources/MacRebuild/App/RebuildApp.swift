@@ -201,6 +201,7 @@ struct RebuildCommands: Commands {
             Button(L("Memorización de pasajes…")) { workspace.activeTool = .scriptureMemory }
             Button(L("Autoevaluaciones…")) { workspace.activeTool = .studyAssessments }
             Button(L("Sopa de letras…")) { workspace.activeTool = .wordSearch }
+            Button(L("Pesos y medidas bíblicos…")) { workspace.activeTool = .biblicalMeasures }
             Button(L("Comparar pasajes bíblicos…")) { workspace.activeTool = .passageComparison }
             Button(L("Enlaces clave…")) { workspace.activeTool = .keyLinks }
             Button(L("Asociaciones de recursos…")) { workspace.activeTool = .associations }

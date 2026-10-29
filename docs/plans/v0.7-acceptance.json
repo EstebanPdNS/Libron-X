@@ -1263,10 +1263,17 @@
       "sourceKey": "study-expansion-reference-04",
       "acceptance": "Unidades y factores documentados, supuestos explícitos y cálculos comprobados.",
       "baseline": "Sin conversor integrado identificado.",
-      "status": "pending",
-      "implementation": [],
-      "verification": [],
-      "limitations": []
+      "status": "in_progress",
+      "implementation": [
+        "Added a native converter for length, capacity and mass, including modern units and explicitly approximate cubit, ephah, bath, homer and shekel assumptions. The UI links to the references for those assumptions and rejects incompatible dimensions and non-finite inputs."
+      ],
+      "verification": [
+        "BiblicalMeasuresTests passed for stated estimates, exact modern conversions, incompatible dimensions and non-finite input; AppLanguageTests and CommandPaletteTests passed. Sources: https://www.biblegateway.com/resources/encyclopedia-of-the-bible/Weights-Measures ; https://www.biblegateway.com/passage/?search=Ezekiel+45%3A10-11&version=NRSVUE ; https://www.biblegateway.com/passage/?search=Ezekiel+45%3A12&version=GNT .",
+        "Native build 177 was visually inspected in dark mode; one cubit produced 0.4445 metres, switching to capacity produced 22 litres per ephah and entering two produced 44 litres. The previous workspace was restored."
+      ],
+      "limitations": [
+        "The initial unit catalogue is limited; historical estimates vary substantially. Keyboard, VoiceOver, light appearance, right-to-left and narrow-window acceptance remain pending."
+      ]
     },
     {
       "id": "F220",

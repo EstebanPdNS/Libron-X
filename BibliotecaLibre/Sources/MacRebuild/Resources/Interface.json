@@ -23,6 +23,18 @@
     "ur": "100 %",
     "zh-Hans": "100 %"
   },
+  "A": {
+    "ar": "إلى",
+    "bn": "পর্যন্ত",
+    "en": "To",
+    "es": "A",
+    "fr": "À",
+    "hi": "तक",
+    "id": "Ke",
+    "pt": "Para",
+    "ur": "تک",
+    "zh-Hans": "到"
+  },
   "Aa": {
     "ar": "أب",
     "bn": "অআ",
@@ -1595,6 +1607,18 @@
     "ur": "ٹول بار",
     "zh-Hans": "工具栏"
   },
+  "Batos": {
+    "ar": "بث",
+    "bn": "বৎ",
+    "en": "Baths",
+    "es": "Batos",
+    "fr": "Baths",
+    "hi": "बत",
+    "id": "Bat",
+    "pt": "Batos",
+    "ur": "بت",
+    "zh-Hans": "罢特"
+  },
   "Biblia": {
     "ar": "الكتاب المقدس",
     "bn": "বাইবেল",
@@ -2459,6 +2483,30 @@
     "ur": "منسوخ کریں",
     "zh-Hans": "取消"
   },
+  "Cantidad": {
+    "ar": "الكمية",
+    "bn": "পরিমাণ",
+    "en": "Amount",
+    "es": "Cantidad",
+    "fr": "Quantité",
+    "hi": "मात्रा",
+    "id": "Jumlah",
+    "pt": "Quantidade",
+    "ur": "مقدار",
+    "zh-Hans": "数量"
+  },
+  "Capacidad": {
+    "ar": "السعة",
+    "bn": "ধারণক্ষমতা",
+    "en": "Capacity",
+    "es": "Capacidad",
+    "fr": "Capacité",
+    "hi": "क्षमता",
+    "id": "Kapasitas",
+    "pt": "Capacidade",
+    "ur": "گنجائش",
+    "zh-Hans": "容量"
+  },
   "Capítulo": {
     "ar": "الإصحاح",
     "bn": "অধ্যায়",
@@ -2602,6 +2650,18 @@
     "pt": "Catálogo",
     "ur": "فہرست",
     "zh-Hans": "目录"
+  },
+  "Centímetros": {
+    "ar": "سنتيمترات",
+    "bn": "সেন্টিমিটার",
+    "en": "Centimetres",
+    "es": "Centímetros",
+    "fr": "Centimètres",
+    "hi": "सेंटीमीटर",
+    "id": "Sentimeter",
+    "pt": "Centímetros",
+    "ur": "سینٹی میٹر",
+    "zh-Hans": "厘米"
   },
   "Cerrar": {
     "ar": "إغلاق",
@@ -2782,6 +2842,18 @@
     "pt": "Cobertura parcial: não é possível confirmar versículos ausentes.",
     "ur": "جزوی جانچ: غائب آیات کی تصدیق نہیں کی جا سکتی۔",
     "zh-Hans": "覆盖不完整：无法确认哪些经节缺失。"
+  },
+  "Codos": {
+    "ar": "أذرع",
+    "bn": "হাত",
+    "en": "Cubits",
+    "es": "Codos",
+    "fr": "Coudées",
+    "hi": "हाथ",
+    "id": "Hasta",
+    "pt": "Côvados",
+    "ur": "ذراع",
+    "zh-Hans": "肘"
   },
   "Coincidencia": {
     "ar": "المطابقة",
@@ -3767,6 +3839,18 @@
     "ur": "نسخے کی تفصیلات",
     "zh-Hans": "版本信息"
   },
+  "De": {
+    "ar": "من",
+    "bn": "থেকে",
+    "en": "From",
+    "es": "De",
+    "fr": "De",
+    "hi": "से",
+    "id": "Dari",
+    "pt": "De",
+    "ur": "سے",
+    "zh-Hans": "从"
+  },
   "Declarado": {
     "ar": "مُصرّح به",
     "bn": "ঘোষিত",
@@ -4642,6 +4726,18 @@
     "pt": "Editora",
     "ur": "ناشر",
     "zh-Hans": "出版社"
+  },
+  "Efas": {
+    "ar": "إيفات",
+    "bn": "ঐফা",
+    "en": "Ephahs",
+    "es": "Efas",
+    "fr": "Éphas",
+    "hi": "एपा",
+    "id": "Efa",
+    "pt": "Efas",
+    "ur": "ایفہ",
+    "zh-Hans": "伊法"
   },
   "El HTML original conserva objetos no compatibles; se analiza el texto visible.": {
     "ar": "يحتفظ HTML الأصلي بعناصر غير مدعومة؛ يُحلّل النص الظاهر.",
@@ -6311,6 +6407,18 @@
     "ur": "سسٹم فونٹس اور منتخب الفاظ کے لیے لغت تلاش۔",
     "zh-Hans": "系统字体和选词查词典。"
   },
+  "Fuentes y contexto": {
+    "ar": "المصادر والسياق",
+    "bn": "উৎস ও প্রেক্ষাপট",
+    "en": "Sources and Context",
+    "es": "Fuentes y contexto",
+    "fr": "Sources et contexte",
+    "hi": "स्रोत और संदर्भ",
+    "id": "Sumber dan konteks",
+    "pt": "Fontes e contexto",
+    "ur": "ذرائع اور پس منظر",
+    "zh-Hans": "来源和背景"
+  },
   "Genera una bibliografía para consultar los datos de las ediciones.": {
     "ar": "أنشئ قائمة مراجع للاطلاع على بيانات الطبعات.",
     "bn": "সংস্করণের তথ্য দেখতে গ্রন্থপঞ্জি তৈরি করুন।",
@@ -6394,6 +6502,18 @@
     "pt": "Gerenciar intervalos…",
     "ur": "حدود کا انتظام کریں…",
     "zh-Hans": "管理范围…"
+  },
+  "Gramos": {
+    "ar": "غرامات",
+    "bn": "গ্রাম",
+    "en": "Grams",
+    "es": "Gramos",
+    "fr": "Grammes",
+    "hi": "ग्राम",
+    "id": "Gram",
+    "pt": "Gramas",
+    "ur": "گرام",
+    "zh-Hans": "克"
   },
   "Gramática": {
     "ar": "قواعد اللغة",
@@ -6790,6 +6910,18 @@
     "pt": "Hoje",
     "ur": "آج",
     "zh-Hans": "今天"
+  },
+  "Hómeres": {
+    "ar": "حومرات",
+    "bn": "হোমর",
+    "en": "Homers",
+    "es": "Hómeres",
+    "fr": "Homers",
+    "hi": "होमेर",
+    "id": "Homer",
+    "pt": "Hômeres",
+    "ur": "حومر",
+    "zh-Hans": "贺梅珥"
   },
   "Icono": {
     "ar": "الأيقونة",
@@ -7199,6 +7331,18 @@
     "ur": "درست تلاش کا متن درج کریں۔",
     "zh-Hans": "请输入有效的搜索文本。"
   },
+  "Introduce una cantidad válida.": {
+    "ar": "أدخل كمية صالحة.",
+    "bn": "একটি বৈধ পরিমাণ লিখুন।",
+    "en": "Enter a valid amount.",
+    "es": "Introduce una cantidad válida.",
+    "fr": "Saisissez une quantité valide.",
+    "hi": "मान्य मात्रा दर्ज करें।",
+    "id": "Masukkan jumlah yang valid.",
+    "pt": "Insira uma quantidade válida.",
+    "ur": "درست مقدار درج کریں۔",
+    "zh-Hans": "请输入有效数量。"
+  },
   "Introduce una referencia o entrada válida.": {
     "ar": "أدخل مرجعًا أو مدخلًا صالحًا.",
     "bn": "একটি বৈধ উল্লেখ বা ভুক্তি লিখুন।",
@@ -7270,6 +7414,18 @@
     "pt": "JSON",
     "ur": "JSON",
     "zh-Hans": "JSON"
+  },
+  "Kilogramos": {
+    "ar": "كيلوغرامات",
+    "bn": "কিলোগ্রাম",
+    "en": "Kilograms",
+    "es": "Kilogramos",
+    "fr": "Kilogrammes",
+    "hi": "किलोग्राम",
+    "id": "Kilogram",
+    "pt": "Quilogramas",
+    "ur": "کلوگرام",
+    "zh-Hans": "千克"
   },
   "La actualización está lista para instalar.": {
     "ar": "التحديث جاهز للتثبيت.",
@@ -7919,6 +8075,18 @@
     "ur": "الفاظ کی فہرستوں کے لیے عین مطابقت درکار ہے۔",
     "zh-Hans": "单词列表需要精确匹配。"
   },
+  "Las medidas antiguas son aproximadas y variaban según la época y el lugar.": {
+    "ar": "المقاييس القديمة تقريبية واختلفت باختلاف الزمان والمكان.",
+    "bn": "প্রাচীন পরিমাপ আনুমানিক এবং সময় ও স্থান অনুযায়ী পরিবর্তিত হতো।",
+    "en": "Ancient measures are approximate and varied by time and place.",
+    "es": "Las medidas antiguas son aproximadas y variaban según la época y el lugar.",
+    "fr": "Les mesures anciennes sont approximatives et variaient selon l’époque et le lieu.",
+    "hi": "प्राचीन माप अनुमानित हैं और समय तथा स्थान के अनुसार बदलते थे।",
+    "id": "Ukuran kuno bersifat perkiraan dan berbeda menurut waktu dan tempat.",
+    "pt": "As medidas antigas são aproximadas e variavam conforme a época e o lugar.",
+    "ur": "قدیم پیمائشیں تخمینی ہیں اور زمانے اور مقام کے لحاظ سے مختلف تھیں۔",
+    "zh-Hans": "古代计量值为近似值，因时代和地点而异。"
+  },
   "Las oraciones se guardan localmente. Ocultar una oración no cifra el archivo.": {
     "ar": "تُحفظ الصلوات محليًا. إخفاء الصلاة لا يشفّر الملف.",
     "bn": "প্রার্থনা স্থানীয়ভাবে সংরক্ষিত হয়। লুকালে ফাইল এনক্রিপ্ট হয় না।",
@@ -8290,6 +8458,30 @@
     "pt": "Pronto",
     "ur": "تیار",
     "zh-Hans": "就绪"
+  },
+  "Litros": {
+    "ar": "لترات",
+    "bn": "লিটার",
+    "en": "Litres",
+    "es": "Litros",
+    "fr": "Litres",
+    "hi": "लीटर",
+    "id": "Liter",
+    "pt": "Litros",
+    "ur": "لیٹر",
+    "zh-Hans": "升"
+  },
+  "Longitud": {
+    "ar": "الطول",
+    "bn": "দৈর্ঘ্য",
+    "en": "Length",
+    "es": "Longitud",
+    "fr": "Longueur",
+    "hi": "लंबाई",
+    "id": "Panjang",
+    "pt": "Comprimento",
+    "ur": "لمبائی",
+    "zh-Hans": "长度"
   },
   "Los alternativos reemplazan esta lectura después de comprobar el destino.": {
     "ar": "تحل البدائل محل هذه القراءة بعد التحقق من الوجهة.",
@@ -8699,6 +8891,18 @@
     "ur": "میٹاڈیٹا",
     "zh-Hans": "元数据"
   },
+  "Metros": {
+    "ar": "أمتار",
+    "bn": "মিটার",
+    "en": "Metres",
+    "es": "Metros",
+    "fr": "Mètres",
+    "hi": "मीटर",
+    "id": "Meter",
+    "pt": "Metros",
+    "ur": "میٹر",
+    "zh-Hans": "米"
+  },
   "Mi biblioteca": {
     "ar": "مكتبتي",
     "bn": "আমার লাইব্রেরি",
@@ -8734,6 +8938,18 @@
     "pt": "Membro pendente",
     "ur": "غیر حل شدہ رکن",
     "zh-Hans": "未解析成员"
+  },
+  "Mililitros": {
+    "ar": "ملليلترات",
+    "bn": "মিলিলিটার",
+    "en": "Millilitres",
+    "es": "Mililitros",
+    "fr": "Millilitres",
+    "hi": "मिलीलीटर",
+    "id": "Mililiter",
+    "pt": "Mililitros",
+    "ur": "ملی لیٹر",
+    "zh-Hans": "毫升"
   },
   "Minimizada": {
     "ar": "مصغّرة",
@@ -10235,6 +10451,18 @@
     "ur": "حذف",
     "zh-Hans": "省略"
   },
+  "Onzas": {
+    "ar": "أونصات",
+    "bn": "আউন্স",
+    "en": "Ounces",
+    "es": "Onzas",
+    "fr": "Onces",
+    "hi": "औंस",
+    "id": "Ons",
+    "pt": "Onças",
+    "ur": "اونس",
+    "zh-Hans": "盎司"
+  },
   "Opciones de búsqueda": {
     "ar": "خيارات البحث",
     "bn": "অনুসন্ধানের বিকল্প",
@@ -10811,6 +11039,54 @@
     "ur": "زیر التوا",
     "zh-Hans": "待处理"
   },
+  "Peso": {
+    "ar": "الوزن",
+    "bn": "ওজন",
+    "en": "Weight",
+    "es": "Peso",
+    "fr": "Poids",
+    "hi": "वजन",
+    "id": "Berat",
+    "pt": "Peso",
+    "ur": "وزن",
+    "zh-Hans": "重量"
+  },
+  "Pesos y medidas bíblicos": {
+    "ar": "الأوزان والمقاييس الكتابية",
+    "bn": "বাইবেলের ওজন ও পরিমাপ",
+    "en": "Biblical Weights and Measures",
+    "es": "Pesos y medidas bíblicos",
+    "fr": "Poids et mesures bibliques",
+    "hi": "बाइबिल के बाट और माप",
+    "id": "Bobot dan ukuran Alkitab",
+    "pt": "Pesos e medidas bíblicos",
+    "ur": "بائبل کے اوزان اور پیمائشیں",
+    "zh-Hans": "圣经中的度量衡"
+  },
+  "Pesos y medidas bíblicos…": {
+    "ar": "الأوزان والمقاييس الكتابية…",
+    "bn": "বাইবেলের ওজন ও পরিমাপ…",
+    "en": "Biblical Weights and Measures…",
+    "es": "Pesos y medidas bíblicos…",
+    "fr": "Poids et mesures bibliques…",
+    "hi": "बाइबिल के बाट और माप…",
+    "id": "Bobot dan ukuran Alkitab…",
+    "pt": "Pesos e medidas bíblicos…",
+    "ur": "بائبل کے اوزان اور پیمائشیں…",
+    "zh-Hans": "圣经中的度量衡…"
+  },
+  "Pies": {
+    "ar": "أقدام",
+    "bn": "ফুট",
+    "en": "Feet",
+    "es": "Pies",
+    "fr": "Pieds",
+    "hi": "फीट",
+    "id": "Kaki",
+    "pt": "Pés",
+    "ur": "فٹ",
+    "zh-Hans": "英尺"
+  },
   "Plan de lectura": {
     "ar": "خطة القراءة",
     "bn": "পাঠ পরিকল্পনা",
@@ -11086,6 +11362,18 @@
     "pt": "Propriedades…",
     "ur": "خصوصیات…",
     "zh-Hans": "属性…"
+  },
+  "Pulgadas": {
+    "ar": "بوصات",
+    "bn": "ইঞ্চি",
+    "en": "Inches",
+    "es": "Pulgadas",
+    "fr": "Pouces",
+    "hi": "इंच",
+    "id": "Inci",
+    "pt": "Polegadas",
+    "ur": "انچ",
+    "zh-Hans": "英寸"
   },
   "Puntuación": {
     "ar": "علامات الترقيم",
@@ -11555,6 +11843,30 @@
     "ur": "بائبل کا حوالہ",
     "zh-Hans": "圣经经文"
   },
+  "Referencia de capacidad": {
+    "ar": "مرجع السعة",
+    "bn": "ধারণক্ষমতার সূত্র",
+    "en": "Capacity Reference",
+    "es": "Referencia de capacidad",
+    "fr": "Référence de capacité",
+    "hi": "क्षमता का संदर्भ",
+    "id": "Referensi kapasitas",
+    "pt": "Referência de capacidade",
+    "ur": "گنجائش کا حوالہ",
+    "zh-Hans": "容量参考"
+  },
+  "Referencia de peso": {
+    "ar": "مرجع الوزن",
+    "bn": "ওজনের সূত্র",
+    "en": "Weight Reference",
+    "es": "Referencia de peso",
+    "fr": "Référence de poids",
+    "hi": "वजन का संदर्भ",
+    "id": "Referensi berat",
+    "pt": "Referência de peso",
+    "ur": "وزن کا حوالہ",
+    "zh-Hans": "重量参考"
+  },
   "Referencia general": {
     "ar": "المراجع العامة",
     "bn": "সাধারণ তথ্যসূত্র",
@@ -12010,6 +12322,18 @@
     "pt": "Restaurar tamanho do texto",
     "ur": "متن کا سائز بحال کریں",
     "zh-Hans": "还原文字大小"
+  },
+  "Resultado": {
+    "ar": "النتيجة",
+    "bn": "ফলাফল",
+    "en": "Result",
+    "es": "Resultado",
+    "fr": "Résultat",
+    "hi": "परिणाम",
+    "id": "Hasil",
+    "pt": "Resultado",
+    "ur": "نتیجہ",
+    "zh-Hans": "结果"
   },
   "Resultado anterior": {
     "ar": "النتيجة السابقة",
@@ -12875,6 +13199,18 @@
     "ur": "اگر یہ فولڈر ہے تو اس کا مواد بھی حذف ہو جائے گا۔",
     "zh-Hans": "如果是文件夹，其内容也将被删除。"
   },
+  "Siclos": {
+    "ar": "شواقل",
+    "bn": "শেকেল",
+    "en": "Shekels",
+    "es": "Siclos",
+    "fr": "Sicles",
+    "hi": "शेकेल",
+    "id": "Syikal",
+    "pt": "Siclos",
+    "ur": "شیکل",
+    "zh-Hans": "舍客勒"
+  },
   "Siguiente lectura": {
     "ar": "القراءة التالية",
     "bn": "পরের পাঠ",
@@ -13247,6 +13583,18 @@
     "ur": "اوپر بائیں",
     "zh-Hans": "左上角"
   },
+  "Supuestos: codo 44,45 cm; efa y bato 22 L; homer 220 L; siclo 11,4 g.": {
+    "ar": "الافتراضات: الذراع 44.45 سم؛ الإيفة والبث 22 لترًا؛ الحومر 220 لترًا؛ الشاقل 11.4 غرامًا.",
+    "bn": "অনুমান: হাত 44.45 সেমি; ঐফা ও বৎ 22 লিটার; হোমর 220 লিটার; শেকেল 11.4 গ্রাম।",
+    "en": "Assumptions: cubit 44.45 cm; ephah and bath 22 L; homer 220 L; shekel 11.4 g.",
+    "es": "Supuestos: codo 44,45 cm; efa y bato 22 L; homer 220 L; siclo 11,4 g.",
+    "fr": "Hypothèses : coudée 44,45 cm ; épha et bath 22 L ; homer 220 L ; sicle 11,4 g.",
+    "hi": "मान्यताएँ: हाथ 44.45 सेमी; एपा और बत 22 लीटर; होमेर 220 लीटर; शेकेल 11.4 ग्राम।",
+    "id": "Asumsi: hasta 44,45 cm; efa dan bat 22 L; homer 220 L; syikal 11,4 g.",
+    "pt": "Suposições: côvado 44,45 cm; efa e bato 22 L; hômer 220 L; siclo 11,4 g.",
+    "ur": "مفروضے: ذراع 44.45 سم؛ ایفہ اور بت 22 لیٹر؛ حومر 220 لیٹر؛ شیکل 11.4 گرام۔",
+    "zh-Hans": "假定：肘为44.45厘米；伊法和罢特为22升；贺梅珥为220升；舍客勒为11.4克。"
+  },
   "Sustitución": {
     "ar": "استبدال",
     "bn": "প্রতিস্থাপন",
@@ -13486,6 +13834,18 @@
     "pt": "Tipo de busca",
     "ur": "تلاش کی قسم",
     "zh-Hans": "搜索类型"
+  },
+  "Tipo de medida": {
+    "ar": "نوع القياس",
+    "bn": "পরিমাপের ধরন",
+    "en": "Measure Type",
+    "es": "Tipo de medida",
+    "fr": "Type de mesure",
+    "hi": "माप का प्रकार",
+    "id": "Jenis ukuran",
+    "pt": "Tipo de medida",
+    "ur": "پیمائش کی قسم",
+    "zh-Hans": "计量类型"
   },
   "Tipo de recurso": {
     "ar": "نوع المورد",
