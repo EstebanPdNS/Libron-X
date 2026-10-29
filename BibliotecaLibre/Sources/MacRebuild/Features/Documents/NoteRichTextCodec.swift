@@ -38,6 +38,7 @@ enum NoteRichTextCodec {
             if span.italic { font = NSFontManager.shared.convert(font, toHaveTrait: .italicFontMask) }
             var attributes: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: NSColor.textColor]
             if span.underline { attributes[.underlineStyle] = NSUnderlineStyle.single.rawValue }
+            if span.strikeout { attributes[.strikethroughStyle] = NSUnderlineStyle.single.rawValue }
             let link = span.reference.flatMap(referenceURL) ?? span.hyperlink.flatMap(webURL)
             if let link { attributes[.link] = link; attributes[.underlineStyle] = NSUnderlineStyle.single.rawValue }
             result.append(NSAttributedString(string: span.text, attributes: attributes))

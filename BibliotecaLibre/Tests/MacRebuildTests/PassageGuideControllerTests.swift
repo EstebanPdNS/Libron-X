@@ -145,4 +145,20 @@ import CSQLite
         controller.referenceResourceID = "missing"; controller.run(workspace: workspace)
         #expect(!controller.isLoading && !controller.completed && controller.error != nil)
     }
+    @Test func derivesDictionaryTermsFromTheActualSelectedBiblePassage() async throws {
+        let (root, workspace) = try fixture(); defer { try? FileManager.default.removeItem(at: root) }
+        let url = root.appendingPathComponent("bible.bbli")
+        var db: OpaquePointer?
+        #expect(sqlite3_open(url.path, &db) == SQLITE_OK)
+        #expect(sqlite3_exec(db, "CREATE TABLE Details(Title,Abbreviation,Information); INSERT INTO Details VALUES('Owned Bible','OB','Fixture'); CREATE TABLE Bible(Book,Chapter,Verse,Scripture); INSERT INTO Bible VALUES(1,1,1,'<b>Wisdom shines brightly</b>'),(1,1,2,'unselected');", nil, nil, nil) == SQLITE_OK)
+        sqlite3_close(db)
+        workspace.resources.append(try ESwordResource.inspect(url))
+        let controller = PassageGuideController(lookup: { resource, _, query in
+            .init(resource: resource, destination: .init(ordinal: 0), label: query, page: .init(destination: .init(ordinal: 0), text: "Owned", sectionCount: 1), stamps: [])
+        }, referenceLookup: { _, _ in .init(results: [], complete: true, warnings: []) })
+        controller.passage = "Ge 1:1"; controller.run(workspace: workspace); try await wait(controller)
+        #expect(controller.completed && controller.searchedTerms == ["Wisdom", "shines", "brightly"])
+        #expect(!controller.searchedTerms.contains("unselected"))
+    }
+
 }

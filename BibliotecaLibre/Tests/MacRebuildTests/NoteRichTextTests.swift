@@ -19,16 +19,19 @@ import LibronixCore
 
     @Test func inertHTMLAndRTFRoundTripPreserveFormattingLinksListsAndOriginal() throws {
         var note = StudyNote(title: "Owned rich note")
-        note.sourceBody = #"<p><b>😀 Alpha</b> <i>café</i> <u>שלום</u> <span lbxrt:xref="bible+esv.64.3.18">18–20</span> <a href="https://example.invalid/owned">web</a></p><ol start="3"><li>First</li><li>Second</li></ol><script>not visible</script>"#
+        note.sourceBody = #"<p><b>😀 Alpha</b> <i>café</i> <u>שלום</u> <del>removed</del> <span lbxrt:xref="bible+esv.64.3.18">18–20</span> <a href="https://example.invalid/owned">web</a></p><ol start="3"><li>First</li><li>Second</li></ol><script>not visible</script>"#
         let original = note
         let text = try NoteRichTextCodec.attributed(note)
-        #expect(text.string == "😀 Alpha café שלום 18–20 web\n3. First\n4. Second\n")
+        #expect(text.string == "😀 Alpha café שלום removed 18–20 web\n3. First\n4. Second\n")
         let strong = text.attribute(.font, at: 0, effectiveRange: nil) as? NSFont
         #expect(strong.map { NSFontManager.shared.traits(of: $0).contains(.boldFontMask) } == true)
+        let deletedRange = (text.string as NSString).range(of: "removed")
+        #expect((text.attribute(.strikethroughStyle, at: deletedRange.location, effectiveRange: nil) as? NSNumber)?.intValue != 0)
         let data = try NoteRichTextCodec.encode(text)
         note.editedRTF = data
         let reopened = try NoteRichTextCodec.attributed(note)
         #expect(reopened.string == text.string)
+        #expect((reopened.attribute(.strikethroughStyle, at: deletedRange.location, effectiveRange: nil) as? NSNumber)?.intValue != 0)
         let reopenedFont = reopened.attribute(.font, at: 0, effectiveRange: nil) as? NSFont
         #expect(reopenedFont.map { NSFontManager.shared.traits(of: $0).contains(.boldFontMask) } == true)
         #expect((reopened.attribute(.foregroundColor, at: 0, effectiveRange: nil) as? NSColor) == .textColor)

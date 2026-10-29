@@ -31,4 +31,27 @@ struct LibraryHealthTests {
         let report = LibraryHealthReport.inspect(resources: items, documents: [], highlights: [], exists: { _ in false })
         #expect(report.issues.count == 5000 && report.omittedIssueCount == 2)
     }
+    @Test func findsMissingDeclaredIndexAndIncompleteConversion() throws {
+        let folder = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        try FileManager.default.createDirectory(at: folder.appendingPathComponent("normalized"), withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: folder) }
+        let source = folder.appendingPathComponent("source.lsf"), index = folder.appendingPathComponent("source.lix")
+        try Data().write(to: source)
+        let receipt = LibronNormalizationReceipt(resourceID: "owned", sourceSHA256: "owned", state: "pending", profile: "", sections: 1, checkedSections: 0, warnings: [])
+        try JSONEncoder().encode(receipt).write(to: folder.appendingPathComponent("normalized/conversion.json"))
+        let resource = LibraryResource(location: source, indexLocation: index, title: "Owned", byteCount: 0, format: .legacyLSF, support: .metadataOnly, provenance: .fileName, packageLocation: folder)
+        let report = LibraryHealthReport.inspect(resources: [resource], documents: [], highlights: [])
+        #expect(report.issues.contains { $0.kind == .missingResource && $0.detail == index.path })
+        #expect(report.issues.contains { $0.kind == .conversionIssue })
+    }
+
+    @Test func reportsUnavailableFavoritesAndBookmarksWithoutChangingThem() {
+        let location = ReaderLocation(resourceID: "missing", format: .legacyLSF, sectionOrdinal: 1)
+        let favorite = LibraryFavorite(title: "Owned favorite", kind: .location, location: location)
+        let original = LibraryFavorite(title: "Unknown command", kind: .legacyCommand, legacyCommand: "unrecognized")
+        let report = LibraryHealthReport.inspect(resources: [], documents: [], highlights: [], favorites: [favorite, original], bookmarks: [2: location])
+        #expect(report.issues.filter { $0.kind == .unresolvedLink }.count == 3)
+        #expect(original.legacyCommand == "unrecognized" && favorite.location == location)
+    }
+
 }

@@ -35,7 +35,7 @@ public enum ESwordResource {
             _ = try rows("PRAGMA trusted_schema=OFF")
         }
         deinit { sqlite3_close(handle) }
-        func rows(_ sql: String, integers: [Int] = []) throws -> [[String]] {
+        func rows(_ sql: String, integers: [Int] = [], maximumBytes: Int = 64 * 1024 * 1024) throws -> [[String]] {
             let directory = integers.isEmpty && (sql.hasPrefix("SELECT rowid,") || sql.hasPrefix("SELECT DISTINCT Book,Chapter"))
             if directory, let cached = directories[sql] { return cached }
 
@@ -54,9 +54,15 @@ public enum ESwordResource {
                 for i in 0..<sqlite3_column_count(statement) {
                     // BLOB bodies are encrypted/unsupported; do not import gibberish.
                     guard sqlite3_column_type(statement, i) != SQLITE_BLOB else { throw LibronError.invalid("e-Sword: encrypted or unsupported content") }
-                    let value = sqlite3_column_text(statement, i).map { String(cString: $0) } ?? ""
+                    let value: String
+                    if let raw = sqlite3_column_text(statement, i) {
+                        let count = Int(sqlite3_column_bytes(statement, i))
+                        guard let decoded = String(bytes: UnsafeBufferPointer(start: raw, count: count), encoding: .utf8),
+                              !decoded.contains("\0") else { throw LibronError.invalid("e-Sword: invalid text encoding") }
+                        value = decoded
+                    } else { value = "" }
                     bytes += value.utf8.count
-                    guard bytes < 64 * 1024 * 1024 else { throw LibronError.invalid("e-Sword: page size limit exceeded") }
+                    guard bytes <= maximumBytes else { throw LibronError.invalid("e-Sword: page size limit exceeded") }
                     row.append(value)
                 }
                 rows.append(row)
@@ -152,6 +158,82 @@ public enum ESwordResource {
         return LibraryResource(location: url, title: m.title, author: m.authors.first, languages: m.languages, byteCount: Int64(try url.resourceValues(forKeys: [.fileSizeKey]).fileSize ?? 0),
             format: .eSwordSQLite, support: .metadataOnly, provenance: .libronixMetadata, libron: m)
     }
+    /// A read transaction owns the source interval. Bodies remain encoded HTML,
+    /// RTF or plain text here; platform renderers decode them without selecting
+    /// a neighboring verse or inventing a missing source boundary.
+    public static func biblePassage(_ resource: LibraryResource, passage: BibleCopyPassage,
+                                   maximumArticles: Int = 256, maximumCharacters: Int = 4_000_000) throws -> ESwordBiblePassage {
+        try Task.checkCancellation()
+        guard resource.format == .eSwordSQLite, resource.location.isFileURL else { throw ReaderOutputError.unsupportedFormat }
+        guard (1...4096).contains(maximumArticles), (1...16_000_000).contains(maximumCharacters) else { throw BibleCopyError.limitExceeded }
+        let files = ESwordBiblePassage.sourceFiles(resource.location)
+        let stamps = try files.map(LibrarySearchFileStamp.capture)
+        let db = try Database(resource.location)
+        _ = try db.rows("BEGIN")
+        guard try db.kind() == "Bible" else { throw ReaderOutputError.unsupportedFormat }
+        func bookNumber(_ address: BibleCopyAddress) throws -> Int {
+            for (index, code) in bookCodes.enumerated() {
+                if LegacyPassageQuery.sourceReference(code + " 1:1")?.sourceBookKey == address.bookKey { return index + 1 }
+            }
+            if LegacyPassageQuery.sourceReference("PrMan 1:1")?.sourceBookKey == address.bookKey { return 78 }
+            throw BibleCopyError.invalidPassage
+        }
+        let firstBook = try bookNumber(passage.start), lastBook = try bookNumber(passage.end)
+        guard (firstBook, passage.start.chapter, passage.start.verse) <= (lastBook, passage.end.chapter, passage.end.verse) else { throw BibleCopyError.reversedPassage }
+        let directory = try db.rows("SELECT DISTINCT Book,Chapter FROM Bible ORDER BY CAST(Book AS INTEGER),CAST(Chapter AS INTEGER),Book,Chapter")
+        var chapters: [BibleChapterKey] = [], ordinals: [BibleChapterKey:Int] = [:]
+        for row in directory {
+            guard row.count == 2, let book = Int(row[0]), let chapter = Int(row[1]),
+                  (1...1_000_000).contains(book), (1...1_000_000).contains(chapter) else { throw BibleCopyError.incompleteSource }
+            let key = BibleChapterKey(book: book, chapter: chapter)
+            guard ordinals[key] == nil else { throw BibleCopyError.incompleteSource }
+            ordinals[key] = chapters.count; chapters.append(key)
+        }
+        guard let lower = ordinals[.init(book: firstBook, chapter: passage.start.chapter)],
+              let upper = ordinals[.init(book: lastBook, chapter: passage.end.chapter)] else { throw BibleCopyError.missingBoundary }
+        guard upper >= lower else { throw BibleCopyError.reversedPassage }
+        guard upper - lower < maximumArticles else { throw BibleCopyError.limitExceeded }
+        let sql: String, arguments: [Int]
+        if passage.wholeChapter {
+            sql = "SELECT Book,Chapter,Verse,Scripture FROM Bible WHERE CAST(Book AS INTEGER)=? AND CAST(Chapter AS INTEGER)=? ORDER BY CAST(Verse AS INTEGER),rowid"
+            arguments = [firstBook, passage.start.chapter]
+        } else {
+            sql = "SELECT Book,Chapter,Verse,Scripture FROM Bible WHERE (CAST(Book AS INTEGER),CAST(Chapter AS INTEGER),CAST(Verse AS INTEGER)) >= (?,?,?) AND (CAST(Book AS INTEGER),CAST(Chapter AS INTEGER),CAST(Verse AS INTEGER)) <= (?,?,?) ORDER BY CAST(Book AS INTEGER),CAST(Chapter AS INTEGER),CAST(Verse AS INTEGER),rowid"
+            arguments = [firstBook, passage.start.chapter, passage.start.verse, lastBook, passage.end.chapter, passage.end.verse]
+        }
+        let rows = try db.rows(sql, integers: arguments, maximumBytes: min(64 * 1024 * 1024, maximumCharacters * 4 + 3_200_000))
+        var result: [ESwordBibleSourceVerse] = [], characters = 0
+        var previous: (book: Int, chapter: Int, verse: Int)?
+        for row in rows {
+            try Task.checkCancellation()
+            guard row.count == 4, let book = Int(row[0]), let chapter = Int(row[1]), let verse = Int(row[2]),
+                  (1...1_000_000).contains(verse), !row[3].trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
+                  let ordinal = ordinals[.init(book: book, chapter: chapter)],
+                  let query = LegacyPassageQuery.sourceReference(reference(book, chapter, verse)) else { throw BibleCopyError.incompleteSource }
+            if let previous {
+                if book == previous.book && chapter == previous.chapter {
+                    guard verse == previous.verse + 1 else { throw BibleCopyError.incompleteSource }
+                } else if book == previous.book {
+                    guard chapter == previous.chapter + 1, verse == 1 else { throw BibleCopyError.incompleteSource }
+                } else {
+                    guard book == previous.book + 1, chapter == 1, verse == 1 else { throw BibleCopyError.incompleteSource }
+                }
+            }
+            characters += row[3].utf16.count
+            guard characters <= maximumCharacters else { throw BibleCopyError.limitExceeded }
+            result.append(.init(address: .init(query), reference: query.displayReference, sectionOrdinal: ordinal, encodedBody: row[3]))
+            previous = (book, chapter, verse)
+        }
+        guard result.first?.address == passage.start,
+              passage.wholeChapter || result.last?.address == passage.end else { throw BibleCopyError.missingBoundary }
+        _ = try db.rows("COMMIT")
+        let selected = ESwordBiblePassage(resource: resource, passage: passage, verses: result,
+            sourceStamps: stamps, encodedCharacterCount: characters)
+        try selected.verifyUnchanged()
+        return selected
+    }
+    private struct BibleChapterKey: Hashable { let book: Int; let chapter: Int }
+
     public static func audit(_ url: URL) throws -> ImportFormattingAudit {
         let db = try Database(url), kind = try db.kind()
         let definitions: [(String, String)]
@@ -298,6 +380,7 @@ public enum ESwordResource {
         return ESwordPage(ordinal: ordinal, entries: [.init(title: row[1], body: body, reference: nil)], contents: directory.map { $0[1] })
     }
     #else
+    public static func biblePassage(_ resource: LibraryResource, passage: BibleCopyPassage, maximumArticles: Int = 256, maximumCharacters: Int = 4_000_000) throws -> ESwordBiblePassage { throw LibronError.invalid("SQLite reader unavailable on this platform") }
     public static func referenceOrdinal(_ url: URL, reference: String, endReference: String? = nil) throws -> Int? { throw LibronError.invalid("SQLite reader unavailable on this platform") }
     public static func audit(_ url: URL) throws -> ImportFormattingAudit { throw LibronError.invalid("SQLite importer unavailable on this platform") }
     public static func inspect(_ url: URL) throws -> LibraryResource { throw LibronError.invalid("SQLite importer unavailable on this platform") }

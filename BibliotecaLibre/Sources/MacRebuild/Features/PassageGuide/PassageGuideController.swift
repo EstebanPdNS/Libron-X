@@ -1,5 +1,6 @@
 import Foundation
 import Observation
+import NaturalLanguage
 import LibronixCore
 
 struct PassageGuideMatch: Identifiable, Sendable {
@@ -66,7 +67,7 @@ struct PassageGuideResourceWarning: Sendable, Identifiable {
         clear()
         do {
             let requested = passage.trimmingCharacters(in: .whitespacesAndNewlines)
-            _ = try BibleCopyPassage.parse(requested)
+            let passage = try BibleCopyPassage.parse(requested)
             let query = try BibleReferenceQuery.parse(requested)
             let raw = terms.components(separatedBy: CharacterSet(charactersIn: ",;\n"))
                 .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { !$0.isEmpty }
@@ -78,6 +79,8 @@ struct PassageGuideResourceWarning: Sendable, Identifiable {
             let commentary = workspace.resourcePriorities.ordered(workspace.availableResources, in: .init(kind: .commentary))
             let dictionaries = workspace.resourcePriorities.ordered(workspace.availableResources, in: .init(kind: .dictionary))
             let lexicons = workspace.resourcePriorities.ordered(workspace.availableResources, in: .init(kind: .lexicon))
+            let bibles = workspace.resourcePriorities.ordered(workspace.availableResources, in: .init(kind: .bible))
+                .filter { [.legacyLSF, .eSwordSQLite, .libronixLLS].contains($0.format) }
             let library = workspace.availableResources.filter { !$0.isHelp }
             let sources = referenceResourceID.map { id in library.filter { $0.id == id } } ?? library
             if referenceResourceID != nil && sources.count != 1 { throw PersonalStateError.invalid("El recurso seleccionado ya no está disponible.") }
@@ -89,7 +92,25 @@ struct PassageGuideResourceWarning: Sendable, Identifiable {
                 do {
                     guard let workspace else { throw PersonalStateError.invalid("La biblioteca cambió. Vuelve a generar la guía.") }
                     async let referencesTask: Void = self.collectReferences(workspace: workspace, library: library, sources: sources, query: query, token: token, referenceLookup: referenceLookup)
-                    for (kind, resources, items) in [(KeyLinkKind.commentary, commentary, [requested]), (.dictionary, dictionaries, words), (.lexicon, lexicons, words)] {
+                    var searchWords = words
+                    if searchWords.isEmpty, !dictionaries.isEmpty || !lexicons.isEmpty, let bible = bibles.first {
+                        do {
+                            let document = try await WorkspaceBibleCopy.prepare(bible, passage: passage, includeFootnotes: false)
+                            let text = document.verses.map(\.text).joined(separator: " ")
+                            let tokenizer = NLTokenizer(unit: .word); tokenizer.string = text
+                            var keys = Set<String>()
+                            tokenizer.enumerateTokens(in: text.startIndex..<text.endIndex) { range, _ in
+                                let word = String(text[range]), key = LibronDictionaryIndex.key(word)
+                                if word.count >= 4, word.utf16.count <= 128, keys.insert(key).inserted { searchWords.append(word) }
+                                return searchWords.count < 8
+                            }
+                            try Task.checkCancellation()
+                            guard self.generation == token else { throw CancellationError() }
+                            self.searchedTerms = searchWords
+                        } catch is CancellationError { throw CancellationError() }
+                        catch { self.failures.append(bible.title + ": " + error.localizedDescription) }
+                    }
+                    for (kind, resources, items) in [(KeyLinkKind.commentary, commentary, [requested]), (.dictionary, dictionaries, searchWords), (.lexicon, lexicons, searchWords)] {
                         for resource in resources {
                             for term in items {
                                 try Task.checkCancellation()

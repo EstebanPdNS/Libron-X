@@ -6,15 +6,26 @@ public struct ReaderOutputParagraph: Sendable, Equatable {
     public let text: String
     public let style: LegacyParagraphStyle?
     public let spans: [ReaderOutputSpan]
+    public init(text: String, style: LegacyParagraphStyle?, spans: [ReaderOutputSpan]) {
+        self.text = text; self.style = style; self.spans = spans
+    }
 }
 public struct ReaderOutputSpan: Sendable, Equatable {
     public let range: SearchTextRange
     public let style: LegacyCharacterStyle?
+    public init(range: SearchTextRange, style: LegacyCharacterStyle?) { self.range = range; self.style = style }
 }
 public struct ReaderOutputSource: Sendable, Equatable {
     public let sectionOrdinal: Int
     public let decodedTextSHA256: String
     public let selectedRange: SearchTextRange
+    /// A source row has its own decoded-body coordinates. Nil denotes the
+    /// existing whole-article projection; row offsets must never open a reader.
+    public let verseReference: String?
+    public init(sectionOrdinal: Int, decodedTextSHA256: String, selectedRange: SearchTextRange, verseReference: String? = nil) {
+        self.sectionOrdinal = sectionOrdinal; self.decodedTextSHA256 = decodedTextSHA256
+        self.selectedRange = selectedRange; self.verseReference = verseReference
+    }
 }
 public struct ReaderOutputDocument: Sendable, Equatable {
     public let resourceID: String

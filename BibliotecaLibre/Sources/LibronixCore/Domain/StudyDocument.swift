@@ -208,10 +208,11 @@ public struct NoteTextSpan: Equatable, Sendable {
     public var bold = false
     public var italic = false
     public var underline = false
+    public var strikeout = false
     public var reference: String?
     public var hyperlink: String?
-    public init(text: String, bold: Bool = false, italic: Bool = false, underline: Bool = false, reference: String? = nil, hyperlink: String? = nil) {
-        self.text = text; self.bold = bold; self.italic = italic; self.underline = underline; self.reference = reference; self.hyperlink = hyperlink
+    public init(text: String, bold: Bool = false, italic: Bool = false, underline: Bool = false, strikeout: Bool = false, reference: String? = nil, hyperlink: String? = nil) {
+        self.text = text; self.bold = bold; self.italic = italic; self.underline = underline; self.strikeout = strikeout; self.reference = reference; self.hyperlink = hyperlink
     }
 }
 
@@ -220,13 +221,13 @@ public struct NoteTextSpan: Equatable, Sendable {
 public enum NoteHTMLProjection {
     public static func spans(_ html: String) -> [NoteTextSpan] {
         guard html.utf8.count <= MetadataXMLReader.maximumFileBytes else { return [] }
-        struct Style { var tag: String; var bold: Bool; var italic: Bool; var underline: Bool; var reference: String?; var hyperlink: String? }
+        struct Style { var tag: String; var bold: Bool; var italic: Bool; var underline: Bool; var strikeout: Bool; var reference: String?; var hyperlink: String? }
         var stack: [Style] = [], result: [NoteTextSpan] = [], cursor = html.startIndex, suppressed: String?
         var lists: [(tag: String, next: Int)] = []
         func append(_ text: String) {
             guard !text.isEmpty, suppressed == nil else { return }
             result.append(NoteTextSpan(text: decodeEntities(text), bold: stack.contains(where: \.bold),
-                italic: stack.contains(where: \.italic), underline: stack.contains(where: \.underline), reference: stack.last(where: { $0.reference != nil })?.reference,
+                italic: stack.contains(where: \.italic), underline: stack.contains(where: \.underline), strikeout: stack.contains(where: \.strikeout), reference: stack.last(where: { $0.reference != nil })?.reference,
                 hyperlink: stack.last(where: { $0.hyperlink != nil })?.hyperlink))
         }
         while cursor < html.endIndex {
@@ -272,7 +273,7 @@ public enum NoteHTMLProjection {
             } else if !["img", "link", "meta", "hr"].contains(tag), stack.count < 128 {
                 let attrs = attributes(raw)
                 stack.append(Style(tag: tag, bold: ["b", "strong"].contains(tag), italic: ["i", "em"].contains(tag),
-                    underline: tag == "u", reference: attrs["lbxrt:xref"], hyperlink: tag == "a" ? attrs["href"] : nil))
+                    underline: tag == "u", strikeout: ["s", "strike", "del"].contains(tag), reference: attrs["lbxrt:xref"], hyperlink: tag == "a" ? attrs["href"] : nil))
             }
         }
         return result

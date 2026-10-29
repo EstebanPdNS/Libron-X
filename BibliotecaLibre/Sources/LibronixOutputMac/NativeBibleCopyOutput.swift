@@ -106,6 +106,7 @@ import LibronixCore
                 if flags.bold { text="<b>"+text+"</b>" };if flags.italic { text="<i>"+text+"</i>" }
                 if flags.underline { text="<u>"+text+"</u>" };if flags.superscript { text="<sup>"+text+"</sup>" }
                 if flags.subscriptText { text="<sub>"+text+"</sub>" }
+                if document.style.characterFormatting && run.sourceStyle?.font.strikeout == true { text="<s>"+text+"</s>" }
                 if let note=run.footnoteID,let identity=identities[note] { text="<a href=\"#\(identity)\" style=\"mso-footnote-id:\(identity)\">"+text+"</a>" }
                 body += "<span style=\"font-family:'\(family(run.text))';color:\(hex);\">"+text+"</span>"
             }

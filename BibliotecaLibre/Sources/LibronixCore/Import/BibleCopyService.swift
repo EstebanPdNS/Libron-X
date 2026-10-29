@@ -6,15 +6,15 @@ public actor BibleCopyService {
     private let content = LegacyContentService()
     public init() {}
     public func prepare(_ resource:LibraryResource, passage: BibleCopyPassage, abbreviation:String,
-                        maximumArticles:Int = 256, maximumCharacters:Int = 4_000_000, includeFootnotes:Bool = true) async throws -> BibleCopyDocument {
+                        maximumArticles:Int = 256, maximumCharacters:Int = 4_000_000, includeFootnotes:Bool = true, allowSerializedBibleAnchors:Bool = false) async throws -> BibleCopyDocument {
         guard resource.format == .legacyLSF else { throw ReaderOutputError.unsupportedFormat }
         guard maximumArticles > 0, maximumArticles <= 4_096, maximumCharacters > 0,
               !abbreviation.trimmingCharacters(in:.whitespacesAndNewlines).isEmpty, abbreviation.utf8.count <= 256 else { throw BibleCopyError.limitExceeded }
         let file=resource.location, lix=resource.indexLocation ?? file.deletingPathExtension().appendingPathExtension("LIX")
         let before=try LegacyGraphicsService.fileStamp(file), indexBefore=try LegacyGraphicsService.fileStamp(lix)
-        let pair=try LegacyResourceReader.inspect(lsfURL:file,lixURL:lix)
+        let pair=try LegacyResourceReader.inspect(lsfURL:file,lixURL:lix,allowUnavailableIndexBlocks:allowSerializedBibleAnchors)
         guard pair.identifiersMatch == true, pair.lsf.bkidHex?.lowercased() == resource.legacyIdentifier?.lowercased() else { throw LegacyLocatorError.resourceMismatch }
-        let index=try LegacyIndicesReader.inspect(lsfURL:file,lixURL:lix), typography=try LegacyTypographyReader.inspect(lsfURL:file)
+        let index=try LegacyIndicesReader.inspect(lsfURL:file,lixURL:lix,allowUnavailableIndexBlocks:allowSerializedBibleAnchors), typography=try LegacyTypographyReader.inspect(lsfURL:file)
         let directory=LegacyIndicesReader.articleDirectory(index:index)
         let markers=directory.entries.compactMap { entry -> Chapter? in
             guard entry.level > 0, let name=entry.positionLabel else { return nil };return Chapter(name,article:entry.sectionOrdinal)
@@ -25,17 +25,24 @@ public actor BibleCopyService {
         }
         let firstMarker=try marker(passage.start), lastMarker=try marker(passage.end)
         var sections:[LegacySectionContent] = [], lower:Int?, upper:Int?
-        if let firstMarker, let lastMarker {
+        func bibleReference(_ anchor: LegacyReferenceAnchor) -> LegacyPassageQuery? {
+            guard let reference = anchor.reference else { return nil }
+            if anchor.dataTypeCode == 2 { return LegacyPassageQuery.parse(reference) }
+            guard allowSerializedBibleAnchors, anchor.dataTypeCode == 16,
+                  reference.lowercased().hasPrefix("bible.") || reference.lowercased().hasPrefix("bible+") else { return nil }
+            return LegacyPassageQuery.sourceReference(reference)
+        }
+        if let firstMarker, let lastMarker, !allowSerializedBibleAnchors {
             guard firstMarker <= lastMarker else { throw BibleCopyError.reversedPassage }
             lower=firstMarker;upper=markers.filter{$0.article > lastMarker}.map(\.article).min() ?? index.sections.sections.count
-        } else if !markers.isEmpty {
+        } else if !markers.isEmpty && !allowSerializedBibleAnchors {
             // This resource has explicit checked chapter labels. Missing source
             // chapter is the citation-only case, not a budgeted failed search.
             guard passage.start == passage.end else { throw BibleCopyError.missingBoundary }
             return try empty(resource,passage:passage,abbreviation:abbreviation,typography:typography,metadata:pair.lsf,
                              file:file,lix:lix,before:before,indexBefore:indexBefore)
         } else {
-            let first=try await content.resolvePassage(file,indexURL:lix,reference:passage.start.key,maximumCandidates:4_096)
+            let first=try await content.resolvePassage(file,indexURL:lix,reference:passage.start.key,maximumCandidates:4_096,allowUnavailableIndexBlocks:allowSerializedBibleAnchors)
             guard let start=first.match else {
                 guard first.exhaustedCandidates, first.diagnostics.isEmpty else { throw BibleCopyError.incompleteSource }
                 return try empty(resource,passage:passage,abbreviation:abbreviation,typography:typography,metadata:pair.lsf,
@@ -43,7 +50,7 @@ public actor BibleCopyService {
             }
             lower=start.sectionOrdinal
             if !passage.wholeChapter {
-                let last=passage.start==passage.end ? first : try await content.resolvePassage(file,indexURL:lix,reference:passage.end.key,maximumCandidates:4_096)
+                let last=passage.start==passage.end ? first : try await content.resolvePassage(file,indexURL:lix,reference:passage.end.key,maximumCandidates:4_096,allowUnavailableIndexBlocks:allowSerializedBibleAnchors)
                 guard let end=last.match else { throw BibleCopyError.missingBoundary }
                 guard start.sectionOrdinal <= end.sectionOrdinal else { throw BibleCopyError.reversedPassage };upper=end.sectionOrdinal+1
             }
@@ -57,11 +64,11 @@ public actor BibleCopyService {
             try Task.checkCancellation()
             let section=try await content.read(file,ordinal:ordinal)
             let nextChapter = upper == nil && section.anchors.contains(where:{ anchor in
-                guard anchor.dataTypeCode==2,let reference=anchor.reference,let q=LegacyPassageQuery.parse(reference) else { return false }
+                guard let q=bibleReference(anchor) else { return false }
                 return q.sourceBookKey != passage.start.bookKey || q.chapter != passage.start.chapter
             })
             if nextChapter && !section.anchors.contains(where: { anchor in
-                guard anchor.dataTypeCode==2,let reference=anchor.reference,let q=LegacyPassageQuery.parse(reference) else { return false }
+                guard let q=bibleReference(anchor) else { return false }
                 return q.sourceBookKey==passage.start.bookKey && q.chapter==passage.start.chapter
             }) { sawNextChapter=true;break }
             consumed += section.plainText.utf16.count
@@ -71,17 +78,16 @@ public actor BibleCopyService {
             // chapter for a single verse. Later articles need not be decoded or
             // charged against this request once its end is present in source.
             if !passage.wholeChapter && section.anchors.contains(where:{ anchor in
-                guard anchor.dataTypeCode==2,let reference=anchor.reference else { return false }
-                return LegacyPassageQuery.parse(reference).map{BibleCopyAddress($0)==passage.end} == true
+                return bibleReference(anchor).map{BibleCopyAddress($0)==passage.end} == true
             }) { reachedRequestedEnd=true;break }
             if nextChapter { sawNextChapter=true;break }
         }
         if !reachedRequestedEnd && !sawNextChapter && end != sourceEnd { throw BibleCopyError.limitExceeded }
         var observed:[LocatedVerse] = []
         for section in sections {
-            let anchors=section.anchors.filter{$0.dataTypeCode==2 && $0.reference.flatMap(LegacyPassageQuery.parse) != nil}
+            let anchors=section.anchors.filter{bibleReference($0) != nil}
             for anchor in anchors {
-                guard let reference=anchor.reference,let query=LegacyPassageQuery.parse(reference) else { continue }
+                guard let reference=anchor.reference,let query=bibleReference(anchor) else { continue }
                 let address=BibleCopyAddress(query)
                 if let previous=observed.last,previous.address==address {
                     guard previous.section.descriptor.ordinal==section.descriptor.ordinal else { throw BibleCopyError.incompleteSource }

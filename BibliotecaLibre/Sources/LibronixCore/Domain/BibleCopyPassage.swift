@@ -44,6 +44,10 @@ public struct BibleCopyFragment: Sendable, Equatable {
     public let footnote: String?
     public let isBibleText: Bool
     public let isVerseNumber: Bool
+    public init(text: String, style: LegacyCharacterStyle?, sourceRange: SearchTextRange, footnote: String?, isBibleText: Bool, isVerseNumber: Bool) {
+        self.text = text; self.style = style; self.sourceRange = sourceRange
+        self.footnote = footnote; self.isBibleText = isBibleText; self.isVerseNumber = isVerseNumber
+    }
 }
 public struct BibleCopyVerse: Sendable, Equatable {
     public let address: BibleCopyAddress
@@ -53,6 +57,10 @@ public struct BibleCopyVerse: Sendable, Equatable {
     public let paragraphStyle: LegacyParagraphStyle?
     public let fragments: [BibleCopyFragment]
     public var text:String { fragments.filter{$0.isBibleText && $0.footnote == nil}.map(\.text).joined() }
+    public init(address: BibleCopyAddress, sourceReference: String, source: ReaderOutputSource, paragraphKey: String, paragraphStyle: LegacyParagraphStyle?, fragments: [BibleCopyFragment]) {
+        self.address = address; self.sourceReference = sourceReference; self.source = source
+        self.paragraphKey = paragraphKey; self.paragraphStyle = paragraphStyle; self.fragments = fragments
+    }
 }
 public struct BibleCopyFootnote: Sendable, Equatable {
     public let id: String
@@ -63,11 +71,15 @@ public struct BibleCopyFootnote: Sendable, Equatable {
 public struct BibleCopySourceMark: Sendable, Equatable {
     public let offset: Int
     public let address: BibleCopyAddress
+    public init(offset: Int, address: BibleCopyAddress) { self.offset = offset; self.address = address }
 }
 public struct BibleCopySourceParagraph: Sendable, Equatable {
     public let style: LegacyParagraphStyle?
     public let fragments: [BibleCopyFragment]
     public let marks: [BibleCopySourceMark]
+    public init(style: LegacyParagraphStyle?, fragments: [BibleCopyFragment], marks: [BibleCopySourceMark]) {
+        self.style = style; self.fragments = fragments; self.marks = marks
+    }
 }
 public struct BibleCopyDocument: Sendable, Equatable {
     public let resourceID: String
@@ -83,4 +95,12 @@ public struct BibleCopyDocument: Sendable, Equatable {
     public let sourceLanguages: [String]
     public var sourceParagraphs: [BibleCopySourceParagraph] = []
     public var hasVerseText: Bool { !verses.isEmpty }
+    public init(resourceID: String, passage: BibleCopyPassage, title: String, abbreviation: String,
+                verses: [BibleCopyVerse], footnotes: [BibleCopyFootnote], citation: String,
+                typography: LegacyTypography = .importedOutput, sources: [ReaderOutputSource],
+                fullParagraphs: [ReaderOutputParagraph], sourceLanguages: [String], sourceParagraphs: [BibleCopySourceParagraph] = []) {
+        self.resourceID = resourceID; self.passage = passage; self.title = title; self.abbreviation = abbreviation
+        self.verses = verses; self.footnotes = footnotes; self.citation = citation; self.typography = typography
+        self.sources = sources; self.fullParagraphs = fullParagraphs; self.sourceLanguages = sourceLanguages; self.sourceParagraphs = sourceParagraphs
+    }
 }

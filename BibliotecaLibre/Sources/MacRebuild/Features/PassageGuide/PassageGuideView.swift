@@ -39,6 +39,7 @@ struct PassageGuideView: View {
                         ForEach(commentaries) { matchRow($0) }
                         Divider()
                         sectionTitle("Diccionarios y léxicos", count: dictionaries.count)
+                        if !controller.searchedTerms.isEmpty { Text(controller.searchedTerms.joined(separator: " · ")).font(.caption).foregroundStyle(.secondary).textSelection(.enabled) }
                         if controller.searchedTerms.isEmpty { Text(L("Añade palabras para consultar diccionarios y léxicos.")).foregroundStyle(.secondary) }
                         else if controller.dictionaryCount == 0 { Text(L("No hay diccionarios ni léxicos disponibles.")).foregroundStyle(.secondary) }
                         else if controller.completed && dictionaries.isEmpty { Text(L("No se encontraron coincidencias verificadas.")).foregroundStyle(.secondary) }

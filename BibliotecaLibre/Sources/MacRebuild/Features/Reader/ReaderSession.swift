@@ -398,6 +398,40 @@ struct ReaderPage: Sendable {
             }
         }
     }
+    /// Verify a saved annotation against the rendered DOM before changing the
+    /// committed page; a changed source leaves the previous location intact.
+    func navigateOEBAnnotation(_ destination: ReaderAnnotationDestination) {
+        guard let previous = page, let current = previous.oeb, oebProjectionReady else { return }
+        cancel()
+        let token = generation, findToken = findGeneration, resource = readingResource
+        let viewport = ReaderOEBViewport(width: Double(oebWebView?.bounds.width ?? 760), zoom: renderingScale)
+        isLoading = true; error = nil
+        task = Task { [weak self, loader] in
+            do {
+                var result = destination.ordinal == previous.destination.ordinal ? previous : try await loader(resource, .init(ordinal: destination.ordinal))
+                guard let oeb = result.oeb, let path = oeb.book.path(for: oeb.url) else { throw LibronixBookError.sourceChanged }
+                let text = destination.ordinal == previous.destination.ordinal ? previous.text : try await ReaderOEBTextSource.shared.read(book: oeb.book, path: path, viewport: viewport).text
+                try Task.checkCancellation(); try current.book.verifySource(); try oeb.book.verifySource()
+                guard LibrarySearchService.textFingerprint(text) == destination.fingerprint, Range(destination.range, in: text) != nil else { throw LibronixBookError.sourceChanged }
+                guard let self, self.generation == token, !Task.isCancelled else { return }
+                if destination.ordinal == previous.destination.ordinal {
+                    self.selectedRange = destination.range; self.viewportCharacterOffset = destination.range.location; self.selectionRequest += 1
+                } else {
+                    result.text = text
+                    let match = ReaderFindMatch(ordinal: destination.ordinal, range: destination.range, fingerprint: destination.fingerprint, wrapped: false)
+                    self.pendingOEBFind = .init(previous: previous, selection: self.selectedRange, locator: self.locator,
+                        ready: self.oebProjectionReady, target: oeb.id, match: match, generation: findToken)
+                    self.page = result; self.oebProjectionReady = false
+                    self.locator = self.locatorIsArticle ? String(destination.ordinal + 1) : result.destination.reference ?? ""
+                    self.selectedRange = NSRange(location: 0, length: 0); self.selectionRequest += 1
+                }
+                self.isLoading = false; self.task = nil
+            } catch {
+                guard let self, self.generation == token, !Task.isCancelled else { return }
+                self.error = error.localizedDescription; self.isLoading = false; self.task = nil
+            }
+        }
+    }
     func cancel() {
         commentaryViewportReference = nil
         flowGeneration += 1; flowTask?.cancel(); flowTask = nil

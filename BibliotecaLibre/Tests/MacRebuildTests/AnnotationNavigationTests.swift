@@ -56,4 +56,27 @@ import Testing
         #expect(workspace.adjacentAnnotation(for: reader, backwards: true) == stops[0])
         workspace.shutdown()
     }
+    @Test func webAnnotationsVerifyTheirSourceBeforeChangingThePage() async throws {
+        _ = NSApplication.shared
+        let fixture = try AuthoredOEBFixture(); defer { fixture.remove() }
+        let workspace = StudyWorkspace(), reader = workspace.open(fixture.resource, startReading: false)
+        reader.load(.init(ordinal: 0)); try await settle(reader)
+        let cover = try #require(reader.page?.oeb)
+        let coverText = try await ReaderOEBTextSource.shared.read(book: cover.book, path: "Cover.html", viewport: .init()).text
+        try reader.acceptOEBProjection(coverText, at: cover.url)
+        let chapter = try await ReaderOEBTextSource.shared.read(book: cover.book, path: "Chapter.html", viewport: .init())
+        let range = (chapter.text as NSString).range(of: "Gamma")
+        workspace.personal.highlights = [.init(resourceID: fixture.resource.id, ordinal: 1, fingerprint: chapter.fingerprint, range: range, color: "yellow")]
+        workspace.navigateAnnotation(backwards: false); try await settle(reader)
+        let candidate = try #require(reader.page?.oeb)
+        #expect(reader.committedPage?.destination.ordinal == 0)
+        #expect(throws: LibronixBookError.sourceChanged) { try reader.acceptOEBProjection("changed", at: candidate.url) }
+        #expect(reader.page?.destination.ordinal == 0)
+        workspace.navigateAnnotation(backwards: false); try await settle(reader)
+        let next = try #require(reader.page?.oeb)
+        try reader.acceptOEBProjection(chapter.text, at: next.url)
+        #expect(reader.page?.destination.ordinal == 1 && reader.selectedText == "Gamma")
+        workspace.shutdown()
+    }
+
 }

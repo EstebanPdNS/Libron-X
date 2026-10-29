@@ -28,7 +28,7 @@ struct ReaderAnnotationCursor {
             }
     }
     func adjacentAnnotation(for reader: ReaderSession, backwards: Bool) -> ReaderAnnotationDestination? {
-        guard !reader.isLoading, let page = reader.page, page.oeb == nil else { return nil }
+        guard !reader.isLoading, let page = reader.page, page.oeb == nil || reader.oebProjectionReady else { return nil }
         let ordinal = page.destination.ordinal, offset = reader.selectedRange.location
         let all = annotationDestinations(for: reader)
         if let cursor = annotationNavigationCursor, cursor.readerID == reader.id,
@@ -43,6 +43,7 @@ struct ReaderAnnotationCursor {
     func navigateAnnotation(backwards: Bool) {
         guard let reader = activeReader, let destination = adjacentAnnotation(for: reader, backwards: backwards) else { return }
         annotationNavigationCursor = .init(readerID: reader.id, destination: destination)
-        reader.load(.init(ordinal: destination.ordinal), selection: destination.range, expectedFingerprint: destination.fingerprint)
+        if reader.page?.oeb != nil { reader.navigateOEBAnnotation(destination) }
+        else { reader.load(.init(ordinal: destination.ordinal), selection: destination.range, expectedFingerprint: destination.fingerprint) }
     }
 }

@@ -2,7 +2,7 @@ import Foundation
 import LibronixCore
 
 struct LibraryHealthIssue: Identifiable, Equatable, Sendable {
-    enum Kind: String, Sendable { case missingResource, invalidResource, opaqueResource, resourceWarning, missingAnnotationSource, unresolvedAnnotation }
+    enum Kind: String, Sendable { case missingResource, invalidResource, opaqueResource, resourceWarning, missingAnnotationSource, unresolvedAnnotation, conversionIssue, unresolvedLink }
     let id: String
     let kind: Kind
     let title: String
@@ -13,6 +13,7 @@ struct LibraryHealthReport: Equatable, Sendable {
     let issues: [LibraryHealthIssue]
     let omittedIssueCount: Int
     static func inspect(resources: [LibraryResource], documents: [StudyDocument], highlights: [ReaderHighlight],
+                        favorites: [LibraryFavorite] = [], bookmarks: [Int: ReaderLocation] = [:],
                         exists: (URL) -> Bool = { FileManager.default.fileExists(atPath: $0.path) }) -> Self {
         let limit = 5000
         var issues: [LibraryHealthIssue] = [], omitted = 0
@@ -21,7 +22,7 @@ struct LibraryHealthReport: Equatable, Sendable {
         }
         for (resourceIndex, resource) in resources.enumerated() {
             if Task.isCancelled { break }
-            let paths = Set([resource.packageLocation, resource.location].compactMap { $0 })
+            let paths = Set([resource.packageLocation, resource.location, resource.indexLocation].compactMap { $0 })
             for path in paths.sorted(by: { $0.path < $1.path }) where !exists(path) {
                 add(.init(id: "missing:\(resourceIndex):" + resource.id + ":" + path.path, kind: .missingResource, title: resource.title, detail: path.path))
             }
@@ -30,6 +31,21 @@ struct LibraryHealthReport: Equatable, Sendable {
             }
             if resource.support == .opaqueContainer {
                 add(.init(id: "opaque:\(resourceIndex):" + resource.id, kind: .opaqueResource, title: resource.title, detail: resource.format.displayName))
+            }
+            if let package = resource.packageLocation {
+                let folder = package.appendingPathComponent("normalized", isDirectory: true)
+                let receiptURL = folder.appendingPathComponent("conversion.json")
+                let databaseURL = folder.appendingPathComponent("reader.sqlite")
+                if exists(receiptURL) {
+                    let attributes = try? receiptURL.resourceValues(forKeys: [.isRegularFileKey, .isSymbolicLinkKey, .fileSizeKey])
+                    let data = (attributes?.isRegularFile == true && attributes?.isSymbolicLink != true && (attributes?.fileSize ?? Int.max) <= 4 * 1024 * 1024) ? try? Data(contentsOf: receiptURL) : nil
+                    let receipt = data.flatMap { try? JSONDecoder().decode(LibronNormalizationReceipt.self, from: $0) }
+                    if receipt?.state != "complete" || !exists(databaseURL) {
+                        add(.init(id: "conversion:\(resourceIndex):" + resource.id, kind: .conversionIssue, title: resource.title, detail: receiptURL.path))
+                    }
+                } else if exists(databaseURL) {
+                    add(.init(id: "conversion:\(resourceIndex):" + resource.id, kind: .conversionIssue, title: resource.title, detail: receiptURL.path))
+                }
             }
             for (index, warning) in resource.warnings.enumerated() {
                 add(.init(id: "warning:\(resourceIndex):" + resource.id + ":" + String(index), kind: .resourceWarning, title: resource.title, detail: warning))
@@ -51,6 +67,24 @@ struct LibraryHealthReport: Equatable, Sendable {
                 add(.init(id: "note:" + document.id.uuidString + ":" + note.id.uuidString,
                           kind: .missingAnnotationSource, title: note.title, detail: document.title))
             }
+        }
+        let legacyCounts = Dictionary(resources.compactMap { resource -> String? in
+            guard resource.format == .legacyLSF else { return nil }
+            return LegacyNumericResourceID.fromBKIDHex(resource.legacyIdentifier)?.identifier
+        }.map { ($0, 1) }, uniquingKeysWith: +)
+        for favorite in favorites {
+            if Task.isCancelled { break }
+            if let location = favorite.location, !identities.contains(Identity(id: location.resourceID, format: location.format, legacy: location.legacyIdentifier)) {
+                add(.init(id: "favorite:" + favorite.id.uuidString, kind: .unresolvedLink, title: favorite.title, detail: location.resourceID))
+            } else if let command = favorite.legacyCommand {
+                let destination = try? LegacyJumpDestination.parse(command)
+                if destination.map({ legacyCounts[$0.resourceID] != 1 }) ?? true {
+                    add(.init(id: "favorite:" + favorite.id.uuidString, kind: .unresolvedLink, title: favorite.title, detail: command))
+                }
+            }
+        }
+        for (slot, location) in bookmarks.sorted(by: { $0.key < $1.key }) where !identities.contains(Identity(id: location.resourceID, format: location.format, legacy: location.legacyIdentifier)) {
+            add(.init(id: "bookmark:" + String(slot), kind: .unresolvedLink, title: String(slot), detail: location.resourceID))
         }
         for mark in highlights where !resourceIDs.contains(mark.resourceID) {
             if Task.isCancelled { break }

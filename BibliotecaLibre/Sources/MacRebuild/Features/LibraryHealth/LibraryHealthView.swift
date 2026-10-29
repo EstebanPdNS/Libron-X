@@ -46,13 +46,16 @@ struct LibraryHealthView: View {
         case .resourceWarning: "Aviso del recurso"
         case .missingAnnotationSource: "Origen de anotación ausente"
         case .unresolvedAnnotation: "Anotación sin resolver"
+        case .conversionIssue: "Estado de conversión"
+        case .unresolvedLink: "Destino"
         }
     }
     private func refresh() {
         task?.cancel(); isLoading = true
         let resources = workspace.resources, documents = workspace.personal.documents, highlights = workspace.personal.highlights
+        let favorites = workspace.personal.favorites.items, bookmarks = workspace.personal.bookmarks.slots
         task = Task {
-            let worker = Task.detached { LibraryHealthReport.inspect(resources: resources, documents: documents, highlights: highlights) }
+            let worker = Task.detached { LibraryHealthReport.inspect(resources: resources, documents: documents, highlights: highlights, favorites: favorites, bookmarks: bookmarks) }
             let result = await withTaskCancellationHandler { await worker.value } onCancel: { worker.cancel() }
             guard !Task.isCancelled else { return }
             report = result; isLoading = false
