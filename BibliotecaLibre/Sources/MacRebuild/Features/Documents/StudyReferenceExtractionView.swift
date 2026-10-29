@@ -17,15 +17,19 @@ struct StudyReferenceExtractionView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             MacToolHeader(title: "Extraer referencias") { dismiss() }
-            Picker(L("Origen"), selection: $sourceID) {
-                Text(L("Texto")).tag(Optional<UUID>.none)
-                ForEach(personal.documents.filter { $0.id != destinationID }) { document in
-                    Text(document.title).tag(Optional(document.id))
+            HStack(spacing: 10) {
+                Text(L("Origen"))
+                MacSelectionMenu(L("Origen"), value: personal.documents.first { $0.id == sourceID }?.title ?? L("Texto"), selection: $sourceID) {
+                    Text(L("Texto")).tag(Optional<UUID>.none)
+                    ForEach(personal.documents.filter { $0.id != destinationID }) { document in
+                        Text(document.title).tag(Optional(document.id))
+                    }
                 }
             }
             if sourceID == nil {
                 Text(L("Pega o escribe el texto que quieres analizar.")).font(.caption).foregroundStyle(.secondary)
-                TextEditor(text: $text).font(.body).frame(minHeight: 80, idealHeight: 100, maxHeight: 120)
+                TextEditor(text: $text).font(.body).scrollContentBackground(.hidden).padding(8)
+                    .frame(height: 100).macEditorSurface()
                     .accessibilityLabel(L("Texto"))
                 HStack {
                     Button(L("Pegar del portapapeles")) { paste() }
@@ -61,7 +65,7 @@ struct StudyReferenceExtractionView: View {
                                 }
                             }
                         }
-                    }.frame(minHeight: 120, maxHeight: .infinity)
+                    }.frame(height: min(220, max(72, CGFloat(report.items.count) * 32)))
                 }
             }
             if let error { Text(L(error)).font(.caption).foregroundStyle(.red).textSelection(.enabled) }
@@ -70,8 +74,7 @@ struct StudyReferenceExtractionView: View {
                 Button(L("Cancelar")) { dismiss() }
                 Button(L("Agregar"), action: add).disabled(selected.isEmpty || report == nil)
             }
-        }.padding(20).frame(minWidth: 560, idealWidth: 620,
-                            minHeight: report == nil ? nil : 440, idealHeight: report == nil ? nil : 580)
+        }.padding(20).frame(minWidth: 560, idealWidth: 620)
             .modifier(MacPanelControlPresentation()).modifier(AppInterfaceLanguage())
             .onChange(of: sourceID) { report = nil; selected = []; error = nil }
             .onChange(of: text) { report = nil; selected = []; error = nil }

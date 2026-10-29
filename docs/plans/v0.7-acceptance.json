@@ -330,7 +330,7 @@
       "sourceKey": "study-expansion-comparison-08",
       "acceptance": "Exportar resultados y comparaciones con referencias, orden, escape y edición correctos.",
       "baseline": "Bibliografías exportan; las búsquedas no tienen ese exportador.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "BibliotecaLibre/Sources/LibronixCore/Study/TextComparison.swift",
         "BibliotecaLibre/Sources/LibronixCore/Study/BiblePassageReport.swift",
@@ -344,11 +344,18 @@
       "verification": [
         "16 comparison, native integration and localization tests passed in 5 suites; installed native UI acceptance pending.",
         "24 tests passed in 7 suites: CSV round-trip, exact Unicode coordinates, visible ordering, metadata fields, partial coverage, source-change rejection, source destination protection, comparison, result navigation and localization.",
-        "Comparison CSV exported through the installed native SavePanel and independently parsed: header plus six source-bound rows; original authored source hashes unchanged."
+        "Comparison CSV exported through the installed native SavePanel and independently parsed: header plus six source-bound rows; original authored source hashes unchanged.",
+        "Native build 208: exported an eight-occurrence search through the system Save panel. Parsed the written CSV and verified exactly eight rows, matching source IDs, ascending source offsets, six-unit UTF-16 match lengths, complete/finished state and consistent columns across multiline contexts."
       ],
       "limitations": [
-        "Search-result CSV still needs a native SavePanel check; final RTL acceptance remains pending."
-      ]
+        "The export uses the supported source projections and preserves their edition identities; it does not invent unavailable reference mappings.",
+        "General RTL and platform acceptance remains open in the dedicated release requirements."
+      ],
+      "completionReview": {
+        "date": "2026-10-28",
+        "basis": "Exportación y comparación tabular cubiertas por pruebas y guardado nativo real con comprobación del archivo generado.",
+        "releaseAcceptance": "La validación general de idioma, accesibilidad y plataformas sigue abierta."
+      }
     },
     {
       "id": "F165",
@@ -1154,18 +1161,27 @@
       "sourceKey": "study-expansion-queries-06",
       "acceptance": "Exponer extracción desde portapapeles y documentos con casos ambiguos e inválidos.",
       "baseline": "Core detecta menciones para la búsqueda de referencias.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
-        "Recognize visible citations and explicit Bible links from pasted text or personal documents, preserving edition, original source positions and projection fingerprints; add selected results to a verse list atomically."
+        "Recognize visible citations and explicit Bible links from pasted text or personal documents, preserving edition, original source positions and projection fingerprints; add selected results to a verse list atomically.",
+        "Unified the source menu and multiline input with the shared native Glass controls, and sized the result list to its contents instead of leaving a large empty area."
       ],
       "verification": [
         "Core citation tests and extraction tests passed, including malformed references, UTF-16 offsets, explicit editions, incompatible rich text and rollback on invalid input.",
-        "Native app: pasted text and notebook extraction, selecting citations and adding results verified; compact and expanded sheets inspected in dark English and dark Arabic, compact sheet in light English."
+        "Native app: pasted text and notebook extraction, selecting citations and adding results verified; compact and expanded sheets inspected in dark English and dark Arabic, compact sheet in light English.",
+        "Native build 208: copied a Unicode sample containing two recognized references and an invalid book name, used the dedicated Paste from Clipboard action, extracted and selected the two valid references, added them to a verse list and verified their exact persisted strings. The invalid reference was not added.",
+        "StudyReferenceExtractionTests and AppLanguageTests passed (9 tests).",
+        "Native build 210: verified the compact original and result states, native source menu, Glass editor and Paste from Clipboard flow with Unicode text. Exactly two valid references were presented; the invalid reference was excluded. References saved by the earlier native Add action survived restart. Original personal files were restored and synthetic history snapshots archived."
       ],
       "limitations": [
-        "Only recognized reference syntax is included; incompatible document objects are reported and require review.",
-        "The dedicated Paste from Clipboard button still needs an end-to-end interaction check."
-      ]
+        "Only recognized reference syntax is included; incompatible document objects remain explicit and require review.",
+        "General appearance, RTL, accessibility and platform acceptance remain tracked separately."
+      ],
+      "completionReview": {
+        "date": "2026-10-28",
+        "basis": "Entrada desde portapapeles y documentos implementada con coordenadas verificadas, casos inválidos y escritura transaccional comprobada.",
+        "releaseAcceptance": "La aceptación general de accesibilidad, idioma y plataformas sigue abierta."
+      }
     },
     {
       "id": "F199",
