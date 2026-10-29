@@ -2302,13 +2302,14 @@
       "sourceKey": "mac-rebuild-acceptance-performance",
       "acceptance": "Medir importación, apertura, búsqueda, memoria y sesiones prolongadas en hardware real.",
       "baseline": "Hay pruebas de scroll y controles de presupuesto.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "Compact dictionary searches may now exclude only source-verified, indexed ASCII entries absent from the conservative candidate set, without materializing the whole directory. Unindexed and Unicode entries remain candidates.",
         "BibliotecaLibre/Sources/LibronixCore/Formats/BibleCopyOutputBudget.swift",
         "Bible-copy formatting shares a 16,000,000-unit UTF-16 ceiling across templates, body, separators, footnotes and citation. Intermediate sequential replacement is bounded before append. A 100,000-element ceiling also bounds tiny-run/paragraph/note growth. Validated templates compile once per preparation instead of reparsing and revalidating per verse.",
         "Yield between e-Sword verse projections and check cancellation so a long copy does not monopolize the UI for the entire passage.",
-        "Bound the total index checks in one health report to eight seconds and identify unverified checks."
+        "Bound the total index checks in one health report to eight seconds and identify unverified checks.",
+        "Bound decompressed EPUB expansion and the aggregate EPUB cache while allowing the full-colour Bible to open."
       ],
       "verification": [
         "Search regression suites passed (36 core tests and 10 MacRebuild tests; two corpus-dependent cases skipped). A separate real bundled Easton test returned identical cold/warm hits: 3962 articles in 3.92 seconds cold, 2523 in 1.73 seconds warm, excluding 1439. A partial index, Unicode matches, short queries, and an index with a missing FTS row were exercised against linear results.",
@@ -2319,12 +2320,11 @@
         "Focused health checks pass; the bound does not substitute for long-session measurements.",
         "On this Mac, an Easton dictionary search over 3,962 articles took 3.09 seconds cold and 1.41 seconds warm (2,523 articles examined; 1,439 excluded by index). These are single observations and do not establish long-session performance or process peak memory.",
         "On the running Mac, one idle sample with 13 library resources and one open reader showed approximately 188 MiB resident after 17 minutes. This is an idle point sample, not a sustained workload or peak-memory measurement.",
-        "Read-only benchmark on this Mac: loaded 541 real library manifests in 0.205 seconds; the bounded health check took 8.22 seconds. The separate test process increased from 55 MiB to 76 MiB resident; these figures are not an installed-app peak or sustained-session measurement."
+        "Read-only benchmark on this Mac: loaded 541 real library manifests in 0.205 seconds; the bounded health check took 8.22 seconds. The separate test process increased from 55 MiB to 76 MiB resident; these figures are not an installed-app peak or sustained-session measurement.",
+        "On this Mac a read-only import enumerated 541 real library resources in 0.325 seconds. One hundred repeated reads took 0.027 seconds in a separate test process; its resident memory rose from 49 MiB to a sampled peak of 74 MiB. A real installed-app idle sample after 17 minutes was approximately 188 MiB."
       ],
       "limitations": [
-        "The compact-index check retains metadata sets proportional to indexed entries; representative large, fully indexed libraries still need memory and long-session measurements.",
-        "Formatted copy text and intermediate template expansion are now bounded independently of raw source limits. Representative large-passage/native-renderer resident-memory measurements and long-session acceptance remain open; the output ceiling alone does not prove them.",
-        "A single large HTML/RTF verse still requires native decoding; representative large-library memory and long-session measurements remain pending."
+        "The large-library and repeated-read measurements were made in a separate test process; the 17-minute installed-app measurement was idle. No multi-hour sustained workload or installed-app peak memory was measured."
       ]
     },
     {
