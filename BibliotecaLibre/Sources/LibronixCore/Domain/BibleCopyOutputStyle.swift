@@ -50,9 +50,6 @@ public struct BibleCopyOutputStyle: Identifiable, Codable, Equatable, Sendable {
             throw PersonalStateError.invalid("El estilo necesita un nombre de hasta 4.096 bytes.")
         }
         for template in [beforePassage,afterPassage,beforeVerse,afterVerse] {
-            guard template.pattern.utf8.count <= 16_384 else {
-                throw PersonalStateError.invalid("La plantilla es demasiado larga.")
-            }
             try BibleCopyOutputTemplateExpander.validate(template.pattern)
         }
     }
@@ -157,13 +154,50 @@ public enum BibleCopyOutputTemplateExpander {
     public static func validate(_ pattern:String) throws {
         guard pattern.utf8.count <= 16_384 else { throw BibleCopyError.limitExceeded }
     }
-    public static func expand(_ pattern:String,context:BibleCopyOutputTemplateContext?) throws -> String {
+    public static let maximumOutputUTF16Units = BibleCopyOutputBudget.maximumUTF16Units
+
+    public static func expand(_ pattern: String, context: BibleCopyOutputTemplateContext?,
+                              maximumUTF16Units: Int = maximumOutputUTF16Units) throws -> String {
         try validate(pattern)
+        let budget = try BibleCopyOutputBudget(maximumUTF16Units: maximumUTF16Units)
+        return try expand(pattern, context: context, within: budget)
+    }
+
+    /// The caller already validated the pattern. Every sequential replacement is
+    /// bounded before appending, including expansion of codes inside earlier values.
+    static func expand(_ pattern: String, context: BibleCopyOutputTemplateContext?, within budget: BibleCopyOutputBudget) throws -> String {
         let values:[(String,String)] = [("^a",context?.abbreviation ?? ""),("^B",context?.fullBook ?? ""),
             ("^b",context?.shortBook ?? ""),("^c",context.map{String($0.chapter)} ?? ""),("^n","\n"),
             ("^P",context?.passage ?? ""),("^p",context?.shortPassage ?? ""),("^R",context?.fullReference ?? ""),
             ("^r",context?.shortReference ?? ""),("^v",context.map{String($0.verse)} ?? ""),("^^","^")]
-        return values.reduce(pattern) { $0.replacingOccurrences(of:$1.0,with:$1.1) }
+        var result = pattern
+        for (token, value) in values {
+            try Task.checkCancellation()
+            let source = result as NSString
+            var match = source.range(of: token)
+            guard match.location != NSNotFound else { continue }
+            var next = "", cursor = 0, stageBudget = budget
+            let valueUnits = value.utf16.count
+            while true {
+                try Task.checkCancellation()
+                let prefixLength = match.location - cursor
+                try stageBudget.consume(units: prefixLength)
+                next.append(source.substring(with: NSRange(location: cursor, length: prefixLength)))
+                try stageBudget.consume(units: valueUnits)
+                next.append(value)
+                cursor = NSMaxRange(match)
+                match = source.range(of: token, range: NSRange(location: cursor, length: source.length - cursor))
+                if match.location == NSNotFound { break }
+            }
+            let tailLength = source.length - cursor
+            try stageBudget.consume(units: tailLength)
+            next.append(source.substring(from: cursor))
+            result = next
+        }
+        var finalBudget = budget
+        try finalBudget.consume(units: result.utf16.count)
+        try Task.checkCancellation()
+        return result
     }
 }
 

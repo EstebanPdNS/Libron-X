@@ -2215,15 +2215,19 @@
       "baseline": "Hay pruebas de scroll y controles de presupuesto.",
       "status": "in_progress",
       "implementation": [
-        "Compact dictionary searches may now exclude only source-verified, indexed ASCII entries absent from the conservative candidate set, without materializing the whole directory. Unindexed and Unicode entries remain candidates."
+        "Compact dictionary searches may now exclude only source-verified, indexed ASCII entries absent from the conservative candidate set, without materializing the whole directory. Unindexed and Unicode entries remain candidates.",
+        "BibliotecaLibre/Sources/LibronixCore/Formats/BibleCopyOutputBudget.swift",
+        "Bible-copy formatting shares a 16,000,000-unit UTF-16 ceiling across templates, body, separators, footnotes and citation. Intermediate sequential replacement is bounded before append. A 100,000-element ceiling also bounds tiny-run/paragraph/note growth. Validated templates compile once per preparation instead of reparsing and revalidating per verse."
       ],
       "verification": [
         "Search regression suites passed (36 core tests and 10 MacRebuild tests; two corpus-dependent cases skipped). A separate real bundled Easton test returned identical cold/warm hits: 3962 articles in 3.92 seconds cold, 2523 in 1.73 seconds warm, excluding 1439. A partial index, Unicode matches, short queries, and an index with a missing FTS row were exercised against linear results.",
-        "Native build 144: an Easton search returned 59 matching articles on both cold and warm runs, examining 3962 articles in 4.1 seconds and 2523 in 2.0 seconds respectively. Opening the first result selected the matching source text in the reader; the test reading and query were closed afterward."
+        "Native build 144: an Easton search returned 59 matching articles on both cold and warm runs, examining 3962 articles in 4.1 seconds and 2523 in 2.0 seconds respectively. Opening the first result selected the matching source text in the reader; the test reading and query were closed afterward.",
+        "2026-10-29: 37 focused tests passed in five suites: production-size repeated templates, intermediate growth, exact Unicode boundaries, trim/spaces, both source-paragraph paths, repeated notes and citation accounting, structural-element limit, invalid bounds, cancellation, native RTF/HTML/text output, unchanged private pasteboard after rejection, style persistence and all ten interface translations. The oversized-template fixture contains 1100 owned verses with an individually valid 16000-byte pattern; the aggregate request throws rather than returning partial output.",
+        "Local build log 226: compiled, signed and replaced the single installed /Applications/Libron-X.app. Reopened the original reading and the native Bible-copy tool; its empty-resource state correctly disabled preview/copy/export. No compatible Bible is installed in this restored user library, so the over-limit copy path is verified by the authored Core/AppKit tests, not claimed as a live-library UI test."
       ],
       "limitations": [
         "The compact-index check retains metadata sets proportional to indexed entries; representative large, fully indexed libraries still need memory and long-session measurements.",
-        "Copy templates have per-pattern and raw-source limits, but the current formatter has no independent aggregate budget for repeated template expansion. A bounded formatted-result contract and representative large-passage memory measurements remain to be completed."
+        "Formatted copy text and intermediate template expansion are now bounded independently of raw source limits. Representative large-passage/native-renderer resident-memory measurements and long-session acceptance remain open; the output ceiling alone does not prove them."
       ]
     },
     {

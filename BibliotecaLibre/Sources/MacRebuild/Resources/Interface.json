@@ -17074,5 +17074,17 @@
     "pt": "Última modificação",
     "ur": "آخری ترمیم",
     "zh-Hans": "最后修改"
+  },
+  "El pasaje supera los límites de preparación de copia.": {
+    "en": "The copy exceeds the preparation limits. Shorten the passage or the template.",
+    "es": "La copia supera los límites de preparación. Reduce el pasaje o la plantilla.",
+    "pt": "A cópia excede os limites de preparação. Reduza a passagem ou o modelo.",
+    "fr": "La copie dépasse les limites de préparation. Raccourcissez le passage ou le modèle.",
+    "zh-Hans": "复制内容超出准备限制。请缩短经文范围或模板。",
+    "hi": "कॉपी तैयार करने की सीमा पार हो गई है। अंश या टेम्पलेट छोटा करें।",
+    "ar": "تتجاوز النسخة حدود الإعداد. اختصر المقطع أو القالب.",
+    "bn": "কপি প্রস্তুতির সীমা অতিক্রম করেছে। অনুচ্ছেদ বা টেমপ্লেট ছোট করুন।",
+    "id": "Salinan melebihi batas penyiapan. Persingkat bagian teks atau templat.",
+    "ur": "نقل تیاری کی حدود سے تجاوز کرتی ہے۔ اقتباس یا سانچہ مختصر کریں۔"
   }
 }

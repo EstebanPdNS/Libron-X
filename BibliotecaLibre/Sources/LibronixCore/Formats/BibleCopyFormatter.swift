@@ -39,9 +39,16 @@ public struct BibleCopyFormattedDocument: Sendable, Equatable {
 /// Templates and the source body take different paths: only literal template
 /// tags b/i/u/sup/sub change formatting. Book text and expanded names stay text.
 public enum BibleCopyFormatter {
+    public static let maximumOutputUTF16Units = BibleCopyOutputTemplateExpander.maximumOutputUTF16Units
+
     public static func format(_ document:BibleCopyDocument, style:BibleCopyOutputStyle,
-                              referenceLanguage:BibleCopyReferenceLanguage = .english) throws -> BibleCopyFormattedDocument {
-        try style.validate();try Task.checkCancellation()
+                              referenceLanguage:BibleCopyReferenceLanguage = .english,
+                              maximumUTF16Units: Int = maximumOutputUTF16Units) throws -> BibleCopyFormattedDocument {
+        try Task.checkCancellation()
+        try style.validate()
+        var budget = try BibleCopyOutputBudget(maximumUTF16Units: maximumUTF16Units)
+        let beforePassage = try PreparedTemplate(style.beforePassage), afterPassage = try PreparedTemplate(style.afterPassage)
+        let beforeVerse = try PreparedTemplate(style.beforeVerse), afterVerse = try PreparedTemplate(style.afterVerse)
         let rangeName=BibleCopyReferenceNames.passage(document.passage,last:document.verses.last?.address,language:referenceLanguage,short:false)
         let shortRange=BibleCopyReferenceNames.passage(document.passage,last:document.verses.last?.address,language:referenceLanguage,short:true)
         func context(_ address:BibleCopyAddress) -> BibleCopyOutputTemplateContext {
@@ -51,19 +58,27 @@ public enum BibleCopyFormatter {
                 chapter:address.chapter,verse:address.verse,abbreviation:document.abbreviation,shortPassage:shortRange)
         }
         var paragraphs:[BibleCopyFormattedParagraph]=[],notes:[BibleCopyFormattedNote]=[]
-        func template(_ value:BibleCopyOutputTemplate,_ address:BibleCopyAddress) throws -> [BibleCopyFormattedRun] {
-            try templateRuns(value,context:context(address))
+        func template(_ value: PreparedTemplate, _ address: BibleCopyAddress) throws -> [BibleCopyFormattedRun] {
+            try value.runs(context: context(address), budget: &budget)
         }
         func body(_ fragments:[BibleCopyFragment],trim:Bool) throws -> [BibleCopyFormattedRun] {
             var result:[BibleCopyFormattedRun]=[]
             for fragment in fragments {
+                try Task.checkCancellation()
                 if let note=fragment.footnote {
                     guard style.copyFootnotes else { continue }
                     guard let source=document.footnotes.first(where:{$0.id==note}) else { throw BibleCopyError.missingBoundary }
-                    if !notes.contains(where:{$0.id==note}) { notes.append(.init(id:note,marker:try project(source.marker,style:style),text:try project(source.text,style:style),isCitation:false)) }
+                    if !notes.contains(where:{$0.id==note}) {
+                        let marker = try project(source.marker, style: style), text = try project(source.text, style: style)
+                        try budget.consume(units: 3, elements: 1) // Two newlines and the marker/text space.
+                        try budget.consume(units: marker.utf16.count)
+                        try budget.consume(units: text.utf16.count)
+                        notes.append(.init(id: note, marker: marker, text: text, isCitation: false))
+                    }
                 } else if style.bibleTextOnly && !fragment.isBibleText { continue }
                 let text=try project(fragment.text,style:style)
                 guard !text.isEmpty else { continue }
+                try budget.consume(elements: 1)
                 result.append(.init(text:text,sourceStyle:fragment.style,format:.init(),footnoteID:fragment.footnote))
             }
             if trim {
@@ -76,33 +91,35 @@ public enum BibleCopyFormatter {
                     result[last].text=result[last].text.replacingOccurrences(of:"\\s+$",with:"",options:.regularExpression)
                 }
             }
+            for run in result { try budget.consume(units: run.text.utf16.count) }
             return result
         }
-        func paragraph(_ runs:[BibleCopyFormattedRun],_ source:LegacyParagraphStyle?) -> BibleCopyFormattedParagraph {
-            let text=runs.map(\.text).joined()
-            let hebrew=text.unicodeScalars.contains{(0x0590...0x05ff).contains($0.value)}
+        func appendParagraph(_ runs:[BibleCopyFormattedRun],_ source:LegacyParagraphStyle?) throws {
+            try budget.consume(units: paragraphs.isEmpty ? 0 : 2, elements: 1)
+            let hebrew = runs.contains { $0.text.unicodeScalars.contains { (0x0590...0x05ff).contains($0.value) } }
             let transliterated=style.hebrew == .transliterated && document.sourceLanguages.contains(where:{$0.lowercased().hasPrefix("he")})
-            return .init(runs:runs,sourceStyle:style.paragraphFormatting ? source:nil,
-                direction:hebrew ? .rightToLeft:transliterated ? .leftToRight:source?.rightToLeft == true ? .rightToLeft:.natural)
+            paragraphs.append(.init(runs:runs,sourceStyle:style.paragraphFormatting ? source:nil,
+                direction:hebrew ? .rightToLeft:transliterated ? .leftToRight:source?.rightToLeft == true ? .rightToLeft:.natural))
         }
         if document.hasVerseText {
             if style.bibleTextOnly && style.paragraphs != .sourceParagraphs {
-                var runs=try template(style.beforePassage,document.passage.start)
+                var runs=try template(beforePassage,document.passage.start)
                 for (index,verse) in document.verses.enumerated() {
                     try Task.checkCancellation()
-                    runs += try template(style.beforeVerse,verse.address)
+                    runs += try template(beforeVerse,verse.address)
                     runs += try body(verse.fragments,trim:true)
-                    runs += try template(style.afterVerse,verse.address)
+                    runs += try template(afterVerse,verse.address)
                     if index+1 < document.verses.count && !style.afterVerse.pattern.contains("^n") &&
                         !document.sourceLanguages.contains(where:{["ja","ko","th","zh"].contains($0.lowercased())}) {
+                        try budget.consume(units: 1, elements: 1)
                         runs.append(.init(text:" ",sourceStyle:nil,format:.init(),footnoteID:nil))
                     }
                 }
-                runs += try template(style.afterPassage,document.passage.start)
-                paragraphs.append(paragraph(runs,document.verses.first?.paragraphStyle))
+                runs += try template(afterPassage,document.passage.start)
+                try appendParagraph(runs,document.verses.first?.paragraphStyle)
             } else {
                 guard !document.sourceParagraphs.isEmpty else { throw BibleCopyError.incompleteSource }
-                if !style.bibleTextOnly { paragraphs.append(paragraph(try template(style.beforePassage,document.passage.start),nil)) }
+                if !style.bibleTextOnly { try appendParagraph(try template(beforePassage,document.passage.start),nil) }
                 for source in document.sourceParagraphs {
                     try Task.checkCancellation()
                     var runs:[BibleCopyFormattedRun]=[]
@@ -110,7 +127,7 @@ public enum BibleCopyFormatter {
                         var marks=source.marks
                         for fragment in source.fragments {
                             while let mark=marks.first,mark.offset<=fragment.sourceRange.location {
-                                runs += try template(style.beforeVerse,mark.address);marks.removeFirst()
+                                runs += try template(beforeVerse,mark.address);marks.removeFirst()
                             }
                             // An anchor inside a text run needs an explicit split;
                             // do not silently put the reference in the wrong place.
@@ -118,21 +135,25 @@ public enum BibleCopyFormatter {
                             runs += try body([fragment],trim:false)
                         }
                     } else { runs=try body(source.fragments,trim:false) }
-                    if !runs.isEmpty { paragraphs.append(paragraph(runs,source.style)) }
+                    if !runs.isEmpty { try appendParagraph(runs,source.style) }
                 }
                 if style.bibleTextOnly, !paragraphs.isEmpty {
-                    paragraphs[0].runs.insert(contentsOf:try template(style.beforePassage,document.passage.start),at:0)
-                    paragraphs[paragraphs.count-1].runs += try template(style.afterPassage,document.passage.start)
-                } else { paragraphs.append(paragraph(try template(style.afterPassage,document.passage.start),nil)) }
+                    paragraphs[0].runs.insert(contentsOf:try template(beforePassage,document.passage.start),at:0)
+                    paragraphs[paragraphs.count-1].runs += try template(afterPassage,document.passage.start)
+                } else { try appendParagraph(try template(afterPassage,document.passage.start),nil) }
             }
         }
         if style.citation && !document.citation.isEmpty {
             if !paragraphs.isEmpty {
                 var format=BibleCopyTextFormat();format.superscript=true
+                try budget.consume(units: 3, elements: 1)
                 paragraphs[paragraphs.count-1].runs.append(.init(text:"[1]",sourceStyle:nil,format:format,footnoteID:"citation"))
             }
+            try budget.consume(units: 6, elements: 1) // Two newlines, [1], and a space.
+            try budget.consume(units: document.citation.utf16.count)
             notes.append(.init(id:"citation",marker:"[1]",text:document.citation,isCitation:true))
         }
+        try Task.checkCancellation()
         return .init(title:rangeName,style:style,paragraphs:paragraphs,notes:notes,sources:document.sources)
     }
     private static func project(_ text:String,style:BibleCopyOutputStyle) throws -> String {
@@ -148,28 +169,57 @@ public enum BibleCopyFormatter {
         }
         return result
     }
-    public static func templateRuns(_ template:BibleCopyOutputTemplate,context:BibleCopyOutputTemplateContext?) throws -> [BibleCopyFormattedRun] {
+    public static func templateRuns(_ template: BibleCopyOutputTemplate, context: BibleCopyOutputTemplateContext?,
+                                    maximumUTF16Units: Int = maximumOutputUTF16Units) throws -> [BibleCopyFormattedRun] {
+        try Task.checkCancellation()
         try BibleCopyOutputTemplateExpander.validate(template.pattern)
-        let pattern=template.pattern as NSString
-        let expression=try NSRegularExpression(pattern:"</?(b|i|u|sup|sub)>",options:.caseInsensitive)
-        let matches=expression.matches(in:template.pattern,range:NSRange(location:0,length:pattern.length))
-        var counts:[String:Int]=[:],cursor=0,result:[BibleCopyFormattedRun]=[]
-        func append(_ text:String) throws {
-            guard !text.isEmpty else { return }
-            var flags=BibleCopyTextFormat()
-            flags.bold=template.bold || counts["b",default:0]>0;flags.italic=template.italic || counts["i",default:0]>0
-            flags.underline=template.underline || counts["u",default:0]>0
-            flags.superscript=template.superscript || counts["sup",default:0]>0
-            flags.subscriptText=template.subscriptText || counts["sub",default:0]>0
-            result.append(.init(text:try BibleCopyOutputTemplateExpander.expand(text,context:context),sourceStyle:nil,format:flags,footnoteID:nil))
+        var budget = try BibleCopyOutputBudget(maximumUTF16Units: maximumUTF16Units)
+        return try PreparedTemplate(template).runs(context: context, budget: &budget)
+    }
+
+    /// Only validated style patterns reach this parser. Compile the literal
+    /// formatting once, then expand its typed segments for each verse.
+    private struct PreparedTemplate {
+        let segments: [(String, BibleCopyTextFormat)]
+
+        init(_ template: BibleCopyOutputTemplate) throws {
+            let pattern = template.pattern as NSString
+            let expression = try NSRegularExpression(pattern: "</?(b|i|u|sup|sub)>", options: .caseInsensitive)
+            let matches = expression.matches(in: template.pattern, range: NSRange(location: 0, length: pattern.length))
+            var counts: [String: Int] = [:], cursor = 0, segments: [(String, BibleCopyTextFormat)] = []
+            func append(_ text: String) {
+                guard !text.isEmpty else { return }
+                var flags = BibleCopyTextFormat()
+                flags.bold = template.bold || counts["b", default: 0] > 0
+                flags.italic = template.italic || counts["i", default: 0] > 0
+                flags.underline = template.underline || counts["u", default: 0] > 0
+                flags.superscript = template.superscript || counts["sup", default: 0] > 0
+                flags.subscriptText = template.subscriptText || counts["sub", default: 0] > 0
+                segments.append((text, flags))
+            }
+            for match in matches {
+                try Task.checkCancellation()
+                append(pattern.substring(with: NSRange(location: cursor, length: match.range.location - cursor)))
+                let name = pattern.substring(with: match.range(at: 1)).lowercased()
+                counts[name, default: 0] += pattern.substring(with: match.range).hasPrefix("</") ? -1 : 1
+                counts[name] = max(0, counts[name, default: 0])
+                cursor = match.range.location + match.range.length
+            }
+            append(pattern.substring(from: cursor))
+            self.segments = segments
         }
-        for match in matches {
-            try append(pattern.substring(with:NSRange(location:cursor,length:match.range.location-cursor)))
-            let name=pattern.substring(with:match.range(at:1)).lowercased(),closing=pattern.substring(with:match.range).hasPrefix("</")
-            counts[name,default:0]=closing ? max(0,counts[name,default:0]-1):counts[name,default:0]+1
-            cursor=match.range.location+match.range.length
+
+        func runs(context: BibleCopyOutputTemplateContext?, budget: inout BibleCopyOutputBudget) throws -> [BibleCopyFormattedRun] {
+            var result: [BibleCopyFormattedRun] = []
+            for (pattern, flags) in segments {
+                try Task.checkCancellation()
+                let text = try BibleCopyOutputTemplateExpander.expand(pattern, context: context, within: budget)
+                guard !text.isEmpty else { continue }
+                try budget.consume(units: text.utf16.count, elements: 1)
+                result.append(.init(text: text, sourceStyle: nil, format: flags, footnoteID: nil))
+            }
+            return result
         }
-        try append(pattern.substring(from:cursor));return result
     }
 }
 

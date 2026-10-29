@@ -95,6 +95,20 @@ import LibronixOutputMac
         }
         #expect(board.changeCount == changeCount && board.string(forType:.string) == "Authored clipboard sentinel")
     }
+    @Test func aRejectedAggregateExpansionCannotReplaceTheClipboardWithAPartialCopy() async throws {
+        let fixture = try OutputFixture(); defer { fixture.remove() }
+        let source = try await BibleCopyService().prepare(fixture.resource, passage: .parse("Xy 1:1"), abbreviation: "Own")
+        var style = BibleCopyOutputStyle(name: "Owned bounded copy")
+        style.beforePassage.pattern = ""; style.beforeVerse.pattern = String(repeating: "x", count: 4000)
+        let board = NSPasteboard.withUniqueName(); defer { board.releaseGlobally() }
+        board.setString("Owned clipboard sentinel", forType: .string)
+        let count = board.changeCount
+        #expect(throws: BibleCopyError.limitExceeded) {
+            let formatted = try BibleCopyFormatter.format(source, style: style, maximumUTF16Units: 128)
+            try NativeBibleCopyOutput.copy(NativeBibleCopyOutput.prepare(formatted), to: board)
+        }
+        #expect(board.changeCount == count && board.string(forType: .string) == "Owned clipboard sentinel")
+    }
     @Test func exportedStylesRetainUnknownSourceDataWhileEditingOwnedKnownFields() throws {
         let data=Data("""
         <lbx-copy-bible-verses-style name="Own" source="keep"><!-- own comment --><unknown x="y">own payload</unknown><options><option name="BibleTextOnly">true</option><option name="Future">false</option></options><templates><template name="BeforeVerse"><pattern xml:space="preserve">^v </pattern><extra>keep</extra><format name="FutureFormat">false</format></template></templates></lbx-copy-bible-verses-style>

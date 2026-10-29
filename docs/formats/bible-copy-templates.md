@@ -49,3 +49,28 @@ Bible formats remain the separate F186 requirement; this interface work does not
 claim their extraction is complete. Source boundaries, unavailable verses,
 unsupported content, cancellation and source-file changes retain the existing
 read-only service checks.
+
+## Output limits and cancellation
+
+Source extraction retains its separate raw-text and article limits. Formatting
+has an independent default ceiling of 16,000,000 UTF-16 units shared by all
+patterns, projected body text, inter-verse spaces, paragraph separators, footnote
+markers/text and the bibliographic endnote. The count matches the emitted plain
+text, including its separators. Callers can request a lower nonnegative ceiling;
+they cannot raise the production maximum.
+
+Every intermediate sequential token replacement must also fit the remaining
+text budget before its pieces are appended. A later replacement that would shrink
+an oversized intermediate result does not exempt it. Template text is parsed
+once per preparation into literal formatting segments; reference expansion does
+not reinterpret inserted names or source text as formatting tags. Empty expanded
+segments do not create empty formatted runs.
+
+A separate limit of 100,000 combined runs, paragraphs and notes bounds structural
+growth even for many tiny fragments. Exceeding either limit throws the existing
+copy-limit error and returns no partial document. Clipboard/export preparation
+therefore never receives a truncated result. Cancellation is checked at entry,
+per source fragment, during template parsing and replacement, and before returning
+the prepared result. These bounds
+are not a measurement or guarantee of the native renderer's total resident
+memory; large-passage and long-session acceptance remains open under F256.
