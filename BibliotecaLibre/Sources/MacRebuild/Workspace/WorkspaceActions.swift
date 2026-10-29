@@ -155,10 +155,7 @@ struct ReaderHighlight: Identifiable, Codable, Equatable, Sendable {
         savePersonal()
     }
     func addFavorite() {
-        guard let reader = activeReader, let page = reader.page else { return }
-        let location = ReaderLocation(resourceID: reader.resource.id, legacyIdentifier: reader.resource.legacyIdentifier, format: reader.resource.format,
-            sectionOrdinal: page.destination.ordinal, reference: reader.currentReference,
-            textFingerprint: LibrarySearchService.textFingerprint(page.text), characterOffset: reader.selectedRange.location)
+        guard let reader = activeReader, let page = reader.page, let location = currentBookmarkLocation else { return }
         do {
             let favorite = LibraryFavorite(title: reader.resource.title + " · " + (reader.currentReference ?? "Artículo \(page.destination.ordinal + 1)"),
                                            kind: .location, location: location)

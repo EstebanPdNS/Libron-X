@@ -11,7 +11,7 @@ struct MainWorkspaceToolbar: ToolbarContent {
         ToolbarItemGroup {
             ReaderZoomMenu(reader: workspace.activeReader)
             Menu {
-                Button(L("Agregar ubicación actual"), action: workspace.addFavorite).disabled(workspace.activeReader?.page == nil)
+                Button(L("Agregar ubicación actual"), action: workspace.addFavorite).disabled(workspace.currentBookmarkLocation == nil)
                 Button(L("Organizar favoritos…")) { workspace.activeTool = .favorites }
                 Divider()
                 ForEach(workspace.personal.favorites.items.filter { $0.kind == .location }) { favorite in

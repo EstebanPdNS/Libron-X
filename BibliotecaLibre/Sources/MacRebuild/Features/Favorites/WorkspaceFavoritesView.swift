@@ -66,7 +66,7 @@ struct WorkspaceFavoritesView: View {
     }
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Button(L("Agregar ubicación actual"), action: workspace.addFavorite).disabled(workspace.activeReader?.page == nil)
+            Button(L("Agregar ubicación actual"), action: workspace.addFavorite).disabled(workspace.currentBookmarkLocation == nil)
             List(selection: $selected) {
                 FavoriteRows(nodes: FavoriteNode.tree(favorites), expanded: $expanded, workspace: workspace)
             }

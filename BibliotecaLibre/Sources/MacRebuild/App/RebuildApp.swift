@@ -181,7 +181,7 @@ struct RebuildCommands: Commands {
             Button(L("Explorador temático…")) { workspace.activeTool = .topics }
         }
         CommandMenu(L("Favoritos")) {
-            Button(L("Agregar ubicación actual"), action: workspace.addFavorite).disabled(workspace.activeReader?.page == nil)
+            Button(L("Agregar ubicación actual"), action: workspace.addFavorite).disabled(workspace.currentBookmarkLocation == nil)
             Button(L("Organizar favoritos…")) { workspace.activeTool = .favorites }
             Divider()
             Menu(L("Marcadores rápidos")) {
