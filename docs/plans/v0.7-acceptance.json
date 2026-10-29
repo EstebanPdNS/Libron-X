@@ -742,13 +742,15 @@
       "baseline": "Sin generador de actividades identificado.",
       "status": "in_progress",
       "implementation": [
-        "Added a bounded seeded word-search generator with eight directions, Unicode-letter validation, checked placements and forward/reverse solution matching."
+        "Added a bounded seeded word-search generator with eight directions, Unicode-letter validation, checked placements and forward/reverse solution matching.",
+        "Added an optional native activity using user-supplied words, configurable grid size, accessible square labels, two-point selection and a found-word counter; games are temporary."
       ],
       "verification": [
-        "WordSearchPuzzleTests passed for deterministic generation, placement validation, reverse selection, accented letters, invalid input and malformed coordinates."
+        "WordSearchPuzzleTests passed for deterministic generation, placement validation, reverse selection, accented letters, invalid input and malformed coordinates.",
+        "AppLanguageTests passed for ten languages. Native builds 163 and 164 were visually inspected in dark mode, and a generated word was selected and marked correctly. The previous workspace was restored."
       ],
       "limitations": [
-        "The interactive activity and accessibility/visual review are not yet implemented. The generator uses a bounded greedy placement strategy and may reject a list even when another arrangement exists."
+        "The generator uses a bounded greedy placement strategy and may reject a list even when another arrangement exists. Further light, right-to-left, narrow-window and keyboard/VoiceOver review remains pending; only the generated placements count as solutions."
       ]
     },
     {

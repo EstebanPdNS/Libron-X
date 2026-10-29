@@ -19,6 +19,7 @@ struct WorkspaceToolsView: View {
             case .prayerJournal: PrayerJournalView(personal: workspace.personal)
             case .scriptureMemory: ScriptureMemoryView(workspace: workspace, personal: workspace.personal)
             case .studyAssessments: StudyAssessmentView(personal: workspace.personal)
+            case .wordSearch: WordSearchView()
             case .passageGuide: PassageGuideView(workspace: workspace, controller: workspace.passageGuide)
             case .information: ResourceInformationView(reader: workspace.activeReader)
             case .resources: ResourceManagerView(workspace: workspace)
@@ -67,6 +68,7 @@ struct WorkspaceToolsView: View {
         case .prayerJournal: "Lista de oración"
         case .scriptureMemory: "Memorización de pasajes"
         case .studyAssessments: "Autoevaluaciones"
+        case .wordSearch: "Sopa de letras"
         case .passageGuide: "Guía de pasajes"
         case .information: "Propiedades del recurso"
         case .resources: "Recursos y licencias"

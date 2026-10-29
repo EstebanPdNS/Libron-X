@@ -6011,6 +6011,18 @@
     "ur": "شروع کی تاریخ",
     "zh-Hans": "开始日期"
   },
+  "Fila {row}, columna {column}: {letter}": {
+    "ar": "الصف {row}، العمود {column}: {letter}",
+    "bn": "সারি {row}, কলাম {column}: {letter}",
+    "en": "Row {row}, column {column}: {letter}",
+    "es": "Fila {row}, columna {column}: {letter}",
+    "fr": "Ligne {row}, colonne {column} : {letter}",
+    "hi": "पंक्ति {row}, स्तंभ {column}: {letter}",
+    "id": "Baris {row}, kolom {column}: {letter}",
+    "pt": "Linha {row}, coluna {column}: {letter}",
+    "ur": "قطار {row}، کالم {column}: {letter}",
+    "zh-Hans": "第 {row} 行，第 {column} 列：{letter}"
+  },
   "Filtrar por": {
     "ar": "تصفية حسب",
     "bn": "ছাঁকুন",
@@ -6202,6 +6214,18 @@
     "pt": "Geral",
     "ur": "عمومی",
     "zh-Hans": "通用"
+  },
+  "Generar": {
+    "ar": "إنشاء",
+    "bn": "তৈরি করুন",
+    "en": "Generate",
+    "es": "Generar",
+    "fr": "Générer",
+    "hi": "बनाएँ",
+    "id": "Buat",
+    "pt": "Gerar",
+    "ur": "بنائیں",
+    "zh-Hans": "生成"
   },
   "Generar bibliografía": {
     "ar": "إنشاء قائمة المراجع",
@@ -7715,6 +7739,18 @@
     "ur": "دعائیں مقامی طور پر محفوظ ہوتی ہیں۔ دعا چھپانے سے فائل خفیہ نہیں ہوتی۔",
     "zh-Hans": "祷告保存在本地。隐藏祷告不会加密文件。"
   },
+  "Las palabras o la cuadrícula no son válidas.": {
+    "ar": "الكلمات أو الشبكة غير صالحة.",
+    "bn": "শব্দ বা গ্রিড অবৈধ।",
+    "en": "The words or grid are invalid.",
+    "es": "Las palabras o la cuadrícula no son válidas.",
+    "fr": "Les mots ou la grille sont invalides.",
+    "hi": "शब्द या ग्रिड अमान्य हैं।",
+    "id": "Kata atau kisi tidak valid.",
+    "pt": "As palavras ou a grade são inválidas.",
+    "ur": "الفاظ یا گرڈ درست نہیں۔",
+    "zh-Hans": "单词或网格无效。"
+  },
   "Las referencias se buscan en los recursos disponibles; no se convierten versificaciones.": {
     "ar": "تُبحث المراجع في الموارد المتاحة؛ لا تُحوّل أنظمة ترقيم الآيات.",
     "bn": "উপলব্ধ রিসোর্সে রেফারেন্স খোঁজা হয়; পদসংখ্যা রূপান্তর করা হয় না।",
@@ -8795,6 +8831,18 @@
     "ur": "نہیں",
     "zh-Hans": "否"
   },
+  "No coincide con una palabra pendiente.": {
+    "ar": "لا يطابق ذلك كلمة متبقية.",
+    "bn": "এটি বাকি কোনো শব্দের সঙ্গে মেলে না।",
+    "en": "That does not match an unfound word.",
+    "es": "No coincide con una palabra pendiente.",
+    "fr": "Cela ne correspond à aucun mot restant.",
+    "hi": "यह किसी शेष शब्द से मेल नहीं खाता।",
+    "id": "Itu tidak cocok dengan kata yang belum ditemukan.",
+    "pt": "Não corresponde a uma palavra pendente.",
+    "ur": "یہ کسی باقی لفظ سے میل نہیں کھاتا۔",
+    "zh-Hans": "未匹配尚未找到的单词。"
+  },
   "No contiene": {
     "ar": "لا يحتوي على",
     "bn": "অন্তর্ভুক্ত করে না",
@@ -9226,6 +9274,18 @@
     "pt": "Não foi possível abrir os planos de leitura.",
     "ur": "مطالعے کے منصوبے نہیں کھل سکے۔",
     "zh-Hans": "无法打开阅读计划。"
+  },
+  "No se pudieron colocar todas las palabras. Reduce la lista o aumenta la cuadrícula.": {
+    "ar": "تعذر وضع كل الكلمات. قلل القائمة أو كبّر الشبكة.",
+    "bn": "সব শব্দ বসানো যায়নি। তালিকা ছোট করুন বা গ্রিড বড় করুন।",
+    "en": "Could not place every word. Shorten the list or enlarge the grid.",
+    "es": "No se pudieron colocar todas las palabras. Reduce la lista o aumenta la cuadrícula.",
+    "fr": "Impossible de placer tous les mots. Réduisez la liste ou agrandissez la grille.",
+    "hi": "सभी शब्द नहीं रखे जा सके। सूची घटाएँ या ग्रिड बढ़ाएँ।",
+    "id": "Tidak dapat menempatkan semua kata. Kurangi daftar atau perbesar kisi.",
+    "pt": "Não foi possível posicionar todas as palavras. Reduza a lista ou amplie a grade.",
+    "ur": "تمام الفاظ نہیں رکھے جا سکے۔ فہرست کم کریں یا گرڈ بڑھائیں۔",
+    "zh-Hans": "无法放置所有单词。请缩短列表或增大网格。"
   },
   "No se pudieron leer las asociaciones.": {
     "ar": "تعذرت قراءة الارتباطات.",
@@ -10115,6 +10175,18 @@
     "ur": "مکمل الفاظ",
     "zh-Hans": "全字匹配"
   },
+  "Palabras encontradas: {found} de {total}": {
+    "ar": "الكلمات المكتشفة: {found} من {total}",
+    "bn": "পাওয়া শব্দ: {total}-এর মধ্যে {found}",
+    "en": "Words found: {found} of {total}",
+    "es": "Palabras encontradas: {found} de {total}",
+    "fr": "Mots trouvés : {found} sur {total}",
+    "hi": "मिले शब्द: {found}/{total}",
+    "id": "Kata ditemukan: {found} dari {total}",
+    "pt": "Palavras encontradas: {found} de {total}",
+    "ur": "ملے ہوئے الفاظ: {total} میں سے {found}",
+    "zh-Hans": "已找到：{found}/{total}"
+  },
   "Palabras para diccionarios, separadas por comas (opcional)": {
     "ar": "كلمات القاموس مفصولة بفواصل (اختياري)",
     "bn": "অভিধানের শব্দ, কমা দিয়ে আলাদা করুন (ঐচ্ছিক)",
@@ -10126,6 +10198,18 @@
     "pt": "Palavras para dicionários, separadas por vírgulas (opcional)",
     "ur": "لغت کے الفاظ، کوما سے الگ (اختیاری)",
     "zh-Hans": "词典查询词，以逗号分隔（可选）"
+  },
+  "Palabras separadas por comas": {
+    "ar": "كلمات مفصولة بفواصل",
+    "bn": "কমা দিয়ে আলাদা করা শব্দ",
+    "en": "Words separated by commas",
+    "es": "Palabras separadas por comas",
+    "fr": "Mots séparés par des virgules",
+    "hi": "अल्पविराम से अलग शब्द",
+    "id": "Kata dipisahkan koma",
+    "pt": "Palavras separadas por vírgulas",
+    "ur": "کوما سے الگ الفاظ",
+    "zh-Hans": "用逗号分隔单词"
   },
   "Panel localizador": {
     "ar": "لوحة الموقع",
@@ -11963,6 +12047,18 @@
     "ur": "ایک سے سولہ بائبل اور ایک بنیادی ترجمہ منتخب کریں۔",
     "zh-Hans": "请选择一至十六本圣经及一个基准版本。"
   },
+  "Selecciona la primera y la última letra de cada palabra.": {
+    "ar": "حدد الحرف الأول والأخير من كل كلمة.",
+    "bn": "প্রতিটি শব্দের প্রথম ও শেষ অক্ষর নির্বাচন করুন।",
+    "en": "Select the first and last letter of each word.",
+    "es": "Selecciona la primera y la última letra de cada palabra.",
+    "fr": "Sélectionnez la première et la dernière lettre de chaque mot.",
+    "hi": "हर शब्द का पहला और अंतिम अक्षर चुनें।",
+    "id": "Pilih huruf pertama dan terakhir setiap kata.",
+    "pt": "Selecione a primeira e a última letra de cada palavra.",
+    "ur": "ہر لفظ کا پہلا اور آخری حرف منتخب کریں۔",
+    "zh-Hans": "选择每个单词的首字母和末字母。"
+  },
   "Selecciona notas que sigan disponibles.": {
     "ar": "اختر ملاحظات ما زالت متاحة.",
     "bn": "এখনও উপলব্ধ নোট নির্বাচন করুন।",
@@ -12563,6 +12659,30 @@
     "ur": "صرف متن",
     "zh-Hans": "仅文本"
   },
+  "Sopa de letras": {
+    "ar": "البحث عن الكلمات",
+    "bn": "শব্দ খোঁজা",
+    "en": "Word Search",
+    "es": "Sopa de letras",
+    "fr": "Mots mêlés",
+    "hi": "शब्द खोज",
+    "id": "Cari kata",
+    "pt": "Caça-palavras",
+    "ur": "الفاظ تلاش کریں",
+    "zh-Hans": "找词游戏"
+  },
+  "Sopa de letras…": {
+    "ar": "البحث عن الكلمات…",
+    "bn": "শব্দ খোঁজা…",
+    "en": "Word Search…",
+    "es": "Sopa de letras…",
+    "fr": "Mots mêlés…",
+    "hi": "शब्द खोज…",
+    "id": "Cari kata…",
+    "pt": "Caça-palavras…",
+    "ur": "الفاظ تلاش کریں…",
+    "zh-Hans": "找词游戏…"
+  },
   "Stable recibe versiones estables. Beta incluye también versiones de prueba.": {
     "ar": "تستقبل Stable الإصدارات المستقرة. وتشمل Beta الإصدارات التجريبية أيضًا.",
     "bn": "Stable-এ স্থিতিশীল সংস্করণ পাওয়া যায়। Beta-তে পরীক্ষামূলক সংস্করণও থাকে।",
@@ -12694,6 +12814,18 @@
     "pt": "Tamanho",
     "ur": "سائز",
     "zh-Hans": "大小"
+  },
+  "Tamaño de cuadrícula": {
+    "ar": "حجم الشبكة",
+    "bn": "গ্রিডের আকার",
+    "en": "Grid Size",
+    "es": "Tamaño de cuadrícula",
+    "fr": "Taille de la grille",
+    "hi": "ग्रिड आकार",
+    "id": "Ukuran kisi",
+    "pt": "Tamanho da grade",
+    "ur": "گرڈ کا سائز",
+    "zh-Hans": "网格大小"
   },
   "Tamaño predeterminado": {
     "ar": "الحجم الافتراضي",
@@ -13294,6 +13426,18 @@
     "pt": "Use Voltar, Avançar e Histórico para rever locais. Conteúdo abre o índice do recurso; Artigo muda o modo do campo de referência.",
     "ur": "پیچھے، آگے اور تاریخ سے دیکھی ہوئی جگہوں پر واپس جائیں۔ مندرجات وسیلے کی فہرست کھولتا ہے؛ مضمون سے حوالہ خانے کی وضع بدلتی ہے۔",
     "zh-Hans": "使用后退、前进和历史记录返回访问过的位置。目录打开资源索引；文章切换引用输入框的模式。"
+  },
+  "Usa de 1 a 30 palabras distintas de 2 a {size} letras, sin espacios.": {
+    "ar": "استخدم من 1 إلى 30 كلمة مختلفة من حرفين إلى {size} حرفًا، دون مسافات.",
+    "bn": "ফাঁকা স্থান ছাড়া ২ থেকে {size} অক্ষরের ১ থেকে ৩০টি ভিন্ন শব্দ ব্যবহার করুন।",
+    "en": "Use 1 to 30 different words of 2 to {size} letters, without spaces.",
+    "es": "Usa de 1 a 30 palabras distintas de 2 a {size} letras, sin espacios.",
+    "fr": "Utilisez 1 à 30 mots différents de 2 à {size} lettres, sans espaces.",
+    "hi": "बिना रिक्त स्थान के 2 से {size} अक्षरों वाले 1 से 30 अलग शब्द उपयोग करें।",
+    "id": "Gunakan 1 hingga 30 kata berbeda berisi 2 hingga {size} huruf, tanpa spasi.",
+    "pt": "Use de 1 a 30 palavras diferentes de 2 a {size} letras, sem espaços.",
+    "ur": "بغیر خالی جگہ کے 2 سے {size} حروف والے 1 سے 30 مختلف الفاظ استعمال کریں۔",
+    "zh-Hans": "使用 1 到 30 个不同单词，每个含 2 到 {size} 个字母，不含空格。"
   },
   "Vaciar lista": {
     "ar": "مسح القائمة",
