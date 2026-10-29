@@ -2315,7 +2315,8 @@
         "Focused functional tests pass with cooperative yielding between e-Sword rows; this is not evidence of long-session or representative peak-memory performance.",
         "Focused health checks pass; the bound does not substitute for long-session measurements.",
         "On this Mac, an Easton dictionary search over 3,962 articles took 3.09 seconds cold and 1.41 seconds warm (2,523 articles examined; 1,439 excluded by index). These are single observations and do not establish long-session performance or process peak memory.",
-        "On the running Mac, one idle sample with 13 library resources and one open reader showed approximately 188 MiB resident after 17 minutes. This is an idle point sample, not a sustained workload or peak-memory measurement."
+        "On the running Mac, one idle sample with 13 library resources and one open reader showed approximately 188 MiB resident after 17 minutes. This is an idle point sample, not a sustained workload or peak-memory measurement.",
+        "Read-only benchmark on this Mac: loaded 541 real library manifests in 0.205 seconds; the bounded health check took 8.22 seconds. The separate test process increased from 55 MiB to 76 MiB resident; these figures are not an installed-app peak or sustained-session measurement."
       ],
       "limitations": [
         "The compact-index check retains metadata sets proportional to indexed entries; representative large, fully indexed libraries still need memory and long-session measurements.",
