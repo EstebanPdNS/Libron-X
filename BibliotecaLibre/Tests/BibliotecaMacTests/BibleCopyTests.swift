@@ -20,6 +20,8 @@ import Testing
         let doc=try await service.prepare(fixture.resource,passage:.parse("Xy 1:2-2:1"),abbreviation:"Own")
         #expect(doc.verses.map(\.address.key)==["xy 1:2","xy 2:1"])
         #expect(doc.verses.map(\.text)==["Own second <tag>.","Own next chapter."])
+        let memory = try ScriptureMemorySource.card(reference: "Xy 1:2-2:1", document: doc)
+        #expect(memory.passage == "Own second <tag>.\nOwn next chapter." && memory.source == doc.title)
         #expect(doc.fullParagraphs.map(\.text).joined(separator:"\n").contains("Own following heading"))
         #expect(doc.sources.map(\.sectionOrdinal)==[1,3])
         let chapter=try await service.prepare(fixture.resource,passage:.parse("Xy 1"),abbreviation:"Own")
@@ -31,6 +33,7 @@ import Testing
         let fixture=try OutputFixture();defer{fixture.remove()};let service=BibleCopyService()
         let absent=try await service.prepare(fixture.resource,passage:.parse("Xy 999:1"),abbreviation:"Own")
         #expect(!absent.hasVerseText && !absent.citation.isEmpty && absent.sources.isEmpty)
+        #expect(throws: (any Error).self) { try ScriptureMemorySource.card(reference: "Xy 999:1", document: absent) }
         await #expect(throws:BibleCopyError.missingBoundary) { try await service.prepare(fixture.resource,passage:.parse("Xy 1:1-999:1"),abbreviation:"Own") }
         await #expect(throws:BibleCopyError.limitExceeded) { try await service.prepare(fixture.resource,passage:.parse("Xy 1:1"),abbreviation:"Own",maximumCharacters:1) }
         let gap=try OutputFixture(secondVerse:3);defer{gap.remove()}

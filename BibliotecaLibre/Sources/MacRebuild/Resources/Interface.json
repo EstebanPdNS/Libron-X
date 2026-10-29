@@ -7271,6 +7271,18 @@
     "ur": "مطالعے کی تاریخ درست نہیں ہے۔",
     "zh-Hans": "阅读日期无效。"
   },
+  "La fuente no contiene el pasaje solicitado.": {
+    "ar": "لا يحتوي المصدر على المقطع المطلوب.",
+    "bn": "উৎসে অনুরোধ করা অংশ নেই।",
+    "en": "The source does not contain the requested passage.",
+    "es": "La fuente no contiene el pasaje solicitado.",
+    "fr": "La source ne contient pas le passage demandé.",
+    "hi": "स्रोत में अनुरोधित अंश नहीं है।",
+    "id": "Sumber tidak memuat bagian yang diminta.",
+    "pt": "A fonte não contém a passagem solicitada.",
+    "ur": "ماخذ میں مطلوبہ مقطع موجود نہیں۔",
+    "zh-Hans": "来源不包含所请求的经文。"
+  },
   "La identidad del recurso cambió.": {
     "ar": "تغيّرت هوية المورد.",
     "bn": "রিসোর্সের পরিচয় বদলেছে।",
@@ -9586,6 +9598,18 @@
     "pt": "Números Strong",
     "ur": "اسٹرانگ نمبرز",
     "zh-Hans": "Strong 编号"
+  },
+  "Obtener texto": {
+    "ar": "جلب النص",
+    "bn": "পাঠ্য আনুন",
+    "en": "Get Text",
+    "es": "Obtener texto",
+    "fr": "Obtenir le texte",
+    "hi": "पाठ प्राप्त करें",
+    "id": "Ambil teks",
+    "pt": "Obter texto",
+    "ur": "متن حاصل کریں",
+    "zh-Hans": "获取文本"
   },
   "Ocultar lecturas completadas": {
     "ar": "إخفاء القراءات المكتملة",

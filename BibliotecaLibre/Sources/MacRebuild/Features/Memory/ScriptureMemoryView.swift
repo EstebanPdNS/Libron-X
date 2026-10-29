@@ -6,6 +6,7 @@ private struct MemoryEdit: Identifiable {
     let original: ScriptureMemoryCard?
 }
 struct ScriptureMemoryView: View {
+    @Bindable var workspace: StudyWorkspace
     @Bindable var personal: WorkspacePersonalState
     @RebuildViewState private var selectedID: UUID?
     @RebuildViewState private var editing: MemoryEdit?
@@ -39,7 +40,7 @@ struct ScriptureMemoryView: View {
             }
         }.padding(16)
             .sheet(item: $editing) { value in
-                MemoryEditor(personal: personal, original: value.original) { selectedID = $0 }.modifier(AppInterfaceLanguage())
+                MemoryEditor(workspace: workspace, personal: personal, original: value.original) { selectedID = $0 }.modifier(AppInterfaceLanguage())
             }
             .sheet(item: $practice) { card in MemoryPractice(personal: personal, original: card).modifier(AppInterfaceLanguage()) }
             .alert(L("Eliminar pasaje"), isPresented: $deleting) {
@@ -59,6 +60,7 @@ struct ScriptureMemoryView: View {
     }
 }
 private struct MemoryEditor: View {
+    @Bindable var workspace: StudyWorkspace
     @Bindable var personal: WorkspacePersonalState
     let original: ScriptureMemoryCard?
     let saved: (UUID) -> Void
@@ -66,21 +68,54 @@ private struct MemoryEditor: View {
     @RebuildViewState private var reference = ""
     @RebuildViewState private var passage = ""
     @RebuildViewState private var source = ""
+    @RebuildViewState private var resourceID = ""
+    @RebuildViewState private var loading = false
+    @RebuildViewState private var task: Task<Void, Never>?
     @RebuildViewState private var error: String?
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             MacToolHeader(title: original == nil ? "Añadir pasaje" : "Editar pasaje") { dismiss() }
             TextField(L("Referencia"), text: $reference).macInputStyle()
-            TextField(L("Fuente o versión"), text: $source).macInputStyle()
+            TextField(L("Fuente o versión"), text: $source).macInputStyle().disabled(loading)
+            HStack {
+                Picker(L("Biblia"), selection: $resourceID) {
+                    Text(L("Selecciona un recurso")).tag("")
+                    ForEach(workspace.availableResources.filter { $0.format == .legacyLSF }) { Text($0.title).tag($0.id) }
+                }.disabled(loading)
+                Button(L("Obtener texto"), action: loadPassage)
+                    .disabled(loading || reference.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || resourceID.isEmpty)
+                if loading { ProgressView().controlSize(.small); Button(L("Cancelar")) { task?.cancel(); loading = false } }
+            }
             Text(L("Texto del pasaje"))
-            TextEditor(text: $passage).scrollContentBackground(.hidden).padding(8).frame(minHeight: 160)
+            TextEditor(text: $passage).scrollContentBackground(.hidden).padding(8).frame(minHeight: 160).disabled(loading)
                 .background(Color(nsColor: .textBackgroundColor), in: RoundedRectangle(cornerRadius: 12))
                 .overlay(RoundedRectangle(cornerRadius: 12).strokeBorder(Color(nsColor: .separatorColor).opacity(0.6)))
             if original != nil { Text(L("Cambiar el pasaje, la referencia o la fuente reinicia el progreso.")).font(.caption).foregroundStyle(.secondary) }
             if let error { Text(L(error)).font(.caption).foregroundStyle(.red).textSelection(.enabled) }
-            HStack { Spacer(); Button(L("Cancelar")) { dismiss() }; Button(L("Guardar"), action: save) }
-        }.padding(16).frame(width: 540, height: 460).modifier(MacPanelControlPresentation())
+            HStack { Spacer(); Button(L("Cancelar")) { dismiss() }; Button(L("Guardar"), action: save).disabled(loading) }
+        }.padding(16).frame(width: 600, height: 520).modifier(MacPanelControlPresentation())
             .onAppear { if let original { reference = original.reference; passage = original.passage; source = original.source } }
+            .onDisappear { task?.cancel() }
+            .onChange(of: reference) { task?.cancel(); loading = false }
+            .onChange(of: workspace.availableResources.map(\.id)) {
+                if !workspace.availableResources.contains(where: { $0.id == resourceID }) { task?.cancel(); resourceID = ""; loading = false }
+            }
+    }
+    private func loadPassage() {
+        guard let resource = workspace.availableResources.first(where: { $0.id == resourceID }) else { return }
+        let requested = reference
+        task?.cancel(); loading = true; error = nil
+        task = Task {
+            do {
+                let parsed = try BibleCopyPassage.parse(requested)
+                let document = try await BibleCopyService().prepare(resource, passage: parsed,
+                    abbreviation: resource.location.deletingPathExtension().lastPathComponent, includeFootnotes: false)
+                let card = try ScriptureMemorySource.card(reference: requested, document: document)
+                guard !Task.isCancelled, reference == requested, resourceID == resource.id,
+                      workspace.availableResources.contains(where: { $0.id == resource.id && $0.location == resource.location && $0.legacyIdentifier == resource.legacyIdentifier }) else { return }
+                passage = card.passage; source = card.source; loading = false
+            } catch { if !Task.isCancelled { self.error = error.localizedDescription; loading = false } }
+        }
     }
     private func save() {
         var card = original ?? ScriptureMemoryCard(reference: reference, passage: passage)

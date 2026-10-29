@@ -683,14 +683,16 @@
       "status": "in_progress",
       "implementation": [
         "Added a user-provided passage practice model with explicit reference and source, case/whitespace-insensitive matching, progress counts and local transactional persistence.",
-        "Added native passage creation, editing and practice with answer feedback, progress display and a warning that changing the source material resets progress."
+        "Added native passage creation, editing and practice with answer feedback, progress display and a warning that changing the source material resets progress.",
+        "Added optional extraction of source-identified verse text from compatible legacy Bibles, retaining the resource title and refusing missing or incomplete source passages."
       ],
       "verification": [
         "ScriptureMemoryTests and ScriptureMemoryPersistenceTests passed for grading, progress, data integrity, concurrent writes and future schemas.",
-        "Native build 159 was visually inspected in dark mode. A synthetic exercise was created; correct and incorrect answers updated progress, persisted after restart, and editing text reset progress. Test-only records were archived. AppLanguageTests passed for ten languages."
+        "Native build 159 was visually inspected in dark mode. A synthetic exercise was created; correct and incorrect answers updated progress, persisted after restart, and editing text reset progress. Test-only records were archived. AppLanguageTests passed for ten languages.",
+        "BibleCopyTests passed for exact source text across chapter boundaries and refusal of an absent passage. Native build 160 editor with the Bible selector was visually inspected in dark mode; the available application library did not provide a compatible Bible for an end-to-end selection test."
       ],
       "limitations": [
-        "Passages currently require user-supplied text; verified extraction from library resources remains pending. Light, right-to-left, narrow-window and broader accessibility review remains pending."
+        "End-to-end extraction in the installed application requires a compatible Bible. Light, right-to-left, narrow-window and broader accessibility review remains pending."
       ]
     },
     {
