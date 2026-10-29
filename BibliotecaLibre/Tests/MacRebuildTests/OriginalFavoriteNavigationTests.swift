@@ -60,4 +60,46 @@ import Testing
         for _ in 0..<500 where workspace.originalFavoriteTask != nil { try await Task.sleep(for: .milliseconds(10)) }
         #expect(workspace.originalFavoriteTask == nil && workspace.error != nil && workspace.readers.isEmpty)
     }
+    @Test func importedFavoriteOpensAPairedBibleInsideAnLLS() async throws {
+        let fixture = try OriginalFavoriteFixture(); defer { fixture.remove() }
+        let original = fixture.resources[0], url = fixture.root.appendingPathComponent("owned.lbxlls")
+        func le(_ value: UInt64, _ count: Int) -> Data { Data((0..<count).map { UInt8(truncatingIfNeeded: value >> ($0 * 8)) }) }
+        func words(_ values: [UInt32]) -> Data { values.reduce(into: Data()) { $0 += le(UInt64($1), 4) } }
+        let members = ["owned.LSF": try Data(contentsOf: original.location), "owned.LIX": try Data(contentsOf: #require(original.indexLocation)), "this.metadata.xml": Data("<lbx-resource guid=\"owned\"><metadata/></lbx-resource>".utf8)]
+        let paths = members.keys.sorted(), start = 56 + paths.count * 144
+        var directory = Data(), body = Data()
+        for path in paths {
+            let bytes = members[path]!, name = path.data(using: .utf16LittleEndian)!
+            directory += le(UInt64(start + body.count), 8) + le(UInt64(bytes.count), 8) + name + Data(repeating: 0, count: 128 - name.count)
+            body += bytes
+        }
+        let archive = Data("LEFS".utf8) + words([0x01000000,0,0,12,0,0,20]) + le(UInt64(start),8) + words([4,16,64,UInt32(paths.count)]) + directory + body
+        let header = Data("LTES".utf8) + words([0x01010000]) + le(UInt64(archive.count),8)
+        var clear = Data(header.prefix(8)) + archive
+        while clear.count % 8 != 0 { clear.append(0) }
+        var key = [UInt32](repeating: 0, count: 4)
+        for (i, c) in "Libronix File".utf8.enumerated() { key[i & 3] = key[i & 3] &* 17 &+ UInt32(c) }
+        var encrypted = header
+        for at in stride(from: 0, to: clear.count, by: 8) {
+            func word(_ offset: Int) -> UInt32 { (0..<4).reduce(0) { $0 | UInt32(clear[offset + $1]) << ($1 * 8) } }
+            var a = word(at), b = word(at + 4), sum: UInt32 = 0
+            for _ in 0..<8 {
+                a = a &+ ((((b << 4) ^ (b >> 5)) &+ b) ^ (sum &+ key[Int(sum & 3)]))
+                sum = sum &+ 0x9e3779b9
+                b = b &+ ((((a << 4) ^ (a >> 5)) &+ a) ^ (sum &+ key[Int((sum >> 11) & 3)]))
+            }
+            encrypted += words([a,b])
+        }
+        try encrypted.write(to: url)
+        let resource = LibraryResource(location: url, title: "Owned LLS", byteCount: Int64(encrypted.count), format: .libronixLLS, support: .metadataOnly, provenance: .fileName, legacyIdentifier: original.legacyIdentifier)
+        let workspace = StudyWorkspace(personal: WorkspacePersonalState(url: fixture.root.appendingPathComponent("personal.json")))
+        workspace.resources = [resource]
+        workspace.openFavorite(.init(title: "Own", kind: .legacyCommand, legacyCommand: "jump|pos=LLS-AOL:0.12.0|res=LLS:1.0.3"))
+        for _ in 0..<500 where workspace.originalFavoriteTask != nil || workspace.activeReader?.isLoading == true { try await Task.sleep(for: .milliseconds(10)) }
+        let reader = try #require(workspace.activeReader)
+        #expect(workspace.error == nil && reader.error == nil && reader.resource.id == resource.id)
+        #expect(reader.page?.text == "Edition A · John1" && reader.selectedRange == NSRange(location: 12, length: 0))
+        workspace.shutdown()
+    }
+
 }

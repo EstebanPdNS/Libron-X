@@ -48,6 +48,8 @@ struct LibraryHealthView: View {
         case .unresolvedAnnotation: "Anotación sin resolver"
         case .conversionIssue: "Estado de conversión"
         case .unresolvedLink: "Destino"
+        case .damagedIndex: "Índice de búsqueda dañado"
+        case .indexUnavailable: "Índice de búsqueda sin verificar"
         }
     }
     private func refresh() {

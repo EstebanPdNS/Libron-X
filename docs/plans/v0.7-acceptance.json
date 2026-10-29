@@ -587,14 +587,16 @@
         "Display a native expandable hierarchy; create and rename folders, move items with descendants, reorder siblings and confirm deletion; retain imported commands without inventing destinations.",
         "Save favorite edits atomically with conflict detection; restore verified locations using their exact saved UTF-16 offset and source fingerprint.",
         "Open supported legacy jump commands by checking the unique numeric resource identity, paired LSF/LIX indices, original character counts, position and decoded-text fingerprint; cancel stale navigation and display errors within the favorites sheet.",
-        "Import original XML favorites through the native file picker, preserving nested folders and opaque commands while merging atomically with existing favorites; input size is bounded."
+        "Import original XML favorites through the native file picker, preserving nested folders and opaque commands while merging atomically with existing favorites; input size is bounded.",
+        "Open verified legacy jump commands in LLS containers when their catalog identity matches the embedded LSF/LIX; keep the original container identity and reject ambiguous matches."
       ],
       "verification": [
         "Seven PersonalLibraryStateTests and six QuickBookmarkTests passed, including cycles, order, conflict rollback, exact position and changed-source rejection.",
         "Native build 128: created nested folders, moved a folder to the root, reordered, moved an authored Bible location into a nested folder and opened it; new and moved descendants were made visible. Inspected dark/light English and dark Arabic.",
         "Four OriginalFavoriteNavigationTests passed using authored paired LSF/LIX data: exact imported position, missing or ambiguous resources, invalid command, damaged index and newer-navigation cancellation. Native build 130 shows the missing-resource alert immediately above the favorites sheet; the sheet remains open after dismissal.",
         "Two OriginalFavoriteImportTests cover nested merge and persisted state, repeated import with distinct IDs, invalid and oversized input, and concurrent-writer conflict. Native build 131 imported an authored XML through the file picker and displayed its nested folder and position; original personal state was restored afterward.",
-        "OriginalFavoriteNavigationTests pass for existing checked LSF jump commands, ambiguous resources and damaged indexes; other original actions remain unresolved."
+        "OriginalFavoriteNavigationTests pass for existing checked LSF jump commands, ambiguous resources and damaged indexes; other original actions remain unresolved.",
+        "OriginalFavoriteNavigationTests include an authored LLS containing paired LSF/LIX data and confirm the checked position and outer resource identity."
       ],
       "limitations": [
         "Recovery supports measured jump commands and checked LSF/LIX projections only; other original actions and incompatible formats remain unresolved. Additional original-file variants require validation.",
@@ -1797,12 +1799,14 @@
       "implementation": [
         "Added a read-only library health report for missing package or source files, invalid or opaque resources, catalog warnings, missing annotation sources and unresolved legacy note anchors. It explicitly says conversions and indexes are not comprehensively checked.",
         "Inspection runs off the main actor, supports cancellation on close and limits displayed issues while reporting the omitted count.",
-        "Report missing declared indexes, incomplete conversion receipts, and unavailable favorite and bookmark destinations in the existing bounded health report."
+        "Report missing declared indexes, incomplete conversion receipts, and unavailable favorite and bookmark destinations in the existing bounded health report.",
+        "Check existing search-index databases read-only with bounded SQLite integrity and schema checks; report unavailable checks and validate conversion receipt identity and completion against its package manifest."
       ],
       "verification": [
         "LibraryHealthTests passed for missing files, warnings, invalid resources, edition identity, unresolved annotations and the 5,000-item display cap. AppLanguageTests and CommandPaletteTests passed.",
         "Native build 184: the health panel checked 13 resources and showed the compact, clearly spaced no-problems state; the issue-list state remains to be checked visually.",
-        "LibraryHealthTests cover missing declared index, incomplete receipt and unresolved favorite and bookmark destinations, retaining bounded report behavior."
+        "LibraryHealthTests cover missing declared index, incomplete receipt and unresolved favorite and bookmark destinations, retaining bounded report behavior.",
+        "LibraryHealthTests cover absent, healthy and damaged search-index caches, and the ten-language interface catalog passes AppLanguageTests."
       ],
       "limitations": [
         "The panel does not yet verify the full contents of every index or conversion; native visual, accessibility and multilingual acceptance remain pending."

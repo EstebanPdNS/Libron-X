@@ -1,4 +1,5 @@
 import Foundation
+import CSQLite
 import LibronixCore
 import Testing
 @testable import MacRebuild
@@ -52,6 +53,24 @@ struct LibraryHealthTests {
         let report = LibraryHealthReport.inspect(resources: [], documents: [], highlights: [], favorites: [favorite, original], bookmarks: [2: location])
         #expect(report.issues.filter { $0.kind == .unresolvedLink }.count == 3)
         #expect(original.legacyCommand == "unrecognized" && favorite.location == location)
+    }
+
+    @Test func distinguishesAbsentHealthyAndDamagedSearchCaches() throws {
+        let folder = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: folder) }
+        let resource = LibraryResource(location: folder.appendingPathComponent("book"), title: "Owned", byteCount: 0, format: .legacyLSF, support: .metadataOnly, provenance: .fileName)
+        #expect(LibrarySearchIndexHealth.inspect(resource: resource, directory: folder) == .absent)
+        let url = folder.appendingPathComponent(PersistentLibrarySearchProvider.filename(for: resource))
+        var db: OpaquePointer?
+        #expect(sqlite3_open(url.path, &db) == SQLITE_OK)
+        #expect(sqlite3_exec(db, "PRAGMA user_version=2;CREATE TABLE identity(value);CREATE TABLE articles(ordinal);CREATE TABLE terms(value);", nil, nil, nil) == SQLITE_OK)
+        sqlite3_close(db)
+        #expect(LibrarySearchIndexHealth.inspect(resource: resource, directory: folder) == .healthy)
+        try Data("corrupt".utf8).write(to: url)
+        #expect(LibrarySearchIndexHealth.inspect(resource: resource, directory: folder) == .damaged)
+        let report = LibraryHealthReport.inspect(resources: [resource], documents: [], highlights: [], indexDirectory: folder)
+        #expect(report.issues.contains { $0.kind == .damagedIndex })
     }
 
 }

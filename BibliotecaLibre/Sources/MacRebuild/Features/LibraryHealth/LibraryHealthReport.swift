@@ -2,7 +2,7 @@ import Foundation
 import LibronixCore
 
 struct LibraryHealthIssue: Identifiable, Equatable, Sendable {
-    enum Kind: String, Sendable { case missingResource, invalidResource, opaqueResource, resourceWarning, missingAnnotationSource, unresolvedAnnotation, conversionIssue, unresolvedLink }
+    enum Kind: String, Sendable { case missingResource, invalidResource, opaqueResource, resourceWarning, missingAnnotationSource, unresolvedAnnotation, conversionIssue, unresolvedLink, damagedIndex, indexUnavailable }
     let id: String
     let kind: Kind
     let title: String
@@ -14,6 +14,7 @@ struct LibraryHealthReport: Equatable, Sendable {
     let omittedIssueCount: Int
     static func inspect(resources: [LibraryResource], documents: [StudyDocument], highlights: [ReaderHighlight],
                         favorites: [LibraryFavorite] = [], bookmarks: [Int: ReaderLocation] = [:],
+                        indexDirectory: URL? = nil,
                         exists: (URL) -> Bool = { FileManager.default.fileExists(atPath: $0.path) }) -> Self {
         let limit = 5000
         var issues: [LibraryHealthIssue] = [], omitted = 0
@@ -25,6 +26,13 @@ struct LibraryHealthReport: Equatable, Sendable {
             let paths = Set([resource.packageLocation, resource.location, resource.indexLocation].compactMap { $0 })
             for path in paths.sorted(by: { $0.path < $1.path }) where !exists(path) {
                 add(.init(id: "missing:\(resourceIndex):" + resource.id + ":" + path.path, kind: .missingResource, title: resource.title, detail: path.path))
+            }
+            switch LibrarySearchIndexHealth.inspect(resource: resource, directory: indexDirectory) {
+            case .damaged:
+                add(.init(id: "index:\(resourceIndex):" + resource.id, kind: .damagedIndex, title: resource.title, detail: ""))
+            case .unavailable:
+                add(.init(id: "index:\(resourceIndex):" + resource.id, kind: .indexUnavailable, title: resource.title, detail: ""))
+            case .absent, .healthy: break
             }
             if resource.support == .invalidFile {
                 add(.init(id: "invalid:\(resourceIndex):" + resource.id, kind: .invalidResource, title: resource.title, detail: resource.format.displayName))
@@ -40,7 +48,9 @@ struct LibraryHealthReport: Equatable, Sendable {
                     let attributes = try? receiptURL.resourceValues(forKeys: [.isRegularFileKey, .isSymbolicLinkKey, .fileSizeKey])
                     let data = (attributes?.isRegularFile == true && attributes?.isSymbolicLink != true && (attributes?.fileSize ?? Int.max) <= 4 * 1024 * 1024) ? try? Data(contentsOf: receiptURL) : nil
                     let receipt = data.flatMap { try? JSONDecoder().decode(LibronNormalizationReceipt.self, from: $0) }
-                    if receipt?.state != "complete" || !exists(databaseURL) {
+                    let manifest = try? LibronPackage.read(package).0
+                    if receipt?.state != "complete" || receipt?.resourceID != resource.id || receipt?.sourceSHA256 != manifest?.payload.sha256 ||
+                        (receipt?.sections ?? 0) <= 0 || receipt?.checkedSections != receipt?.sections || !exists(databaseURL) {
                         add(.init(id: "conversion:\(resourceIndex):" + resource.id, kind: .conversionIssue, title: resource.title, detail: receiptURL.path))
                     }
                 } else if exists(databaseURL) {
@@ -69,7 +79,7 @@ struct LibraryHealthReport: Equatable, Sendable {
             }
         }
         let legacyCounts = Dictionary(resources.compactMap { resource -> String? in
-            guard resource.format == .legacyLSF else { return nil }
+            guard [.legacyLSF, .libronixLLS].contains(resource.format) else { return nil }
             return LegacyNumericResourceID.fromBKIDHex(resource.legacyIdentifier)?.identifier
         }.map { ($0, 1) }, uniquingKeysWith: +)
         for favorite in favorites {

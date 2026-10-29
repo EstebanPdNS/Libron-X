@@ -1,4 +1,10 @@
 {
+  "Índice de búsqueda dañado": {
+    "ar": "فهرس البحث تالف", "bn": "অনুসন্ধান সূচক ক্ষতিগ্রস্ত", "en": "Search index damaged", "es": "Índice de búsqueda dañado", "fr": "Index de recherche endommagé", "hi": "खोज सूचकांक क्षतिग्रस्त", "id": "Indeks pencarian rusak", "pt": "Índice de pesquisa danificado", "ur": "تلاش کا اشاریہ خراب ہے", "zh-Hans": "搜索索引已损坏"
+  },
+  "Índice de búsqueda sin verificar": {
+    "ar": "تعذر التحقق من فهرس البحث", "bn": "অনুসন্ধান সূচক যাচাই করা যায়নি", "en": "Search index could not be checked", "es": "Índice de búsqueda sin verificar", "fr": "Index de recherche non vérifié", "hi": "खोज सूचकांक की जाँच नहीं हुई", "id": "Indeks pencarian belum diperiksa", "pt": "Índice de pesquisa não verificado", "ur": "تلاش کے اشاریے کی جانچ نہیں ہو سکی", "zh-Hans": "无法检查搜索索引"
+  },
   ".libron": {
     "ar": ".libron",
     "bn": ".libron",

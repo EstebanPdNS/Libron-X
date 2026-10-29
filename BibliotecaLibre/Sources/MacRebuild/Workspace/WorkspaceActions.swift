@@ -265,7 +265,7 @@ struct ReaderHighlight: Identifiable, Codable, Equatable, Sendable {
         do {
             let destination = try LegacyJumpDestination.parse(command)
             let matches = resources.filter {
-                $0.format == .legacyLSF && LegacyNumericResourceID.fromBKIDHex($0.legacyIdentifier)?.identifier == destination.resourceID
+                [.legacyLSF, .libronixLLS].contains($0.format) && LegacyNumericResourceID.fromBKIDHex($0.legacyIdentifier)?.identifier == destination.resourceID
             }
             guard matches.count == 1, let resource = matches.first else {
                 error = L(matches.isEmpty ? "El recurso de este favorito no está disponible en la biblioteca abierta." : "Hay varias copias de este recurso. Se conserva el destino hasta confirmar la edición.")
@@ -275,13 +275,16 @@ struct ReaderHighlight: Identifiable, Codable, Equatable, Sendable {
             let readerID = activeID, readerGeneration = activeReader?.associationGeneration
             originalFavoriteTask = Task { [weak self] in
                 do {
-                    let result = try await LegacyContentService().resolveArticleLocator(resource, originalResourceID: destination.resourceID, position: destination.position)
+                    let stamp = try LibrarySearchFileStamp.capture(resource.location)
+                    let source = resource.format == .libronixLLS ? try await LibronixBookService.shared.prepare(resource) : resource
+                    let result = try await LegacyContentService().resolveArticleLocator(source, originalResourceID: destination.resourceID, position: destination.position)
+                    try LibrarySearchFileStamp.verify([stamp])
                     try Task.checkCancellation()
                     guard let self, self.originalFavoriteGeneration == generation else { return }
                     self.originalFavoriteTask = nil
                     guard self.activeID == readerID, self.activeReader?.associationGeneration == readerGeneration,
-                          self.resources.filter({ $0.format == .legacyLSF && LegacyNumericResourceID.fromBKIDHex($0.legacyIdentifier)?.identifier == destination.resourceID }).count == 1,
-                          result.location.resolve(in: self.resources) != nil else { return }
+                          self.resources.filter({ [.legacyLSF, .libronixLLS].contains($0.format) && LegacyNumericResourceID.fromBKIDHex($0.legacyIdentifier)?.identifier == destination.resourceID }).count == 1,
+                          self.resources.contains(resource) else { return }
                     let reader = self.open(resource, startReading: false, loader: loader)
                     reader.load(.init(ordinal: result.location.sectionOrdinal, reference: result.location.reference),
                                 selection: result.range.nsRange, expectedFingerprint: result.location.textFingerprint)
