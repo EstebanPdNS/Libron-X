@@ -995,17 +995,20 @@
       "sourceKey": "study-expansion-fidelity-01",
       "acceptance": "Extender selección y extracción a otros formatos nativos compatibles verificando límites exactos.",
       "baseline": "La herramienta específica filtra recursos legacyLSF.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "Added a read-only transactional e-Sword Bible-passage selector with exact source endpoints, ordered verse/chapter identities, duplicate/gap rejection, encoded-body bounds, cancellation and SQLite main/WAL/journal stability checks. Native decoding and output integration are still in progress.",
-        "Integrate checked e-Sword Bible rows and compatible LLS embedded Bibles into the existing copy formatter; preserve edition identity, formatting and source checks, and reject unsupported embedded objects."
+        "Integrate checked e-Sword Bible rows and compatible LLS embedded Bibles into the existing copy formatter; preserve edition identity, formatting and source checks, and reject unsupported embedded objects.",
+        "Support structured EPUB Bibles with verified verse anchors, including verses continued across adjacent files, inline emphasis and resolved notes; read note files in batches off the main actor.",
+        "Recognize anchored Bible EPUBs during import, bound EPUB cache memory, and reject unsupported objects or non-Bible context explicitly."
       ],
       "verification": [
         "ESwordBiblePassageTests, ESwordKeyLinkTests and LibronPackageTests passed: 13 tests in three suites, including seven malformed-body cases, exact and whole-chapter intervals, skipped chapters/books, UTF-16 bounds, an unselected large body, unchanged source bytes, WAL-only writes and a newly created journal.",
-        "Focused checks pass for authored e-Sword rich text and the local original RVR60 LLS Genesis 1:1, plus existing BibleCopyTests. Source stamps and outer edition identity remain intact; other formats and UI need verification."
+        "Focused checks pass for authored e-Sword rich text and the local original RVR60 LLS Genesis 1:1, plus existing BibleCopyTests. Source stamps and outer edition identity remain intact; other formats and UI need verification.",
+        "Both original NKJV EPUBs passed Genesis chapter and cross-chapter extraction, John 3:16, Psalm 23, a verse continued in the next EPUB file, formatting and notes. Native build 246 imported an authored EPUB and verified preview, clipboard paste and TXT export including notes; the test resource was removed and the original catalog restored."
       ],
       "limitations": [
-        "Structured EPUB and other compatible Bible formats, some LLS variants and native clipboard/export/visual acceptance remain pending."
+        "EPUBs without supported explicit verse anchors, unsupported inline objects or templates requiring non-Bible context report an error rather than producing an incomplete copy. Some uncommon legacy and EPUB markup variants remain unsupported."
       ]
     },
     {
