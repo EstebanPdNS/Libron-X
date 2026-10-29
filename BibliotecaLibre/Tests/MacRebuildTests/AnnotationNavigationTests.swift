@@ -41,4 +41,19 @@ import Testing
         #expect(reader.error != nil && reader.page?.destination.ordinal == 0)
         workspace.shutdown()
     }
+    @Test func overlappingAnnotationsRemainSeparateStops() throws {
+        let fixture = try AuthoredReaderFixture(documents: [["same location"]]); defer { fixture.remove() }
+        let resource = fixture.resources[0], state = WorkspacePersonalState(url: fixture.root.appendingPathComponent("personal.json"))
+        let workspace = StudyWorkspace(personal: state); let reader = workspace.open(resource, startReading: false)
+        let text = "same location", range = NSRange(location: 0, length: 4), fingerprint = LibrarySearchService.textFingerprint(text)
+        reader.page = ReaderPage(destination: .init(ordinal: 0), text: text, sectionCount: 1); reader.selectedRange = range
+        state.highlights = [.init(resourceID: resource.id, ordinal: 0, fingerprint: fingerprint, range: range, color: "yellow"),
+                            .init(resourceID: resource.id, ordinal: 0, fingerprint: fingerprint, range: range, color: "blue")]
+        let stops = workspace.annotationDestinations(for: reader); #expect(stops.count == 2)
+        workspace.annotationNavigationCursor = .init(readerID: reader.id, destination: stops[0])
+        #expect(workspace.adjacentAnnotation(for: reader, backwards: false) == stops[1])
+        workspace.annotationNavigationCursor = .init(readerID: reader.id, destination: stops[1])
+        #expect(workspace.adjacentAnnotation(for: reader, backwards: true) == stops[0])
+        workspace.shutdown()
+    }
 }

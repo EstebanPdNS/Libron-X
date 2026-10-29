@@ -48,6 +48,7 @@ enum PaneArrangement { case cascade, horizontal, vertical }
     var personalSearchDestination: BibleReferencePersonalDestination?
     var personalNavigationID = UUID()
     var activeTool: WorkspaceTool?
+    var annotationNavigationCursor: ReaderAnnotationCursor?
     @ObservationIgnored var researchDraftSaver: (() -> Bool)?
     func saveResearchDraftIfNeeded() -> Bool { researchDraftSaver?() ?? true }
     func closeActiveTool() {

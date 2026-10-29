@@ -7,6 +7,10 @@ struct ReaderAnnotationDestination: Equatable {
     let fingerprint: String
     let stableID: String
 }
+struct ReaderAnnotationCursor {
+    let readerID: UUID
+    let destination: ReaderAnnotationDestination
+}
 
 @MainActor extension StudyWorkspace {
     func annotationDestinations(for reader: ReaderSession) -> [ReaderAnnotationDestination] {
@@ -27,11 +31,18 @@ struct ReaderAnnotationDestination: Equatable {
         guard !reader.isLoading, let page = reader.page, page.oeb == nil else { return nil }
         let ordinal = page.destination.ordinal, offset = reader.selectedRange.location
         let all = annotationDestinations(for: reader)
+        if let cursor = annotationNavigationCursor, cursor.readerID == reader.id,
+           cursor.destination.ordinal == ordinal, cursor.destination.range == reader.selectedRange,
+           let index = all.firstIndex(of: cursor.destination) {
+            let target = index + (backwards ? -1 : 1)
+            return all.indices.contains(target) ? all[target] : nil
+        }
         if backwards { return all.last { $0.ordinal < ordinal || ($0.ordinal == ordinal && $0.range.location < offset) } }
         return all.first { $0.ordinal > ordinal || ($0.ordinal == ordinal && ($0.range.location > offset || ($0.range.location == offset && reader.selectedRange.length == 0))) }
     }
     func navigateAnnotation(backwards: Bool) {
         guard let reader = activeReader, let destination = adjacentAnnotation(for: reader, backwards: backwards) else { return }
+        annotationNavigationCursor = .init(readerID: reader.id, destination: destination)
         reader.load(.init(ordinal: destination.ordinal), selection: destination.range, expectedFingerprint: destination.fingerprint)
     }
 }
