@@ -495,7 +495,7 @@
       "sourceKey": "study-expansion-annotations-06",
       "acceptance": "Recorrer nota o marca anterior/siguiente con coordenadas correctas.",
       "baseline": "Se puede abrir una nota y su referencia.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "Added previous and next annotation actions to the native Go menu, traversing anchored notes and highlights in the current compatible reader by article and UTF-16 position. Each destination is reopened with its recorded source fingerprint.",
         "A per-reader navigation cursor preserves individual stops for annotations sharing the same location.",
@@ -507,10 +507,11 @@
         "Native build 180 exposed disabled previous/next annotation actions in the Go menu when no reader was open. The native automation did not provide a menu screenshot; user personal data was unchanged and the previous workspace was restored.",
         "AnnotationNavigationTests also passed for distinct annotations at the same position in both directions.",
         "AnnotationNavigationTests include a source-stamped authored OEB page, selection, a changed-DOM rejection and restoration of the previous reader page.",
-        "Native WebKit test navigates to an annotation in another article and verifies the actual rendered selection."
+        "Native WebKit test navigates to an annotation in another article and verifies the actual rendered selection.",
+        "Installed app: the next-annotation keyboard shortcut selected a temporary mark in La Armadura de Dios; the mark was removed afterwards. Native WebKit separately verified the exact visible selection across articles."
       ],
       "limitations": [
-        "Visual and keyboard acceptance in the installed web reader remains pending."
+        "The keyboard shortcut was checked in the native reader; the web-reader selection was checked through its native WebKit view."
       ]
     },
     {
