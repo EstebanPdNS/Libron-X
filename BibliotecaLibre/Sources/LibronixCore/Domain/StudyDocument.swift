@@ -240,7 +240,7 @@ public enum NoteHTMLProjection {
                 if parts.count == 2 { result[parts[0]] = parts[1] }
             }
             let weight = declarations["font-weight"] ?? "", decoration = declarations["text-decoration"] ?? ""
-            let color = declarations["color"] ?? attrs["color"] ?? ""
+            let color = declarations["color"] ?? attrs["color"]?.lowercased() ?? ""
             let hex = color.hasPrefix("#") ? String(color.dropFirst()) : ""
             let expanded = hex.count == 3 ? hex.map { String(repeating: String($0), count: 2) }.joined() : hex
             let rgb: UInt32? = expanded.count == 6 ? UInt32(expanded, radix: 16) : namedColors[color]

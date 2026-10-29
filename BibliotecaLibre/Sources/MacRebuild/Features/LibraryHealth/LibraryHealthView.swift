@@ -58,8 +58,9 @@ struct LibraryHealthView: View {
         let favorites = workspace.personal.favorites.items, bookmarks = workspace.personal.bookmarks.slots
         let plans = workspace.personal.readingPlans.plans, memoryCards = workspace.personal.scriptureMemory.cards
         let excerpts = workspace.personal.researchInbox.excerpts
+        let collections = workspace.collections.sets, associations = workspace.resourceAssociations.sets
         task = Task {
-            let worker = Task.detached { LibraryHealthReport.inspect(resources: resources, documents: documents, highlights: highlights, favorites: favorites, bookmarks: bookmarks, plans: plans, memoryCards: memoryCards, excerpts: excerpts) }
+            let worker = Task.detached { LibraryHealthReport.inspect(resources: resources, documents: documents, highlights: highlights, favorites: favorites, bookmarks: bookmarks, plans: plans, memoryCards: memoryCards, excerpts: excerpts, collections: collections, associations: associations) }
             let result = await withTaskCancellationHandler { await worker.value } onCancel: { worker.cancel() }
             guard !Task.isCancelled else { return }
             report = result; isLoading = false

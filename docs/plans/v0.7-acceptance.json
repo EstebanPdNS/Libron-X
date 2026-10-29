@@ -1810,7 +1810,8 @@
         "Inspection runs off the main actor, supports cancellation on close and limits displayed issues while reporting the omitted count.",
         "Report missing declared indexes, incomplete conversion receipts, and unavailable favorite and bookmark destinations in the existing bounded health report.",
         "Check existing search-index databases read-only with bounded SQLite integrity and schema checks; report unavailable checks and validate conversion receipt identity and completion against its package manifest.",
-        "Report missing editions in verse lists, reading plans and scripture-memory cards and bound total search-index checking time."
+        "Report missing editions in verse lists, reading plans and scripture-memory cards and bound total search-index checking time.",
+        "Include unresolved research excerpts, collection members and associated-resource members, with exact identity and original association resolution."
       ],
       "verification": [
         "LibraryHealthTests passed for missing files, warnings, invalid resources, edition identity, unresolved annotations and the 5,000-item display cap. AppLanguageTests and CommandPaletteTests passed.",
@@ -2305,7 +2306,8 @@
         "Local build log 226: compiled, signed and replaced the single installed /Applications/Libron-X.app. Reopened the original reading and the native Bible-copy tool; its empty-resource state correctly disabled preview/copy/export. No compatible Bible is installed in this restored user library, so the over-limit copy path is verified by the authored Core/AppKit tests, not claimed as a live-library UI test.",
         "Focused functional tests pass with cooperative yielding between e-Sword rows; this is not evidence of long-session or representative peak-memory performance.",
         "Focused health checks pass; the bound does not substitute for long-session measurements.",
-        "On this Mac, an Easton dictionary search over 3,962 articles took 3.09 seconds cold and 1.41 seconds warm (2,523 articles examined; 1,439 excluded by index). These are single observations and do not establish long-session performance or process peak memory."
+        "On this Mac, an Easton dictionary search over 3,962 articles took 3.09 seconds cold and 1.41 seconds warm (2,523 articles examined; 1,439 excluded by index). These are single observations and do not establish long-session performance or process peak memory.",
+        "On the running Mac, one idle sample with 13 library resources and one open reader showed approximately 188 MiB resident after 17 minutes. This is an idle point sample, not a sustained workload or peak-memory measurement."
       ],
       "limitations": [
         "The compact-index check retains metadata sets proportional to indexed entries; representative large, fully indexed libraries still need memory and long-session measurements.",

@@ -92,4 +92,13 @@ struct LibraryHealthTests {
         #expect(report.issues.filter { $0.kind == .unresolvedLink }.count == 3)
     }
 
+    @Test func reportsMissingCollectionAndAssociationMembers() {
+        let resource = LibraryResource(location: URL(fileURLWithPath: "/owned/missing"), title: "Owned Bible", byteCount: 0, format: .legacyLSF, support: .metadataOnly, provenance: .fileName)
+        let member = LibraryCollectionMember(resource)
+        let collection = LibraryCollection(name: "Owned collection", members: [member])
+        let association = ResourceAssociationSet(name: "Owned association", members: [member])
+        let report = LibraryHealthReport.inspect(resources: [], documents: [], highlights: [], collections: [collection], associations: [association])
+        #expect(report.issues.filter { $0.kind == .unresolvedLink }.count == 2)
+    }
+
 }

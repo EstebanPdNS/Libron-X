@@ -15,6 +15,7 @@ struct LibraryHealthReport: Equatable, Sendable {
     static func inspect(resources: [LibraryResource], documents: [StudyDocument], highlights: [ReaderHighlight],
                         favorites: [LibraryFavorite] = [], bookmarks: [Int: ReaderLocation] = [:],
                         plans: [ReadingPlan] = [], memoryCards: [ScriptureMemoryCard] = [], excerpts: [ResearchExcerpt] = [],
+                        collections: [LibraryCollection] = [], associations: [ResourceAssociationSet] = [],
                         indexDirectory: URL? = nil,
                         exists: (URL) -> Bool = { FileManager.default.fileExists(atPath: $0.path) }) -> Self {
         let limit = 5000
@@ -101,6 +102,33 @@ struct LibraryHealthReport: Equatable, Sendable {
             guard [.legacyLSF, .libronixLLS].contains(resource.format) else { return nil }
             return LegacyNumericResourceID.fromBKIDHex(resource.legacyIdentifier)?.identifier ?? (resource.format == .libronixLLS ? resource.legacyIdentifier : nil)
         }.map { ($0, 1) }, uniquingKeysWith: +)
+        for collection in collections {
+            if Task.isCancelled { break }
+            for member in collection.members {
+                if Task.isCancelled { break }
+                if !identities.contains(Identity(id: member.resourceID, format: member.format, legacy: member.legacyIdentifier)) {
+                    add(.init(id: "collection:" + collection.id.uuidString + ":" + member.id, kind: .unresolvedLink, title: member.title, detail: collection.name))
+                }
+            }
+        }
+        if !associations.isEmpty {
+            let associationCatalog = ResourceAssociationCatalog(resources: resources)
+            let byIdentity = Dictionary(resources.map { (Identity(id: $0.id, format: $0.format, legacy: $0.legacyIdentifier), $0) }, uniquingKeysWith: { first, _ in first })
+            for association in associations {
+                if Task.isCancelled { break }
+                for member in association.members {
+                    if Task.isCancelled { break }
+                    let resolved: Bool
+                    if association.original == nil {
+                        let identity = Identity(id: member.resourceID, format: member.format, legacy: member.legacyIdentifier)
+                        resolved = byIdentity[identity].map { association.supports($0, using: associationCatalog) } ?? false
+                    } else { resolved = association.resolve(member, using: associationCatalog) != nil }
+                    if !resolved {
+                        add(.init(id: "association:" + association.id.uuidString + ":" + member.id, kind: .unresolvedLink, title: member.title, detail: association.name))
+                    }
+                }
+            }
+        }
         for plan in plans {
             if Task.isCancelled { break }
             if let edition = plan.edition, !identities.contains(Identity(id: edition.resourceID, format: edition.format, legacy: edition.legacyIdentifier)) {
