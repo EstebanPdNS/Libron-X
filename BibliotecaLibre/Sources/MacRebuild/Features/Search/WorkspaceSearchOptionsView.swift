@@ -7,9 +7,10 @@ struct WorkspaceSearchOptionsView: View {
     @Binding var namedRangesOpen: Bool
     let run: () -> Void
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 10) {
-                Label(L("Opciones de búsqueda"), systemImage: "slider.horizontal.3").font(.headline)
+        VStack(alignment: .leading, spacing: 12) {
+            Label(L("Opciones de búsqueda"), systemImage: "slider.horizontal.3").font(.headline)
+            ScrollView {
+                VStack(alignment: .leading, spacing: 12) {
                 WorkspaceSearchScopePicker(selection: search.scope, context: workspace.searchScopeContext(), stacked: true)
                 Divider()
                 WorkspaceSearchFieldPicker(field: $search.searchField)
@@ -84,7 +85,8 @@ struct WorkspaceSearchOptionsView: View {
 
             }.disabled(search.isSearching).padding(.horizontal, 4).padding(.bottom, 12)
                 .frame(maxWidth: .infinity, alignment: .leading)
-        }.scrollIndicators(.visible).accessibilityLabel(L("Opciones de búsqueda"))
+            }.scrollIndicators(.visible).accessibilityLabel(L("Opciones de búsqueda"))
+        }
     }
     private func rangeTitle(_ mode: WorkspaceBibleRangeMode) -> String {
         switch mode {

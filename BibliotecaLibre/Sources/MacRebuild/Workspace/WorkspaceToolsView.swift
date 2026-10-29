@@ -125,9 +125,9 @@ struct WorkspaceSearchView: View {
                 }.disabled(search.isSearching)
             }
             Divider()
-            HStack(alignment: .top, spacing: 16) {
+            HStack(alignment: .top, spacing: 12) {
                 WorkspaceSearchOptionsView(workspace: workspace, search: search, namedRangesOpen: $namedRangesOpen, run: run)
-                    .frame(width: 252)
+                    .frame(minWidth: 224, idealWidth: 252, maxWidth: 280, maxHeight: .infinity)
                 Divider()
                 VStack(alignment: .leading, spacing: 10) {
                     Text(L("Resultados de búsqueda")).font(.headline)
@@ -177,7 +177,8 @@ struct WorkspaceSearchView: View {
                 }
             }
 
-                }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                }.frame(minWidth: 440, maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                    .layoutPriority(1)
             }.frame(maxHeight: .infinity)
         }.padding(16).onDisappear(perform: search.pause)
             .onChange(of: workspace.personal.namedBibleRanges) { old, new in search.namedRangesChanged(from: old, to: new) }

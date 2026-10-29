@@ -74,3 +74,10 @@ boundary. A translated label alone does not prove the presented view inherited
 the interface direction. Check an actual Arabic or Urdu presentation: headers,
 form labels and action groups must follow RTL while source books and physical
 workspace coordinates retain their own direction.
+
+The main search sheet keeps the query and history actions above two
+columns that follow the interface direction. Bound the filter column so it
+cannot consume the result area; keep its heading outside its independent scroll
+view. Expanding word lists, limits or
+operators must not move the result toolbar or reduce the result list's height.
+Result navigation, export and Open stay visible beside the selection counter.
