@@ -499,17 +499,18 @@
       "implementation": [
         "Added previous and next annotation actions to the native Go menu, traversing anchored notes and highlights in the current compatible reader by article and UTF-16 position. Each destination is reopened with its recorded source fingerprint.",
         "A per-reader navigation cursor preserves individual stops for annotations sharing the same location.",
-        "Navigate saved notes and highlights in web-backed readers using their verified visible-text fingerprint; keep the previous page if the target DOM no longer matches."
+        "Navigate saved notes and highlights in web-backed readers using their verified visible-text fingerprint; keep the previous page if the target DOM no longer matches.",
+        "Keyboard shortcuts invoke previous and next annotation; WebKit destinations are verified and selected in the rendered page."
       ],
       "verification": [
         "AnnotationNavigationTests passed for first/last boundaries, notes and highlights, movement across articles, exact selection and rejection of a changed fingerprint. AppLanguageTests passed for ten languages.",
         "Native build 180 exposed disabled previous/next annotation actions in the Go menu when no reader was open. The native automation did not provide a menu screenshot; user personal data was unchanged and the previous workspace was restored.",
         "AnnotationNavigationTests also passed for distinct annotations at the same position in both directions.",
-        "AnnotationNavigationTests include a source-stamped authored OEB page, selection, a changed-DOM rejection and restoration of the previous reader page."
+        "AnnotationNavigationTests include a source-stamped authored OEB page, selection, a changed-DOM rejection and restoration of the previous reader page.",
+        "Native WebKit test navigates to an annotation in another article and verifies the actual rendered selection."
       ],
       "limitations": [
-        "Web-backed readers are excluded. Accessibility and full visual/keyboard acceptance remain pending.",
-        "Native visual and keyboard acceptance of the WebKit route remains pending."
+        "Visual and keyboard acceptance in the installed web reader remains pending."
       ]
     },
     {
@@ -1746,7 +1747,6 @@
       ],
       "verification": [
         "ReaderLocationLinkTests and ReaderLocationLinkWorkflowTests passed for round trips, malformed links, bounds, exact selection, changed fingerprints and unavailable resources. The generated app Info.plist passed plutil validation.",
-        "ReaderLocationLinkWorkflowTests pass for checked resources, position and changed or absent source; operating-system delivery has not been checked.",
         "ReaderLocationLinkWorkflowTests cover a real authored OEB, a verified position and source replacement before selection.",
         "Native WebKit test confirmed the rendered caret at the saved offset; on macOS a real link to La Armadura de Dios launched the closed app and opened its resource at the saved location. An invalid link produced the expected error."
       ],
