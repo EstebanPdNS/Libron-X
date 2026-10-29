@@ -4235,6 +4235,18 @@
     "ur": "نامعلوم",
     "zh-Hans": "未知"
   },
+  "Deseleccionar todo": {
+    "ar": "إلغاء تحديد الكل",
+    "bn": "সব নির্বাচন বাতিল",
+    "en": "Deselect All",
+    "es": "Deseleccionar todo",
+    "fr": "Tout désélectionner",
+    "hi": "सभी का चयन हटाएँ",
+    "id": "Batalkan semua pilihan",
+    "pt": "Desmarcar tudo",
+    "ur": "تمام انتخاب ختم کریں",
+    "zh-Hans": "取消全选"
+  },
   "Deshacer": {
     "ar": "تراجع",
     "bn": "পূর্বাবস্থায় ফেরান",
@@ -6431,6 +6443,18 @@
     "ur": "موازنے اور تلاش کے نتائج CSV میں برآمد کریں۔",
     "zh-Hans": "将比较和搜索结果导出为 CSV。"
   },
+  "Exportar informe": {
+    "ar": "تصدير التقرير",
+    "bn": "প্রতিবেদন রপ্তানি",
+    "en": "Export Report",
+    "es": "Exportar informe",
+    "fr": "Exporter le rapport",
+    "hi": "रिपोर्ट निर्यात करें",
+    "id": "Ekspor laporan",
+    "pt": "Exportar relatório",
+    "ur": "رپورٹ برآمد کریں",
+    "zh-Hans": "导出报告"
+  },
   "Exportar lectura": {
     "ar": "تصدير القراءة",
     "bn": "পাঠ রপ্তানি",
@@ -6454,6 +6478,18 @@
     "pt": "Exportar resultados…",
     "ur": "نتائج برآمد کریں…",
     "zh-Hans": "导出结果…"
+  },
+  "Exportar…": {
+    "ar": "تصدير…",
+    "bn": "রপ্তানি…",
+    "en": "Export…",
+    "es": "Exportar…",
+    "fr": "Exporter…",
+    "hi": "निर्यात करें…",
+    "id": "Ekspor…",
+    "pt": "Exportar…",
+    "ur": "برآمد کریں…",
+    "zh-Hans": "导出…"
   },
   "Extraer": {
     "ar": "استخراج",
@@ -7654,6 +7690,30 @@
     "pt": "Relatório bibliográfico",
     "ur": "کتابیاتی رپورٹ",
     "zh-Hans": "参考书目报告"
+  },
+  "Informe del cuaderno": {
+    "ar": "تقرير الدفتر",
+    "bn": "নোটবুক প্রতিবেদন",
+    "en": "Notebook Report",
+    "es": "Informe del cuaderno",
+    "fr": "Rapport du carnet",
+    "hi": "नोटबुक रिपोर्ट",
+    "id": "Laporan buku catatan",
+    "pt": "Relatório do caderno",
+    "ur": "نوٹ بک رپورٹ",
+    "zh-Hans": "笔记本报告"
+  },
+  "Informe…": {
+    "ar": "تقرير…",
+    "bn": "প্রতিবেদন…",
+    "en": "Report…",
+    "es": "Informe…",
+    "fr": "Rapport…",
+    "hi": "रिपोर्ट…",
+    "id": "Laporan…",
+    "pt": "Relatório…",
+    "ur": "رپورٹ…",
+    "zh-Hans": "报告…"
   },
   "Inicio": {
     "ar": "الرئيسية",
@@ -10474,6 +10534,18 @@
     "pt": "Não foi possível ler a lista de áreas recentes.",
     "ur": "حالیہ کام کی جگہوں کی فہرست پڑھی نہیں جا سکی۔",
     "zh-Hans": "无法读取最近工作区列表。"
+  },
+  "No se pudo preparar el informe con estas opciones.": {
+    "ar": "تعذر إعداد التقرير بهذه الخيارات.",
+    "bn": "এই বিকল্পগুলিতে প্রতিবেদন তৈরি করা যায়নি।",
+    "en": "The report could not be prepared with these options.",
+    "es": "No se pudo preparar el informe con estas opciones.",
+    "fr": "Le rapport n’a pas pu être préparé avec ces options.",
+    "hi": "इन विकल्पों से रिपोर्ट तैयार नहीं की जा सकी।",
+    "id": "Laporan tidak dapat disiapkan dengan opsi ini.",
+    "pt": "Não foi possível preparar o relatório com essas opções.",
+    "ur": "ان اختیارات سے رپورٹ تیار نہیں ہو سکی۔",
+    "zh-Hans": "无法使用这些选项生成报告。"
   },
   "No se pueden ordenar todas las referencias. Revisa las referencias desconocidas o ambiguas.": {
     "ar": "تعذر ترتيب جميع المراجع. راجع المراجع غير المعروفة أو الملتبسة.",

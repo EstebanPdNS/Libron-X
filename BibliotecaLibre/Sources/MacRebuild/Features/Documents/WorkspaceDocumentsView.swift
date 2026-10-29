@@ -29,6 +29,7 @@ struct WorkspaceDocumentsView: View {
     @RebuildViewState private var moveRequest: NoteMoveRequest?
     @RebuildViewState private var propertiesRequest: NotePropertiesRequest?
     @RebuildViewState private var extractionRequest: ReferenceExtractionRequest?
+    @RebuildViewState private var reportDocument: StudyDocument?
     @RebuildViewState private var selectedVerse: UUID?
     @RebuildViewState private var verseReference = ""
     @RebuildViewState private var verseBibleID = ""
@@ -47,6 +48,9 @@ struct WorkspaceDocumentsView: View {
                     Button(L("Lista de versículos")) { personal.create(.verseList) }
                 }
                 Button(L("Abrir…"), action: workspace.openDocument)
+                if let index = documentIndex, personal.documents[index].kind == .notebook {
+                    Button(L("Informe…")) { reportDocument = personal.documents[index] }
+                }
                 if let index = documentIndex { Button(L("Guardar como…")) { workspace.exportDocument(personal.documents[index]) } }
             }
             if let index = documentIndex {
@@ -114,6 +118,9 @@ struct WorkspaceDocumentsView: View {
             }
             .sheet(item: $extractionRequest) { request in
                 StudyReferenceExtractionView(personal: personal, destinationID: request.id)
+            }
+            .sheet(item: $reportDocument) { document in
+                NotebookReportView(document: document, initialSelection: selectedNotes).modifier(AppInterfaceLanguage())
             }
     }
     private func selectPendingNote() {
