@@ -864,13 +864,15 @@
       "baseline": "Consulta actual en memoria; no un documento de búsqueda integrado.",
       "status": "in_progress",
       "implementation": [
-        "Added independently versioned, transactional storage for named search configurations, preserving query, scope, filters and search limits."
+        "Added independently versioned, transactional storage for named search configurations, preserving query, scope, filters and search limits.",
+        "Added native controls to create and update named searches, select and restore their configurations, and remove an entry. Running a restored search remains a deliberate action."
       ],
       "verification": [
-        "WorkspaceSavedQueriesTests and WorkspaceSearchHistoryTests passed for save, restore, update, delete, concurrency and future-version protection."
+        "WorkspaceSavedQueriesTests and WorkspaceSearchHistoryTests passed for save, restore, update, delete, concurrency and future-version protection.",
+        "Native build 156 was visually inspected in dark mode. A synthetic search was saved, restored with its scope, executed and recovered after application restart; test records were archived and the previous workspace restored. AppLanguageTests passed for ten languages."
       ],
       "limitations": [
-        "The saved-query interface and deliberate execution flow remain to be implemented and visually verified."
+        "Visual and accessibility review in light appearance, right-to-left layout and narrow windows remains pending; portable file export/import is not yet implemented."
       ]
     },
     {

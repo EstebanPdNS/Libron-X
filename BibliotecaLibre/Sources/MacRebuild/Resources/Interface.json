@@ -539,6 +539,18 @@
     "ur": "تازہ کردہ",
     "zh-Hans": "已更新"
   },
+  "Actualizar consulta seleccionada": {
+    "ar": "تحديث البحث المحدد",
+    "bn": "নির্বাচিত অনুসন্ধান আপডেট করুন",
+    "en": "Update Selected Search",
+    "es": "Actualizar consulta seleccionada",
+    "fr": "Mettre à jour la recherche sélectionnée",
+    "hi": "चयनित खोज अपडेट करें",
+    "id": "Perbarui pencarian terpilih",
+    "pt": "Atualizar pesquisa selecionada",
+    "ur": "منتخب تلاش اپ ڈیٹ کریں",
+    "zh-Hans": "更新所选搜索"
+  },
   "Actualizar gráfico": {
     "ar": "تحديث الرسم البياني",
     "bn": "চার্ট হালনাগাদ করুন",
@@ -3034,6 +3046,30 @@
     "pt": "Preserve o conteúdo original das notas HTML importadas ao editá-las.",
     "ur": "درآمد شدہ HTML نوٹس میں ترمیم کرتے وقت اصل مواد محفوظ رکھیں۔",
     "zh-Hans": "编辑导入的 HTML 笔记时保留原始内容。"
+  },
+  "Consultas guardadas": {
+    "ar": "عمليات البحث المحفوظة",
+    "bn": "সংরক্ষিত অনুসন্ধান",
+    "en": "Saved Searches",
+    "es": "Consultas guardadas",
+    "fr": "Recherches enregistrées",
+    "hi": "सहेजी गई खोजें",
+    "id": "Pencarian tersimpan",
+    "pt": "Pesquisas salvas",
+    "ur": "محفوظ تلاشیں",
+    "zh-Hans": "已保存的搜索"
+  },
+  "Consultas guardadas…": {
+    "ar": "عمليات البحث المحفوظة…",
+    "bn": "সংরক্ষিত অনুসন্ধান…",
+    "en": "Saved Searches…",
+    "es": "Consultas guardadas…",
+    "fr": "Recherches enregistrées…",
+    "hi": "सहेजी गई खोजें…",
+    "id": "Pencarian tersimpan…",
+    "pt": "Pesquisas salvas…",
+    "ur": "محفوظ تلاشیں…",
+    "zh-Hans": "已保存的搜索…"
   },
   "Contar coincidencias conservadas": {
     "ar": "حساب التطابقات المحفوظة",
@@ -6119,6 +6155,18 @@
     "ur": "دوسرے نام سے محفوظ کریں…",
     "zh-Hans": "另存为…"
   },
+  "Guardar consulta actual": {
+    "ar": "حفظ البحث الحالي",
+    "bn": "বর্তমান অনুসন্ধান সংরক্ষণ করুন",
+    "en": "Save Current Search",
+    "es": "Guardar consulta actual",
+    "fr": "Enregistrer la recherche actuelle",
+    "hi": "वर्तमान खोज सहेजें",
+    "id": "Simpan pencarian saat ini",
+    "pt": "Salvar pesquisa atual",
+    "ur": "موجودہ تلاش محفوظ کریں",
+    "zh-Hans": "保存当前搜索"
+  },
   "Guardar originales en backup": {
     "ar": "نسخ الأصول إلى backup",
     "bn": "মূল ফাইল backup-এ কপি করুন",
@@ -7042,6 +7090,18 @@
     "pt": "A configuração mudou. Execute uma nova pesquisa para abrir estes resultados.",
     "ur": "ترتیبات بدل گئی ہیں۔ یہ نتائج کھولنے کے لیے نئی تلاش چلائیں۔",
     "zh-Hans": "配置已更改。请运行新搜索后再打开这些结果。"
+  },
+  "La consulta guardada necesita un nombre válido.": {
+    "ar": "يحتاج البحث المحفوظ إلى اسم صالح.",
+    "bn": "সংরক্ষিত অনুসন্ধানের জন্য বৈধ নাম প্রয়োজন।",
+    "en": "A saved search needs a valid name.",
+    "es": "La consulta guardada necesita un nombre válido.",
+    "fr": "Une recherche enregistrée nécessite un nom valide.",
+    "hi": "सहेजी गई खोज के लिए मान्य नाम चाहिए।",
+    "id": "Pencarian tersimpan memerlukan nama yang valid.",
+    "pt": "A pesquisa salva precisa de um nome válido.",
+    "ur": "محفوظ تلاش کے لیے درست نام درکار ہے۔",
+    "zh-Hans": "保存的搜索需要有效名称。"
   },
   "La definición no contiene asociaciones activas.": {
     "ar": "لا يحتوي التعريف على ارتباطات نشطة.",
@@ -8519,6 +8579,18 @@
     "ur": "کوئی تفاسیر دستیاب نہیں ہیں۔",
     "zh-Hans": "没有可用的注释书。"
   },
+  "No hay consultas guardadas.": {
+    "ar": "لا توجد عمليات بحث محفوظة.",
+    "bn": "কোনো সংরক্ষিত অনুসন্ধান নেই।",
+    "en": "No saved searches.",
+    "es": "No hay consultas guardadas.",
+    "fr": "Aucune recherche enregistrée.",
+    "hi": "कोई सहेजी गई खोज नहीं।",
+    "id": "Tidak ada pencarian tersimpan.",
+    "pt": "Nenhuma pesquisa salva.",
+    "ur": "کوئی محفوظ تلاش نہیں۔",
+    "zh-Hans": "没有保存的搜索。"
+  },
   "No hay devocional para esta fecha. La lectura actual permanece abierta.": {
     "ar": "لا توجد قراءة تعبدية لهذا التاريخ. تبقى القراءة الحالية مفتوحة.",
     "bn": "এই তারিখে কোনো ভক্তিমূলক পাঠ নেই। বর্তমান পাঠ খোলা থাকবে।",
@@ -8759,6 +8831,18 @@
     "ur": "یہ آئیکن لوڈ نہیں ہو سکا۔ پچھلا انتخاب برقرار ہے۔",
     "zh-Hans": "无法加载此图标。将保留之前的选择。"
   },
+  "No se pudieron abrir las consultas guardadas.": {
+    "ar": "تعذر فتح عمليات البحث المحفوظة.",
+    "bn": "সংরক্ষিত অনুসন্ধান খোলা যায়নি।",
+    "en": "Could not open saved searches.",
+    "es": "No se pudieron abrir las consultas guardadas.",
+    "fr": "Impossible d’ouvrir les recherches enregistrées.",
+    "hi": "सहेजी गई खोजें नहीं खोली जा सकीं।",
+    "id": "Pencarian tersimpan tidak dapat dibuka.",
+    "pt": "Não foi possível abrir as pesquisas salvas.",
+    "ur": "محفوظ تلاشیں نہیں کھولی جا سکیں۔",
+    "zh-Hans": "无法打开已保存的搜索。"
+  },
   "No se pudieron abrir los planes de lectura.": {
     "ar": "تعذر فتح خطط القراءة.",
     "bn": "পাঠ পরিকল্পনা খোলা যায়নি।",
@@ -8986,6 +9070,18 @@
     "pt": "Nome da coleção",
     "ur": "مجموعے کا نام",
     "zh-Hans": "收藏集名称"
+  },
+  "Nombre de la consulta": {
+    "ar": "اسم البحث",
+    "bn": "অনুসন্ধানের নাম",
+    "en": "Search name",
+    "es": "Nombre de la consulta",
+    "fr": "Nom de la recherche",
+    "hi": "खोज का नाम",
+    "id": "Nama pencarian",
+    "pt": "Nome da pesquisa",
+    "ur": "تلاش کا نام",
+    "zh-Hans": "搜索名称"
   },
   "Nombre de la serie": {
     "ar": "اسم السلسلة",

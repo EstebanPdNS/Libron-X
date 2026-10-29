@@ -84,6 +84,7 @@ struct WorkspaceSearchView: View {
     @Bindable var workspace: StudyWorkspace
     @Bindable var search: WorkspaceSearchController
     @RebuildViewState private var historyOpen = false
+    @RebuildViewState private var savedQueriesOpen = false
     private func run() { search.run(workspace.availableResources, documents: workspace.personal.documents, scopeContext: workspace.searchScopeContext()) }
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -96,8 +97,12 @@ struct WorkspaceSearchView: View {
                     Button(L("Cancelar"), action: search.cancel).disabled(search.phase == .cancelling)
                 }
                 else { Button(L("Buscar"), action: run).disabled(search.query.isEmpty) }
-                Button(L("Historial de búsquedas…")) { historyOpen = true }.disabled(search.isSearching)
             }
+            HStack {
+                Button(L("Historial de búsquedas…")) { historyOpen = true }
+                Button(L("Consultas guardadas…")) { savedQueriesOpen = true }
+                Spacer()
+            }.disabled(search.isSearching)
             WorkspaceSearchScopePicker(selection: search.scope, context: workspace.searchScopeContext()).disabled(search.isSearching)
             WorkspaceSearchFieldPicker(field: $search.searchField).disabled(search.isSearching)
             WorkspaceSearchMatchingPicker(search: search).disabled(search.isSearching)
@@ -171,6 +176,9 @@ struct WorkspaceSearchView: View {
         }.padding(16).onDisappear(perform: search.pause)
             .sheet(isPresented: $historyOpen) {
                 WorkspaceSearchHistoryView(history: workspace.personal.searchHistory, search: search).modifier(AppInterfaceLanguage())
+            }
+            .sheet(isPresented: $savedQueriesOpen) {
+                WorkspaceSavedQueriesView(store: workspace.personal.savedQueries, search: search).modifier(AppInterfaceLanguage())
             }
     }
 }
