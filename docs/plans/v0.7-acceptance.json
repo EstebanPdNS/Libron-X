@@ -792,7 +792,8 @@
         "The template editor also exposes Greek and Hebrew rendering and Hebrew mark options."
       ],
       "verification": [
-        "BibleCopyStylePersistenceTests passed for save, restore, deletion, invalid values, concurrent and future-schema protection and the quit guard. BibleCopyOutputTests passed including a custom template applied to an authored passage. AppLanguageTests passed for ten languages."
+        "BibleCopyStylePersistenceTests passed for save, restore, deletion, invalid values, concurrent and future-schema protection and the quit guard. BibleCopyOutputTests passed including a custom template applied to an authored passage. AppLanguageTests passed for ten languages.",
+        "Native build 184: the copy template editor was inspected with a new unsaved template; controls and labels remained readable and spaced. The test draft was discarded. A live Bible preview remains unverified without a compatible Bible."
       ],
       "limitations": [
         "The new native editor and selection controls have not yet been visually inspected or tested in the installed application; the control service timed out after an open panel was closed. The installed library has no confirmed compatible Bible for a complete on-screen copy preview. Formatting controls and wider language, keyboard and accessibility acceptance remain pending."
@@ -950,7 +951,8 @@
         "SearchWordListsTests, SearchWordListsPersistenceTests and SearchWordListsWorkflowTests passed, including real search matching, escaping, concurrency, schema protection and restoration of older history. AppLanguageTests passed for ten languages.",
         "Native build 165 was visually inspected in dark mode; synthetic lists were created and a real-library search returned results with both filters selected. Synthetic data was archived and the previous workspace restored.",
         "Native build 167 was inspected with a running search: the header and results stay on screen while the search options scroll. The form was also inspected before running a search.",
-        "SearchWordListsWorkflowTests confirmed that inclusion/exclusion still selects the correct fixture resource and that only the original query produces counted hits."
+        "SearchWordListsWorkflowTests confirmed that inclusion/exclusion still selects the correct fixture resource and that only the original query produces counted hits.",
+        "Native build 184: the word list editor and its rounded glass text surface were visually checked in dark appearance. No list was saved."
       ],
       "limitations": [
         "Light appearance, right-to-left and narrow-window visual and accessibility review remain pending."
@@ -1101,7 +1103,8 @@
       ],
       "verification": [
         "BibleCopyTests passed for Greek and Hebrew transliteration and distinct Hebrew mark policies. BibleCopyStylePersistenceTests confirmed language settings persist, and AppLanguageTests passed for ten interface languages.",
-        "TransliterationInputTests passed for Greek and Hebrew samples, source preservation and bounded invalid input; CommandPaletteTests and AppLanguageTests passed."
+        "TransliterationInputTests passed for Greek and Hebrew samples, source preservation and bounded invalid input; CommandPaletteTests and AppLanguageTests passed.",
+        "Native build 184: the Greek input λόγος produced logos in the glass-surfaced editor, with readable output and an enabled Copy button."
       ],
       "limitations": [
         "Search-query integration remains pending. The new input tool and copy-template controls still need native visual, keyboard and accessibility acceptance; the native control timed out after an open panel was closed."
@@ -1454,7 +1457,8 @@
         "Inspection runs off the main actor, supports cancellation on close and limits displayed issues while reporting the omitted count."
       ],
       "verification": [
-        "LibraryHealthTests passed for missing files, warnings, invalid resources, edition identity, unresolved annotations and the 5,000-item display cap. AppLanguageTests and CommandPaletteTests passed."
+        "LibraryHealthTests passed for missing files, warnings, invalid resources, edition identity, unresolved annotations and the 5,000-item display cap. AppLanguageTests and CommandPaletteTests passed.",
+        "Native build 184: the health panel checked 13 resources and showed the compact, clearly spaced no-problems state; the issue-list state remains to be checked visually."
       ],
       "limitations": [
         "Conversion status, full index health and unresolved non-annotation links are not yet unified. Native visual, accessibility and multilingual runtime acceptance remain pending; application control timed out after closing an open panel."
@@ -1573,7 +1577,8 @@
       ],
       "verification": [
         "WorkspaceSearchHistoryTests and ToolbarSearchTests passed for full-option round trips, persistence, concurrent-write and future-schema protection, and recording toolbar searches. AppLanguageTests passed for all ten interface languages. Native build 151 was visually inspected in dark mode and tested for recording, restoring and persistence after restart.",
-        "Word-list filter snapshots and decoding configurations without the new optional field passed SearchWordListsWorkflowTests."
+        "Word-list filter snapshots and decoding configurations without the new optional field passed SearchWordListsWorkflowTests.",
+        "Native build 184: a previously exported acceptance JSON was selectable in the native file panel and imported as [Acceptance] Portable search. The test entry was removed after verification."
       ],
       "limitations": [
         "Light, right-to-left and narrow-window visual review remains pending. The history currently retains at most 100 distinct configurations; broader history requirements remain to be evaluated."
