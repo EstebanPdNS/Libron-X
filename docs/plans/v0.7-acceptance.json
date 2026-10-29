@@ -1379,10 +1379,11 @@
         "Added a temporary focused-reading presentation that hides secondary controls and other panes without altering their workspace geometry or stored reader settings; exit is available from a native toolbar control and a non-conflicting keyboard shortcut."
       ],
       "verification": [
-        "FocusedReadingTests, ReaderScrollPerformanceTests and AppLanguageTests passed. Native build 155 was visually reviewed in dark mode on a real monograph; entering and leaving focused mode retained a mid-page reading position and restored the prior pane and toolbar."
+        "FocusedReadingTests, ReaderScrollPerformanceTests and AppLanguageTests passed. Native build 155 was visually reviewed in dark mode on a real monograph; entering and leaving focused mode retained a mid-page reading position and restored the prior pane and toolbar.",
+        "Native build 155 also retained two open reader panes when entering and leaving focused reading."
       ],
       "limitations": [
-        "Additional visual and accessibility review is required for light appearance, right-to-left layout, narrow windows, multiple readers and other resource types."
+        "Additional visual and accessibility review is required for light appearance, right-to-left layout, narrow windows and other resource types."
       ]
     },
     {
