@@ -31,16 +31,32 @@ struct BibleCopyStylesView: View {
                     .overlay { if personal.bibleCopyState.customStyles.isEmpty { Text(L("No hay plantillas guardadas.")).foregroundStyle(.secondary).allowsHitTesting(false) } }
                 VStack(alignment: .leading, spacing: 10) {
                     if editingNew || selected != nil {
+                        ScrollView {
+                        VStack(alignment: .leading, spacing: 10) {
                         TextField(L("Nombre de plantilla"), text: $draft.name).macInputStyle()
                         Text(L("Antes del pasaje")); TextField(L("Antes del pasaje"), text: $draft.beforePassage.pattern).macInputStyle()
                         Text(L("Antes de cada versículo")); TextField(L("Antes de cada versículo"), text: $draft.beforeVerse.pattern).macInputStyle()
                         Text(L("Después de cada versículo")); TextField(L("Después de cada versículo"), text: $draft.afterVerse.pattern).macInputStyle()
                         Text(L("Después del pasaje")); TextField(L("Después del pasaje"), text: $draft.afterPassage.pattern).macInputStyle()
+                        Picker(L("Griego"), selection: $draft.greek) {
+                            Text(L("Texto original")).tag(BibleCopyLanguageRendering.unicode)
+                            Text(L("Transliteración")).tag(BibleCopyLanguageRendering.transliterated)
+                        }
+                        Picker(L("Hebreo"), selection: $draft.hebrew) {
+                            Text(L("Texto original")).tag(BibleCopyLanguageRendering.unicode)
+                            Text(L("Transliteración")).tag(BibleCopyLanguageRendering.transliterated)
+                        }
+                        Picker(L("Marcas hebreas"), selection: $draft.hebrewLetters) {
+                            Text(L("Todas las marcas")).tag(BibleCopyHebrewLetters.full)
+                            Text(L("Sin cantilación")).tag(BibleCopyHebrewLetters.consonantsAndVowels)
+                            Text(L("Solo consonantes")).tag(BibleCopyHebrewLetters.consonantsOnly)
+                        }
                         Text(L("^P pasaje · ^R referencia · ^B libro · ^c capítulo · ^v versículo · ^a abreviatura · ^n salto de línea · ^^ acento circunflejo"))
                             .font(.caption).foregroundStyle(.secondary)
                         Text(L("Usa Vista previa en Copiar versículos para comprobar el resultado con un pasaje."))
                             .font(.caption).foregroundStyle(.secondary)
-                        Spacer(minLength: 0)
+                        }.frame(maxWidth: .infinity, alignment: .leading)
+                        }
                         HStack {
                             Button(L("Guardar plantilla")) { _ = save() }.disabled(!dirty)
                             Button(L("Duplicar")) { duplicate() }.disabled(dirty || selected == nil)

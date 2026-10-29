@@ -6755,6 +6755,18 @@
     "ur": "قواعد",
     "zh-Hans": "语法"
   },
+  "Griego": {
+    "ar": "اليونانية",
+    "bn": "গ্রিক",
+    "en": "Greek",
+    "es": "Griego",
+    "fr": "Grec",
+    "hi": "यूनानी",
+    "id": "Yunani",
+    "pt": "Grego",
+    "ur": "یونانی",
+    "zh-Hans": "希腊语"
+  },
   "Grupo": {
     "ar": "المجموعة",
     "bn": "গোষ্ঠী",
@@ -7114,6 +7126,18 @@
     "pt": "Existem várias cópias deste recurso. O destino é preservado até confirmar a edição.",
     "ur": "اس وسیلے کی متعدد کاپیاں ہیں۔ ایڈیشن کی تصدیق تک منزل محفوظ رہے گی۔",
     "zh-Hans": "此资源有多个副本。确认版本之前将保留目标位置。"
+  },
+  "Hebreo": {
+    "ar": "العبرية",
+    "bn": "হিব্রু",
+    "en": "Hebrew",
+    "es": "Hebreo",
+    "fr": "Hébreu",
+    "hi": "इब्रानी",
+    "id": "Ibrani",
+    "pt": "Hebraico",
+    "ur": "عبرانی",
+    "zh-Hans": "希伯来语"
   },
   "Herramientas": {
     "ar": "أدوات",
@@ -9106,6 +9130,18 @@
     "pt": "Marcar como respondida",
     "ur": "قبول شدہ نشان زد کریں",
     "zh-Hans": "标记为已回应"
+  },
+  "Marcas hebreas": {
+    "ar": "العلامات العبرية",
+    "bn": "হিব্রু চিহ্ন",
+    "en": "Hebrew Marks",
+    "es": "Marcas hebreas",
+    "fr": "Signes hébreux",
+    "hi": "इब्रानी चिह्न",
+    "id": "Tanda Ibrani",
+    "pt": "Marcas hebraicas",
+    "ur": "عبرانی علامات",
+    "zh-Hans": "希伯来语标记"
   },
   "Mayúsculas": {
     "ar": "مطابقة حالة الأحرف",
@@ -13679,6 +13715,18 @@
     "ur": "بغیر گروہ",
     "zh-Hans": "不分组"
   },
+  "Sin cantilación": {
+    "ar": "دون علامات الترتيل",
+    "bn": "ক্যান্টিলেশন ছাড়া",
+    "en": "Without Cantillation",
+    "es": "Sin cantilación",
+    "fr": "Sans cantillation",
+    "hi": "कैंटिलेशन के बिना",
+    "id": "Tanpa kantilasi",
+    "pt": "Sem cantilação",
+    "ur": "ترتیل کی علامات کے بغیر",
+    "zh-Hans": "不含吟唱符号"
+  },
   "Sin categoría": {
     "ar": "بلا فئة",
     "bn": "কোনো বিভাগ নেই",
@@ -13846,6 +13894,18 @@
     "pt": "Sincronizar todas as Bíblias abertas",
     "ur": "تمام کھلی بائبل ہم آہنگ کریں",
     "zh-Hans": "同步所有已打开的圣经"
+  },
+  "Solo consonantes": {
+    "ar": "الحروف الصامتة فقط",
+    "bn": "শুধু ব্যঞ্জনবর্ণ",
+    "en": "Consonants Only",
+    "es": "Solo consonantes",
+    "fr": "Consonnes seules",
+    "hi": "केवल व्यंजन",
+    "id": "Hanya konsonan",
+    "pt": "Apenas consoantes",
+    "ur": "صرف حروف صحیح",
+    "zh-Hans": "仅辅音"
   },
   "Solo ocultos": {
     "ar": "المخفية فقط",
@@ -14231,6 +14291,18 @@
     "ur": "نوٹس یا نمایاں متن میں عبارت",
     "zh-Hans": "笔记或高亮中的文本"
   },
+  "Texto original": {
+    "ar": "النص الأصلي",
+    "bn": "মূল লেখা",
+    "en": "Original Text",
+    "es": "Texto original",
+    "fr": "Texte original",
+    "hi": "मूल पाठ",
+    "id": "Teks asli",
+    "pt": "Texto original",
+    "ur": "اصل متن",
+    "zh-Hans": "原文"
+  },
   "Texto…": {
     "ar": "نص…",
     "bn": "পাঠ…",
@@ -14363,6 +14435,18 @@
     "ur": "تمام شرائط",
     "zh-Hans": "所有条件"
   },
+  "Todas las marcas": {
+    "ar": "كل العلامات",
+    "bn": "সব চিহ্ন",
+    "en": "All Marks",
+    "es": "Todas las marcas",
+    "fr": "Tous les signes",
+    "hi": "सभी चिह्न",
+    "id": "Semua tanda",
+    "pt": "Todas as marcas",
+    "ur": "تمام علامات",
+    "zh-Hans": "所有标记"
+  },
   "Todavía no hay versiones Stable publicadas.": {
     "ar": "لم تُنشر إصدارات Stable بعد.",
     "bn": "এখনও কোনো Stable সংস্করণ প্রকাশিত হয়নি।",
@@ -14446,6 +14530,18 @@
     "pt": "Todos os versículos",
     "ur": "تمام آیات",
     "zh-Hans": "所有经文"
+  },
+  "Transliteración": {
+    "ar": "نقل صوتي",
+    "bn": "লিপ্যন্তর",
+    "en": "Transliteration",
+    "es": "Transliteración",
+    "fr": "Translittération",
+    "hi": "लिप्यंतरण",
+    "id": "Transliterasi",
+    "pt": "Transliteração",
+    "ur": "نقل حرفی",
+    "zh-Hans": "音译"
   },
   "Trasladar y redimensionar": {
     "ar": "نقل وتغيير الحجم",

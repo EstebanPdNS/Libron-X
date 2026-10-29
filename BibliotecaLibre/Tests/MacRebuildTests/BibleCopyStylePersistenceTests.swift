@@ -13,6 +13,7 @@ import Testing
         let first = WorkspacePersonalState(url: url), stale = WorkspacePersonalState(url: url)
         var style = BibleCopyOutputStyle(name: "Study")
         style.beforePassage.pattern = "^P (^a)^n"; style.beforeVerse.pattern = "^R "
+        style.greek = .transliterated; style.hebrew = .transliterated; style.hebrewLetters = .consonantsOnly
         try first.editBibleCopyState { $0.customStyles.append(style); $0.selectedStyleID = style.id }
         let restored = WorkspacePersonalState(url: url)
         #expect(restored.bibleCopyState.customStyles == [style] && restored.bibleCopyState.selectedStyleID == style.id)

@@ -788,7 +788,8 @@
       "status": "in_progress",
       "implementation": [
         "Added independently persisted custom Bible-copy templates, including create, edit, duplicate, delete and selection. Four passage and verse patterns feed the existing formatter and the current passage preview; the previous format remains the default.",
-        "Unsaved template changes require a save, discard or cancel decision before switching or closing; normal application quit can be blocked while a draft is open."
+        "Unsaved template changes require a save, discard or cancel decision before switching or closing; normal application quit can be blocked while a draft is open.",
+        "The template editor also exposes Greek and Hebrew rendering and Hebrew mark options."
       ],
       "verification": [
         "BibleCopyStylePersistenceTests passed for save, restore, deletion, invalid values, concurrent and future-schema protection and the quit guard. BibleCopyOutputTests passed including a custom template applied to an authored passage. AppLanguageTests passed for ten languages."
@@ -1093,10 +1094,16 @@
       "sourceKey": "study-expansion-languages-09",
       "acceptance": "Exponerlas en entrada, consulta y copia conservando el texto de origen y sus límites.",
       "baseline": "Core tiene conversiones acotadas griego/hebreo; no integración completa actual.",
-      "status": "pending",
-      "implementation": [],
-      "verification": [],
-      "limitations": []
+      "status": "in_progress",
+      "implementation": [
+        "Exposed the existing verified Greek and Hebrew transliteration policies and Hebrew mark options in user-owned Bible-copy templates; source text remains unchanged."
+      ],
+      "verification": [
+        "BibleCopyTests passed for Greek and Hebrew transliteration and distinct Hebrew mark policies. BibleCopyStylePersistenceTests confirmed language settings persist, and AppLanguageTests passed for ten interface languages."
+      ],
+      "limitations": [
+        "This covers Bible-copy templates only; integration in query and other input flows remains pending. Native visual and end-to-end acceptance require the application control to recover and a compatible Bible."
+      ]
     },
     {
       "id": "F206",
