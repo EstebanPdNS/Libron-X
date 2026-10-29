@@ -16,13 +16,21 @@ struct EPUBBibleText {
         let paragraph: Int
         var noteKey: String { sourcePath + "\0" + (noteTarget ?? "") }
     }
-    static func read(book: LibronixOEBBook, entries: [EPUBBibleDirectory.Entry]) throws -> [String: [Piece]] {
-        let requested = Set(entries.map(\.fragment)), paths = Set(entries.map(\.path))
+    static func read(book: LibronixOEBBook, entries: [EPUBBibleDirectory.Entry], directory: EPUBBibleDirectory) throws -> [String: [Piece]] {
+        let requested = Set(entries.map(\.fragment))
+        var paths = Set(entries.map(\.path)), continuations = Set<String>()
+        for (index, entry) in directory.entries.enumerated() where requested.contains(entry.fragment) && index + 1 < directory.entries.count {
+            let next = directory.entries[index + 1]
+            if next.book == entry.book && next.ordinal > entry.ordinal {
+                guard next.ordinal == entry.ordinal + 1 else { throw BibleCopyError.unsupportedContent }
+                paths.insert(next.path); continuations.insert(next.path)
+            }
+        }
         let delegate = VerseTextParser(requested: requested)
         for path in book.directory.files where paths.contains(path) {
             try Task.checkCancellation()
             guard let data = book.members[path] else { throw BibleCopyError.incompleteSource }
-            delegate.beginFile(path)
+            delegate.beginFile(path, carry: continuations.contains(path))
             let xml = XMLParser(data: data); xml.shouldResolveExternalEntities = false; xml.delegate = delegate
             guard xml.parse() else { throw BibleCopyError.unsupportedContent }
         }
@@ -50,8 +58,8 @@ private final class VerseTextParser: NSObject, XMLParserDelegate {
     private var note: (depth: Int, target: String, marker: String)?
     private var styles: [(depth: Int, bold: Bool, italic: Bool, underline: Bool, strikeout: Bool, smallCaps: Bool)] = []
     init(requested: Set<String>) { self.requested = requested }
-    func beginFile(_ path: String) {
-        self.path = path; current = nil; depth = 0; ignoredUntil = nil; paragraphUntil = nil
+    func beginFile(_ path: String, carry: Bool) {
+        self.path = path; if !carry { current = nil }; depth = 0; ignoredUntil = nil; paragraphUntil = nil
         skipLeadingNumber = false; verseMarker = nil; note = nil; styles.removeAll()
     }
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes: [String: String]) {

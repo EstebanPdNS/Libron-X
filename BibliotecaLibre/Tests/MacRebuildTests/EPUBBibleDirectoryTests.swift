@@ -28,7 +28,7 @@ struct EPUBBibleDirectoryTests {
             #expect(directory.entries.contains { $0.fragment == "v01001031" })
             #expect(directory.entries.contains { $0.fragment == "v01002001" })
             let passages = directory.entries.filter { ["v01001001", "v01001002"].contains($0.fragment) }
-            let projection = try EPUBBibleText.read(book: archive.book, entries: passages)
+            let projection = try EPUBBibleText.read(book: archive.book, entries: passages, directory: directory)
             let text = projection.mapValues { $0.filter { $0.noteTarget == nil }.map(\.text).joined() }
             #expect(text["v01001001"]?.trimmingCharacters(in: .whitespacesAndNewlines) == "In the beginning God created the heavens and the earth.")
             #expect(text["v01001002"]?.contains("The earth was without form, and void") == true)
@@ -71,6 +71,8 @@ struct EPUBBibleDirectoryTests {
             #expect(john.verses[0].text.contains("God so loved the world"))
             let psalm = try await EPUBBibleCopy.prepare(resource, passage: .parse("Ps 23:1-6"), includeFootnotes: false)
             #expect(psalm.verses.count == 6 && psalm.verses[0].text.contains("shepherd"))
+            let split = try await EPUBBibleCopy.prepare(resource, passage: .parse("De 32:11"), includeFootnotes: false)
+            #expect(split.verses[0].text.contains("Hovers over its young"))
         }
     }
 }

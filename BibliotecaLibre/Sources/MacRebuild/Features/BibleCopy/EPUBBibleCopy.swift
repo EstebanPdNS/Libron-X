@@ -37,7 +37,7 @@ import LibronixCore
             guard consecutive else { throw BibleCopyError.incompleteSource }
         }
         let projectionTask = Task.detached {
-            let text = try EPUBBibleText.read(book: book, entries: selected)
+            let text = try EPUBBibleText.read(book: book, entries: selected, directory: directory)
             let notes = includeFootnotes ? try EPUBBibleText.footnotes(book: book, pieces: text.values.flatMap { $0 }) : [:]
             return (text, notes)
         }
