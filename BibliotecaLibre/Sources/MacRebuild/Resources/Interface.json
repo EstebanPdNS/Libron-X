@@ -563,6 +563,18 @@
     "ur": "چارٹ تازہ کریں",
     "zh-Hans": "更新图表"
   },
+  "Actualizar lista": {
+    "ar": "تحديث القائمة",
+    "bn": "তালিকা আপডেট করুন",
+    "en": "Update List",
+    "es": "Actualizar lista",
+    "fr": "Modifier la liste",
+    "hi": "सूची अपडेट करें",
+    "id": "Perbarui daftar",
+    "pt": "Atualizar lista",
+    "ur": "فہرست اپ ڈیٹ کریں",
+    "zh-Hans": "更新列表"
+  },
   "Actualizar pregunta": {
     "ar": "تحديث السؤال",
     "bn": "প্রশ্ন আপডেট করুন",
@@ -1450,6 +1462,18 @@
     "pt": "Adicionar categoria",
     "ur": "زمرہ شامل کریں",
     "zh-Hans": "添加类别"
+  },
+  "Añadir lista": {
+    "ar": "إضافة قائمة",
+    "bn": "তালিকা যোগ করুন",
+    "en": "Add List",
+    "es": "Añadir lista",
+    "fr": "Ajouter une liste",
+    "hi": "सूची जोड़ें",
+    "id": "Tambah daftar",
+    "pt": "Adicionar lista",
+    "ur": "فہرست شامل کریں",
+    "zh-Hans": "添加列表"
   },
   "Añadir oración": {
     "ar": "إضافة صلاة",
@@ -5303,6 +5327,18 @@
     "ur": "مطالعہ حذف کریں",
     "zh-Hans": "删除阅读"
   },
+  "Eliminar lista": {
+    "ar": "حذف القائمة",
+    "bn": "তালিকা মুছুন",
+    "en": "Delete List",
+    "es": "Eliminar lista",
+    "fr": "Supprimer la liste",
+    "hi": "सूची हटाएँ",
+    "id": "Hapus daftar",
+    "pt": "Excluir lista",
+    "ur": "فہرست حذف کریں",
+    "zh-Hans": "删除列表"
+  },
   "Eliminar oración": {
     "ar": "حذف الصلاة",
     "bn": "প্রার্থনা মুছুন",
@@ -5795,6 +5831,18 @@
     "ur": "عین مطابق",
     "zh-Hans": "精确"
   },
+  "Excluir palabras": {
+    "ar": "استبعاد كلمات",
+    "bn": "শব্দ বাদ দিন",
+    "en": "Exclude Words",
+    "es": "Excluir palabras",
+    "fr": "Exclure les mots",
+    "hi": "शब्द बाहर रखें",
+    "id": "Kecualikan kata",
+    "pt": "Excluir palavras",
+    "ur": "الفاظ خارج کریں",
+    "zh-Hans": "排除单词"
+  },
   "Explorador temático": {
     "ar": "متصفح المواضيع",
     "bn": "বিষয় অনুসন্ধান",
@@ -6058,6 +6106,18 @@
     "pt": "Filtrar recursos da seleção",
     "ur": "انتخاب کے وسائل چھانٹیں",
     "zh-Hans": "筛选待选资源"
+  },
+  "Filtro restaurado": {
+    "ar": "عامل تصفية مستعاد",
+    "bn": "পুনরুদ্ধার করা ফিল্টার",
+    "en": "Restored Filter",
+    "es": "Filtro restaurado",
+    "fr": "Filtre restauré",
+    "hi": "बहाल फ़िल्टर",
+    "id": "Filter dipulihkan",
+    "pt": "Filtro restaurado",
+    "ur": "بحال شدہ فلٹر",
+    "zh-Hans": "已恢复的筛选"
   },
   "Final": {
     "ar": "النهاية",
@@ -6839,6 +6899,30 @@
     "ur": "مضمون کی تصاویر",
     "zh-Hans": "文章图片"
   },
+  "Incluir palabras": {
+    "ar": "تضمين كلمات",
+    "bn": "শব্দ অন্তর্ভুক্ত করুন",
+    "en": "Include Words",
+    "es": "Incluir palabras",
+    "fr": "Inclure les mots",
+    "hi": "शब्द शामिल करें",
+    "id": "Sertakan kata",
+    "pt": "Incluir palavras",
+    "ur": "الفاظ شامل کریں",
+    "zh-Hans": "包含单词"
+  },
+  "Incluye cualquiera de la primera lista y excluye cualquiera de la segunda.": {
+    "ar": "يتضمن أي كلمة من القائمة الأولى ويستبعد أي كلمة من الثانية.",
+    "bn": "প্রথম তালিকার যেকোনো শব্দ অন্তর্ভুক্ত ও দ্বিতীয়টির যেকোনো শব্দ বাদ দেয়।",
+    "en": "Includes any word in the first list and excludes any in the second.",
+    "es": "Incluye cualquiera de la primera lista y excluye cualquiera de la segunda.",
+    "fr": "Inclut tout mot de la première liste et exclut tout mot de la seconde.",
+    "hi": "पहली सूची का कोई भी शब्द शामिल और दूसरी सूची का कोई भी शब्द बाहर रखें।",
+    "id": "Sertakan kata apa pun dari daftar pertama dan kecualikan dari daftar kedua.",
+    "pt": "Inclui qualquer palavra da primeira lista e exclui qualquer uma da segunda.",
+    "ur": "پہلی فہرست کا کوئی بھی لفظ شامل اور دوسری کا کوئی بھی لفظ خارج کرتا ہے۔",
+    "zh-Hans": "包含第一列表中的任意词，并排除第二列表中的任意词。"
+  },
   "Inferido": {
     "ar": "مستنتج",
     "bn": "অনুমিত",
@@ -7499,6 +7583,18 @@
     "ur": "دعاؤں کی فہرست میں غلط معلومات ہیں۔",
     "zh-Hans": "祷告清单包含无效数据。"
   },
+  "La lista de palabras contiene datos incompatibles.": {
+    "ar": "تحتوي قائمة الكلمات على بيانات غير متوافقة.",
+    "bn": "শব্দ তালিকায় অসংগত তথ্য আছে।",
+    "en": "The word list contains incompatible data.",
+    "es": "La lista de palabras contiene datos incompatibles.",
+    "fr": "La liste de mots contient des données incompatibles.",
+    "hi": "शब्द सूची में असंगत डेटा है।",
+    "id": "Daftar kata berisi data yang tidak kompatibel.",
+    "pt": "A lista de palavras contém dados incompatíveis.",
+    "ur": "الفاظ کی فہرست میں غیر مطابقت پذیر ڈیٹا ہے۔",
+    "zh-Hans": "单词列表包含不兼容的数据。"
+  },
   "La lista de temas es parcial; puede haber más artículos en otros recursos.": {
     "ar": "قائمة الموضوعات جزئية؛ قد توجد مقالات أخرى في موارد أخرى.",
     "bn": "বিষয়ের তালিকা আংশিক; অন্য রিসোর্সে আরও নিবন্ধ থাকতে পারে।",
@@ -7726,6 +7822,18 @@
     "pt": "As leituras repetem-se todos os anos.",
     "ur": "مطالعے ہر سال دہرائے جاتے ہیں۔",
     "zh-Hans": "读经内容每年重复。"
+  },
+  "Las listas de palabras requieren coincidencia exacta.": {
+    "ar": "تتطلب قوائم الكلمات تطابقًا تامًا.",
+    "bn": "শব্দ তালিকার জন্য সঠিক মিল প্রয়োজন।",
+    "en": "Word lists require exact matching.",
+    "es": "Las listas de palabras requieren coincidencia exacta.",
+    "fr": "Les listes de mots nécessitent une correspondance exacte.",
+    "hi": "शब्द सूचियों के लिए सटीक मिलान आवश्यक है।",
+    "id": "Daftar kata memerlukan pencocokan tepat.",
+    "pt": "Listas de palavras exigem correspondência exata.",
+    "ur": "الفاظ کی فہرستوں کے لیے عین مطابقت درکار ہے۔",
+    "zh-Hans": "单词列表需要精确匹配。"
   },
   "Las oraciones se guardan localmente. Ocultar una oración no cifra el archivo.": {
     "ar": "تُحفظ الصلوات محليًا. إخفاء الصلاة لا يشفّر الملف.",
@@ -8038,6 +8146,42 @@
     "pt": "Listas",
     "ur": "فہرستیں",
     "zh-Hans": "列表"
+  },
+  "Listas de palabras": {
+    "ar": "قوائم الكلمات",
+    "bn": "শব্দ তালিকা",
+    "en": "Word Lists",
+    "es": "Listas de palabras",
+    "fr": "Listes de mots",
+    "hi": "शब्द सूचियाँ",
+    "id": "Daftar kata",
+    "pt": "Listas de palavras",
+    "ur": "الفاظ کی فہرستیں",
+    "zh-Hans": "单词列表"
+  },
+  "Listas de palabras activas": {
+    "ar": "قوائم الكلمات النشطة",
+    "bn": "সক্রিয় শব্দ তালিকা",
+    "en": "Active Word Lists",
+    "es": "Listas de palabras activas",
+    "fr": "Listes de mots actives",
+    "hi": "सक्रिय शब्द सूचियाँ",
+    "id": "Daftar kata aktif",
+    "pt": "Listas de palavras ativas",
+    "ur": "فعال الفاظ کی فہرستیں",
+    "zh-Hans": "已启用的单词列表"
+  },
+  "Listas de palabras…": {
+    "ar": "قوائم الكلمات…",
+    "bn": "শব্দ তালিকা…",
+    "en": "Word Lists…",
+    "es": "Listas de palabras…",
+    "fr": "Listes de mots…",
+    "hi": "शब्द सूचियाँ…",
+    "id": "Daftar kata…",
+    "pt": "Listas de palavras…",
+    "ur": "الفاظ کی فہرستیں…",
+    "zh-Hans": "单词列表…"
   },
   "Listo": {
     "ar": "جاهز",
@@ -8999,6 +9143,18 @@
     "ur": "کوئی لغت یا فرہنگ دستیاب نہیں ہے۔",
     "zh-Hans": "没有可用的词典或词汇书。"
   },
+  "No hay listas de palabras.": {
+    "ar": "لا توجد قوائم كلمات.",
+    "bn": "কোনো শব্দ তালিকা নেই।",
+    "en": "No word lists.",
+    "es": "No hay listas de palabras.",
+    "fr": "Aucune liste de mots.",
+    "hi": "कोई शब्द सूची नहीं।",
+    "id": "Tidak ada daftar kata.",
+    "pt": "Nenhuma lista de palavras.",
+    "ur": "الفاظ کی کوئی فہرست نہیں۔",
+    "zh-Hans": "没有单词列表。"
+  },
   "No hay oraciones en esta vista.": {
     "ar": "لا توجد صلوات في هذا العرض.",
     "bn": "এই দৃশ্যে কোনো প্রার্থনা নেই।",
@@ -9250,6 +9406,18 @@
     "pt": "Não foi possível abrir as pesquisas salvas.",
     "ur": "محفوظ تلاشیں نہیں کھولی جا سکیں۔",
     "zh-Hans": "无法打开已保存的搜索。"
+  },
+  "No se pudieron abrir las listas de palabras.": {
+    "ar": "تعذر فتح قوائم الكلمات.",
+    "bn": "শব্দ তালিকা খোলা যায়নি।",
+    "en": "Could not open word lists.",
+    "es": "No se pudieron abrir las listas de palabras.",
+    "fr": "Impossible d’ouvrir les listes de mots.",
+    "hi": "शब्द सूचियाँ नहीं खोली जा सकीं।",
+    "id": "Daftar kata tidak dapat dibuka.",
+    "pt": "Não foi possível abrir as listas de palavras.",
+    "ur": "الفاظ کی فہرستیں نہیں کھل سکیں۔",
+    "zh-Hans": "无法打开单词列表。"
   },
   "No se pudieron abrir los ejercicios de memorización.": {
     "ar": "تعذر فتح تمارين الحفظ.",
@@ -9526,6 +9694,18 @@
     "pt": "Nome da série",
     "ur": "سلسلے کا نام",
     "zh-Hans": "系列名称"
+  },
+  "Nombre de lista": {
+    "ar": "اسم القائمة",
+    "bn": "তালিকার নাম",
+    "en": "List Name",
+    "es": "Nombre de lista",
+    "fr": "Nom de la liste",
+    "hi": "सूची का नाम",
+    "id": "Nama daftar",
+    "pt": "Nome da lista",
+    "ur": "فہرست کا نام",
+    "zh-Hans": "列表名称"
   },
   "Nombre del documento": {
     "ar": "اسم المستند",
@@ -11903,6 +12083,18 @@
     "ur": "ہر ایڈیشن کے محفوظ نتائج شمار ہوتے ہیں۔ جزوی گنتی پوری لائبریری کی نمائندگی نہیں کرتی۔",
     "zh-Hans": "计数使用各版本保留的结果。部分计数不代表整个书库。"
   },
+  "Se eliminará esta lista de palabras.": {
+    "ar": "ستُحذف قائمة الكلمات هذه.",
+    "bn": "এই শব্দ তালিকা মুছে যাবে।",
+    "en": "This word list will be deleted.",
+    "es": "Se eliminará esta lista de palabras.",
+    "fr": "Cette liste de mots sera supprimée.",
+    "hi": "यह शब्द सूची मिटाई जाएगी।",
+    "id": "Daftar kata ini akan dihapus.",
+    "pt": "Esta lista de palavras será excluída.",
+    "ur": "یہ الفاظ کی فہرست حذف ہو جائے گی۔",
+    "zh-Hans": "将删除此单词列表。"
+  },
   "Se eliminará esta oración.": {
     "ar": "ستُحذف هذه الصلاة.",
     "bn": "এই প্রার্থনাটি মুছে যাবে।",
@@ -12490,6 +12682,18 @@
     "pt": "Sem evidência",
     "ur": "بغیر ثبوت",
     "zh-Hans": "未证实"
+  },
+  "Sin filtro": {
+    "ar": "بدون تصفية",
+    "bn": "ফিল্টার নেই",
+    "en": "No Filter",
+    "es": "Sin filtro",
+    "fr": "Sans filtre",
+    "hi": "बिना फ़िल्टर",
+    "id": "Tanpa filter",
+    "pt": "Sem filtro",
+    "ur": "بغیر فلٹر",
+    "zh-Hans": "无筛选"
   },
   "Sin seleccionar": {
     "ar": "غير محدّد",
@@ -13378,6 +13582,18 @@
     "pt": "Uma fonte mudou ou não pôde ser verificada após a pausa. Inicie uma nova pesquisa.",
     "ur": "وقفے کے بعد کوئی ماخذ بدل گیا یا اس کی تصدیق نہ ہو سکی۔ نئی تلاش شروع کریں۔",
     "zh-Hans": "暂停后有来源已更改或无法验证。请开始新搜索。"
+  },
+  "Una palabra o frase por línea": {
+    "ar": "كلمة أو عبارة في كل سطر",
+    "bn": "প্রতি লাইনে একটি শব্দ বা বাক্যাংশ",
+    "en": "One Word or Phrase per Line",
+    "es": "Una palabra o frase por línea",
+    "fr": "Un mot ou une expression par ligne",
+    "hi": "प्रति पंक्ति एक शब्द या वाक्यांश",
+    "id": "Satu kata atau frasa per baris",
+    "pt": "Uma palavra ou frase por linha",
+    "ur": "ہر سطر میں ایک لفظ یا فقرہ",
+    "zh-Hans": "每行一个单词或短语"
   },
   "Una parte del pasaje no conserva una referencia o un intervalo de texto válido.": {
     "ar": "لا يحتفظ جزء من المقطع بمرجع أو نطاق نص صالح.",

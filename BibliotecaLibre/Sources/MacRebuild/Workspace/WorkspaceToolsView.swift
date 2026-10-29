@@ -94,6 +94,8 @@ struct WorkspaceSearchView: View {
     private func run() { search.run(workspace.availableResources, documents: workspace.personal.documents, scopeContext: workspace.searchScopeContext()) }
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
+            ScrollView {
+            VStack(alignment: .leading, spacing: 12) {
             HStack {
                 TextField(L(search.approximatePhrase ? "Frase literal" : "Palabra, frase entre comillas o consulta AND / OR"), text: $search.query).macInputStyle()
                     .onSubmit(run).disabled(search.isSearching)
@@ -112,6 +114,7 @@ struct WorkspaceSearchView: View {
             WorkspaceSearchScopePicker(selection: search.scope, context: workspace.searchScopeContext()).disabled(search.isSearching)
             WorkspaceSearchFieldPicker(field: $search.searchField).disabled(search.isSearching)
             WorkspaceSearchMatchingPicker(search: search).disabled(search.isSearching)
+            WorkspaceWordFiltersView(search: search, personal: workspace.personal)
             WorkspaceSearchLimitsView(search: search)
             if search.bibleVerses {
                 VStack(alignment: .leading, spacing: 8) {
@@ -147,6 +150,8 @@ struct WorkspaceSearchView: View {
                 }.font(.caption).textSelection(.enabled)
             }
             }
+            }.frame(maxWidth: .infinity, alignment: .leading)
+            }.frame(maxHeight: search.isSearching || search.report != nil ? 300 : 480)
             if let message = search.error { Text(message).foregroundStyle(.red).textSelection(.enabled) }
             if let message = search.historyError { Text(L(message)).font(.caption).foregroundStyle(.red).textSelection(.enabled) }
             if search.report == nil, let scope = search.scopeSnapshot, !scope.complete {

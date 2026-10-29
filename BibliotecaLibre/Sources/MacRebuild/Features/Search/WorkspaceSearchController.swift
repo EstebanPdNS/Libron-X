@@ -18,6 +18,7 @@ struct WorkspaceSearchLimits: Codable, Hashable, Sendable {
     var searchField: SearchField?
     var approximatePhrase = false
     var maximumEdits = 1
+    var wordFilter: SearchWordFilter?
     var scope = WorkspaceSearchScopeSelection()
     var resourceID: String? { get { scope.resourceID } set { scope.resourceID = newValue } }
     var allResources: Bool { get { scope.allResources } set { scope.allResources = newValue } }
@@ -52,6 +53,7 @@ struct WorkspaceSearchLimits: Codable, Hashable, Sendable {
         let rangeMode: String; let range: String; let list: UUID?
         let scope: String; let resource: String?; let collections: Set<UUID>; let subset: Set<String>
         let limits: WorkspaceSearchLimits
+        let wordFilter: SearchWordFilter?
     }
     private var identity: Identity {
         .init(query: query, field: searchField, approximate: approximatePhrase, edits: approximatePhrase ? maximumEdits : 0,
@@ -59,7 +61,7 @@ struct WorkspaceSearchLimits: Codable, Hashable, Sendable {
               rangeMode: bibleVerses ? bibleRangeMode.rawValue : "", range: bibleVerses && bibleRangeMode == .custom ? customBibleRange : "",
               list: bibleVerses && bibleRangeMode == .savedList ? referenceListID : nil,
               scope: scope.kind.rawValue, resource: scope.kind == .resource ? resourceID : nil,
-              collections: scope.kind == .collections ? scope.collectionIDs : [], subset: scope.kind == .subset ? scope.selectedSubsetIDs : [], limits: limits)
+              collections: scope.kind == .collections ? scope.collectionIDs : [], subset: scope.kind == .subset ? scope.selectedSubsetIDs : [], limits: limits, wordFilter: wordFilter)
     }
     init(providerFactory: @escaping @Sendable () -> any LibrarySearchContentProvider = { PersistentLibrarySearchProvider(source: WorkspaceSearchReader()) }) {
         self.providerFactory = providerFactory
@@ -71,7 +73,7 @@ struct WorkspaceSearchLimits: Codable, Hashable, Sendable {
               subsetMembers: scope.members, unresolvedSubsetIDs: scope.unresolvedSubsetIDs,
               caseSensitive: caseSensitive, wholeWords: wholeWords, bibleVerses: bibleVerses,
               bibleRangeMode: bibleRangeMode, customBibleRange: customBibleRange, referenceListID: referenceListID,
-              limits: limits)
+              limits: limits, wordFilter: wordFilter)
     }
     func restore(_ configuration: WorkspaceSearchConfiguration) throws {
         guard !isSearching else { throw PersonalStateError.invalid("Cancela la búsqueda antes de cambiar su configuración.") }
@@ -86,6 +88,7 @@ struct WorkspaceSearchLimits: Codable, Hashable, Sendable {
         bibleVerses = configuration.bibleVerses; bibleRangeMode = configuration.bibleRangeMode
         customBibleRange = configuration.customBibleRange; referenceListID = configuration.referenceListID
         limits = configuration.limits
+        wordFilter = configuration.wordFilter
     }
     func pause() {
         guard phase == .running, let control else { return }
@@ -122,7 +125,9 @@ struct WorkspaceSearchLimits: Codable, Hashable, Sendable {
                 let escaped = query.replacingOccurrences(of: "\\", with: "\\\\").replacingOccurrences(of: "\"", with: "\\\"")
                 text = "\"" + escaped + "\""
             } else { text = query }
-            let compiled = searchField.map { $0.rawValue + ":(" + text + ")" } ?? text
+            if approximatePhrase && wordFilter != nil { throw PersonalStateError.invalid("Las listas de palabras requieren coincidencia exacta.") }
+            let expanded = try wordFilter?.compile(text) ?? text
+            let compiled = searchField.map { $0.rawValue + ":(" + expanded + ")" } ?? expanded
             let parsed = try SearchQueryParser.parse(compiled, limits: .init(maximumOperandUTF16: approximatePhrase ? 16_384 : 512))
             var options = TextSearchOptions(); options.caseSensitive = caseSensitive; options.wholeWords = wholeWords
             options.maximumEditDistance = approximatePhrase ? maximumEdits : 0

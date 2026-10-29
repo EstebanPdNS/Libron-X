@@ -21,6 +21,7 @@ struct WorkspaceSearchConfiguration: Codable, Equatable {
     var customBibleRange: String
     var referenceListID: UUID?
     var limits: WorkspaceSearchLimits
+    var wordFilter: SearchWordFilter? = nil
 
     func validate() throws {
         guard !query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
@@ -35,6 +36,7 @@ struct WorkspaceSearchConfiguration: Codable, Equatable {
               subsetMembers.allSatisfy({ $0.title.utf8.count <= 4096 && ($0.legacyIdentifier?.utf8.count ?? 0) <= 1024 })
         else { throw PersonalStateError.invalid("El historial de búsquedas contiene datos incompatibles.") }
         try limits.budget.validate()
+        if let wordFilter { _ = try wordFilter.compile(query) }
     }
 }
 struct WorkspaceSearchHistoryEntry: Codable, Equatable, Identifiable {

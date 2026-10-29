@@ -31,6 +31,8 @@ struct WorkspacePersonalSnapshot: Codable {
     private(set) var scriptureMemoryLoadError: String?
     private(set) var studyAssessments = StudyAssessments()
     private(set) var studyAssessmentsLoadError: String?
+    private(set) var searchWordLists = SearchWordLists()
+    private(set) var searchWordListsLoadError: String?
     let searchHistory: WorkspaceSearchHistory
     let savedQueries: WorkspaceSavedQueries
     var highlights: [ReaderHighlight] = []
@@ -43,11 +45,13 @@ struct WorkspacePersonalSnapshot: Codable {
     @ObservationIgnored private let prayerJournalFile: PersonalStateFile<PrayerJournal>
     @ObservationIgnored private let scriptureMemoryFile: PersonalStateFile<ScriptureMemory>
     @ObservationIgnored private let studyAssessmentsFile: PersonalStateFile<StudyAssessments>
+    @ObservationIgnored private let searchWordListsFile: PersonalStateFile<SearchWordLists>
     @ObservationIgnored private var bookmarksWritable = false
     @ObservationIgnored private var readingPlansWritable = false
     @ObservationIgnored private var prayerJournalWritable = false
     @ObservationIgnored private var scriptureMemoryWritable = false
     @ObservationIgnored private var studyAssessmentsWritable = false
+    @ObservationIgnored private var searchWordListsWritable = false
     @ObservationIgnored private var canSave = false
     @ObservationIgnored private var saveTask: Task<Void, Never>?
     init(url: URL? = nil) {
@@ -61,6 +65,7 @@ struct WorkspacePersonalSnapshot: Codable {
         prayerJournalFile = PersonalStateFile(url: path.deletingLastPathComponent().appendingPathComponent("prayer-journal.json"))
         scriptureMemoryFile = PersonalStateFile(url: path.deletingLastPathComponent().appendingPathComponent("scripture-memory.json"))
         studyAssessmentsFile = PersonalStateFile(url: path.deletingLastPathComponent().appendingPathComponent("study-assessments.json"))
+        searchWordListsFile = PersonalStateFile(url: path.deletingLastPathComponent().appendingPathComponent("search-word-lists.json"))
         do {
             if let saved = try file.load() {
                 try saved.validate(); favorites = saved.favorites; highlights = saved.highlights; documents = saved.documents
@@ -87,6 +92,17 @@ struct WorkspacePersonalSnapshot: Codable {
             if let saved = try studyAssessmentsFile.load() { try saved.validate(); studyAssessments = saved }
             studyAssessmentsWritable = true
         } catch { studyAssessmentsLoadError = error.localizedDescription }
+        do {
+            if let saved = try searchWordListsFile.load() { try saved.validate(); searchWordLists = saved }
+            searchWordListsWritable = true
+        } catch { searchWordListsLoadError = error.localizedDescription }
+    }
+    func editSearchWordLists(_ edit: (inout SearchWordLists) throws -> Void) throws {
+        guard searchWordListsWritable else { throw PersonalStateError.invalid(searchWordListsLoadError ?? "No se pudieron abrir las listas de palabras.") }
+        var next = searchWordLists
+        try edit(&next); try next.validate()
+        guard next != searchWordLists else { return }
+        try searchWordListsFile.save(next); searchWordLists = next
     }
     func editStudyAssessments(_ edit: (inout StudyAssessments) throws -> Void) throws {
         guard studyAssessmentsWritable else { throw PersonalStateError.invalid(studyAssessmentsLoadError ?? "No se pudieron abrir las autoevaluaciones.") }

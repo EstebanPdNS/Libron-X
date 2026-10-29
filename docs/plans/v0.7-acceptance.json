@@ -897,7 +897,8 @@
       "verification": [
         "WorkspaceSavedQueriesTests and WorkspaceSearchHistoryTests passed for save, restore, update, delete, concurrency and future-version protection.",
         "Native build 156 was visually inspected in dark mode. A synthetic search was saved, restored with its scope, executed and recovered after application restart; test records were archived and the previous workspace restored. AppLanguageTests passed for ten languages.",
-        "WorkspaceSavedQueriesTests pass for document encoding, decoding and invalid type. Native build 157 exported a synthetic query to a real JSON file; its document kind, schema and content were checked. The updated controls were visually inspected in dark mode in build 158."
+        "WorkspaceSavedQueriesTests pass for document encoding, decoding and invalid type. Native build 157 exported a synthetic query to a real JSON file; its document kind, schema and content were checked. The updated controls were visually inspected in dark mode in build 158.",
+        "Word-list filter snapshots and decoding configurations without the new optional field passed SearchWordListsWorkflowTests."
       ],
       "limitations": [
         "Native import remains unverified: in two attempts the file appeared in the open panel but the Open button remained disabled after selection, including after allowing other file types. Visual and accessibility review in light appearance, right-to-left layout and narrow windows remains pending."
@@ -912,10 +913,19 @@
       "sourceKey": "study-expansion-queries-03",
       "acceptance": "Crear listas de inclusión/exclusión y aplicarlas a búsquedas reales.",
       "baseline": "No hay documento de términos conectado al buscador.",
-      "status": "pending",
-      "implementation": [],
-      "verification": [],
-      "limitations": []
+      "status": "in_progress",
+      "implementation": [
+        "Added locally persisted reusable word lists with native creation, editing and deletion, and inclusion/exclusion filters applied to actual library searches. Active filters remain visible when their section is collapsed.",
+        "Search history and saved configurations preserve the actual terms as snapshots, including when a list is later edited or removed. Approximate matching explicitly rejects word-list filters."
+      ],
+      "verification": [
+        "SearchWordListsTests, SearchWordListsPersistenceTests and SearchWordListsWorkflowTests passed, including real search matching, escaping, concurrency, schema protection and restoration of older history. AppLanguageTests passed for ten languages.",
+        "Native build 165 was visually inspected in dark mode; synthetic lists were created and a real-library search returned results with both filters selected. Synthetic data was archived and the previous workspace restored.",
+        "Native build 167 was inspected with a running search: the header and results stay on screen while the search options scroll. The form was also inspected before running a search."
+      ],
+      "limitations": [
+        "Light appearance, right-to-left and narrow-window visual and accessibility review remain pending. Filter terms contribute positive occurrences to result snippets as part of the compiled search expression."
+      ]
     },
     {
       "id": "F197",
@@ -1478,7 +1488,8 @@
         "Added a local search history that records valid library searches, retains all search options and scope membership, permits selecting and restoring a configuration without automatically rerunning it, and supports removal of individual entries. History is limited to 100 distinct configurations."
       ],
       "verification": [
-        "WorkspaceSearchHistoryTests and ToolbarSearchTests passed for full-option round trips, persistence, concurrent-write and future-schema protection, and recording toolbar searches. AppLanguageTests passed for all ten interface languages. Native build 151 was visually inspected in dark mode and tested for recording, restoring and persistence after restart."
+        "WorkspaceSearchHistoryTests and ToolbarSearchTests passed for full-option round trips, persistence, concurrent-write and future-schema protection, and recording toolbar searches. AppLanguageTests passed for all ten interface languages. Native build 151 was visually inspected in dark mode and tested for recording, restoring and persistence after restart.",
+        "Word-list filter snapshots and decoding configurations without the new optional field passed SearchWordListsWorkflowTests."
       ],
       "limitations": [
         "Light, right-to-left and narrow-window visual review remains pending. The history currently retains at most 100 distinct configurations; broader history requirements remain to be evaluated."
