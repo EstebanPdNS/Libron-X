@@ -3,6 +3,13 @@ import AppKit
 import UniformTypeIdentifiers
 import LibronixCore
 
+@MainActor enum WorkspaceSavedQueryOpenPanel {
+    static func configure(_ panel: NSOpenPanel) {
+        panel.canChooseFiles = true; panel.canChooseDirectories = false; panel.allowsMultipleSelection = false
+        panel.allowedContentTypes = []; panel.allowsOtherFileTypes = true
+    }
+}
+
 struct WorkspaceSavedQueriesView: View {
     @Bindable var store: WorkspaceSavedQueries
     @Bindable var search: WorkspaceSearchController
@@ -65,7 +72,8 @@ struct WorkspaceSavedQueriesView: View {
         catch { self.error = error.localizedDescription }
     }
     private func importDocument() {
-        let panel = NSOpenPanel(); panel.allowedContentTypes = [.json]; panel.allowsOtherFileTypes = true
+        let panel = NSOpenPanel()
+        WorkspaceSavedQueryOpenPanel.configure(panel)
         panel.begin { response in
             guard response == .OK, let url = panel.url else { return }
             let accessed = url.startAccessingSecurityScopedResource()

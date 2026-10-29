@@ -901,16 +901,18 @@
       "implementation": [
         "Added independently versioned, transactional storage for named search configurations, preserving query, scope, filters and search limits.",
         "Added native controls to create and update named searches, select and restore their configurations, and remove an entry. Running a restored search remains a deliberate action.",
-        "Added versioned JSON query documents and native import/export controls; imports validate size, type and schema and preserve existing entries on identifier collision."
+        "Added versioned JSON query documents and native import/export controls; imports validate size, type and schema and preserve existing entries on identifier collision.",
+        "The import panel now explicitly selects files rather than directories, permits one selection and leaves format validation to the search-document decoder."
       ],
       "verification": [
         "WorkspaceSavedQueriesTests and WorkspaceSearchHistoryTests passed for save, restore, update, delete, concurrency and future-version protection.",
         "Native build 156 was visually inspected in dark mode. A synthetic search was saved, restored with its scope, executed and recovered after application restart; test records were archived and the previous workspace restored. AppLanguageTests passed for ten languages.",
         "WorkspaceSavedQueriesTests pass for document encoding, decoding and invalid type. Native build 157 exported a synthetic query to a real JSON file; its document kind, schema and content were checked. The updated controls were visually inspected in dark mode in build 158.",
-        "Word-list filter snapshots and decoding configurations without the new optional field passed SearchWordListsWorkflowTests."
+        "Word-list filter snapshots and decoding configurations without the new optional field passed SearchWordListsWorkflowTests.",
+        "WorkspaceSavedQueriesTests passed for import-panel configuration after a folder-only state and for portable query decoding and persistence."
       ],
       "limitations": [
-        "Native import remains unverified: in two attempts the file appeared in the open panel but the Open button remained disabled after selection, including after allowing other file types. Visual and accessibility review in light appearance, right-to-left layout and narrow windows remains pending."
+        "Native import remains unverified: after explicitly enabling file selection, the file was visibly selected but Open remained disabled. A second panel configuration without a file-type filter is implemented and awaits native verification. Visual and accessibility review in light appearance, right-to-left layout and narrow windows remains pending."
       ]
     },
     {

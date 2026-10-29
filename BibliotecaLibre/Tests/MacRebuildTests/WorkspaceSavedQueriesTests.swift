@@ -1,8 +1,15 @@
 import Foundation
+import AppKit
 import Testing
 @testable import MacRebuild
 
 @MainActor struct WorkspaceSavedQueriesTests {
+    @Test func importPanelCanSelectFilesAfterFolderOnlyPanel() {
+        let panel = NSOpenPanel()
+        panel.canChooseFiles = false; panel.canChooseDirectories = true; panel.allowsMultipleSelection = true
+        WorkspaceSavedQueryOpenPanel.configure(panel)
+        #expect(panel.canChooseFiles && !panel.canChooseDirectories && !panel.allowsMultipleSelection)
+    }
     @Test func namedQueryRoundTripsAndRestoresConfiguration() throws {
         let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
         try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
