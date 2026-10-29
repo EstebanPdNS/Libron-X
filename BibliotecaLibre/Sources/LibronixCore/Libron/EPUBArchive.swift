@@ -42,7 +42,9 @@ public struct EPUBArchive: Sendable {
             let start = try local + 30 + u16(local + 26) + u16(local + 28)
             guard start <= central, stored <= central - start else { throw LibronError.invalid("Invalid EPUB member extent") }
             total += expanded
-            guard total <= 64 * 1024 * 1024 else { throw LibronError.invalid("EPUB expansion exceeds limit") }
+            // Full-colour study Bibles can legitimately exceed 64 MiB after
+            // decompression. Keep a bounded expansion while allowing them.
+            guard total <= 128 * 1024 * 1024 else { throw LibronError.invalid("EPUB expansion exceeds limit") }
             let compressed = data.subdata(in: start ..< start + stored)
             var output: Data
             if method == 0 {
