@@ -134,6 +134,22 @@ struct WorkspaceSearchView: View {
                             }
                         }
                     }
+                    Picker(L("Excluir referencias"), selection: $search.excludedRange.mode) {
+                        Text(L("Sin exclusiones")).tag(WorkspaceBibleRangeMode.all)
+                        Text(L("Pasajes o libros")).tag(WorkspaceBibleRangeMode.custom)
+                        Text(L("Lista guardada")).tag(WorkspaceBibleRangeMode.savedList)
+                    }
+                    if search.excludedRange.mode == .custom {
+                        TextField(L("Pasajes, por ejemplo Gn 1–3; Juan 3:16–18; Romanos"), text: $search.excludedRange.customRange)
+                            .macInputStyle().onSubmit(run)
+                    } else if search.excludedRange.mode == .savedList {
+                        Picker(L("Lista de versículos excluidos"), selection: $search.excludedRange.referenceListID) {
+                            Text(L("Selecciona una lista de versículos")).tag(Optional<UUID>.none)
+                            ForEach(workspace.personal.documents.filter { $0.kind == .verseList }) {
+                                Text($0.title).tag(Optional($0.id))
+                            }
+                        }
+                    }
                 }.disabled(search.isSearching)
             }
             HStack {
@@ -151,7 +167,7 @@ struct WorkspaceSearchView: View {
             }
             }
             }.frame(maxWidth: .infinity, alignment: .leading)
-            }.frame(maxHeight: search.isSearching || search.report != nil ? 300 : 480)
+            }.frame(maxHeight: search.isSearching || search.report != nil ? 300 : 480).layoutPriority(1)
             if let message = search.error { Text(message).foregroundStyle(.red).textSelection(.enabled) }
             if let message = search.historyError { Text(L(message)).font(.caption).foregroundStyle(.red).textSelection(.enabled) }
             if search.report == nil, let scope = search.scopeSnapshot, !scope.complete {
@@ -167,11 +183,16 @@ struct WorkspaceSearchView: View {
                 Text(L("La configuración cambió. Ejecuta una búsqueda nueva para abrir estos resultados."))
                     .font(.caption).foregroundStyle(.secondary)
             }
-            WorkspaceSearchResultsView(workspace: workspace, search: search, presentation: search.presentation)
+            if search.report != nil {
+                WorkspaceSearchResultsView(workspace: workspace, search: search, presentation: search.presentation)
+            }
             if let report = search.report {
                 if let scope = search.scopeSnapshot { Text(scope.description).font(.caption).lineLimit(2) }
                 if report.unit == .bibleVerse {
                     Text(LF("Rango: {range}", ["range": report.bibleRange?.description ?? L("Todos los versículos")])).font(.caption)
+                    if let excluded = report.excludedBibleRange {
+                        Text(LF("Referencias excluidas: {range}", ["range": excluded.description])).font(.caption)
+                    }
                     Text(LF("{selected} versículos examinados · {excluded} fuera del rango", ["selected": String(report.counters.versesExamined), "excluded": String(report.counters.versesExcludedByRange)])).font(.caption)
                 }
                 Text(LF("{results} resultados · {articles} artículos examinados", ["results": String(report.counters.resultsReturned), "articles": String(report.counters.articlesExamined)])).font(.caption)
@@ -184,6 +205,7 @@ struct WorkspaceSearchView: View {
                     }
                 }
             }
+            Spacer(minLength: 0)
         }.padding(16).onDisappear(perform: search.pause)
             .sheet(isPresented: $historyOpen) {
                 WorkspaceSearchHistoryView(history: workspace.personal.searchHistory, search: search).modifier(AppInterfaceLanguage())

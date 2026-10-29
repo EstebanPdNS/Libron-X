@@ -3,6 +3,11 @@ import Observation
 import LibronixCore
 
 enum WorkspaceBibleRangeMode: String, Codable, CaseIterable, Sendable { case all, custom, savedList }
+struct WorkspaceExcludedBibleRange: Codable, Hashable {
+    var mode: WorkspaceBibleRangeMode = .all
+    var customRange = ""
+    var referenceListID: UUID?
+}
 enum WorkspaceSearchPhase: Equatable { case idle, running, pausing, paused, cancelling, cancelled, finished, failed }
 struct WorkspaceSearchLimits: Codable, Hashable, Sendable {
     var durationSeconds = 120.0
@@ -30,6 +35,7 @@ struct WorkspaceSearchLimits: Codable, Hashable, Sendable {
     var bibleRangeMode = WorkspaceBibleRangeMode.all
     var customBibleRange = ""
     var referenceListID: UUID?
+    var excludedRange = WorkspaceExcludedBibleRange()
     var limits = WorkspaceSearchLimits()
     private(set) var phase = WorkspaceSearchPhase.idle
     var isSearching: Bool { [.running,.pausing,.paused,.cancelling].contains(phase) }
@@ -54,6 +60,7 @@ struct WorkspaceSearchLimits: Codable, Hashable, Sendable {
         let scope: String; let resource: String?; let collections: Set<UUID>; let subset: Set<String>
         let limits: WorkspaceSearchLimits
         let wordFilter: SearchWordFilter?
+        let excludedRange: WorkspaceExcludedBibleRange?
     }
     private var identity: Identity {
         .init(query: query, field: searchField, approximate: approximatePhrase, edits: approximatePhrase ? maximumEdits : 0,
@@ -61,7 +68,8 @@ struct WorkspaceSearchLimits: Codable, Hashable, Sendable {
               rangeMode: bibleVerses ? bibleRangeMode.rawValue : "", range: bibleVerses && bibleRangeMode == .custom ? customBibleRange : "",
               list: bibleVerses && bibleRangeMode == .savedList ? referenceListID : nil,
               scope: scope.kind.rawValue, resource: scope.kind == .resource ? resourceID : nil,
-              collections: scope.kind == .collections ? scope.collectionIDs : [], subset: scope.kind == .subset ? scope.selectedSubsetIDs : [], limits: limits, wordFilter: wordFilter)
+              collections: scope.kind == .collections ? scope.collectionIDs : [], subset: scope.kind == .subset ? scope.selectedSubsetIDs : [], limits: limits, wordFilter: wordFilter,
+              excludedRange: bibleVerses && excludedRange.mode != .all ? excludedRange : nil)
     }
     init(providerFactory: @escaping @Sendable () -> any LibrarySearchContentProvider = { PersistentLibrarySearchProvider(source: WorkspaceSearchReader()) }) {
         self.providerFactory = providerFactory
@@ -73,7 +81,7 @@ struct WorkspaceSearchLimits: Codable, Hashable, Sendable {
               subsetMembers: scope.members, unresolvedSubsetIDs: scope.unresolvedSubsetIDs,
               caseSensitive: caseSensitive, wholeWords: wholeWords, bibleVerses: bibleVerses,
               bibleRangeMode: bibleRangeMode, customBibleRange: customBibleRange, referenceListID: referenceListID,
-              limits: limits, wordFilter: wordFilter)
+              limits: limits, wordFilter: wordFilter, excludedRange: excludedRange.mode == .all ? nil : excludedRange)
     }
     func restore(_ configuration: WorkspaceSearchConfiguration) throws {
         guard !isSearching else { throw PersonalStateError.invalid("Cancela la búsqueda antes de cambiar su configuración.") }
@@ -89,6 +97,7 @@ struct WorkspaceSearchLimits: Codable, Hashable, Sendable {
         customBibleRange = configuration.customBibleRange; referenceListID = configuration.referenceListID
         limits = configuration.limits
         wordFilter = configuration.wordFilter
+        excludedRange = configuration.excludedRange ?? .init()
     }
     func pause() {
         guard phase == .running, let control else { return }
@@ -147,6 +156,16 @@ struct WorkspaceSearchLimits: Codable, Hashable, Sendable {
                     range = try BibleSearchRange.referenceList(list)
                 }
             } else { range = nil }
+            let excluded: BibleSearchRange?
+            if unit == .bibleVerse {
+                switch excludedRange.mode {
+                case .all: excluded = nil
+                case .custom: excluded = try BibleSearchRange.parse(excludedRange.customRange)
+                case .savedList:
+                    guard let list = documents.first(where: { $0.id == excludedRange.referenceListID && $0.kind == .verseList }) else { throw BibleSearchRangeError.missingReferenceList }
+                    excluded = try BibleSearchRange.referenceList(list)
+                }
+            } else { excluded = nil }
             let control = LibrarySearchControl(), provider = providerFactory()
             self.control = control; submittedIdentity = identity; submittedQuery = query; phase = .running
             if let history {
@@ -156,7 +175,7 @@ struct WorkspaceSearchLimits: Codable, Hashable, Sendable {
             task = Task { [weak self] in
                 do {
                     let result = try await LibrarySearchService(provider: provider).search(resources: selected, query: parsed, options: options,
-                        unit: unit, bibleRange: range, budget: budget, control: control,
+                        unit: unit, bibleRange: range, excludedBibleRange: excluded, budget: budget, control: control,
                         onSnapshot: { [weak self] value in await self?.receive(value, token: token) },
                         onProgress: { [weak self] value in await self?.receive(value, token: token) })
                     guard let self, token == self.generation, !Task.isCancelled else { return }

@@ -168,6 +168,7 @@ public struct LibrarySearchProgress: Sendable {
 public struct LibrarySearchReport: Sendable {
     public var runState = LibrarySearchRunState.finished
     public var bibleRange: BibleSearchRange? = nil
+    public var excludedBibleRange: BibleSearchRange? = nil
     public let unit: LibrarySearchUnit
     public let results: [LibrarySearchResult]
     public let resourceReports: [LibrarySearchResourceReport]

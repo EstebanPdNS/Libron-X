@@ -936,10 +936,18 @@
       "sourceKey": "study-expansion-queries-04",
       "acceptance": "Completar inclusión/exclusión, gestión reusable y comprobación de ámbitos.",
       "baseline": "Listas de versículos sirven como rango positivo de búsqueda.",
-      "status": "pending",
-      "implementation": [],
-      "verification": [],
-      "limitations": []
+      "status": "in_progress",
+      "implementation": [
+        "Added optional excluded Bible ranges from a typed reference expression or saved verse list, combinable with existing included ranges. Execution filters verified verse boundaries and records the excluded range in the report.",
+        "Saved search configurations and history retain the exclusion selection, while older configurations remain readable."
+      ],
+      "verification": [
+        "BibleSearchRangeWorkflowTests passed with real fixture Bibles, inclusion and exclusion lists, custom exclusions, missing lists and restoration; BibleSearchRangeTests and search history, saved query and language tests passed.",
+        "Native builds 169 and 170 were visually inspected in dark mode; the reference exclusion picker and custom passage field were shown, and the search header and controls fit in the initial window."
+      ],
+      "limitations": [
+        "Lists reuse existing verse-list documents; named-range management, end-to-end tests with installed compatible Bibles, and visual and accessibility acceptance remain pending."
+      ]
     },
     {
       "id": "F198",

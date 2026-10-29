@@ -19,22 +19,23 @@ public actor LibrarySearchService {
     /// Preserve the original single-progress-callback API, including trailing closures.
     public func search(resources: [LibraryResource], query: SearchQuery,
                        options: TextSearchOptions = TextSearchOptions(), unit: LibrarySearchUnit = .article,
-                       bibleRange: BibleSearchRange? = nil, budget: LibrarySearchBudget = LibrarySearchBudget(),
+                       bibleRange: BibleSearchRange? = nil, excludedBibleRange: BibleSearchRange? = nil, budget: LibrarySearchBudget = LibrarySearchBudget(),
                        onProgress: (@Sendable (LibrarySearchProgress) async -> Void)? = nil) async throws -> LibrarySearchReport {
         try await search(resources: resources, query: query, options: options, unit: unit, bibleRange: bibleRange,
-                         budget: budget, control: nil, onSnapshot: nil, onProgress: onProgress)
+                         excludedBibleRange: excludedBibleRange, budget: budget, control: nil, onSnapshot: nil, onProgress: onProgress)
     }
 
     public func search(resources: [LibraryResource], query: SearchQuery,
                        options: TextSearchOptions = TextSearchOptions(),
                        unit: LibrarySearchUnit = .article,
                        bibleRange: BibleSearchRange? = nil,
+                       excludedBibleRange: BibleSearchRange? = nil,
                        budget: LibrarySearchBudget = LibrarySearchBudget(),
                        control: LibrarySearchControl?,
                        onSnapshot: (@Sendable (LibrarySearchReport) async -> Void)? = nil,
                        onProgress: (@Sendable (LibrarySearchProgress) async -> Void)? = nil) async throws -> LibrarySearchReport {
         let execution = LibrarySearchExecution(provider: provider, resources: resources, query: query, options: options,
-            unit: unit, bibleRange: bibleRange, budget: budget, control: control, onSnapshot: onSnapshot, onProgress: onProgress)
+            unit: unit, bibleRange: bibleRange, excludedBibleRange: excludedBibleRange, budget: budget, control: control, onSnapshot: onSnapshot, onProgress: onProgress)
         return try await execution.run()
     }
 
@@ -57,6 +58,7 @@ private actor LibrarySearchExecution {
     let options: TextSearchOptions
     let unit: LibrarySearchUnit
     let bibleRange: BibleSearchRange?
+    let excludedBibleRange: BibleSearchRange?
     let budget: LibrarySearchBudget
     let control: LibrarySearchControl?
     let onSnapshot: (@Sendable (LibrarySearchReport) async -> Void)?
@@ -71,11 +73,11 @@ private actor LibrarySearchExecution {
     var limit: LibrarySearchLimit?
     var preparedSources: [(LibraryResource, LibrarySearchPreparedResource)] = []
     init(provider: any LibrarySearchContentProvider, resources: [LibraryResource], query: SearchQuery,
-         options: TextSearchOptions, unit: LibrarySearchUnit, bibleRange: BibleSearchRange?, budget: LibrarySearchBudget,
+         options: TextSearchOptions, unit: LibrarySearchUnit, bibleRange: BibleSearchRange?, excludedBibleRange: BibleSearchRange?, budget: LibrarySearchBudget,
          control: LibrarySearchControl?, onSnapshot: (@Sendable (LibrarySearchReport) async -> Void)?,
          onProgress: (@Sendable (LibrarySearchProgress) async -> Void)?) {
         self.provider = provider; self.resources = resources; self.query = query; self.options = options
-        self.unit = unit; self.bibleRange = bibleRange; self.budget = budget; self.control = control
+        self.unit = unit; self.bibleRange = bibleRange; self.excludedBibleRange = excludedBibleRange; self.budget = budget; self.control = control
         self.onSnapshot = onSnapshot; self.onProgress = onProgress; self.start = clock.now
         contextRemaining = budget.maximumContextUTF16; resourceReports = resources.map(LibrarySearchResourceReport.init)
         counters.resourcesTotal = resources.count; counters.resourcesWithUnknownArticleTotal = resources.count
@@ -92,6 +94,7 @@ private actor LibrarySearchExecution {
             ? "Búsqueda lineal por artículo, sobre el texto del lector compatible. Las páginas HTML compartidas se evalúan por artículo. Los rangos UTF-16 y el hash pertenecen al texto completo del lector; no son offsets de índices legados ni búsqueda de lemas/Strong."
             : "Búsqueda lineal dentro de intervalos bíblicos verificados por el lector compatible, hasta la siguiente referencia distinta o fin del artículo. Excluye prefijos sin referencia y no une versículos entre artículos. Los rangos UTF-16 y el hash corresponden al artículo completo. Índices, límites RPOS y equivalencia general con Libronix continúan pendientes.")
         report.runState = state
+        report.excludedBibleRange = excludedBibleRange
         return report
     }
     private func publish(_ state: LibrarySearchRunState = .running) async {
@@ -130,7 +133,7 @@ private actor LibrarySearchExecution {
     }
     func run() async throws -> LibrarySearchReport {
         try validate(budget)
-        guard bibleRange == nil || unit == .bibleVerse else { throw BibleSearchRangeError.requiresVerseMode }
+        guard (bibleRange == nil && excludedBibleRange == nil) || unit == .bibleVerse else { throw BibleSearchRangeError.requiresVerseMode }
         try Task.checkCancellation()
         // Validate evaluator options before classifying any source as a failed read.
         _ = try TextSearchEngine.search(query: query, in: "", options: options, verses: query.expression.requiresVerseContext ? [] : nil,
@@ -172,6 +175,7 @@ private actor LibrarySearchExecution {
                 counters.resourcesExamined += 1
                 var hasVerseIntervals = false
                 let rangePredicate = bibleRange?.bind(to: resource)
+                let excludedRangePredicate = excludedBibleRange?.bind(to: resource)
                 let prepared: LibrarySearchPreparedResource
                 do {
                     prepared = try await provider.prepare(resource)
@@ -271,10 +275,12 @@ private actor LibrarySearchExecution {
                                 return true
                             }
                             hasVerseIntervals = hasVerseIntervals || !logical.isEmpty
-                            if let rangePredicate {
+                            if rangePredicate != nil || excludedRangePredicate != nil {
                                 verses = try logical.filter { verse in
                                     try Task.checkCancellation()
-                                    let included = try rangePredicate.contains(verse)
+                                    let inIncludedRange = try rangePredicate?.contains(verse) ?? true
+                                    let inExcludedRange = try excludedRangePredicate?.contains(verse) ?? false
+                                    let included = inIncludedRange && !inExcludedRange
                                     if !included {
                                         counters.versesExcludedByRange += 1
                                         resourceReports[index].versesExcludedByRange += 1

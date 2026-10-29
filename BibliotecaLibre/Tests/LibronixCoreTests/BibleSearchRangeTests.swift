@@ -131,6 +131,9 @@ struct BibleSearchRangeTests {
         await #expect(throws: BibleSearchRangeError.requiresVerseMode) {
             try await LibrarySearchService(provider: source).search(resources: [book], query: SearchQueryParser.parse("faith"), bibleRange: range)
         }
+        await #expect(throws: BibleSearchRangeError.requiresVerseMode) {
+            try await LibrarySearchService(provider: source).search(resources: [book], query: SearchQueryParser.parse("faith"), excludedBibleRange: range)
+        }
         let limited = try await search(source, range: range, budget: .init(maximumArticles: 1))
         #expect(limited.truncated && !limited.coverageComplete && limited.results.count == 1)
         await #expect(throws: LegacyIndicesError.sourceChanged) {

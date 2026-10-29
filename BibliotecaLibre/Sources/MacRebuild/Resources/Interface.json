@@ -5843,6 +5843,18 @@
     "ur": "الفاظ خارج کریں",
     "zh-Hans": "排除单词"
   },
+  "Excluir referencias": {
+    "ar": "استبعاد المراجع",
+    "bn": "তথ্যসূত্র বাদ দিন",
+    "en": "Exclude References",
+    "es": "Excluir referencias",
+    "fr": "Exclure des références",
+    "hi": "संदर्भ बाहर करें",
+    "id": "Kecualikan referensi",
+    "pt": "Excluir referências",
+    "ur": "حوالے خارج کریں",
+    "zh-Hans": "排除经文"
+  },
   "Explorador temático": {
     "ar": "متصفح المواضيع",
     "bn": "বিষয় অনুসন্ধান",
@@ -8110,6 +8122,18 @@
     "pt": "Lista de versículos",
     "ur": "آیات کی فہرست",
     "zh-Hans": "经文列表"
+  },
+  "Lista de versículos excluidos": {
+    "ar": "قائمة الآيات المستبعدة",
+    "bn": "বাদ দেওয়া পদগুলির তালিকা",
+    "en": "Excluded Verse List",
+    "es": "Lista de versículos excluidos",
+    "fr": "Liste de versets exclus",
+    "hi": "अपवर्जित पदों की सूची",
+    "id": "Daftar ayat yang dikecualikan",
+    "pt": "Lista de versículos excluídos",
+    "ur": "خارج شدہ آیات کی فہرست",
+    "zh-Hans": "排除的经文列表"
   },
   "Lista guardada": {
     "ar": "قائمة محفوظة",
@@ -11423,6 +11447,18 @@
     "ur": "وسائل میں حوالے",
     "zh-Hans": "资源中的引用"
   },
+  "Referencias excluidas: {range}": {
+    "ar": "المراجع المستبعدة: {range}",
+    "bn": "বাদ দেওয়া তথ্যসূত্র: {range}",
+    "en": "Excluded references: {range}",
+    "es": "Referencias excluidas: {range}",
+    "fr": "Références exclues : {range}",
+    "hi": "अपवर्जित संदर्भ: {range}",
+    "id": "Referensi yang dikecualikan: {range}",
+    "pt": "Referências excluídas: {range}",
+    "ur": "خارج شدہ حوالے: {range}",
+    "zh-Hans": "排除的经文：{range}"
+  },
   "Referencias y texto": {
     "ar": "المراجع والنص",
     "bn": "তথ্যসূত্র ও পাঠ্য",
@@ -12682,6 +12718,18 @@
     "pt": "Sem evidência",
     "ur": "بغیر ثبوت",
     "zh-Hans": "未证实"
+  },
+  "Sin exclusiones": {
+    "ar": "بلا استثناءات",
+    "bn": "কোনো বর্জন নেই",
+    "en": "No Exclusions",
+    "es": "Sin exclusiones",
+    "fr": "Aucune exclusion",
+    "hi": "कोई अपवर्जन नहीं",
+    "id": "Tanpa pengecualian",
+    "pt": "Sem exclusões",
+    "ur": "کوئی اخراج نہیں",
+    "zh-Hans": "不排除"
   },
   "Sin filtro": {
     "ar": "بدون تصفية",

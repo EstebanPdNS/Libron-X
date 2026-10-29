@@ -90,4 +90,31 @@ import LibronixCore
         controller.run([resource]); try await settle { !controller.isSearching }
         #expect(controller.error != nil && controller.report == nil)
     }
+    @Test func includedAndExcludedListsApplyToRealVerseBoundariesAndRestore() async throws {
+        _ = NSApplication.shared
+        let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: root) }
+        let resource = try bible(root), controller = WorkspaceSearchController()
+        var includes = StudyDocument(title: "Included", kind: .verseList)
+        includes.verses = [.init(reference: "John3:16–18"), .init(reference: "Romans8")]
+        var excludes = StudyDocument(title: "Excluded", kind: .verseList)
+        excludes.verses = [.init(reference: "John3:18"), .init(reference: "Romans8:1")]
+        controller.resourceID = resource.id; controller.query = "faith"; controller.bibleVerses = true
+        controller.bibleRangeMode = .savedList; controller.referenceListID = includes.id
+        controller.excludedRange = .init(mode: .savedList, referenceListID: excludes.id)
+        let configuration = controller.historyConfiguration
+        controller.run([resource], documents: [includes, excludes]); try await settle { !controller.isSearching }
+        #expect(controller.error == nil && controller.report?.results.map(\.bibleReference) == ["jn 3:16"])
+        #expect(controller.report?.excludedBibleRange?.sourceDocumentID == excludes.id)
+        #expect(controller.report?.counters.versesExcludedByRange == 3)
+        controller.excludedRange = .init(); try controller.restore(configuration)
+        #expect(controller.excludedRange.referenceListID == excludes.id && controller.excludedRange.mode == .savedList)
+        controller.run([resource], documents: [includes]); try await settle { !controller.isSearching }
+        #expect(controller.error != nil && controller.report == nil)
+        controller.excludedRange = .init(mode: .custom, customRange: "John3:16")
+        controller.bibleRangeMode = .all
+        controller.run([resource]); try await settle { !controller.isSearching }
+        #expect(controller.report?.results.map(\.bibleReference) == ["jn 3:18", "ro 8:1"])
+    }
 }

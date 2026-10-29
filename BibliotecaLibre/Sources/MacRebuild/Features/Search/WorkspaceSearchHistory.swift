@@ -22,6 +22,7 @@ struct WorkspaceSearchConfiguration: Codable, Equatable {
     var referenceListID: UUID?
     var limits: WorkspaceSearchLimits
     var wordFilter: SearchWordFilter? = nil
+    var excludedRange: WorkspaceExcludedBibleRange? = nil
 
     func validate() throws {
         guard !query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
@@ -36,6 +37,11 @@ struct WorkspaceSearchConfiguration: Codable, Equatable {
               subsetMembers.allSatisfy({ $0.title.utf8.count <= 4096 && ($0.legacyIdentifier?.utf8.count ?? 0) <= 1024 })
         else { throw PersonalStateError.invalid("El historial de búsquedas contiene datos incompatibles.") }
         try limits.budget.validate()
+        if let excludedRange {
+            guard excludedRange.customRange.utf16.count <= 16_384, !excludedRange.customRange.contains("\0") else {
+                throw PersonalStateError.invalid("El historial de búsquedas contiene datos incompatibles.")
+            }
+        }
         if let wordFilter { _ = try wordFilter.compile(query) }
     }
 }
