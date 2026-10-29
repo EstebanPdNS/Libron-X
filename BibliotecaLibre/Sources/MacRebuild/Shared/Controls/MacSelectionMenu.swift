@@ -7,8 +7,9 @@ struct MacSelectionMenu<Selection: Hashable, Options: View>: View {
     let value: String
     @Binding var selection: Selection
     let options: Options
-    init(_ title: String, value: String, selection: Binding<Selection>, @ViewBuilder options: () -> Options) {
-        self.title = title; self.value = value; _selection = selection; self.options = options()
+    let fillsWidth: Bool
+    init(_ title: String, value: String, selection: Binding<Selection>, fillsWidth: Bool = false, @ViewBuilder options: () -> Options) {
+        self.title = title; self.value = value; _selection = selection; self.options = options(); self.fillsWidth = fillsWidth
     }
     var body: some View {
         Menu {
@@ -17,6 +18,7 @@ struct MacSelectionMenu<Selection: Hashable, Options: View>: View {
             Text(verbatim: value).lineLimit(1).frame(maxWidth: .infinity, alignment: .leading)
         }
         .menuStyle(.borderlessButton).buttonStyle(.plain)
+        .frame(maxWidth: fillsWidth ? .infinity : nil)
         .padding(.horizontal, 12).padding(.vertical, 6)
         .modifier(MacToolbarSearchSurface())
         .accessibilityLabel(title).accessibilityValue(value).help(title + ": " + value)

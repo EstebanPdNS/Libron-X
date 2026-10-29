@@ -62,12 +62,12 @@ struct WorkspaceSearchScopePicker: View {
         }
     }
     private var scopeMenu: some View {
-        MacSelectionMenu(L("Ámbito"), value: selection.kind.title, selection: $selection.kind) {
+        MacSelectionMenu(L("Ámbito"), value: selection.kind.title, selection: $selection.kind, fillsWidth: stacked) {
             ForEach(WorkspaceSearchScopeKind.allCases, id: \.self) { Text($0.title).tag($0) }
         }
     }
     private var resourceMenu: some View {
-        MacSelectionMenu(L("Recurso"), value: choices.first { $0.id == selection.resourceID }?.title ?? L("Selecciona un recurso"), selection: $selection.resourceID) {
+        MacSelectionMenu(L("Recurso"), value: choices.first { $0.id == selection.resourceID }?.title ?? L("Selecciona un recurso"), selection: $selection.resourceID, fillsWidth: stacked) {
             Text(L("Selecciona un recurso")).tag(Optional<String>.none)
             ForEach(choices) { Text($0.title).tag(Optional($0.id)) }
         }

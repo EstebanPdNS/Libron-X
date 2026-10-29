@@ -18,7 +18,7 @@ struct WorkspaceSearchFieldPicker: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(L("Campo")).font(.caption).foregroundStyle(.secondary)
-            MacSelectionMenu(L("Campo"), value: field?.localizedTitle ?? L("Todo el texto"), selection: $field) {
+            MacSelectionMenu(L("Campo"), value: field?.localizedTitle ?? L("Todo el texto"), selection: $field, fillsWidth: true) {
                 Text(L("Todo el texto")).tag(Optional<SearchField>.none)
                 ForEach(SearchField.allCases, id: \.self) { Text($0.localizedTitle).tag(Optional($0)) }
             }

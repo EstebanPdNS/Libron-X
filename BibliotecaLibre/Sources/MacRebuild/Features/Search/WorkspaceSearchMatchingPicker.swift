@@ -5,13 +5,13 @@ struct WorkspaceSearchMatchingPicker: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(L("Coincidencia")).font(.caption).foregroundStyle(.secondary)
-                MacSelectionMenu(L("Coincidencia"), value: L(search.approximatePhrase ? "Frase aproximada" : "Exacta"), selection: $search.approximatePhrase) {
+                MacSelectionMenu(L("Coincidencia"), value: L(search.approximatePhrase ? "Frase aproximada" : "Exacta"), selection: $search.approximatePhrase, fillsWidth: true) {
                     Text(L("Exacta")).tag(false)
                     Text(L("Frase aproximada")).tag(true)
                 }
                 if search.approximatePhrase {
                     Text(L("Cambios máximos")).font(.caption).foregroundStyle(.secondary)
-                    MacSelectionMenu(L("Cambios máximos"), value: String(search.maximumEdits), selection: $search.maximumEdits) {
+                    MacSelectionMenu(L("Cambios máximos"), value: String(search.maximumEdits), selection: $search.maximumEdits, fillsWidth: true) {
                         ForEach(1...3, id: \.self) { Text(verbatim: String($0)).tag($0) }
                     }
                 }

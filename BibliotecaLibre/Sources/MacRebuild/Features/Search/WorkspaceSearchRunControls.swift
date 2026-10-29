@@ -41,21 +41,29 @@ struct WorkspaceSearchRunStatusView: View {
     var body: some View {
         if search.phase != .idle {
             VStack(alignment: .leading, spacing: 4) {
-                HStack {
-                    if [.running,.pausing,.cancelling].contains(search.phase) { ProgressView().controlSize(.small) }
-                    Text(status).font(.caption)
-                }
-                if let progress = search.progress {
-                    Text(LF("{count} artículos examinados · {seconds} s de trabajo activo", [
-                        "count": String(search.report?.counters.articlesExamined ?? progress.counters.articlesExamined),
-                        "seconds": (search.report?.elapsedSeconds ?? progress.elapsedSeconds).formatted(.number.precision(.fractionLength(1)))
-                    ])).font(.caption).foregroundStyle(.secondary)
+                ViewThatFits(in: .horizontal) {
+                    HStack(spacing: 10) { phaseLabel; progressLabel }
+                    VStack(alignment: .leading, spacing: 4) { phaseLabel; progressLabel }
                 }
                 if search.isSearching {
                     Text(L("Pausar espera a que termine el artículo o versículo actual. Al cerrar esta ventana, la búsqueda se pausa."))
                         .font(.caption).foregroundStyle(.secondary)
                 }
             }
+        }
+    }
+    private var phaseLabel: some View {
+        HStack(spacing: 6) {
+            if [.running, .pausing, .cancelling].contains(search.phase) { ProgressView().controlSize(.small) }
+            Text(status).font(.caption)
+        }
+    }
+    @ViewBuilder private var progressLabel: some View {
+        if let progress = search.progress {
+            Text(LF("{count} artículos examinados · {seconds} s de trabajo activo", [
+                "count": String(search.report?.counters.articlesExamined ?? progress.counters.articlesExamined),
+                "seconds": (search.report?.elapsedSeconds ?? progress.elapsedSeconds).formatted(.number.precision(.fractionLength(1)))
+            ])).font(.caption).foregroundStyle(.secondary)
         }
     }
     private var status: String {

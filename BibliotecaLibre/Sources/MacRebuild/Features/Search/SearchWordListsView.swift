@@ -22,9 +22,9 @@ struct WorkspaceWordFiltersView: View {
         DisclosureGroup {
             VStack(alignment: .leading, spacing: 8) {
                 Text(L("Incluir palabras")).font(.caption).foregroundStyle(.secondary)
-                MacSelectionMenu(L("Incluir palabras"), value: selectedTitle(true), selection: selection(true)) { options(include: true) }
+                MacSelectionMenu(L("Incluir palabras"), value: selectedTitle(true), selection: selection(true), fillsWidth: true) { options(include: true) }
                 Text(L("Excluir palabras")).font(.caption).foregroundStyle(.secondary)
-                MacSelectionMenu(L("Excluir palabras"), value: selectedTitle(false), selection: selection(false)) { options(include: false) }
+                MacSelectionMenu(L("Excluir palabras"), value: selectedTitle(false), selection: selection(false), fillsWidth: true) { options(include: false) }
                 Button(L("Listas de palabras…")) { managing = true }
                 Text(L("Incluye cualquiera de la primera lista y excluye cualquiera de la segunda."))
                     .font(.caption).foregroundStyle(.secondary)

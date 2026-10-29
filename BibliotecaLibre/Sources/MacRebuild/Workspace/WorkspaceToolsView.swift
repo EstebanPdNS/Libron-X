@@ -44,8 +44,6 @@ struct WorkspaceToolsView: View {
         }.frame(minWidth: tool == .search ? 820 : tool == .information ? 700 : 680, idealWidth: tool == .search ? 960 : tool == .information ? 700 : 820,
                 minHeight: compactComparison || compactAnnotationSearch || compactReadingPlans || compactPassageGuide || compactSermons || tool == .information || tool == .libraryHealth ? nil : tool == .bibliography ? 640 : tool == .search ? 520 : expandedScope ? 620 : 520,
                 idealHeight: compactComparison || compactAnnotationSearch || compactReadingPlans || compactPassageGuide || compactSermons || tool == .information || tool == .libraryHealth ? nil : tool == .bibliography ? 820 : tool == .search ? 640 : expandedScope ? 720 : 620)
-            .frame(width: tool == .search ? min(960, max(820, (NSScreen.main?.visibleFrame.width ?? 1024) - 80)) : nil,
-                   height: tool == .search ? min(680, max(520, (NSScreen.main?.visibleFrame.height ?? 820) - 100)) : nil)
             .modifier(MacPanelControlPresentation())
             .alert("Libron-X", isPresented: Binding(get: { tool == .favorites && workspace.error != nil }, set: { if !$0 { workspace.error = nil } })) {
                 Button(L("Aceptar")) { workspace.error = nil }
@@ -112,20 +110,19 @@ struct WorkspaceSearchView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
             HStack(spacing: 8) {
-                TextField(L(search.approximatePhrase ? "Frase literal" : "Palabra, frase entre comillas o consulta AND / OR"), text: $search.query).macInputStyle()
-                    .onSubmit(run).disabled(search.isSearching)
+                MacToolbarSearchField(text: $search.query,
+                    prompt: L(search.approximatePhrase ? "Frase literal" : "Palabra, frase entre comillas o consulta AND / OR"), onSubmit: run)
+                    .modifier(MacToolbarSearchSurface()).disabled(search.isSearching)
                 if search.isSearching {
                     if search.phase == .paused { Button(L("Reanudar"), action: search.resume) }
                     else { Button(L("Pausar"), action: search.pause).disabled(search.phase != .running) }
                     Button(L("Cancelar"), action: search.cancel).disabled(search.phase == .cancelling)
-                } else { Button(L("Buscar"), action: run).disabled(search.query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty) }
-                Divider().frame(height: 24)
-                Button { historyOpen = true } label: { Label(L("Historial de búsquedas…"), systemImage: "clock.arrow.circlepath").labelStyle(.iconOnly).frame(width: 22, height: 20) }
-                    .help(L("Historial de búsquedas…")).disabled(search.isSearching)
-                Button { savedQueriesOpen = true } label: { Label(L("Consultas guardadas…"), systemImage: "bookmark").labelStyle(.iconOnly).frame(width: 22, height: 20) }
-                    .help(L("Consultas guardadas…")).disabled(search.isSearching)
-                Button { workspace.activeTool = .transliteration } label: { Label(L("Transliteración"), systemImage: "character.book.closed").labelStyle(.iconOnly).frame(width: 22, height: 20) }
-                    .help(L("Transliteración")).disabled(search.isSearching)
+                }
+                MacReaderControlGroup {
+                    MacToolbarButton("Historial de búsquedas…", "clock.arrow.circlepath") { historyOpen = true }
+                    MacToolbarButton("Consultas guardadas…", "bookmark") { savedQueriesOpen = true }
+                    MacToolbarButton("Transliteración", "character.book.closed") { workspace.activeTool = .transliteration }
+                }.disabled(search.isSearching)
             }
             Divider()
             HStack(alignment: .top, spacing: 16) {
@@ -136,7 +133,6 @@ struct WorkspaceSearchView: View {
                     Text(L("Resultados de búsqueda")).font(.headline)
                     if let message = search.error { Text(message).foregroundStyle(.red).textSelection(.enabled) }
                     if let message = search.historyError { Text(L(message)).font(.caption).foregroundStyle(.red).textSelection(.enabled) }
-                    WorkspaceSearchRunStatusView(search: search)
                     if search.configurationChanged {
                         if let query = search.submittedQuery { Text(LF("Resultados de: {query}", ["query": query])).font(.caption).lineLimit(2) }
                         Text(L("La configuración cambió. Ejecuta una búsqueda nueva para abrir estos resultados."))
@@ -156,8 +152,14 @@ struct WorkspaceSearchView: View {
                             }
                         }
                     }
+            Divider()
+            WorkspaceSearchRunStatusView(search: search)
             if let report = search.report {
-                if let scope = search.scopeSnapshot { Text(scope.description).font(.caption).lineLimit(2) }
+                HStack(alignment: .firstTextBaseline, spacing: 12) {
+                    if let scope = search.scopeSnapshot { Text(scope.description).lineLimit(2) }
+                    Spacer(minLength: 0)
+                    Text(LF("{results} resultados · {articles} artículos examinados", ["results": String(search.presentation.rows.count), "articles": String(report.counters.articlesExamined)]))
+                }.font(.caption).foregroundStyle(.secondary)
                 if report.unit == .bibleVerse {
                     Text(LF("Rango: {range}", ["range": report.bibleRange?.description ?? L("Todos los versículos")])).font(.caption)
                     if let excluded = report.excludedBibleRange {
@@ -165,7 +167,6 @@ struct WorkspaceSearchView: View {
                     }
                     Text(LF("{selected} versículos examinados · {excluded} fuera del rango", ["selected": String(report.counters.versesExamined), "excluded": String(report.counters.versesExcludedByRange)])).font(.caption)
                 }
-                Text(LF("{results} resultados · {articles} artículos examinados", ["results": String(search.presentation.rows.count), "articles": String(report.counters.articlesExamined)])).font(.caption)
                 if !search.coverageComplete {
                     DisclosureGroup(L("La búsqueda tiene resultados parciales o recursos pendientes")) {
                         ScrollView {

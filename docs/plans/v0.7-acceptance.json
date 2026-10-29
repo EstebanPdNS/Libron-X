@@ -2251,14 +2251,18 @@
       "baseline": "Snapping y controles tienen código y pruebas parciales.",
       "status": "pending",
       "implementation": [
-        "Reorganized Search into a fixed query header, a compact options sidebar and an expanding results area. Added native checked Glass menus, direct export and distribution actions, persistent result navigation, compact word-list/limit forms and a display-bounded window size. Displayed result counts now match the visible occurrence rows."
+        "Reorganized Search into a fixed query header, a compact options sidebar and an expanding results area. Added native checked Glass menus, direct export and distribution actions, persistent result navigation, compact word-list/limit forms and a display-bounded window size. Displayed result counts now match the visible occurrence rows.",
+        "Search uses the shared native Glass search field and compact action groups, equal-width column menus, a compact status footer and a visible no-matches state. Source excerpts and resource headings determine their direction independently of the interface; aligned context retains balanced surrounding columns in the compact sheet."
       ],
       "verification": [
         "Builds 207–208: inspected the real Search window with eight occurrences, all collapsed option sections visible, independent sidebar scrolling, expanded word lists and expanded limits. Native scope changes disabled stale-result actions and restoring the original scope re-enabled them.",
         "Inspected build 208 in dark and light appearance. Restored English and Automatic appearance after testing. The native language popup again caused an accessibility timeout; captured a local process sample, preserved saved data and restarted the application. The changed Search layout still needs runtime RTL acceptance.",
-        "48 focused tests passed for translations, search history, transliteration, exports, result presentation, scopes, field and approximate matching, word lists and Bible ranges."
+        "48 focused tests passed for translations, search history, transliteration, exports, result presentation, scopes, field and approximate matching, word lists and Bible ranges.",
+        "2026-10-29, local build logs 223–224: inspected the installed 820-point compact Search sheet in English/dark and Arabic/light. Eight occurrence rows remained navigable; expanded word lists and limits scrolled independently without shrinking results. Verified a no-matches query disables Open/Export, Next advances and scrolls selection, both context modes fit, and Spanish source text stays left-aligned in the RTL interface. Restored English/Automatic appearance. 32 focused tests passed in six suites; the final direction adjustment passed a further focused recheck of 12 tests in two of those suites."
       ],
-      "limitations": []
+      "limitations": [
+        "This revision verifies the compact Search sheet and the stated native appearances, not all window sizes, all ten languages, VoiceOver or physical Force Touch. Comprehensive release acceptance remains open."
+      ]
     },
     {
       "id": "F259",

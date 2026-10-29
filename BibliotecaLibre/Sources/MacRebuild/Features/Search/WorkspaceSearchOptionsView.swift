@@ -8,7 +8,7 @@ struct WorkspaceSearchOptionsView: View {
     let run: () -> Void
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 8) {
+            VStack(alignment: .leading, spacing: 10) {
                 Label(L("Opciones de búsqueda"), systemImage: "slider.horizontal.3").font(.headline)
                 WorkspaceSearchScopePicker(selection: search.scope, context: workspace.searchScopeContext(), stacked: true)
                 Divider()
@@ -21,7 +21,7 @@ struct WorkspaceSearchOptionsView: View {
                 }
             if search.bibleVerses {
                 VStack(alignment: .leading, spacing: 8) {
-                    MacSelectionMenu(L("Rango bíblico"), value: rangeTitle(search.bibleRangeMode), selection: $search.bibleRangeMode) {
+                    MacSelectionMenu(L("Rango bíblico"), value: rangeTitle(search.bibleRangeMode), selection: $search.bibleRangeMode, fillsWidth: true) {
                         Text(L("Todos los versículos")).tag(WorkspaceBibleRangeMode.all)
                         Text(L("Pasajes o libros")).tag(WorkspaceBibleRangeMode.custom)
                         Text(L("Lista guardada")).tag(WorkspaceBibleRangeMode.savedList)
@@ -31,19 +31,19 @@ struct WorkspaceSearchOptionsView: View {
                         TextField(L("Pasajes, por ejemplo Gn 1–3; Juan 3:16–18; Romanos"), text: $search.customBibleRange)
                             .macInputStyle().onSubmit(run)
                     } else if search.bibleRangeMode == .savedList {
-                        MacSelectionMenu(L("Lista de versículos"), value: workspace.personal.documents.first { $0.id == search.referenceListID }?.title ?? L("Selecciona una lista de versículos"), selection: $search.referenceListID) {
+                        MacSelectionMenu(L("Lista de versículos"), value: workspace.personal.documents.first { $0.id == search.referenceListID }?.title ?? L("Selecciona una lista de versículos"), selection: $search.referenceListID, fillsWidth: true) {
                             Text(L("Selecciona una lista de versículos")).tag(Optional<UUID>.none)
                             ForEach(workspace.personal.documents.filter { $0.kind == .verseList }) {
                                 Text($0.title).tag(Optional($0.id))
                             }
                         }
                     } else if search.bibleRangeMode == .namedRange {
-                        MacSelectionMenu(L("Rango guardado"), value: workspace.personal.namedBibleRanges.ranges.first { $0.id == search.namedRangeID }?.name ?? L("Selecciona un rango guardado"), selection: $search.namedRangeID) {
+                        MacSelectionMenu(L("Rango guardado"), value: workspace.personal.namedBibleRanges.ranges.first { $0.id == search.namedRangeID }?.name ?? L("Selecciona un rango guardado"), selection: $search.namedRangeID, fillsWidth: true) {
                             Text(L("Selecciona un rango guardado")).tag(Optional<UUID>.none)
                             ForEach(workspace.personal.namedBibleRanges.ranges) { Text($0.name).tag(Optional($0.id)) }
                         }
                     }
-                    MacSelectionMenu(L("Excluir referencias"), value: search.excludedRange.mode == .all ? L("Sin exclusiones") : rangeTitle(search.excludedRange.mode), selection: $search.excludedRange.mode) {
+                    MacSelectionMenu(L("Excluir referencias"), value: search.excludedRange.mode == .all ? L("Sin exclusiones") : rangeTitle(search.excludedRange.mode), selection: $search.excludedRange.mode, fillsWidth: true) {
                         Text(L("Sin exclusiones")).tag(WorkspaceBibleRangeMode.all)
                         Text(L("Pasajes o libros")).tag(WorkspaceBibleRangeMode.custom)
                         Text(L("Lista guardada")).tag(WorkspaceBibleRangeMode.savedList)
@@ -53,14 +53,14 @@ struct WorkspaceSearchOptionsView: View {
                         TextField(L("Pasajes, por ejemplo Gn 1–3; Juan 3:16–18; Romanos"), text: $search.excludedRange.customRange)
                             .macInputStyle().onSubmit(run)
                     } else if search.excludedRange.mode == .savedList {
-                        MacSelectionMenu(L("Lista de versículos excluidos"), value: workspace.personal.documents.first { $0.id == search.excludedRange.referenceListID }?.title ?? L("Selecciona una lista de versículos"), selection: $search.excludedRange.referenceListID) {
+                        MacSelectionMenu(L("Lista de versículos excluidos"), value: workspace.personal.documents.first { $0.id == search.excludedRange.referenceListID }?.title ?? L("Selecciona una lista de versículos"), selection: $search.excludedRange.referenceListID, fillsWidth: true) {
                             Text(L("Selecciona una lista de versículos")).tag(Optional<UUID>.none)
                             ForEach(workspace.personal.documents.filter { $0.kind == .verseList }) {
                                 Text($0.title).tag(Optional($0.id))
                             }
                         }
                     } else if search.excludedRange.mode == .namedRange {
-                        MacSelectionMenu(L("Rango excluido"), value: workspace.personal.namedBibleRanges.ranges.first { $0.id == search.excludedRange.namedRangeID }?.name ?? L("Selecciona un rango guardado"), selection: $search.excludedRange.namedRangeID) {
+                        MacSelectionMenu(L("Rango excluido"), value: workspace.personal.namedBibleRanges.ranges.first { $0.id == search.excludedRange.namedRangeID }?.name ?? L("Selecciona un rango guardado"), selection: $search.excludedRange.namedRangeID, fillsWidth: true) {
                             Text(L("Selecciona un rango guardado")).tag(Optional<UUID>.none)
                             ForEach(workspace.personal.namedBibleRanges.ranges) { Text($0.name).tag(Optional($0.id)) }
                         }
@@ -82,9 +82,9 @@ struct WorkspaceSearchOptionsView: View {
             }
             }
 
-            }.disabled(search.isSearching).padding(.trailing, 10)
+            }.disabled(search.isSearching).padding(.horizontal, 4).padding(.bottom, 12)
                 .frame(maxWidth: .infinity, alignment: .leading)
-        }.scrollIndicators(.visible)
+        }.scrollIndicators(.visible).accessibilityLabel(L("Opciones de búsqueda"))
     }
     private func rangeTitle(_ mode: WorkspaceBibleRangeMode) -> String {
         switch mode {

@@ -1,5 +1,6 @@
 import SwiftUI
 import UniformTypeIdentifiers
+import NaturalLanguage
 import LibronixCore
 
 struct WorkspaceSearchResultsView: View {
@@ -26,32 +27,30 @@ struct WorkspaceSearchResultsView: View {
                 HStack {
                     VStack(alignment: .leading, spacing: 4) {
                     Text(L("Vista")).font(.caption).foregroundStyle(.secondary)
-                    MacSelectionMenu(L("Vista"), value: presentation.layout.localizedTitle, selection: $presentation.layout) {
+                    MacSelectionMenu(L("Vista"), value: presentation.layout.localizedTitle, selection: $presentation.layout, fillsWidth: true) {
                         ForEach(WorkspaceSearchResultLayout.allCases, id: \.self) { Text($0.localizedTitle).tag($0) }
                     }
                     }
                     VStack(alignment: .leading, spacing: 4) {
                     Text(L("Agrupar")).font(.caption).foregroundStyle(.secondary)
-                    MacSelectionMenu(L("Agrupar"), value: presentation.grouping.localizedTitle, selection: $presentation.grouping) {
+                    MacSelectionMenu(L("Agrupar"), value: presentation.grouping.localizedTitle, selection: $presentation.grouping, fillsWidth: true) {
                         ForEach(WorkspaceSearchResultGrouping.allCases, id: \.self) { Text($0.localizedTitle).tag($0) }
                     }
                     }
                     VStack(alignment: .leading, spacing: 4) {
                     Text(L("Orden")).font(.caption).foregroundStyle(.secondary)
-                    MacSelectionMenu(L("Orden"), value: presentation.order.localizedTitle, selection: $presentation.order) {
+                    MacSelectionMenu(L("Orden"), value: presentation.order.localizedTitle, selection: $presentation.order, fillsWidth: true) {
                         ForEach(WorkspaceSearchResultOrder.allCases, id: \.self) { Text($0.localizedTitle).tag($0) }
                     }
                     }
                 }
                 HStack {
-                    Button { presentation.previous(); listFocused = true } label: {
-                        Label(L("Resultado anterior"), systemImage: "chevron.up")
-                    }.labelStyle(.iconOnly).help(L("Resultado anterior"))
-                        .disabled(!presentation.canPrevious).keyboardShortcut(.upArrow, modifiers: [.command, .option])
-                    Button { presentation.next(); listFocused = true } label: {
-                        Label(L("Resultado siguiente"), systemImage: "chevron.down")
-                    }.labelStyle(.iconOnly).help(L("Resultado siguiente"))
-                        .disabled(!presentation.canNext).keyboardShortcut(.downArrow, modifiers: [.command, .option])
+                    MacReaderControlGroup {
+                        MacToolbarButton("Resultado anterior", "chevron.up") { presentation.previous(); listFocused = true }
+                            .disabled(!presentation.canPrevious).keyboardShortcut(.upArrow, modifiers: [.command, .option])
+                        MacToolbarButton("Resultado siguiente", "chevron.down") { presentation.next(); listFocused = true }
+                            .disabled(!presentation.canNext).keyboardShortcut(.downArrow, modifiers: [.command, .option])
+                    }
                     Text(LF("Resultado {current} de {total}", ["current": String((presentation.selectedIndex ?? -1) + 1), "total": String(presentation.rows.count)]))
                         .font(.caption).monospacedDigit()
                     Spacer()
@@ -71,7 +70,10 @@ struct WorkspaceSearchResultsView: View {
                 List(selection: $presentation.selectedID) {
                     ForEach(presentation.sections) { section in
                         if let title = section.title {
-                            Section { rows(section.rows) } header: { Text(verbatim: title) }
+                            Section { rows(section.rows) } header: {
+                                Text(verbatim: title).frame(maxWidth: .infinity, alignment: .leading)
+                                    .environment(\.layoutDirection, sourceDirection(resourceID: section.rows.first?.result.resourceID, text: title))
+                            }
                         } else { rows(section.rows) }
                     }
                 }
@@ -81,7 +83,16 @@ struct WorkspaceSearchResultsView: View {
                 .onChange(of: presentation.selectedID) { if let id = presentation.selectedID { proxy.scrollTo(id, anchor: .center) } }
                 .onChange(of: presentation.revision) { if let id = presentation.selectedID { proxy.scrollTo(id, anchor: .center) } }
                 .onChange(of: presentation.layout) { if let id = presentation.selectedID { proxy.scrollTo(id, anchor: .center) } }
-            }.frame(minHeight: 200, maxHeight: .infinity)
+            }
+            .overlay {
+                if presentation.rows.isEmpty {
+                    VStack(spacing: 10) {
+                        Image(systemName: "magnifyingglass").font(.system(size: 26))
+                        Text(L("No se encontraron coincidencias."))
+                    }.foregroundStyle(.secondary).allowsHitTesting(false)
+                }
+            }
+            .frame(minHeight: 180, maxHeight: .infinity)
             if search.report?.contextCoverageComplete == false {
                 Text(L("Algunos contextos no se muestran por el límite de presentación. Puedes abrir las coincidencias."))
                     .font(.caption).foregroundStyle(.secondary)
@@ -110,9 +121,15 @@ struct WorkspaceSearchResultsView: View {
             }
         } catch { exportError = L(error.localizedDescription) }
     }
+    private func sourceDirection(resourceID: String?, text: String) -> LayoutDirection {
+        let language = search.scopeSnapshot?.resources.first { $0.id == resourceID }?.languages.first
+            ?? NLLanguageRecognizer.dominantLanguage(for: String(text.prefix(1024)))?.rawValue
+        return NSParagraphStyle.defaultWritingDirection(forLanguage: language) == .rightToLeft ? .rightToLeft : .leftToRight
+    }
     @ViewBuilder private func rows(_ value: [WorkspaceSearchResultRow]) -> some View {
         ForEach(value) { row in
-            WorkspaceSearchResultRowView(row: row, layout: presentation.layout, showsResource: presentation.grouping == .none)
+            WorkspaceSearchResultRowView(row: row, layout: presentation.layout, showsResource: presentation.grouping == .none,
+                sourceDirection: sourceDirection(resourceID: row.result.resourceID, text: row.result.snippet.text))
                 .tag(row.id).id(row.id)
                 .contentShape(Rectangle()).onTapGesture(count: 2) { open(row) }
                 .accessibilityAction(named: Text(L("Abrir"))) { open(row) }
@@ -124,6 +141,7 @@ private struct WorkspaceSearchResultRowView: View {
     let row: WorkspaceSearchResultRow
     let layout: WorkspaceSearchResultLayout
     let showsResource: Bool
+    let sourceDirection: LayoutDirection
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 5) {
@@ -133,13 +151,18 @@ private struct WorkspaceSearchResultRowView: View {
                     if let field = row.field { Text(verbatim: field.localizedTitle).font(.caption) }
                     Spacer()
                 }
-                if let parts = row.parts {
-                    if layout == .aligned { aligned(parts) }
-                    else { Text(context(parts)).lineLimit(3) }
-                } else if row.isSummary {
-                    Text(verbatim: row.result.snippet.text).lineLimit(3).foregroundStyle(.secondary)
+                Group {
+                    if let parts = row.parts {
+                        if layout == .aligned { aligned(parts) }
+                        else { Text(context(parts)).lineLimit(3) }
+                    } else if row.isSummary {
+                        Text(verbatim: row.result.snippet.text).lineLimit(3).foregroundStyle(.secondary)
+                    } else { Text(L("Contexto no disponible")).foregroundStyle(.secondary) }
+                }.frame(maxWidth: .infinity, alignment: .leading)
+                    .environment(\.layoutDirection, sourceDirection)
+                if row.isSummary {
                     Text(L(row.result.hitCount > 0 ? "Coincidencias omitidas por el límite" : "Resultado sin coincidencias positivas")).font(.caption)
-                } else { Text(L("Contexto no disponible")).foregroundStyle(.secondary) }
+                }
             }.padding(.vertical, 4).frame(maxWidth: .infinity, alignment: .leading)
         }
     }
@@ -156,7 +179,7 @@ private struct WorkspaceSearchResultRowView: View {
             Text(verbatim: (parts.omittedBefore ? "…" : "") + parts.before)
                 .lineLimit(2).truncationMode(.head).foregroundStyle(.secondary).frame(maxWidth: .infinity, alignment: .trailing)
             Text(verbatim: (parts.partialStart ? "…" : "") + parts.match + (parts.partialEnd ? "…" : ""))
-                .fontWeight(.semibold).lineLimit(2).frame(width: 160, alignment: .center)
+                .fontWeight(.semibold).lineLimit(2).frame(maxWidth: 120, alignment: .center)
             Text(verbatim: parts.after + (parts.omittedAfter ? "…" : ""))
                 .lineLimit(2).truncationMode(.tail).foregroundStyle(.secondary).frame(maxWidth: .infinity, alignment: .leading)
         }
