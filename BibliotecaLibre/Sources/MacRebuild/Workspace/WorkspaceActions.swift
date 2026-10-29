@@ -4,7 +4,7 @@ import LibronixCore
 enum WorkspaceTool: String, Identifiable { case search, referenceSearch, annotationSearch, documents, favorites, information, resources, topics, bibleCopy, windows, parallelSets, keyLinks, associations, associationLinks, bibliography, editions, passageComparison, readingPlans, passageGuide, prayerJournal, scriptureMemory, studyAssessments, wordSearch, commandPalette, biblicalMeasures, researchInbox, transliteration, libraryHealth
     var id: String { rawValue }
 }
-enum ReaderMarkStyle: String, Codable, Hashable, Sendable { case underline, strike }
+enum ReaderMarkStyle: String, Codable, Hashable, Sendable { case underline, strike, outline }
 struct ReaderHighlight: Identifiable, Codable, Equatable, Sendable {
     var id = UUID()
     var resourceID: String

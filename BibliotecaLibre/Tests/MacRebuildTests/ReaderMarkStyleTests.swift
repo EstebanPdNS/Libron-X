@@ -29,6 +29,9 @@ import Testing
         let strike = NSMutableAttributedString(string: "Example")
         ReaderMarkPresentation.apply(mark(style: .strike), to: strike)
         #expect(strike.attribute(.strikethroughStyle, at: 0, effectiveRange: nil) != nil)
+        let outline = NSMutableAttributedString(string: "Example")
+        ReaderMarkPresentation.apply(mark(style: .outline), to: outline)
+        #expect(outline.attribute(.readerMarkOutline, at: 0, effectiveRange: nil) != nil)
         var invalid = mark(style: .underline); invalid.range = NSRange(location: 5, length: 20)
         ReaderMarkPresentation.apply(invalid, to: strike)
         #expect(strike.attribute(.underlineStyle, at: 5, effectiveRange: nil) == nil)
@@ -38,7 +41,7 @@ import Testing
         try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
         defer { try? FileManager.default.removeItem(at: directory) }
         let url = directory.appendingPathComponent("personal.json"), state = WorkspacePersonalState(url: url)
-        state.highlights = [mark(), mark(style: .underline), mark(style: .strike)]
+        state.highlights = [mark(), mark(style: .underline), mark(style: .strike), mark(style: .outline)]
         try state.save()
         let stored = try JSONDecoder().decode(WorkspacePersonalSnapshot.self, from: Data(contentsOf: url))
         #expect(stored.schemaVersion == 2)

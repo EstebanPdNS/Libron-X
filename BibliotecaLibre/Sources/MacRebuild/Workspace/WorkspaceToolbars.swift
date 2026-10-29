@@ -152,7 +152,7 @@ struct ReaderMarkupMenu: View {
             expanded.toggle()
         } label: { MacToolbarLabel("Marcación visual", "highlighter") }
             .help(L("Marcación visual"))
-            .macToolbarPopover(isPresented: $expanded, size: NSSize(width: 300, height: 150)) {
+            .macToolbarPopover(isPresented: $expanded, size: NSSize(width: 280, height: 242)) {
                 ReaderMarkupPopover(workspace: workspace, personal: workspace.personal, target: target,
                                     style: $markStyle, expanded: $expanded, showsPalettes: $showsPalettes)
             }
@@ -169,6 +169,12 @@ private struct ReaderMarkupPopover: View {
     @Binding var style: ReaderMarkStyle?
     @Binding var expanded: Bool
     @Binding var showsPalettes: Bool
+    private let styles: [(ReaderMarkStyle?, String, String)] = [
+        (nil, "Resaltado", "highlighter"),
+        (.underline, "Subrayado", "underline"),
+        (.strike, "Tachado", "strikethrough"),
+        (.outline, "Contorno", "rectangle")
+    ]
     private var selection: Binding<UUID?> {
         Binding(get: { personal.markPalettes.selectedID }, set: { value in
             do { try personal.editMarkPalettes { $0.selectedID = value } }
@@ -176,42 +182,49 @@ private struct ReaderMarkupPopover: View {
         })
     }
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(spacing: 8) {
                 Picker(L("Paleta"), selection: selection) {
                     Text(L("Colores predeterminados")).tag(Optional<UUID>.none)
                     ForEach(personal.markPalettes.palettes) { Text($0.name).tag(Optional($0.id)) }
-                }.labelsHidden()
+                }.labelsHidden().frame(maxWidth: .infinity)
                 Button { expanded = false; showsPalettes = true } label: {
                     Label(L("Gestionar paletas"), systemImage: "slider.horizontal.3").labelStyle(.iconOnly)
                 }.help(L("Gestionar paletas"))
             }
-            Picker(L("Estilo de marcación"), selection: $style) {
-                Text(L("Resaltado")).tag(Optional<ReaderMarkStyle>.none)
-                Text(L("Subrayado")).tag(Optional(ReaderMarkStyle.underline))
-                Text(L("Tachado")).tag(Optional(ReaderMarkStyle.strike))
-            }.labelsHidden().pickerStyle(.segmented)
-            HStack(spacing: 8) {
+            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 8) {
+                ForEach(styles.indices, id: \.self) { index in
+                    let choice = styles[index]
+                    Toggle(isOn: Binding(get: { style == choice.0 }, set: { if $0 { style = choice.0 } })) {
+                        VStack(spacing: 4) {
+                            Image(systemName: choice.2).font(.system(size: 16, weight: .medium))
+                            Text(L(choice.1)).font(.caption).lineLimit(1).minimumScaleFactor(0.85)
+                        }.frame(maxWidth: .infinity, minHeight: 40)
+                    }.toggleStyle(.button).buttonBorderShape(.roundedRectangle(radius: 10))
+                        .accessibilityLabel(L(choice.1))
+                }
+            }.accessibilityLabel(L("Estilo de marcación"))
+            Divider()
+            HStack(spacing: 6) {
                 ForEach(personal.markPalettes.selectedColors, id: \.self) { color in
                     Button {
                         if let target { workspace.activate(target) }
                         workspace.addHighlight(color.rawValue, style: style); expanded = false
                     } label: {
-                        RoundedRectangle(cornerRadius: 5).fill(color.color)
-                            .overlay(RoundedRectangle(cornerRadius: 5).strokeBorder(.primary.opacity(0.22), lineWidth: 1))
-                            .frame(width: 25, height: 25).frame(width: 33, height: 34)
-                    }.buttonStyle(.borderless).help(L(color.title)).accessibilityLabel(L(color.title))
+                        if #available(macOS 26, *) { Color.clear.frame(width: 22, height: 28) }
+                        else { Capsule().fill(color.color).frame(width: 22, height: 28) }
+                    }.tint(color.color).help(L(color.title)).accessibilityLabel(L(color.title))
                         .disabled((target?.selectedRange.length ?? 0) == 0).featureHelpTarget(.marks)
                 }
-                Divider().frame(height: 25)
+                Divider().frame(height: 28)
                 Button {
                     if let target { workspace.activate(target) }
                     workspace.eraseHighlight(); expanded = false
-                } label: { Image(systemName: "trash").font(.system(size: 17)).frame(width: 33, height: 34) }
-                    .buttonStyle(.borderless).help(L("Borrar marcación seleccionada"))
+                } label: { Image(systemName: "trash").font(.system(size: 16)).frame(width: 22, height: 28) }
+                    .help(L("Borrar marcación seleccionada"))
                     .disabled((target?.selectedRange.length ?? 0) == 0)
                     .accessibilityLabel(L("Borrar marcación seleccionada")).featureHelpTarget(.marks)
-            }
+            }.controlSize(.regular)
         }.padding(12).modifier(MacPanelControlPresentation()).featureHelpTarget(.marks)
     }
 }

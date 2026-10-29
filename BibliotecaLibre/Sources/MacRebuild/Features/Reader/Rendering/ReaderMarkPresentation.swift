@@ -10,6 +10,8 @@ enum ReaderMarkPresentation {
             text.addAttributes([.underlineStyle: NSUnderlineStyle.single.rawValue, .underlineColor: color], range: mark.range)
         case .strike:
             text.addAttributes([.strikethroughStyle: NSUnderlineStyle.single.rawValue, .strikethroughColor: color], range: mark.range)
+        case .outline:
+            text.addAttribute(.readerMarkOutline, value: color, range: mark.range)
         case nil:
             text.addAttribute(.backgroundColor, value: color.withAlphaComponent(0.35), range: mark.range)
         }

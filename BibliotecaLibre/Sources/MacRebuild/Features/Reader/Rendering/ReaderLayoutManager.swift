@@ -4,6 +4,7 @@ import CoreText
 extension NSAttributedString.Key {
     static let readerListLabel = Self("org.libronx.reader.listLabel")
     static let readerCapitalizedGlyph = Self("org.libronx.reader.capitalizedGlyph")
+    static let readerMarkOutline = Self("org.libronx.reader.markOutline")
 }
 
 /// Draws source labels outside body coordinates and substitutes one-to-one
@@ -11,6 +12,24 @@ extension NSAttributedString.Key {
 final class ReaderLayoutManager: NSLayoutManager, NSLayoutManagerDelegate {
     override init() { super.init(); delegate = self }
     required init?(coder: NSCoder) { super.init(coder: coder); delegate = self }
+    override func drawBackground(forGlyphRange glyphsToShow: NSRange, at origin: NSPoint) {
+        super.drawBackground(forGlyphRange: glyphsToShow, at: origin)
+        guard let storage = textStorage else { return }
+        let characters = characterRange(forGlyphRange: glyphsToShow, actualGlyphRange: nil)
+        storage.enumerateAttribute(.readerMarkOutline, in: characters) { value, range, _ in
+            guard let color = value as? NSColor else { return }
+            let glyphs = glyphRange(forCharacterRange: range, actualCharacterRange: nil)
+            let visible = NSIntersectionRange(glyphs, glyphsToShow)
+            guard visible.length > 0, let container = textContainer(forGlyphAt: visible.location, effectiveRange: nil) else { return }
+            color.setStroke()
+            enumerateEnclosingRects(forGlyphRange: visible, withinSelectedGlyphRange: NSRange(location: NSNotFound, length: 0), in: container) { rect, _ in
+                let outline = rect.offsetBy(dx: origin.x, dy: origin.y).insetBy(dx: -1, dy: 1)
+                guard outline.width > 0, outline.height > 0 else { return }
+                let path = NSBezierPath(roundedRect: outline, xRadius: 3, yRadius: 3)
+                path.lineWidth = 1.5; path.stroke()
+            }
+        }
+    }
     func layoutManager(_ layoutManager: NSLayoutManager, shouldGenerateGlyphs glyphs: UnsafePointer<CGGlyph>,
                        properties props: UnsafePointer<NSLayoutManager.GlyphProperty>,
                        characterIndexes charIndexes: UnsafePointer<Int>, font aFont: NSFont, forGlyphRange glyphRange: NSRange) -> Int {
