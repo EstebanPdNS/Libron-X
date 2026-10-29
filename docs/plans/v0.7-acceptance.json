@@ -594,7 +594,8 @@
         "Open supported legacy jump commands by checking the unique numeric resource identity, paired LSF/LIX indices, original character counts, position and decoded-text fingerprint; cancel stale navigation and display errors within the favorites sheet.",
         "Import original XML favorites through the native file picker, preserving nested folders and opaque commands while merging atomically with existing favorites; input size is bounded.",
         "Open verified legacy jump commands in LLS containers when their catalog identity matches the embedded LSF/LIX; keep the original container identity and reject ambiguous matches.",
-        "Resolve original jump commands against LLS catalog identifiers, then verify the embedded LSF/LIX identity and position."
+        "Resolve original jump commands against LLS catalog identifiers, then verify the embedded LSF/LIX identity and position.",
+        "Resolve named LLS catalog identifiers by checking the original container metadata and its embedded numeric LSF identity before translating the saved article position."
       ],
       "verification": [
         "Seven PersonalLibraryStateTests and six QuickBookmarkTests passed, including cycles, order, conflict rollback, exact position and changed-source rejection.",
@@ -603,7 +604,8 @@
         "Two OriginalFavoriteImportTests cover nested merge and persisted state, repeated import with distinct IDs, invalid and oversized input, and concurrent-writer conflict. Native build 131 imported an authored XML through the file picker and displayed its nested folder and position; original personal state was restored afterward.",
         "OriginalFavoriteNavigationTests pass for existing checked LSF jump commands, ambiguous resources and damaged indexes; other original actions remain unresolved.",
         "OriginalFavoriteNavigationTests include an authored LLS containing paired LSF/LIX data and confirm the checked position and outer resource identity.",
-        "OriginalFavoriteNavigationTests cover the LLS catalog identifier and the original saved position."
+        "OriginalFavoriteNavigationTests cover the LLS catalog identifier and the original saved position.",
+        "Verified the actual original favorites file against its matching original managed package; the saved jump opened without a resource or reader error. An authored named-LLS fixture also covers the same path."
       ],
       "limitations": [
         "Recovery supports measured jump commands and checked LSF/LIX projections only; other original actions and incompatible formats remain unresolved. Additional original-file variants require validation.",

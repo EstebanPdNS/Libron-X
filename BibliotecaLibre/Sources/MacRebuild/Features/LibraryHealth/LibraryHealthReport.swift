@@ -101,7 +101,7 @@ struct LibraryHealthReport: Equatable, Sendable {
         let legacyCounts = Dictionary(resources.compactMap { resource -> String? in
             guard [.legacyLSF, .libronixLLS].contains(resource.format) else { return nil }
             return LegacyNumericResourceID.fromBKIDHex(resource.legacyIdentifier)?.identifier ?? (resource.format == .libronixLLS ? resource.legacyIdentifier : nil)
-        }.map { ($0, 1) }, uniquingKeysWith: +)
+        }.map { ($0.lowercased(), 1) }, uniquingKeysWith: +)
         for collection in collections {
             if Task.isCancelled { break }
             for member in collection.members {
@@ -154,7 +154,7 @@ struct LibraryHealthReport: Equatable, Sendable {
                 add(.init(id: "favorite:" + favorite.id.uuidString, kind: .unresolvedLink, title: favorite.title, detail: location.resourceID))
             } else if let command = favorite.legacyCommand {
                 let destination = try? LegacyJumpDestination.parse(command)
-                if destination.map({ legacyCounts[$0.resourceID] != 1 }) ?? true {
+                if destination.map({ legacyCounts[$0.resourceID.lowercased()] != 1 }) ?? true {
                     add(.init(id: "favorite:" + favorite.id.uuidString, kind: .unresolvedLink, title: favorite.title, detail: command))
                 }
             }

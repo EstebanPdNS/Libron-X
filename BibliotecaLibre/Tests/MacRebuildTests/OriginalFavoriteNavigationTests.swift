@@ -65,7 +65,7 @@ import Testing
         let original = fixture.resources[0], url = fixture.root.appendingPathComponent("owned.lbxlls")
         func le(_ value: UInt64, _ count: Int) -> Data { Data((0..<count).map { UInt8(truncatingIfNeeded: value >> ($0 * 8)) }) }
         func words(_ values: [UInt32]) -> Data { values.reduce(into: Data()) { $0 += le(UInt64($1), 4) } }
-        let members = ["owned.LSF": try Data(contentsOf: original.location), "owned.LIX": try Data(contentsOf: #require(original.indexLocation)), "this.metadata.xml": Data("<lbx-resource guid=\"owned\"><metadata/></lbx-resource>".utf8)]
+        let members = ["owned.LSF": try Data(contentsOf: original.location), "owned.LIX": try Data(contentsOf: #require(original.indexLocation)), "this.metadata.xml": Data("<lbx-resource guid=\"LLS:OWNED\"><metadata/></lbx-resource>".utf8)]
         let paths = members.keys.sorted(), start = 56 + paths.count * 144
         var directory = Data(), body = Data()
         for path in paths {
@@ -91,14 +91,41 @@ import Testing
             encrypted += words([a,b])
         }
         try encrypted.write(to: url)
-        let resource = LibraryResource(location: url, title: "Owned LLS", byteCount: Int64(encrypted.count), format: .libronixLLS, support: .metadataOnly, provenance: .fileName, legacyIdentifier: "LLS:1.0.3")
+        let resource = LibraryResource(location: url, title: "Owned LLS", byteCount: Int64(encrypted.count), format: .libronixLLS, support: .metadataOnly, provenance: .fileName, legacyIdentifier: "LLS:OWNED")
         let workspace = StudyWorkspace(personal: WorkspacePersonalState(url: fixture.root.appendingPathComponent("personal.json")))
         workspace.resources = [resource]
-        workspace.openFavorite(.init(title: "Own", kind: .legacyCommand, legacyCommand: "jump|pos=LLS-AOL:0.12.0|res=LLS:1.0.3"))
+        workspace.openFavorite(.init(title: "Own", kind: .legacyCommand, legacyCommand: "jump|pos=LLS-AOL:0.12.0|res=LLS:OWNED"))
         for _ in 0..<500 where workspace.originalFavoriteTask != nil || workspace.activeReader?.isLoading == true { try await Task.sleep(for: .milliseconds(10)) }
         let reader = try #require(workspace.activeReader)
         #expect(workspace.error == nil && reader.error == nil && reader.resource.id == resource.id)
         #expect(reader.page?.text == "Edition A · John1" && reader.selectedRange == NSRange(location: 12, length: 0))
+        workspace.shutdown()
+    }
+
+    @Test(.enabled(if: ProcessInfo.processInfo.environment["LIBRONX_FAVORITE_CHECK"] != nil))
+    func originalFavoriteResolvesAgainstTheOriginalLibrary() async throws {
+        let root = URL(fileURLWithPath: try #require(ProcessInfo.processInfo.environment["LIBRONX_FAVORITE_CHECK"]))
+        let data = try Data(contentsOf: URL(fileURLWithPath: NSHomeDirectory()).appendingPathComponent("Documents/Libronix DLS/Favorites.xml"))
+        let favorite = try #require(FavoritesDocument.importingLegacyXML(data).items.first { $0.kind == .legacyCommand })
+        let temporary = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        try FileManager.default.createDirectory(at: temporary, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: temporary) }
+        let personal = WorkspacePersonalState(url: temporary.appendingPathComponent("personal.json"))
+        let workspace = StudyWorkspace(personal: personal)
+        let destination = try LegacyJumpDestination.parse(#require(favorite.legacyCommand))
+        let packages = try FileManager.default.contentsOfDirectory(at: root, includingPropertiesForKeys: nil).filter { $0.pathExtension == "libron" }
+        let resources = try packages.compactMap { package -> LibraryResource? in
+            let manifestURL = package.appendingPathComponent("manifest.json")
+            guard let data = try? Data(contentsOf: manifestURL), let manifest = try? JSONDecoder().decode(LibronManifest.self, from: data),
+                  manifest.legacyIdentifier?.caseInsensitiveCompare(destination.resourceID) == .orderedSame else { return nil }
+            return try LibronPackage.read(package).1
+        }
+        workspace.resources = resources
+        workspace.openFavorite(favorite)
+        for _ in 0..<1000 where workspace.originalFavoriteTask != nil || workspace.activeReader?.isLoading == true { try await Task.sleep(for: .milliseconds(10)) }
+        if let error = workspace.error { print("Original favorite resolution: \(error)") }
+        if let error = workspace.activeReader?.error { print("Original favorite reader: \(error)") }
+        #expect(workspace.error == nil && workspace.activeReader?.error == nil && workspace.activeReader?.page != nil)
         workspace.shutdown()
     }
 

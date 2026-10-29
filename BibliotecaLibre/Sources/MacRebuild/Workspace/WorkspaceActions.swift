@@ -268,7 +268,7 @@ struct ReaderHighlight: Identifiable, Codable, Equatable, Sendable {
             let destination = try LegacyJumpDestination.parse(command)
             let matches = resources.filter {
                 ($0.format == .legacyLSF && LegacyNumericResourceID.fromBKIDHex($0.legacyIdentifier)?.identifier == destination.resourceID) ||
-                ($0.format == .libronixLLS && ($0.legacyIdentifier == destination.resourceID || LegacyNumericResourceID.fromBKIDHex($0.legacyIdentifier)?.identifier == destination.resourceID))
+                ($0.format == .libronixLLS && ($0.legacyIdentifier?.caseInsensitiveCompare(destination.resourceID) == .orderedSame || LegacyNumericResourceID.fromBKIDHex($0.legacyIdentifier)?.identifier == destination.resourceID))
             }
             guard matches.count == 1, let resource = matches.first else {
                 error = L(matches.isEmpty ? "El recurso de este favorito no está disponible en la biblioteca abierta." : "Hay varias copias de este recurso. Se conserva el destino hasta confirmar la edición.")
@@ -280,14 +280,22 @@ struct ReaderHighlight: Identifiable, Codable, Equatable, Sendable {
                 do {
                     let stamp = try LibrarySearchFileStamp.capture(resource.location)
                     let source = resource.format == .libronixLLS ? try await LibronixBookService.shared.prepare(resource) : resource
-                    let result = try await LegacyContentService().resolveArticleLocator(source, originalResourceID: destination.resourceID, position: destination.position)
+                    let numericID: String
+                    if resource.format == .libronixLLS {
+                        let metadata = try await LibronixBookService.shared.metadata(resource)
+                        guard metadata.identifier?.caseInsensitiveCompare(destination.resourceID) == .orderedSame ||
+                                LegacyNumericResourceID.fromBKIDHex(resource.legacyIdentifier)?.identifier == destination.resourceID,
+                              let embeddedID = LegacyNumericResourceID.fromBKIDHex(source.legacyIdentifier)?.identifier else { throw LegacyLocatorError.resourceMismatch }
+                        numericID = embeddedID
+                    } else { numericID = destination.resourceID }
+                    let result = try await LegacyContentService().resolveArticleLocator(source, originalResourceID: numericID, position: destination.position)
                     try LibrarySearchFileStamp.verify([stamp])
                     try Task.checkCancellation()
                     guard let self, self.originalFavoriteGeneration == generation else { return }
                     self.originalFavoriteTask = nil
                     guard self.activeID == readerID, self.activeReader?.associationGeneration == readerGeneration,
                           self.resources.filter({ ($0.format == .legacyLSF && LegacyNumericResourceID.fromBKIDHex($0.legacyIdentifier)?.identifier == destination.resourceID) ||
-                ($0.format == .libronixLLS && ($0.legacyIdentifier == destination.resourceID || LegacyNumericResourceID.fromBKIDHex($0.legacyIdentifier)?.identifier == destination.resourceID)) }).count == 1,
+                ($0.format == .libronixLLS && ($0.legacyIdentifier?.caseInsensitiveCompare(destination.resourceID) == .orderedSame || LegacyNumericResourceID.fromBKIDHex($0.legacyIdentifier)?.identifier == destination.resourceID)) }).count == 1,
                           self.resources.contains(resource) else { return }
                     let reader = self.open(resource, startReading: false, loader: loader)
                     reader.load(.init(ordinal: result.location.sectionOrdinal, reference: result.location.reference),
