@@ -1415,6 +1415,18 @@
     "ur": "دعا شامل کریں",
     "zh-Hans": "添加祷告"
   },
+  "Añadir pasaje": {
+    "ar": "إضافة مقطع",
+    "bn": "অংশ যোগ করুন",
+    "en": "Add Passage",
+    "es": "Añadir pasaje",
+    "fr": "Ajouter un passage",
+    "hi": "अंश जोड़ें",
+    "id": "Tambah bagian",
+    "pt": "Adicionar passagem",
+    "ur": "مقطع شامل کریں",
+    "zh-Hans": "添加经文"
+  },
   "Año": {
     "ar": "السنة",
     "bn": "বছর",
@@ -2182,6 +2194,18 @@
     "pt": "Alterar a passagem marca a leitura como pendente novamente.",
     "ur": "عبارت بدلنے سے مطالعہ دوبارہ نامکمل ہو جائے گا۔",
     "zh-Hans": "更改经文会将阅读重新标记为待完成。"
+  },
+  "Cambiar el pasaje, la referencia o la fuente reinicia el progreso.": {
+    "ar": "يؤدي تغيير المقطع أو المرجع أو المصدر إلى إعادة ضبط التقدم.",
+    "bn": "অংশ, সূত্র বা উৎস বদলালে অগ্রগতি পুনরায় শুরু হয়।",
+    "en": "Changing the passage, reference or source resets progress.",
+    "es": "Cambiar el pasaje, la referencia o la fuente reinicia el progreso.",
+    "fr": "Modifier le passage, la référence ou la source réinitialise la progression.",
+    "hi": "अंश, संदर्भ या स्रोत बदलने से प्रगति रीसेट होती है।",
+    "id": "Mengubah bagian, referensi, atau sumber akan mengatur ulang kemajuan.",
+    "pt": "Alterar a passagem, referência ou fonte reinicia o progresso.",
+    "ur": "مقطع، حوالہ یا ماخذ بدلنے سے پیش رفت دوبارہ شروع ہوگی۔",
+    "zh-Hans": "更改经文、引用或来源会重置进度。"
   },
   "Cambiar tamaño del panel": {
     "ar": "تغيير حجم اللوحة",
@@ -2986,6 +3010,18 @@
     "pt": "Concluída",
     "ur": "مکمل",
     "zh-Hans": "已完成"
+  },
+  "Comprobar respuesta": {
+    "ar": "تحقق من الإجابة",
+    "bn": "উত্তর যাচাই করুন",
+    "en": "Check Answer",
+    "es": "Comprobar respuesta",
+    "fr": "Vérifier la réponse",
+    "hi": "उत्तर जाँचें",
+    "id": "Periksa jawaban",
+    "pt": "Verificar resposta",
+    "ur": "جواب جانچیں",
+    "zh-Hans": "检查答案"
   },
   "Concordancia": {
     "ar": "فهرس ألفاظ",
@@ -4427,6 +4463,18 @@
     "ur": "دعا میں ترمیم کریں",
     "zh-Hans": "编辑祷告"
   },
+  "Editar pasaje": {
+    "ar": "تحرير المقطع",
+    "bn": "অংশ সম্পাদনা করুন",
+    "en": "Edit Passage",
+    "es": "Editar pasaje",
+    "fr": "Modifier le passage",
+    "hi": "अंश संपादित करें",
+    "id": "Ubah bagian",
+    "pt": "Editar passagem",
+    "ur": "مقطع میں ترمیم کریں",
+    "zh-Hans": "编辑经文"
+  },
   "Editorial": {
     "ar": "الناشر",
     "bn": "প্রকাশক",
@@ -4510,6 +4558,18 @@
     "pt": "O caderno de origem ou destino não está disponível.",
     "ur": "ماخذ یا منزل کی نوٹ بک دستیاب نہیں ہے۔",
     "zh-Hans": "源笔记本或目标笔记本不可用。"
+  },
+  "El ejercicio de memorización contiene datos incompatibles.": {
+    "ar": "يحتوي تمرين الحفظ على بيانات غير متوافقة.",
+    "bn": "মুখস্থ অনুশীলনে অসংগত তথ্য আছে।",
+    "en": "The memory exercise contains incompatible data.",
+    "es": "El ejercicio de memorización contiene datos incompatibles.",
+    "fr": "L’exercice de mémorisation contient des données incompatibles.",
+    "hi": "स्मरण अभ्यास में असंगत डेटा है।",
+    "id": "Latihan hafalan berisi data yang tidak kompatibel.",
+    "pt": "O exercício de memorização contém dados incompatíveis.",
+    "ur": "یاد کرنے کی مشق میں غیر مطابقت پذیر ڈیٹا ہے۔",
+    "zh-Hans": "记忆练习包含不兼容的数据。"
   },
   "El filtro de cuaderno incluye notas; el de color incluye resaltados. El texto se busca sin distinguir mayúsculas ni acentos.": {
     "ar": "يتضمن مرشح الدفتر الملاحظات ومرشح اللون التمييزات. يتجاهل البحث حالة الأحرف والعلامات.",
@@ -5147,6 +5207,18 @@
     "ur": "دعا حذف کریں",
     "zh-Hans": "删除祷告"
   },
+  "Eliminar pasaje": {
+    "ar": "حذف المقطع",
+    "bn": "অংশ মুছুন",
+    "en": "Delete Passage",
+    "es": "Eliminar pasaje",
+    "fr": "Supprimer le passage",
+    "hi": "अंश हटाएँ",
+    "id": "Hapus bagian",
+    "pt": "Excluir passagem",
+    "ur": "مقطع حذف کریں",
+    "zh-Hans": "删除经文"
+  },
   "Eliminar plan…": {
     "ar": "حذف الخطة…",
     "bn": "পরিকল্পনা মুছুন…",
@@ -5326,6 +5398,18 @@
     "pt": "É igual a",
     "ur": "برابر ہے",
     "zh-Hans": "等于"
+  },
+  "Escribe el pasaje de memoria.": {
+    "ar": "اكتب المقطع من الذاكرة.",
+    "bn": "মনে করে অংশটি লিখুন।",
+    "en": "Write the passage from memory.",
+    "es": "Escribe el pasaje de memoria.",
+    "fr": "Écrivez le passage de mémoire.",
+    "hi": "अंश को याद से लिखें।",
+    "id": "Tulis bagian dari ingatan.",
+    "pt": "Escreva a passagem de memória.",
+    "ur": "مقطع یاد سے لکھیں۔",
+    "zh-Hans": "凭记忆写出经文。"
   },
   "Escribe entre uno y veinte rangos, uno por línea, sin duplicados.": {
     "ar": "أدخل من نطاق واحد إلى عشرين نطاقًا، واحدًا في كل سطر، دون تكرار.",
@@ -5938,6 +6022,18 @@
     "pt": "Fonte",
     "ur": "فونٹ",
     "zh-Hans": "字体"
+  },
+  "Fuente o versión": {
+    "ar": "المصدر أو النسخة",
+    "bn": "উৎস বা সংস্করণ",
+    "en": "Source or Version",
+    "es": "Fuente o versión",
+    "fr": "Source ou version",
+    "hi": "स्रोत या संस्करण",
+    "id": "Sumber atau versi",
+    "pt": "Fonte ou versão",
+    "ur": "ماخذ یا نسخہ",
+    "zh-Hans": "来源或版本"
   },
   "Fuentes del sistema y consulta de diccionarios al seleccionar una palabra.": {
     "ar": "خطوط النظام والبحث في القواميس عن الكلمات المحددة.",
@@ -6743,6 +6839,18 @@
     "ur": "انسٹال کریں اور دوبارہ شروع کریں",
     "zh-Hans": "安装并重新启动"
   },
+  "Intentos: {attempts} · Correctos: {correct}": {
+    "ar": "المحاولات: {attempts} · الصحيح: {correct}",
+    "bn": "প্রচেষ্টা: {attempts} · সঠিক: {correct}",
+    "en": "Attempts: {attempts} · Correct: {correct}",
+    "es": "Intentos: {attempts} · Correctos: {correct}",
+    "fr": "Essais : {attempts} · Corrects : {correct}",
+    "hi": "प्रयास: {attempts} · सही: {correct}",
+    "id": "Percobaan: {attempts} · Benar: {correct}",
+    "pt": "Tentativas: {attempts} · Corretas: {correct}",
+    "ur": "کوششیں: {attempts} · درست: {correct}",
+    "zh-Hans": "尝试：{attempts} · 正确：{correct}"
+  },
   "Interpretación bíblica": {
     "ar": "تفسير الكتاب المقدس",
     "bn": "বাইবেলের ব্যাখ্যা",
@@ -7342,6 +7450,18 @@
     "pt": "A referência exige a edição {edition}. Abra essa edição para seguir este link.",
     "ur": "حوالے کے لیے نسخہ {edition} درکار ہے۔ ربط پر جانے کے لیے وہ نسخہ کھولیں۔",
     "zh-Hans": "此经文需要版本 {edition}。请打开该版本以跟随链接。"
+  },
+  "La respuesta o fecha del ejercicio no es válida.": {
+    "ar": "إجابة التمرين أو تاريخه غير صالح.",
+    "bn": "অনুশীলনের উত্তর বা তারিখ অবৈধ।",
+    "en": "The exercise answer or date is invalid.",
+    "es": "La respuesta o fecha del ejercicio no es válida.",
+    "fr": "La réponse ou la date de l’exercice est invalide.",
+    "hi": "अभ्यास का उत्तर या तिथि अमान्य है।",
+    "id": "Jawaban atau tanggal latihan tidak valid.",
+    "pt": "A resposta ou data do exercício é inválida.",
+    "ur": "مشق کا جواب یا تاریخ درست نہیں۔",
+    "zh-Hans": "练习答案或日期无效。"
   },
   "Las asociaciones conservan su orden y los recursos ausentes. Los grupos de Biblias se administran por separado.": {
     "ar": "تحتفظ الارتباطات بترتيبها والموارد المفقودة. تُدار مجموعات الكتاب المقدس بشكل منفصل.",
@@ -8099,6 +8219,30 @@
     "ur": "تفاسیر، ہم وقت سازی اور بائبل کے نسخوں کے درمیان نقل و حرکت میں بہتری۔",
     "zh-Hans": "改进注释、同步和圣经版本间的导航。"
   },
+  "Memorización de pasajes": {
+    "ar": "حفظ المقاطع",
+    "bn": "ধর্মগ্রন্থ মুখস্থ",
+    "en": "Scripture Memory",
+    "es": "Memorización de pasajes",
+    "fr": "Mémorisation de passages",
+    "hi": "शास्त्र स्मरण",
+    "id": "Hafalan ayat",
+    "pt": "Memorização de passagens",
+    "ur": "صحیفے یاد کرنا",
+    "zh-Hans": "经文记忆"
+  },
+  "Memorización de pasajes…": {
+    "ar": "حفظ المقاطع…",
+    "bn": "ধর্মগ্রন্থ মুখস্থ…",
+    "en": "Scripture Memory…",
+    "es": "Memorización de pasajes…",
+    "fr": "Mémorisation de passages…",
+    "hi": "शास्त्र स्मरण…",
+    "id": "Hafalan ayat…",
+    "pt": "Memorização de passagens…",
+    "ur": "صحیفے یاد کرنا…",
+    "zh-Hans": "经文记忆…"
+  },
   "Mensual": {
     "ar": "شهريًا",
     "bn": "মাসিক",
@@ -8651,6 +8795,18 @@
     "ur": "اس منظر میں کوئی دعا نہیں ہے۔",
     "zh-Hans": "此视图中没有祷告。"
   },
+  "No hay pasajes para practicar.": {
+    "ar": "لا توجد مقاطع للتدرب عليها.",
+    "bn": "অনুশীলনের জন্য কোনো অংশ নেই।",
+    "en": "No passages to practice.",
+    "es": "No hay pasajes para practicar.",
+    "fr": "Aucun passage à pratiquer.",
+    "hi": "अभ्यास के लिए कोई अंश नहीं।",
+    "id": "Tidak ada bagian untuk latihan.",
+    "pt": "Nenhuma passagem para praticar.",
+    "ur": "مشق کے لیے کوئی مقطع نہیں۔",
+    "zh-Hans": "没有可练习的经文。"
+  },
   "No hay recursos compatibles para agregar.": {
     "ar": "لا توجد موارد متوافقة لإضافتها.",
     "bn": "যোগ করার মতো সামঞ্জস্যপূর্ণ রিসোর্স নেই।",
@@ -8854,6 +9010,18 @@
     "pt": "Não foi possível abrir as pesquisas salvas.",
     "ur": "محفوظ تلاشیں نہیں کھولی جا سکیں۔",
     "zh-Hans": "无法打开已保存的搜索。"
+  },
+  "No se pudieron abrir los ejercicios de memorización.": {
+    "ar": "تعذر فتح تمارين الحفظ.",
+    "bn": "মুখস্থ অনুশীলন খোলা যায়নি।",
+    "en": "Could not open memory exercises.",
+    "es": "No se pudieron abrir los ejercicios de memorización.",
+    "fr": "Impossible d’ouvrir les exercices de mémorisation.",
+    "hi": "स्मरण अभ्यास नहीं खोले जा सके।",
+    "id": "Latihan hafalan tidak dapat dibuka.",
+    "pt": "Não foi possível abrir os exercícios de memorização.",
+    "ur": "یاد کرنے کی مشقیں نہیں کھل سکیں۔",
+    "zh-Hans": "无法打开记忆练习。"
   },
   "No se pudieron abrir los planes de lectura.": {
     "ar": "تعذر فتح خطط القراءة.",
@@ -10091,6 +10259,18 @@
     "ur": "مقام {number}",
     "zh-Hans": "位置 {number}"
   },
+  "Practicar": {
+    "ar": "تدرّب",
+    "bn": "অনুশীলন",
+    "en": "Practice",
+    "es": "Practicar",
+    "fr": "Pratiquer",
+    "hi": "अभ्यास",
+    "id": "Latihan",
+    "pt": "Praticar",
+    "ur": "مشق کریں",
+    "zh-Hans": "练习"
+  },
   "Predeterminada (Times New Roman)": {
     "ar": "الافتراضي (Times New Roman)",
     "bn": "ডিফল্ট (Times New Roman)",
@@ -10991,6 +11171,30 @@
     "ur": "قبول شدہ",
     "zh-Hans": "已回应"
   },
+  "Respuesta correcta": {
+    "ar": "إجابة صحيحة",
+    "bn": "সঠিক উত্তর",
+    "en": "Correct Answer",
+    "es": "Respuesta correcta",
+    "fr": "Réponse correcte",
+    "hi": "सही उत्तर",
+    "id": "Jawaban benar",
+    "pt": "Resposta correta",
+    "ur": "درست جواب",
+    "zh-Hans": "回答正确"
+  },
+  "Respuesta diferente": {
+    "ar": "الإجابة مختلفة",
+    "bn": "উত্তর ভিন্ন",
+    "en": "Answer Differs",
+    "es": "Respuesta diferente",
+    "fr": "Réponse différente",
+    "hi": "उत्तर अलग है",
+    "id": "Jawaban berbeda",
+    "pt": "Resposta diferente",
+    "ur": "جواب مختلف ہے",
+    "zh-Hans": "答案不一致"
+  },
   "Restablecer": {
     "ar": "إعادة تعيين",
     "bn": "রিসেট করুন",
@@ -11363,6 +11567,18 @@
     "ur": "یہ دعا حذف کر دی جائے گی۔",
     "zh-Hans": "将删除此祷告。"
   },
+  "Se eliminará este ejercicio y su progreso.": {
+    "ar": "سيُحذف هذا التمرين وتقدمه.",
+    "bn": "এই অনুশীলন ও অগ্রগতি মুছে যাবে।",
+    "en": "This exercise and its progress will be deleted.",
+    "es": "Se eliminará este ejercicio y su progreso.",
+    "fr": "Cet exercice et sa progression seront supprimés.",
+    "hi": "यह अभ्यास और इसकी प्रगति मिटाई जाएगी।",
+    "id": "Latihan ini dan kemajuannya akan dihapus.",
+    "pt": "Este exercício e seu progresso serão excluídos.",
+    "ur": "یہ مشق اور اس کی پیش رفت حذف ہو جائے گی۔",
+    "zh-Hans": "将删除此练习及其进度。"
+  },
   "Se eliminarán esta lectura y su progreso.": {
     "ar": "ستُحذف هذه القراءة وتقدمها.",
     "bn": "এই পাঠ ও তার অগ্রগতি মুছে যাবে।",
@@ -11374,6 +11590,18 @@
     "pt": "Esta leitura e seu progresso serão excluídos.",
     "ur": "یہ مطالعہ اور اس کی پیش رفت حذف ہو جائے گی۔",
     "zh-Hans": "此阅读及其进度将被删除。"
+  },
+  "Se ignoran mayúsculas y espacios; los acentos y la puntuación cuentan.": {
+    "ar": "تُتجاهل حالة الأحرف والمسافات؛ وتُحسب اللكنات وعلامات الترقيم.",
+    "bn": "বড় হাতের অক্ষর ও ফাঁকা স্থান উপেক্ষিত; উচ্চারণচিহ্ন ও বিরামচিহ্ন গণ্য।",
+    "en": "Case and whitespace are ignored; accents and punctuation count.",
+    "es": "Se ignoran mayúsculas y espacios; los acentos y la puntuación cuentan.",
+    "fr": "La casse et les espaces sont ignorés ; les accents et la ponctuation comptent.",
+    "hi": "बड़े अक्षर और रिक्त स्थान अनदेखे हैं; उच्चारण और विराम चिह्न गिने जाते हैं।",
+    "id": "Huruf besar dan spasi diabaikan; aksen dan tanda baca diperhitungkan.",
+    "pt": "Maiúsculas e espaços são ignorados; acentos e pontuação contam.",
+    "ur": "بڑے حروف اور خالی جگہیں نظر انداز؛ اعراب اور رموز شمار ہوتے ہیں۔",
+    "zh-Hans": "忽略大小写和空格；重音和标点需匹配。"
   },
   "Se muestran las primeras {count} entradas; quedan resultados o recursos por consultar.": {
     "ar": "تُعرض أول {count} مدخلات؛ توجد نتائج أو موارد أخرى لم تُفحص.",
@@ -12310,6 +12538,18 @@
     "pt": "Texto dos recursos",
     "ur": "وسائل کا متن",
     "zh-Hans": "资源文本"
+  },
+  "Texto del pasaje": {
+    "ar": "نص المقطع",
+    "bn": "অংশের পাঠ্য",
+    "en": "Passage Text",
+    "es": "Texto del pasaje",
+    "fr": "Texte du passage",
+    "hi": "अंश का पाठ",
+    "id": "Teks bagian",
+    "pt": "Texto da passagem",
+    "ur": "مقطع کا متن",
+    "zh-Hans": "经文文本"
   },
   "Texto en notas o resaltados": {
     "ar": "نص في الملاحظات أو التمييزات",

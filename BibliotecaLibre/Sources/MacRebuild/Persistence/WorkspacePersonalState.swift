@@ -86,6 +86,16 @@ struct WorkspacePersonalSnapshot: Codable {
         guard next != scriptureMemory else { return }
         try scriptureMemoryFile.save(next); scriptureMemory = next
     }
+    func saveScriptureMemoryCard(original: ScriptureMemoryCard?, replacement: ScriptureMemoryCard) throws {
+        try editScriptureMemory { state in
+            if let original {
+                guard original.id == replacement.id,
+                      let index = state.cards.firstIndex(where: { $0.id == original.id }), state.cards[index] == original
+                else { throw PersonalStateError.concurrentChange }
+                state.cards[index] = replacement
+            } else { state.cards.append(replacement) }
+        }
+    }
     func editPrayerJournal(_ edit: (inout PrayerJournal) throws -> Void) throws {
         guard prayerJournalWritable else { throw PersonalStateError.invalid(prayerJournalLoadError ?? "No se pudo abrir la lista de oración.") }
         var next = prayerJournal
