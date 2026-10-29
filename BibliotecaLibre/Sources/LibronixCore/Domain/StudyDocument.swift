@@ -233,6 +233,21 @@ public enum NoteHTMLProjection {
                 italic: stack.contains(where: \.italic), underline: stack.contains(where: \.underline), strikeout: stack.contains(where: \.strikeout), superscript: stack.last(where: { $0.superscript || $0.subscriptText })?.superscript == true, subscriptText: stack.last(where: { $0.superscript || $0.subscriptText })?.subscriptText == true, foregroundRGB: stack.last(where: { $0.foregroundRGB != nil })?.foregroundRGB, reference: stack.last(where: { $0.reference != nil })?.reference,
                 hyperlink: stack.last(where: { $0.hyperlink != nil })?.hyperlink))
         }
+        func pushStyle(_ tag: String, _ raw: String) {
+            let attrs = attributes(raw)
+            let declarations = (attrs["style"] ?? "").split(separator: ";").reduce(into: [String: String]()) { result, declaration in
+                let parts = declaration.split(separator: ":", maxSplits: 1).map { $0.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() }
+                if parts.count == 2 { result[parts[0]] = parts[1] }
+            }
+            let weight = declarations["font-weight"] ?? "", decoration = declarations["text-decoration"] ?? ""
+            let color = declarations["color"] ?? attrs["color"] ?? ""
+            let hex = color.hasPrefix("#") ? String(color.dropFirst()) : ""
+            let rgb: UInt32? = hex.count == 6 ? UInt32(hex, radix: 16) : nil
+            stack.append(Style(tag: tag, bold: ["b", "strong"].contains(tag) || weight == "bold" || (Int(weight) ?? 0) >= 600,
+                italic: ["i", "em"].contains(tag) || declarations["font-style"] == "italic",
+                underline: tag == "u" || decoration.contains("underline"), strikeout: ["s", "strike", "del"].contains(tag) || decoration.contains("line-through"),
+                superscript: tag == "sup", subscriptText: tag == "sub", foregroundRGB: rgb, reference: attrs["lbxrt:xref"], hyperlink: tag == "a" ? attrs["href"] : nil))
+        }
         while cursor < html.endIndex {
             guard html[cursor] == "<" else {
                 let end = html[cursor...].firstIndex(of: "<") ?? html.endIndex
@@ -273,20 +288,10 @@ public enum NoteHTMLProjection {
                     append(String(repeating: "  ", count: lists.count - 1) + (list.tag == "ol" ? "\(list.next). " : "• "))
                     lists[lists.count - 1].next += 1
                 }
+                if stack.count < 128 { pushStyle(tag, raw) }
             } else if !["img", "link", "meta", "hr"].contains(tag), stack.count < 128 {
-                let attrs = attributes(raw)
-                let declarations = (attrs["style"] ?? "").split(separator: ";").reduce(into: [String: String]()) { result, declaration in
-                    let parts = declaration.split(separator: ":", maxSplits: 1).map { $0.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() }
-                    if parts.count == 2 { result[parts[0]] = parts[1] }
-                }
-                let weight = declarations["font-weight"] ?? "", decoration = declarations["text-decoration"] ?? ""
-                let color = declarations["color"] ?? attrs["color"] ?? ""
-                let hex = color.hasPrefix("#") ? String(color.dropFirst()) : ""
-                let rgb: UInt32? = hex.count == 6 ? UInt32(hex, radix: 16) : nil
-                stack.append(Style(tag: tag, bold: ["b", "strong"].contains(tag) || weight == "bold" || (Int(weight) ?? 0) >= 600,
-                    italic: ["i", "em"].contains(tag) || declarations["font-style"] == "italic",
-                    underline: tag == "u" || decoration.contains("underline"), strikeout: ["s", "strike", "del"].contains(tag) || decoration.contains("line-through"),
-                    superscript: tag == "sup", subscriptText: tag == "sub", foregroundRGB: rgb, reference: attrs["lbxrt:xref"], hyperlink: tag == "a" ? attrs["href"] : nil))
+                pushStyle(tag, raw)
+
             }
         }
         return result

@@ -113,6 +113,9 @@ import Testing
         let spans = NoteHTMLProjection.spans("<span style=\"font-weight:700;font-style:italic;text-decoration:underline line-through;color:#c01020\">Owned</span>")
         #expect(spans.count == 1 && spans[0].text == "Owned")
         #expect(spans[0].bold && spans[0].italic && spans[0].underline && spans[0].strikeout && spans[0].foregroundRGB == 0xc01020)
+        let paragraph = NoteHTMLProjection.spans("<p style=\"color:#123456\"><b>Styled</b> text</p>")
+        #expect(paragraph.first?.bold == true && paragraph.first?.foregroundRGB == 0x123456)
+        #expect(paragraph.contains { $0.text == " text" && !$0.bold && $0.foregroundRGB == 0x123456 })
     }
 
 }

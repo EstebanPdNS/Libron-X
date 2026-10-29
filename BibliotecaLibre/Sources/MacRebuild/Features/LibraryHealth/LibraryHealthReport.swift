@@ -19,6 +19,8 @@ struct LibraryHealthReport: Equatable, Sendable {
                         exists: (URL) -> Bool = { FileManager.default.fileExists(atPath: $0.path) }) -> Self {
         let limit = 5000
         var issues: [LibraryHealthIssue] = [], omitted = 0
+        let indexDeadline = Date().addingTimeInterval(8)
+        var reportedIndexTimeout = false
         func add(_ issue: LibraryHealthIssue) {
             if issues.count < limit { issues.append(issue) } else { omitted += 1 }
         }
@@ -28,12 +30,18 @@ struct LibraryHealthReport: Equatable, Sendable {
             for path in paths.sorted(by: { $0.path < $1.path }) where !exists(path) {
                 add(.init(id: "missing:\(resourceIndex):" + resource.id + ":" + path.path, kind: .missingResource, title: resource.title, detail: path.path))
             }
-            switch LibrarySearchIndexHealth.inspect(resource: resource, directory: indexDirectory) {
-            case .damaged:
-                add(.init(id: "index:\(resourceIndex):" + resource.id, kind: .damagedIndex, title: resource.title, detail: ""))
-            case .unavailable:
-                add(.init(id: "index:\(resourceIndex):" + resource.id, kind: .indexUnavailable, title: resource.title, detail: ""))
-            case .absent, .healthy: break
+            let remaining = indexDeadline.timeIntervalSinceNow
+            if remaining > 0 {
+                switch LibrarySearchIndexHealth.inspect(resource: resource, directory: indexDirectory, seconds: min(1, remaining)) {
+                case .damaged:
+                    add(.init(id: "index:\(resourceIndex):" + resource.id, kind: .damagedIndex, title: resource.title, detail: ""))
+                case .unavailable:
+                    add(.init(id: "index:\(resourceIndex):" + resource.id, kind: .indexUnavailable, title: resource.title, detail: ""))
+                case .absent, .healthy: break
+                }
+            } else if !reportedIndexTimeout {
+                reportedIndexTimeout = true
+                add(.init(id: "index-budget", kind: .indexUnavailable, title: resource.title, detail: ""))
             }
             if resource.support == .invalidFile {
                 add(.init(id: "invalid:\(resourceIndex):" + resource.id, kind: .invalidResource, title: resource.title, detail: resource.format.displayName))

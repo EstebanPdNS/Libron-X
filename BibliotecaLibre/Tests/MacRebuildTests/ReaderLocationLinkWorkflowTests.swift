@@ -30,4 +30,31 @@ import Testing
         #expect(workspace.error != nil)
         workspace.shutdown()
     }
+    @Test func webLocationUsesOnlyAReadyVerifiedProjection() async throws {
+        _ = NSApplication.shared
+        let fixture = try AuthoredOEBFixture(); defer { fixture.remove() }
+        let personal = WorkspacePersonalState(url: fixture.root.appendingPathComponent("personal.json"))
+        let workspace = StudyWorkspace(personal: personal); workspace.resources = [fixture.resource]
+        let reader = workspace.open(fixture.resource, startReading: false)
+        reader.load(.init(ordinal: 0)); try await settle(reader)
+        let page = try #require(reader.page?.oeb)
+        #expect(workspace.currentBookmarkLocation == nil)
+        let projection = try await ReaderOEBTextSource.shared.read(book: page.book, path: "Cover.html", viewport: .init())
+        try reader.acceptOEBProjection(projection.text, at: page.url)
+        reader.selectedRange = NSRange(location: 2, length: 0)
+        let location = try #require(workspace.currentBookmarkLocation)
+        #expect(location.resourceID == fixture.resource.id && location.textFingerprint == projection.fingerprint && location.characterOffset == 2)
+        workspace.openReaderLocationLink(try ReaderLocationLink.make(location))
+        let target = try #require(workspace.activeReader); try await settle(target)
+        let destination = try #require(target.page?.oeb)
+        try target.acceptOEBProjection(projection.text, at: destination.url)
+        #expect(target.selectedRange == NSRange(location: 2, length: 0))
+        target.load(.init(ordinal: 0), selection: NSRange(location: 2, length: 0), expectedFingerprint: projection.fingerprint)
+        try await settle(target)
+        let changedPage = try #require(target.page?.oeb)
+        try Data("changed".utf8).write(to: fixture.resource.location)
+        #expect(throws: LibronixBookError.sourceChanged) { try target.acceptOEBProjection(projection.text, at: changedPage.url) }
+        workspace.shutdown()
+    }
+
 }

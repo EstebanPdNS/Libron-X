@@ -192,9 +192,11 @@ struct ReaderHighlight: Identifiable, Codable, Equatable, Sendable {
         activeTool = nil
     }
     /// Bookmarks are bound to the exact edition and visible UTF-16 position.
-    /// Web-backed pages are excluded until their rendered projection is stable.
+    /// Web-backed positions are available only after their visible DOM has
+    /// produced the same stable text projection used by navigation.
     var currentBookmarkLocation: ReaderLocation? {
-        guard let reader = activeReader, !reader.isLoading, let page = reader.page, page.oeb == nil else { return nil }
+        guard let reader = activeReader, !reader.isLoading, let page = reader.page,
+              page.oeb == nil || reader.oebProjectionReady else { return nil }
         let offset = reader.viewportCharacterOffset ?? reader.selectedRange.location
         guard offset >= 0, Range(NSRange(location: offset, length: 0), in: page.text) != nil else { return nil }
         return ReaderLocation(resourceID: reader.resource.id, legacyIdentifier: reader.resource.legacyIdentifier,
