@@ -298,9 +298,10 @@ public enum NoteHTMLProjection {
         }
         return result
     }
+    private static let attributeRegex = try? NSRegularExpression(pattern: #"([\w:-]+)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))"#)
+    private static let entityRegex = try? NSRegularExpression(pattern: #"&(?:amp|lt|gt|quot|apos|nbsp|#\d+|#x[0-9a-fA-F]+);"#)
     private static func attributes(_ token: String) -> [String: String] {
-        let pattern = #"([\w:-]+)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))"#
-        guard let regex = try? NSRegularExpression(pattern: pattern) else { return [:] }
+        guard token.contains("="), let regex = attributeRegex else { return [:] }
         let text = token as NSString; var result: [String: String] = [:]
         for match in regex.matches(in: token, range: NSRange(location: 0, length: text.length)) {
             let key = text.substring(with: match.range(at: 1)).lowercased()
@@ -310,7 +311,7 @@ public enum NoteHTMLProjection {
         return result
     }
     private static func decodeEntities(_ text: String) -> String {
-        guard let regex = try? NSRegularExpression(pattern: #"&(?:amp|lt|gt|quot|apos|nbsp|#\d+|#x[0-9a-fA-F]+);"#) else { return text }
+        guard text.contains("&"), let regex = entityRegex else { return text }
         let original = text as NSString, result = NSMutableString(string: text)
         for match in regex.matches(in: text, range: NSRange(location: 0, length: original.length)).reversed() {
             let raw = original.substring(with: match.range), code = String(raw.dropFirst().dropLast())
