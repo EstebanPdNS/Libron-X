@@ -62,6 +62,20 @@ struct LibraryHealthReport: Equatable, Sendable {
                     if receipt?.state != "complete" || receipt?.resourceID != resource.id || receipt?.sourceSHA256 != manifest?.payload.sha256 ||
                         (receipt?.sections ?? 0) <= 0 || receipt?.checkedSections != receipt?.sections || !exists(databaseURL) {
                         add(.init(id: "conversion:\(resourceIndex):" + resource.id, kind: .conversionIssue, title: resource.title, detail: receiptURL.path))
+                    } else {
+                        let remaining = indexDeadline.timeIntervalSinceNow
+                        if remaining > 0 {
+                            switch LibrarySearchIndexHealth.inspectNormalized(at: databaseURL, seconds: min(1, remaining)) {
+                            case .damaged, .absent:
+                                add(.init(id: "conversion:\(resourceIndex):" + resource.id, kind: .conversionIssue, title: resource.title, detail: databaseURL.path))
+                            case .unavailable:
+                                add(.init(id: "conversion-check:\(resourceIndex):" + resource.id, kind: .indexUnavailable, title: resource.title, detail: databaseURL.path))
+                            case .healthy: break
+                            }
+                        } else if !reportedIndexTimeout {
+                            reportedIndexTimeout = true
+                            add(.init(id: "index-budget", kind: .indexUnavailable, title: resource.title, detail: ""))
+                        }
                     }
                 } else if exists(databaseURL) {
                     add(.init(id: "conversion:\(resourceIndex):" + resource.id, kind: .conversionIssue, title: resource.title, detail: receiptURL.path))

@@ -12,6 +12,14 @@ public enum LibrarySearchIndexHealth: Sendable, Equatable {
         let cacheRoot = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first ?? FileManager.default.temporaryDirectory
         let directory = directory ?? cacheRoot.appendingPathComponent("org.libronx.mac.rebuild/search-v2", isDirectory: true)
         let url = directory.appendingPathComponent(PersistentLibrarySearchProvider.filename(for: resource))
+        return inspectDatabase(url, version: "2", tables: "'identity','articles','terms'", seconds: seconds)
+    }
+
+    public static func inspectNormalized(at url: URL, seconds: TimeInterval = 1) -> Self {
+        inspectDatabase(url, version: "1", tables: "'values_v1','bible_v1','words_v1'", seconds: seconds)
+    }
+
+    private static func inspectDatabase(_ url: URL, version expectedVersion: String, tables: String, seconds: TimeInterval) -> Self {
         guard FileManager.default.fileExists(atPath: url.path) else { return .absent }
         #if canImport(CSQLite)
         guard let values = try? url.resourceValues(forKeys: [.isRegularFileKey, .isSymbolicLinkKey]),
@@ -43,8 +51,9 @@ public enum LibrarySearchIndexHealth: Sendable, Equatable {
             if [SQLITE_BUSY, SQLITE_LOCKED, SQLITE_INTERRUPT].contains(status) || Task.isCancelled { return .unavailable }
             guard status == SQLITE_ROW, result == "ok" else { return .damaged }
             let (versionStatus, version) = scalar("PRAGMA user_version")
-            guard versionStatus == SQLITE_ROW, version == "2" else { return .damaged }
-            let (schemaStatus, count) = scalar("SELECT count(*) FROM sqlite_master WHERE type='table' AND name IN ('identity','articles','terms')")
+            if [SQLITE_BUSY, SQLITE_LOCKED, SQLITE_INTERRUPT].contains(versionStatus) { return .unavailable }
+            guard versionStatus == SQLITE_ROW, version == expectedVersion else { return .damaged }
+            let (schemaStatus, count) = scalar("SELECT count(*) FROM sqlite_master WHERE type='table' AND name IN (\(tables))")
             if [SQLITE_BUSY, SQLITE_LOCKED, SQLITE_INTERRUPT].contains(schemaStatus) { return .unavailable }
             return schemaStatus == SQLITE_ROW && count == "3" ? .healthy : .damaged
         }

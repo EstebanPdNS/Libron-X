@@ -73,6 +73,21 @@ struct LibraryHealthTests {
         #expect(report.issues.contains { $0.kind == .damagedIndex })
     }
 
+    @Test func checksTheConvertedDatabaseSchemaAndIntegrity() throws {
+        let folder = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: folder) }
+        let url = folder.appendingPathComponent("reader.sqlite")
+        #expect(LibrarySearchIndexHealth.inspectNormalized(at: url) == .absent)
+        var db: OpaquePointer?
+        #expect(sqlite3_open(url.path, &db) == SQLITE_OK)
+        #expect(sqlite3_exec(db, "PRAGMA user_version=1;CREATE TABLE values_v1(key);CREATE TABLE bible_v1(book);CREATE TABLE words_v1(key);", nil, nil, nil) == SQLITE_OK)
+        sqlite3_close(db)
+        #expect(LibrarySearchIndexHealth.inspectNormalized(at: url) == .healthy)
+        try Data("corrupt".utf8).write(to: url)
+        #expect(LibrarySearchIndexHealth.inspectNormalized(at: url) == .damaged)
+    }
+
     @Test func reportsMissingVerseListDestinations() {
         let missing = ReaderLocation(resourceID: "missing-edition", format: .legacyLSF, sectionOrdinal: 0)
         var document = StudyDocument(title: "Owned list", kind: .verseList)
