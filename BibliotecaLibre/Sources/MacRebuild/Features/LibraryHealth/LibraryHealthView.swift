@@ -16,6 +16,12 @@ struct LibraryHealthView: View {
             Text(L("Comprueba archivos, avisos y anotaciones; no verifica todas las conversiones ni los índices."))
                 .font(.caption).foregroundStyle(.secondary)
             if let report {
+                if report.issues.isEmpty {
+                    VStack(spacing: 8) {
+                        Image(systemName: "checkmark.circle").font(.largeTitle)
+                        Text(L("No se encontraron problemas en estas comprobaciones."))
+                    }.foregroundStyle(.secondary).frame(maxWidth: .infinity).padding(.vertical, 28)
+                } else {
                 List(report.issues) { issue in
                     VStack(alignment: .leading, spacing: 4) {
                         Label(L(title(issue.kind)), systemImage: "exclamationmark.triangle")
@@ -23,12 +29,13 @@ struct LibraryHealthView: View {
                         Text(issue.title).font(.headline).textSelection(.enabled)
                         if !issue.detail.isEmpty { Text(issue.detail).font(.caption).foregroundStyle(.secondary).textSelection(.enabled) }
                     }.padding(.vertical, 4)
-                }.overlay { if report.issues.isEmpty { Text(L("No se encontraron problemas en estas comprobaciones.")).foregroundStyle(.secondary).allowsHitTesting(false) } }
+                }.frame(minHeight: 240, idealHeight: 340, maxHeight: 400)
+                }
                 if report.omittedIssueCount > 0 {
                     Text(LF("Se omitieron {count} problemas adicionales.", ["count": String(report.omittedIssueCount)]))
                         .font(.caption).foregroundStyle(.secondary)
                 }
-            } else { Spacer() }
+            } else { ProgressView().frame(maxWidth: .infinity).padding(.vertical, 28) }
         }.padding(16).onAppear(perform: refresh).onDisappear { task?.cancel() }
     }
     private func title(_ kind: LibraryHealthIssue.Kind) -> String {

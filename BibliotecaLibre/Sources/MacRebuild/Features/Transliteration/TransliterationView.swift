@@ -25,15 +25,13 @@ struct TransliterationView: View {
             }
             Text(L("Texto original"))
             TextEditor(text: $input).scrollContentBackground(.hidden).padding(8)
-                .background(Color(nsColor: .textBackgroundColor), in: RoundedRectangle(cornerRadius: 12))
-                .overlay(RoundedRectangle(cornerRadius: 12).strokeBorder(Color(nsColor: .separatorColor).opacity(0.6)))
+                .macEditorSurface()
                 .accessibilityLabel(L("Texto original"))
             Text(L("Transliteración"))
             ScrollView {
                 Text(output ?? L("El texto supera el límite permitido."))
                     .frame(maxWidth: .infinity, alignment: .leading).textSelection(.enabled).padding(12)
-            }.background(Color(nsColor: .textBackgroundColor), in: RoundedRectangle(cornerRadius: 12))
-                .overlay(RoundedRectangle(cornerRadius: 12).strokeBorder(Color(nsColor: .separatorColor).opacity(0.6)))
+            }.macEditorSurface()
             Text(L("La conversión es una aproximación; el texto original se conserva sin cambios."))
                 .font(.caption).foregroundStyle(.secondary)
             HStack { Spacer(); Button(L("Copiar")) {

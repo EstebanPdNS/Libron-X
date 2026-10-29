@@ -70,7 +70,7 @@ struct BibleCopyToolView: View {
                     else { Text(result) }
                 }.textSelection(.enabled).frame(maxWidth: .infinity, alignment: .leading).padding(12)
             }
-                .background(Color(nsColor: .textBackgroundColor)).clipShape(RoundedRectangle(cornerRadius: 6))
+                .macEditorSurface()
             HStack { Spacer(); Button(L("Copiar")) {
                 guard let payload else { return }
                 do { try NativeBibleCopyOutput.copy(payload); error = nil }

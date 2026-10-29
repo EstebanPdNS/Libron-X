@@ -62,8 +62,7 @@ private struct SearchWordListsManager: View {
             TextField(L("Nombre de lista"), text: $name).macInputStyle()
             Text(L("Una palabra o frase por línea"))
             TextEditor(text: $terms).scrollContentBackground(.hidden).padding(8).frame(minHeight: 100, maxHeight: 140)
-                .background(Color(nsColor: .textBackgroundColor), in: RoundedRectangle(cornerRadius: 12))
-                .overlay(RoundedRectangle(cornerRadius: 12).strokeBorder(Color(nsColor: .separatorColor).opacity(0.6)))
+                .macEditorSurface()
             if let message = error ?? personal.searchWordListsLoadError { Text(L(message)).font(.caption).foregroundStyle(.red).textSelection(.enabled) }
             HStack {
                 Button(L("Añadir lista")) { save(add: true) }

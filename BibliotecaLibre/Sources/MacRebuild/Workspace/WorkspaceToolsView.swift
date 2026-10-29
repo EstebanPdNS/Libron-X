@@ -40,8 +40,8 @@ struct WorkspaceToolsView: View {
             case .passageComparison: PassageComparisonView(workspace: workspace, controller: workspace.passageComparison)
             }
         }.frame(minWidth: tool == .information ? 700 : 680, idealWidth: tool == .information ? 700 : 820,
-                minHeight: compactComparison || compactAnnotationSearch || compactReadingPlans || compactPassageGuide || tool == .information ? nil : tool == .bibliography ? 640 : tool == .search ? 680 : expandedScope ? 620 : 520,
-                idealHeight: compactComparison || compactAnnotationSearch || compactReadingPlans || compactPassageGuide || tool == .information ? nil : tool == .bibliography ? 820 : tool == .search ? 820 : expandedScope ? 720 : 620)
+                minHeight: compactComparison || compactAnnotationSearch || compactReadingPlans || compactPassageGuide || tool == .information || tool == .libraryHealth ? nil : tool == .bibliography ? 640 : tool == .search ? 680 : expandedScope ? 620 : 520,
+                idealHeight: compactComparison || compactAnnotationSearch || compactReadingPlans || compactPassageGuide || tool == .information || tool == .libraryHealth ? nil : tool == .bibliography ? 820 : tool == .search ? 820 : expandedScope ? 720 : 620)
             .modifier(MacPanelControlPresentation())
             .alert("Libron-X", isPresented: Binding(get: { tool == .favorites && workspace.error != nil }, set: { if !$0 { workspace.error = nil } })) {
                 Button(L("Aceptar")) { workspace.error = nil }

@@ -27,6 +27,19 @@ struct MacPanelControlPresentation: ViewModifier {
 
 extension View {
     func macInputStyle() -> some View { modifier(MacInputPresentation()) }
+    func macEditorSurface() -> some View { modifier(MacEditorSurface()) }
+}
+
+/// A shared, rounded surface for multiline editing and previews.
+private struct MacEditorSurface: ViewModifier {
+    @ViewBuilder func body(content: Content) -> some View {
+        if #available(macOS 26, *) {
+            content.glassEffect(.regular, in: RoundedRectangle(cornerRadius: 12))
+        } else {
+            content.background(Color(nsColor: .textBackgroundColor), in: RoundedRectangle(cornerRadius: 12))
+                .overlay(RoundedRectangle(cornerRadius: 12).strokeBorder(Color(nsColor: .separatorColor).opacity(0.6)))
+        }
+    }
 }
 
 struct MacToolbarSearchSurface: ViewModifier {
