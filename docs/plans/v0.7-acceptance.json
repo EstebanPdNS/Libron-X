@@ -808,13 +808,15 @@
       "baseline": "El lector general copia RTF/HTML; la herramienta de versículos solo escribe string.",
       "status": "in_progress",
       "implementation": [
-        "Connected the MacRebuild copy tool to the existing native output pipeline, generating plain text, RTF and HTML from the same formatted passage. Changing inputs clears the prepared payload before another copy can occur."
+        "Connected the MacRebuild copy tool to the existing native output pipeline, generating plain text, RTF and HTML from the same formatted passage. Changing inputs clears the prepared payload before another copy can occur.",
+        "The preview now uses the same attributed output, adapting normal black text to the interface appearance without modifying clipboard data."
       ],
       "verification": [
-        "BibleCopyOutputTests passed for plain text, HTML, RTF, footnote preservation, Unicode, formatting and failure before clipboard mutation. BibleCopyStylePersistenceTests and AppLanguageTests also passed."
+        "BibleCopyOutputTests passed for plain text, HTML, RTF, footnote preservation, Unicode, formatting and failure before clipboard mutation. BibleCopyStylePersistenceTests and AppLanguageTests also passed.",
+        "BibleCopyStylePersistenceTests verified preview text and colour preservation without modifying source attributes."
       ],
       "limitations": [
-        "The MacRebuild UI and a real paste into an independent application remain unverified; the native control timed out after an open panel was closed. The current preview displays plain text rather than the rich formatting."
+        "The MacRebuild rich preview and a real paste into an independent application remain unverified; the native control timed out after an open panel was closed."
       ]
     },
     {

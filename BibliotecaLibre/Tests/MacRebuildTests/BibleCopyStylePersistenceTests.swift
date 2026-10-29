@@ -1,4 +1,5 @@
 import Foundation
+import AppKit
 import LibronixCore
 import Testing
 @testable import MacRebuild
@@ -42,5 +43,16 @@ import Testing
         workspace.copyStyleCloseGuard = { false }; #expect(!workspace.canQuitWithCopyStyleDraft())
         workspace.copyStyleCloseGuard = { true }; #expect(workspace.canQuitWithCopyStyleDraft())
         workspace.shutdown()
+    }
+    @Test func previewRetainsTextWithoutChangingClipboardSourceAttributes() {
+        let original = NSMutableAttributedString(string: "Black and red")
+        original.addAttribute(.foregroundColor, value: NSColor.black, range: NSRange(location: 0, length: 6))
+        original.addAttribute(.foregroundColor, value: NSColor.red, range: NSRange(location: 10, length: 3))
+        let preview = BibleCopyPreview.text(original)
+        #expect(String(preview.characters) == original.string)
+        let rendered = NSAttributedString(preview)
+        #expect((rendered.attribute(.foregroundColor, at: 10, effectiveRange: nil) as? NSColor) == .red)
+        #expect((original.attribute(.foregroundColor, at: 0, effectiveRange: nil) as? NSColor) == .black)
+        #expect((original.attribute(.foregroundColor, at: 10, effectiveRange: nil) as? NSColor) == .red)
     }
 }

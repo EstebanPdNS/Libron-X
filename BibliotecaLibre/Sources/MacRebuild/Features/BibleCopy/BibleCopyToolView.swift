@@ -3,6 +3,17 @@ import SwiftUI
 import LibronixCore
 import LibronixOutputMac
 
+@MainActor enum BibleCopyPreview {
+    static func text(_ original: NSAttributedString) -> AttributedString {
+        let copy = NSMutableAttributedString(attributedString: original)
+        let full = NSRange(location: 0, length: copy.length)
+        copy.enumerateAttribute(.foregroundColor, in: full) { value, range, _ in
+            if let color = value as? NSColor, color == .black { copy.addAttribute(.foregroundColor, value: NSColor.labelColor, range: range) }
+        }
+        return AttributedString(copy)
+    }
+}
+
 struct BibleCopyToolView: View {
     @Bindable var workspace: StudyWorkspace
     @RebuildViewState private var reference = ""
@@ -53,7 +64,12 @@ struct BibleCopyToolView: View {
             }
             if let error { Text(error).foregroundStyle(.red).textSelection(.enabled) }
             if isLoading { HStack { ProgressView().controlSize(.small); Button(L("Cancelar")) { task?.cancel(); isLoading = false } } }
-            ScrollView { Text(result).textSelection(.enabled).frame(maxWidth: .infinity, alignment: .leading).padding(12) }
+            ScrollView {
+                Group {
+                    if let payload { Text(BibleCopyPreview.text(payload.preview)) }
+                    else { Text(result) }
+                }.textSelection(.enabled).frame(maxWidth: .infinity, alignment: .leading).padding(12)
+            }
                 .background(Color(nsColor: .textBackgroundColor)).clipShape(RoundedRectangle(cornerRadius: 6))
             HStack { Spacer(); Button(L("Copiar")) {
                 guard let payload else { return }
