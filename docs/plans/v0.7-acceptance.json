@@ -466,14 +466,17 @@
       "baseline": "Cuatro colores y borrado de resaltado.",
       "status": "in_progress",
       "implementation": [
-        "Added persistent colored underline and strikethrough alongside existing highlights in both reader renderers. Styled annotations use personal-data schema 2, while legacy highlights keep schema 1; unrecognized styles fail decoding."
+        "Added persistent colored underline and strikethrough alongside existing highlights in both reader renderers. Styled annotations use personal-data schema 2, while legacy highlights keep schema 1; unrecognized styles fail decoding.",
+        "Added named, locally persisted palettes made from the four supported colors, with selection, editing, deletion and unsaved-draft protection; the active popover updates immediately."
       ],
       "verification": [
         "ReaderMarkStyleTests check legacy decoding, schema compatibility, unknown style rejection, rendered attributes, bounds, and save/reload. AnnotationNavigationTests and AppLanguageTests pass.",
-        "Native build 194: inspected the glass markup popover and applied a blue underline and pink strikethrough in an e-Sword book. The underline survived restart; the original personal data and workspace were restored."
+        "Native build 194: inspected the glass markup popover and applied a blue underline and pink strikethrough in an e-Sword book. The underline survived restart; the original personal data and workspace were restored.",
+        "MarkPaletteTests cover persistence, default colors and validation. Native builds 196–198 created and selected a test palette, confirmed immediate color updates and restart persistence, and exercised save, cancel and discard prompts. Test data and workspace were restored.",
+        "The full test suite passed with --no-parallel after timing-sensitive association and passage-guide tests also passed in isolation."
       ],
       "limitations": [
-        "Custom palettes, outline and additional marking styles remain pending."
+        "Arbitrary custom colors, outlines and additional marking styles remain pending."
       ]
     },
     {

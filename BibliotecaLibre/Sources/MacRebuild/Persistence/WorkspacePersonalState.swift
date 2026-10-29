@@ -40,6 +40,8 @@ struct WorkspacePersonalSnapshot: Codable {
     private(set) var researchInboxLoadError: String?
     private(set) var bibleCopyState = BibleCopyPersonalState()
     private(set) var bibleCopyLoadError: String?
+    private(set) var markPalettes = MarkPalettes()
+    private(set) var markPalettesLoadError: String?
     let searchHistory: WorkspaceSearchHistory
     let savedQueries: WorkspaceSavedQueries
     var highlights: [ReaderHighlight] = []
@@ -56,6 +58,7 @@ struct WorkspacePersonalSnapshot: Codable {
     @ObservationIgnored private let namedBibleRangesFile: PersonalStateFile<NamedBibleSearchRanges>
     @ObservationIgnored private let researchInboxFile: PersonalStateFile<ResearchInbox>
     @ObservationIgnored private let bibleCopyFile: PersonalStateFile<BibleCopyPersonalState>
+    @ObservationIgnored private let markPalettesFile: PersonalStateFile<MarkPalettes>
     @ObservationIgnored private var bookmarksWritable = false
     @ObservationIgnored private var readingPlansWritable = false
     @ObservationIgnored private var prayerJournalWritable = false
@@ -65,6 +68,7 @@ struct WorkspacePersonalSnapshot: Codable {
     @ObservationIgnored private var namedBibleRangesWritable = false
     @ObservationIgnored private var researchInboxWritable = false
     @ObservationIgnored private var bibleCopyWritable = false
+    @ObservationIgnored private var markPalettesWritable = false
     @ObservationIgnored private var canSave = false
     @ObservationIgnored private var saveTask: Task<Void, Never>?
     init(url: URL? = nil) {
@@ -82,6 +86,7 @@ struct WorkspacePersonalSnapshot: Codable {
         namedBibleRangesFile = PersonalStateFile(url: path.deletingLastPathComponent().appendingPathComponent("named-bible-ranges.json"))
         researchInboxFile = PersonalStateFile(url: path.deletingLastPathComponent().appendingPathComponent("research-inbox.json"))
         bibleCopyFile = PersonalStateFile(url: path.deletingLastPathComponent().appendingPathComponent("bible-copy-styles.json"))
+        markPalettesFile = PersonalStateFile(url: path.deletingLastPathComponent().appendingPathComponent("mark-palettes.json"))
         do {
             if let saved = try file.load() {
                 try saved.validate(); favorites = saved.favorites; highlights = saved.highlights; documents = saved.documents
@@ -124,6 +129,17 @@ struct WorkspacePersonalSnapshot: Codable {
             if let saved = try bibleCopyFile.load() { try saved.validate(); bibleCopyState = saved }
             bibleCopyWritable = true
         } catch { bibleCopyLoadError = error.localizedDescription }
+        do {
+            if let saved = try markPalettesFile.load() { try saved.validate(); markPalettes = saved }
+            markPalettesWritable = true
+        } catch { markPalettesLoadError = error.localizedDescription }
+    }
+    func editMarkPalettes(_ edit: (inout MarkPalettes) throws -> Void) throws {
+        guard markPalettesWritable else { throw PersonalStateError.invalid(markPalettesLoadError ?? "No se pudieron abrir las paletas.") }
+        var next = markPalettes
+        try edit(&next); try next.validate()
+        guard next != markPalettes else { return }
+        try markPalettesFile.save(next); markPalettes = next
     }
     func editBibleCopyState(_ edit: (inout BibleCopyPersonalState) throws -> Void) throws {
         guard bibleCopyWritable else { throw PersonalStateError.invalid(bibleCopyLoadError ?? "No se pudieron abrir las plantillas de copia.") }

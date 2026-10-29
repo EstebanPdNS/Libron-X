@@ -611,6 +611,18 @@
     "ur": "فہرست اپ ڈیٹ کریں",
     "zh-Hans": "更新列表"
   },
+  "Actualizar paleta": {
+    "ar": "تحديث اللوحة",
+    "bn": "প্যালেট আপডেট করুন",
+    "en": "Update Palette",
+    "es": "Actualizar paleta",
+    "fr": "Mettre à jour la palette",
+    "hi": "पैलेट अपडेट करें",
+    "id": "Perbarui palet",
+    "pt": "Atualizar paleta",
+    "ur": "پیلیٹ اپ ڈیٹ کریں",
+    "zh-Hans": "更新调色板"
+  },
   "Actualizar pregunta": {
     "ar": "تحديث السؤال",
     "bn": "প্রশ্ন আপডেট করুন",
@@ -1618,6 +1630,18 @@
     "pt": "Adicionar oração",
     "ur": "دعا شامل کریں",
     "zh-Hans": "添加祷告"
+  },
+  "Añadir paleta": {
+    "ar": "إضافة لوحة",
+    "bn": "প্যালেট যোগ করুন",
+    "en": "Add Palette",
+    "es": "Añadir paleta",
+    "fr": "Ajouter une palette",
+    "hi": "पैलेट जोड़ें",
+    "id": "Tambah palet",
+    "pt": "Adicionar paleta",
+    "ur": "پیلیٹ شامل کریں",
+    "zh-Hans": "添加调色板"
   },
   "Añadir pasaje": {
     "ar": "إضافة مقطع",
@@ -3154,6 +3178,30 @@
     "pt": "Cor",
     "ur": "رنگ",
     "zh-Hans": "颜色"
+  },
+  "Colores": {
+    "ar": "الألوان",
+    "bn": "রং",
+    "en": "Colors",
+    "es": "Colores",
+    "fr": "Couleurs",
+    "hi": "रंग",
+    "id": "Warna",
+    "pt": "Cores",
+    "ur": "رنگ",
+    "zh-Hans": "颜色"
+  },
+  "Colores predeterminados": {
+    "ar": "الألوان الافتراضية",
+    "bn": "ডিফল্ট রং",
+    "en": "Default Colors",
+    "es": "Colores predeterminados",
+    "fr": "Couleurs par défaut",
+    "hi": "डिफ़ॉल्ट रंग",
+    "id": "Warna bawaan",
+    "pt": "Cores padrão",
+    "ur": "طے شدہ رنگ",
+    "zh-Hans": "默认颜色"
   },
   "Columna amplia": {
     "ar": "عمود عريض",
@@ -5831,6 +5879,18 @@
     "ur": "دعا حذف کریں",
     "zh-Hans": "删除祷告"
   },
+  "Eliminar paleta": {
+    "ar": "حذف اللوحة",
+    "bn": "প্যালেট মুছুন",
+    "en": "Delete Palette",
+    "es": "Eliminar paleta",
+    "fr": "Supprimer la palette",
+    "hi": "पैलेट हटाएँ",
+    "id": "Hapus palet",
+    "pt": "Excluir paleta",
+    "ur": "پیلیٹ حذف کریں",
+    "zh-Hans": "删除调色板"
+  },
   "Eliminar pasaje": {
     "ar": "حذف المقطع",
     "bn": "অংশ মুছুন",
@@ -6887,6 +6947,18 @@
     "ur": "رہنمائی بنائیں",
     "zh-Hans": "生成指南"
   },
+  "Gestionar paletas": {
+    "ar": "إدارة اللوحات",
+    "bn": "প্যালেট পরিচালনা",
+    "en": "Manage Palettes",
+    "es": "Gestionar paletas",
+    "fr": "Gérer les palettes",
+    "hi": "पैलेट प्रबंधित करें",
+    "id": "Kelola palet",
+    "pt": "Gerenciar paletas",
+    "ur": "پیلیٹ سنبھالیں",
+    "zh-Hans": "管理调色板"
+  },
   "Gestionar plantillas…": {
     "ar": "إدارة القوالب…",
     "bn": "টেমপ্লেট পরিচালনা করুন…",
@@ -7054,6 +7126,18 @@
     "pt": "Salve o comentário antes de mudar de trecho.",
     "ur": "اقتباس بدلنے سے پہلے تبصرہ محفوظ کریں۔",
     "zh-Hans": "切换摘录前请保存评论。"
+  },
+  "Guarda la paleta antes de continuar.": {
+    "ar": "احفظ اللوحة قبل المتابعة.",
+    "bn": "এগিয়ে যাওয়ার আগে প্যালেটটি সংরক্ষণ করুন।",
+    "en": "Save the palette before continuing.",
+    "es": "Guarda la paleta antes de continuar.",
+    "fr": "Enregistrez la palette avant de continuer.",
+    "hi": "जारी रखने से पहले पैलेट सहेजें।",
+    "id": "Simpan palet sebelum melanjutkan.",
+    "pt": "Salve a paleta antes de continuar.",
+    "ur": "جاری رکھنے سے پہلے پیلیٹ محفوظ کریں۔",
+    "zh-Hans": "继续前请保存调色板。"
   },
   "Guarda la plantilla antes de continuar.": {
     "ar": "احفظ القالب قبل المتابعة.",
@@ -8458,6 +8542,18 @@
     "pt": "A organização de notas requer a versão 2 do documento.",
     "ur": "نوٹس کی تنظیم کے لیے دستاویز کا ورژن 2 درکار ہے۔",
     "zh-Hans": "笔记组织功能需要文档版本 2。"
+  },
+  "La paleta de marcación no es válida.": {
+    "ar": "لوحة التمييز غير صالحة.",
+    "bn": "চিহ্নের প্যালেটটি বৈধ নয়।",
+    "en": "The marking palette is invalid.",
+    "es": "La paleta de marcación no es válida.",
+    "fr": "La palette de marquage n’est pas valide.",
+    "hi": "चिह्न पैलेट मान्य नहीं है।",
+    "id": "Palet penandaan tidak valid.",
+    "pt": "A paleta de marcação é inválida.",
+    "ur": "نشان کا پیلیٹ درست نہیں ہے۔",
+    "zh-Hans": "标记调色板无效。"
   },
   "La pertenencia de esta colección se calcula mediante reglas.": {
     "ar": "تُحسب عضوية هذه المجموعة باستخدام القواعد.",
@@ -10103,6 +10199,18 @@
     "ur": "اس منظر میں کوئی دعا نہیں ہے۔",
     "zh-Hans": "此视图中没有祷告。"
   },
+  "No hay paletas guardadas.": {
+    "ar": "لا توجد لوحات محفوظة.",
+    "bn": "কোনো প্যালেট সংরক্ষিত নেই।",
+    "en": "No saved palettes.",
+    "es": "No hay paletas guardadas.",
+    "fr": "Aucune palette enregistrée.",
+    "hi": "कोई सहेजा गया पैलेट नहीं है।",
+    "id": "Tidak ada palet tersimpan.",
+    "pt": "Não há paletas salvas.",
+    "ur": "کوئی پیلیٹ محفوظ نہیں ہے۔",
+    "zh-Hans": "没有已存的调色板。"
+  },
   "No hay pasajes para practicar.": {
     "ar": "لا توجد مقاطع للتدرب عليها.",
     "bn": "অনুশীলনের জন্য কোনো অংশ নেই।",
@@ -10390,6 +10498,18 @@
     "pt": "Não foi possível abrir as listas de palavras.",
     "ur": "الفاظ کی فہرستیں نہیں کھل سکیں۔",
     "zh-Hans": "无法打开单词列表。"
+  },
+  "No se pudieron abrir las paletas.": {
+    "ar": "تعذر فتح اللوحات.",
+    "bn": "প্যালেটগুলি খোলা যায়নি।",
+    "en": "The palettes could not be opened.",
+    "es": "No se pudieron abrir las paletas.",
+    "fr": "Les palettes n’ont pas pu être ouvertes.",
+    "hi": "पैलेट नहीं खोले जा सके।",
+    "id": "Palet tidak dapat dibuka.",
+    "pt": "Não foi possível abrir as paletas.",
+    "ur": "پیلیٹ کھولے نہیں جا سکے۔",
+    "zh-Hans": "无法打开调色板。"
   },
   "No se pudieron abrir las plantillas de copia.": {
     "ar": "تعذر فتح قوالب النسخ.",
@@ -10702,6 +10822,18 @@
     "pt": "Nome da pesquisa",
     "ur": "تلاش کا نام",
     "zh-Hans": "搜索名称"
+  },
+  "Nombre de la paleta": {
+    "ar": "اسم اللوحة",
+    "bn": "প্যালেটের নাম",
+    "en": "Palette Name",
+    "es": "Nombre de la paleta",
+    "fr": "Nom de la palette",
+    "hi": "पैलेट का नाम",
+    "id": "Nama palet",
+    "pt": "Nome da paleta",
+    "ur": "پیلیٹ کا نام",
+    "zh-Hans": "调色板名称"
   },
   "Nombre de la serie": {
     "ar": "اسم السلسلة",
@@ -11471,6 +11603,18 @@
     "ur": "کوما سے الگ الفاظ",
     "zh-Hans": "用逗号分隔单词"
   },
+  "Paleta": {
+    "ar": "لوحة",
+    "bn": "প্যালেট",
+    "en": "Palette",
+    "es": "Paleta",
+    "fr": "Palette",
+    "hi": "पैलेट",
+    "id": "Palet",
+    "pt": "Paleta",
+    "ur": "پیلیٹ",
+    "zh-Hans": "调色板"
+  },
   "Paleta de comandos": {
     "ar": "لوحة الأوامر",
     "bn": "কমান্ড প্যালেট",
@@ -11494,6 +11638,18 @@
     "pt": "Paleta de comandos…",
     "ur": "کمانڈ پیلیٹ…",
     "zh-Hans": "命令面板…"
+  },
+  "Paletas de marcación": {
+    "ar": "لوحات التمييز",
+    "bn": "চিহ্নের প্যালেট",
+    "en": "Marking Palettes",
+    "es": "Paletas de marcación",
+    "fr": "Palettes de marquage",
+    "hi": "चिह्न पैलेट",
+    "id": "Palet penandaan",
+    "pt": "Paletas de marcação",
+    "ur": "نشان کے پیلیٹ",
+    "zh-Hans": "标记调色板"
   },
   "Panel localizador": {
     "ar": "لوحة الموقع",
@@ -13462,6 +13618,18 @@
     "pt": "Esta oração será excluída.",
     "ur": "یہ دعا حذف کر دی جائے گی۔",
     "zh-Hans": "将删除此祷告。"
+  },
+  "Se eliminará esta paleta de marcación.": {
+    "ar": "سيتم حذف لوحة التمييز هذه.",
+    "bn": "এই চিহ্নের প্যালেট মুছে ফেলা হবে।",
+    "en": "This marking palette will be deleted.",
+    "es": "Se eliminará esta paleta de marcación.",
+    "fr": "Cette palette de marquage sera supprimée.",
+    "hi": "यह चिह्न पैलेट हटा दिया जाएगा।",
+    "id": "Palet penandaan ini akan dihapus.",
+    "pt": "Esta paleta de marcação será excluída.",
+    "ur": "یہ نشان کا پیلیٹ حذف ہو جائے گا۔",
+    "zh-Hans": "此标记调色板将被删除。"
   },
   "Se eliminará esta plantilla de copia.": {
     "ar": "سيُحذف قالب النسخ هذا.",

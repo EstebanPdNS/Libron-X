@@ -144,49 +144,75 @@ struct ReaderMarkupMenu: View {
     var reader: ReaderSession? = nil
     @RebuildViewState private var expanded = false
     @RebuildViewState private var markStyle: ReaderMarkStyle?
+    @RebuildViewState private var showsPalettes = false
     private var target: ReaderSession? { reader ?? workspace.activeReader }
-    private let colors: [(String, Color, String)] = [
-        ("yellow", .yellow, "Amarillo"),
-        ("green", .green, "Verde"),
-        ("blue", .blue, "Azul"),
-        ("pink", .pink, "Rosa")
-    ]
     var body: some View {
         Button {
             if let target { workspace.activate(target) }
             expanded.toggle()
         } label: { MacToolbarLabel("Marcación visual", "highlighter") }
             .help(L("Marcación visual"))
-            .disabled((target?.selectedRange.length ?? 0) == 0)
-            .macToolbarPopover(isPresented: $expanded, size: NSSize(width: 275, height: 110)) {
-                VStack(alignment: .leading, spacing: 8) {
-                Picker(L("Estilo de marcación"), selection: $markStyle) {
-                    Text(L("Resaltado")).tag(Optional<ReaderMarkStyle>.none)
-                    Text(L("Subrayado")).tag(Optional(ReaderMarkStyle.underline))
-                    Text(L("Tachado")).tag(Optional(ReaderMarkStyle.strike))
-                }.labelsHidden().pickerStyle(.segmented)
-                HStack(spacing: 8) {
-                    ForEach(colors, id: \.0) { key, color, title in
-                        Button {
-                            if let target { workspace.activate(target) }
-                            workspace.addHighlight(key, style: markStyle); expanded = false
-                        } label: {
-                            RoundedRectangle(cornerRadius: 5).fill(color)
-                                .overlay(RoundedRectangle(cornerRadius: 5).strokeBorder(.primary.opacity(0.22), lineWidth: 1))
-                                .frame(width: 25, height: 25).frame(width: 33, height: 34)
-                        }.buttonStyle(.borderless).help(L(title)).accessibilityLabel(L(title))
-                            .featureHelpTarget(.marks)
-                    }
-                    Divider().frame(height: 25)
+            .macToolbarPopover(isPresented: $expanded, size: NSSize(width: 300, height: 150)) {
+                ReaderMarkupPopover(workspace: workspace, personal: workspace.personal, target: target,
+                                    style: $markStyle, expanded: $expanded, showsPalettes: $showsPalettes)
+            }
+            .sheet(isPresented: $showsPalettes) { MarkPalettesView(personal: workspace.personal).modifier(AppInterfaceLanguage()) }
+    }
+}
+
+/// Its own observed view is hosted inside the native popover so a palette
+/// change updates the color buttons immediately while the popover is open.
+private struct ReaderMarkupPopover: View {
+    @Bindable var workspace: StudyWorkspace
+    @Bindable var personal: WorkspacePersonalState
+    let target: ReaderSession?
+    @Binding var style: ReaderMarkStyle?
+    @Binding var expanded: Bool
+    @Binding var showsPalettes: Bool
+    private var selection: Binding<UUID?> {
+        Binding(get: { personal.markPalettes.selectedID }, set: { value in
+            do { try personal.editMarkPalettes { $0.selectedID = value } }
+            catch { workspace.error = error.localizedDescription }
+        })
+    }
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                Picker(L("Paleta"), selection: selection) {
+                    Text(L("Colores predeterminados")).tag(Optional<UUID>.none)
+                    ForEach(personal.markPalettes.palettes) { Text($0.name).tag(Optional($0.id)) }
+                }.labelsHidden()
+                Button { expanded = false; showsPalettes = true } label: {
+                    Label(L("Gestionar paletas"), systemImage: "slider.horizontal.3").labelStyle(.iconOnly)
+                }.help(L("Gestionar paletas"))
+            }
+            Picker(L("Estilo de marcación"), selection: $style) {
+                Text(L("Resaltado")).tag(Optional<ReaderMarkStyle>.none)
+                Text(L("Subrayado")).tag(Optional(ReaderMarkStyle.underline))
+                Text(L("Tachado")).tag(Optional(ReaderMarkStyle.strike))
+            }.labelsHidden().pickerStyle(.segmented)
+            HStack(spacing: 8) {
+                ForEach(personal.markPalettes.selectedColors, id: \.self) { color in
                     Button {
                         if let target { workspace.activate(target) }
-                        workspace.eraseHighlight(); expanded = false
-                    } label: { Image(systemName: "trash").font(.system(size: 17)).frame(width: 33, height: 34) }
-                        .buttonStyle(.borderless).help(L("Borrar marcación seleccionada"))
-                        .accessibilityLabel(L("Borrar marcación seleccionada")).featureHelpTarget(.marks)
+                        workspace.addHighlight(color.rawValue, style: style); expanded = false
+                    } label: {
+                        RoundedRectangle(cornerRadius: 5).fill(color.color)
+                            .overlay(RoundedRectangle(cornerRadius: 5).strokeBorder(.primary.opacity(0.22), lineWidth: 1))
+                            .frame(width: 25, height: 25).frame(width: 33, height: 34)
+                    }.buttonStyle(.borderless).help(L(color.title)).accessibilityLabel(L(color.title))
+                        .disabled((target?.selectedRange.length ?? 0) == 0).featureHelpTarget(.marks)
                 }
-                }.padding(12).featureHelpTarget(.marks)
+                Divider().frame(height: 25)
+                Button {
+                    if let target { workspace.activate(target) }
+                    workspace.eraseHighlight(); expanded = false
+                } label: { Image(systemName: "trash").font(.system(size: 17)).frame(width: 33, height: 34) }
+                    .buttonStyle(.borderless).help(L("Borrar marcación seleccionada"))
+                    .disabled((target?.selectedRange.length ?? 0) == 0)
+                    .accessibilityLabel(L("Borrar marcación seleccionada")).featureHelpTarget(.marks)
             }
+        }.padding(12).modifier(MacPanelControlPresentation()).featureHelpTarget(.marks)
     }
 }
 
