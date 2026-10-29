@@ -740,10 +740,16 @@
       "sourceKey": "study-expansion-daily-09",
       "acceptance": "Generar y validar actividad y solución desde reglas y datos documentados.",
       "baseline": "Sin generador de actividades identificado.",
-      "status": "pending",
-      "implementation": [],
-      "verification": [],
-      "limitations": []
+      "status": "in_progress",
+      "implementation": [
+        "Added a bounded seeded word-search generator with eight directions, Unicode-letter validation, checked placements and forward/reverse solution matching."
+      ],
+      "verification": [
+        "WordSearchPuzzleTests passed for deterministic generation, placement validation, reverse selection, accented letters, invalid input and malformed coordinates."
+      ],
+      "limitations": [
+        "The interactive activity and accessibility/visual review are not yet implemented. The generator uses a bounded greedy placement strategy and may reject a list even when another arrangement exists."
+      ]
     },
     {
       "id": "F186",
