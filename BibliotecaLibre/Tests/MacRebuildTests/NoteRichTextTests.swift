@@ -149,4 +149,17 @@ import LibronixCore
         #expect((reopened.attribute(.superscript, at: sup.location, effectiveRange: nil) as? NSNumber)?.intValue == 1)
     }
 
+    @Test func importedInlineColorSurvivesAnEditableRTFRoundTrip() throws {
+        var note = StudyNote(title: "Owned")
+        note.sourceBody = "<p style=\"color:#abc\">Colored <b>text</b></p>"
+        let original = note.sourceBody
+        let projected = try NoteRichTextCodec.attributed(note)
+        let value = try #require((projected.attribute(.foregroundColor, at: 0, effectiveRange: nil) as? NSColor)?.usingColorSpace(.sRGB))
+        #expect(abs(value.redComponent - 0xaa / 255.0) < 0.01)
+        note.editedRTF = try NoteRichTextCodec.encode(projected)
+        let reopened = try NoteRichTextCodec.attributed(note)
+        let color = try #require((reopened.attribute(.foregroundColor, at: 0, effectiveRange: nil) as? NSColor)?.usingColorSpace(.sRGB))
+        #expect(abs(color.redComponent - value.redComponent) < 0.01 && note.sourceBody == original)
+    }
+
 }
