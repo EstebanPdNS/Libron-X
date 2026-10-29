@@ -15,6 +15,9 @@ import Testing
         for _ in 0..<1000 { if !workspace.search.isSearching { break }; try await Task.sleep(for: .milliseconds(5)) }
         #expect(workspace.search.error == nil)
         #expect(workspace.search.report?.results.map(\.resourceID) == [fixture.resources[0].id])
+        let result = try #require(workspace.search.report?.results.first)
+        #expect(result.hits.count == 1 && result.hits[0].range.location == 0 && result.hits[0].range.length == 5)
+        #expect(workspace.search.report?.counters.occurrencesObserved == 1)
         let saved = try #require(personal.searchHistory.entries.first?.configuration)
         let restored = WorkspaceSearchController(); try restored.restore(saved)
         #expect(restored.wordFilter == workspace.search.wordFilter)

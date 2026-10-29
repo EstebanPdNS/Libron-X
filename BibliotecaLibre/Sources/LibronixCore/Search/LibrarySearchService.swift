@@ -17,12 +17,15 @@ public actor LibrarySearchService {
     public init(provider: any LibrarySearchContentProvider) { self.provider = provider }
 
     /// Preserve the original single-progress-callback API, including trailing closures.
+    /// When supplied, `reportingQuery` must match every unit accepted by `query`
+    /// and use no additional fields or verse context. Its hits, rather than the
+    /// filter operands, determine reported occurrences and snippets.
     public func search(resources: [LibraryResource], query: SearchQuery,
                        options: TextSearchOptions = TextSearchOptions(), unit: LibrarySearchUnit = .article,
-                       bibleRange: BibleSearchRange? = nil, excludedBibleRange: BibleSearchRange? = nil, budget: LibrarySearchBudget = LibrarySearchBudget(),
+                       bibleRange: BibleSearchRange? = nil, excludedBibleRange: BibleSearchRange? = nil, reportingQuery: SearchQuery? = nil, budget: LibrarySearchBudget = LibrarySearchBudget(),
                        onProgress: (@Sendable (LibrarySearchProgress) async -> Void)? = nil) async throws -> LibrarySearchReport {
         try await search(resources: resources, query: query, options: options, unit: unit, bibleRange: bibleRange,
-                         excludedBibleRange: excludedBibleRange, budget: budget, control: nil, onSnapshot: nil, onProgress: onProgress)
+                         excludedBibleRange: excludedBibleRange, reportingQuery: reportingQuery, budget: budget, control: nil, onSnapshot: nil, onProgress: onProgress)
     }
 
     public func search(resources: [LibraryResource], query: SearchQuery,
@@ -30,12 +33,13 @@ public actor LibrarySearchService {
                        unit: LibrarySearchUnit = .article,
                        bibleRange: BibleSearchRange? = nil,
                        excludedBibleRange: BibleSearchRange? = nil,
+                       reportingQuery: SearchQuery? = nil,
                        budget: LibrarySearchBudget = LibrarySearchBudget(),
                        control: LibrarySearchControl?,
                        onSnapshot: (@Sendable (LibrarySearchReport) async -> Void)? = nil,
                        onProgress: (@Sendable (LibrarySearchProgress) async -> Void)? = nil) async throws -> LibrarySearchReport {
         let execution = LibrarySearchExecution(provider: provider, resources: resources, query: query, options: options,
-            unit: unit, bibleRange: bibleRange, excludedBibleRange: excludedBibleRange, budget: budget, control: control, onSnapshot: onSnapshot, onProgress: onProgress)
+            unit: unit, bibleRange: bibleRange, excludedBibleRange: excludedBibleRange, reportingQuery: reportingQuery, budget: budget, control: control, onSnapshot: onSnapshot, onProgress: onProgress)
         return try await execution.run()
     }
 
@@ -55,6 +59,7 @@ private actor LibrarySearchExecution {
     let provider: any LibrarySearchContentProvider
     let resources: [LibraryResource]
     let query: SearchQuery
+    let reportingQuery: SearchQuery?
     let options: TextSearchOptions
     let unit: LibrarySearchUnit
     let bibleRange: BibleSearchRange?
@@ -73,10 +78,10 @@ private actor LibrarySearchExecution {
     var limit: LibrarySearchLimit?
     var preparedSources: [(LibraryResource, LibrarySearchPreparedResource)] = []
     init(provider: any LibrarySearchContentProvider, resources: [LibraryResource], query: SearchQuery,
-         options: TextSearchOptions, unit: LibrarySearchUnit, bibleRange: BibleSearchRange?, excludedBibleRange: BibleSearchRange?, budget: LibrarySearchBudget,
+         options: TextSearchOptions, unit: LibrarySearchUnit, bibleRange: BibleSearchRange?, excludedBibleRange: BibleSearchRange?, reportingQuery: SearchQuery?, budget: LibrarySearchBudget,
          control: LibrarySearchControl?, onSnapshot: (@Sendable (LibrarySearchReport) async -> Void)?,
          onProgress: (@Sendable (LibrarySearchProgress) async -> Void)?) {
-        self.provider = provider; self.resources = resources; self.query = query; self.options = options
+        self.provider = provider; self.resources = resources; self.query = query; self.reportingQuery = reportingQuery; self.options = options
         self.unit = unit; self.bibleRange = bibleRange; self.excludedBibleRange = excludedBibleRange; self.budget = budget; self.control = control
         self.onSnapshot = onSnapshot; self.onProgress = onProgress; self.start = clock.now
         contextRemaining = budget.maximumContextUTF16; resourceReports = resources.map(LibrarySearchResourceReport.init)
@@ -138,6 +143,13 @@ private actor LibrarySearchExecution {
         // Validate evaluator options before classifying any source as a failed read.
         _ = try TextSearchEngine.search(query: query, in: "", options: options, verses: query.expression.requiresVerseContext ? [] : nil,
             fields: .init(regions: Dictionary(uniqueKeysWithValues: query.expression.requiredFields.map { ($0, []) })))
+        if let reportingQuery {
+            guard reportingQuery.expression.requiredFields.isSubset(of: query.expression.requiredFields),
+                  !reportingQuery.expression.requiresVerseContext || query.expression.requiresVerseContext else { throw LibrarySearchError.invalidReportingQuery }
+            _ = try TextSearchEngine.search(query: reportingQuery, in: "", options: options,
+                verses: reportingQuery.expression.requiresVerseContext ? [] : nil,
+                fields: .init(regions: Dictionary(uniqueKeysWithValues: reportingQuery.expression.requiredFields.map { ($0, []) })))
+        }
         let requiresBibleDirectory = query.expression.requiresVerseContext || query.expression.requiredFields.contains(.bibleText)
         var ids = Set<String>()
         for resource in resources {
@@ -329,9 +341,12 @@ private actor LibrarySearchExecution {
                                 let start = scopeRange?.location ?? 0, end = scopeRange?.upperBound ?? content.text.utf16.count
                                 return position > start && position < end ? position - start : nil
                             }
-                            let match = try TextSearchEngine.search(query: query, in: evaluationText, options: options, verses: verseContext, fields: fields, lexicalBreaks: lexical)
+                            let filteredMatch = try TextSearchEngine.search(query: query, in: evaluationText, options: options, verses: verseContext, fields: fields, lexicalBreaks: lexical)
                             if elapsed() >= budget.maximumDurationSeconds { limit = .duration; break resourceLoop }
-                            if match.matchesQuery {
+                            if filteredMatch.matchesQuery {
+                                let match = try reportingQuery.map { try TextSearchEngine.search(query: $0, in: evaluationText, options: options, verses: verseContext, fields: fields, lexicalBreaks: lexical) } ?? filteredMatch
+                                if elapsed() >= budget.maximumDurationSeconds { limit = .duration; break resourceLoop }
+                                guard match.matchesQuery else { throw LibrarySearchError.invalidReportingQuery }
                                 if !articleMatched {
                                     counters.matchingArticles += 1
                                     resourceReports[index].matchingArticles += 1

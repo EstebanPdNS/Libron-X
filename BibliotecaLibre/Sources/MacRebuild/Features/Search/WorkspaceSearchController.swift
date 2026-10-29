@@ -153,6 +153,11 @@ struct WorkspaceSearchLimits: Codable, Hashable, Sendable {
             let expanded = try wordFilter?.compile(text) ?? text
             let compiled = searchField.map { $0.rawValue + ":(" + expanded + ")" } ?? expanded
             let parsed = try SearchQueryParser.parse(compiled, limits: .init(maximumOperandUTF16: approximatePhrase ? 16_384 : 512))
+            let reportingQuery: SearchQuery?
+            if wordFilter != nil {
+                let original = searchField.map { $0.rawValue + ":(" + text + ")" } ?? text
+                reportingQuery = try SearchQueryParser.parse(original)
+            } else { reportingQuery = nil }
             var options = TextSearchOptions(); options.caseSensitive = caseSensitive; options.wholeWords = wholeWords
             options.maximumEditDistance = approximatePhrase ? maximumEdits : 0
             if approximatePhrase { options.maximumMatchAttempts = 5_000_000 }
@@ -196,7 +201,7 @@ struct WorkspaceSearchLimits: Codable, Hashable, Sendable {
             task = Task { [weak self] in
                 do {
                     let result = try await LibrarySearchService(provider: provider).search(resources: selected, query: parsed, options: options,
-                        unit: unit, bibleRange: range, excludedBibleRange: excluded, budget: budget, control: control,
+                        unit: unit, bibleRange: range, excludedBibleRange: excluded, reportingQuery: reportingQuery, budget: budget, control: control,
                         onSnapshot: { [weak self] value in await self?.receive(value, token: token) },
                         onProgress: { [weak self] value in await self?.receive(value, token: token) })
                     guard let self, token == self.generation, !Task.isCancelled else { return }

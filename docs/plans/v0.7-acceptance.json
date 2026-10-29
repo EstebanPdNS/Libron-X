@@ -916,15 +916,17 @@
       "status": "in_progress",
       "implementation": [
         "Added locally persisted reusable word lists with native creation, editing and deletion, and inclusion/exclusion filters applied to actual library searches. Active filters remain visible when their section is collapsed.",
-        "Search history and saved configurations preserve the actual terms as snapshots, including when a list is later edited or removed. Approximate matching explicitly rejects word-list filters."
+        "Search history and saved configurations preserve the actual terms as snapshots, including when a list is later edited or removed. Approximate matching explicitly rejects word-list filters.",
+        "Result snippets, highlights and occurrence counts use the original query; list terms act only as filters."
       ],
       "verification": [
         "SearchWordListsTests, SearchWordListsPersistenceTests and SearchWordListsWorkflowTests passed, including real search matching, escaping, concurrency, schema protection and restoration of older history. AppLanguageTests passed for ten languages.",
         "Native build 165 was visually inspected in dark mode; synthetic lists were created and a real-library search returned results with both filters selected. Synthetic data was archived and the previous workspace restored.",
-        "Native build 167 was inspected with a running search: the header and results stay on screen while the search options scroll. The form was also inspected before running a search."
+        "Native build 167 was inspected with a running search: the header and results stay on screen while the search options scroll. The form was also inspected before running a search.",
+        "SearchWordListsWorkflowTests confirmed that inclusion/exclusion still selects the correct fixture resource and that only the original query produces counted hits."
       ],
       "limitations": [
-        "Light appearance, right-to-left and narrow-window visual and accessibility review remain pending. Filter terms contribute positive occurrences to result snippets as part of the compiled search expression."
+        "Light appearance, right-to-left and narrow-window visual and accessibility review remain pending."
       ]
     },
     {

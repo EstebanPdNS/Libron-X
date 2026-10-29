@@ -189,6 +189,7 @@ public enum LibrarySearchError: Error, LocalizedError, Equatable, Sendable {
     case duplicateResourceID(String)
     case invalidArticleDirectory
     case invalidVerseDirectory
+    case invalidReportingQuery
 
     public var errorDescription: String? {
         switch self {
@@ -197,6 +198,7 @@ public enum LibrarySearchError: Error, LocalizedError, Equatable, Sendable {
         case let .duplicateResourceID(id): "El ámbito contiene dos veces el mismo recurso: \(id)."
         case .invalidArticleDirectory: "El proveedor de texto devolvió artículos duplicados o posiciones inválidas."
         case .invalidVerseDirectory: "Las referencias bíblicas contienen límites ambiguos o posiciones inválidas."
+        case .invalidReportingQuery: "La consulta de resultados es incompatible con el filtro de búsqueda."
         }
     }
 }
