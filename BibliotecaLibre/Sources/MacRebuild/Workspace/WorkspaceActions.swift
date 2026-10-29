@@ -1,7 +1,7 @@
 import AppKit
 import LibronixCore
 
-enum WorkspaceTool: String, Identifiable { case search, referenceSearch, annotationSearch, documents, favorites, information, resources, topics, bibleCopy, windows, parallelSets, keyLinks, associations, associationLinks, bibliography, editions, passageComparison, readingPlans, passageGuide, prayerJournal, scriptureMemory, studyAssessments, wordSearch, commandPalette, biblicalMeasures
+enum WorkspaceTool: String, Identifiable { case search, referenceSearch, annotationSearch, documents, favorites, information, resources, topics, bibleCopy, windows, parallelSets, keyLinks, associations, associationLinks, bibliography, editions, passageComparison, readingPlans, passageGuide, prayerJournal, scriptureMemory, studyAssessments, wordSearch, commandPalette, biblicalMeasures, researchInbox
     var id: String { rawValue }
 }
 struct ReaderHighlight: Identifiable, Codable, Equatable, Sendable {
@@ -161,6 +161,31 @@ struct ReaderHighlight: Identifiable, Codable, Equatable, Sendable {
                                            kind: .location, location: location)
             try personal.editFavorites { try $0.insert(favorite) }
         } catch { self.error = error.localizedDescription }
+    }
+    var canCaptureResearchExcerpt: Bool {
+        guard let reader = activeReader, !reader.isLoading, let page = reader.page, page.oeb == nil,
+              reader.selectedRange.length > 0, reader.selectedRange.length <= 65_536 else { return false }
+        return Range(reader.selectedRange, in: page.text) != nil
+    }
+    func captureResearchExcerpt() {
+        guard canCaptureResearchExcerpt, let reader = activeReader, let page = reader.page,
+              let range = Range(reader.selectedRange, in: page.text) else { return }
+        let location = ReaderLocation(resourceID: reader.resource.id, legacyIdentifier: reader.resource.legacyIdentifier,
+            format: reader.resource.format, sectionOrdinal: page.destination.ordinal, reference: page.destination.reference,
+            textFingerprint: LibrarySearchService.textFingerprint(page.text), characterOffset: reader.selectedRange.location)
+        let excerpt = ResearchExcerpt(sourceTitle: reader.resource.title, text: String(page.text[range]), location: location,
+                                     selectionLength: reader.selectedRange.length)
+        do { try personal.editResearchInbox { $0.excerpts.insert(excerpt, at: 0) }; activeTool = .researchInbox }
+        catch { self.error = L(error.localizedDescription) }
+    }
+    func openResearchExcerpt(_ excerpt: ResearchExcerpt) {
+        guard let resource = excerpt.location.resolve(in: resources), let offset = excerpt.location.characterOffset else {
+            error = L("El recurso de este extracto no está disponible en la biblioteca abierta."); return
+        }
+        let reader = open(resource, startReading: false)
+        reader.load(.init(ordinal: excerpt.location.sectionOrdinal, reference: excerpt.location.reference),
+                    selection: NSRange(location: offset, length: excerpt.selectionLength), expectedFingerprint: excerpt.location.textFingerprint)
+        activeTool = nil
     }
     /// Bookmarks are bound to the exact edition and visible UTF-16 position.
     /// Web-backed pages are excluded until their rendered projection is stable.

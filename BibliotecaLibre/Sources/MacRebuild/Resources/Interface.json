@@ -263,6 +263,18 @@
     "ur": "تصویر {number} کھولیں",
     "zh-Hans": "打开图片 {number}"
   },
+  "Abrir origen": {
+    "ar": "فتح المصدر",
+    "bn": "উৎস খুলুন",
+    "en": "Open Source",
+    "es": "Abrir origen",
+    "fr": "Ouvrir la source",
+    "hi": "स्रोत खोलें",
+    "id": "Buka sumber",
+    "pt": "Abrir origem",
+    "ur": "ماخذ کھولیں",
+    "zh-Hans": "打开来源"
+  },
   "Abrir preferidos": {
     "ar": "فتح المفضلة",
     "bn": "পছন্দেরগুলো খুলুন",
@@ -1594,6 +1606,30 @@
     "pt": "Mover para baixo",
     "ur": "نیچے منتقل کریں",
     "zh-Hans": "下移"
+  },
+  "Bandeja de investigación": {
+    "ar": "صندوق البحث",
+    "bn": "গবেষণা ইনবক্স",
+    "en": "Research Inbox",
+    "es": "Bandeja de investigación",
+    "fr": "Boîte de recherche",
+    "hi": "अनुसंधान इनबॉक्स",
+    "id": "Kotak riset",
+    "pt": "Caixa de pesquisa",
+    "ur": "تحقیقی ان باکس",
+    "zh-Hans": "研究收集箱"
+  },
+  "Bandeja de investigación…": {
+    "ar": "صندوق البحث…",
+    "bn": "গবেষণা ইনবক্স…",
+    "en": "Research Inbox…",
+    "es": "Bandeja de investigación…",
+    "fr": "Boîte de recherche…",
+    "hi": "अनुसंधान इनबॉक्स…",
+    "id": "Kotak riset…",
+    "pt": "Caixa de pesquisa…",
+    "ur": "تحقیقی ان باکس…",
+    "zh-Hans": "研究收集箱…"
   },
   "Barra de herramientas": {
     "ar": "شريط الأدوات",
@@ -3059,6 +3095,18 @@
     "ur": "کالم، فلٹر، زبان سے تلاش اور خودکار بائبل گروپ۔",
     "zh-Hans": "可配置列、筛选、按语言搜索及自动圣经组。"
   },
+  "Comentario": {
+    "ar": "تعليق",
+    "bn": "মন্তব্য",
+    "en": "Comment",
+    "es": "Comentario",
+    "fr": "Commentaire",
+    "hi": "टिप्पणी",
+    "id": "Komentar",
+    "pt": "Comentário",
+    "ur": "تبصرہ",
+    "zh-Hans": "评论"
+  },
   "Comentario anterior": {
     "ar": "التفسير السابق",
     "bn": "আগের ভাষ্য",
@@ -3094,6 +3142,18 @@
     "pt": "Comentário seguinte",
     "ur": "اگلی تفسیر",
     "zh-Hans": "下一篇注释"
+  },
+  "Comentario sin guardar": {
+    "ar": "تعليق غير محفوظ",
+    "bn": "অসংরক্ষিত মন্তব্য",
+    "en": "Unsaved Comment",
+    "es": "Comentario sin guardar",
+    "fr": "Commentaire non enregistré",
+    "hi": "सहेजी नहीं गई टिप्पणी",
+    "id": "Komentar belum disimpan",
+    "pt": "Comentário não salvo",
+    "ur": "غیر محفوظ تبصرہ",
+    "zh-Hans": "未保存的评论"
   },
   "Comentarios": {
     "ar": "التعليقات",
@@ -4031,6 +4091,18 @@
     "ur": "ڈاؤن لوڈز",
     "zh-Hans": "下载"
   },
+  "Descartar": {
+    "ar": "تجاهل",
+    "bn": "বাতিল করুন",
+    "en": "Discard",
+    "es": "Descartar",
+    "fr": "Ignorer",
+    "hi": "त्यागें",
+    "id": "Buang",
+    "pt": "Descartar",
+    "ur": "رد کریں",
+    "zh-Hans": "丢弃"
+  },
   "Desconocido": {
     "ar": "غير معروف",
     "bn": "অজানা",
@@ -4823,6 +4895,18 @@
     "ur": "یاد کرنے کی مشق میں غیر مطابقت پذیر ڈیٹا ہے۔",
     "zh-Hans": "记忆练习包含不兼容的数据。"
   },
+  "El extracto contiene datos incompatibles.": {
+    "ar": "يحتوي المقتطف على بيانات غير متوافقة.",
+    "bn": "উদ্ধৃতিতে অসামঞ্জস্যপূর্ণ তথ্য রয়েছে।",
+    "en": "The excerpt contains incompatible data.",
+    "es": "El extracto contiene datos incompatibles.",
+    "fr": "L’extrait contient des données incompatibles.",
+    "hi": "अंश में असंगत डेटा है।",
+    "id": "Kutipan berisi data yang tidak kompatibel.",
+    "pt": "O trecho contém dados incompatíveis.",
+    "ur": "اقتباس میں غیر مطابقت پذیر ڈیٹا ہے۔",
+    "zh-Hans": "摘录包含不兼容的数据。"
+  },
   "El filtro de cuaderno incluye notas; el de color incluye resaltados. El texto se busca sin distinguir mayúsculas ni acentos.": {
     "ar": "يتضمن مرشح الدفتر الملاحظات ومرشح اللون التمييزات. يتجاهل البحث حالة الأحرف والعلامات.",
     "bn": "নোটবুক ফিল্টারে নোট এবং রং ফিল্টারে হাইলাইট থাকে। খোঁজে বড় হাতের অক্ষর ও উচ্চারণ উপেক্ষা করা হয়।",
@@ -4978,6 +5062,18 @@
     "pt": "O intervalo salvo contém dados incompatíveis.",
     "ur": "محفوظ حد میں غیر مطابقت پذیر ڈیٹا ہے۔",
     "zh-Hans": "已保存的范围包含不兼容的数据。"
+  },
+  "El recurso de este extracto no está disponible en la biblioteca abierta.": {
+    "ar": "مورد هذا المقتطف غير متاح في المكتبة المفتوحة.",
+    "bn": "এই উদ্ধৃতির রিসোর্স খোলা লাইব্রেরিতে উপলভ্য নয়।",
+    "en": "The resource for this excerpt is not available in the open library.",
+    "es": "El recurso de este extracto no está disponible en la biblioteca abierta.",
+    "fr": "La ressource de cet extrait n’est pas disponible dans la bibliothèque ouverte.",
+    "hi": "इस अंश का संसाधन खुली लाइब्रेरी में उपलब्ध नहीं है।",
+    "id": "Sumber kutipan ini tidak tersedia di pustaka terbuka.",
+    "pt": "O recurso deste trecho não está disponível na biblioteca aberta.",
+    "ur": "اس اقتباس کا وسیلہ کھلی لائبریری میں دستیاب نہیں ہے۔",
+    "zh-Hans": "此摘录的资源在当前资料库中不可用。"
   },
   "El recurso de este favorito no está disponible en la biblioteca abierta.": {
     "ar": "مورد هذه المفضلة غير متاح في المكتبة المفتوحة.",
@@ -5434,6 +5530,18 @@
     "pt": "Excluir coleção",
     "ur": "مجموعہ حذف کریں",
     "zh-Hans": "删除收藏集"
+  },
+  "Eliminar extracto": {
+    "ar": "حذف المقتطف",
+    "bn": "উদ্ধৃতি মুছুন",
+    "en": "Delete Excerpt",
+    "es": "Eliminar extracto",
+    "fr": "Supprimer l’extrait",
+    "hi": "अंश हटाएँ",
+    "id": "Hapus kutipan",
+    "pt": "Excluir trecho",
+    "ur": "اقتباس حذف کریں",
+    "zh-Hans": "删除摘录"
   },
   "Eliminar favorito": {
     "ar": "حذف المفضلة",
@@ -6623,6 +6731,18 @@
     "ur": "گروپ: {count}",
     "zh-Hans": "分组：{count}"
   },
+  "Guarda el comentario antes de cambiar de extracto.": {
+    "ar": "احفظ التعليق قبل تغيير المقتطف.",
+    "bn": "উদ্ধৃতি পরিবর্তনের আগে মন্তব্য সংরক্ষণ করুন।",
+    "en": "Save the comment before changing excerpts.",
+    "es": "Guarda el comentario antes de cambiar de extracto.",
+    "fr": "Enregistrez le commentaire avant de changer d’extrait.",
+    "hi": "अंश बदलने से पहले टिप्पणी सहेजें।",
+    "id": "Simpan komentar sebelum mengganti kutipan.",
+    "pt": "Salve o comentário antes de mudar de trecho.",
+    "ur": "اقتباس بدلنے سے پہلے تبصرہ محفوظ کریں۔",
+    "zh-Hans": "切换摘录前请保存评论。"
+  },
   "Guarda la ubicación de lectura como favorito para volver después. Puedes organizar los favoritos en carpetas. Al abrir uno, vuelves al recurso y a la ubicación guardados.": {
     "ar": "احفظ موضع القراءة في المفضلة للعودة إليه. نظّم المفضلة في مجلدات. يفتح كل عنصر المورد والموضع المحفوظين.",
     "bn": "পরে ফেরার জন্য বর্তমান স্থান প্রিয়তে রাখুন। ফোল্ডারে প্রিয়গুলো সাজান। খুললে সংরক্ষিত রিসোর্স ও অবস্থানে যায়।",
@@ -6658,6 +6778,18 @@
     "pt": "Salvar",
     "ur": "محفوظ کریں",
     "zh-Hans": "保存"
+  },
+  "Guardar comentario": {
+    "ar": "حفظ التعليق",
+    "bn": "মন্তব্য সংরক্ষণ করুন",
+    "en": "Save Comment",
+    "es": "Guardar comentario",
+    "fr": "Enregistrer le commentaire",
+    "hi": "टिप्पणी सहेजें",
+    "id": "Simpan komentar",
+    "pt": "Salvar comentário",
+    "ur": "تبصرہ محفوظ کریں",
+    "zh-Hans": "保存评论"
   },
   "Guardar como…": {
     "ar": "حفظ باسم…",
@@ -6706,6 +6838,18 @@
     "pt": "Salvar regras",
     "ur": "قواعد محفوظ کریں",
     "zh-Hans": "保存规则"
+  },
+  "Guardar selección en investigación": {
+    "ar": "حفظ التحديد في البحث",
+    "bn": "নির্বাচন গবেষণায় সংরক্ষণ করুন",
+    "en": "Save Selection to Research",
+    "es": "Guardar selección en investigación",
+    "fr": "Enregistrer la sélection dans la recherche",
+    "hi": "चयन अनुसंधान में सहेजें",
+    "id": "Simpan pilihan ke riset",
+    "pt": "Salvar seleção na pesquisa",
+    "ur": "انتخاب تحقیق میں محفوظ کریں",
+    "zh-Hans": "将所选内容保存到研究收集箱"
   },
   "Guardar área de trabajo": {
     "ar": "حفظ مساحة العمل",
@@ -9467,6 +9611,18 @@
     "ur": "کوئی لغت یا فرہنگ دستیاب نہیں ہے۔",
     "zh-Hans": "没有可用的词典或词汇书。"
   },
+  "No hay extractos guardados.": {
+    "ar": "لا توجد مقتطفات محفوظة.",
+    "bn": "কোনো সংরক্ষিত উদ্ধৃতি নেই।",
+    "en": "No saved excerpts.",
+    "es": "No hay extractos guardados.",
+    "fr": "Aucun extrait enregistré.",
+    "hi": "कोई सहेजा गया अंश नहीं।",
+    "id": "Tidak ada kutipan tersimpan.",
+    "pt": "Nenhum trecho salvo.",
+    "ur": "کوئی محفوظ اقتباس نہیں۔",
+    "zh-Hans": "没有已保存的摘录。"
+  },
   "No hay listas de palabras.": {
     "ar": "لا توجد قوائم كلمات.",
     "bn": "কোনো শব্দ তালিকা নেই।",
@@ -9898,6 +10054,18 @@
     "pt": "Não foi possível abrir o texto enriquecido da nota. Sua representação original é preservada.",
     "ur": "نوٹ کا وضع شدہ متن نہیں کھل سکا۔ اس کی اصل صورت محفوظ ہے۔",
     "zh-Hans": "无法打开笔记的富文本。原始内容会保留。"
+  },
+  "No se pudo abrir la bandeja de investigación.": {
+    "ar": "تعذر فتح صندوق البحث.",
+    "bn": "গবেষণা ইনবক্স খোলা যায়নি।",
+    "en": "The research inbox could not be opened.",
+    "es": "No se pudo abrir la bandeja de investigación.",
+    "fr": "Impossible d’ouvrir la boîte de recherche.",
+    "hi": "अनुसंधान इनबॉक्स नहीं खोला जा सका।",
+    "id": "Kotak riset tidak dapat dibuka.",
+    "pt": "Não foi possível abrir a caixa de pesquisa.",
+    "ur": "تحقیقی ان باکس نہیں کھولا جا سکا۔",
+    "zh-Hans": "无法打开研究收集箱。"
   },
   "No se pudo abrir la lista de oración.": {
     "ar": "تعذّر فتح قائمة الصلاة.",
@@ -12659,6 +12827,18 @@
     "ur": "یہ مشق اور اس کی پیش رفت حذف ہو جائے گی۔",
     "zh-Hans": "将删除此练习及其进度。"
   },
+  "Se eliminará este extracto de la bandeja.": {
+    "ar": "سيُحذف هذا المقتطف من الصندوق.",
+    "bn": "এই উদ্ধৃতিটি ইনবক্স থেকে মুছে ফেলা হবে।",
+    "en": "This excerpt will be removed from the inbox.",
+    "es": "Se eliminará este extracto de la bandeja.",
+    "fr": "Cet extrait sera retiré de la boîte.",
+    "hi": "यह अंश इनबॉक्स से हटा दिया जाएगा।",
+    "id": "Kutipan ini akan dihapus dari kotak.",
+    "pt": "Este trecho será removido da caixa.",
+    "ur": "یہ اقتباس ان باکس سے حذف ہو جائے گا۔",
+    "zh-Hans": "此摘录将从收集箱中移除。"
+  },
   "Se eliminará este rango guardado.": {
     "ar": "سيتم حذف هذا النطاق المحفوظ.",
     "bn": "এই সংরক্ষিত সীমা মুছে ফেলা হবে।",
@@ -12839,6 +13019,18 @@
     "ur": "نمایاں کرنے یا ذاتی نوٹ شامل کرنے سے پہلے متن منتخب کریں۔ نشانات ذاتی مطالعے کے ڈیٹا میں محفوظ ہوتے ہیں، اصل کتاب تبدیل نہیں ہوتی۔",
     "zh-Hans": "先选中文本，再高亮或添加个人笔记。标记保存在个人研读数据中，不会改写原始书籍。"
   },
+  "Selecciona texto en un recurso y usa Herramientas para guardarlo aquí.": {
+    "ar": "حدد نصًا في مورد واستخدم الأدوات لحفظه هنا.",
+    "bn": "একটি রিসোর্সে লেখা নির্বাচন করে এখানে সংরক্ষণ করতে টুলস ব্যবহার করুন।",
+    "en": "Select text in a resource and use Tools to save it here.",
+    "es": "Selecciona texto en un recurso y usa Herramientas para guardarlo aquí.",
+    "fr": "Sélectionnez du texte dans une ressource et utilisez Outils pour l’enregistrer ici.",
+    "hi": "किसी संसाधन में पाठ चुनें और उसे यहाँ सहेजने के लिए उपकरण का उपयोग करें।",
+    "id": "Pilih teks dalam sumber dan gunakan Alat untuk menyimpannya di sini.",
+    "pt": "Selecione texto em um recurso e use Ferramentas para salvá-lo aqui.",
+    "ur": "کسی وسیلے میں متن منتخب کریں اور اسے یہاں محفوظ کرنے کے لیے ٹولز استعمال کریں۔",
+    "zh-Hans": "选择资源中的文本，然后通过“工具”将其保存到此处。"
+  },
   "Selecciona un documento": {
     "ar": "اختر مستندًا",
     "bn": "নথি বাছাই করুন",
@@ -12850,6 +13042,18 @@
     "pt": "Selecione um documento",
     "ur": "دستاویز منتخب کریں",
     "zh-Hans": "选择文档"
+  },
+  "Selecciona un extracto.": {
+    "ar": "اختر مقتطفًا.",
+    "bn": "একটি উদ্ধৃতি নির্বাচন করুন।",
+    "en": "Select an excerpt.",
+    "es": "Selecciona un extracto.",
+    "fr": "Sélectionnez un extrait.",
+    "hi": "एक अंश चुनें।",
+    "id": "Pilih kutipan.",
+    "pt": "Selecione um trecho.",
+    "ur": "ایک اقتباس منتخب کریں۔",
+    "zh-Hans": "选择一个摘录。"
   },
   "Selecciona un grupo para ver sus resultados.": {
     "ar": "اختر مجموعة لعرض نتائجها.",

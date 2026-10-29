@@ -1340,10 +1340,18 @@
       "sourceKey": "study-expansion-product-03",
       "acceptance": "Recoger extractos y referencias para organizarlos después sin alterar las fuentes.",
       "baseline": "Notas y favoritos básicos disponibles.",
-      "status": "pending",
-      "implementation": [],
-      "verification": [],
-      "limitations": []
+      "status": "in_progress",
+      "implementation": [
+        "Added a locally persisted research inbox that captures selected text with source identity, exact UTF-16 location and source fingerprint, permits comments and removal, and reopens a checked source selection.",
+        "Switching away from an edited comment prompts to save, discard or cancel. Capture is currently restricted to compatible non-web-backed reader pages."
+      ],
+      "verification": [
+        "ResearchInboxTests passed for capture, persistence, exact source reopening, changed fingerprint rejection, absent resources, invalid coordinates and concurrent-write protection. AppLanguageTests and CommandPaletteTests passed.",
+        "Native build 178 was visually inspected in dark mode. A real dictionary selection was captured, a synthetic comment was saved, and its source reopened with the selection. The test record was archived and the previous workspace restored."
+      ],
+      "limitations": [
+        "Web-backed selections are unsupported. Error recovery when an unsaved comment fails to save during window dismissal requires further work. Keyboard, VoiceOver, light appearance, right-to-left and narrow-window acceptance remain pending."
+      ]
     },
     {
       "id": "F225",

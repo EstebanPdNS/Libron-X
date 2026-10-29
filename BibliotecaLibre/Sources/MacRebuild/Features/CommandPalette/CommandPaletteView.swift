@@ -19,6 +19,7 @@ struct WorkspacePaletteCommand: Identifiable {
         .init(tool: .studyAssessments, title: "Autoevaluaciones", symbol: "checklist"),
         .init(tool: .wordSearch, title: "Sopa de letras", symbol: "square.grid.3x3"),
         .init(tool: .biblicalMeasures, title: "Pesos y medidas bíblicos", symbol: "scalemass"),
+        .init(tool: .researchInbox, title: "Bandeja de investigación", symbol: "tray"),
         .init(tool: .passageComparison, title: "Comparar pasajes bíblicos", symbol: "rectangle.split.2x1"),
         .init(tool: .keyLinks, title: "Enlaces clave", symbol: "link"),
         .init(tool: .associations, title: "Asociaciones de recursos", symbol: "link"),
