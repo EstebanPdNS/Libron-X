@@ -162,6 +162,11 @@ struct RebuildCommands: Commands {
                 .disabled(workspace.activeReader?.canGoBack != true)
             Button(L("Adelante")) { workspace.activeReader?.goForward() }.keyboardShortcut("]", modifiers: [.command])
                 .disabled(workspace.activeReader?.canGoForward != true)
+            Divider()
+            Button(L("Anotación anterior")) { workspace.navigateAnnotation(backwards: true) }
+                .disabled(workspace.activeReader.flatMap { workspace.adjacentAnnotation(for: $0, backwards: true) } == nil)
+            Button(L("Anotación siguiente")) { workspace.navigateAnnotation(backwards: false) }
+                .disabled(workspace.activeReader.flatMap { workspace.adjacentAnnotation(for: $0, backwards: false) } == nil)
         }
         CommandMenu(L("Buscar")) {
             Button(L("Búsqueda básica…"), action: workspace.beginSearch).keyboardShortcut("f", modifiers: [.command, .shift])

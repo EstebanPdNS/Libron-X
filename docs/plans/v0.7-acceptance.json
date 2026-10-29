@@ -421,10 +421,17 @@
       "sourceKey": "study-expansion-annotations-06",
       "acceptance": "Recorrer nota o marca anterior/siguiente con coordenadas correctas.",
       "baseline": "Se puede abrir una nota y su referencia.",
-      "status": "pending",
-      "implementation": [],
-      "verification": [],
-      "limitations": []
+      "status": "in_progress",
+      "implementation": [
+        "Added previous and next annotation actions to the native Go menu, traversing anchored notes and highlights in the current compatible reader by article and UTF-16 position. Each destination is reopened with its recorded source fingerprint."
+      ],
+      "verification": [
+        "AnnotationNavigationTests passed for first/last boundaries, notes and highlights, movement across articles, exact selection and rejection of a changed fingerprint. AppLanguageTests passed for ten languages.",
+        "Native build 180 exposed disabled previous/next annotation actions in the Go menu when no reader was open. The native automation did not provide a menu screenshot; user personal data was unchanged and the previous workspace was restored."
+      ],
+      "limitations": [
+        "Web-backed readers are excluded. Multiple annotations at the same position are treated as one navigation stop; accessibility and full visual/keyboard acceptance remain pending."
+      ]
     },
     {
       "id": "F171",

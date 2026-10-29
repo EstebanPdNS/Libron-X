@@ -1055,6 +1055,30 @@
     "ur": "لائبریری کا تجزیہ کریں",
     "zh-Hans": "分析书库"
   },
+  "Anotación anterior": {
+    "ar": "التعليق السابق",
+    "bn": "পূর্ববর্তী টীকা",
+    "en": "Previous Annotation",
+    "es": "Anotación anterior",
+    "fr": "Annotation précédente",
+    "hi": "पिछली टिप्पणी",
+    "id": "Anotasi sebelumnya",
+    "pt": "Anotação anterior",
+    "ur": "پچھلی تشریح",
+    "zh-Hans": "上一条注释"
+  },
+  "Anotación siguiente": {
+    "ar": "التعليق التالي",
+    "bn": "পরবর্তী টীকা",
+    "en": "Next Annotation",
+    "es": "Anotación siguiente",
+    "fr": "Annotation suivante",
+    "hi": "अगली टिप्पणी",
+    "id": "Anotasi berikutnya",
+    "pt": "Próxima anotação",
+    "ur": "اگلی تشریح",
+    "zh-Hans": "下一条注释"
+  },
   "Apariencia": {
     "ar": "المظهر",
     "bn": "চেহারা",
