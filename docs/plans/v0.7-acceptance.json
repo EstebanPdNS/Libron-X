@@ -1414,10 +1414,17 @@
       "sourceKey": "study-expansion-product-09",
       "acceptance": "Buscar y ejecutar acciones disponibles por teclado con foco y accesibilidad correctos.",
       "baseline": "Menús y atajos existentes.",
-      "status": "pending",
-      "implementation": [],
-      "verification": [],
-      "limitations": []
+      "status": "in_progress",
+      "implementation": [
+        "Added a keyboard shortcut and native searchable palette for existing workspace tools, using translated names and dispatching to existing workspace actions."
+      ],
+      "verification": [
+        "CommandPaletteTests passed for unique command IDs, translated catalog coverage and matching; AppLanguageTests passed across ten languages. Native build 171 was visually inspected in dark mode; Command-Shift-P opened the palette, typing filtered the list and Return opened the selected reading-plan tool.",
+        "Native build 172 opened the palette with Command-Shift-P, selected commands with the arrow keys, opened the selected reference-search tool with Return, and dismissed the palette with Escape. The prior workspace was restored."
+      ],
+      "limitations": [
+        "The palette currently exposes a curated set of workspace tools, not every application action. Light appearance, right-to-left, narrow-window and VoiceOver acceptance remain pending."
+      ]
     },
     {
       "id": "F231",

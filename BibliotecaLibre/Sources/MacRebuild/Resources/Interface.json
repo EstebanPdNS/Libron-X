@@ -2135,6 +2135,18 @@
     "ur": "عنوان، مصنف، زبان یا فائل تلاش کریں",
     "zh-Hans": "搜索标题、作者、语言或文件"
   },
+  "Buscar un comando": {
+    "ar": "البحث عن أمر",
+    "bn": "একটি কমান্ড খুঁজুন",
+    "en": "Search for a Command",
+    "es": "Buscar un comando",
+    "fr": "Rechercher une commande",
+    "hi": "कमांड खोजें",
+    "id": "Cari perintah",
+    "pt": "Buscar um comando",
+    "ur": "کمانڈ تلاش کریں",
+    "zh-Hans": "搜索命令"
+  },
   "Búsqueda básica…": {
     "ar": "بحث أساسي…",
     "bn": "সাধারণ অনুসন্ধান…",
@@ -9095,6 +9107,18 @@
     "ur": "دعاؤں کے زمرے موجود نہیں ہیں۔",
     "zh-Hans": "没有祷告类别。"
   },
+  "No hay comandos coincidentes.": {
+    "ar": "لا توجد أوامر مطابقة.",
+    "bn": "কোনো মিল থাকা কমান্ড নেই।",
+    "en": "No matching commands.",
+    "es": "No hay comandos coincidentes.",
+    "fr": "Aucune commande correspondante.",
+    "hi": "कोई मिलान करने वाला कमांड नहीं।",
+    "id": "Tidak ada perintah yang cocok.",
+    "pt": "Nenhum comando correspondente.",
+    "ur": "کوئی مماثل کمانڈ نہیں۔",
+    "zh-Hans": "没有匹配的命令。"
+  },
   "No hay comentario para {reference}.": {
     "ar": "لا يوجد تعليق على {reference}.",
     "bn": "{reference} এর জন্য কোনো ভাষ্য নেই।",
@@ -10414,6 +10438,30 @@
     "pt": "Palavras separadas por vírgulas",
     "ur": "کوما سے الگ الفاظ",
     "zh-Hans": "用逗号分隔单词"
+  },
+  "Paleta de comandos": {
+    "ar": "لوحة الأوامر",
+    "bn": "কমান্ড প্যালেট",
+    "en": "Command Palette",
+    "es": "Paleta de comandos",
+    "fr": "Palette de commandes",
+    "hi": "कमांड पैलेट",
+    "id": "Palet perintah",
+    "pt": "Paleta de comandos",
+    "ur": "کمانڈ پیلیٹ",
+    "zh-Hans": "命令面板"
+  },
+  "Paleta de comandos…": {
+    "ar": "لوحة الأوامر…",
+    "bn": "কমান্ড প্যালেট…",
+    "en": "Command Palette…",
+    "es": "Paleta de comandos…",
+    "fr": "Palette de commandes…",
+    "hi": "कमांड पैलेट…",
+    "id": "Palet perintah…",
+    "pt": "Paleta de comandos…",
+    "ur": "کمانڈ پیلیٹ…",
+    "zh-Hans": "命令面板…"
   },
   "Panel localizador": {
     "ar": "لوحة الموقع",
@@ -13702,6 +13750,18 @@
     "pt": "Use de 1 a 30 palavras diferentes de 2 a {size} letras, sem espaços.",
     "ur": "بغیر خالی جگہ کے 2 سے {size} حروف والے 1 سے 30 مختلف الفاظ استعمال کریں۔",
     "zh-Hans": "使用 1 到 30 个不同单词，每个含 2 到 {size} 个字母，不含空格。"
+  },
+  "Usa las flechas y pulsa Intro para abrir.": {
+    "ar": "استخدم الأسهم واضغط على إدخال للفتح.",
+    "bn": "খুলতে তীর চিহ্ন ও এন্টার চাপুন।",
+    "en": "Use the arrow keys and press Return to open.",
+    "es": "Usa las flechas y pulsa Intro para abrir.",
+    "fr": "Utilisez les flèches et appuyez sur Entrée pour ouvrir.",
+    "hi": "खोलने के लिए तीर कुंजियाँ और एंटर दबाएँ।",
+    "id": "Gunakan tombol panah dan tekan Enter untuk membuka.",
+    "pt": "Use as setas e pressione Enter para abrir.",
+    "ur": "کھولنے کے لیے تیر کی کلیدیں اور انٹر دبائیں۔",
+    "zh-Hans": "使用方向键并按回车键打开。"
   },
   "Vaciar lista": {
     "ar": "مسح القائمة",

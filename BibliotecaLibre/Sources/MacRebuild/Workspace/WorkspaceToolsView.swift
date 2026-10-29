@@ -20,6 +20,7 @@ struct WorkspaceToolsView: View {
             case .scriptureMemory: ScriptureMemoryView(workspace: workspace, personal: workspace.personal)
             case .studyAssessments: StudyAssessmentView(personal: workspace.personal)
             case .wordSearch: WordSearchView()
+            case .commandPalette: WorkspaceCommandPaletteView(workspace: workspace)
             case .passageGuide: PassageGuideView(workspace: workspace, controller: workspace.passageGuide)
             case .information: ResourceInformationView(reader: workspace.activeReader)
             case .resources: ResourceManagerView(workspace: workspace)
@@ -69,6 +70,7 @@ struct WorkspaceToolsView: View {
         case .scriptureMemory: "Memorización de pasajes"
         case .studyAssessments: "Autoevaluaciones"
         case .wordSearch: "Sopa de letras"
+        case .commandPalette: "Paleta de comandos"
         case .passageGuide: "Guía de pasajes"
         case .information: "Propiedades del recurso"
         case .resources: "Recursos y licencias"

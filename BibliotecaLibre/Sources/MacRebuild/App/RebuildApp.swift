@@ -194,6 +194,7 @@ struct RebuildCommands: Commands {
             }
         }
         CommandMenu(L("Herramientas")) {
+            Button(L("Paleta de comandos…")) { workspace.activeTool = .commandPalette }.keyboardShortcut("p", modifiers: [.command, .shift])
             Button(L("Guía de pasajes…")) { workspace.activeTool = .passageGuide }
             Button(L("Planes de lectura…")) { workspace.activeTool = .readingPlans }
             Button(L("Lista de oración…")) { workspace.activeTool = .prayerJournal }
