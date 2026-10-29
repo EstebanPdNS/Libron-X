@@ -34,7 +34,7 @@ targets += [
     .target(name: "LibronixOutputMac", dependencies: ["LibronixCore"]),
     .executableTarget(name: "BibliotecaMac", dependencies: ["LibronixCore", "LibronixOutputMac"]),
     .testTarget(name: "BibliotecaMacTests", dependencies: ["BibliotecaMac", "LibronixCore", "LibronixOutputMac"]),
-    .executableTarget(name: "MacRebuild", dependencies: ["LibronixCore"], resources: [.process("Resources")]),
+    .executableTarget(name: "MacRebuild", dependencies: ["LibronixCore", "LibronixOutputMac"], resources: [.process("Resources")]),
     .testTarget(name: "MacRebuildTests", dependencies: ["MacRebuild", "LibronixCore"])
 ]
 inspectDependencies.append("LibronixOutputMac")

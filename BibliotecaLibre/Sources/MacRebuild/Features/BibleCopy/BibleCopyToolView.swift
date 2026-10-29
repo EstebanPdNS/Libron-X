@@ -1,6 +1,7 @@
 import AppKit
 import SwiftUI
 import LibronixCore
+import LibronixOutputMac
 
 struct BibleCopyToolView: View {
     @Bindable var workspace: StudyWorkspace
@@ -10,6 +11,7 @@ struct BibleCopyToolView: View {
     @RebuildViewState private var citation = true
     @RebuildViewState private var footnotes = false
     @RebuildViewState private var result = ""
+    @RebuildViewState private var payload: NativeBibleCopyPayload?
     @RebuildViewState private var error: String?
     @RebuildViewState private var isLoading = false
     @RebuildViewState private var task: Task<Void, Never>?
@@ -53,7 +55,11 @@ struct BibleCopyToolView: View {
             if isLoading { HStack { ProgressView().controlSize(.small); Button(L("Cancelar")) { task?.cancel(); isLoading = false } } }
             ScrollView { Text(result).textSelection(.enabled).frame(maxWidth: .infinity, alignment: .leading).padding(12) }
                 .background(Color(nsColor: .textBackgroundColor)).clipShape(RoundedRectangle(cornerRadius: 6))
-            HStack { Spacer(); Button(L("Copiar")) { NSPasteboard.general.clearContents(); NSPasteboard.general.setString(result, forType: .string) }.disabled(result.isEmpty) }
+            HStack { Spacer(); Button(L("Copiar")) {
+                guard let payload else { return }
+                do { try NativeBibleCopyOutput.copy(payload); error = nil }
+                catch { self.error = error.localizedDescription }
+            }.disabled(payload == nil || result.isEmpty) }
         }.padding(16)
             .onAppear {
                 let active = workspace.activeReader
@@ -62,32 +68,34 @@ struct BibleCopyToolView: View {
             }
             .onChange(of: workspace.availableResources.map(\.id)) {
                 if !workspace.availableResources.contains(where: { $0.id == resourceID }) {
-                    task?.cancel(); resourceID = ""; result = ""; isLoading = false
+                    task?.cancel(); resourceID = ""; result = ""; payload = nil; isLoading = false
                 }
             }
             .onDisappear { task?.cancel() }
-            .onChange(of: reference) { task?.cancel(); result = ""; isLoading = false }
-            .onChange(of: resourceID) { task?.cancel(); result = ""; isLoading = false }
-            .onChange(of: paragraphStyle) { task?.cancel(); result = ""; isLoading = false }
-            .onChange(of: citation) { task?.cancel(); result = ""; isLoading = false }
-            .onChange(of: footnotes) { task?.cancel(); result = ""; isLoading = false }
-            .onChange(of: workspace.personal.bibleCopyState) { task?.cancel(); result = ""; isLoading = false }
+            .onChange(of: reference) { clearPreview() }
+            .onChange(of: resourceID) { clearPreview() }
+            .onChange(of: paragraphStyle) { clearPreview() }
+            .onChange(of: citation) { clearPreview() }
+            .onChange(of: footnotes) { clearPreview() }
+            .onChange(of: workspace.personal.bibleCopyState) { clearPreview() }
             .sheet(isPresented: $showStyles) { BibleCopyStylesView(workspace: workspace, personal: workspace.personal).modifier(AppInterfaceLanguage()) }
     }
+    private func clearPreview() { task?.cancel(); result = ""; payload = nil; isLoading = false }
     private func prepare() {
         task?.cancel()
         guard let resource = workspace.availableResources.first(where: { $0.id == resourceID }) else { return }
         let requested = reference
         var style = chosenStyle ?? BibleCopyOutputStyle(name: "Copiar versículos")
         style.paragraphs = paragraphStyle; style.citation = citation; style.copyFootnotes = footnotes
-        error = nil; result = ""; isLoading = true
+        error = nil; result = ""; payload = nil; isLoading = true
         task = Task {
             do {
                 let passage = try BibleCopyPassage.parse(requested)
                 let document = try await BibleCopyService().prepare(resource, passage: passage, abbreviation: resource.location.deletingPathExtension().lastPathComponent, includeFootnotes: footnotes)
                 let formatted = try BibleCopyFormatter.format(document, style: style, referenceLanguage: .spanish)
+                let output = try NativeBibleCopyOutput.prepare(formatted)
                 guard !Task.isCancelled else { return }
-                result = formatted.plainText; isLoading = false
+                result = output.text; payload = output; isLoading = false
             } catch { if !Task.isCancelled { self.error = error.localizedDescription; isLoading = false } }
         }
     }
