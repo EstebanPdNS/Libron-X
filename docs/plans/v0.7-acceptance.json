@@ -29,7 +29,8 @@
         "Reuse the source-verified native dictionary entry count during search instead of recounting the database for every article; source stamps are checked around reads.",
         "Use compact contiguous native-dictionary search directories and iterate descriptors lazily; preserve source-stamp validation, results, ordering and explicit coverage limits.",
         "Keep source identifiers, coverage statuses and diagnostic details separately; localize status labels at display time without changing resource titles.",
-        "When no dictionary terms are supplied, derive up to eight distinct words from a checked Bible passage in a prioritized LSF, LLS or e-Sword edition; show the terms used and preserve user-supplied terms."
+        "When no dictionary terms are supplied, derive up to eight distinct words from a checked Bible passage in a prioritized LSF, LLS or e-Sword edition; show the terms used and preserve user-supplied terms.",
+        "When the highest-priority Bible cannot provide the passage, try other compatible editions and retain source-specific warnings."
       ],
       "verification": [
         "Four PassageGuideControllerTests cover a real authored e-Sword commentary and explicit-reference scan, source identity, mixed results, incomplete coverage, failures, invalid input, partial results and cancellation. Existing KeyLinkControllerTests verify real dictionary and lexicon lookups and changed-source rejection.",
@@ -42,7 +43,8 @@
         "Build 141 searched Spanish Wiktionary using a compact 837,661-entry directory; early process memory was approximately 200–225 MB versus approximately 770 MB observed in build 140 for the same scoped search. These are point observations, not controlled peak-memory benchmarks. PersistentLibrarySearchTests pass 13 tests including compact directory encoding and old identity decoding; WorkspaceUnifiedSearchTests compare source and indexed searches and exact citation results. A full test run passed 472 core tests and 46 BibliotecaMac tests; one topic concurrency test in the 460-test MacRebuild target failed under suite load and passed when rerun alone.",
         "Build 141 reached the search time limit in the Spanish Wiktionary and displayed an incomplete reference report without claiming no matches. During the run, process resident memory was sampled at about 200–225 MB; results do not constitute a controlled peak-memory benchmark.",
         "PassageGuideControllerTests and AppLanguageTests passed (13 tests), including a real incompatible-resource report and all status labels in ten languages. Build 143 displayed the same incomplete Wiktionary report in Spanish dark, Arabic light and English dark, preserving the resource name and updating the warning when the language changed. Original English/automatic settings were restored.",
-        "PassageGuideControllerTests include automatic source-word lookup from an authored e-Sword Bible; the nine focused tests pass, including partial references and cancellation."
+        "PassageGuideControllerTests include automatic source-word lookup from an authored e-Sword Bible; the nine focused tests pass, including partial references and cancellation.",
+        "Focused PassageGuideControllerTests cover an unavailable first Bible and terms from a second authored edition."
       ],
       "limitations": [
         "Long dictionary and library scans can still be slow; the guide displays partial matches and supports cancellation, but lookup duration is not independently bounded.",
@@ -399,11 +401,13 @@
       "status": "in_progress",
       "implementation": [
         "Rich note editor and persistent hierarchy and organization are integrated in MacRebuild.",
-        "Preserve strikeout formatting from inert imported HTML in both native note projections and the saved editable RTF; retain the original HTML."
+        "Preserve strikeout formatting from inert imported HTML in both native note projections and the saved editable RTF; retain the original HTML.",
+        "Preserve supported HTML inline and paragraph styles, including color, when creating an editable rich-text representation; original HTML remains intact."
       ],
       "verification": [
         "22 focused note and organization tests passed; the complete optimized suite passed 935 tests. Native macOS checks covered rich formatting, keyboard undo/redo, saving, reopening, nested notes, reordering, and properties.",
-        "NoteRichTextTests preserve imported strikeout through RTF round-trip and retain the untouched original HTML."
+        "NoteRichTextTests preserve imported strikeout through RTF round-trip and retain the untouched original HTML.",
+        "StudyDocumentTests and NoteRichTextTests cover nested paragraph styling, character styles and editable RTF."
       ],
       "limitations": [
         "Further native testing, imported-object fidelity and remaining acceptance work continue in 0.7.",
@@ -588,7 +592,8 @@
         "Save favorite edits atomically with conflict detection; restore verified locations using their exact saved UTF-16 offset and source fingerprint.",
         "Open supported legacy jump commands by checking the unique numeric resource identity, paired LSF/LIX indices, original character counts, position and decoded-text fingerprint; cancel stale navigation and display errors within the favorites sheet.",
         "Import original XML favorites through the native file picker, preserving nested folders and opaque commands while merging atomically with existing favorites; input size is bounded.",
-        "Open verified legacy jump commands in LLS containers when their catalog identity matches the embedded LSF/LIX; keep the original container identity and reject ambiguous matches."
+        "Open verified legacy jump commands in LLS containers when their catalog identity matches the embedded LSF/LIX; keep the original container identity and reject ambiguous matches.",
+        "Resolve original jump commands against LLS catalog identifiers, then verify the embedded LSF/LIX identity and position."
       ],
       "verification": [
         "Seven PersonalLibraryStateTests and six QuickBookmarkTests passed, including cycles, order, conflict rollback, exact position and changed-source rejection.",
@@ -596,7 +601,8 @@
         "Four OriginalFavoriteNavigationTests passed using authored paired LSF/LIX data: exact imported position, missing or ambiguous resources, invalid command, damaged index and newer-navigation cancellation. Native build 130 shows the missing-resource alert immediately above the favorites sheet; the sheet remains open after dismissal.",
         "Two OriginalFavoriteImportTests cover nested merge and persisted state, repeated import with distinct IDs, invalid and oversized input, and concurrent-writer conflict. Native build 131 imported an authored XML through the file picker and displayed its nested folder and position; original personal state was restored afterward.",
         "OriginalFavoriteNavigationTests pass for existing checked LSF jump commands, ambiguous resources and damaged indexes; other original actions remain unresolved.",
-        "OriginalFavoriteNavigationTests include an authored LLS containing paired LSF/LIX data and confirm the checked position and outer resource identity."
+        "OriginalFavoriteNavigationTests include an authored LLS containing paired LSF/LIX data and confirm the checked position and outer resource identity.",
+        "OriginalFavoriteNavigationTests cover the LLS catalog identifier and the original saved position."
       ],
       "limitations": [
         "Recovery supports measured jump commands and checked LSF/LIX projections only; other original actions and incompatible formats remain unresolved. Additional original-file variants require validation.",
@@ -1730,11 +1736,13 @@
       "status": "in_progress",
       "implementation": [
         "Added versioned, bounded Libron-X location links carrying exact local resource identity, reference, UTF-16 position and source fingerprint. Link opening waits for workspace startup and verifies resource identity and source fingerprint.",
-        "The Go menu exposes link copying and explains that the link can include a local path; the macOS bundle registers the libronx URL scheme."
+        "The Go menu exposes link copying and explains that the link can include a local path; the macOS bundle registers the libronx URL scheme.",
+        "Create location links for web-backed readers after their DOM projection is ready and verify the source file and fingerprint before applying a saved position."
       ],
       "verification": [
         "ReaderLocationLinkTests and ReaderLocationLinkWorkflowTests passed for round trips, malformed links, bounds, exact selection, changed fingerprints and unavailable resources. The generated app Info.plist passed plutil validation.",
-        "ReaderLocationLinkWorkflowTests pass for checked resources, position and changed or absent source; operating-system delivery has not been checked."
+        "ReaderLocationLinkWorkflowTests pass for checked resources, position and changed or absent source; operating-system delivery has not been checked.",
+        "ReaderLocationLinkWorkflowTests cover a real authored OEB, a verified position and source replacement before selection."
       ],
       "limitations": [
         "End-to-end operating-system URL delivery, cold start, clipboard copying and native visual/accessibility acceptance remain pending. Resource identity can include a local path; links may not resolve after moving the resource or on a different installation."
@@ -1800,13 +1808,15 @@
         "Added a read-only library health report for missing package or source files, invalid or opaque resources, catalog warnings, missing annotation sources and unresolved legacy note anchors. It explicitly says conversions and indexes are not comprehensively checked.",
         "Inspection runs off the main actor, supports cancellation on close and limits displayed issues while reporting the omitted count.",
         "Report missing declared indexes, incomplete conversion receipts, and unavailable favorite and bookmark destinations in the existing bounded health report.",
-        "Check existing search-index databases read-only with bounded SQLite integrity and schema checks; report unavailable checks and validate conversion receipt identity and completion against its package manifest."
+        "Check existing search-index databases read-only with bounded SQLite integrity and schema checks; report unavailable checks and validate conversion receipt identity and completion against its package manifest.",
+        "Report missing editions in verse lists, reading plans and scripture-memory cards and bound total search-index checking time."
       ],
       "verification": [
         "LibraryHealthTests passed for missing files, warnings, invalid resources, edition identity, unresolved annotations and the 5,000-item display cap. AppLanguageTests and CommandPaletteTests passed.",
         "Native build 184: the health panel checked 13 resources and showed the compact, clearly spaced no-problems state; the issue-list state remains to be checked visually.",
         "LibraryHealthTests cover missing declared index, incomplete receipt and unresolved favorite and bookmark destinations, retaining bounded report behavior.",
-        "LibraryHealthTests cover absent, healthy and damaged search-index caches, and the ten-language interface catalog passes AppLanguageTests."
+        "LibraryHealthTests cover absent, healthy and damaged search-index caches, and the ten-language interface catalog passes AppLanguageTests.",
+        "LibraryHealthTests cover edition references and absent, damaged and healthy caches."
       ],
       "limitations": [
         "The panel does not yet verify the full contents of every index or conversion; native visual, accessibility and multilingual acceptance remain pending."
@@ -2284,14 +2294,16 @@
         "Compact dictionary searches may now exclude only source-verified, indexed ASCII entries absent from the conservative candidate set, without materializing the whole directory. Unindexed and Unicode entries remain candidates.",
         "BibliotecaLibre/Sources/LibronixCore/Formats/BibleCopyOutputBudget.swift",
         "Bible-copy formatting shares a 16,000,000-unit UTF-16 ceiling across templates, body, separators, footnotes and citation. Intermediate sequential replacement is bounded before append. A 100,000-element ceiling also bounds tiny-run/paragraph/note growth. Validated templates compile once per preparation instead of reparsing and revalidating per verse.",
-        "Yield between e-Sword verse projections and check cancellation so a long copy does not monopolize the UI for the entire passage."
+        "Yield between e-Sword verse projections and check cancellation so a long copy does not monopolize the UI for the entire passage.",
+        "Bound the total index checks in one health report to eight seconds and identify unverified checks."
       ],
       "verification": [
         "Search regression suites passed (36 core tests and 10 MacRebuild tests; two corpus-dependent cases skipped). A separate real bundled Easton test returned identical cold/warm hits: 3962 articles in 3.92 seconds cold, 2523 in 1.73 seconds warm, excluding 1439. A partial index, Unicode matches, short queries, and an index with a missing FTS row were exercised against linear results.",
         "Native build 144: an Easton search returned 59 matching articles on both cold and warm runs, examining 3962 articles in 4.1 seconds and 2523 in 2.0 seconds respectively. Opening the first result selected the matching source text in the reader; the test reading and query were closed afterward.",
         "2026-10-29: 37 focused tests passed in five suites: production-size repeated templates, intermediate growth, exact Unicode boundaries, trim/spaces, both source-paragraph paths, repeated notes and citation accounting, structural-element limit, invalid bounds, cancellation, native RTF/HTML/text output, unchanged private pasteboard after rejection, style persistence and all ten interface translations. The oversized-template fixture contains 1100 owned verses with an individually valid 16000-byte pattern; the aggregate request throws rather than returning partial output.",
         "Local build log 226: compiled, signed and replaced the single installed /Applications/Libron-X.app. Reopened the original reading and the native Bible-copy tool; its empty-resource state correctly disabled preview/copy/export. No compatible Bible is installed in this restored user library, so the over-limit copy path is verified by the authored Core/AppKit tests, not claimed as a live-library UI test.",
-        "Focused functional tests pass with cooperative yielding between e-Sword rows; this is not evidence of long-session or representative peak-memory performance."
+        "Focused functional tests pass with cooperative yielding between e-Sword rows; this is not evidence of long-session or representative peak-memory performance.",
+        "Focused health checks pass; the bound does not substitute for long-session measurements."
       ],
       "limitations": [
         "The compact-index check retains metadata sets proportional to indexed entries; representative large, fully indexed libraries still need memory and long-session measurements.",

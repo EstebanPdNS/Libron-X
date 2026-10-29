@@ -643,16 +643,18 @@ struct ReaderPage: Sendable {
             }
             return
         }
-        page?.text = text; oebProjectionReady = true
         if let pending = pendingOEBSelection, pending.url == url {
             pendingOEBSelection = nil
             try page?.oeb?.book.verifySource()
             if let fingerprint = pending.fingerprint, LibrarySearchService.textFingerprint(text) != fingerprint { throw LibronixBookError.sourceChanged }
+            if let range = pending.selection, Range(range, in: text) == nil { throw LibronixBookError.sourceChanged }
+            page?.text = text; oebProjectionReady = true
             if let range = pending.selection {
-                guard Range(range, in: text) != nil else { throw LibronixBookError.sourceChanged }
                 selectedRange = range; selectionRequest += 1
                 return
             }
+        } else {
+            page?.text = text; oebProjectionReady = true
         }
         if selectedRange.length == 0, let initialOffset, (0...text.utf16.count).contains(initialOffset) {
             selectedRange = NSRange(location: initialOffset, length: 0)
