@@ -50,8 +50,8 @@ struct WorkspaceDocumentsView: View {
                 }
                 Button(L("Abrir…"), action: workspace.openDocument)
                 Button { showsPreviousDocuments = true } label: {
-                    Label(L("Recuperar versión anterior"), systemImage: "clock.arrow.circlepath").labelStyle(.iconOnly)
-                }.help(L("Recuperar versión anterior"))
+                    Label(L("Historial de documentos"), systemImage: "clock.arrow.circlepath").labelStyle(.iconOnly)
+                }.help(L("Historial de documentos"))
                 if let index = documentIndex, personal.documents[index].kind == .notebook {
                     Button(L("Informe…")) { reportDocument = personal.documents[index] }
                 }

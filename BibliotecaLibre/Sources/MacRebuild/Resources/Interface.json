@@ -1115,6 +1115,18 @@
     "ur": "غیر حل شدہ تشریح",
     "zh-Hans": "未解析的注释"
   },
+  "Anterior": {
+    "ar": "السابق",
+    "bn": "পূর্ববর্তী",
+    "en": "Previous",
+    "es": "Anterior",
+    "fr": "Précédent",
+    "hi": "पिछला",
+    "id": "Sebelumnya",
+    "pt": "Anterior",
+    "ur": "پچھلا",
+    "zh-Hans": "上一页"
+  },
   "Antes de cada versículo": {
     "ar": "قبل كل آية",
     "bn": "প্রতি পদের আগে",
@@ -6719,6 +6731,18 @@
     "ur": "قطار {row}، کالم {column}: {letter}",
     "zh-Hans": "第 {row} 行，第 {column} 列：{letter}"
   },
+  "Filtrar documentos": {
+    "ar": "تصفية المستندات",
+    "bn": "নথি ফিল্টার করুন",
+    "en": "Filter Documents",
+    "es": "Filtrar documentos",
+    "fr": "Filtrer les documents",
+    "hi": "दस्तावेज़ फ़िल्टर करें",
+    "id": "Filter dokumen",
+    "pt": "Filtrar documentos",
+    "ur": "دستاویزات چھانٹیں",
+    "zh-Hans": "筛选文档"
+  },
   "Filtrar por": {
     "ar": "تصفية حسب",
     "bn": "ছাঁকুন",
@@ -7498,6 +7522,18 @@
     "pt": "Histórico de pesquisas…",
     "ur": "تلاش کی تاریخ…",
     "zh-Hans": "搜索历史…"
+  },
+  "Historial de documentos": {
+    "ar": "سجل المستندات",
+    "bn": "নথির ইতিহাস",
+    "en": "Document History",
+    "es": "Historial de documentos",
+    "fr": "Historique des documents",
+    "hi": "दस्तावेज़ इतिहास",
+    "id": "Riwayat dokumen",
+    "pt": "Histórico de documentos",
+    "ur": "دستاویزات کی تاریخ",
+    "zh-Hans": "文档历史记录"
   },
   "Historial de lectura": {
     "ar": "سجل القراءة",
@@ -8663,6 +8699,18 @@
     "ur": "مشق کا جواب یا تاریخ درست نہیں۔",
     "zh-Hans": "练习答案或日期无效。"
   },
+  "La vista previa muestra texto; la copia recuperada conserva el documento completo.": {
+    "ar": "تعرض المعاينة النص؛ وتحتفظ النسخة المستعادة بالمستند كاملاً.",
+    "bn": "পূর্বরূপে পাঠ্য দেখানো হয়; পুনরুদ্ধার করা অনুলিপি সম্পূর্ণ নথি সংরক্ষণ করে।",
+    "en": "The preview shows text; the recovered copy preserves the complete document.",
+    "es": "La vista previa muestra texto; la copia recuperada conserva el documento completo.",
+    "fr": "L’aperçu affiche le texte ; la copie récupérée préserve le document complet.",
+    "hi": "पूर्वावलोकन पाठ दिखाता है; पुनर्प्राप्त प्रति पूरा दस्तावेज़ सुरक्षित रखती है।",
+    "id": "Pratinjau menampilkan teks; salinan yang dipulihkan mempertahankan dokumen lengkap.",
+    "pt": "A prévia mostra o texto; a cópia recuperada preserva o documento completo.",
+    "ur": "پیش منظر متن دکھاتا ہے؛ بازیاب نقل مکمل دستاویز محفوظ رکھتی ہے۔",
+    "zh-Hans": "预览显示文本；恢复的副本保留完整文档。"
+  },
   "Las asociaciones conservan su orden y los recursos ausentes. Los grupos de Biblias se administran por separado.": {
     "ar": "تحتفظ الارتباطات بترتيبها والموارد المفقودة. تُدار مجموعات الكتاب المقدس بشكل منفصل.",
     "bn": "সংযোগের ক্রম ও অনুপস্থিত রিসোর্স বজায় থাকে। বাইবেলের দলগুলো আলাদাভাবে পরিচালিত হয়।",
@@ -8830,6 +8878,18 @@
     "pt": "As regras exigem entre 1 e 32 condições válidas.",
     "ur": "قواعد کے لیے 1 سے 32 درست شرائط درکار ہیں۔",
     "zh-Hans": "规则需要 1 至 32 个有效条件。"
+  },
+  "Las revisiones se conservan al guardar cambios. Recuperar crea una copia sin reemplazar el documento actual.": {
+    "ar": "تُحفظ المراجعات عند حفظ التغييرات. تنشئ الاستعادة نسخة دون استبدال المستند الحالي.",
+    "bn": "পরিবর্তন সংরক্ষণ করলে সংশোধনগুলি রাখা হয়। পুনরুদ্ধার বর্তমান নথি প্রতিস্থাপন না করে একটি অনুলিপি তৈরি করে।",
+    "en": "Revisions are retained when changes are saved. Recovery creates a copy without replacing the current document.",
+    "es": "Las revisiones se conservan al guardar cambios. Recuperar crea una copia sin reemplazar el documento actual.",
+    "fr": "Les révisions sont conservées à l’enregistrement. La récupération crée une copie sans remplacer le document actuel.",
+    "hi": "बदलाव सहेजने पर संशोधन सुरक्षित रहते हैं। पुनर्प्राप्ति वर्तमान दस्तावेज़ को बदले बिना एक प्रति बनाती है।",
+    "id": "Revisi disimpan saat perubahan disimpan. Pemulihan membuat salinan tanpa mengganti dokumen saat ini.",
+    "pt": "As revisões são preservadas ao salvar alterações. A recuperação cria uma cópia sem substituir o documento atual.",
+    "ur": "تبدیلیاں محفوظ کرنے پر سابقہ نسخے برقرار رہتے ہیں۔ بازیابی موجودہ دستاویز بدلے بغیر ایک نقل بناتی ہے۔",
+    "zh-Hans": "保存更改时会保留修订版本。恢复会创建副本，不会替换当前文档。"
   },
   "Las subnotas se trasladan junto con sus notas superiores.": {
     "ar": "تُنقل الملاحظات الفرعية مع ملاحظاتها الأصلية.",
@@ -10367,6 +10427,18 @@
     "ur": "اس مطالعے کے لیے کوئی تعلق دستیاب نہیں ہے۔",
     "zh-Hans": "此阅读没有可用的关联。"
   },
+  "No hay versiones guardadas en esta página.": {
+    "ar": "لا توجد إصدارات محفوظة في هذه الصفحة.",
+    "bn": "এই পৃষ্ঠায় কোনো সংরক্ষিত সংস্করণ নেই।",
+    "en": "No saved versions on this page.",
+    "es": "No hay versiones guardadas en esta página.",
+    "fr": "Aucune version enregistrée sur cette page.",
+    "hi": "इस पृष्ठ पर कोई सहेजा गया संस्करण नहीं है।",
+    "id": "Tidak ada versi tersimpan di halaman ini.",
+    "pt": "Não há versões salvas nesta página.",
+    "ur": "اس صفحے پر کوئی محفوظ نسخہ نہیں ہے۔",
+    "zh-Hans": "此页没有已保存的版本。"
+  },
   "No hay áreas de trabajo recientes.": {
     "ar": "لا توجد مساحات عمل حديثة.",
     "bn": "কোনো সাম্প্রতিক কর্মক্ষেত্র নেই।",
@@ -10654,6 +10726,18 @@
     "pt": "Não foi possível ler os grupos de Bíblias.",
     "ur": "بائبل کے گروپ پڑھے نہیں جا سکے۔",
     "zh-Hans": "无法读取圣经分组。"
+  },
+  "No se pudieron leer {count} copias del historial; se han conservado sus archivos.": {
+    "ar": "تعذرت قراءة {count} نسخ من السجل؛ تم الاحتفاظ بملفاتها.",
+    "bn": "ইতিহাসের {count}টি অনুলিপি পড়া যায়নি; তাদের ফাইলগুলি রাখা হয়েছে।",
+    "en": "Could not read {count} history snapshots; their files have been preserved.",
+    "es": "No se pudieron leer {count} copias del historial; se han conservado sus archivos.",
+    "fr": "Impossible de lire {count} copies de l’historique ; leurs fichiers ont été conservés.",
+    "hi": "इतिहास की {count} प्रतियाँ पढ़ी नहीं जा सकीं; उनकी फ़ाइलें सुरक्षित हैं।",
+    "id": "Tidak dapat membaca {count} salinan riwayat; berkasnya tetap disimpan.",
+    "pt": "Não foi possível ler {count} cópias do histórico; seus arquivos foram preservados.",
+    "ur": "تاریخ کی {count} نقول پڑھی نہیں جا سکیں؛ ان کی فائلیں محفوظ ہیں۔",
+    "zh-Hans": "无法读取 {count} 个历史快照；其文件已保留。"
   },
   "No se pudo abrir el RTF guardado; se analiza la vista de solo lectura del original.": {
     "ar": "تعذر فتح RTF المحفوظ؛ يُحلّل العرض الأصلي للقراءة فقط.",
@@ -14183,6 +14267,18 @@
     "ur": "کوئی سانچہ منتخب کریں یا نیا بنائیں۔",
     "zh-Hans": "选择模板或新建模板。"
   },
+  "Selecciona una versión para revisarla.": {
+    "ar": "اختر إصدارًا لمراجعته.",
+    "bn": "পর্যালোচনা করতে একটি সংস্করণ নির্বাচন করুন।",
+    "en": "Select a version to review.",
+    "es": "Selecciona una versión para revisarla.",
+    "fr": "Sélectionnez une version à examiner.",
+    "hi": "समीक्षा के लिए एक संस्करण चुनें।",
+    "id": "Pilih versi untuk ditinjau.",
+    "pt": "Selecione uma versão para revisar.",
+    "ur": "جائزے کے لیے ایک نسخہ منتخب کریں۔",
+    "zh-Hans": "选择一个版本进行查看。"
+  },
   "Seleccionado": {
     "ar": "محدّد",
     "bn": "বাছাই করা",
@@ -14326,6 +14422,18 @@
     "pt": "Siclos",
     "ur": "شیکل",
     "zh-Hans": "舍客勒"
+  },
+  "Siguiente": {
+    "ar": "التالي",
+    "bn": "পরবর্তী",
+    "en": "Next",
+    "es": "Siguiente",
+    "fr": "Suivant",
+    "hi": "अगला",
+    "id": "Berikutnya",
+    "pt": "Seguinte",
+    "ur": "اگلا",
+    "zh-Hans": "下一页"
   },
   "Siguiente lectura": {
     "ar": "القراءة التالية",

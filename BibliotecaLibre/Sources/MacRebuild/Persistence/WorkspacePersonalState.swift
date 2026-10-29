@@ -70,6 +70,7 @@ struct WorkspacePersonalSnapshot: Codable {
     @ObservationIgnored private var bibleCopyWritable = false
     @ObservationIgnored private var markPalettesWritable = false
     @ObservationIgnored private var canSave = false
+    @ObservationIgnored private var savedDocuments: [StudyDocument] = []
     @ObservationIgnored private var saveTask: Task<Void, Never>?
     init(url: URL? = nil) {
         let path = url ?? FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
@@ -90,6 +91,7 @@ struct WorkspacePersonalSnapshot: Codable {
         do {
             if let saved = try file.load() {
                 try saved.validate(); favorites = saved.favorites; highlights = saved.highlights; documents = saved.documents
+                savedDocuments = saved.documents
             }
             canSave = true; selectedDocumentID = documents.first?.id
         } catch { loadError = error.localizedDescription }
@@ -260,7 +262,12 @@ struct WorkspacePersonalSnapshot: Codable {
         guard canSave else { throw PersonalStateError.invalid(loadError ?? "No se pudo abrir el archivo personal; se conservaron sus datos.") }
         let snapshot = WorkspacePersonalSnapshot(schemaVersion: highlights.contains(where: { $0.style != nil }) ? 2 : 1,
             favorites: favorites, highlights: highlights, documents: documents)
-        try snapshot.validate(); try file.save(snapshot); loadError = nil
+        try snapshot.validate()
+        let documentsChanged = savedDocuments != documents
+        try file.save(snapshot) { previous in
+            if documentsChanged { try PersonalDocumentHistory.archive(previous, beside: self.file.url) }
+        }
+        savedDocuments = documents; loadError = nil
     }
     func scheduleSave() {
         saveTask?.cancel()
@@ -368,6 +375,17 @@ struct WorkspacePersonalSnapshot: Codable {
     }
     func previousDocuments() throws -> [StudyDocument] {
         try PreviousDocumentRecovery.read(from: file.url)
+    }
+    func documentHistory(offset: Int = 0) throws -> PersonalDocumentHistory.Report {
+        try PersonalDocumentHistory.read(beside: file.url, offset: offset)
+    }
+    func recoverDocumentVersion(_ version: PersonalDocumentHistory.Version, title: String) throws {
+        let snapshot = try PersonalDocumentHistory.verify(version)
+        let copy = try PreviousDocumentRecovery.copy(version.document, title: title)
+        // The selected predecessor may rotate during the save; preserve it first.
+        try PersonalDocumentHistory.archive(snapshot, beside: file.url)
+        try replaceDocuments(documents + [copy])
+        selectedDocumentID = copy.id
     }
     func recoverPreviousDocument(_ original: StudyDocument, title: String) throws {
         // Re-read just before writing; do not restore a stale or replaced backup.

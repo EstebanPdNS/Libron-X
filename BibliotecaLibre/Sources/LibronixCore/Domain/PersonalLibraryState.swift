@@ -175,7 +175,7 @@ public final class PersonalStateFile<Value: Codable> {
         let value = try JSONDecoder().decode(Value.self, from: data)
         previousBytes = data; loaded = true; return value
     }
-    public func save(_ value: Value) throws {
+    public func save(_ value: Value, beforeReplacing: ((Data) throws -> Void)? = nil) throws {
         guard loaded else { throw PersonalStateError.invalid("Abre el archivo antes de guardarlo.") }
         let current = FileManager.default.fileExists(atPath: url.path) ? try readBounded(url) : nil
         guard current == previousBytes else { throw PersonalStateError.concurrentChange }
@@ -186,6 +186,7 @@ public final class PersonalStateFile<Value: Codable> {
         // identical copy of the current state.
         guard data != current else { return }
         try FileManager.default.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
+        if let current { try beforeReplacing?(current) }
         if let current { try current.write(to: url.appendingPathExtension("previous"), options: .atomic) }
         try data.write(to: url, options: .atomic)
         previousBytes = data

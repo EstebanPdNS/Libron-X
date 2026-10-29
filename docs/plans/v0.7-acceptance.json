@@ -1630,15 +1630,22 @@
       "status": "in_progress",
       "implementation": [
         "Added a native browser for the immediately preceding personal-data backup and recovery as a separate document with new identities and preserved note hierarchy and provenance.",
-        "Preserve the original backup in a private recovery directory before rotating the normal predecessor; avoid replacing the predecessor during a no-op save."
+        "Preserve the original backup in a private recovery directory before rotating the normal predecessor; avoid replacing the predecessor during a no-op save.",
+        "Added immutable, SHA-256-addressed personal snapshots before document changes rotate the live state. Identical content is deduplicated, unchanged saves do not create revisions, and no history files are automatically removed.",
+        "Expanded the browser to paginated historical snapshots and prior recovery archives, with document filtering, dates, text preview and recovery as an independent copy. The source fingerprint is rechecked before recovery; unreadable snapshots remain on disk and do not hide valid versions."
       ],
       "verification": [
         "PreviousDocumentRecoveryTests cover preserved hierarchy, new identities, stale backup rejection, missing or corrupt backup, unchanged-save retention and preservation of the source archive on a concurrent save conflict.",
         "Native build 188 displayed the backup browser in dark appearance and recovered a test notebook as a separate document with its note text intact. Original personal files were restored.",
-        "Native build 189 created a private recovery archive and recovered the test notebook; the test archive was moved aside and original personal files restored."
+        "Native build 189 created a private recovery archive and recovered the test notebook; the test archive was moved aside and original personal files restored.",
+        "PersonalDocumentHistoryTests, PreviousDocumentRecoveryTests, PersonalLibraryStateTests and AppLanguageTests passed: 19 tests covering multiple rotations, independent recovery identities and hierarchy, no-op saves, failed archives, concurrent modifications, unreadable history, pagination and ten-language catalog coverage.",
+        "Native build 206: reviewed the dated history list and text preview with two historical notebooks; filtered to the first revision, recovered it as a new notebook and verified its body in the rich editor. The current notebook retained its different body. Personal data were restored and synthetic history files archived outside app data.",
+        "The full serial test suite passed after the persistence change: 520 MacRebuild tests, 491 LibronixCore tests and 47 BibliotecaMac tests (1,058 total)."
       ],
       "limitations": [
-        "The browser exposes only the immediately preceding personal snapshot; a multi-version history and sermon documents remain pending."
+        "Sermon document support remains pending in F210. The history supports the current notebook and verse-list document types.",
+        "Historical snapshots record their archive time, not an independently recovered original edit timestamp. The preview projects text; recovery preserves the complete stored document.",
+        "General light/RTL, VoiceOver and platform acceptance remain open in their dedicated release requirements."
       ]
     },
     {
