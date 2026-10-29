@@ -62,6 +62,7 @@ enum PaneArrangement { case cascade, horizontal, vertical }
     var snapPreview: PaneFrame?
     var dictionary = DictionaryController()
     var search = WorkspaceSearchController()
+    var transliteration = TransliterationController()
     var referenceSearch = WorkspaceReferenceSearchController()
     var annotationSearch = PersonalAnnotationSearchController()
     var personal: WorkspacePersonalState

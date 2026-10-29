@@ -23,7 +23,8 @@ struct WorkspaceToolsView: View {
             case .commandPalette: WorkspaceCommandPaletteView(workspace: workspace)
             case .biblicalMeasures: BiblicalMeasuresView()
             case .researchInbox: ResearchInboxView(workspace: workspace, personal: workspace.personal)
-            case .transliteration: TransliterationView()
+            case .transliteration:
+                TransliterationView(controller: workspace.transliteration, search: workspace.search) { workspace.activeTool = .search }
             case .libraryHealth: LibraryHealthView(workspace: workspace)
             case .passageGuide: PassageGuideView(workspace: workspace, controller: workspace.passageGuide)
             case .information: ResourceInformationView(reader: workspace.activeReader)
@@ -120,6 +121,9 @@ struct WorkspaceSearchView: View {
             HStack {
                 Button(L("Historial de búsquedas…")) { historyOpen = true }
                 Button(L("Consultas guardadas…")) { savedQueriesOpen = true }
+                Button { workspace.activeTool = .transliteration } label: {
+                    Label(L("Transliteración"), systemImage: "character.book.closed")
+                }
                 Spacer()
             }.disabled(search.isSearching)
             WorkspaceSearchScopePicker(selection: search.scope, context: workspace.searchScopeContext()).disabled(search.isSearching)

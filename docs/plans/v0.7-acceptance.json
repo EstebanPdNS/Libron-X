@@ -1260,19 +1260,29 @@
       "sourceKey": "study-expansion-languages-09",
       "acceptance": "Exponerlas en entrada, consulta y copia conservando el texto de origen y sus límites.",
       "baseline": "Core tiene conversiones acotadas griego/hebreo; no integración completa actual.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "Exposed the existing verified Greek and Hebrew transliteration policies and Hebrew mark options in user-owned Bible-copy templates; source text remains unchanged.",
-        "Added a bounded text-entry tool for Greek and Hebrew transliteration with a separately copyable result; the input is not altered."
+        "Added a bounded text-entry tool for Greek and Hebrew transliteration with a separately copyable result; the input is not altered.",
+        "Connected original and transliterated text to bounded literal search queries, escaping quotes, backslashes and operators. Search keeps the selected scope and limits while removing stale field, word-list, approximation and Bible-range filters.",
+        "The session-owned transliteration draft survives navigation between the input and search tools; a search-side action returns to it without changing the original text."
       ],
       "verification": [
         "BibleCopyTests passed for Greek and Hebrew transliteration and distinct Hebrew mark policies. BibleCopyStylePersistenceTests confirmed language settings persist, and AppLanguageTests passed for ten interface languages.",
         "TransliterationInputTests passed for Greek and Hebrew samples, source preservation and bounded invalid input; CommandPaletteTests and AppLanguageTests passed.",
-        "Native build 184: the Greek input λόγος produced logos in the glass-surfaced editor, with readable output and an enabled Copy button."
+        "Native build 184: the Greek input λόγος produced logos in the glass-surfaced editor, with readable output and an enabled Copy button.",
+        "TransliterationInputTests and AppLanguageTests passed: 10 tests, including exact UTF-16 hit coordinates, literal operators and escapes, rejected null/oversized input, draft preservation and search-setting transfer.",
+        "Native build 205: Greek λόγος produced logos; both search actions prepared their correct quoted phrase. Returning from Search retained the original draft. Copy followed by an actual keyboard paste produced logos. Inspected the native Glass actions, spacing and readable source/result editors."
       ],
       "limitations": [
-        "Search-query integration remains pending. The new input tool and copy-template controls still need native visual, keyboard and accessibility acceptance; the native control timed out after an open panel was closed."
-      ]
+        "Conversion uses the supported approximate Greek SBL and Hebrew Logos policies, not reverse conversion or semantic lemma matching. Literal searches are bounded to 512 UTF-16 units and search the actual book text; books are not converted.",
+        "Global light/RTL, full keyboard/VoiceOver and older-macOS acceptance remain tracked separately."
+      ],
+      "completionReview": {
+        "date": "2026-10-28",
+        "basis": "Entrada, consulta y copia están conectadas y verificadas sin alterar el origen.",
+        "releaseAcceptance": "La aceptación general de accesibilidad, idiomas y plataformas sigue abierta en sus fichas."
+      }
     },
     {
       "id": "F206",

@@ -2303,6 +2303,30 @@
     "ur": "لائبریری کے عنوانات اور فہرست مضامین میں موضوعات تلاش کریں۔",
     "zh-Hans": "在书库标题和目录条目中搜索主题。"
   },
+  "Buscar texto original": {
+    "ar": "البحث عن النص الأصلي",
+    "bn": "মূল পাঠ্য অনুসন্ধান",
+    "en": "Search Original Text",
+    "es": "Buscar texto original",
+    "fr": "Rechercher le texte original",
+    "hi": "मूल पाठ खोजें",
+    "id": "Cari teks asli",
+    "pt": "Pesquisar texto original",
+    "ur": "اصل متن تلاش کریں",
+    "zh-Hans": "搜索原文"
+  },
+  "Buscar transliteración": {
+    "ar": "البحث عن النقل الحرفي",
+    "bn": "প্রতিবর্ণীকরণ অনুসন্ধান",
+    "en": "Search Transliteration",
+    "es": "Buscar transliteración",
+    "fr": "Rechercher la translittération",
+    "hi": "लिप्यंतरण खोजें",
+    "id": "Cari transliterasi",
+    "pt": "Pesquisar transliteração",
+    "ur": "حرف نویسی تلاش کریں",
+    "zh-Hans": "搜索转写"
+  },
   "Buscar título o archivo": {
     "ar": "بحث بالعنوان أو الملف",
     "bn": "শিরোনাম বা ফাইল খুঁজুন",
@@ -8254,6 +8278,18 @@
     "pt": "A busca tem resultados parciais ou recursos pendentes",
     "ur": "تلاش کے نتائج جزوی ہیں یا وسائل زیر التوا ہیں",
     "zh-Hans": "搜索结果不完整或有待处理资源"
+  },
+  "La búsqueda usa una frase literal de hasta 512 caracteres UTF-16; no convierte el contenido de los libros.": {
+    "ar": "يستخدم البحث عبارة حرفية حتى 512 وحدة UTF-16؛ ولا يحوّل محتوى الكتب.",
+    "bn": "অনুসন্ধান সর্বোচ্চ 512 UTF-16 এককের আক্ষরিক বাক্যাংশ ব্যবহার করে; বইয়ের বিষয়বস্তু রূপান্তর করে না।",
+    "en": "Search uses a literal phrase of up to 512 UTF-16 units; it does not convert book content.",
+    "es": "La búsqueda usa una frase literal de hasta 512 caracteres UTF-16; no convierte el contenido de los libros.",
+    "fr": "La recherche utilise une expression littérale de 512 unités UTF-16 au maximum ; elle ne convertit pas le contenu des livres.",
+    "hi": "खोज अधिकतम 512 UTF-16 इकाइयों का शाब्दिक वाक्यांश उपयोग करती है; यह पुस्तकों की सामग्री नहीं बदलती।",
+    "id": "Pencarian memakai frasa literal hingga 512 unit UTF-16; isi buku tidak dikonversi.",
+    "pt": "A pesquisa usa uma expressão literal de até 512 unidades UTF-16; não converte o conteúdo dos livros.",
+    "ur": "تلاش زیادہ سے زیادہ 512 UTF-16 اکائیوں کا لفظی فقرہ استعمال کرتی ہے؛ کتابوں کا مواد تبدیل نہیں کرتی۔",
+    "zh-Hans": "搜索使用最多 512 个 UTF-16 单位的字面短语；不会转换书籍内容。"
   },
   "La categoría contiene oraciones.": {
     "ar": "تحتوي الفئة على صلوات.",
@@ -15478,6 +15514,18 @@
     "pt": "Use as setas e pressione Enter para abrir.",
     "ur": "کھولنے کے لیے تیر کی کلیدیں اور انٹر دبائیں۔",
     "zh-Hans": "使用方向键并按回车键打开。"
+  },
+  "Usar en búsqueda": {
+    "ar": "استخدام في البحث",
+    "bn": "অনুসন্ধানে ব্যবহার করুন",
+    "en": "Use in Search",
+    "es": "Usar en búsqueda",
+    "fr": "Utiliser dans la recherche",
+    "hi": "खोज में उपयोग करें",
+    "id": "Gunakan dalam pencarian",
+    "pt": "Usar na pesquisa",
+    "ur": "تلاش میں استعمال کریں",
+    "zh-Hans": "用于搜索"
   },
   "Vaciar lista": {
     "ar": "مسح القائمة",
