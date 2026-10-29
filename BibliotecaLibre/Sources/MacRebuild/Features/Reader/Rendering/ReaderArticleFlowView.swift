@@ -203,8 +203,7 @@ struct ReaderArticleFlowView: NSViewRepresentable {
             ReaderSourceLinkAttributes.install(page.inlineLinks, in: display, verseAnchors: page.content?.anchors ?? [])
             let fingerprint = LibrarySearchService.textFingerprint(page.text)
             for mark in marks where mark.fingerprint == fingerprint && Range(mark.range, in: page.text) != nil {
-                let color: NSColor = switch mark.color { case "green": .systemGreen; case "blue": .systemBlue; case "pink": .systemPink; default: .systemYellow }
-                display.addAttribute(.backgroundColor, value: color.withAlphaComponent(0.35), range: mark.range)
+                ReaderMarkPresentation.apply(mark, to: display)
             }
             surface.view.personalNoteLinks = ReaderPersonalNoteAttributes.matching(personalNotes, text: page.text, ordinal: page.destination.ordinal)
             ReaderPersonalNoteAttributes.install(surface.view.personalNoteLinks, in: display)

@@ -6287,6 +6287,18 @@
     "ur": "حوالے کا انداز",
     "zh-Hans": "引用格式"
   },
+  "Estilo de marcación": {
+    "ar": "نمط التمييز",
+    "bn": "চিহ্নের ধরন",
+    "en": "Marking Style",
+    "es": "Estilo de marcación",
+    "fr": "Style de marquage",
+    "hi": "चिह्न शैली",
+    "id": "Gaya penandaan",
+    "pt": "Estilo de marcação",
+    "ur": "نشان کا انداز",
+    "zh-Hans": "标记样式"
+  },
   "Estudios bíblicos": {
     "ar": "الدراسات الكتابية",
     "bn": "বাইবেল অধ্যয়ন",
@@ -12851,6 +12863,18 @@
     "ur": "تقاضے",
     "zh-Hans": "系统要求"
   },
+  "Resaltado": {
+    "ar": "تمييز",
+    "bn": "হাইলাইট",
+    "en": "Highlight",
+    "es": "Resaltado",
+    "fr": "Surlignage",
+    "hi": "हाइलाइट",
+    "id": "Sorotan",
+    "pt": "Realce",
+    "ur": "نمایاں",
+    "zh-Hans": "高亮"
+  },
   "Resaltado no verificable": {
     "ar": "تعذر التحقق من التمييز",
     "bn": "হাইলাইট যাচাই করা যায়নি",
@@ -14518,6 +14542,18 @@
     "pt": "Sim",
     "ur": "ہاں",
     "zh-Hans": "是"
+  },
+  "Tachado": {
+    "ar": "يتوسطه خط",
+    "bn": "কাটা দাগ",
+    "en": "Strikethrough",
+    "es": "Tachado",
+    "fr": "Barré",
+    "hi": "काटकर दिखाएँ",
+    "id": "Coret",
+    "pt": "Tachado",
+    "ur": "خط تنسیخ",
+    "zh-Hans": "删除线"
   },
   "Tamaño": {
     "ar": "الحجم",

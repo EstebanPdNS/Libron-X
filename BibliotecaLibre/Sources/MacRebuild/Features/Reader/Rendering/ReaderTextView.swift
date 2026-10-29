@@ -184,8 +184,7 @@ struct ReaderTextView: NSViewRepresentable {
         ReaderSourceLinkAttributes.install(inlineLinks, in: display, verseAnchors: content?.anchors ?? [])
         let fingerprint = LibrarySearchService.textFingerprint(text)
         for mark in highlights where mark.ordinal == identity?.ordinal && mark.fingerprint == fingerprint && Range(mark.range, in: text) != nil {
-            let color: NSColor = switch mark.color { case "green": .systemGreen; case "blue": .systemBlue; case "pink": .systemPink; default: .systemYellow }
-            display.addAttribute(.backgroundColor, value: color.withAlphaComponent(0.35), range: mark.range)
+            ReaderMarkPresentation.apply(mark, to: display)
         }
         view.personalNoteLinks = ReaderPersonalNoteAttributes.matching(personalNotes, text: text, ordinal: identity?.ordinal)
         ReaderPersonalNoteAttributes.install(view.personalNoteLinks, in: display)

@@ -8,13 +8,14 @@ struct WorkspacePersonalSnapshot: Codable {
     var highlights: [ReaderHighlight] = []
     var documents: [StudyDocument] = []
     func validate() throws {
-        guard schemaVersion == 1 else { throw PersonalStateError.futureVersion }
+        guard (1...2).contains(schemaVersion) else { throw PersonalStateError.futureVersion }
         try favorites.validate()
         guard documents.count <= 100, highlights.count <= 100_000,
               Set(documents.map(\.id)).count == documents.count,
               highlights.allSatisfy({ $0.ordinal >= 0 && $0.range.location >= 0 && $0.range.length > 0 &&
                   $0.range.length < 10_000_000 && $0.range.location <= Int.max - $0.range.length &&
-                  ["yellow", "green", "blue", "pink"].contains($0.color) }) else { throw PersonalStateError.invalid("Los datos personales contienen entradas incompatibles.") }
+                  ["yellow", "green", "blue", "pink"].contains($0.color) &&
+                  (schemaVersion >= 2 || $0.style == nil) }) else { throw PersonalStateError.invalid("Los datos personales contienen entradas incompatibles.") }
         for document in documents { try document.validate() }
     }
 }
@@ -241,7 +242,8 @@ struct WorkspacePersonalSnapshot: Codable {
     func save() throws {
         saveTask?.cancel()
         guard canSave else { throw PersonalStateError.invalid(loadError ?? "No se pudo abrir el archivo personal; se conservaron sus datos.") }
-        let snapshot = WorkspacePersonalSnapshot(favorites: favorites, highlights: highlights, documents: documents)
+        let snapshot = WorkspacePersonalSnapshot(schemaVersion: highlights.contains(where: { $0.style != nil }) ? 2 : 1,
+            favorites: favorites, highlights: highlights, documents: documents)
         try snapshot.validate(); try file.save(snapshot); loadError = nil
     }
     func scheduleSave() {

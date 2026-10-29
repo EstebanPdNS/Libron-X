@@ -4,6 +4,7 @@ import LibronixCore
 enum WorkspaceTool: String, Identifiable { case search, referenceSearch, annotationSearch, documents, favorites, information, resources, topics, bibleCopy, windows, parallelSets, keyLinks, associations, associationLinks, bibliography, editions, passageComparison, readingPlans, passageGuide, prayerJournal, scriptureMemory, studyAssessments, wordSearch, commandPalette, biblicalMeasures, researchInbox, transliteration, libraryHealth
     var id: String { rawValue }
 }
+enum ReaderMarkStyle: String, Codable, Hashable, Sendable { case underline, strike }
 struct ReaderHighlight: Identifiable, Codable, Equatable, Sendable {
     var id = UUID()
     var resourceID: String
@@ -11,6 +12,8 @@ struct ReaderHighlight: Identifiable, Codable, Equatable, Sendable {
     var fingerprint: String
     var range: NSRange
     var color: String
+    /// Nil represents a highlight created by an older version.
+    var style: ReaderMarkStyle? = nil
 }
 
 @MainActor extension StudyWorkspace {
@@ -132,10 +135,10 @@ struct ReaderHighlight: Identifiable, Codable, Equatable, Sendable {
         beginSearch()
         search.run(availableResources, documents: personal.documents, namedRanges: personal.namedBibleRanges.ranges, scopeContext: searchScopeContext())
     }
-    func addHighlight(_ color: String) {
+    func addHighlight(_ color: String, style: ReaderMarkStyle? = nil) {
         guard let reader = activeReader, let page = reader.page, reader.selectedRange.length > 0 else { return }
         let mark = ReaderHighlight(resourceID: reader.resource.id, ordinal: page.destination.ordinal,
-            fingerprint: LibrarySearchService.textFingerprint(page.text), range: reader.selectedRange, color: color)
+            fingerprint: LibrarySearchService.textFingerprint(page.text), range: reader.selectedRange, color: color, style: style)
         personal.highlights.append(mark)
         for pane in readers where pane.resource.id == reader.resource.id { pane.highlights.append(mark) }
         savePersonal()

@@ -143,12 +143,13 @@ struct ReaderMarkupMenu: View {
     @Bindable var workspace: StudyWorkspace
     var reader: ReaderSession? = nil
     @RebuildViewState private var expanded = false
+    @RebuildViewState private var markStyle: ReaderMarkStyle?
     private var target: ReaderSession? { reader ?? workspace.activeReader }
     private let colors: [(String, Color, String)] = [
-        ("yellow", .yellow, "Resaltar en amarillo"),
-        ("green", .green, "Resaltar en verde"),
-        ("blue", .blue, "Resaltar en azul"),
-        ("pink", .pink, "Resaltar en rosa")
+        ("yellow", .yellow, "Amarillo"),
+        ("green", .green, "Verde"),
+        ("blue", .blue, "Azul"),
+        ("pink", .pink, "Rosa")
     ]
     var body: some View {
         Button {
@@ -157,12 +158,18 @@ struct ReaderMarkupMenu: View {
         } label: { MacToolbarLabel("Marcación visual", "highlighter") }
             .help(L("Marcación visual"))
             .disabled((target?.selectedRange.length ?? 0) == 0)
-            .macToolbarPopover(isPresented: $expanded, size: NSSize(width: 235, height: 58)) {
+            .macToolbarPopover(isPresented: $expanded, size: NSSize(width: 275, height: 110)) {
+                VStack(alignment: .leading, spacing: 8) {
+                Picker(L("Estilo de marcación"), selection: $markStyle) {
+                    Text(L("Resaltado")).tag(Optional<ReaderMarkStyle>.none)
+                    Text(L("Subrayado")).tag(Optional(ReaderMarkStyle.underline))
+                    Text(L("Tachado")).tag(Optional(ReaderMarkStyle.strike))
+                }.labelsHidden().pickerStyle(.segmented)
                 HStack(spacing: 8) {
                     ForEach(colors, id: \.0) { key, color, title in
                         Button {
                             if let target { workspace.activate(target) }
-                            workspace.addHighlight(key); expanded = false
+                            workspace.addHighlight(key, style: markStyle); expanded = false
                         } label: {
                             RoundedRectangle(cornerRadius: 5).fill(color)
                                 .overlay(RoundedRectangle(cornerRadius: 5).strokeBorder(.primary.opacity(0.22), lineWidth: 1))
@@ -177,6 +184,7 @@ struct ReaderMarkupMenu: View {
                     } label: { Image(systemName: "trash").font(.system(size: 17)).frame(width: 33, height: 34) }
                         .buttonStyle(.borderless).help(L("Borrar marcación seleccionada"))
                         .accessibilityLabel(L("Borrar marcación seleccionada")).featureHelpTarget(.marks)
+                }
                 }.padding(12).featureHelpTarget(.marks)
             }
     }

@@ -464,10 +464,17 @@
       "sourceKey": "study-expansion-annotations-08",
       "acceptance": "Crear estilos persistentes de subrayado, contorno y otras marcas soportadas.",
       "baseline": "Cuatro colores y borrado de resaltado.",
-      "status": "pending",
-      "implementation": [],
-      "verification": [],
-      "limitations": []
+      "status": "in_progress",
+      "implementation": [
+        "Added persistent colored underline and strikethrough alongside existing highlights in both reader renderers. Styled annotations use personal-data schema 2, while legacy highlights keep schema 1; unrecognized styles fail decoding."
+      ],
+      "verification": [
+        "ReaderMarkStyleTests check legacy decoding, schema compatibility, unknown style rejection, rendered attributes, bounds, and save/reload. AnnotationNavigationTests and AppLanguageTests pass.",
+        "Native build 194: inspected the glass markup popover and applied a blue underline and pink strikethrough in an e-Sword book. The underline survived restart; the original personal data and workspace were restored."
+      ],
+      "limitations": [
+        "Custom palettes, outline and additional marking styles remain pending."
+      ]
     },
     {
       "id": "F173",
@@ -1552,10 +1559,11 @@
         "PersonalHomeTests check local-day boundaries in two time zones, plan identity and completed status. The language catalog tests pass.",
         "Native build 192 showed two test plans and a test notebook in dark appearance. The second reading opened its own plan and the notebook shortcut opened the corresponding document. Personal files and workspace state were restored.",
         "Full test run had one timeout in an existing TopicSearchTests gate; rerunning that suite together with the home and language tests passed. The timeout needs further investigation before release.",
-        "After extending the existing topic test gate timeout, a complete swift test run passed without concurrent build work."
+        "After extending the existing topic test gate timeout, a complete swift test run passed without concurrent build work.",
+        "Native build 194 showed the active e-Sword book on Home and its button returned to the same reader."
       ],
       "limitations": [
-        "Resume of an active reader and light/right-to-left layouts still need native visual verification."
+        "Light and right-to-left layouts still need native visual verification."
       ]
     },
     {
