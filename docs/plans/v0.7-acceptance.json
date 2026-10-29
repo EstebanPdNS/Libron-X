@@ -1441,10 +1441,17 @@
       "sourceKey": "study-expansion-product-07",
       "acceptance": "Unificar conversiones, errores, recursos ausentes, enlaces no resueltos y dependencias.",
       "baseline": "Hay recibos, advertencias del lector y análisis de ediciones.",
-      "status": "pending",
-      "implementation": [],
-      "verification": [],
-      "limitations": []
+      "status": "in_progress",
+      "implementation": [
+        "Added a read-only library health report for missing package or source files, invalid or opaque resources, catalog warnings, missing annotation sources and unresolved legacy note anchors. It explicitly says conversions and indexes are not comprehensively checked.",
+        "Inspection runs off the main actor, supports cancellation on close and limits displayed issues while reporting the omitted count."
+      ],
+      "verification": [
+        "LibraryHealthTests passed for missing files, warnings, invalid resources, edition identity, unresolved annotations and the 5,000-item display cap. AppLanguageTests and CommandPaletteTests passed."
+      ],
+      "limitations": [
+        "Conversion status, full index health and unresolved non-annotation links are not yet unified. Native visual, accessibility and multilingual runtime acceptance remain pending; application control timed out after closing an open panel."
+      ]
     },
     {
       "id": "F229",

@@ -1,0 +1,54 @@
+import SwiftUI
+
+struct LibraryHealthView: View {
+    @Bindable var workspace: StudyWorkspace
+    @RebuildViewState private var report: LibraryHealthReport?
+    @RebuildViewState private var isLoading = false
+    @RebuildViewState private var task: Task<Void, Never>?
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                if let report { Text(LF("{count} recursos revisados", ["count": String(report.resourceCount)])) }
+                Spacer()
+                if isLoading { ProgressView().controlSize(.small) }
+                Button(L("Actualizar")) { refresh() }.disabled(isLoading)
+            }
+            Text(L("Comprueba archivos, avisos y anotaciones; no verifica todas las conversiones ni los índices."))
+                .font(.caption).foregroundStyle(.secondary)
+            if let report {
+                List(report.issues) { issue in
+                    VStack(alignment: .leading, spacing: 4) {
+                        Label(L(title(issue.kind)), systemImage: "exclamationmark.triangle")
+                            .font(.caption).foregroundStyle(.secondary)
+                        Text(issue.title).font(.headline).textSelection(.enabled)
+                        if !issue.detail.isEmpty { Text(issue.detail).font(.caption).foregroundStyle(.secondary).textSelection(.enabled) }
+                    }.padding(.vertical, 4)
+                }.overlay { if report.issues.isEmpty { Text(L("No se encontraron problemas en estas comprobaciones.")).foregroundStyle(.secondary).allowsHitTesting(false) } }
+                if report.omittedIssueCount > 0 {
+                    Text(LF("Se omitieron {count} problemas adicionales.", ["count": String(report.omittedIssueCount)]))
+                        .font(.caption).foregroundStyle(.secondary)
+                }
+            } else { Spacer() }
+        }.padding(16).onAppear(perform: refresh).onDisappear { task?.cancel() }
+    }
+    private func title(_ kind: LibraryHealthIssue.Kind) -> String {
+        switch kind {
+        case .missingResource: "Archivo ausente"
+        case .invalidResource: "Recurso inválido"
+        case .opaqueResource: "Recurso no descodificado"
+        case .resourceWarning: "Aviso del recurso"
+        case .missingAnnotationSource: "Origen de anotación ausente"
+        case .unresolvedAnnotation: "Anotación sin resolver"
+        }
+    }
+    private func refresh() {
+        task?.cancel(); isLoading = true
+        let resources = workspace.resources, documents = workspace.personal.documents, highlights = workspace.personal.highlights
+        task = Task {
+            let worker = Task.detached { LibraryHealthReport.inspect(resources: resources, documents: documents, highlights: highlights) }
+            let result = await withTaskCancellationHandler { await worker.value } onCancel: { worker.cancel() }
+            guard !Task.isCancelled else { return }
+            report = result; isLoading = false
+        }
+    }
+}

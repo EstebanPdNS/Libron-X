@@ -563,6 +563,18 @@
     "ur": "تازہ کردہ",
     "zh-Hans": "已更新"
   },
+  "Actualizar": {
+    "ar": "تحديث",
+    "bn": "রিফ্রেশ করুন",
+    "en": "Refresh",
+    "es": "Actualizar",
+    "fr": "Actualiser",
+    "hi": "ताज़ा करें",
+    "id": "Segarkan",
+    "pt": "Atualizar",
+    "ur": "تازہ کریں",
+    "zh-Hans": "刷新"
+  },
   "Actualizar consulta seleccionada": {
     "ar": "تحديث البحث المحدد",
     "bn": "নির্বাচিত অনুসন্ধান আপডেট করুন",
@@ -1079,6 +1091,18 @@
     "ur": "اگلی تشریح",
     "zh-Hans": "下一条注释"
   },
+  "Anotación sin resolver": {
+    "ar": "تعليق غير محلول",
+    "bn": "অমীমাংসিত টীকা",
+    "en": "Unresolved Annotation",
+    "es": "Anotación sin resolver",
+    "fr": "Annotation non résolue",
+    "hi": "अनसुलझी टिप्पणी",
+    "id": "Anotasi belum terselesaikan",
+    "pt": "Anotação não resolvida",
+    "ur": "غیر حل شدہ تشریح",
+    "zh-Hans": "未解析的注释"
+  },
   "Antes de cada versículo": {
     "ar": "قبل كل آية",
     "bn": "প্রতি পদের আগে",
@@ -1162,6 +1186,18 @@
     "pt": "Arquivo",
     "ur": "فائل",
     "zh-Hans": "文件"
+  },
+  "Archivo ausente": {
+    "ar": "ملف مفقود",
+    "bn": "ফাইল অনুপস্থিত",
+    "en": "Missing File",
+    "es": "Archivo ausente",
+    "fr": "Fichier manquant",
+    "hi": "फ़ाइल अनुपस्थित",
+    "id": "Berkas hilang",
+    "pt": "Arquivo ausente",
+    "ur": "فائل موجود نہیں",
+    "zh-Hans": "文件缺失"
   },
   "Archivo de notas": {
     "ar": "ملف ملاحظات",
@@ -1462,6 +1498,18 @@
     "pt": "Autor e título",
     "ur": "مصنف اور عنوان",
     "zh-Hans": "作者和标题"
+  },
+  "Aviso del recurso": {
+    "ar": "تنبيه المورد",
+    "bn": "রিসোর্স সতর্কতা",
+    "en": "Resource Warning",
+    "es": "Aviso del recurso",
+    "fr": "Avertissement de ressource",
+    "hi": "संसाधन चेतावनी",
+    "id": "Peringatan sumber",
+    "pt": "Aviso do recurso",
+    "ur": "وسیلے کا انتباہ",
+    "zh-Hans": "资源警告"
   },
   "Ayuda contextual con «¿Qué es esto?» y ajustes más compactos.": {
     "ar": "مساعدة سياقية عبر «ما هذا؟» وإعدادات أكثر اختصارًا.",
@@ -3346,6 +3394,18 @@
     "pt": "Verificar resposta",
     "ur": "جواب جانچیں",
     "zh-Hans": "检查答案"
+  },
+  "Comprueba archivos, avisos y anotaciones; no verifica todas las conversiones ni los índices.": {
+    "ar": "يفحص الملفات والتنبيهات والتعليقات؛ ولا يتحقق من جميع التحويلات أو الفهارس.",
+    "bn": "ফাইল, সতর্কতা ও টীকা পরীক্ষা করে; সব রূপান্তর বা সূচি যাচাই করে না।",
+    "en": "Checks files, warnings and annotations; it does not verify every conversion or index.",
+    "es": "Comprueba archivos, avisos y anotaciones; no verifica todas las conversiones ni los índices.",
+    "fr": "Vérifie les fichiers, les avertissements et les annotations ; ne vérifie pas toutes les conversions ni tous les index.",
+    "hi": "फ़ाइलों, चेतावनियों और टिप्पणियों की जाँच करता है; सभी रूपांतरणों या अनुक्रमणिकाओं की नहीं।",
+    "id": "Memeriksa berkas, peringatan, dan anotasi; tidak memeriksa semua konversi atau indeks.",
+    "pt": "Verifica arquivos, avisos e anotações; não verifica todas as conversões ou índices.",
+    "ur": "فائلوں، انتباہات اور تشریحات کی جانچ کرتا ہے؛ تمام تبدیلیوں یا اشاریوں کی نہیں۔",
+    "zh-Hans": "检查文件、警告和注释；不会验证所有转换或索引。"
   },
   "Concordancia": {
     "ar": "فهرس ألفاظ",
@@ -10019,6 +10079,18 @@
     "ur": "کوئی نقل یا ملتا ایڈیشن نہیں ملا۔",
     "zh-Hans": "未发现重复项或匹配的版本。"
   },
+  "No se encontraron problemas en estas comprobaciones.": {
+    "ar": "لم تُعثر على مشكلات في هذه الفحوص.",
+    "bn": "এই পরীক্ষাগুলোতে কোনো সমস্যা পাওয়া যায়নি।",
+    "en": "No problems found in these checks.",
+    "es": "No se encontraron problemas en estas comprobaciones.",
+    "fr": "Aucun problème trouvé lors de ces vérifications.",
+    "hi": "इन जाँचों में कोई समस्या नहीं मिली।",
+    "id": "Tidak ditemukan masalah dalam pemeriksaan ini.",
+    "pt": "Nenhum problema encontrado nessas verificações.",
+    "ur": "ان جانچوں میں کوئی مسئلہ نہیں ملا۔",
+    "zh-Hans": "这些检查未发现问题。"
+  },
   "No se encontraron referencias coincidentes.": {
     "ar": "لم يُعثر على مراجع مطابقة.",
     "bn": "কোনো মিলে যাওয়া উল্লেখ পাওয়া যায়নি।",
@@ -11075,6 +11147,18 @@
     "ur": "ماخذ",
     "zh-Hans": "来源"
   },
+  "Origen de anotación ausente": {
+    "ar": "مصدر التعليق مفقود",
+    "bn": "টীকার উৎস অনুপস্থিত",
+    "en": "Missing Annotation Source",
+    "es": "Origen de anotación ausente",
+    "fr": "Source d’annotation manquante",
+    "hi": "टिप्पणी का स्रोत अनुपस्थित",
+    "id": "Sumber anotasi hilang",
+    "pt": "Origem da anotação ausente",
+    "ur": "تشریح کا ماخذ موجود نہیں",
+    "zh-Hans": "注释来源缺失"
+  },
   "Origen: {title}": {
     "ar": "المصدر: {title}",
     "bn": "উৎস: {title}",
@@ -12083,6 +12167,30 @@
     "ur": "غیر مطابقت پذیر وسیلہ",
     "zh-Hans": "资源不兼容"
   },
+  "Recurso inválido": {
+    "ar": "مورد غير صالح",
+    "bn": "অবৈধ রিসোর্স",
+    "en": "Invalid Resource",
+    "es": "Recurso inválido",
+    "fr": "Ressource invalide",
+    "hi": "अमान्य संसाधन",
+    "id": "Sumber tidak valid",
+    "pt": "Recurso inválido",
+    "ur": "غلط وسیلہ",
+    "zh-Hans": "无效资源"
+  },
+  "Recurso no descodificado": {
+    "ar": "مورد غير مفكوك",
+    "bn": "ডিকোড না করা রিসোর্স",
+    "en": "Undecoded Resource",
+    "es": "Recurso no descodificado",
+    "fr": "Ressource non décodée",
+    "hi": "अडिकोड किया गया संसाधन",
+    "id": "Sumber belum didekode",
+    "pt": "Recurso não decodificado",
+    "ur": "غیر ڈیکوڈ شدہ وسیلہ",
+    "zh-Hans": "未解码的资源"
+  },
   "Recurso no disponible": {
     "ar": "المورد غير متاح",
     "bn": "সম্পদ অনুপলব্ধ",
@@ -12971,6 +13079,30 @@
     "ur": "یکسو مطالعہ سے باہر نکلیں",
     "zh-Hans": "退出专注阅读"
   },
+  "Salud de la biblioteca": {
+    "ar": "حالة المكتبة",
+    "bn": "লাইব্রেরির অবস্থা",
+    "en": "Library Health",
+    "es": "Salud de la biblioteca",
+    "fr": "Santé de la bibliothèque",
+    "hi": "लाइब्रेरी की स्थिति",
+    "id": "Kesehatan pustaka",
+    "pt": "Saúde da biblioteca",
+    "ur": "لائبریری کی حالت",
+    "zh-Hans": "资料库健康"
+  },
+  "Salud de la biblioteca…": {
+    "ar": "حالة المكتبة…",
+    "bn": "লাইব্রেরির অবস্থা…",
+    "en": "Library Health…",
+    "es": "Salud de la biblioteca…",
+    "fr": "Santé de la bibliothèque…",
+    "hi": "लाइब्रेरी की स्थिति…",
+    "id": "Kesehatan pustaka…",
+    "pt": "Saúde da biblioteca…",
+    "ur": "لائبریری کی حالت…",
+    "zh-Hans": "资料库健康…"
+  },
   "Se abrirá el inicio del recurso; los números de artículo no se transfieren entre libros.": {
     "ar": "ستُفتح بداية المورد؛ لا تُنقل أرقام المقالات بين الكتب.",
     "bn": "রিসোর্সের শুরু খুলবে; বইয়ের মধ্যে নিবন্ধের সংখ্যা স্থানান্তরিত হয় না।",
@@ -13198,6 +13330,18 @@
     "pt": "São mostradas as primeiras {count} entradas; há resultados ou recursos por consultar.",
     "ur": "پہلے {count} اندراجات دکھائے گئے ہیں؛ مزید نتائج یا وسائل باقی ہیں۔",
     "zh-Hans": "显示前 {count} 个条目；还有结果或资源未查询。"
+  },
+  "Se omitieron {count} problemas adicionales.": {
+    "ar": "تم إغفال {count} مشكلات إضافية.",
+    "bn": "আরও {count}টি সমস্যা বাদ দেওয়া হয়েছে।",
+    "en": "{count} additional issues were omitted.",
+    "es": "Se omitieron {count} problemas adicionales.",
+    "fr": "{count} problèmes supplémentaires ont été omis.",
+    "hi": "{count} अतिरिक्त समस्याएँ छोड़ी गईं।",
+    "id": "{count} masalah tambahan dihilangkan.",
+    "pt": "{count} problemas adicionais foram omitidos.",
+    "ur": "مزید {count} مسائل چھوڑ دیے گئے۔",
+    "zh-Hans": "省略了另外 {count} 个问题。"
   },
   "Se usan los metadatos del catálogo, incluidos los recursos ocultos. Los datos desconocidos no se completan.": {
     "ar": "تُستخدم بيانات الفهرس الوصفية، بما فيها الموارد المخفية. لا تُستكمل البيانات غير المعروفة.",
@@ -15466,6 +15610,18 @@
     "pt": "Recursos indisponíveis: {count}",
     "ur": "غیر دستیاب وسائل: {count}",
     "zh-Hans": "不可用的资源：{count}"
+  },
+  "{count} recursos revisados": {
+    "ar": "تم فحص {count} موارد",
+    "bn": "{count}টি রিসোর্স পরীক্ষা করা হয়েছে",
+    "en": "{count} resources checked",
+    "es": "{count} recursos revisados",
+    "fr": "{count} ressources vérifiées",
+    "hi": "{count} संसाधनों की जाँच हुई",
+    "id": "{count} sumber diperiksa",
+    "pt": "{count} recursos verificados",
+    "ur": "{count} وسائل کی جانچ ہوئی",
+    "zh-Hans": "已检查 {count} 个资源"
   },
   "{count} recursos seleccionados": {
     "ar": "{count} موارد محددة",

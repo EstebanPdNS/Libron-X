@@ -212,6 +212,7 @@ struct RebuildCommands: Commands {
             Button(L("Guardar selección en investigación"), action: workspace.captureResearchExcerpt).disabled(!workspace.canCaptureResearchExcerpt)
             Button(L("Bandeja de investigación…")) { workspace.activeTool = .researchInbox }
             Button(L("Transliteración…")) { workspace.activeTool = .transliteration }
+            Button(L("Salud de la biblioteca…")) { workspace.activeTool = .libraryHealth }
             Button(L("Comparar pasajes bíblicos…")) { workspace.activeTool = .passageComparison }
             Button(L("Enlaces clave…")) { workspace.activeTool = .keyLinks }
             Button(L("Asociaciones de recursos…")) { workspace.activeTool = .associations }

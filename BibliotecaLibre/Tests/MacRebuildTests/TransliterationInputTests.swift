@@ -12,5 +12,7 @@ struct TransliterationInputTests {
         #expect(TransliterationInput.convert(String(repeating: "a", count: 4097), language: .greek) == nil)
         #expect(TransliterationInput.convert("a\0b", language: .hebrew) == nil)
         #expect(TransliterationInput.convert("", language: .greek) == "")
+        let maximum = String(repeating: "ב", count: 4096)
+        #expect(TransliterationInput.convert(maximum, language: .hebrew)?.count == 4096)
     }
 }

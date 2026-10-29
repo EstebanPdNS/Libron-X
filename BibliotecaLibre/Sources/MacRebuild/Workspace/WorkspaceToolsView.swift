@@ -24,6 +24,7 @@ struct WorkspaceToolsView: View {
             case .biblicalMeasures: BiblicalMeasuresView()
             case .researchInbox: ResearchInboxView(workspace: workspace, personal: workspace.personal)
             case .transliteration: TransliterationView()
+            case .libraryHealth: LibraryHealthView(workspace: workspace)
             case .passageGuide: PassageGuideView(workspace: workspace, controller: workspace.passageGuide)
             case .information: ResourceInformationView(reader: workspace.activeReader)
             case .resources: ResourceManagerView(workspace: workspace)
@@ -77,6 +78,7 @@ struct WorkspaceToolsView: View {
         case .biblicalMeasures: "Pesos y medidas bíblicos"
         case .researchInbox: "Bandeja de investigación"
         case .transliteration: "Transliteración"
+        case .libraryHealth: "Salud de la biblioteca"
         case .passageGuide: "Guía de pasajes"
         case .information: "Propiedades del recurso"
         case .resources: "Recursos y licencias"
