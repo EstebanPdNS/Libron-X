@@ -30,6 +30,7 @@ struct WorkspaceDocumentsView: View {
     @RebuildViewState private var propertiesRequest: NotePropertiesRequest?
     @RebuildViewState private var extractionRequest: ReferenceExtractionRequest?
     @RebuildViewState private var reportDocument: StudyDocument?
+    @RebuildViewState private var showsPreviousDocuments = false
     @RebuildViewState private var selectedVerse: UUID?
     @RebuildViewState private var verseReference = ""
     @RebuildViewState private var verseBibleID = ""
@@ -48,6 +49,9 @@ struct WorkspaceDocumentsView: View {
                     Button(L("Lista de versículos")) { personal.create(.verseList) }
                 }
                 Button(L("Abrir…"), action: workspace.openDocument)
+                Button { showsPreviousDocuments = true } label: {
+                    Label(L("Recuperar versión anterior"), systemImage: "clock.arrow.circlepath").labelStyle(.iconOnly)
+                }.help(L("Recuperar versión anterior"))
                 if let index = documentIndex, personal.documents[index].kind == .notebook {
                     Button(L("Informe…")) { reportDocument = personal.documents[index] }
                 }
@@ -121,6 +125,9 @@ struct WorkspaceDocumentsView: View {
             }
             .sheet(item: $reportDocument) { document in
                 NotebookReportView(document: document, initialSelection: selectedNotes).modifier(AppInterfaceLanguage())
+            }
+            .sheet(isPresented: $showsPreviousDocuments) {
+                PreviousDocumentsView(personal: personal).modifier(AppInterfaceLanguage())
             }
     }
     private func selectPendingNote() {

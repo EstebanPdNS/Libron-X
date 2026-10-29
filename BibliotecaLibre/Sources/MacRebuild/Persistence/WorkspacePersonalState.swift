@@ -348,6 +348,17 @@ struct WorkspacePersonalSnapshot: Codable {
         do { try save() }
         catch { documents = previous; throw error }
     }
+    func previousDocuments() throws -> [StudyDocument] {
+        try PreviousDocumentRecovery.read(from: file.url)
+    }
+    func recoverPreviousDocument(_ original: StudyDocument, title: String) throws {
+        // Re-read just before writing; do not restore a stale or replaced backup.
+        guard try previousDocuments().contains(original) else { throw PersonalStateError.concurrentChange }
+        let copy = try PreviousDocumentRecovery.copy(original, title: title)
+        try PreviousDocumentRecovery.archive(original, from: file.url)
+        try replaceDocuments(documents + [copy])
+        selectedDocumentID = copy.id
+    }
     @discardableResult func create(_ kind: StudyDocumentKind) -> UUID {
         let document = StudyDocument(title: kind == .notebook ? "Mis notas" : "Lista de versículos", kind: kind)
         documents.append(document); selectedDocumentID = document.id; scheduleSave(); return document.id

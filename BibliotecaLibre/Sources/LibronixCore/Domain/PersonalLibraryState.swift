@@ -182,6 +182,9 @@ public final class PersonalStateFile<Value: Codable> {
         let encoder = JSONEncoder(); encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
         let data = try encoder.encode(value)
         guard data.count <= MetadataXMLReader.maximumFileBytes else { throw PersonalStateError.tooLarge }
+        // A redundant save must not replace a useful predecessor with an
+        // identical copy of the current state.
+        guard data != current else { return }
         try FileManager.default.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
         if let current { try current.write(to: url.appendingPathExtension("previous"), options: .atomic) }
         try data.write(to: url, options: .atomic)

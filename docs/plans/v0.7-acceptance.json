@@ -1443,10 +1443,18 @@
       "sourceKey": "study-expansion-product-06",
       "acceptance": "Explorar y recuperar versiones de cuadernos, sermones y documentos sin sobrescritura silenciosa.",
       "baseline": "Almacenamiento conserva copia anterior en contratos compatibles.",
-      "status": "pending",
-      "implementation": [],
-      "verification": [],
-      "limitations": []
+      "status": "in_progress",
+      "implementation": [
+        "Added a native browser for the immediately preceding personal-data backup and recovery as a separate document with new identities and preserved note hierarchy and provenance.",
+        "Preserve the original backup in a private recovery directory before rotating the normal predecessor; avoid replacing the predecessor during a no-op save."
+      ],
+      "verification": [
+        "PreviousDocumentRecoveryTests cover preserved hierarchy, new identities, stale backup rejection, missing or corrupt backup, unchanged-save retention and preservation of the source archive on a concurrent save conflict.",
+        "Native build 188 displayed the backup browser in dark appearance and recovered a test notebook as a separate document with its note text intact. Original personal files were restored."
+      ],
+      "limitations": [
+        "The browser exposes only the immediately preceding personal snapshot; a multi-version history and sermon documents remain pending."
+      ]
     },
     {
       "id": "F228",

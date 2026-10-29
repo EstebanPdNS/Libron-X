@@ -10007,6 +10007,18 @@
     "ur": "کوئی لغت یا فرہنگ دستیاب نہیں ہے۔",
     "zh-Hans": "没有可用的词典或词汇书。"
   },
+  "No hay documentos en la copia anterior.": {
+    "ar": "لا توجد مستندات في النسخة السابقة.",
+    "bn": "আগের কপিতে কোনো নথি নেই।",
+    "en": "There are no documents in the previous copy.",
+    "es": "No hay documentos en la copia anterior.",
+    "fr": "La copie précédente ne contient aucun document.",
+    "hi": "पिछली प्रति में कोई दस्तावेज़ नहीं है।",
+    "id": "Tidak ada dokumen dalam salinan sebelumnya.",
+    "pt": "Não há documentos na cópia anterior.",
+    "ur": "پچھلی کاپی میں کوئی دستاویز نہیں ہے۔",
+    "zh-Hans": "上一份副本中没有文档。"
+  },
   "No hay extractos guardados.": {
     "ar": "لا توجد مقتطفات محفوظة.",
     "bn": "কোনো সংরক্ষিত উদ্ধৃতি নেই।",
@@ -12275,6 +12287,30 @@
     "ur": "دوبارہ جاری کریں",
     "zh-Hans": "继续"
   },
+  "Recuperar como copia": {
+    "ar": "استعادة كنسخة",
+    "bn": "কপি হিসেবে পুনরুদ্ধার",
+    "en": "Recover as Copy",
+    "es": "Recuperar como copia",
+    "fr": "Récupérer en tant que copie",
+    "hi": "प्रति के रूप में पुनर्प्राप्त करें",
+    "id": "Pulihkan sebagai salinan",
+    "pt": "Recuperar como cópia",
+    "ur": "کاپی کے طور پر بحال کریں",
+    "zh-Hans": "恢复为副本"
+  },
+  "Recuperar versión anterior": {
+    "ar": "استعادة النسخة السابقة",
+    "bn": "আগের সংস্করণ পুনরুদ্ধার",
+    "en": "Recover Previous Version",
+    "es": "Recuperar versión anterior",
+    "fr": "Récupérer la version précédente",
+    "hi": "पिछला संस्करण पुनर्प्राप्त करें",
+    "id": "Pulihkan versi sebelumnya",
+    "pt": "Recuperar versão anterior",
+    "ur": "پچھلا ورژن بحال کریں",
+    "zh-Hans": "恢复上一版本"
+  },
   "Recurso": {
     "ar": "المورد",
     "bn": "রিসোর্স",
@@ -13450,6 +13486,18 @@
     "pt": "Maiúsculas e espaços são ignorados; acentos e pontuação contam.",
     "ur": "بڑے حروف اور خالی جگہیں نظر انداز؛ اعراب اور رموز شمار ہوتے ہیں۔",
     "zh-Hans": "忽略大小写和空格；重音和标点需匹配。"
+  },
+  "Se muestra la copia anterior de los datos personales. La recuperación crea un documento nuevo.": {
+    "ar": "تُعرض النسخة السابقة من البيانات الشخصية. تنشئ الاستعادة مستندًا جديدًا.",
+    "bn": "ব্যক্তিগত তথ্যের আগের কপি দেখানো হচ্ছে। পুনরুদ্ধারে নতুন নথি তৈরি হয়।",
+    "en": "The previous copy of personal data is shown. Recovery creates a new document.",
+    "es": "Se muestra la copia anterior de los datos personales. La recuperación crea un documento nuevo.",
+    "fr": "La copie précédente des données personnelles est affichée. La récupération crée un nouveau document.",
+    "hi": "व्यक्तिगत डेटा की पिछली प्रति दिखाई गई है। पुनर्प्राप्ति एक नया दस्तावेज़ बनाती है।",
+    "id": "Salinan data pribadi sebelumnya ditampilkan. Pemulihan membuat dokumen baru.",
+    "pt": "A cópia anterior dos dados pessoais é exibida. A recuperação cria um novo documento.",
+    "ur": "ذاتی ڈیٹا کی پچھلی کاپی دکھائی گئی ہے۔ بحالی ایک نئی دستاویز بناتی ہے۔",
+    "zh-Hans": "显示个人数据的上一份副本。恢复会创建新文档。"
   },
   "Se muestran las primeras {count} entradas; quedan resultados o recursos por consultar.": {
     "ar": "تُعرض أول {count} مدخلات؛ توجد نتائج أو موارد أخرى لم تُفحص.",
@@ -15886,6 +15934,18 @@
     "pt": "{selected} versículos examinados · {excluded} fora do intervalo",
     "ur": "{selected} آیات کی جانچ ہوئی · {excluded} دائرے سے باہر",
     "zh-Hans": "已检查 {selected} 节经文 · {excluded} 节在范围外"
+  },
+  "{title} (recuperado)": {
+    "ar": "{title} (مستعاد)",
+    "bn": "{title} (পুনরুদ্ধার করা)",
+    "en": "{title} (recovered)",
+    "es": "{title} (recuperado)",
+    "fr": "{title} (récupéré)",
+    "hi": "{title} (पुनर्प्राप्त)",
+    "id": "{title} (dipulihkan)",
+    "pt": "{title} (recuperado)",
+    "ur": "{title} (بحال شدہ)",
+    "zh-Hans": "{title}（已恢复）"
   },
   "¿Qué es esto?": {
     "ar": "ما هذا؟",
