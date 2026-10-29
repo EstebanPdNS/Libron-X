@@ -51,8 +51,12 @@ struct ResearchInboxView: View {
             if let message = error ?? personal.researchInboxLoadError { Text(L(message)).font(.caption).foregroundStyle(.red).textSelection(.enabled) }
         }.padding(16)
             .onChange(of: selectedID) { note = selected?.note ?? ""; error = nil }
-            .onAppear { if selectedID == nil { selectedID = personal.researchInbox.excerpts.first?.id } }
-            .onDisappear { if let selected, note != selected.note { saveNote() } }
+            .onAppear {
+                if selectedID == nil { selectedID = personal.researchInbox.excerpts.first?.id }
+                workspace.researchDraftSaver = { saveDraftIfNeeded() }
+            }
+            .onDisappear { workspace.researchDraftSaver = nil }
+            .onExitCommand { workspace.closeActiveTool() }
             .alert(L("Eliminar extracto"), isPresented: $deleting) {
                 Button(L("Cancelar"), role: .cancel) { }
                 Button(L("Eliminar"), role: .destructive) { remove() }
@@ -73,6 +77,10 @@ struct ResearchInboxView: View {
             }
             error = nil; return true
         } catch { self.error = error.localizedDescription; return false }
+    }
+    private func saveDraftIfNeeded() -> Bool {
+        guard let selected, note != selected.note else { return true }
+        return saveNote()
     }
     private func remove() {
         guard let original = selected else { return }

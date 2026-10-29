@@ -48,6 +48,12 @@ enum PaneArrangement { case cascade, horizontal, vertical }
     var personalSearchDestination: BibleReferencePersonalDestination?
     var personalNavigationID = UUID()
     var activeTool: WorkspaceTool?
+    @ObservationIgnored var researchDraftSaver: (() -> Bool)?
+    func saveResearchDraftIfNeeded() -> Bool { researchDraftSaver?() ?? true }
+    func closeActiveTool() {
+        guard activeTool != .researchInbox || saveResearchDraftIfNeeded() else { return }
+        activeTool = nil
+    }
     var showsHome = false { didSet { if showsHome { exitFocusedReading() } } }
     var snapPreview: PaneFrame?
     var dictionary = DictionaryController()

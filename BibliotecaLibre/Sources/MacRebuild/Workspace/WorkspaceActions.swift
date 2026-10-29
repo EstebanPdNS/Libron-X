@@ -179,6 +179,7 @@ struct ReaderHighlight: Identifiable, Codable, Equatable, Sendable {
         catch { self.error = L(error.localizedDescription) }
     }
     func openResearchExcerpt(_ excerpt: ResearchExcerpt) {
+        guard saveResearchDraftIfNeeded() else { return }
         guard let resource = excerpt.location.resolve(in: resources), let offset = excerpt.location.characterOffset else {
             error = L("El recurso de este extracto no está disponible en la biblioteca abierta."); return
         }

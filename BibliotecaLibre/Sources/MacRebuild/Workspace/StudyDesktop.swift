@@ -85,6 +85,7 @@ struct StudyDesktop: View {
         .modifier(MacWorkspaceTitlePresentation())
         .sheet(item: $workspace.activeTool) { tool in
             WorkspaceToolsView(tool: tool, workspace: workspace).modifier(AppInterfaceLanguage())
+                .interactiveDismissDisabled(tool == .researchInbox)
         }
         .alert("Libron-X", isPresented: Binding(get: { workspace.error != nil && workspace.activeTool != .favorites }, set: { if !$0 { workspace.error = nil } })) {
             Button(L("Aceptar")) { workspace.error = nil }

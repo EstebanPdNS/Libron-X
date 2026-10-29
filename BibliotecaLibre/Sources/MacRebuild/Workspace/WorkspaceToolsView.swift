@@ -7,7 +7,7 @@ struct WorkspaceToolsView: View {
     @Bindable var workspace: StudyWorkspace
     var body: some View {
         VStack(spacing: 0) {
-            MacToolHeader(title: title) { workspace.activeTool = nil }.padding(16)
+            MacToolHeader(title: title) { workspace.closeActiveTool() }.padding(16)
             Divider()
             switch tool {
             case .search: WorkspaceSearchView(workspace: workspace, search: workspace.search)

@@ -51,4 +51,16 @@ import Testing
         #expect(throws: (any Error).self) { try first.editResearchInbox { $0.excerpts = [invalid] } }
         #expect(first.researchInbox.excerpts == [excerpt])
     }
+    @Test func closeKeepsInboxOpenWhenDraftCannotBeSaved() throws {
+        let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: root) }
+        let personal = WorkspacePersonalState(url: root.appendingPathComponent("personal.json"))
+        let workspace = StudyWorkspace(personal: personal, resourceVisibility: .init(url: root.appendingPathComponent("hidden.json")))
+        workspace.activeTool = .researchInbox; workspace.researchDraftSaver = { false }
+        workspace.closeActiveTool(); #expect(workspace.activeTool == .researchInbox)
+        workspace.researchDraftSaver = { true }
+        workspace.closeActiveTool(); #expect(workspace.activeTool == nil)
+        workspace.shutdown()
+    }
 }
