@@ -680,10 +680,16 @@
       "sourceKey": "study-expansion-daily-06",
       "acceptance": "Preparar ejercicios de pasajes y conservar progreso entre sesiones.",
       "baseline": "Listas de versículos básicas disponibles.",
-      "status": "pending",
-      "implementation": [],
-      "verification": [],
-      "limitations": []
+      "status": "in_progress",
+      "implementation": [
+        "Added a user-provided passage practice model with explicit reference and source, case/whitespace-insensitive matching, progress counts and local transactional persistence."
+      ],
+      "verification": [
+        "ScriptureMemoryTests and ScriptureMemoryPersistenceTests passed for grading, progress, data integrity, concurrent writes and future schemas."
+      ],
+      "limitations": [
+        "No user-facing exercise interface or verified passage extraction from library resources yet."
+      ]
     },
     {
       "id": "F183",
