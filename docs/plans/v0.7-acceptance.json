@@ -589,7 +589,7 @@
       "sourceKey": "study-expansion-annotations-09",
       "acceptance": "Exponer carpetas, movimiento y orden sin perder destinos; completar recuperación de acciones.",
       "baseline": "Modelo con jerarquía; la vista actual permite una lista plana.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "Display a native expandable hierarchy; create and rename folders, move items with descendants, reorder siblings and confirm deletion; retain imported commands without inventing destinations.",
         "Save favorite edits atomically with conflict detection; restore verified locations using their exact saved UTF-16 offset and source fingerprint.",
@@ -597,7 +597,8 @@
         "Import original XML favorites through the native file picker, preserving nested folders and opaque commands while merging atomically with existing favorites; input size is bounded.",
         "Open verified legacy jump commands in LLS containers when their catalog identity matches the embedded LSF/LIX; keep the original container identity and reject ambiguous matches.",
         "Resolve original jump commands against LLS catalog identifiers, then verify the embedded LSF/LIX identity and position.",
-        "Resolve named LLS catalog identifiers by checking the original container metadata and its embedded numeric LSF identity before translating the saved article position."
+        "Resolve named LLS catalog identifiers by checking the original container metadata and its embedded numeric LSF identity before translating the saved article position.",
+        "Favorites saved from web-backed readers use the verified projection and location. The empty organizer explains how to add or import favorites."
       ],
       "verification": [
         "Seven PersonalLibraryStateTests and six QuickBookmarkTests passed, including cycles, order, conflict rollback, exact position and changed-source rejection.",
@@ -607,12 +608,11 @@
         "OriginalFavoriteNavigationTests pass for existing checked LSF jump commands, ambiguous resources and damaged indexes; other original actions remain unresolved.",
         "OriginalFavoriteNavigationTests include an authored LLS containing paired LSF/LIX data and confirm the checked position and outer resource identity.",
         "OriginalFavoriteNavigationTests cover the LLS catalog identifier and the original saved position.",
-        "Verified the actual original favorites file against its matching original managed package; the saved jump opened without a resource or reader error. An authored named-LLS fixture also covers the same path."
+        "Verified the actual original favorites file against its matching original managed package; the saved jump opened without a resource or reader error. An authored named-LLS fixture also covers the same path.",
+        "The actual original favorites file contains one saved jump, which was resolved against its matching original resource. A native WebKit workflow also verifies the saved fingerprint and offset; build 242 shows the empty state."
       ],
       "limitations": [
-        "Recovery supports measured jump commands and checked LSF/LIX projections only; other original actions and incompatible formats remain unresolved. Additional original-file variants require validation.",
-        "The full range of original resource formats and old macOS hardware still requires validation.",
-        "The latest imported-favorite row, import menu and error were visually checked in dark English; light and RTL coverage for these changed states remains pending."
+        "Unrecognized original command types are preserved but cannot be executed; only verified jump syntax is supported."
       ]
     },
     {
