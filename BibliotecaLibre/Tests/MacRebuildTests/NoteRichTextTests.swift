@@ -135,4 +135,18 @@ import LibronixCore
         #expect(projection.projectionComplete && projection.warnings.isEmpty)
         #expect(projection.fields.first { $0.kind == .noteBody }?.text == rich.string)
     }
+    @Test func importedSuperscriptAndSubscriptRemainEditable() throws {
+        var note = StudyNote(title: "Owned")
+        note.sourceBody = "Water H<sub>2</sub>O and x<sup>2</sup>"
+        let text = try NoteRichTextCodec.attributed(note)
+        let sub = (text.string as NSString).range(of: "2")
+        let sup = (text.string as NSString).range(of: "2", options: .backwards)
+        #expect((text.attribute(.superscript, at: sub.location, effectiveRange: nil) as? NSNumber)?.intValue == -1)
+        #expect((text.attribute(.superscript, at: sup.location, effectiveRange: nil) as? NSNumber)?.intValue == 1)
+        let reopened = try NoteRichTextCodec.decode(NoteRichTextCodec.encode(text))
+        #expect(reopened.string == text.string && note.sourceBody.contains("<sub>"))
+        #expect((reopened.attribute(.superscript, at: sub.location, effectiveRange: nil) as? NSNumber)?.intValue == -1)
+        #expect((reopened.attribute(.superscript, at: sup.location, effectiveRange: nil) as? NSNumber)?.intValue == 1)
+    }
+
 }

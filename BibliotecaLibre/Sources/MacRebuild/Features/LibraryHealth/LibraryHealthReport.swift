@@ -66,6 +66,16 @@ struct LibraryHealthReport: Equatable, Sendable {
         let identities = Set(resources.map { Identity(id: $0.id, format: $0.format, legacy: $0.legacyIdentifier) })
         for document in documents {
             if Task.isCancelled { break }
+            for verse in document.verses {
+                if Task.isCancelled { break }
+                if let location = verse.location, !identities.contains(Identity(id: location.resourceID, format: location.format, legacy: location.legacyIdentifier)) {
+                    add(.init(id: "verse:" + document.id.uuidString + ":" + verse.id.uuidString,
+                              kind: .unresolvedLink, title: verse.reference, detail: document.title))
+                }
+            }
+            if let edition = document.verseListEdition, !identities.contains(Identity(id: edition.resourceID, format: edition.format, legacy: edition.legacyIdentifier)) {
+                add(.init(id: "edition:" + document.id.uuidString, kind: .unresolvedLink, title: document.title, detail: edition.title))
+            }
             for note in document.notes {
                 if Task.isCancelled { break }
                 if note.resolvedAnchor == nil && (note.anchor.kind == .legacySelection || note.anchor.kind == .legacyReference) {

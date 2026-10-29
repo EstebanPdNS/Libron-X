@@ -181,6 +181,8 @@ struct NoteRichTextEditor: NSViewRepresentable {
             var attrs: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: NSColor.textColor]
             if span.underline { attrs[.underlineStyle] = NSUnderlineStyle.single.rawValue }
             if span.strikeout { attrs[.strikethroughStyle] = NSUnderlineStyle.single.rawValue }
+            if span.superscript { attrs[.superscript] = 1 }
+            if span.subscriptText { attrs[.superscript] = -1 }
             if let reference = span.reference { attrs[.foregroundColor] = NSColor.linkColor; attrs[.toolTip] = reference }
             result.append(NSAttributedString(string: span.text, attributes: attrs))
         }

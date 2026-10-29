@@ -59,7 +59,8 @@ import Testing
     @Test func webAnnotationsVerifyTheirSourceBeforeChangingThePage() async throws {
         _ = NSApplication.shared
         let fixture = try AuthoredOEBFixture(); defer { fixture.remove() }
-        let workspace = StudyWorkspace(), reader = workspace.open(fixture.resource, startReading: false)
+        let personal = WorkspacePersonalState(url: fixture.root.appendingPathComponent("personal.json"))
+        let workspace = StudyWorkspace(personal: personal), reader = workspace.open(fixture.resource, startReading: false)
         reader.load(.init(ordinal: 0)); try await settle(reader)
         let cover = try #require(reader.page?.oeb)
         let coverText = try await ReaderOEBTextSource.shared.read(book: cover.book, path: "Cover.html", viewport: .init()).text

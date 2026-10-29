@@ -73,4 +73,12 @@ struct LibraryHealthTests {
         #expect(report.issues.contains { $0.kind == .damagedIndex })
     }
 
+    @Test func reportsMissingVerseListDestinations() {
+        let missing = ReaderLocation(resourceID: "missing-edition", format: .legacyLSF, sectionOrdinal: 0)
+        var document = StudyDocument(title: "Owned list", kind: .verseList)
+        document.verses = [StudyVerseEntry(reference: "John 3:16", location: missing)]
+        let report = LibraryHealthReport.inspect(resources: [], documents: [document], highlights: [])
+        #expect(report.issues.contains { $0.kind == .unresolvedLink && $0.title == "John 3:16" })
+    }
+
 }
