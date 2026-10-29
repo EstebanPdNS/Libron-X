@@ -1737,19 +1737,21 @@
       "sourceKey": "study-expansion-product-04",
       "acceptance": "Copiar y reabrir enlaces de aplicación estables a ubicación exacta con gestión de recursos ausentes.",
       "baseline": "Navegación interna y favoritos disponibles.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "Added versioned, bounded Libron-X location links carrying exact local resource identity, reference, UTF-16 position and source fingerprint. Link opening waits for workspace startup and verifies resource identity and source fingerprint.",
         "The Go menu exposes link copying and explains that the link can include a local path; the macOS bundle registers the libronx URL scheme.",
-        "Create location links for web-backed readers after their DOM projection is ready and verify the source file and fingerprint before applying a saved position."
+        "Create location links for web-backed readers after their DOM projection is ready and verify the source file and fingerprint before applying a saved position.",
+        "Restore collapsed web-reader positions and scroll them into view after the verified DOM projection loads."
       ],
       "verification": [
         "ReaderLocationLinkTests and ReaderLocationLinkWorkflowTests passed for round trips, malformed links, bounds, exact selection, changed fingerprints and unavailable resources. The generated app Info.plist passed plutil validation.",
         "ReaderLocationLinkWorkflowTests pass for checked resources, position and changed or absent source; operating-system delivery has not been checked.",
-        "ReaderLocationLinkWorkflowTests cover a real authored OEB, a verified position and source replacement before selection."
+        "ReaderLocationLinkWorkflowTests cover a real authored OEB, a verified position and source replacement before selection.",
+        "Native WebKit test confirmed the rendered caret at the saved offset; on macOS a real link to La Armadura de Dios launched the closed app and opened its resource at the saved location. An invalid link produced the expected error."
       ],
       "limitations": [
-        "End-to-end operating-system URL delivery, cold start, clipboard copying and native visual/accessibility acceptance remain pending. Resource identity can include a local path; links may not resolve after moving the resource or on a different installation."
+        "Resource identities can include a local path; links may not resolve after moving the resource or on a different installation."
       ]
     },
     {
