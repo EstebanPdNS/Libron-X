@@ -1,5 +1,41 @@
 # Changelog
 
+## v0.7 — 2026-10-29
+
+### Changelog
+
+- Add a passage guide for relevant references, commentaries and dictionaries, with source-backed navigation and coverage notices.
+- Organize favorites in folders, import original favorites and reopen supported original locations.
+- Add nine numbered reading bookmarks and navigate to the previous or next note or highlight, including with keyboard shortcuts.
+- Search notes and highlights by content and source.
+- Add highlight, underline, strikethrough and outline styles with customizable marking palettes.
+- Improve imported HTML note editing, including inherited styles and colors, while retaining the original content.
+- Create notebook reports with source citations and print layouts.
+- Edit and organize verse lists, retain the selected Bible edition and display available verse text.
+- Create reading plans, distribute readings over dates, show pending readings and export them to calendars.
+- Navigate daily devotionals and keep local prayer lists.
+- Practice Scripture memory with passages from installed Bibles and saved progress.
+- Create study assessments and optional Bible word searches.
+- Save searches and portable search documents, reuse word lists and reference ranges, and review search history.
+- Extract Bible references from documents and clipboard text.
+- Add transliteration and conversion tools for search and Bible copy.
+- Copy Bible passages from supported LSF, LLS, e-Sword and structured EPUB editions, including supported notes and formatted text.
+- Edit and save Bible-copy templates, preview rich output, copy it and export it as TXT, RTF or HTML.
+- Preserve citation and note identities in Bible-copy output and check source boundaries before copying.
+- Add a sermon archive, personal document history and recovery as independent copies.
+- Collect source-linked excerpts in a research inbox.
+- Copy and reopen Libron-X location links, including in web-backed readers and from a closed app.
+- Check library resources, indexes, conversions and unresolved personal references in a library health panel.
+- Convert biblical weights and measures with documented units.
+- Add a keyboard command palette, focused reading mode and personal home view.
+- Reorganize the search interface and refine native Liquid Glass controls, spacing and text direction.
+- Improve dictionary search and bound memory and processing for Bible copy, library health checks and EPUB caching.
+- Preserve unsupported imported note objects and unrecognized original favorite commands without inventing destinations.
+
+### Bug reports
+
+[Open an issue](https://github.com/EstebanPdNS/Libron-X/issues/new?template=bug_report.md) with the app version, macOS version, reproduction steps and a screenshot or available logs. Remove private paths and personal content. Do not attach books or license files.
+
 ## v0.6 — 2026-10-28
 
 ### Changelog
