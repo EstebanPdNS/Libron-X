@@ -14,7 +14,7 @@ struct LibraryHealthReport: Equatable, Sendable {
     let omittedIssueCount: Int
     static func inspect(resources: [LibraryResource], documents: [StudyDocument], highlights: [ReaderHighlight],
                         favorites: [LibraryFavorite] = [], bookmarks: [Int: ReaderLocation] = [:],
-                        plans: [ReadingPlan] = [], memoryCards: [ScriptureMemoryCard] = [],
+                        plans: [ReadingPlan] = [], memoryCards: [ScriptureMemoryCard] = [], excerpts: [ResearchExcerpt] = [],
                         indexDirectory: URL? = nil,
                         exists: (URL) -> Bool = { FileManager.default.fileExists(atPath: $0.path) }) -> Self {
         let limit = 5000
@@ -111,6 +111,13 @@ struct LibraryHealthReport: Equatable, Sendable {
             if Task.isCancelled { break }
             if let edition = card.sourceEdition, !identities.contains(Identity(id: edition.resourceID, format: edition.format, legacy: edition.legacyIdentifier)) {
                 add(.init(id: "memory:" + card.id.uuidString, kind: .unresolvedLink, title: card.reference, detail: edition.title))
+            }
+        }
+        for excerpt in excerpts {
+            if Task.isCancelled { break }
+            let location = excerpt.location
+            if !identities.contains(Identity(id: location.resourceID, format: location.format, legacy: location.legacyIdentifier)) {
+                add(.init(id: "excerpt:" + excerpt.id.uuidString, kind: .unresolvedLink, title: excerpt.sourceTitle, detail: location.resourceID))
             }
         }
         for favorite in favorites {

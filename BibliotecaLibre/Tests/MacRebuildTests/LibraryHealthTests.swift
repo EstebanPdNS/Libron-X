@@ -86,8 +86,10 @@ struct LibraryHealthTests {
         let edition = StudyBibleEdition(resource)
         let plan = ReadingPlan(title: "Owned plan", readings: [], edition: edition)
         let card = ScriptureMemoryCard(reference: "John 3:16", passage: "Owned text", sourceEdition: edition)
-        let report = LibraryHealthReport.inspect(resources: [], documents: [], highlights: [], plans: [plan], memoryCards: [card])
-        #expect(report.issues.filter { $0.kind == .unresolvedLink }.count == 2)
+        let location = ReaderLocation(resourceID: resource.id, format: resource.format, sectionOrdinal: 0)
+        let excerpt = ResearchExcerpt(sourceTitle: "Owned excerpt", text: "Text", location: location, selectionLength: 4)
+        let report = LibraryHealthReport.inspect(resources: [], documents: [], highlights: [], plans: [plan], memoryCards: [card], excerpts: [excerpt])
+        #expect(report.issues.filter { $0.kind == .unresolvedLink }.count == 3)
     }
 
 }
