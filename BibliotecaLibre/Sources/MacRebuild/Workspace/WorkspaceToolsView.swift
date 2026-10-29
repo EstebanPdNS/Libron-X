@@ -83,6 +83,7 @@ struct WorkspaceToolsView: View {
 struct WorkspaceSearchView: View {
     @Bindable var workspace: StudyWorkspace
     @Bindable var search: WorkspaceSearchController
+    @RebuildViewState private var historyOpen = false
     private func run() { search.run(workspace.availableResources, documents: workspace.personal.documents, scopeContext: workspace.searchScopeContext()) }
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -95,6 +96,7 @@ struct WorkspaceSearchView: View {
                     Button(L("Cancelar"), action: search.cancel).disabled(search.phase == .cancelling)
                 }
                 else { Button(L("Buscar"), action: run).disabled(search.query.isEmpty) }
+                Button(L("Historial de búsquedas…")) { historyOpen = true }.disabled(search.isSearching)
             }
             WorkspaceSearchScopePicker(selection: search.scope, context: workspace.searchScopeContext()).disabled(search.isSearching)
             WorkspaceSearchFieldPicker(field: $search.searchField).disabled(search.isSearching)
@@ -135,6 +137,7 @@ struct WorkspaceSearchView: View {
             }
             }
             if let message = search.error { Text(message).foregroundStyle(.red).textSelection(.enabled) }
+            if let message = search.historyError { Text(L(message)).font(.caption).foregroundStyle(.red).textSelection(.enabled) }
             if search.report == nil, let scope = search.scopeSnapshot, !scope.complete {
                 DisclosureGroup(L("La búsqueda tiene resultados parciales o recursos pendientes")) {
                     ScrollView { Text(scope.issueLines.joined(separator: "\n")).font(.caption).textSelection(.enabled) }.frame(maxHeight: 100)
@@ -166,6 +169,9 @@ struct WorkspaceSearchView: View {
                 }
             }
         }.padding(16).onDisappear(perform: search.pause)
+            .sheet(isPresented: $historyOpen) {
+                WorkspaceSearchHistoryView(history: workspace.personal.searchHistory, search: search).modifier(AppInterfaceLanguage())
+            }
     }
 }
 

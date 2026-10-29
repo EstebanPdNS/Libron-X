@@ -26,8 +26,12 @@ import Testing
         let value = workspace(fixture); value.search.query = "Gamma"
         value.submitToolbarSearch(); try await settle(value)
         #expect(value.activeTool == .search && value.search.error == nil)
+        #expect(value.personal.searchHistory.entries.first?.configuration.query == "Gamma")
+        #expect(value.personal.searchHistory.entries.first?.configuration.scopeKind == .resource)
         #expect(value.search.report?.results.map(\.resourceID) == [fixture.resources[0].id])
         value.search.allResources = true; value.submitToolbarSearch(); try await settle(value)
+        #expect(value.personal.searchHistory.entries.first?.configuration.scopeKind == .library)
+        #expect(value.personal.searchHistory.entries.count == 2)
         #expect(Set(value.search.report?.results.map(\.resourceID) ?? []) == Set(fixture.resources.map(\.id)))
         try value.hideLibraryResources([fixture.resources[1].id])
         value.submitToolbarSearch(); try await settle(value)

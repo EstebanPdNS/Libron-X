@@ -75,6 +75,7 @@ enum PaneArrangement { case cascade, horizontal, vertical }
         self.parallelBibleSets = parallelBibleSets ?? ParallelBibleSets()
         self.resourceAssociations = resourceAssociations ?? ResourceAssociationSets()
         self.recentWorkspaces = recentWorkspaces ?? RecentWorkspaces()
+        self.search.history = self.personal.searchHistory
     }
     var availableResources: [LibraryResource] { resources.filter { !resourceVisibility.isHidden($0) } }
     var activeReader: ReaderSession? { readers.first { $0.id == activeID } }

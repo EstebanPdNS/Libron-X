@@ -2243,6 +2243,18 @@
     "ur": "اپ ڈیٹ چینل",
     "zh-Hans": "更新通道"
   },
+  "Cancela la búsqueda antes de cambiar su configuración.": {
+    "ar": "ألغِ البحث قبل تغيير إعداداته.",
+    "bn": "সেটিংস বদলানোর আগে অনুসন্ধান বাতিল করুন।",
+    "en": "Cancel the search before changing its settings.",
+    "es": "Cancela la búsqueda antes de cambiar su configuración.",
+    "fr": "Annulez la recherche avant de modifier ses options.",
+    "hi": "सेटिंग बदलने से पहले खोज रद्द करें।",
+    "id": "Batalkan pencarian sebelum mengubah pengaturannya.",
+    "pt": "Cancele a pesquisa antes de alterar suas opções.",
+    "ur": "ترتیبات بدلنے سے پہلے تلاش منسوخ کریں۔",
+    "zh-Hans": "更改设置前请取消搜索。"
+  },
   "Cancelando búsqueda…": {
     "ar": "جارٍ إلغاء البحث…",
     "bn": "অনুসন্ধান বাতিল হচ্ছে…",
@@ -4475,6 +4487,18 @@
     "ur": "بائبل کا گروپ اب دستیاب نہیں ہے۔",
     "zh-Hans": "该圣经分组已不可用。"
   },
+  "El historial de búsquedas contiene datos incompatibles.": {
+    "ar": "يحتوي سجل البحث على بيانات غير متوافقة.",
+    "bn": "অনুসন্ধানের ইতিহাসে অসংগত তথ্য আছে।",
+    "en": "Search history contains incompatible data.",
+    "es": "El historial de búsquedas contiene datos incompatibles.",
+    "fr": "L’historique des recherches contient des données incompatibles.",
+    "hi": "खोज इतिहास में असंगत डेटा है।",
+    "id": "Riwayat pencarian berisi data yang tidak kompatibel.",
+    "pt": "O histórico de pesquisas contém dados incompatíveis.",
+    "ur": "تلاش کی تاریخ میں غیر مطابقت پذیر ڈیٹا ہے۔",
+    "zh-Hans": "搜索历史包含不兼容的数据。"
+  },
   "El idioma cambia la interfaz. Los libros conservan su texto original.": {
     "ar": "يغيّر هذا لغة الواجهة. تحتفظ الكتب بنصها الأصلي.",
     "bn": "এটি ইন্টারফেসের ভাষা বদলায়। বইয়ের মূল পাঠ অপরিবর্তিত থাকে।",
@@ -6274,6 +6298,30 @@
     "pt": "História e contexto bíblico",
     "ur": "بائبلی تاریخ اور پس منظر",
     "zh-Hans": "圣经历史与背景"
+  },
+  "Historial de búsquedas": {
+    "ar": "سجل البحث",
+    "bn": "অনুসন্ধানের ইতিহাস",
+    "en": "Search History",
+    "es": "Historial de búsquedas",
+    "fr": "Historique des recherches",
+    "hi": "खोज इतिहास",
+    "id": "Riwayat pencarian",
+    "pt": "Histórico de pesquisas",
+    "ur": "تلاش کی تاریخ",
+    "zh-Hans": "搜索历史"
+  },
+  "Historial de búsquedas…": {
+    "ar": "سجل البحث…",
+    "bn": "অনুসন্ধানের ইতিহাস…",
+    "en": "Search History…",
+    "es": "Historial de búsquedas…",
+    "fr": "Historique des recherches…",
+    "hi": "खोज इतिहास…",
+    "id": "Riwayat pencarian…",
+    "pt": "Histórico de pesquisas…",
+    "ur": "تلاش کی تاریخ…",
+    "zh-Hans": "搜索历史…"
   },
   "Historial de lectura": {
     "ar": "سجل القراءة",
@@ -8411,6 +8459,18 @@
     "ur": "لائبریری میں کوئی موافق بائبل نہیں ہے۔",
     "zh-Hans": "书库中没有兼容的圣经。"
   },
+  "No hay búsquedas guardadas.": {
+    "ar": "لا توجد عمليات بحث محفوظة.",
+    "bn": "কোনো সংরক্ষিত অনুসন্ধান নেই।",
+    "en": "No saved searches.",
+    "es": "No hay búsquedas guardadas.",
+    "fr": "Aucune recherche enregistrée.",
+    "hi": "कोई सहेजी गई खोज नहीं।",
+    "id": "Tidak ada pencarian tersimpan.",
+    "pt": "Nenhuma pesquisa salva.",
+    "ur": "کوئی محفوظ تلاش نہیں۔",
+    "zh-Hans": "没有保存的搜索。"
+  },
   "No hay categorías de oración.": {
     "ar": "لا توجد فئات للصلاة.",
     "bn": "কোনো প্রার্থনার বিভাগ নেই।",
@@ -8770,6 +8830,18 @@
     "pt": "Não foi possível abrir a pasta no Finder.",
     "ur": "Finder میں فولڈر نہیں کھولا جا سکا۔",
     "zh-Hans": "无法在访达中打开文件夹。"
+  },
+  "No se pudo abrir el historial de búsquedas.": {
+    "ar": "تعذر فتح سجل البحث.",
+    "bn": "অনুসন্ধানের ইতিহাস খোলা যায়নি।",
+    "en": "Could not open search history.",
+    "es": "No se pudo abrir el historial de búsquedas.",
+    "fr": "Impossible d’ouvrir l’historique des recherches.",
+    "hi": "खोज इतिहास नहीं खोला जा सका।",
+    "id": "Riwayat pencarian tidak dapat dibuka.",
+    "pt": "Não foi possível abrir o histórico de pesquisas.",
+    "ur": "تلاش کی تاریخ نہیں کھولی جا سکی۔",
+    "zh-Hans": "无法打开搜索历史。"
   },
   "No se pudo abrir el texto enriquecido de la nota. Se conserva su representación original.": {
     "ar": "تعذّر فتح النص المنسّق للملاحظة. يُحفظ تمثيلها الأصلي.",
@@ -10823,6 +10895,18 @@
     "ur": "ترجیحات بحال کریں",
     "zh-Hans": "重置优先级"
   },
+  "Restaurar búsqueda": {
+    "ar": "استعادة البحث",
+    "bn": "অনুসন্ধান পুনরুদ্ধার করুন",
+    "en": "Restore Search",
+    "es": "Restaurar búsqueda",
+    "fr": "Restaurer la recherche",
+    "hi": "खोज बहाल करें",
+    "id": "Pulihkan pencarian",
+    "pt": "Restaurar pesquisa",
+    "ur": "تلاش بحال کریں",
+    "zh-Hans": "恢复搜索"
+  },
   "Restaurar grupos por idioma": {
     "ar": "استعادة مجموعات اللغات",
     "bn": "ভাষার দলগুলি পুনরুদ্ধার করুন",
@@ -11374,6 +11458,18 @@
     "pt": "Selecione uma associação",
     "ur": "تعلق منتخب کریں",
     "zh-Hans": "选择关联"
+  },
+  "Selecciona una búsqueda para restaurar sus opciones. Después pulsa Buscar para ejecutarla.": {
+    "ar": "حدد بحثًا لاستعادة خياراته، ثم اضغط على بحث لتشغيله.",
+    "bn": "বিকল্প ফেরাতে একটি অনুসন্ধান নির্বাচন করুন। তারপর চালাতে অনুসন্ধান চাপুন।",
+    "en": "Select a search to restore its options. Then press Search to run it.",
+    "es": "Selecciona una búsqueda para restaurar sus opciones. Después pulsa Buscar para ejecutarla.",
+    "fr": "Sélectionnez une recherche pour restaurer ses options. Appuyez ensuite sur Rechercher pour l’exécuter.",
+    "hi": "विकल्प बहाल करने के लिए खोज चुनें। फिर उसे चलाने के लिए खोज दबाएँ।",
+    "id": "Pilih pencarian untuk memulihkan opsinya. Lalu tekan Cari untuk menjalankannya.",
+    "pt": "Selecione uma pesquisa para restaurar suas opções. Depois, pressione Pesquisar para executá-la.",
+    "ur": "اختیارات بحال کرنے کے لیے تلاش منتخب کریں۔ پھر چلانے کے لیے تلاش دبائیں۔",
+    "zh-Hans": "选择搜索以恢复其选项，然后点击搜索以执行。"
   },
   "Selecciona una colección para la bibliografía.": {
     "ar": "اختر مجموعة لقائمة المراجع.",

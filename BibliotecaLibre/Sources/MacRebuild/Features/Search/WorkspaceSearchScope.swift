@@ -35,6 +35,10 @@ enum WorkspaceSearchScopeError: Error, LocalizedError {
     private(set) var unresolvedSubsetIDs: Set<String> = []
     var selectedSubsetIDs: Set<String> { Set(members.map(\.id)).union(unresolvedSubsetIDs) }
     func clearSubset() { members = []; unresolvedSubsetIDs = [] }
+    func restoreSubset(members: [LibraryCollectionMember], unresolvedIDs: Set<String>) {
+        self.members = members
+        unresolvedSubsetIDs = unresolvedIDs
+    }
     // Keep the existing controller API and toolbar behavior available.
     var allResources: Bool {
         get { kind == .library }

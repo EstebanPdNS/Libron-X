@@ -1430,10 +1430,16 @@
       "sourceKey": "WIN-SEARCH-HISTORY-001",
       "acceptance": "Historial recuperable con todas las opciones, selección y repetición deliberada.",
       "baseline": "Consulta actual en memoria.",
-      "status": "pending",
-      "implementation": [],
-      "verification": [],
-      "limitations": []
+      "status": "in_progress",
+      "implementation": [
+        "Added a local search history that records valid library searches, retains all search options and scope membership, permits selecting and restoring a configuration without automatically rerunning it, and supports removal of individual entries. History is limited to 100 distinct configurations."
+      ],
+      "verification": [
+        "WorkspaceSearchHistoryTests and ToolbarSearchTests passed for full-option round trips, persistence, concurrent-write and future-schema protection, and recording toolbar searches. AppLanguageTests passed for all ten interface languages. Native build 151 was visually inspected in dark mode and tested for recording, restoring and persistence after restart."
+      ],
+      "limitations": [
+        "Light, right-to-left and narrow-window visual review remains pending. The history currently retains at most 100 distinct configurations; broader history requirements remain to be evaluated."
+      ]
     },
     {
       "id": "F236",

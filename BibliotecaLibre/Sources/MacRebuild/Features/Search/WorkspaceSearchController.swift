@@ -2,9 +2,9 @@ import Foundation
 import Observation
 import LibronixCore
 
-enum WorkspaceBibleRangeMode: String, CaseIterable, Sendable { case all, custom, savedList }
+enum WorkspaceBibleRangeMode: String, Codable, CaseIterable, Sendable { case all, custom, savedList }
 enum WorkspaceSearchPhase: Equatable { case idle, running, pausing, paused, cancelling, cancelled, finished, failed }
-struct WorkspaceSearchLimits: Hashable, Sendable {
+struct WorkspaceSearchLimits: Codable, Hashable, Sendable {
     var durationSeconds = 120.0
     var articles = 250_000
     var results = 500
@@ -36,6 +36,8 @@ struct WorkspaceSearchLimits: Hashable, Sendable {
     var report: LibrarySearchReport? { didSet { presentation.setResults(report?.results ?? [], preserveSelection: oldValue != nil) } }
     var progress: LibrarySearchProgress?
     var error: String?
+    var historyError: String?
+    var history: WorkspaceSearchHistory?
     private(set) var submittedQuery: String?
     var configurationChanged: Bool { report != nil && submittedIdentity.map { $0 != identity } == true }
     var canOpenResults: Bool { report != nil && report?.runState != .failed && !configurationChanged && phase != .cancelling }
@@ -63,6 +65,28 @@ struct WorkspaceSearchLimits: Hashable, Sendable {
         self.providerFactory = providerFactory
     }
     deinit { task?.cancel() }
+    var historyConfiguration: WorkspaceSearchConfiguration {
+        .init(query: query, field: searchField, approximatePhrase: approximatePhrase, maximumEdits: maximumEdits,
+              scopeKind: scope.kind, resourceID: resourceID, collectionIDs: scope.collectionIDs,
+              subsetMembers: scope.members, unresolvedSubsetIDs: scope.unresolvedSubsetIDs,
+              caseSensitive: caseSensitive, wholeWords: wholeWords, bibleVerses: bibleVerses,
+              bibleRangeMode: bibleRangeMode, customBibleRange: customBibleRange, referenceListID: referenceListID,
+              limits: limits)
+    }
+    func restore(_ configuration: WorkspaceSearchConfiguration) throws {
+        guard !isSearching else { throw PersonalStateError.invalid("Cancela la búsqueda antes de cambiar su configuración.") }
+        try configuration.validate()
+        clear()
+        query = configuration.query; searchField = configuration.field
+        approximatePhrase = configuration.approximatePhrase; maximumEdits = configuration.maximumEdits
+        scope.kind = configuration.scopeKind; resourceID = configuration.resourceID
+        scope.collectionIDs = configuration.collectionIDs
+        scope.restoreSubset(members: configuration.subsetMembers, unresolvedIDs: configuration.unresolvedSubsetIDs)
+        caseSensitive = configuration.caseSensitive; wholeWords = configuration.wholeWords
+        bibleVerses = configuration.bibleVerses; bibleRangeMode = configuration.bibleRangeMode
+        customBibleRange = configuration.customBibleRange; referenceListID = configuration.referenceListID
+        limits = configuration.limits
+    }
     func pause() {
         guard phase == .running, let control else { return }
         phase = .pausing
@@ -120,6 +144,10 @@ struct WorkspaceSearchLimits: Hashable, Sendable {
             } else { range = nil }
             let control = LibrarySearchControl(), provider = providerFactory()
             self.control = control; submittedIdentity = identity; submittedQuery = query; phase = .running
+            if let history {
+                do { try history.record(historyConfiguration); historyError = nil }
+                catch { historyError = error.localizedDescription }
+            }
             task = Task { [weak self] in
                 do {
                     let result = try await LibrarySearchService(provider: provider).search(resources: selected, query: parsed, options: options,
