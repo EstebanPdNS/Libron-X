@@ -3611,6 +3611,18 @@
     "ur": "شروع یا آخر سے جاری رکھیں",
     "zh-Hans": "从开头或末尾继续"
   },
+  "Continuar lectura": {
+    "ar": "متابعة القراءة",
+    "bn": "পড়া চালিয়ে যান",
+    "en": "Continue Reading",
+    "es": "Continuar lectura",
+    "fr": "Continuer la lecture",
+    "hi": "पढ़ना जारी रखें",
+    "id": "Lanjutkan membaca",
+    "pt": "Continuar leitura",
+    "ur": "پڑھنا جاری رکھیں",
+    "zh-Hans": "继续阅读"
+  },
   "Conversión pendiente": {
     "ar": "التحويل قيد الانتظار",
     "bn": "রূপান্তর বাকি",
@@ -8759,6 +8771,18 @@
     "ur": "کھلی مطالعے کی ونڈوز",
     "zh-Hans": "打开的阅读窗口"
   },
+  "Lecturas de hoy": {
+    "ar": "قراءات اليوم",
+    "bn": "আজকের পাঠ",
+    "en": "Today’s Readings",
+    "es": "Lecturas de hoy",
+    "fr": "Lectures du jour",
+    "hi": "आज के पाठ",
+    "id": "Bacaan hari ini",
+    "pt": "Leituras de hoje",
+    "ur": "آج کی قرأتیں",
+    "zh-Hans": "今日阅读"
+  },
   "Lenguas bíblicas": {
     "ar": "اللغات الكتابية",
     "bn": "বাইবেলের ভাষা",
@@ -10030,6 +10054,18 @@
     "pt": "Nenhum trecho salvo.",
     "ur": "کوئی محفوظ اقتباس نہیں۔",
     "zh-Hans": "没有已保存的摘录。"
+  },
+  "No hay lecturas programadas para hoy.": {
+    "ar": "لا توجد قراءات مجدولة لليوم.",
+    "bn": "আজ কোনো পাঠ নির্ধারিত নেই।",
+    "en": "No readings are scheduled for today.",
+    "es": "No hay lecturas programadas para hoy.",
+    "fr": "Aucune lecture n’est prévue aujourd’hui.",
+    "hi": "आज के लिए कोई पाठ निर्धारित नहीं है।",
+    "id": "Tidak ada bacaan yang dijadwalkan hari ini.",
+    "pt": "Não há leituras agendadas para hoje.",
+    "ur": "آج کے لیے کوئی قرأت مقرر نہیں ہے۔",
+    "zh-Hans": "今天没有安排阅读。"
   },
   "No hay listas de palabras.": {
     "ar": "لا توجد قوائم كلمات.",
@@ -15766,6 +15802,18 @@
     "pt": "{count} janelas de leitura abertas",
     "ur": "{count} کھلی مطالعے کی ونڈوز",
     "zh-Hans": "{count} 个打开的阅读窗口"
+  },
+  "{count} lecturas más": {
+    "ar": "{count} قراءات أخرى",
+    "bn": "আরও {count}টি পাঠ",
+    "en": "{count} more readings",
+    "es": "{count} lecturas más",
+    "fr": "{count} lectures supplémentaires",
+    "hi": "{count} और पाठ",
+    "id": "{count} bacaan lainnya",
+    "pt": "Mais {count} leituras",
+    "ur": "مزید {count} قرأتیں",
+    "zh-Hans": "另有 {count} 项阅读"
   },
   "{count} ocultos": {
     "ar": "المخفية: {count}",

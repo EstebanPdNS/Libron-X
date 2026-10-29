@@ -58,6 +58,7 @@ enum PaneArrangement { case cascade, horizontal, vertical }
         activeTool = nil
     }
     var showsHome = false { didSet { if showsHome { exitFocusedReading() } } }
+    var homeReadingPlanID: UUID?
     var snapPreview: PaneFrame?
     var dictionary = DictionaryController()
     var search = WorkspaceSearchController()

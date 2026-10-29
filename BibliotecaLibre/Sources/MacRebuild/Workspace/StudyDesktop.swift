@@ -11,12 +11,7 @@ struct StudyDesktop: View {
                 ZStack(alignment: .topLeading) {
                     Color(nsColor: .underPageBackgroundColor)
                     if workspace.showsHome {
-                        VStack(spacing: 14) {
-                            Image(systemName: "books.vertical").font(.system(size: 36)).foregroundStyle(.secondary)
-                            Text(L("Espacio de trabajo")).font(.title2)
-                            Button(L("Abrir Mi biblioteca")) { openWindow(id: "library") }
-                            Text(L("Abre libros y organízalos dentro de esta ventana.")).foregroundStyle(.secondary)
-                        }.frame(maxWidth: .infinity, maxHeight: .infinity)
+                        PersonalHomeView(workspace: workspace) { openWindow(id: "library") }.modifier(AppInterfaceLanguage())
                     }
                     ForEach(workspace.showsHome ? [] : workspace.presentedReaders) { reader in
                         let focused = workspace.focusedReaderID == reader.id

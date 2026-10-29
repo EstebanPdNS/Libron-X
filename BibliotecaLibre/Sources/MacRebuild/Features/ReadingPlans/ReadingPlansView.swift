@@ -93,7 +93,12 @@ struct ReadingPlansView: View {
                 Text(L(message)).foregroundStyle(.red).font(.caption).textSelection(.enabled)
             }
         }.padding(16)
-            .onAppear { if selectedID == nil { selectedID = workspace.personal.readingPlans.plans.first?.id } }
+            .onAppear {
+                if let requested = workspace.homeReadingPlanID,
+                   workspace.personal.readingPlans.plans.contains(where: { $0.id == requested }) { selectedID = requested }
+                else if selectedID == nil { selectedID = workspace.personal.readingPlans.plans.first?.id }
+                workspace.homeReadingPlanID = nil
+            }
             .onChange(of: selectedID) { selectedReading = nil }
             .sheet(isPresented: $creating) {
                 ReadingPlanCreationView(personal: workspace.personal) { id in selectedID = id }

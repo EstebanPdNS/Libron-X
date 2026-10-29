@@ -1450,7 +1450,8 @@
       ],
       "verification": [
         "PreviousDocumentRecoveryTests cover preserved hierarchy, new identities, stale backup rejection, missing or corrupt backup, unchanged-save retention and preservation of the source archive on a concurrent save conflict.",
-        "Native build 188 displayed the backup browser in dark appearance and recovered a test notebook as a separate document with its note text intact. Original personal files were restored."
+        "Native build 188 displayed the backup browser in dark appearance and recovered a test notebook as a separate document with its note text intact. Original personal files were restored.",
+        "Native build 189 created a private recovery archive and recovered the test notebook; the test archive was moved aside and original personal files restored."
       ],
       "limitations": [
         "The browser exposes only the immediately preceding personal snapshot; a multi-version history and sermon documents remain pending."
@@ -1543,10 +1544,18 @@
       "sourceKey": "study-expansion-product-11",
       "acceptance": "Reanudar estudios/documentos y mostrar planes y lecturas reales del día.",
       "baseline": "Pantalla de Inicio básica y opciones de arranque.",
-      "status": "pending",
-      "implementation": [],
-      "verification": [],
-      "limitations": []
+      "status": "in_progress",
+      "implementation": [
+        "Added a native glass home view with the active reader, locally saved study documents, and actual readings scheduled for the current local day. Reading entries open their corresponding plan; errors loading local data remain visible."
+      ],
+      "verification": [
+        "PersonalHomeTests check local-day boundaries in two time zones, plan identity and completed status. The language catalog tests pass.",
+        "Native build 192 showed two test plans and a test notebook in dark appearance. The second reading opened its own plan and the notebook shortcut opened the corresponding document. Personal files and workspace state were restored.",
+        "Full test run had one timeout in an existing TopicSearchTests gate; rerunning that suite together with the home and language tests passed. The timeout needs further investigation before release."
+      ],
+      "limitations": [
+        "Resume of an active reader and light/right-to-left layouts still need native visual verification."
+      ]
     },
     {
       "id": "F233",
