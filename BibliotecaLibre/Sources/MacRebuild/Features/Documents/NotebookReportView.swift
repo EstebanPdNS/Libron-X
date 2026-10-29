@@ -114,18 +114,18 @@ struct NotebookReportView: View {
                 Divider()
                 VStack(alignment: .leading, spacing: 10) {
                     Text(L("Vista previa")).font(.headline)
-                    ScrollView {
-                        Group {
-                            if selected.isEmpty {
-                                Text(L("Selecciona las notas que quieras incluir.")).foregroundStyle(.secondary)
-                            } else {
-                                switch preview {
-                                case .success(let report): Text(BibleCopyPreview.text(report)).textSelection(.enabled)
-                                case .failure(let failure): Text(L(failure.localizedDescription)).foregroundStyle(.secondary).textSelection(.enabled)
-                                case nil: ProgressView()
-                                }
+                    Group {
+                        if selected.isEmpty {
+                            Text(L("Selecciona las notas que quieras incluir.")).foregroundStyle(.secondary)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading).padding(12)
+                        } else {
+                            switch preview {
+                            case .success(let report): MacAttributedPreview(text: report)
+                            case .failure(let failure):
+                                ScrollView { Text(L(failure.localizedDescription)).foregroundStyle(.secondary).textSelection(.enabled).padding(12) }
+                            case nil: ProgressView()
                             }
-                        }.frame(maxWidth: .infinity, alignment: .leading).padding(12)
+                        }
                     }.frame(maxWidth: .infinity, maxHeight: .infinity).macEditorSurface()
                 }
             }.frame(maxHeight: .infinity)

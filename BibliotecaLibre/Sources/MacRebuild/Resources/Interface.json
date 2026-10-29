@@ -3011,6 +3011,18 @@
     "ur": "شکاگو · مصنف–تاریخ",
     "zh-Hans": "Chicago · 作者–日期"
   },
+  "Cita": {
+    "ar": "اقتباس",
+    "bn": "উদ্ধৃতি",
+    "en": "Quotation",
+    "es": "Cita",
+    "fr": "Citation",
+    "hi": "उद्धरण",
+    "id": "Kutipan",
+    "pt": "Citação",
+    "ur": "اقتباس",
+    "zh-Hans": "引文"
+  },
   "Cita bibliográfica": {
     "ar": "استشهاد ببليوغرافي",
     "bn": "গ্রন্থপঞ্জির উদ্ধৃতি",
@@ -4931,6 +4943,18 @@
     "ur": "دو کالم",
     "zh-Hans": "两列"
   },
+  "Duplica una plantilla incluida para editarla.": {
+    "ar": "انسخ قالبًا مضمنًا لتحريره.",
+    "bn": "সম্পাদনা করতে অন্তর্ভুক্ত টেমপ্লেটের অনুলিপি তৈরি করুন।",
+    "en": "Duplicate a built-in template to edit it.",
+    "es": "Duplica una plantilla incluida para editarla.",
+    "fr": "Dupliquez un modèle intégré pour le modifier.",
+    "hi": "किसी अंतर्निहित टेम्पलेट को संपादित करने के लिए उसकी प्रतिलिपि बनाएँ।",
+    "id": "Duplikasikan templat bawaan untuk mengeditnya.",
+    "pt": "Duplique um modelo incluído para editá-lo.",
+    "ur": "ترمیم کے لیے شامل سانچے کی نقل بنائیں۔",
+    "zh-Hans": "复制内置模板后即可编辑。"
+  },
   "Duplicados y ediciones": {
     "ar": "النسخ المكررة والطبعات",
     "bn": "সদৃশ ও সংস্করণ",
@@ -6707,6 +6731,18 @@
     "ur": "موازنے اور تلاش کے نتائج CSV میں برآمد کریں۔",
     "zh-Hans": "将比较和搜索结果导出为 CSV。"
   },
+  "Exportar copia bíblica": {
+    "ar": "تصدير النسخة الكتابية",
+    "bn": "বাইবেলের অনুলিপি রপ্তানি করুন",
+    "en": "Export Bible Copy",
+    "es": "Exportar copia bíblica",
+    "fr": "Exporter la copie biblique",
+    "hi": "बाइबल प्रतिलिपि निर्यात करें",
+    "id": "Ekspor Salinan Alkitab",
+    "pt": "Exportar cópia bíblica",
+    "ur": "بائبلی نقل برآمد کریں",
+    "zh-Hans": "导出经文副本"
+  },
   "Exportar informe": {
     "ar": "تصدير التقرير",
     "bn": "প্রতিবেদন রপ্তানি",
@@ -6995,6 +7031,42 @@
     "ur": "موجودہ فارمیٹ",
     "zh-Hans": "当前格式"
   },
+  "Formato completo": {
+    "ar": "التنسيق الكامل",
+    "bn": "সম্পূর্ণ বিন্যাস",
+    "en": "Full Formatting",
+    "es": "Formato completo",
+    "fr": "Mise en forme complète",
+    "hi": "पूर्ण स्वरूपण",
+    "id": "Format Lengkap",
+    "pt": "Formatação completa",
+    "ur": "مکمل وضع",
+    "zh-Hans": "完整格式"
+  },
+  "Formato de caracteres": {
+    "ar": "تنسيق الأحرف",
+    "bn": "অক্ষরের বিন্যাস",
+    "en": "Character Formatting",
+    "es": "Formato de caracteres",
+    "fr": "Mise en forme des caractères",
+    "hi": "अक्षर स्वरूपण",
+    "id": "Format Karakter",
+    "pt": "Formatação de caracteres",
+    "ur": "حروف کی وضع",
+    "zh-Hans": "字符格式"
+  },
+  "Formato de párrafos": {
+    "ar": "تنسيق الفقرات",
+    "bn": "অনুচ্ছেদের বিন্যাস",
+    "en": "Paragraph Formatting",
+    "es": "Formato de párrafos",
+    "fr": "Mise en forme des paragraphes",
+    "hi": "अनुच्छेद स्वरूपण",
+    "id": "Format Paragraf",
+    "pt": "Formatação de parágrafos",
+    "ur": "پیراگراف کی وضع",
+    "zh-Hans": "段落格式"
+  },
   "Formato original": {
     "ar": "التنسيق الأصلي",
     "bn": "মূল বিন্যাস",
@@ -7246,6 +7318,18 @@
     "pt": "Grego",
     "ur": "یونانی",
     "zh-Hans": "希腊语"
+  },
+  "Griego y hebreo transliterados": {
+    "ar": "نقل صوتي لليونانية والعبرية",
+    "bn": "গ্রিক ও হিব্রু প্রতিবর্ণীকরণ",
+    "en": "Transliterated Greek and Hebrew",
+    "es": "Griego y hebreo transliterados",
+    "fr": "Grec et hébreu translittérés",
+    "hi": "यूनानी और हिब्रू लिप्यंतरण",
+    "id": "Transliterasi Yunani dan Ibrani",
+    "pt": "Grego e hebraico transliterados",
+    "ur": "یونانی اور عبرانی حرف نویسی",
+    "zh-Hans": "希腊语和希伯来语转写"
   },
   "Grupo": {
     "ar": "المجموعة",
@@ -7810,6 +7894,18 @@
     "pt": "Idioma da interface",
     "ur": "انٹرفیس کی زبان",
     "zh-Hans": "界面语言"
+  },
+  "Idioma de las referencias": {
+    "ar": "لغة المراجع",
+    "bn": "তথ্যসূত্রের ভাষা",
+    "en": "Reference Language",
+    "es": "Idioma de las referencias",
+    "fr": "Langue des références",
+    "hi": "संदर्भों की भाषा",
+    "id": "Bahasa Referensi",
+    "pt": "Idioma das referências",
+    "ur": "حوالوں کی زبان",
+    "zh-Hans": "经文引用语言"
   },
   "Idioma de origen": {
     "ar": "لغة المصدر",
@@ -10007,6 +10103,18 @@
     "ur": "میرے نوٹس",
     "zh-Hans": "我的笔记"
   },
+  "Mis plantillas": {
+    "ar": "قوالبي",
+    "bn": "আমার টেমপ্লেট",
+    "en": "My Templates",
+    "es": "Mis plantillas",
+    "fr": "Mes modèles",
+    "hi": "मेरे टेम्पलेट",
+    "id": "Templat Saya",
+    "pt": "Meus modelos",
+    "ur": "میرے سانچے",
+    "zh-Hans": "我的模板"
+  },
   "Misiones y evangelización": {
     "ar": "الإرساليات والتبشير",
     "bn": "মিশন ও সুসমাচার প্রচার",
@@ -11687,6 +11795,30 @@
     "ur": "تلاش کے اختیارات",
     "zh-Hans": "查找选项"
   },
+  "Opciones de copia": {
+    "ar": "خيارات النسخ",
+    "bn": "অনুলিপির বিকল্প",
+    "en": "Copy Options",
+    "es": "Opciones de copia",
+    "fr": "Options de copie",
+    "hi": "प्रतिलिपि विकल्प",
+    "id": "Opsi Salin",
+    "pt": "Opções de cópia",
+    "ur": "نقل کے اختیارات",
+    "zh-Hans": "复制选项"
+  },
+  "Opciones de plantilla": {
+    "ar": "خيارات القالب",
+    "bn": "টেমপ্লেটের বিকল্প",
+    "en": "Template Options",
+    "es": "Opciones de plantilla",
+    "fr": "Options du modèle",
+    "hi": "टेम्पलेट विकल्प",
+    "id": "Opsi Templat",
+    "pt": "Opções do modelo",
+    "ur": "سانچے کے اختیارات",
+    "zh-Hans": "模板选项"
+  },
   "Operadores de búsqueda": {
     "ar": "عوامل البحث",
     "bn": "অনুসন্ধান অপারেটর",
@@ -11950,6 +12082,18 @@
     "pt": "Palavras inteiras",
     "ur": "مکمل الفاظ",
     "zh-Hans": "全字匹配"
+  },
+  "Palabras de Jesús en rojo": {
+    "ar": "كلمات يسوع بالأحمر",
+    "bn": "যীশুর বাণী লাল রঙে",
+    "en": "Words of Jesus in Red",
+    "es": "Palabras de Jesús en rojo",
+    "fr": "Paroles de Jésus en rouge",
+    "hi": "यीशु के वचन लाल रंग में",
+    "id": "Perkataan Yesus dalam Merah",
+    "pt": "Palavras de Jesus em vermelho",
+    "ur": "یسوع کے الفاظ سرخ رنگ میں",
+    "zh-Hans": "耶稣的话显示为红色"
   },
   "Palabras encontradas: {found} de {total}": {
     "ar": "الكلمات المكتشفة: {found} من {total}",
@@ -12407,6 +12551,18 @@
     "ur": "کاپی کے سانچے",
     "zh-Hans": "复制模板"
   },
+  "Plantillas incluidas": {
+    "ar": "القوالب المضمنة",
+    "bn": "অন্তর্ভুক্ত টেমপ্লেট",
+    "en": "Built-in Templates",
+    "es": "Plantillas incluidas",
+    "fr": "Modèles intégrés",
+    "hi": "अंतर्निहित टेम्पलेट",
+    "id": "Templat Bawaan",
+    "pt": "Modelos incluídos",
+    "ur": "شامل سانچے",
+    "zh-Hans": "内置模板"
+  },
   "Por reglas": {
     "ar": "حسب القواعد",
     "bn": "নিয়মভিত্তিক",
@@ -12718,6 +12874,18 @@
     "pt": "Parágrafos",
     "ur": "پیراگراف",
     "zh-Hans": "段落"
+  },
+  "Párrafos sencillos": {
+    "ar": "فقرات بسيطة",
+    "bn": "সাধারণ অনুচ্ছেদ",
+    "en": "Simple Paragraphs",
+    "es": "Párrafos sencillos",
+    "fr": "Paragraphes simples",
+    "hi": "सरल अनुच्छेद",
+    "id": "Paragraf Sederhana",
+    "pt": "Parágrafos simples",
+    "ur": "سادہ پیراگراف",
+    "zh-Hans": "简单段落"
   },
   "Quita los recursos no disponibles o incompatibles antes de cambiar el tipo, idioma o serie.": {
     "ar": "أزل الموارد غير المتاحة أو غير المتوافقة قبل تغيير النوع أو اللغة أو السلسلة.",
@@ -14315,6 +14483,18 @@
     "ur": "کسی وسیلے میں متن منتخب کریں اور اسے یہاں محفوظ کرنے کے لیے ٹولز استعمال کریں۔",
     "zh-Hans": "选择资源中的文本，然后通过“工具”将其保存到此处。"
   },
+  "Selecciona texto original o transliteración para copiar este estilo hebreo heredado.": {
+    "ar": "اختر النص الأصلي أو النقل الصوتي لنسخ هذا النمط العبري القديم.",
+    "bn": "এই পুরোনো হিব্রু শৈলী অনুলিপি করতে মূল পাঠ বা প্রতিবর্ণীকরণ নির্বাচন করুন।",
+    "en": "Choose original text or transliteration to copy this legacy Hebrew style.",
+    "es": "Selecciona texto original o transliteración para copiar este estilo hebreo heredado.",
+    "fr": "Choisissez le texte original ou la translittération pour copier ce style hébreu ancien.",
+    "hi": "इस पुराने हिब्रू शैली की प्रतिलिपि के लिए मूल पाठ या लिप्यंतरण चुनें।",
+    "id": "Pilih teks asli atau transliterasi untuk menyalin gaya Ibrani lama ini.",
+    "pt": "Selecione texto original ou transliteração para copiar este estilo hebraico antigo.",
+    "ur": "اس قدیم عبرانی طرز کو نقل کرنے کے لیے اصل متن یا حرف نویسی منتخب کریں۔",
+    "zh-Hans": "请选择原文或转写以复制此旧版希伯来语样式。"
+  },
   "Selecciona un documento": {
     "ar": "اختر مستندًا",
     "bn": "নথি বাছাই করুন",
@@ -14434,6 +14614,18 @@
     "pt": "Selecione uma Bíblia e carregue os textos.",
     "ur": "بائبل منتخب کریں اور متن لوڈ کریں۔",
     "zh-Hans": "选择圣经并载入经文。"
+  },
+  "Selecciona una Biblia y un pasaje para preparar la copia.": {
+    "ar": "اختر كتابًا مقدسًا ومقطعًا لتحضير النسخة.",
+    "bn": "অনুলিপি প্রস্তুত করতে একটি বাইবেল ও অনুচ্ছেদ নির্বাচন করুন।",
+    "en": "Choose a Bible and a passage to prepare the copy.",
+    "es": "Selecciona una Biblia y un pasaje para preparar la copia.",
+    "fr": "Choisissez une Bible et un passage pour préparer la copie.",
+    "hi": "प्रतिलिपि तैयार करने के लिए बाइबल और अंश चुनें।",
+    "id": "Pilih Alkitab dan perikop untuk menyiapkan salinan.",
+    "pt": "Selecione uma Bíblia e uma passagem para preparar a cópia.",
+    "ur": "نقل تیار کرنے کے لیے بائبل اور اقتباس منتخب کریں۔",
+    "zh-Hans": "请选择圣经版本和经文以准备复制。"
   },
   "Selecciona una asociación": {
     "ar": "اختر ارتباطًا",
@@ -15023,6 +15215,18 @@
     "ur": "صرف متن",
     "zh-Hans": "仅文本"
   },
+  "Solo texto bíblico": {
+    "ar": "النص الكتابي فقط",
+    "bn": "শুধু বাইবেলের পাঠ",
+    "en": "Bible Text Only",
+    "es": "Solo texto bíblico",
+    "fr": "Texte biblique uniquement",
+    "hi": "केवल बाइबल पाठ",
+    "id": "Hanya Teks Alkitab",
+    "pt": "Somente texto bíblico",
+    "ur": "صرف بائبلی متن",
+    "zh-Hans": "仅圣经正文"
+  },
   "Sopa de letras": {
     "ar": "البحث عن الكلمات",
     "bn": "শব্দ খোঁজা",
@@ -15107,6 +15311,18 @@
     "ur": "ذیلی عنوان",
     "zh-Hans": "副标题"
   },
+  "Subíndice": {
+    "ar": "خط سفلي",
+    "bn": "অধোলিপি",
+    "en": "Subscript",
+    "es": "Subíndice",
+    "fr": "Indice",
+    "hi": "अधोलिखित",
+    "id": "Subskrip",
+    "pt": "Subscrito",
+    "ur": "زیریں حروف",
+    "zh-Hans": "下标"
+  },
   "Superior": {
     "ar": "أعلى",
     "bn": "উপরে",
@@ -15142,6 +15358,18 @@
     "pt": "Superior esquerdo",
     "ur": "اوپر بائیں",
     "zh-Hans": "左上角"
+  },
+  "Superíndice": {
+    "ar": "خط علوي",
+    "bn": "ঊর্ধ্বলিপি",
+    "en": "Superscript",
+    "es": "Superíndice",
+    "fr": "Exposant",
+    "hi": "अधिलिखित",
+    "id": "Superskrip",
+    "pt": "Sobrescrito",
+    "ur": "بالائی حروف",
+    "zh-Hans": "上标"
   },
   "Supuestos: codo 44,45 cm; efa y bato 22 L; homer 220 L; siclo 11,4 g.": {
     "ar": "الافتراضات: الذراع 44.45 سم؛ الإيفة والبث 22 لترًا؛ الحومر 220 لترًا؛ الشاقل 11.4 غرامًا.",
@@ -15815,6 +16043,30 @@
     "ur": "فہرست کا عنوان متن نمایاں کیے بغیر اپنا مضمون کھول سکتا ہے۔",
     "zh-Hans": "索引标题可以打开其文章而不突出显示正文。"
   },
+  "Un versículo por línea": {
+    "ar": "آية في كل سطر",
+    "bn": "প্রতি লাইনে একটি পদ",
+    "en": "One Verse per Line",
+    "es": "Un versículo por línea",
+    "fr": "Un verset par ligne",
+    "hi": "हर पंक्ति में एक पद",
+    "id": "Satu Ayat per Baris",
+    "pt": "Um versículo por linha",
+    "ur": "ہر سطر میں ایک آیت",
+    "zh-Hans": "每节一行"
+  },
+  "Un versículo por línea con referencia completa": {
+    "ar": "آية في كل سطر مع مرجع كامل",
+    "bn": "পূর্ণ তথ্যসূত্রসহ প্রতি লাইনে একটি পদ",
+    "en": "One Verse per Line with Full Reference",
+    "es": "Un versículo por línea con referencia completa",
+    "fr": "Un verset par ligne avec référence complète",
+    "hi": "पूर्ण संदर्भ के साथ हर पंक्ति में एक पद",
+    "id": "Satu Ayat per Baris dengan Referensi Lengkap",
+    "pt": "Um versículo por linha com referência completa",
+    "ur": "مکمل حوالہ کے ساتھ ہر سطر میں ایک آیت",
+    "zh-Hans": "每节一行并附完整引用"
+  },
   "Una a la izquierda y dos a la derecha": {
     "ar": "واحدة يسارًا واثنتان يمينًا",
     "bn": "বামে একটি, ডানে দুটি",
@@ -15958,6 +16210,18 @@
     "pt": "Usar na pesquisa",
     "ur": "تلاش میں استعمال کریں",
     "zh-Hans": "用于搜索"
+  },
+  "Usar plantilla": {
+    "ar": "استخدام القالب",
+    "bn": "টেমপ্লেট ব্যবহার করুন",
+    "en": "Use Template",
+    "es": "Usar plantilla",
+    "fr": "Utiliser le modèle",
+    "hi": "टेम्पलेट इस्तेमाल करें",
+    "id": "Gunakan Templat",
+    "pt": "Usar modelo",
+    "ur": "سانچہ استعمال کریں",
+    "zh-Hans": "使用模板"
   },
   "Vaciar lista": {
     "ar": "مسح القائمة",

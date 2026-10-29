@@ -26,7 +26,9 @@ An empty selection disables output and shows a selection instruction.
 ## Preview and output
 
 The native report window keeps inclusion options and the selectable note list in
-one column, and an attributed, selectable preview in the other. Each option
+one column, and a native attributed, selectable text view in the other. The
+preview retains source paragraph direction and uses native adaptive colors for
+dark appearance without changing output attributes. Each option
 change prepares the preview once. Export and print capture that same attributed
 result, including when a system save panel remains open.
 

@@ -40,7 +40,7 @@ struct PreviousDocumentsView: View {
                             ForEach(selected.document.notes) { note in
                                 Text(note.title).font(.headline)
                                 switch Result(catching: { try NoteRichTextCodec.attributed(note) }) {
-                                case .success(let body): Text(BibleCopyPreview.text(body)).textSelection(.enabled)
+                                case .success(let body): Text(MacAttributedPreview.inlineText(body)).textSelection(.enabled)
                                 case .failure(let error): Text(L(error.localizedDescription)).foregroundStyle(.secondary)
                                 }
                                 Divider()

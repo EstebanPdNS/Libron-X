@@ -45,15 +45,54 @@ import Testing
         workspace.copyStyleCloseGuard = { true }; #expect(workspace.canQuitWithCopyStyleDraft())
         workspace.shutdown()
     }
-    @Test func previewRetainsTextWithoutChangingClipboardSourceAttributes() {
-        let original = NSMutableAttributedString(string: "Black and red")
-        original.addAttribute(.foregroundColor, value: NSColor.black, range: NSRange(location: 0, length: 6))
-        original.addAttribute(.foregroundColor, value: NSColor.red, range: NSRange(location: 10, length: 3))
-        let preview = BibleCopyPreview.text(original)
-        #expect(String(preview.characters) == original.string)
-        let rendered = NSAttributedString(preview)
-        #expect((rendered.attribute(.foregroundColor, at: 10, effectiveRange: nil) as? NSColor) == .red)
-        #expect((original.attribute(.foregroundColor, at: 0, effectiveRange: nil) as? NSColor) == .black)
-        #expect((original.attribute(.foregroundColor, at: 10, effectiveRange: nil) as? NSColor) == .red)
+    @Test func nativePreviewRetainsRichTextWithoutChangingSourceAttributes() {
+        let source = NSMutableAttributedString(string: "Black and red")
+        source.addAttribute(.foregroundColor, value: NSColor(srgbRed: 0, green: 0, blue: 0, alpha: 1), range: NSRange(location: 0, length: 6))
+        source.addAttribute(.foregroundColor, value: NSColor.red, range: NSRange(location: 10, length: 3))
+        let paragraph = NSMutableParagraphStyle(); paragraph.baseWritingDirection = .rightToLeft; paragraph.alignment = .right
+        source.addAttribute(.paragraphStyle, value: paragraph, range: NSRange(location: 0, length: source.length))
+        let view = MacAttributedPreview.Coordinator(); view.update(source)
+        #expect(view.textView.string == source.string)
+        #expect(view.textView.attributedString().isEqual(to: source))
+        #expect(view.textView.usesAdaptiveColorMappingForDarkAppearance)
+        #expect(!view.textView.isEditable && view.textView.isSelectable)
+        #expect((view.textView.attributedString().attribute(.paragraphStyle, at: 0, effectiveRange: nil) as? NSParagraphStyle)?.baseWritingDirection == .rightToLeft)
+        #expect((source.attribute(.foregroundColor, at: 10, effectiveRange: nil) as? NSColor) == .red)
     }
+    @Test func includedTemplateNamesArePresentInEveryInterfaceLanguage() throws {
+        for style in BibleCopyOutputStyle.defaults {
+            let translations = try #require(AppStrings.catalog[style.name])
+            for language in AppLanguage.allCases {
+                #expect(translations[language.rawValue]?.isEmpty == false)
+            }
+        }
+    }
+
+    @Test func nativePreviewPreservesSelectionAcrossUnchangedUpdatesAndKeepsColorsForOutput() {
+        let view = MacAttributedPreview.Coordinator()
+        for color in [NSColor.black, NSColor(srgbRed: 0, green: 0, blue: 0, alpha: 1), NSColor(calibratedWhite: 0, alpha: 1)] {
+            let source = NSAttributedString(string: "😀 Native preview", attributes: [.foregroundColor: color])
+            view.update(source); view.textView.setSelectedRange(NSRange(location: 3, length: 6)); view.update(source)
+            #expect(view.textView.selectedRange() == NSRange(location: 3, length: 6))
+            #expect(view.textView.attributedString().isEqual(to: source))
+            #expect(view.textView.usesAdaptiveColorMappingForDarkAppearance)
+        }
+        view.update(NSAttributedString(string: "New"))
+        #expect(view.textView.selectedRange() == NSRange(location: 0, length: 0))
+    }
+
+    @Test func historySnippetsAdaptOpaqueRGBBlackWithoutRecoloringSourceOrColoredText() throws {
+        let appearance = try #require(NSAppearance(named: .darkAqua))
+        appearance.performAsCurrentDrawingAppearance {
+            let black = NSColor(srgbRed: 0, green: 0, blue: 0, alpha: 1)
+            let source = NSMutableAttributedString(string: "Black red", attributes: [.foregroundColor: black])
+            source.addAttribute(.foregroundColor, value: NSColor.red, range: NSRange(location: 6, length: 3))
+            let rendered = NSAttributedString(MacAttributedPreview.inlineText(source))
+            let foreground = (rendered.attribute(.foregroundColor, at: 0, effectiveRange: nil) as? NSColor)?.usingColorSpace(.sRGB)
+            #expect((foreground?.redComponent ?? 0) > 0.5)
+            #expect((rendered.attribute(.foregroundColor, at: 6, effectiveRange: nil) as? NSColor) == .red)
+            #expect((source.attribute(.foregroundColor, at: 0, effectiveRange: nil) as? NSColor) == black)
+        }
+    }
+
 }

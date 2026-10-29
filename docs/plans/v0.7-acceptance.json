@@ -512,7 +512,8 @@
         "Added a snapshot-based notebook report with note selection, body and reference options, attributed preview, printing and TXT, RTFD and PDF export. Unsupported original HTML objects and invalid edited RTF prevent silent loss.",
         "Added independent bibliographic-citation inclusion and Catalog, Chicago author–date and MLA choices. Citations resolve the exact resource ID, format and original identifier; missing editions and unidentified legacy sources are explicit, without inferred bibliographic fields.",
         "Reorganized the native Glass report into inclusion/selection and attributed-preview columns, with select/deselect actions and disabled output for an empty selection. Preview generation occurs once per option change, and the catalog snapshot is retained for the presentation.",
-        "Applied the reference option to sermon passage metadata as well as note anchors. PDF export and printing use private, top-aligned print settings; the shared output writer accepts those settings without changing reader defaults or shared preferences."
+        "Applied the reference option to sermon passage metadata as well as note anchors. PDF export and printing use private, top-aligned print settings; the shared output writer accepts those settings without changing reader defaults or shared preferences.",
+        "Replaced the full report preview with the shared native attributed text view, retaining source paragraph direction independently of RTL interface layout and using native dark-appearance color adaptation."
       ],
       "verification": [
         "NotebookReportTests verify selection, edited text, reference options, unsupported objects and corrupt RTF. AppLanguageTests passed for the new interface strings.",
@@ -522,7 +523,8 @@
         "Native build 215: selected one of two notes, toggled body inclusion while retaining reference and citation, selected Chicago author–date and exported TXT, RTFD and PDF through system save panels. TXT and reopened RTFD matched exactly; PDF retained Greek note text, reference and citation, and omitted the unselected note.",
         "Native build 215 presented the system print panel with a one-page report preview. No printer was selected, so no physical print job was sent.",
         "Native build 216: reviewed the complete report in light appearance and Arabic RTL with mirrored options, preview column and action groups. Deselect All showed the selection instruction and disabled print/export. English and Automatic appearance were restored.",
-        "Native build 216 exported the corrected PDF. PDFKit verified one page, expected text and a header above 75% of page height; its rendered page was visually inspected. Original personal files were restored and synthetic data retained only in local test output."
+        "Native build 216 exported the corrected PDF. PDFKit verified one page, expected text and a header above 75% of page height; its rendered page was visually inspected. Original personal files were restored and synthetic data retained only in local test output.",
+        "Local build log 222: inspected the native report with two authored notes in Arabic/light and English/dark appearances; content retained its own direction, remained readable and preserved note selection/output controls. The report and shared-preview regression suites passed in the 42-test related run."
       ],
       "limitations": [
         "No physical printer was configured during acceptance. System print preview, PDF output and print-view layout were verified; actual paper/printer compatibility remains part of platform acceptance.",
@@ -942,18 +944,27 @@
       "sourceKey": "study-expansion-fidelity-02",
       "acceptance": "Editor, guardado, carga, duplicación y borrado de plantillas con vista previa comprobada.",
       "baseline": "Core modela estilos y códigos; la herramienta actual expone opciones básicas.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "Added independently persisted custom Bible-copy templates, including create, edit, duplicate, delete and selection. Four passage and verse patterns feed the existing formatter and the current passage preview; the previous format remains the default.",
         "Unsaved template changes require a save, discard or cancel decision before switching or closing; normal application quit can be blocked while a draft is open.",
-        "The template editor also exposes Greek and Hebrew rendering and Hebrew mark options."
+        "The template editor also exposes Greek and Hebrew rendering and Hebrew mark options.",
+        "Exposed all six read-only built-in presets together with custom templates, with translated built-in names and distinct user-owned duplicates. Saving activates the new/edited custom style; Use Template loads an unchanged style. Saved paragraph, citation and footnote policies now initialize the copy controls instead of being overwritten by defaults.",
+        "Reorganized the native Glass editor into text, format and language pages. Added per-pattern bold, italic, underline and exclusive super/subscript controls, source formatting and red-letter policies, Bible-text-only, citation, footnotes and paragraph policy. Retained inherited unsupported Hebrew modes explicitly instead of presenting them as working conversions.",
+        "Retained the loaded original for optimistic saves and a guarded draft when switching or closing. Added a blank-name save restriction and mirrored the physical split-view columns for RTL with margins on both sides of the divider. Reference language is independent of interface language."
       ],
       "verification": [
         "BibleCopyStylePersistenceTests passed for save, restore, deletion, invalid values, concurrent and future-schema protection and the quit guard. BibleCopyOutputTests passed including a custom template applied to an authored passage. AppLanguageTests passed for ten languages.",
-        "Native build 184: the copy template editor was inspected with a new unsaved template; controls and labels remained readable and spaced. The test draft was discarded. A live Bible preview remains unverified without a compatible Bible."
+        "Native build 184: the copy template editor was inspected with a new unsaved template; controls and labels remained readable and spaced. The test draft was discarded. A live Bible preview remains unverified without a compatible Bible.",
+        "42 tests in seven related suites passed after the final changes: copy-service/formatter/output, style persistence, interface catalogs, notebook reports and personal-history/recovery suites. Added coverage for generated built-in labels in all ten languages, native preview attributes/direction, selection across unchanged redraws and RGB-black history snippets.",
+        "Local build logs 218–219: selected a built-in, duplicated it into an authored custom template, changed its pattern and bold flag, checked super/subscript exclusion and changed paragraph/citation/footnote policies. Cancelled the unsaved-change prompt, then saved and used the style. Duplicated the custom style, saved and deleted the extra copy with confirmation; the original remained.",
+        "After normal quit/relaunch, the selected custom style, bold pattern and saved From Original / citation-off / footnotes-on policies were restored. Blank New Template disabled Save and Use; discarding that draft preserved the saved style.",
+        "Local build log 222: visually reviewed the mirrored Arabic/light editor with templates on the right and separated form/action margins. The included transliteration preset produced agapē and šalom from the authored Greek/Hebrew passage, and independent Spanish reference selection changed John to Juan without changing the source body."
       ],
       "limitations": [
-        "The new native editor and selection controls have not yet been visually inspected or tested in the installed application; the control service timed out after an open panel was closed. The installed library has no confirmed compatible Bible for a complete on-screen copy preview. Formatting controls and wider language, keyboard and accessibility acceptance remain pending."
+        "The copy extraction service still accepts checked LSF sources. Other compatible Bible formats remain the full, separate F186 requirement.",
+        "Unicode/transliteration and the supported Hebrew mark policies are editable. Inherited legacy Hebrew font encodings are retained but cannot prepare Hebrew output until their independent compatibility work is complete.",
+        "All-language runtime layouts, full keyboard/VoiceOver review, large-output performance and platform coverage remain open in their dedicated release requirements."
       ]
     },
     {
@@ -965,17 +976,23 @@
       "sourceKey": "study-expansion-fidelity-03",
       "acceptance": "Conectar su salida rica a RTF/HTML además de texto plano y comprobar pegado real.",
       "baseline": "El lector general copia RTF/HTML; la herramienta de versículos solo escribe string.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "Connected the MacRebuild copy tool to the existing native output pipeline, generating plain text, RTF and HTML from the same formatted passage. Changing inputs clears the prepared payload before another copy can occur.",
-        "The preview now uses the same attributed output, adapting normal black text to the interface appearance without modifying clipboard data."
+        "The preview now uses the same attributed output, adapting normal black text to the interface appearance without modifying clipboard data.",
+        "Added a shared native selectable attributed-text preview for copy and notebook reports, retaining per-paragraph writing direction and native adaptive colors without changing output attributes. Unchanged updates preserve the current selection.",
+        "Kept the general-Mac RTF representation with visible endnotes and HTML footnote structure, alongside plain text, from the same prepared payload."
       ],
       "verification": [
         "BibleCopyOutputTests passed for plain text, HTML, RTF, footnote preservation, Unicode, formatting and failure before clipboard mutation. BibleCopyStylePersistenceTests and AppLanguageTests also passed.",
-        "BibleCopyStylePersistenceTests verified preview text and colour preservation without modifying source attributes."
+        "BibleCopyStylePersistenceTests verified preview text and colour preservation without modifying source attributes.",
+        "Local build log 219: copied an authored LSF passage containing Greek, Hebrew, emoji and a bold custom reference prefix. Pasted using the real system clipboard into a newly created TextEdit rich document, saved it and reopened its RTF. Text and bold formatting matched the prepared output.",
+        "Captured the three actual system pasteboard representations and verified TXT, RTF and HTML exports matched them byte for byte. Repeated representation/export checks with the citation enabled, including visible RTF endnote text and the HTML footnote list. The original clipboard was restored.",
+        "Local build logs 221–222: visually checked native copy previews in dark and Arabic/light appearances, including mixed paragraph directions. The final native report preview was also checked in Arabic/light and English/dark appearances. Original personal/catalog/style data and preferences were restored."
       ],
       "limitations": [
-        "The MacRebuild rich preview and a real paste into an independent application remain unverified; the native control timed out after an open panel was closed."
+        "General Mac RTF uses visible endnotes because standard AppKit RTF readers drop structural footnote destinations; structural RTF remains separately available in the native payload. Independent destination applications may apply their own appearance and layout.",
+        "Complete VoiceOver, all-language runtime and platform acceptance remain open in their dedicated release requirements."
       ]
     },
     {
@@ -987,10 +1004,24 @@
       "sourceKey": "study-expansion-fidelity-04",
       "acceptance": "Comparar opciones entre vista previa, portapapeles y exportación sin omisiones ni cambios de identidad.",
       "baseline": "Hay opciones de cita y notas y salidas con alcances diferentes.",
-      "status": "pending",
-      "implementation": [],
-      "verification": [],
-      "limitations": []
+      "status": "completed",
+      "implementation": [
+        "Added TXT, RTF and HTML exports to the copy tool using the exact bytes from the prepared clipboard payload. Save-panel completion writes its captured data rather than recomputing from later input or style changes.",
+        "Unified copy eligibility and export eligibility with the prepared attributed preview. Passage, resource/catalog, selected style, reference language and option changes cancel preparation and clear the previous payload.",
+        "Used the native attributed preview to preserve source paragraph direction and rich formatting while adapting display colors independently of serialized output."
+      ],
+      "verification": [
+        "BibleCopyOutputTests cover source-note inclusion/exclusion, independent citation behavior, rich formatting, escaped literal source text, visible and structural note representations and failures before clipboard mutation. The final related test run passed 42 tests in seven suites.",
+        "Native authored-source tests compared all three exports byte for byte with the actual clipboard, first with citation disabled and then with citation enabled. Reopened RTF matched the same text; HTML retained escaped literal markup and its footnote list.",
+        "A real TextEdit paste retained Greek, Hebrew, emoji, both verse references and the custom bold prefix. The saved destination document was independently parsed to verify text and bold attributes.",
+        "Changing the citation control cleared the native preview and disabled Copy and Export until preparation completed again. Reopening used saved options rather than stale per-view defaults; switching reference language and an included transliteration preset produced the requested output.",
+        "Native final previews in dark and Arabic/light appearances preserved their own paragraph directions. Original library/catalog, personal documents, style-file state, clipboard and interface preferences were restored after acceptance."
+      ],
+      "limitations": [
+        "Format extraction compatibility is still governed by F186 and source-reader support; this criterion does not claim all Bible formats are accepted.",
+        "General Mac RTF exposes note text as visible endnotes; structural RTF is retained separately for capable consumers. Destination-specific pagination and typography are outside the byte/content parity contract.",
+        "Global accessibility, all-language/platform and long-session performance gates remain open."
+      ]
     },
     {
       "id": "F190",
@@ -2191,7 +2222,8 @@
         "Native build 144: an Easton search returned 59 matching articles on both cold and warm runs, examining 3962 articles in 4.1 seconds and 2523 in 2.0 seconds respectively. Opening the first result selected the matching source text in the reader; the test reading and query were closed afterward."
       ],
       "limitations": [
-        "The compact-index check retains metadata sets proportional to indexed entries; representative large, fully indexed libraries still need memory and long-session measurements."
+        "The compact-index check retains metadata sets proportional to indexed entries; representative large, fully indexed libraries still need memory and long-session measurements.",
+        "Copy templates have per-pattern and raw-source limits, but the current formatter has no independent aggregate budget for repeated template expansion. A bounded formatted-result contract and representative large-passage memory measurements remain to be completed."
       ]
     },
     {
