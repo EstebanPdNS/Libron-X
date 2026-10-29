@@ -1235,6 +1235,30 @@
     "ur": "نوٹس کی فائل",
     "zh-Hans": "笔记文件"
   },
+  "Archivo de sermones": {
+    "ar": "أرشيف العظات",
+    "bn": "উপদেশের সংরক্ষণাগার",
+    "en": "Sermon Archive",
+    "es": "Archivo de sermones",
+    "fr": "Archives des sermons",
+    "hi": "उपदेश संग्रह",
+    "id": "Arsip khotbah",
+    "pt": "Arquivo de sermões",
+    "ur": "وعظ کا ذخیرہ",
+    "zh-Hans": "讲道档案"
+  },
+  "Archivo de sermones…": {
+    "ar": "أرشيف العظات…",
+    "bn": "উপদেশের সংরক্ষণাগার…",
+    "en": "Sermon Archive…",
+    "es": "Archivo de sermones…",
+    "fr": "Archives des sermons…",
+    "hi": "उपदेश संग्रह…",
+    "id": "Arsip khotbah…",
+    "pt": "Arquivo de sermões…",
+    "ur": "وعظ کا ذخیرہ…",
+    "zh-Hans": "讲道档案…"
+  },
   "Archivo web…": {
     "ar": "أرشيف ويب…",
     "bn": "ওয়েব আর্কাইভ…",
@@ -2290,6 +2314,18 @@
     "pt": "Buscar referências em",
     "ur": "حوالے یہاں تلاش کریں",
     "zh-Hans": "搜索引用的范围"
+  },
+  "Buscar sermones": {
+    "ar": "البحث في العظات",
+    "bn": "উপদেশ অনুসন্ধান",
+    "en": "Search Sermons",
+    "es": "Buscar sermones",
+    "fr": "Rechercher des sermons",
+    "hi": "उपदेश खोजें",
+    "id": "Cari khotbah",
+    "pt": "Pesquisar sermões",
+    "ur": "وعظ تلاش کریں",
+    "zh-Hans": "搜索讲道"
   },
   "Buscar siguiente": {
     "ar": "بحث عن التالي",
@@ -4331,6 +4367,18 @@
     "ur": "رد کریں",
     "zh-Hans": "丢弃"
   },
+  "Descartar cambios": {
+    "ar": "تجاهل التغييرات",
+    "bn": "পরিবর্তন বাতিল করুন",
+    "en": "Discard Changes",
+    "es": "Descartar cambios",
+    "fr": "Abandonner les modifications",
+    "hi": "बदलाव छोड़ें",
+    "id": "Buang perubahan",
+    "pt": "Descartar alterações",
+    "ur": "تبدیلیاں رد کریں",
+    "zh-Hans": "放弃更改"
+  },
   "Desconocido": {
     "ar": "غير معروف",
     "bn": "অজানা",
@@ -4522,6 +4570,18 @@
     "pt": "Detalhes do arquivo",
     "ur": "فائل کی تفصیلات",
     "zh-Hans": "文件详细信息"
+  },
+  "Detalles del sermón": {
+    "ar": "تفاصيل العظة",
+    "bn": "উপদেশের বিবরণ",
+    "en": "Sermon Details",
+    "es": "Detalles del sermón",
+    "fr": "Détails du sermon",
+    "hi": "उपदेश विवरण",
+    "id": "Detail khotbah",
+    "pt": "Detalhes do sermão",
+    "ur": "وعظ کی تفصیلات",
+    "zh-Hans": "讲道详情"
   },
   "Devocional": {
     "ar": "قراءات تعبدية",
@@ -5471,6 +5531,18 @@
     "ur": "نتیجہ تبدیل ہو گیا ہے یا اب دستیاب نہیں۔ کھولنے سے پہلے دوبارہ تلاش کریں۔",
     "zh-Hans": "结果已更改或不再可用。请重新搜索后再打开。"
   },
+  "El sermón se quitará del archivo. Sus versiones guardadas seguirán disponibles en el historial.": {
+    "ar": "ستُزال العظة من الأرشيف. ستبقى إصداراتها المحفوظة متاحة في السجل.",
+    "bn": "উপদেশটি সংরক্ষণাগার থেকে সরানো হবে। এর সংরক্ষিত সংস্করণগুলি ইতিহাসে পাওয়া যাবে।",
+    "en": "The sermon will be removed from the archive. Its saved versions will remain available in history.",
+    "es": "El sermón se quitará del archivo. Sus versiones guardadas seguirán disponibles en el historial.",
+    "fr": "Le sermon sera retiré des archives. Ses versions enregistrées resteront disponibles dans l’historique.",
+    "hi": "उपदेश संग्रह से हटा दिया जाएगा। इसके सहेजे गए संस्करण इतिहास में उपलब्ध रहेंगे।",
+    "id": "Khotbah akan dihapus dari arsip. Versi tersimpannya tetap tersedia dalam riwayat.",
+    "pt": "O sermão será removido do arquivo. Suas versões salvas continuarão disponíveis no histórico.",
+    "ur": "وعظ ذخیرے سے ہٹا دیا جائے گا۔ اس کے محفوظ نسخے تاریخ میں دستیاب رہیں گے۔",
+    "zh-Hans": "讲道将从档案中移除。已保存的版本仍可在历史记录中查看。"
+  },
   "El servicio original de desbloqueo de licencias todavía no tiene una implementación verificada.": {
     "ar": "لا تتوفر بعد نسخة مُتحقّق منها لخدمة فتح التراخيص الأصلية.",
     "bn": "মূল লাইসেন্স খোলার পরিষেবার যাচাইকৃত বাস্তবায়ন এখনও নেই।",
@@ -5506,6 +5578,18 @@
     "pt": "O texto excede o limite permitido.",
     "ur": "متن اجازت دی گئی حد سے زیادہ ہے۔",
     "zh-Hans": "文本超过允许的限制。"
+  },
+  "El tipo y los datos del sermón no coinciden con la versión del documento.": {
+    "ar": "لا يتوافق نوع العظة وبياناتها مع إصدار المستند.",
+    "bn": "উপদেশের ধরন ও তথ্য নথির সংস্করণের সাথে মেলে না।",
+    "en": "The sermon type and details do not match the document version.",
+    "es": "El tipo y los datos del sermón no coinciden con la versión del documento.",
+    "fr": "Le type et les données du sermon ne correspondent pas à la version du document.",
+    "hi": "उपदेश का प्रकार और विवरण दस्तावेज़ संस्करण से मेल नहीं खाते।",
+    "id": "Jenis dan data khotbah tidak sesuai dengan versi dokumen.",
+    "pt": "O tipo e os dados do sermão não correspondem à versão do documento.",
+    "ur": "وعظ کی قسم اور تفصیلات دستاویز کے نسخے سے مطابقت نہیں رکھتیں۔",
+    "zh-Hans": "讲道类型和详情与文档版本不匹配。"
   },
   "El tipo, idioma o serie de la asociación no es válido.": {
     "ar": "نوع الارتباط أو لغته أو سلسلته غير صالح.",
@@ -5999,6 +6083,18 @@
     "ur": "حد حذف کریں",
     "zh-Hans": "删除范围"
   },
+  "Eliminar sermón": {
+    "ar": "حذف العظة",
+    "bn": "উপদেশ মুছুন",
+    "en": "Delete Sermon",
+    "es": "Eliminar sermón",
+    "fr": "Supprimer le sermon",
+    "hi": "उपदेश हटाएँ",
+    "id": "Hapus khotbah",
+    "pt": "Excluir sermão",
+    "ur": "وعظ حذف کریں",
+    "zh-Hans": "删除讲道"
+  },
   "Eliminar versículo": {
     "ar": "حذف الآية",
     "bn": "পদ সরান",
@@ -6455,6 +6551,18 @@
     "ur": "ٹیگ",
     "zh-Hans": "标签"
   },
+  "Etiquetas separadas por comas": {
+    "ar": "وسوم مفصولة بفواصل",
+    "bn": "কমা দিয়ে আলাদা করা ট্যাগ",
+    "en": "Comma-separated tags",
+    "es": "Etiquetas separadas por comas",
+    "fr": "Étiquettes séparées par des virgules",
+    "hi": "अल्पविराम से अलग टैग",
+    "id": "Tag dipisahkan koma",
+    "pt": "Etiquetas separadas por vírgulas",
+    "ur": "کوما سے الگ ٹیگ",
+    "zh-Hans": "以逗号分隔的标签"
+  },
   "Exacta": {
     "ar": "دقيقة",
     "bn": "নির্ভুল",
@@ -6730,6 +6838,30 @@
     "pt": "Data de início",
     "ur": "شروع کی تاریخ",
     "zh-Hans": "开始日期"
+  },
+  "Fecha más antigua": {
+    "ar": "التاريخ الأقدم",
+    "bn": "পুরোনো তারিখ আগে",
+    "en": "Oldest Date",
+    "es": "Fecha más antigua",
+    "fr": "Date la plus ancienne",
+    "hi": "सबसे पुरानी तिथि",
+    "id": "Tanggal terlama",
+    "pt": "Data mais antiga",
+    "ur": "قدیم ترین تاریخ",
+    "zh-Hans": "最早日期"
+  },
+  "Fecha más reciente": {
+    "ar": "التاريخ الأحدث",
+    "bn": "নতুন তারিখ আগে",
+    "en": "Newest Date",
+    "es": "Fecha más reciente",
+    "fr": "Date la plus récente",
+    "hi": "सबसे नई तिथि",
+    "id": "Tanggal terbaru",
+    "pt": "Data mais recente",
+    "ur": "تازہ ترین تاریخ",
+    "zh-Hans": "最新日期"
   },
   "Fila {row}, columna {column}: {letter}": {
     "ar": "الصف {row}، العمود {column}: {letter}",
@@ -7894,6 +8026,18 @@
     "pt": "Relatório do caderno",
     "ur": "نوٹ بک رپورٹ",
     "zh-Hans": "笔记本报告"
+  },
+  "Informe del sermón": {
+    "ar": "تقرير العظة",
+    "bn": "উপদেশের প্রতিবেদন",
+    "en": "Sermon Report",
+    "es": "Informe del sermón",
+    "fr": "Rapport du sermon",
+    "hi": "उपदेश रिपोर्ट",
+    "id": "Laporan khotbah",
+    "pt": "Relatório do sermão",
+    "ur": "وعظ کی رپورٹ",
+    "zh-Hans": "讲道报告"
   },
   "Informe…": {
     "ar": "تقرير…",
@@ -9347,6 +9491,18 @@
     "ur": "تکمیلی وسائل نئے مطالعے میں کھلتے ہیں۔",
     "zh-Hans": "配套资源将在新阅读面板中打开。"
   },
+  "Los datos del sermón contienen campos incompatibles.": {
+    "ar": "تحتوي بيانات العظة على حقول غير متوافقة.",
+    "bn": "উপদেশের তথ্যে অসামঞ্জস্যপূর্ণ ক্ষেত্র রয়েছে।",
+    "en": "The sermon details contain incompatible fields.",
+    "es": "Los datos del sermón contienen campos incompatibles.",
+    "fr": "Les données du sermon contiennent des champs incompatibles.",
+    "hi": "उपदेश विवरण में असंगत फ़ील्ड हैं।",
+    "id": "Data khotbah berisi kolom yang tidak kompatibel.",
+    "pt": "Os dados do sermão contêm campos incompatíveis.",
+    "ur": "وعظ کی تفصیلات میں غیر موافق خانے ہیں۔",
+    "zh-Hans": "讲道详情包含不兼容的字段。"
+  },
   "Los grupos de Biblias contienen datos incompatibles.": {
     "ar": "تحتوي مجموعات الترجمات على بيانات غير متوافقة.",
     "bn": "বাইবেল গোষ্ঠীতে অসামঞ্জস্যপূর্ণ তথ্য রয়েছে।",
@@ -9442,6 +9598,18 @@
     "pt": "Os resultados não mantêm referências bíblicas e identidades válidas.",
     "ur": "نتائج میں بائبل کے درست حوالے اور شناختیں محفوظ نہیں ہیں۔",
     "zh-Hans": "结果未保留有效的圣经引用和标识。"
+  },
+  "Lugar": {
+    "ar": "المكان",
+    "bn": "স্থান",
+    "en": "Location",
+    "es": "Lugar",
+    "fr": "Lieu",
+    "hi": "स्थान",
+    "id": "Tempat",
+    "pt": "Local",
+    "ur": "مقام",
+    "zh-Hans": "地点"
   },
   "Léxico": {
     "ar": "معجم",
@@ -10403,6 +10571,18 @@
     "ur": "حوالے تلاش کرنے کے لیے کوئی وسیلہ دستیاب نہیں ہے۔",
     "zh-Hans": "没有可用于搜索引用的资源。"
   },
+  "No hay sermones guardados.": {
+    "ar": "لا توجد عظات محفوظة.",
+    "bn": "কোনো উপদেশ সংরক্ষিত নেই।",
+    "en": "No saved sermons.",
+    "es": "No hay sermones guardados.",
+    "fr": "Aucun sermon enregistré.",
+    "hi": "कोई उपदेश सहेजा नहीं गया है।",
+    "id": "Belum ada khotbah tersimpan.",
+    "pt": "Não há sermões salvos.",
+    "ur": "کوئی وعظ محفوظ نہیں ہے۔",
+    "zh-Hans": "没有已保存的讲道。"
+  },
   "No hay texto en el portapapeles.": {
     "ar": "لا يوجد نص في الحافظة.",
     "bn": "ক্লিপবোর্ডে কোনো পাঠ নেই।",
@@ -11303,6 +11483,18 @@
     "ur": "نیا مطالعے کا منصوبہ",
     "zh-Hans": "新建阅读计划"
   },
+  "Nuevo sermón": {
+    "ar": "عظة جديدة",
+    "bn": "নতুন উপদেশ",
+    "en": "New Sermon",
+    "es": "Nuevo sermón",
+    "fr": "Nouveau sermon",
+    "hi": "नया उपदेश",
+    "id": "Khotbah baru",
+    "pt": "Novo sermão",
+    "ur": "نیا وعظ",
+    "zh-Hans": "新建讲道"
+  },
   "Nuevos": {
     "ar": "جديدة",
     "bn": "নতুন",
@@ -11939,6 +12131,18 @@
     "ur": "عبارات",
     "zh-Hans": "经文"
   },
+  "Pasajes bíblicos": {
+    "ar": "المقاطع الكتابية",
+    "bn": "বাইবেলের অনুচ্ছেদ",
+    "en": "Bible Passages",
+    "es": "Pasajes bíblicos",
+    "fr": "Passages bibliques",
+    "hi": "बाइबल के अंश",
+    "id": "Bagian Alkitab",
+    "pt": "Passagens bíblicas",
+    "ur": "بائبل کے اقتباسات",
+    "zh-Hans": "圣经段落"
+  },
   "Pasajes o libros": {
     "ar": "مقاطع أو أسفار",
     "bn": "অংশ বা বই",
@@ -12238,6 +12442,18 @@
     "pt": "Pregação e comunicação",
     "ur": "وعظ اور ابلاغ",
     "zh-Hans": "讲道与传播"
+  },
+  "Predicador": {
+    "ar": "الواعظ",
+    "bn": "প্রচারক",
+    "en": "Preacher",
+    "es": "Predicador",
+    "fr": "Prédicateur",
+    "hi": "उपदेशक",
+    "id": "Pengkhotbah",
+    "pt": "Pregador",
+    "ur": "واعظ",
+    "zh-Hans": "讲道人"
   },
   "Pregunta": {
     "ar": "السؤال",
@@ -13895,6 +14111,18 @@
     "ur": "مزید {count} مسائل چھوڑ دیے گئے۔",
     "zh-Hans": "省略了另外 {count} 个问题。"
   },
+  "Se perderán los cambios del sermón que no hayas guardado.": {
+    "ar": "ستفقد تغييرات العظة التي لم تحفظها.",
+    "bn": "উপদেশের অসংরক্ষিত পরিবর্তনগুলি হারিয়ে যাবে।",
+    "en": "Unsaved changes to the sermon will be lost.",
+    "es": "Se perderán los cambios del sermón que no hayas guardado.",
+    "fr": "Les modifications non enregistrées du sermon seront perdues.",
+    "hi": "उपदेश के न सहेजे गए बदलाव खो जाएँगे।",
+    "id": "Perubahan khotbah yang belum disimpan akan hilang.",
+    "pt": "As alterações não salvas do sermão serão perdidas.",
+    "ur": "وعظ کی غیر محفوظ تبدیلیاں ضائع ہو جائیں گی۔",
+    "zh-Hans": "讲道中未保存的更改将丢失。"
+  },
   "Se usan los metadatos del catálogo, incluidos los recursos ocultos. Los datos desconocidos no se completan.": {
     "ar": "تُستخدم بيانات الفهرس الوصفية، بما فيها الموارد المخفية. لا تُستكمل البيانات غير المعروفة.",
     "bn": "লুকানো রিসোর্সসহ ক্যাটালগের মেটাডেটা ব্যবহৃত হয়। অজানা তথ্য পূরণ করা হয় না।",
@@ -14410,6 +14638,18 @@
     "pt": "Sermões ou esboços",
     "ur": "وعظ یا خاکے",
     "zh-Hans": "讲章或提纲"
+  },
+  "Sermón": {
+    "ar": "عظة",
+    "bn": "উপদেশ",
+    "en": "Sermon",
+    "es": "Sermón",
+    "fr": "Sermon",
+    "hi": "उपदेश",
+    "id": "Khotbah",
+    "pt": "Sermão",
+    "ur": "وعظ",
+    "zh-Hans": "讲道"
   },
   "Si es una carpeta, también se borrarán sus contenidos.": {
     "ar": "إذا كان مجلدًا فستُحذف محتوياته أيضًا.",
@@ -15467,6 +15707,18 @@
     "ur": "ہر سطر میں ایک عبارت",
     "zh-Hans": "每行一段经文"
   },
+  "Un pasaje por línea. Las referencias se conservan tal como se escriben.": {
+    "ar": "مقطع واحد في كل سطر. تُحفظ المراجع كما كُتبت.",
+    "bn": "প্রতি লাইনে একটি অনুচ্ছেদ। উল্লেখগুলি যেমন লেখা হয় তেমনই রাখা হয়।",
+    "en": "One passage per line. References are preserved as entered.",
+    "es": "Un pasaje por línea. Las referencias se conservan tal como se escriben.",
+    "fr": "Un passage par ligne. Les références sont conservées telles que saisies.",
+    "hi": "प्रति पंक्ति एक अंश। संदर्भ जैसे दर्ज किए जाते हैं वैसे ही सुरक्षित रहते हैं।",
+    "id": "Satu bagian per baris. Referensi dipertahankan seperti yang dimasukkan.",
+    "pt": "Uma passagem por linha. As referências são preservadas como digitadas.",
+    "ur": "ہر سطر میں ایک اقتباس۔ حوالے اسی طرح محفوظ رہتے ہیں جیسے درج کیے گئے ہوں۔",
+    "zh-Hans": "每行一个段落。引用按输入形式保留。"
+  },
   "Un rango por línea; los rangos solapados se cuentan por separado.": {
     "ar": "نطاق واحد في كل سطر؛ تُحسب النطاقات المتداخلة بشكل منفصل.",
     "bn": "প্রতি লাইনে একটি পরিসর; ওভারল্যাপ করা পরিসর আলাদাভাবে গণনা করা হয়।",
@@ -16282,6 +16534,18 @@
     "pt": "{count} resultados",
     "ur": "{count} نتائج",
     "zh-Hans": "{count} 条结果"
+  },
+  "{count} sermones": {
+    "ar": "{count} عظات",
+    "bn": "{count}টি উপদেশ",
+    "en": "{count} sermons",
+    "es": "{count} sermones",
+    "fr": "{count} sermons",
+    "hi": "{count} उपदेश",
+    "id": "{count} khotbah",
+    "pt": "{count} sermões",
+    "ur": "{count} وعظ",
+    "zh-Hans": "{count} 篇讲道"
   },
   "{current} de {total}": {
     "ar": "{current} من {total}",

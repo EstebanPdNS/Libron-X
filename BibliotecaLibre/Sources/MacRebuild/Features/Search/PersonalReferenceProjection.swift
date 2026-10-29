@@ -4,9 +4,16 @@ import LibronixCore
 /// Matches WorkspaceDocumentsView's current editor projection. Source XML and
 /// rich-edit provenance are never rewritten or treated as visible editor text.
 enum PersonalReferenceProjection {
-    static func body(_ note: StudyNote) -> (text: String, links: [BibleReferenceSourceLink]) {
-        if let data = note.editedRTF, let projection = try? NoteRichTextCodec.projection(data) { return projection }
-        guard note.sourceContentType == "text/html" else { return (note.sourceBody, []) }
+    static func body(_ note: StudyNote) -> (text: String, links: [BibleReferenceSourceLink], issue: String?) {
+        let issue: String?
+        if let data = note.editedRTF {
+            if let projection = try? NoteRichTextCodec.projection(data) { return (projection.text, projection.links, nil) }
+            issue = "no se pudo abrir el RTF guardado; se busca la vista de solo lectura del original."
+        } else {
+            issue = NoteRichTextCodec.hasUnsupportedHTMLObjects(note)
+                ? "el HTML original conserva objetos no compatibles; se busca el texto visible." : nil
+        }
+        guard note.sourceContentType == "text/html" else { return (note.sourceBody, [], issue) }
         var text = "", links: [BibleReferenceSourceLink] = [], offset = 0
         for span in NoteHTMLProjection.spans(note.sourceBody) {
             let length = span.text.utf16.count
@@ -22,7 +29,7 @@ enum PersonalReferenceProjection {
             text += span.text
             offset += length
         }
-        return (text, links)
+        return (text, links, issue)
     }
     static func anchor(_ note: StudyNote) -> String? {
         note.effectiveAnchor.location?.reference ?? note.effectiveAnchor.legacyAttributes["reference"]
@@ -30,6 +37,9 @@ enum PersonalReferenceProjection {
     static func source(_ document: StudyDocument) throws -> BibleReferencePersonalSource {
         try Task.checkCancellation(); try document.validate()
         var fields: [BibleReferencePersonalField] = [.init(kind: .documentTitle, text: document.title)]
+        if let metadata = document.sermon, !metadata.passages.isEmpty {
+            fields.append(.init(kind: .sermonPassages, text: metadata.passages.joined(separator: "\n")))
+        }
         var warnings: [String] = []
         for note in document.notes {
             try Task.checkCancellation()
@@ -39,11 +49,7 @@ enum PersonalReferenceProjection {
             if let reference = anchor(note), !reference.isEmpty {
                 fields.append(.init(entryID: note.id, kind: .noteAnchor, text: reference))
             }
-            if let data = note.editedRTF, (try? NoteRichTextCodec.decode(data)) == nil {
-                warnings.append(note.title + ": no se pudo abrir el RTF guardado; se busca la vista de solo lectura del original.")
-            } else if note.editedRTF == nil && NoteRichTextCodec.hasUnsupportedHTMLObjects(note) {
-                warnings.append(note.title + ": el HTML original conserva objetos no compatibles; se busca el texto visible.")
-            }
+            if let issue = projection.issue { warnings.append(note.title + ": " + issue) }
         }
         for verse in document.verses {
             try Task.checkCancellation()
@@ -71,6 +77,10 @@ enum PersonalReferenceProjection {
         try document.validate()
         if destination.field == .documentTitle {
             return destination.entryID == nil ? .init(kind: .documentTitle, text: document.title) : nil
+        }
+        if destination.field == .sermonPassages {
+            guard destination.entryID == nil, let metadata = document.sermon else { return nil }
+            return .init(kind: .sermonPassages, text: metadata.passages.joined(separator: "\n"))
         }
         if destination.field == .verseEntry {
             return document.verses.first { $0.id == destination.entryID }.map {

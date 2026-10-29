@@ -39,8 +39,8 @@ public enum StudyNoteOrganization {
 
     public static func moving(_ ids: Set<UUID>, from sourceID: UUID, to destinationID: UUID,
                               parentID: UUID? = nil, beforeID: UUID? = nil, documents: [StudyDocument]) throws -> [StudyDocument] {
-        guard let source = documents.firstIndex(where: { $0.id == sourceID && $0.kind == .notebook }),
-              let destination = documents.firstIndex(where: { $0.id == destinationID && $0.kind == .notebook }) else {
+        guard let source = documents.firstIndex(where: { $0.id == sourceID && $0.kind.usesNotes }),
+              let destination = documents.firstIndex(where: { $0.id == destinationID && $0.kind.usesNotes }) else {
             throw PersonalStateError.invalid("El cuaderno de origen o destino no está disponible.")
         }
         try documents[source].validate(); try documents[destination].validate()
@@ -58,7 +58,7 @@ public enum StudyNoteOrganization {
             }
         }
         var result = documents
-        result[source].schemaVersion = 2; result[destination].schemaVersion = 2
+        result[source].schemaVersion = max(2, result[source].schemaVersion); result[destination].schemaVersion = max(2, result[destination].schemaVersion)
         result[source].notes.removeAll { selected.contains($0.id) }
         let insertion = beforeID.flatMap { before in result[destination].notes.firstIndex(where: { $0.id == before }) } ?? result[destination].notes.endIndex
         result[destination].notes.insert(contentsOf: moved, at: insertion)
@@ -72,7 +72,7 @@ public enum StudyNoteOrganization {
         let originals = try outline(document.notes).map(\.note).filter { selected.contains($0.id) }
         let replacements = Dictionary(uniqueKeysWithValues: originals.map { ($0.id, UUID()) })
         var result = document
-        result.schemaVersion = 2
+        result.schemaVersion = max(2, result.schemaVersion)
         for original in originals {
             var copy = original
             copy.id = replacements[original.id]!
@@ -91,7 +91,7 @@ public enum StudyNoteOrganization {
         try document.validate()
         let parents = Dictionary(uniqueKeysWithValues: document.notes.map { ($0.id, $0.parentID) })
         var result = document
-        if document.notes.contains(where: { $0.parentID != nil }) { result.schemaVersion = 2 }
+        if document.notes.contains(where: { $0.parentID != nil }) { result.schemaVersion = max(2, result.schemaVersion) }
         result.notes.removeAll { ids.contains($0.id) }
         for index in result.notes.indices {
             var parent = result.notes[index].parentID

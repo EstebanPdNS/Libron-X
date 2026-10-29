@@ -31,6 +31,7 @@ struct WorkspaceDocumentsView: View {
     @RebuildViewState private var extractionRequest: ReferenceExtractionRequest?
     @RebuildViewState private var reportDocument: StudyDocument?
     @RebuildViewState private var showsPreviousDocuments = false
+    @RebuildViewState private var sermonEditing: StudyDocument?
     @RebuildViewState private var selectedVerse: UUID?
     @RebuildViewState private var verseReference = ""
     @RebuildViewState private var verseBibleID = ""
@@ -39,28 +40,34 @@ struct WorkspaceDocumentsView: View {
     private var documentIndex: Int? { personal.documents.firstIndex { $0.id == personal.selectedDocumentID } }
     var body: some View {
         VStack(spacing: 12) {
-            HStack {
-                Picker(L("Documento"), selection: $personal.selectedDocumentID) {
+            HStack(spacing: 8) {
+                Text(L("Documento")).font(.caption).foregroundStyle(.secondary)
+                MacSelectionMenu(L("Documento"), value: documentIndex.map { personal.documents[$0].title } ?? L("Selecciona un documento"), selection: $personal.selectedDocumentID) {
                     Text(L("Selecciona un documento")).tag(Optional<UUID>.none)
                     ForEach(personal.documents) { document in Text(document.title).tag(Optional(document.id)) }
                 }
-                Menu(L("Nuevo")) {
+                Menu {
                     Button(L("Archivo de notas")) { personal.create(.notebook) }
                     Button(L("Lista de versículos")) { personal.create(.verseList) }
-                }
-                Button(L("Abrir…"), action: workspace.openDocument)
+                    Button(L("Sermón")) { personal.create(.sermon) }
+                } label: { Label(L("Nuevo"), systemImage: "plus").labelStyle(.iconOnly) }
+                    .menuStyle(.borderlessButton).buttonStyle(.plain).padding(.horizontal, 12).padding(.vertical, 7)
+                    .modifier(MacToolbarSearchSurface()).help(L("Nuevo"))
+                Button(action: workspace.openDocument) { Label(L("Abrir…"), systemImage: "folder").labelStyle(.iconOnly) }.help(L("Abrir…"))
                 Button { showsPreviousDocuments = true } label: {
                     Label(L("Historial de documentos"), systemImage: "clock.arrow.circlepath").labelStyle(.iconOnly)
                 }.help(L("Historial de documentos"))
-                if let index = documentIndex, personal.documents[index].kind == .notebook {
-                    Button(L("Informe…")) { reportDocument = personal.documents[index] }
+                if let index = documentIndex, personal.documents[index].kind.usesNotes {
+                    Button { reportDocument = personal.documents[index] } label: { Label(L("Informe…"), systemImage: "doc.text.magnifyingglass").labelStyle(.iconOnly) }.help(L("Informe…"))
                 }
-                if let index = documentIndex { Button(L("Guardar como…")) { workspace.exportDocument(personal.documents[index]) } }
+                if let index = documentIndex {
+                    Button { workspace.exportDocument(personal.documents[index]) } label: { Label(L("Guardar como…"), systemImage: "square.and.arrow.up").labelStyle(.iconOnly) }.help(L("Guardar como…"))
+                }
             }
             if let index = documentIndex {
                 if let destination = workspace.personalSearchDestination,
                    destination.documentID == personal.selectedDocumentID,
-                   (destination.field == .documentTitle ||
+                   (destination.field == .documentTitle || destination.field == .sermonPassages ||
                     (destination.field == .verseEntry ? selectedVerse : selectedNote) == destination.entryID),
                    let field = try? PersonalReferenceProjection.validate(destination, documents: personal.documents) {
                     VStack(alignment: .leading, spacing: 4) {
@@ -69,7 +76,16 @@ struct WorkspaceDocumentsView: View {
                     }.frame(maxWidth: .infinity, alignment: .leading)
                 }
                 TextField(L("Nombre del documento"), text: $personal.documents[index].title).macInputStyle()
-                if personal.documents[index].kind == .notebook { notebook(index) }
+                if let metadata = personal.documents[index].sermon {
+                    HStack(spacing: 12) {
+                        Text([metadata.dateText, metadata.speaker, metadata.series].filter { !$0.isEmpty }.joined(separator: " · "))
+                            .font(.caption).foregroundStyle(.secondary).lineLimit(2).textSelection(.enabled)
+                        Spacer()
+                        Button { workspace.activeTool = .sermons } label: { Label(L("Archivo de sermones"), systemImage: "text.bubble").labelStyle(.iconOnly) }.help(L("Archivo de sermones"))
+                        Button(L("Detalles del sermón")) { sermonEditing = personal.documents[index] }
+                    }
+                }
+                if personal.documents[index].kind.usesNotes { notebook(index) }
                 else { verseList(index) }
             } else {
                 Spacer(); Text(L("Crea o abre un documento de estudio.")).foregroundStyle(.secondary); Spacer()
@@ -115,6 +131,9 @@ struct WorkspaceDocumentsView: View {
             .sheet(item: $moveRequest) { request in
                 NoteMoveView(personal: personal, sourceID: request.documentID, ids: request.noteIDs)
                     .modifier(AppInterfaceLanguage())
+            }
+            .sheet(item: $sermonEditing) { document in
+                SermonDetailsEditor(workspace: workspace, original: document) { personal.selectedDocumentID = $0 }.modifier(AppInterfaceLanguage())
             }
             .sheet(item: $propertiesRequest) { request in
                 NotePropertiesView(personal: personal, documentID: request.documentID, note: request.note)
@@ -222,7 +241,7 @@ struct WorkspaceDocumentsView: View {
     }
     private func addNote(index: Int, parentID: UUID? = nil) {
         var note = StudyNote(); note.sourceContentType = "text/plain"; note.parentID = parentID
-        if parentID != nil { personal.documents[index].schemaVersion = 2 }
+        if parentID != nil { personal.documents[index].schemaVersion = max(2, personal.documents[index].schemaVersion) }
         personal.documents[index].notes.append(note); selectedNote = note.id; noteBodyFocused = true
     }
     private func duplicate(_ ids: Set<UUID>, index: Int) {

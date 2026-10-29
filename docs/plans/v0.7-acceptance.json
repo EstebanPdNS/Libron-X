@@ -1,6 +1,6 @@
 {
   "version": "0.7",
-  "updated": "2026-10-28",
+  "updated": "2026-10-29",
   "authorization": "The owner published the current work as 0.6 and assigned the remaining inventory and acceptance work to 0.7.",
   "baselineRelease": "0.6",
   "count": 111,
@@ -1365,10 +1365,26 @@
       "sourceKey": "study-expansion-authoring-02",
       "acceptance": "Tipo de documento y organización de contenido, fechas, pasajes, metadatos y búsqueda.",
       "baseline": "Cuadernos genéricos disponibles.",
-      "status": "pending",
-      "implementation": [],
-      "verification": [],
-      "limitations": []
+      "status": "completed",
+      "implementation": [
+        "Added sermon documents (schema 3) with hierarchical rich notes, optional validated Gregorian date, preacher, series, venue, Bible passages and tags. Existing notebook and verse-list representations remain compatible.",
+        "Added a cancellable native Sermon Archive with literal case/diacritic-insensitive search across metadata, note titles, anchors and visible note text; date, title and preacher ordering and explicit partial-source coverage.",
+        "Connected creation, metadata drafts and discard protection, document editing, note organization, reports, annotation/reference search, JSON persistence and history recovery to the existing study-document flows.",
+        "Used shared native Glass inputs, menus and action controls; translated new strings in all ten interface languages and inherited RTL at each presentation boundary. The archive fits its list to a bounded content height."
+      ],
+      "verification": [
+        "SermonDocumentTests and SermonArchiveTests cover metadata and note round trips, old JSON compatibility, invalid dates/references/tags/schema, schema preservation during note organization, stale and invalid saves, cancellation boundary behavior, search projection and partial coverage, date order, reference fingerprints, reports, history and independent recovery identities.",
+        "Full serial suite passed: 525 MacRebuild, 494 LibronixCore and 47 BibliotecaMac tests (1,066 total). Build 212 installed and signed successfully.",
+        "Native build 212 on 2026-10-29 created a dated sermon with preacher, series, venue, tags and passages; edited rich note content; found it using the Greek body query λόγος and preacher query Eva; cancelled a discard prompt without losing the draft, then saved it.",
+        "Native build 212 previewed and recovered an older sermon with its metadata and Unicode note text. On-disk verification confirmed distinct document/note IDs, identical recovered RTF and an intact current sermon. Original personal files were restored and test history moved outside app data.",
+        "Native build 212 displayed the archive and metadata editor in Arabic with mirrored headers, form columns and action groups. The shared Settings language menu opened and changed languages without timeout; English and Automatic appearance were restored.",
+        "Native build 213 displayed a compact archive with two test sermons, all actions visible and bounded list height. The installed Search window returned eight Cristo matches with separate visible filter and results columns. Original personal files were restored after visual checks."
+      ],
+      "limitations": [
+        "Native JSON supports the documented sermon schema; importing undocumented historical sermon formats remains F211.",
+        "Archive search is literal text matching, not a linguistic or query-operator search. Rich text that cannot be projected uses preserved source text with explicit partial coverage.",
+        "General VoiceOver, all-language layout and platform acceptance remain open in their dedicated release requirements."
+      ]
     },
     {
       "id": "F211",
@@ -1643,12 +1659,13 @@
       "sourceKey": "study-expansion-product-06",
       "acceptance": "Explorar y recuperar versiones de cuadernos, sermones y documentos sin sobrescritura silenciosa.",
       "baseline": "Almacenamiento conserva copia anterior en contratos compatibles.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "Added a native browser for the immediately preceding personal-data backup and recovery as a separate document with new identities and preserved note hierarchy and provenance.",
         "Preserve the original backup in a private recovery directory before rotating the normal predecessor; avoid replacing the predecessor during a no-op save.",
         "Added immutable, SHA-256-addressed personal snapshots before document changes rotate the live state. Identical content is deduplicated, unchanged saves do not create revisions, and no history files are automatically removed.",
-        "Expanded the browser to paginated historical snapshots and prior recovery archives, with document filtering, dates, text preview and recovery as an independent copy. The source fingerprint is rechecked before recovery; unreadable snapshots remain on disk and do not hide valid versions."
+        "Expanded the browser to paginated historical snapshots and prior recovery archives, with document filtering, dates, text preview and recovery as an independent copy. The source fingerprint is rechecked before recovery; unreadable snapshots remain on disk and do not hide valid versions.",
+        "Extended the same history and recovery contracts to sermon documents, preserving sermon metadata, schema 3, rich notes, hierarchy and provenance; previews identify sermon metadata separately from note text."
       ],
       "verification": [
         "PreviousDocumentRecoveryTests cover preserved hierarchy, new identities, stale backup rejection, missing or corrupt backup, unchanged-save retention and preservation of the source archive on a concurrent save conflict.",
@@ -1656,12 +1673,13 @@
         "Native build 189 created a private recovery archive and recovered the test notebook; the test archive was moved aside and original personal files restored.",
         "PersonalDocumentHistoryTests, PreviousDocumentRecoveryTests, PersonalLibraryStateTests and AppLanguageTests passed: 19 tests covering multiple rotations, independent recovery identities and hierarchy, no-op saves, failed archives, concurrent modifications, unreadable history, pagination and ten-language catalog coverage.",
         "Native build 206: reviewed the dated history list and text preview with two historical notebooks; filtered to the first revision, recovered it as a new notebook and verified its body in the rich editor. The current notebook retained its different body. Personal data were restored and synthetic history files archived outside app data.",
-        "The full serial test suite passed after the persistence change: 520 MacRebuild tests, 491 LibronixCore tests and 47 BibliotecaMac tests (1,058 total)."
+        "The full serial test suite passed after the persistence change: 520 MacRebuild tests, 491 LibronixCore tests and 47 BibliotecaMac tests (1,058 total).",
+        "SermonArchiveTests exercise metadata and note recovery, deletion retention and fresh identities. The complete 1,066-test serial suite passed.",
+        "Native build 212 recovered the preceding sermon as a separate copy with its earlier preacher and identical rich note content; current metadata and document/note identities were independently verified."
       ],
       "limitations": [
-        "Sermon document support remains pending in F210. The history supports the current notebook and verse-list document types.",
         "Historical snapshots record their archive time, not an independently recovered original edit timestamp. The preview projects text; recovery preserves the complete stored document.",
-        "General light/RTL, VoiceOver and platform acceptance remain open in their dedicated release requirements."
+        "General light/all-language layout, VoiceOver and platform acceptance remain open in their dedicated release requirements."
       ]
     },
     {

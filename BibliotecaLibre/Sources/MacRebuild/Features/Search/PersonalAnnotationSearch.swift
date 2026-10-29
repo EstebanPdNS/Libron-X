@@ -71,7 +71,7 @@ actor PersonalAnnotationSearch {
             report.results.append(result); return true
         }
         if filter.includeNotes && filter.color == nil {
-            for document in documents where document.kind == .notebook && (filter.documentID == nil || filter.documentID == document.id) {
+            for document in documents where document.kind.usesNotes && (filter.documentID == nil || filter.documentID == document.id) {
                 try Task.checkCancellation()
                 let source = try PersonalReferenceProjection.source(document)
                 if !source.projectionComplete { report.complete = false; report.warnings += source.warnings }

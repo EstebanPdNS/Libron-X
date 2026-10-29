@@ -8,10 +8,16 @@ import LibronixCore
 @MainActor enum NotebookReport {
     static func make(document: StudyDocument, selected: Set<UUID>, includeBody: Bool, includeReferences: Bool) throws -> NSAttributedString {
         try document.validate()
-        guard document.kind == .notebook, selected.isSubset(of: Set(document.notes.map(\.id))) else {
+        guard document.kind.usesNotes, selected.isSubset(of: Set(document.notes.map(\.id))) else {
             throw PersonalStateError.invalid("Las notas seleccionadas ya no están disponibles.")
         }
         let result = NSMutableAttributedString(string: document.title + "\n\n", attributes: [.font: NSFont.boldSystemFont(ofSize: 18)])
+        if let metadata = document.sermon {
+            for row in SermonMetadataPresentation.rows(metadata) {
+                result.append(NSAttributedString(string: L(row.key) + ": " + row.value + "\n", attributes: [.font: NSFont.systemFont(ofSize: 12)]))
+            }
+            result.append(NSAttributedString(string: "\n"))
+        }
         for entry in try StudyNoteOrganization.outline(document.notes) where selected.contains(entry.id) {
             result.append(NSAttributedString(string: entry.note.title + "\n", attributes: [.font: NSFont.boldSystemFont(ofSize: 14)]))
             if includeReferences, let reference = PersonalReferenceProjection.anchor(entry.note), !reference.isEmpty {
@@ -45,7 +51,7 @@ struct NotebookReportView: View {
     private var report: NSAttributedString? { try? reportResult.get() }
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            MacToolHeader(title: "Informe del cuaderno") { dismiss() }
+            MacToolHeader(title: document.kind == .sermon ? "Informe del sermón" : "Informe del cuaderno") { dismiss() }
             HStack {
                 Button(L("Seleccionar todo")) { selected = Set(document.notes.map(\.id)) }
                 Button(L("Deseleccionar todo")) { selected = [] }

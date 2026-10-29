@@ -29,6 +29,7 @@ struct WorkspacePaletteCommand: Identifiable {
         .init(tool: .editions, title: "Duplicados y ediciones", symbol: "doc.on.doc"),
         .init(tool: .bibleCopy, title: "Copiar versículos bíblicos", symbol: "doc.on.clipboard"),
         .init(tool: .documents, title: "Documentos de estudio", symbol: "note.text"),
+        .init(tool: .sermons, title: "Archivo de sermones", symbol: "text.bubble"),
         .init(tool: .resources, title: "Recursos y licencias", symbol: "externaldrive"),
         .init(tool: .favorites, title: "Favoritos", symbol: "star"),
         .init(tool: .windows, title: "Ventanas", symbol: "macwindow"),

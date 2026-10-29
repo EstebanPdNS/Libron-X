@@ -1,7 +1,7 @@
 import AppKit
 import LibronixCore
 
-enum WorkspaceTool: String, Identifiable { case search, referenceSearch, annotationSearch, documents, favorites, information, resources, topics, bibleCopy, windows, parallelSets, keyLinks, associations, associationLinks, bibliography, editions, passageComparison, readingPlans, passageGuide, prayerJournal, scriptureMemory, studyAssessments, wordSearch, commandPalette, biblicalMeasures, researchInbox, transliteration, libraryHealth
+enum WorkspaceTool: String, Identifiable { case search, referenceSearch, annotationSearch, documents, favorites, information, resources, topics, bibleCopy, windows, parallelSets, keyLinks, associations, associationLinks, bibliography, editions, passageComparison, readingPlans, passageGuide, prayerJournal, scriptureMemory, studyAssessments, wordSearch, commandPalette, biblicalMeasures, researchInbox, transliteration, libraryHealth, sermons
     var id: String { rawValue }
 }
 enum ReaderMarkStyle: String, Codable, Hashable, Sendable { case underline, strike, outline }

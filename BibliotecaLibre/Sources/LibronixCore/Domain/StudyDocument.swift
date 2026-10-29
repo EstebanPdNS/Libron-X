@@ -1,6 +1,9 @@
 import Foundation
 
-public enum StudyDocumentKind: String, Codable, Sendable { case notebook, verseList }
+public enum StudyDocumentKind: String, Codable, Sendable {
+    case notebook, verseList, sermon
+    public var usesNotes: Bool { self != .verseList }
+}
 public enum StudyNoteAnchorKind: String, Codable, Sendable { case general, nativeSelection, nativeReference, legacySelection, legacyReference }
 
 public struct StudyNoteAnchor: Codable, Equatable, Sendable {
@@ -96,11 +99,17 @@ public struct StudyDocument: Identifiable, Codable, Equatable, Sendable {
     public var sourceXML: XMLNode?
     public var sourceSHA256: String?
     public var presentation: String
+    public var sermon: SermonMetadata?
     public init(title: String, kind: StudyDocumentKind) {
         self.title = title; self.kind = kind; presentation = kind == .verseList ? "ReferencesOnly" : "Notes"
+        if kind == .sermon { schemaVersion = 3; sermon = SermonMetadata() }
     }
     public func validate() throws {
-        guard (1...2).contains(schemaVersion) else { throw PersonalStateError.futureVersion }
+        guard (1...3).contains(schemaVersion) else { throw PersonalStateError.futureVersion }
+        guard kind == .sermon ? (schemaVersion == 3 && sermon != nil) : sermon == nil else {
+            throw PersonalStateError.invalid("El tipo y los datos del sermón no coinciden con la versión del documento.")
+        }
+        try sermon?.validate()
         // Version 2 prevents older applications from loading and then silently
         // dropping hierarchy, properties or move/copy provenance on save.
         guard schemaVersion >= 2 || notes.allSatisfy({ $0.parentID == nil && $0.properties == nil && $0.origin == nil }) else {
@@ -109,7 +118,7 @@ public struct StudyDocument: Identifiable, Codable, Equatable, Sendable {
         guard !title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty, title.utf8.count <= 4_096,
               notes.count <= 10_000, verses.count <= 100_000,
               Set(notes.map(\.id)).count == notes.count, Set(verses.map(\.id)).count == verses.count,
-              (kind == .notebook ? verses.isEmpty : notes.isEmpty) else {
+              (kind.usesNotes ? verses.isEmpty : notes.isEmpty) else {
             throw PersonalStateError.invalid("El documento tiene un nombre, tipo o número de entradas incompatible.")
         }
         for note in notes {

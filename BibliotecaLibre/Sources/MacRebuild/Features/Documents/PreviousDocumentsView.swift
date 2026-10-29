@@ -22,7 +22,7 @@ struct PreviousDocumentsView: View {
             HSplitView {
                 List(versions, selection: $selection) { version in
                     VStack(alignment: .leading, spacing: 4) {
-                        Label(version.document.title, systemImage: version.document.kind == .notebook ? "note.text" : "list.bullet")
+                        Label(version.document.title, systemImage: version.document.kind.symbol)
                             .lineLimit(2)
                         if let date = version.date { Text(date, format: .dateTime.year().month().day().hour().minute()).font(.caption).foregroundStyle(.secondary) }
                     }.padding(.vertical, 4).tag(version.id)
@@ -34,6 +34,7 @@ struct PreviousDocumentsView: View {
                     if let selected {
                         LazyVStack(alignment: .leading, spacing: 12) {
                             Text(selected.document.title).font(.headline)
+                            if let metadata = selected.document.sermon { SermonMetadataSummary(metadata: metadata) }
                             Text(L("La vista previa muestra texto; la copia recuperada conserva el documento completo."))
                                 .font(.caption).foregroundStyle(.secondary)
                             ForEach(selected.document.notes) { note in

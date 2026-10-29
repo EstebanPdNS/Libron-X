@@ -14,6 +14,7 @@ struct WorkspaceToolsView: View {
             case .referenceSearch: WorkspaceReferenceSearchView(workspace: workspace, search: workspace.referenceSearch)
             case .annotationSearch: PersonalAnnotationSearchView(workspace: workspace, search: workspace.annotationSearch)
             case .documents: WorkspaceDocumentsView(workspace: workspace, personal: workspace.personal)
+            case .sermons: SermonArchiveView(workspace: workspace)
             case .favorites: WorkspaceFavoritesView(workspace: workspace)
             case .readingPlans: ReadingPlansView(workspace: workspace)
             case .prayerJournal: PrayerJournalView(personal: workspace.personal)
@@ -41,8 +42,8 @@ struct WorkspaceToolsView: View {
             case .passageComparison: PassageComparisonView(workspace: workspace, controller: workspace.passageComparison)
             }
         }.frame(minWidth: tool == .search ? 820 : tool == .information ? 700 : 680, idealWidth: tool == .search ? 960 : tool == .information ? 700 : 820,
-                minHeight: compactComparison || compactAnnotationSearch || compactReadingPlans || compactPassageGuide || tool == .information || tool == .libraryHealth ? nil : tool == .bibliography ? 640 : tool == .search ? 520 : expandedScope ? 620 : 520,
-                idealHeight: compactComparison || compactAnnotationSearch || compactReadingPlans || compactPassageGuide || tool == .information || tool == .libraryHealth ? nil : tool == .bibliography ? 820 : tool == .search ? 640 : expandedScope ? 720 : 620)
+                minHeight: compactComparison || compactAnnotationSearch || compactReadingPlans || compactPassageGuide || compactSermons || tool == .information || tool == .libraryHealth ? nil : tool == .bibliography ? 640 : tool == .search ? 520 : expandedScope ? 620 : 520,
+                idealHeight: compactComparison || compactAnnotationSearch || compactReadingPlans || compactPassageGuide || compactSermons || tool == .information || tool == .libraryHealth ? nil : tool == .bibliography ? 820 : tool == .search ? 640 : expandedScope ? 720 : 620)
             .frame(width: tool == .search ? min(960, max(820, (NSScreen.main?.visibleFrame.width ?? 1024) - 80)) : nil,
                    height: tool == .search ? min(680, max(520, (NSScreen.main?.visibleFrame.height ?? 820) - 100)) : nil)
             .modifier(MacPanelControlPresentation())
@@ -53,6 +54,7 @@ struct WorkspaceToolsView: View {
     private var compactAnnotationSearch: Bool {
         tool == .annotationSearch && workspace.annotationSearch.report == nil && !workspace.annotationSearch.isSearching
     }
+    private var compactSermons: Bool { tool == .sermons }
     private var compactReadingPlans: Bool { tool == .readingPlans && workspace.personal.readingPlans.plans.isEmpty }
     private var compactPassageGuide: Bool { tool == .passageGuide && !workspace.passageGuide.completed && workspace.passageGuide.matches.isEmpty && workspace.passageGuide.references == nil }
     private var compactComparison: Bool {
@@ -71,6 +73,7 @@ struct WorkspaceToolsView: View {
         case .referenceSearch: "Buscar referencias bíblicas"
         case .annotationSearch: "Buscar notas y resaltados"
         case .documents: "Documentos de estudio"
+        case .sermons: "Archivo de sermones"
         case .favorites: "Favoritos"
         case .readingPlans: "Planes de lectura"
         case .prayerJournal: "Lista de oración"

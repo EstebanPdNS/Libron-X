@@ -43,7 +43,7 @@ struct PersonalAnnotationSearchView: View {
             HStack {
                 Picker(L("Cuaderno"), selection: $search.filter.documentID) {
                     Text(L("Todos los cuadernos")).tag(Optional<UUID>.none)
-                    ForEach(workspace.personal.documents.filter { $0.kind == .notebook }) { Text($0.title).tag(Optional($0.id)) }
+                    ForEach(workspace.personal.documents.filter { $0.kind.usesNotes }) { Text($0.title).tag(Optional($0.id)) }
                 }
                 Picker(L("Color"), selection: $search.filter.color) {
                     Text(L("Todos los colores")).tag(Optional<String>.none)

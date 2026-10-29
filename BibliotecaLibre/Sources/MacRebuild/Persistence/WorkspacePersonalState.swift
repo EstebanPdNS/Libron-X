@@ -316,7 +316,7 @@ struct WorkspacePersonalSnapshot: Codable {
               let note = documents[document].notes.firstIndex(where: { $0.id == id }) else { return }
         _ = try NoteRichTextCodec.decode(data)
         guard documents[document].notes[note].editedRTF != data else { return }
-        documents[document].schemaVersion = 2
+        documents[document].schemaVersion = max(2, documents[document].schemaVersion)
         documents[document].notes[note].editedRTF = data
         documents[document].notes[note].modifiedUTC = ISO8601DateFormatter().string(from: Date())
         scheduleSave()
@@ -354,7 +354,7 @@ struct WorkspacePersonalSnapshot: Codable {
         guard let document = documents.firstIndex(where: { $0.id == documentID }),
               let note = documents[document].notes.firstIndex(where: { $0.id == id }) else { return }
         var updated = documents
-        updated[document].schemaVersion = 2
+        updated[document].schemaVersion = max(2, updated[document].schemaVersion)
         updated[document].notes[note].properties = values
         updated[document].notes[note].modifiedUTC = ISO8601DateFormatter().string(from: Date())
         try replaceDocuments(updated)
@@ -396,7 +396,35 @@ struct WorkspacePersonalSnapshot: Codable {
         selectedDocumentID = copy.id
     }
     @discardableResult func create(_ kind: StudyDocumentKind) -> UUID {
-        let document = StudyDocument(title: kind == .notebook ? "Mis notas" : "Lista de versículos", kind: kind)
+        let title: String
+        switch kind {
+        case .notebook: title = "Mis notas"
+        case .verseList: title = "Lista de versículos"
+        case .sermon: title = L("Nuevo sermón")
+        }
+        let document = StudyDocument(title: title, kind: kind)
         documents.append(document); selectedDocumentID = document.id; scheduleSave(); return document.id
+    }
+    @discardableResult func saveSermonDetails(original: StudyDocument?, title: String, metadata: SermonMetadata) throws -> UUID {
+        var updated = documents
+        let index: Int
+        if let original {
+            guard original.kind == .sermon,
+                  let current = updated.firstIndex(where: { $0.id == original.id && $0.kind == .sermon }),
+                  updated[current].title == original.title, updated[current].sermon == original.sermon else {
+                throw PersonalStateError.concurrentChange
+            }
+            index = current
+        } else {
+            updated.append(StudyDocument(title: title, kind: .sermon)); index = updated.count - 1
+        }
+        updated[index].title = title; updated[index].sermon = metadata
+        try replaceDocuments(updated)
+        return updated[index].id
+    }
+    func deleteSermon(_ original: StudyDocument) throws {
+        guard original.kind == .sermon, documents.contains(original) else { throw PersonalStateError.concurrentChange }
+        try replaceDocuments(documents.filter { $0.id != original.id })
+        if selectedDocumentID == original.id { selectedDocumentID = documents.first?.id }
     }
 }

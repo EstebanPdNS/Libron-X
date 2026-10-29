@@ -35,9 +35,9 @@ enum PreviousDocumentRecovery {
         guard !name.isEmpty else { throw PersonalStateError.invalid("El nombre del documento no puede estar vacío.") }
         var result = original
         result.id = UUID(); result.title = name
-        if original.kind == .notebook {
+        if original.kind.usesNotes {
             let ids = Dictionary(uniqueKeysWithValues: original.notes.map { ($0.id, UUID()) })
-            result.schemaVersion = 2
+            result.schemaVersion = max(2, result.schemaVersion)
             for index in result.notes.indices {
                 let note = original.notes[index]
                 result.notes[index].id = ids[note.id]!

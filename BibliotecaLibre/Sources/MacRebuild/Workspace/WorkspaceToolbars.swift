@@ -45,6 +45,7 @@ struct MainWorkspaceToolbar: ToolbarContent {
             Menu {
                 Button(L("Archivo de notas")) { workspace.newDocument(.notebook) }
                 Button(L("Lista de versículos")) { workspace.newDocument(.verseList) }
+                Button(L("Sermón")) { workspace.newDocument(.sermon) }
             } label: { MacToolbarMenuLabel(L("Nuevo documento"), "square.and.pencil") }
                 .help(L("Nuevo documento"))
         }

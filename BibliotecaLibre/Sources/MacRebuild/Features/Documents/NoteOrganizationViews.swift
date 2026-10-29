@@ -19,7 +19,7 @@ struct NoteMoveView: View {
             MacToolHeader(title: "Mover notas") { dismiss() }
             Picker(L("Cuaderno de destino"), selection: $destinationID) {
                 Text(L("Selecciona un documento")).tag(Optional<UUID>.none)
-                ForEach(personal.documents.filter { $0.kind == .notebook }) { Text($0.title).tag(Optional($0.id)) }
+                ForEach(personal.documents.filter { $0.kind.usesNotes }) { Text($0.title).tag(Optional($0.id)) }
             }
             Picker(L("Nota superior"), selection: $parentID) {
                 Text(L("Nivel principal")).tag(Optional<UUID>.none)

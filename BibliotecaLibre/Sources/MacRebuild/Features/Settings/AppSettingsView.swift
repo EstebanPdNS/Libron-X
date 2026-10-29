@@ -14,9 +14,9 @@ struct AppSettingsView: View {
                     HStack(alignment: .center) {
                         Text(L("Idioma de la interfaz"))
                         Spacer(minLength: 16)
-                        Picker(L("Idioma de la interfaz"), selection: $preferences.language) {
+                        MacSelectionMenu(L("Idioma de la interfaz"), value: preferences.language.nativeName, selection: $preferences.language) {
                             ForEach(AppLanguage.allCases) { language in Text(language.nativeName).tag(language) }
-                        }.labelsHidden().fixedSize().featureHelpTarget(.language)
+                        }.fixedSize().featureHelpTarget(.language)
                     }
                 }
                 Section(L("Al abrir Libron-X")) {

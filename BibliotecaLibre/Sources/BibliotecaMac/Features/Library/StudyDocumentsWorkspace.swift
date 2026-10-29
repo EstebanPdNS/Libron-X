@@ -14,7 +14,7 @@ struct StudyDocumentsCatalog: View {
             Button("Importar documento…") { model.store.documents.importDocument { model.selectedDocumentID = $0 } }
             List(selection: $model.selectedDocumentID) {
                 ForEach(model.store.documents.documents) { document in
-                    Label(document.title, systemImage: document.kind == .notebook ? "note.text" : "list.bullet.rectangle")
+                    Label(document.title, systemImage: document.kind.usesNotes ? "note.text" : "list.bullet.rectangle")
                         .tag(document.id)
                 }
             }.listStyle(.inset)
@@ -37,7 +37,7 @@ struct StudyDocumentsWorkspace: View {
                 }
                 Text(store.unsavedIDs.contains(document.id) ? "Guardando cambios…" : "Guardado en tu Mac")
                     .font(.caption).foregroundStyle(.secondary)
-                if document.kind == .notebook { notebook(document) }
+                if document.kind.usesNotes { notebook(document) }
                 else { verses(document) }
             } else {
                 ContentUnavailableView("Tus documentos de estudio", systemImage: "note.text",

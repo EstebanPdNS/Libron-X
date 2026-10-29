@@ -70,7 +70,7 @@ struct PersonalHomeView: View {
                             ForEach(Array(workspace.personal.documents.prefix(5))) { document in
                                 Button {
                                     workspace.personal.selectedDocumentID = document.id; workspace.activeTool = .documents
-                                } label: { Label(document.title, systemImage: document.kind == .notebook ? "note.text" : "list.bullet") }
+                                } label: { Label(document.title, systemImage: document.kind.symbol) }
                             }
                             if workspace.personal.documents.count > 5 {
                                 Button(L("Documentos de estudio")) { workspace.activeTool = .documents }

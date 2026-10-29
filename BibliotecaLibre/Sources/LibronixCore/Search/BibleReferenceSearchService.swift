@@ -4,7 +4,7 @@ import Foundation
 /// Fields stay separate: a title ending in a book name cannot borrow a verse
 /// number from the next field to manufacture a citation.
 public struct BibleReferencePersonalField: Codable, Sendable {
-    public enum Kind: String, Sendable, Codable { case documentTitle, noteTitle, noteBody, noteAnchor, verseEntry }
+    public enum Kind: String, Sendable, Codable { case documentTitle, noteTitle, noteBody, noteAnchor, verseEntry, sermonPassages }
     public let entryID: UUID?
     public let kind: Kind
     public let text: String
@@ -100,7 +100,7 @@ public actor BibleReferenceSearchService {
         try Task.checkCancellation()
         guard Set(resources.map(\.id)).count == resources.count else { throw LibrarySearchError.duplicateResourceID("reference search") }
         guard documents.count <= 100, Set(documents.map(\.documentID)).count == documents.count,
-              documents.allSatisfy({ $0.fields.count <= 300_001 && Set($0.fields.map(\.id)).count == $0.fields.count && $0.fields.allSatisfy { ($0.kind == .documentTitle) == ($0.entryID == nil) } }) else {
+              documents.allSatisfy({ $0.fields.count <= 300_001 && Set($0.fields.map(\.id)).count == $0.fields.count && $0.fields.allSatisfy { ($0.kind == .documentTitle || $0.kind == .sermonPassages) == ($0.entryID == nil) } }) else {
             throw PersonalStateError.invalid("El ámbito de documentos contiene campos duplicados o supera sus límites.")
         }
         let operand = SearchTextOperand(text:query.original,sourceRange:.init(location:0,length:query.original.utf16.count))

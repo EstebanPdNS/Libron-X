@@ -51,8 +51,10 @@ enum PaneArrangement { case cascade, horizontal, vertical }
     var annotationNavigationCursor: ReaderAnnotationCursor?
     @ObservationIgnored var researchDraftSaver: (() -> Bool)?
     @ObservationIgnored var copyStyleCloseGuard: (() -> Bool)?
+    @ObservationIgnored var sermonDraftCloseGuard: (() -> Bool)?
     func saveResearchDraftIfNeeded() -> Bool { researchDraftSaver?() ?? true }
     func canQuitWithCopyStyleDraft() -> Bool { copyStyleCloseGuard?() ?? true }
+    func canQuitWithSermonDraft() -> Bool { sermonDraftCloseGuard?() ?? true }
     func closeActiveTool() {
         guard activeTool != .researchInbox || saveResearchDraftIfNeeded() else { return }
         activeTool = nil

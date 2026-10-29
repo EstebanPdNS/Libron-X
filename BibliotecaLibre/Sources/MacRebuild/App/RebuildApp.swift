@@ -44,6 +44,7 @@ struct LibronXRebuildApp: App {
         canInstallUpdate = false
         guard let workspace else { return .terminateNow }
         guard workspace.canQuitWithCopyStyleDraft() else { return .terminateCancel }
+        guard workspace.canQuitWithSermonDraft() else { return .terminateCancel }
         guard workspace.saveResearchDraftIfNeeded() else { return .terminateCancel }
         do { try startup.save(workspace); try workspace.personal.save(); canInstallUpdate = true; return .terminateNow }
         catch {
@@ -214,6 +215,7 @@ struct RebuildCommands: Commands {
             Button(L("Pesos y medidas bíblicos…")) { workspace.activeTool = .biblicalMeasures }
             Button(L("Guardar selección en investigación"), action: workspace.captureResearchExcerpt).disabled(!workspace.canCaptureResearchExcerpt)
             Button(L("Bandeja de investigación…")) { workspace.activeTool = .researchInbox }
+            Button(L("Archivo de sermones…")) { workspace.activeTool = .sermons }
             Button(L("Transliteración…")) { workspace.activeTool = .transliteration }
             Button(L("Salud de la biblioteca…")) { workspace.activeTool = .libraryHealth }
             Button(L("Comparar pasajes bíblicos…")) { workspace.activeTool = .passageComparison }
