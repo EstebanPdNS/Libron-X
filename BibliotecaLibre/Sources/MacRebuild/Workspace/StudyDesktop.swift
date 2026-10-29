@@ -19,16 +19,20 @@ struct StudyDesktop: View {
                         }.frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
                     ForEach(workspace.showsHome ? [] : workspace.presentedReaders) { reader in
-                        let frame = reader.isMaximized ? PaneFrame(x: 0, y: 0, width: 1, height: 1) : reader.frame
-                        InternalReaderPane(reader: reader, workspace: workspace, canvas: geometry.size)
+                        let focused = workspace.focusedReaderID == reader.id
+                        let hiddenByFocus = workspace.focusedReaderID != nil && !focused
+                        let frame = focused || reader.isMaximized ? PaneFrame(x: 0, y: 0, width: 1, height: 1) : reader.frame
+                        InternalReaderPane(reader: reader, workspace: workspace, canvas: geometry.size, focused: focused)
                             .modifier(AppInterfaceLanguage())
                             .frame(width: max(1, frame.width * geometry.size.width), height: max(1, frame.height * geometry.size.height))
                             .offset(x: frame.x * geometry.size.width, y: frame.y * geometry.size.height)
+                            .opacity(hiddenByFocus ? 0 : 1)
+                            .allowsHitTesting(!hiddenByFocus).accessibilityHidden(hiddenByFocus)
                             .zIndex(workspace.stackingLevel(of: reader))
                     }
                     // The active resize ring sits above all neighboring panes. Its
                     // four-point outward reach owns a shared seam on either side.
-                    if !workspace.showsHome, let reader = workspace.activeReader,
+                    if !workspace.showsHome, workspace.focusedReader == nil, let reader = workspace.activeReader,
                        !reader.isMaximized, !reader.isMinimized {
                         let frame = reader.frame
                         PaneResizeOverlay(reader: reader, workspace: workspace, canvas: geometry.size)
@@ -38,7 +42,7 @@ struct StudyDesktop: View {
                                     y: frame.y * geometry.size.height - 4)
                             .zIndex(9_000)
                     }
-                    if let preview = workspace.snapPreview, !workspace.showsHome {
+                    if let preview = workspace.snapPreview, !workspace.showsHome, workspace.focusedReader == nil {
                         RoundedRectangle(cornerRadius: 12).fill(Color.accentColor.opacity(0.18))
                             .overlay(RoundedRectangle(cornerRadius: 12).strokeBorder(Color.accentColor, lineWidth: 2))
                             .padding(4)
@@ -48,19 +52,19 @@ struct StudyDesktop: View {
                     }
                 }.background(PaneCanvasSurface(workspace: workspace)).coordinateSpace(name: "studyCanvas").clipped()
             }.environment(\.layoutDirection, .leftToRight)
-            if workspace.readers.contains(where: \.isMinimized) {
+            if workspace.focusedReader == nil && workspace.readers.contains(where: \.isMinimized) {
                 HStack {
                     ForEach(workspace.readers.filter(\.isMinimized)) { reader in
                         Button(reader.resource.title) { workspace.activate(reader) }.lineLimit(1)
                     }; Spacer()
                 }.padding(5).background(.bar)
             }
-            Divider()
+            if workspace.focusedReader == nil { Divider()
             HStack {
                 Text(workspace.activeReader?.resource.title ?? L("Listo")).lineLimit(1)
                 Spacer()
                 Text(LF("{panes} paneles · {resources} recursos", ["panes": String(workspace.readers.count), "resources": String(workspace.availableResources.count)]))
-            }.font(.system(size: 11)).foregroundStyle(.secondary).padding(.horizontal, 10).frame(height: 23)
+            }.font(.system(size: 11)).foregroundStyle(.secondary).padding(.horizontal, 10).frame(height: 23) }
         }
         .background(BibleVersionKeyboardRouting(workspace: workspace))
         .task(id: workspace.availableResources + workspace.bibleReaders.map(\.resource)) {
@@ -70,7 +74,13 @@ struct StudyDesktop: View {
         .sheet(isPresented: $updater.showsPanel) {
             UpdatePanel(workspace: workspace).modifier(AppInterfaceLanguage())
         }
-        .toolbar { MainWorkspaceToolbar(workspace: workspace) }
+        .toolbar {
+            if workspace.focusedReader != nil {
+                ToolbarItem(placement: .navigation) {
+                    Button(L("Salir de lectura concentrada")) { workspace.exitFocusedReading() }
+                }
+            } else { MainWorkspaceToolbar(workspace: workspace) }
+        }
         .toolbarRole(.editor)
         .modifier(MacWorkspaceTitlePresentation())
         .sheet(item: $workspace.activeTool) { tool in
@@ -86,18 +96,21 @@ struct InternalReaderPane: View {
     @Bindable var reader: ReaderSession
     let workspace: StudyWorkspace
     let canvas: CGSize
+    var focused = false
     @RebuildViewState private var dragOrigin: PaneFrame?
     @RebuildViewState private var pointerOrigin: CGPoint?
     @RebuildViewState private var canvasOrigin: CGPoint?
     @RebuildViewState private var showsWarnings = false
     var body: some View {
         VStack(spacing: 0) {
-            titleBar
-            if reader.isCommentary { ReaderCommentaryToolbar(reader: reader, workspace: workspace) }
-            else { ResourceReaderToolbar(reader: reader, workspace: workspace) }
-            if reader.isDevotional { DevotionalDateBar(reader: reader, workspace: workspace) }
-            Divider()
-            if reader.showsLocator {
+            if !focused {
+                titleBar
+                if reader.isCommentary { ReaderCommentaryToolbar(reader: reader, workspace: workspace) }
+                else { ResourceReaderToolbar(reader: reader, workspace: workspace) }
+                if reader.isDevotional { DevotionalDateBar(reader: reader, workspace: workspace) }
+                Divider()
+            }
+            if !focused && reader.showsLocator {
                 HStack {
                     Text(reader.currentReference ?? reader.page.map { LF("Artículo {number}", ["number": String($0.destination.ordinal + 1)]) } ?? L("Sin ubicación")).font(.caption)
                     Spacer()
@@ -106,7 +119,7 @@ struct InternalReaderPane: View {
                 }.padding(7).background(.bar)
                 Divider()
             }
-            if reader.showsFind { ReaderFindBar(reader: reader, activate: { workspace.activate(reader) }); Divider() }
+            if !focused && reader.showsFind { ReaderFindBar(reader: reader, activate: { workspace.activate(reader) }); Divider() }
             if let error = reader.error {
                 HStack { MacToolbarLabel(L("Error de lectura"), "exclamationmark.triangle"); Text(error).textSelection(.enabled); Spacer() }
                     .font(.callout).padding(10).background(Color.orange.opacity(0.12))
@@ -118,7 +131,7 @@ struct InternalReaderPane: View {
                     .foregroundStyle(.secondary).textSelection(.enabled).padding(12)
             }
             HSplitView {
-                if reader.showsContents {
+                if !focused && reader.showsContents {
                     ScrollView {
                         LazyVStack(alignment: .leading, spacing: 2) {
                             ForEach(reader.page?.entries ?? []) { entry in
@@ -146,7 +159,7 @@ struct InternalReaderPane: View {
                     .allowsHitTesting(reader.textScale > 0).accessibilityHidden(reader.textScale == 0)
                 }
             }
-            HStack(spacing: 8) {
+            if !focused { HStack(spacing: 8) {
                 Button { workspace.activate(reader); reader.previousArticle() } label: { MacToolbarLabel(L("Artículo anterior"), "chevron.up") }
                     .disabled(!reader.canGoToPreviousArticle).help(L("Artículo anterior"))
                 Button { workspace.activate(reader); reader.nextArticle() } label: { MacToolbarLabel(L("Artículo siguiente"), "chevron.down") }
@@ -164,14 +177,14 @@ struct InternalReaderPane: View {
                         }
                 }
 
-            }.buttonStyle(.borderless).padding(.leading, 8).frame(height: 26).background(.bar)
+            }.buttonStyle(.borderless).padding(.leading, 8).frame(height: 26).background(.bar) }
         }
         .background(Color(nsColor: .textBackgroundColor))
         .readerHelpTarget(reader.isDictionary ? .dictionary : (reader.canSynchronizeBible ? .bibleReading : .navigation), reader: reader, workspace: workspace)
         .clipShape(paneShape)
         .overlay(paneShape.strokeBorder(Color.gray.opacity(workspace.activeID == reader.id ? 0.45 : 0.25), lineWidth: 1))
         .overlay {
-            if !reader.isMaximized { PaneResizeOverlay(reader: reader, workspace: workspace, canvas: canvas) }
+            if !focused && !reader.isMaximized { PaneResizeOverlay(reader: reader, workspace: workspace, canvas: canvas) }
         }
         .transaction { $0.animation = nil }
         .shadow(color: .black.opacity(workspace.activeID == reader.id ? 0.16 : 0.08), radius: 5, y: 2)

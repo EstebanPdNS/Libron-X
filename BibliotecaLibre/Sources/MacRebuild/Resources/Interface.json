@@ -7451,6 +7451,18 @@
     "ur": "بائبل کا مطالعہ",
     "zh-Hans": "圣经阅读"
   },
+  "Lectura concentrada": {
+    "ar": "القراءة المركزة",
+    "bn": "মনোযোগী পাঠ",
+    "en": "Focused Reading",
+    "es": "Lectura concentrada",
+    "fr": "Lecture concentrée",
+    "hi": "एकाग्र पठन",
+    "id": "Membaca fokus",
+    "pt": "Leitura concentrada",
+    "ur": "یکسو مطالعہ",
+    "zh-Hans": "专注阅读"
+  },
   "Lectura nueva": {
     "ar": "قراءة جديدة",
     "bn": "নতুন পাঠ",
@@ -11110,6 +11122,18 @@
     "pt": "Rosa",
     "ur": "گلابی",
     "zh-Hans": "粉色"
+  },
+  "Salir de lectura concentrada": {
+    "ar": "الخروج من القراءة المركزة",
+    "bn": "মনোযোগী পাঠ থেকে বের হন",
+    "en": "Exit Focused Reading",
+    "es": "Salir de lectura concentrada",
+    "fr": "Quitter la lecture concentrée",
+    "hi": "एकाग्र पठन से बाहर निकलें",
+    "id": "Keluar dari membaca fokus",
+    "pt": "Sair da leitura concentrada",
+    "ur": "یکسو مطالعہ سے باہر نکلیں",
+    "zh-Hans": "退出专注阅读"
   },
   "Se abrirá el inicio del recurso; los números de artículo no se transfieren entre libros.": {
     "ar": "ستُفتح بداية المورد؛ لا تُنقل أرقام المقالات بين الكتب.",

@@ -20,6 +20,15 @@ enum PaneArrangement { case cascade, horizontal, vertical }
     var readers: [ReaderSession] = []
     var readerOrder: [UUID] = []
     var activeID: UUID?
+    /// Concentrated reading changes presentation only; existing pane geometry
+    /// and the archived workspace remain untouched.
+    private(set) var focusedReaderID: UUID?
+    var focusedReader: ReaderSession? { readers.first { $0.id == focusedReaderID } }
+    func enterFocusedReading() {
+        guard let reader = activeReader, !reader.isMinimized, !showsHome else { return }
+        focusedReaderID = reader.id
+    }
+    func exitFocusedReading() { focusedReaderID = nil }
     var libraryQuery = ""
     var librarySelection: String?
     var keepLibraryOpen = false
@@ -39,7 +48,7 @@ enum PaneArrangement { case cascade, horizontal, vertical }
     var personalSearchDestination: BibleReferencePersonalDestination?
     var personalNavigationID = UUID()
     var activeTool: WorkspaceTool?
-    var showsHome = false
+    var showsHome = false { didSet { if showsHome { exitFocusedReading() } } }
     var snapPreview: PaneFrame?
     var dictionary = DictionaryController()
     var search = WorkspaceSearchController()
@@ -178,6 +187,7 @@ enum PaneArrangement { case cascade, horizontal, vertical }
         if activeID == reader.id, readers.last === reader, !reader.isMinimized, !showsHome { return }
         cancelOriginalFavoriteNavigation()
         guard readers.contains(where: { $0 === reader }) else { return }
+        if focusedReaderID != nil && focusedReaderID != reader.id { exitFocusedReading() }
         reader.isMinimized = false; activeID = reader.id
         if reader.canSynchronizeBible {
             for follower in readers where follower.commentaryFollowsActiveBible { follower.commentarySourceID = reader.id }
@@ -188,6 +198,7 @@ enum PaneArrangement { case cascade, horizontal, vertical }
     }
     @discardableResult func open(_ resource: LibraryResource, startReading: Bool = true, destination: ReaderDestination? = nil, loader: ReaderSession.Loader? = nil) -> ReaderSession {
         cancelOriginalFavoriteNavigation()
+        exitFocusedReading()
         let reader = ReaderSession(resource: resource, loader: loader ?? ReaderSession.read)
         showsHome = false
         connect(reader)
@@ -208,6 +219,7 @@ enum PaneArrangement { case cascade, horizontal, vertical }
     }
     func close(_ reader: ReaderSession) {
         cancelOriginalFavoriteNavigation()
+        if focusedReaderID == reader.id { exitFocusedReading() }
         let order = orderedReaders
         let successor = order.firstIndex(where: { $0 === reader }).flatMap { index in
             order.dropFirst(index + 1).first ?? order.prefix(index).first
@@ -227,9 +239,10 @@ enum PaneArrangement { case cascade, horizontal, vertical }
         }
         if referenceTargetID == reader.id { referenceTargetID = nil }
     }
-    func closeAll() { cancelOriginalFavoriteNavigation(); for reader in readers { reader.cancel() }; readers = []; readerOrder = []; activeID = nil; referenceTargetID = nil }
+    func closeAll() { exitFocusedReading(); cancelOriginalFavoriteNavigation(); for reader in readers { reader.cancel() }; readers = []; readerOrder = []; activeID = nil; referenceTargetID = nil }
     func minimize(_ reader: ReaderSession) {
         cancelOriginalFavoriteNavigation()
+        if focusedReaderID == reader.id { exitFocusedReading() }
         reader.isMinimized = true
         if activeID == reader.id { activeID = visibleReaders.last?.id }
     }

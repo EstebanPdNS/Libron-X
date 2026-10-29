@@ -121,6 +121,10 @@ struct RebuildCommands: Commands {
             }.disabled(workspace.activeReader?.page == nil)
         }
         CommandGroup(after: .sidebar) {
+            Button(L(workspace.focusedReader == nil ? "Lectura concentrada" : "Salir de lectura concentrada")) {
+                if workspace.focusedReader == nil { workspace.enterFocusedReading() }
+                else { workspace.exitFocusedReading() }
+            }.keyboardShortcut("f", modifiers: [.command, .option]).disabled(workspace.activeReader == nil)
             Button(L("Contenido")) { workspace.activeReader?.showsContents.toggle() }
                 .keyboardShortcut("c", modifiers: [.command, .shift]).disabled(workspace.activeReader == nil)
             Button(L("Panel localizador")) { workspace.activeReader?.showsLocator.toggle() }.disabled(workspace.activeReader == nil)
