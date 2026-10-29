@@ -28,6 +28,7 @@ struct WorkspacePersonalSnapshot: Codable {
     private(set) var prayerJournal = PrayerJournal()
     private(set) var prayerJournalLoadError: String?
     let searchHistory: WorkspaceSearchHistory
+    let savedQueries: WorkspaceSavedQueries
     var highlights: [ReaderHighlight] = []
     var documents: [StudyDocument] = []
     var selectedDocumentID: UUID?
@@ -45,6 +46,7 @@ struct WorkspacePersonalSnapshot: Codable {
         let path = url ?? FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
             .appendingPathComponent("org.libronx.mac.rebuild/personal.json")
         searchHistory = WorkspaceSearchHistory(url: path.deletingLastPathComponent().appendingPathComponent("search-history.json"))
+        savedQueries = WorkspaceSavedQueries(url: path.deletingLastPathComponent().appendingPathComponent("saved-queries.json"))
         file = PersonalStateFile(url: path)
         bookmarkFile = PersonalStateFile(url: path.deletingLastPathComponent().appendingPathComponent("numbered-bookmarks.json"))
         readingPlansFile = PersonalStateFile(url: path.deletingLastPathComponent().appendingPathComponent("reading-plans.json"))

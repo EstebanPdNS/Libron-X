@@ -862,10 +862,16 @@
       "sourceKey": "study-expansion-queries-02",
       "acceptance": "Guardar, recargar y ejecutar consulta, ámbito y opciones con esquema versionado.",
       "baseline": "Consulta actual en memoria; no un documento de búsqueda integrado.",
-      "status": "pending",
-      "implementation": [],
-      "verification": [],
-      "limitations": []
+      "status": "in_progress",
+      "implementation": [
+        "Added independently versioned, transactional storage for named search configurations, preserving query, scope, filters and search limits."
+      ],
+      "verification": [
+        "WorkspaceSavedQueriesTests and WorkspaceSearchHistoryTests passed for save, restore, update, delete, concurrency and future-version protection."
+      ],
+      "limitations": [
+        "The saved-query interface and deliberate execution flow remain to be implemented and visually verified."
+      ]
     },
     {
       "id": "F196",
