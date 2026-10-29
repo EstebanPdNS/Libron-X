@@ -93,7 +93,8 @@ struct WorkspaceSearchView: View {
     @Bindable var search: WorkspaceSearchController
     @RebuildViewState private var historyOpen = false
     @RebuildViewState private var savedQueriesOpen = false
-    private func run() { search.run(workspace.availableResources, documents: workspace.personal.documents, scopeContext: workspace.searchScopeContext()) }
+    @RebuildViewState private var namedRangesOpen = false
+    private func run() { search.run(workspace.availableResources, documents: workspace.personal.documents, namedRanges: workspace.personal.namedBibleRanges.ranges, scopeContext: workspace.searchScopeContext()) }
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             ScrollView {
@@ -124,6 +125,7 @@ struct WorkspaceSearchView: View {
                         Text(L("Todos los versículos")).tag(WorkspaceBibleRangeMode.all)
                         Text(L("Pasajes o libros")).tag(WorkspaceBibleRangeMode.custom)
                         Text(L("Lista guardada")).tag(WorkspaceBibleRangeMode.savedList)
+                        Text(L("Rango guardado")).tag(WorkspaceBibleRangeMode.namedRange)
                     }
                     if search.bibleRangeMode == .custom {
                         TextField(L("Pasajes, por ejemplo Gn 1–3; Juan 3:16–18; Romanos"), text: $search.customBibleRange)
@@ -135,11 +137,17 @@ struct WorkspaceSearchView: View {
                                 Text($0.title).tag(Optional($0.id))
                             }
                         }
+                    } else if search.bibleRangeMode == .namedRange {
+                        Picker(L("Rango guardado"), selection: $search.namedRangeID) {
+                            Text(L("Selecciona un rango guardado")).tag(Optional<UUID>.none)
+                            ForEach(workspace.personal.namedBibleRanges.ranges) { Text($0.name).tag(Optional($0.id)) }
+                        }
                     }
                     Picker(L("Excluir referencias"), selection: $search.excludedRange.mode) {
                         Text(L("Sin exclusiones")).tag(WorkspaceBibleRangeMode.all)
                         Text(L("Pasajes o libros")).tag(WorkspaceBibleRangeMode.custom)
                         Text(L("Lista guardada")).tag(WorkspaceBibleRangeMode.savedList)
+                        Text(L("Rango guardado")).tag(WorkspaceBibleRangeMode.namedRange)
                     }
                     if search.excludedRange.mode == .custom {
                         TextField(L("Pasajes, por ejemplo Gn 1–3; Juan 3:16–18; Romanos"), text: $search.excludedRange.customRange)
@@ -151,7 +159,13 @@ struct WorkspaceSearchView: View {
                                 Text($0.title).tag(Optional($0.id))
                             }
                         }
+                    } else if search.excludedRange.mode == .namedRange {
+                        Picker(L("Rango excluido"), selection: $search.excludedRange.namedRangeID) {
+                            Text(L("Selecciona un rango guardado")).tag(Optional<UUID>.none)
+                            ForEach(workspace.personal.namedBibleRanges.ranges) { Text($0.name).tag(Optional($0.id)) }
+                        }
                     }
+                    Button(L("Gestionar rangos…")) { namedRangesOpen = true }
                 }.disabled(search.isSearching)
             }
             HStack {
@@ -209,11 +223,15 @@ struct WorkspaceSearchView: View {
             }
             Spacer(minLength: 0)
         }.padding(16).onDisappear(perform: search.pause)
+            .onChange(of: workspace.personal.namedBibleRanges) { old, new in search.namedRangesChanged(from: old, to: new) }
             .sheet(isPresented: $historyOpen) {
                 WorkspaceSearchHistoryView(history: workspace.personal.searchHistory, search: search).modifier(AppInterfaceLanguage())
             }
             .sheet(isPresented: $savedQueriesOpen) {
                 WorkspaceSavedQueriesView(store: workspace.personal.savedQueries, search: search).modifier(AppInterfaceLanguage())
+            }
+            .sheet(isPresented: $namedRangesOpen) {
+                NamedBibleRangesView(personal: workspace.personal).modifier(AppInterfaceLanguage())
             }
     }
 }

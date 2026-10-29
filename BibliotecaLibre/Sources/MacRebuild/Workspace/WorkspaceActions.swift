@@ -130,7 +130,7 @@ struct ReaderHighlight: Identifiable, Codable, Equatable, Sendable {
     func submitToolbarSearch() {
         guard !search.query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
         beginSearch()
-        search.run(availableResources, documents: personal.documents, scopeContext: searchScopeContext())
+        search.run(availableResources, documents: personal.documents, namedRanges: personal.namedBibleRanges.ranges, scopeContext: searchScopeContext())
     }
     func addHighlight(_ color: String) {
         guard let reader = activeReader, let page = reader.page, reader.selectedRange.length > 0 else { return }

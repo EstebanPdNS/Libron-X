@@ -2,11 +2,12 @@ import Foundation
 import Observation
 import LibronixCore
 
-enum WorkspaceBibleRangeMode: String, Codable, CaseIterable, Sendable { case all, custom, savedList }
+enum WorkspaceBibleRangeMode: String, Codable, CaseIterable, Sendable { case all, custom, savedList, namedRange }
 struct WorkspaceExcludedBibleRange: Codable, Hashable {
     var mode: WorkspaceBibleRangeMode = .all
     var customRange = ""
     var referenceListID: UUID?
+    var namedRangeID: UUID? = nil
 }
 enum WorkspaceSearchPhase: Equatable { case idle, running, pausing, paused, cancelling, cancelled, finished, failed }
 struct WorkspaceSearchLimits: Codable, Hashable, Sendable {
@@ -35,6 +36,7 @@ struct WorkspaceSearchLimits: Codable, Hashable, Sendable {
     var bibleRangeMode = WorkspaceBibleRangeMode.all
     var customBibleRange = ""
     var referenceListID: UUID?
+    var namedRangeID: UUID?
     var excludedRange = WorkspaceExcludedBibleRange()
     var limits = WorkspaceSearchLimits()
     private(set) var phase = WorkspaceSearchPhase.idle
@@ -46,13 +48,22 @@ struct WorkspaceSearchLimits: Codable, Hashable, Sendable {
     var historyError: String?
     var history: WorkspaceSearchHistory?
     private(set) var submittedQuery: String?
-    var configurationChanged: Bool { report != nil && submittedIdentity.map { $0 != identity } == true }
+    var configurationChanged: Bool { report != nil && (rangeSourceChanged || submittedIdentity.map { $0 != identity } == true) }
     var canOpenResults: Bool { report != nil && report?.runState != .failed && !configurationChanged && phase != .cancelling }
     @ObservationIgnored private var task: Task<Void, Never>?
     @ObservationIgnored private var control: LibrarySearchControl?
     @ObservationIgnored private var generation = 0
     @ObservationIgnored private let providerFactory: @Sendable () -> any LibrarySearchContentProvider
     private var submittedIdentity: Identity?
+    private var rangeSourceChanged = false
+    func namedRangesChanged(from old: NamedBibleSearchRanges, to new: NamedBibleSearchRanges) {
+        guard bibleVerses, report != nil else { return }
+        let ids = [bibleRangeMode == .namedRange ? namedRangeID : nil,
+                   excludedRange.mode == .namedRange ? excludedRange.namedRangeID : nil].compactMap { $0 }
+        if ids.contains(where: { id in old.ranges.first { $0.id == id } != new.ranges.first { $0.id == id } }) {
+            rangeSourceChanged = true
+        }
+    }
     private struct Identity: Hashable {
         let query: String; let field: SearchField?; let approximate: Bool; let edits: Int
         let caseSensitive: Bool; let wholeWords: Bool; let verses: Bool
@@ -61,6 +72,7 @@ struct WorkspaceSearchLimits: Codable, Hashable, Sendable {
         let limits: WorkspaceSearchLimits
         let wordFilter: SearchWordFilter?
         let excludedRange: WorkspaceExcludedBibleRange?
+        let namedRangeID: UUID?
     }
     private var identity: Identity {
         .init(query: query, field: searchField, approximate: approximatePhrase, edits: approximatePhrase ? maximumEdits : 0,
@@ -69,7 +81,8 @@ struct WorkspaceSearchLimits: Codable, Hashable, Sendable {
               list: bibleVerses && bibleRangeMode == .savedList ? referenceListID : nil,
               scope: scope.kind.rawValue, resource: scope.kind == .resource ? resourceID : nil,
               collections: scope.kind == .collections ? scope.collectionIDs : [], subset: scope.kind == .subset ? scope.selectedSubsetIDs : [], limits: limits, wordFilter: wordFilter,
-              excludedRange: bibleVerses && excludedRange.mode != .all ? excludedRange : nil)
+              excludedRange: bibleVerses && excludedRange.mode != .all ? excludedRange : nil,
+              namedRangeID: bibleVerses && bibleRangeMode == .namedRange ? namedRangeID : nil)
     }
     init(providerFactory: @escaping @Sendable () -> any LibrarySearchContentProvider = { PersistentLibrarySearchProvider(source: WorkspaceSearchReader()) }) {
         self.providerFactory = providerFactory
@@ -81,7 +94,8 @@ struct WorkspaceSearchLimits: Codable, Hashable, Sendable {
               subsetMembers: scope.members, unresolvedSubsetIDs: scope.unresolvedSubsetIDs,
               caseSensitive: caseSensitive, wholeWords: wholeWords, bibleVerses: bibleVerses,
               bibleRangeMode: bibleRangeMode, customBibleRange: customBibleRange, referenceListID: referenceListID,
-              limits: limits, wordFilter: wordFilter, excludedRange: excludedRange.mode == .all ? nil : excludedRange)
+              limits: limits, wordFilter: wordFilter, excludedRange: excludedRange.mode == .all ? nil : excludedRange,
+              namedRangeID: namedRangeID)
     }
     func restore(_ configuration: WorkspaceSearchConfiguration) throws {
         guard !isSearching else { throw PersonalStateError.invalid("Cancela la búsqueda antes de cambiar su configuración.") }
@@ -98,6 +112,7 @@ struct WorkspaceSearchLimits: Codable, Hashable, Sendable {
         limits = configuration.limits
         wordFilter = configuration.wordFilter
         excludedRange = configuration.excludedRange ?? .init()
+        namedRangeID = configuration.namedRangeID
     }
     func pause() {
         guard phase == .running, let control else { return }
@@ -120,9 +135,9 @@ struct WorkspaceSearchLimits: Codable, Hashable, Sendable {
         generation += 1; task?.cancel(); task = nil
         let abandoned = control; control = nil
         Task { await abandoned?.cancel() }
-        phase = .idle; error = nil; report = nil; progress = nil; scopeSnapshot = nil; submittedIdentity = nil; submittedQuery = nil
+        phase = .idle; error = nil; report = nil; progress = nil; scopeSnapshot = nil; submittedIdentity = nil; submittedQuery = nil; rangeSourceChanged = false
     }
-    func run(_ resources: [LibraryResource], documents: [StudyDocument] = [], scopeContext: WorkspaceSearchScopeContext? = nil) {
+    func run(_ resources: [LibraryResource], documents: [StudyDocument] = [], namedRanges: [NamedBibleSearchRange] = [], scopeContext: WorkspaceSearchScopeContext? = nil) {
         clear(); let token = generation
         do {
             let snapshot = try WorkspaceSearchScopeResolver.resolve(scope, context: scopeContext ?? .init(library: resources))
@@ -154,6 +169,9 @@ struct WorkspaceSearchLimits: Codable, Hashable, Sendable {
                 case .savedList:
                     guard let list = documents.first(where: { $0.id == referenceListID && $0.kind == .verseList }) else { throw BibleSearchRangeError.missingReferenceList }
                     range = try BibleSearchRange.referenceList(list)
+                case .namedRange:
+                    guard let item = namedRanges.first(where: { $0.id == namedRangeID }) else { throw PersonalStateError.invalid("Selecciona un rango guardado disponible.") }
+                    range = try BibleSearchRange.parse(item.expression)
                 }
             } else { range = nil }
             let excluded: BibleSearchRange?
@@ -164,6 +182,9 @@ struct WorkspaceSearchLimits: Codable, Hashable, Sendable {
                 case .savedList:
                     guard let list = documents.first(where: { $0.id == excludedRange.referenceListID && $0.kind == .verseList }) else { throw BibleSearchRangeError.missingReferenceList }
                     excluded = try BibleSearchRange.referenceList(list)
+                case .namedRange:
+                    guard let item = namedRanges.first(where: { $0.id == excludedRange.namedRangeID }) else { throw PersonalStateError.invalid("Selecciona un rango guardado disponible.") }
+                    excluded = try BibleSearchRange.parse(item.expression)
                 }
             } else { excluded = nil }
             let control = LibrarySearchControl(), provider = providerFactory()
@@ -191,7 +212,7 @@ struct WorkspaceSearchLimits: Codable, Hashable, Sendable {
                     self.task = nil; self.control = nil
                 }
             }
-        } catch { phase = .failed; self.error = error.localizedDescription }
+        } catch { phase = .failed; self.error = L(error.localizedDescription) }
     }
     private func receive(_ value: LibrarySearchProgress, token: Int) { if generation == token { progress = value } }
     private func receive(_ value: LibrarySearchReport, token: Int) {

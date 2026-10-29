@@ -117,4 +117,26 @@ import LibronixCore
         controller.run([resource]); try await settle { !controller.isSearching }
         #expect(controller.report?.results.map(\.bibleReference) == ["jn 3:18", "ro 8:1"])
     }
+    @Test func namedRangesApplyAsInclusionAndExclusion() async throws {
+        let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: root) }
+        let resource = try bible(root), search = WorkspaceSearchController()
+        let include = NamedBibleSearchRange(name: "John", expression: "John3")
+        let exclude = NamedBibleSearchRange(name: "First", expression: "John3:16")
+        search.resourceID = resource.id; search.query = "faith"; search.bibleVerses = true
+        search.bibleRangeMode = .namedRange; search.namedRangeID = include.id
+        search.excludedRange = .init(mode: .namedRange, namedRangeID: exclude.id)
+        let configuration = search.historyConfiguration
+        search.run([resource], namedRanges: [include, exclude]); try await settle { !search.isSearching }
+        #expect(search.error == nil && search.report?.results.map(\.bibleReference) == ["jn 3:18"])
+        var old = NamedBibleSearchRanges(); old.ranges = [include, exclude]
+        var revised = old; revised.ranges[0].expression = "John3:16"
+        search.namedRangesChanged(from: old, to: revised)
+        #expect(search.configurationChanged && !search.canOpenResults)
+        try search.restore(configuration)
+        #expect(search.namedRangeID == include.id && search.excludedRange.namedRangeID == exclude.id)
+        search.run([resource], namedRanges: [include]); try await settle { !search.isSearching }
+        #expect(search.error != nil && search.report == nil)
+    }
 }

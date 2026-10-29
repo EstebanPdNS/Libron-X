@@ -939,7 +939,8 @@
       "status": "in_progress",
       "implementation": [
         "Added optional excluded Bible ranges from a typed reference expression or saved verse list, combinable with existing included ranges. Execution filters verified verse boundaries and records the excluded range in the report.",
-        "Saved search configurations and history retain the exclusion selection, while older configurations remain readable."
+        "Saved search configurations and history retain the exclusion selection, while older configurations remain readable.",
+        "Named reference ranges are also available for inclusion and exclusion; editing an active named range invalidates visible results."
       ],
       "verification": [
         "BibleSearchRangeWorkflowTests passed with real fixture Bibles, inclusion and exclusion lists, custom exclusions, missing lists and restoration; BibleSearchRangeTests and search history, saved query and language tests passed.",
@@ -1547,10 +1548,18 @@
       "sourceKey": "WIN-CUSTOM-RANGE-001",
       "acceptance": "Ciclo de nombrar, editar, borrar y activar rangos como entidades propias del original.",
       "baseline": "Pasajes personalizados y listas guardadas ya se aplican a búsqueda.",
-      "status": "pending",
-      "implementation": [],
-      "verification": [],
-      "limitations": []
+      "status": "in_progress",
+      "implementation": [
+        "Added named reference ranges with independently versioned, validated local storage and native creation, editing, deletion and selection. Named ranges can include or exclude Bible verses and are retained by search history and saved searches.",
+        "Changing a named range used by visible results invalidates those results until the search is run again. Missing named ranges report an error instead of silently widening the search."
+      ],
+      "verification": [
+        "NamedBibleSearchRangesTests and BibleSearchRangeWorkflowTests passed for valid and invalid input, persistence, concurrent and future-schema protection, old configuration compatibility, actual Bible verse inclusion and exclusion, missing ranges and result invalidation.",
+        "Native build 173 was visually inspected in dark mode; a synthetic range was created, edited and selected, then test data was archived and the prior workspace restored."
+      ],
+      "limitations": [
+        "Full comparison with original range-editor behavior and visual, keyboard, VoiceOver, light appearance, right-to-left and narrow-window acceptance remain pending."
+      ]
     },
     {
       "id": "F239",

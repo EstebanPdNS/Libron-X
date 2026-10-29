@@ -23,6 +23,7 @@ struct WorkspaceSearchConfiguration: Codable, Equatable {
     var limits: WorkspaceSearchLimits
     var wordFilter: SearchWordFilter? = nil
     var excludedRange: WorkspaceExcludedBibleRange? = nil
+    var namedRangeID: UUID? = nil
 
     func validate() throws {
         guard !query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,

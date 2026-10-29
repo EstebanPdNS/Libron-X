@@ -587,6 +587,18 @@
     "ur": "سوال اپ ڈیٹ کریں",
     "zh-Hans": "更新问题"
   },
+  "Actualizar rango": {
+    "ar": "تحديث النطاق",
+    "bn": "সীমা আপডেট করুন",
+    "en": "Update Range",
+    "es": "Actualizar rango",
+    "fr": "Mettre à jour la plage",
+    "hi": "सीमा अपडेट करें",
+    "id": "Perbarui rentang",
+    "pt": "Atualizar intervalo",
+    "ur": "حد اپ ڈیٹ کریں",
+    "zh-Hans": "更新范围"
+  },
   "Adelante": {
     "ar": "تقدم",
     "bn": "সামনে",
@@ -1510,6 +1522,18 @@
     "pt": "Adicionar pergunta",
     "ur": "سوال شامل کریں",
     "zh-Hans": "添加问题"
+  },
+  "Añadir rango": {
+    "ar": "إضافة نطاق",
+    "bn": "সীমা যোগ করুন",
+    "en": "Add Range",
+    "es": "Añadir rango",
+    "fr": "Ajouter une plage",
+    "hi": "सीमा जोड़ें",
+    "id": "Tambah rentang",
+    "pt": "Adicionar intervalo",
+    "ur": "حد شامل کریں",
+    "zh-Hans": "添加范围"
   },
   "Año": {
     "ar": "السنة",
@@ -4847,6 +4871,18 @@
     "ur": "منصوبے کے لیے درست عبارات اور مطالعے کے دن چاہییں۔",
     "zh-Hans": "计划需要有效的经文和阅读日。"
   },
+  "El rango guardado contiene datos incompatibles.": {
+    "ar": "يحتوي النطاق المحفوظ على بيانات غير متوافقة.",
+    "bn": "সংরক্ষিত সীমায় অসামঞ্জস্যপূর্ণ তথ্য রয়েছে।",
+    "en": "The saved range contains incompatible data.",
+    "es": "El rango guardado contiene datos incompatibles.",
+    "fr": "La plage enregistrée contient des données incompatibles.",
+    "hi": "सहेजी गई सीमा में असंगत डेटा है।",
+    "id": "Rentang tersimpan berisi data yang tidak kompatibel.",
+    "pt": "O intervalo salvo contém dados incompatíveis.",
+    "ur": "محفوظ حد میں غیر مطابقت پذیر ڈیٹا ہے۔",
+    "zh-Hans": "已保存的范围包含不兼容的数据。"
+  },
   "El recurso de este favorito no está disponible en la biblioteca abierta.": {
     "ar": "مورد هذه المفضلة غير متاح في المكتبة المفتوحة.",
     "bn": "এই পছন্দের রিসোর্স খোলা লাইব্রেরিতে নেই।",
@@ -5398,6 +5434,18 @@
     "pt": "Excluir pergunta",
     "ur": "سوال حذف کریں",
     "zh-Hans": "删除问题"
+  },
+  "Eliminar rango": {
+    "ar": "حذف النطاق",
+    "bn": "সীমা মুছুন",
+    "en": "Delete Range",
+    "es": "Eliminar rango",
+    "fr": "Supprimer la plage",
+    "hi": "सीमा हटाएँ",
+    "id": "Hapus rentang",
+    "pt": "Excluir intervalo",
+    "ur": "حد حذف کریں",
+    "zh-Hans": "删除范围"
   },
   "Eliminar versículo": {
     "ar": "حذف الآية",
@@ -6334,6 +6382,18 @@
     "pt": "Gerar guia",
     "ur": "رہنمائی بنائیں",
     "zh-Hans": "生成指南"
+  },
+  "Gestionar rangos…": {
+    "ar": "إدارة النطاقات…",
+    "bn": "সীমা পরিচালনা করুন…",
+    "en": "Manage Ranges…",
+    "es": "Gestionar rangos…",
+    "fr": "Gérer les plages…",
+    "hi": "सीमाएँ प्रबंधित करें…",
+    "id": "Kelola rentang…",
+    "pt": "Gerenciar intervalos…",
+    "ur": "حدود کا انتظام کریں…",
+    "zh-Hans": "管理范围…"
   },
   "Gramática": {
     "ar": "قواعد اللغة",
@@ -9239,6 +9299,18 @@
     "ur": "ابھی کوئی سوال نہیں۔",
     "zh-Hans": "暂无问题。"
   },
+  "No hay rangos guardados.": {
+    "ar": "لا توجد نطاقات محفوظة.",
+    "bn": "কোনো সংরক্ষিত সীমা নেই।",
+    "en": "No saved ranges.",
+    "es": "No hay rangos guardados.",
+    "fr": "Aucune plage enregistrée.",
+    "hi": "कोई सहेजी गई सीमा नहीं।",
+    "id": "Tidak ada rentang tersimpan.",
+    "pt": "Nenhum intervalo salvo.",
+    "ur": "کوئی محفوظ حد نہیں۔",
+    "zh-Hans": "没有已保存的范围。"
+  },
   "No hay recursos compatibles para agregar.": {
     "ar": "لا توجد موارد متوافقة لإضافتها.",
     "bn": "যোগ করার মতো সামঞ্জস্যপূর্ণ রিসোর্স নেই।",
@@ -9490,6 +9562,18 @@
     "pt": "Não foi possível abrir os planos de leitura.",
     "ur": "مطالعے کے منصوبے نہیں کھل سکے۔",
     "zh-Hans": "无法打开阅读计划。"
+  },
+  "No se pudieron abrir los rangos guardados.": {
+    "ar": "تعذر فتح النطاقات المحفوظة.",
+    "bn": "সংরক্ষিত সীমাগুলি খোলা যায়নি।",
+    "en": "Saved ranges could not be opened.",
+    "es": "No se pudieron abrir los rangos guardados.",
+    "fr": "Impossible d’ouvrir les plages enregistrées.",
+    "hi": "सहेजी गई सीमाएँ खोली नहीं जा सकीं।",
+    "id": "Rentang tersimpan tidak dapat dibuka.",
+    "pt": "Não foi possível abrir os intervalos salvos.",
+    "ur": "محفوظ حدود نہیں کھولی جا سکیں۔",
+    "zh-Hans": "无法打开已保存的范围。"
   },
   "No se pudieron colocar todas las palabras. Reduce la lista o aumenta la cuadrícula.": {
     "ar": "تعذر وضع كل الكلمات. قلل القائمة أو كبّر الشبكة.",
@@ -9790,6 +9874,18 @@
     "pt": "Nome do plano",
     "ur": "منصوبے کا نام",
     "zh-Hans": "计划名称"
+  },
+  "Nombre del rango": {
+    "ar": "اسم النطاق",
+    "bn": "সীমার নাম",
+    "en": "Range Name",
+    "es": "Nombre del rango",
+    "fr": "Nom de la plage",
+    "hi": "सीमा का नाम",
+    "id": "Nama rentang",
+    "pt": "Nome do intervalo",
+    "ur": "حد کا نام",
+    "zh-Hans": "范围名称"
   },
   "Nota o referencia {label}": {
     "ar": "ملاحظة أو مرجع {label}",
@@ -11135,6 +11231,30 @@
     "ur": "بائبل کا دائرہ",
     "zh-Hans": "圣经范围"
   },
+  "Rango excluido": {
+    "ar": "النطاق المستبعد",
+    "bn": "বাদ দেওয়া সীমা",
+    "en": "Excluded Range",
+    "es": "Rango excluido",
+    "fr": "Plage exclue",
+    "hi": "अपवर्जित सीमा",
+    "id": "Rentang yang dikecualikan",
+    "pt": "Intervalo excluído",
+    "ur": "خارج شدہ حد",
+    "zh-Hans": "排除的范围"
+  },
+  "Rango guardado": {
+    "ar": "نطاق محفوظ",
+    "bn": "সংরক্ষিত সীমা",
+    "en": "Saved Range",
+    "es": "Rango guardado",
+    "fr": "Plage enregistrée",
+    "hi": "सहेजी गई सीमा",
+    "id": "Rentang tersimpan",
+    "pt": "Intervalo salvo",
+    "ur": "محفوظ حد",
+    "zh-Hans": "已保存的范围"
+  },
   "Rango: {range}": {
     "ar": "النطاق: {range}",
     "bn": "পরিসর: {range}",
@@ -11146,6 +11266,18 @@
     "pt": "Intervalo: {range}",
     "ur": "دائرہ: {range}",
     "zh-Hans": "范围：{range}"
+  },
+  "Rangos guardados": {
+    "ar": "النطاقات المحفوظة",
+    "bn": "সংরক্ষিত সীমা",
+    "en": "Saved Ranges",
+    "es": "Rangos guardados",
+    "fr": "Plages enregistrées",
+    "hi": "सहेजी गई सीमाएँ",
+    "id": "Rentang tersimpan",
+    "pt": "Intervalos salvos",
+    "ur": "محفوظ حدود",
+    "zh-Hans": "已保存的范围"
   },
   "Rangos personalizados": {
     "ar": "نطاقات مخصصة",
@@ -12203,6 +12335,18 @@
     "ur": "یہ مشق اور اس کی پیش رفت حذف ہو جائے گی۔",
     "zh-Hans": "将删除此练习及其进度。"
   },
+  "Se eliminará este rango guardado.": {
+    "ar": "سيتم حذف هذا النطاق المحفوظ.",
+    "bn": "এই সংরক্ষিত সীমা মুছে ফেলা হবে।",
+    "en": "This saved range will be deleted.",
+    "es": "Se eliminará este rango guardado.",
+    "fr": "Cette plage enregistrée sera supprimée.",
+    "hi": "यह सहेजी गई सीमा हटा दी जाएगी।",
+    "id": "Rentang tersimpan ini akan dihapus.",
+    "pt": "Este intervalo salvo será excluído.",
+    "ur": "یہ محفوظ حد حذف کر دی جائے گی۔",
+    "zh-Hans": "将删除此保存的范围。"
+  },
   "Se eliminará la autoevaluación y sus resultados.": {
     "ar": "سيُحذف التقييم ونتائجه.",
     "bn": "স্বমূল্যায়ন ও তার ফলাফল মুছে যাবে।",
@@ -12406,6 +12550,30 @@
     "pt": "Selecione um plano",
     "ur": "منصوبہ منتخب کریں",
     "zh-Hans": "选择计划"
+  },
+  "Selecciona un rango guardado": {
+    "ar": "اختر نطاقًا محفوظًا",
+    "bn": "একটি সংরক্ষিত সীমা নির্বাচন করুন",
+    "en": "Select a Saved Range",
+    "es": "Selecciona un rango guardado",
+    "fr": "Sélectionnez une plage enregistrée",
+    "hi": "सहेजी गई सीमा चुनें",
+    "id": "Pilih rentang tersimpan",
+    "pt": "Selecione um intervalo salvo",
+    "ur": "محفوظ حد منتخب کریں",
+    "zh-Hans": "选择已保存的范围"
+  },
+  "Selecciona un rango guardado disponible.": {
+    "ar": "اختر نطاقًا محفوظًا متاحًا.",
+    "bn": "একটি উপলভ্য সংরক্ষিত সীমা নির্বাচন করুন।",
+    "en": "Select an available saved range.",
+    "es": "Selecciona un rango guardado disponible.",
+    "fr": "Sélectionnez une plage enregistrée disponible.",
+    "hi": "उपलब्ध सहेजी गई सीमा चुनें।",
+    "id": "Pilih rentang tersimpan yang tersedia.",
+    "pt": "Selecione um intervalo salvo disponível.",
+    "ur": "دستیاب محفوظ حد منتخب کریں۔",
+    "zh-Hans": "选择可用的已保存范围。"
   },
   "Selecciona un recurso": {
     "ar": "اختر موردًا",
