@@ -664,22 +664,35 @@
       "sourceKey": "study-expansion-queries-05",
       "acceptance": "Reordenar, ordenar y mostrar referencias, texto o ambos conservando presentación.",
       "baseline": "Crear, añadir, borrar y abrir referencias; servir como rango de búsqueda.",
-      "status": "in_progress",
+      "status": "completed",
       "implementation": [
         "Move selected verse entries one position and sort recognized, unambiguous references in canonical book order without changing entry identity, destinations or original metadata.",
-        "Select an edition and display source-backed text, references, or both; retain the chosen presentation, cancel stale loads, distinguish missing and unverified results, and open the verified edition and source range."
+        "Select an edition and display source-backed text, references, or both; retain the chosen presentation, cancel stale loads, distinguish missing and unverified results, and open the verified edition and source range.",
+        "BibliotecaLibre/Sources/LibronixCore/Domain/StudyVerseListEdition.swift",
+        "BibliotecaLibre/Sources/MacRebuild/Features/Documents/WorkspaceVerseListView.swift",
+        "Document schema 4 retains an owned edition identity (resource ID, physical format and legacy identifier) independently of immutable original reference attributes. Every list keeps its own choice; missing editions remain selected and cannot silently fall back. Old documents decode without a preference; older applications reject schema 4 instead of dropping it.",
+        "A dedicated native list editor retains references-only/text-only presentation and uses real reference/text columns in BothTwoColumns. Added reference editing with stable entry IDs, stale-edit protection and removal of an obsolete physical destination only after an actual reference change. Selected deletion, canonical sort and move controls use shared Glass groups.",
+        "Automatically reload source-backed rows on reopening, changing a reference/edition or changing the resource snapshot. Title/presentation changes do not rescan. Cancellation retains the request identity; late work cannot replace a newer document. Incomplete scans and closed cross-chapter ranges with unknown chapter lengths retain verified text while explicitly marking coverage unverified."
       ],
       "verification": [
         "Six StudyDocumentTests passed, including stable ordering, preserved identifiers, unknown reference rollback and serialization.",
         "Native builds 114–115: sorted Genesis before John, moved the selected entry and confirmed persistence after restart; separated control groups visually inspected in dark and light English and dark Arabic.",
         "Five BiblePassageReportTests and a cancellation/supersession controller test passed, including duplicate entries, invalid references, edition identity, changed sources and partial ranges.",
-        "Native build 119: inspected references and text in dark English, light English and dark Arabic, and text-only in dark English; two authored editions, missing verses, partial range, persisted presentation, and exact-edition opening verified."
+        "Native build 119: inspected references and text in dark English, light English and dark Arabic, and text-only in dark English; two authored editions, missing verses, partial range, persisted presentation, and exact-edition opening verified.",
+        "2026-10-29: 32 focused tests passed in seven suites. They cover source identity/format replacement rejection, schema-4/legacy round-trip and future-schema refusal, original XML/attributes, stale reference edits and destination clearing, independent edition persistence through personal-state restart, automatic source changes, cancellation/supersession, no rescan for title/presentation changes, finite union coverage, source warnings, sermons, document recovery and ten-language catalog checks.",
+        "Local build log 227, installed app: two authored lists loaded their texts automatically from two owned LSF editions with checked package manifests. Edited John 1:1 to John 1:2, moved and sorted the selected entry, changed independent edition choices, and inspected Text Only and true reference/text columns. After normal quit and restart, list A retained edition B and list B retained edition A plus Text Only; opening John 1:2 opened edition B and its source text.",
+        "Inspected the compact 680-point document sheet in dark English and light Arabic. Controls and columns followed RTL while Spanish/Greek/Hebrew source text retained its own direction. Removed only owned edition B from the temporary catalog, restarted and verified the saved-edition warning and disabled load/open actions without substituting A. Explicitly choosing A restored the text. Restored English/Automatic appearance and verified original personal data, catalog, history and one-reader workspace after archiving all owned fixtures outside the library."
       ],
       "limitations": [
-        "Canonical sorting does not translate between versification systems.",
-        "Partial range absence is identified for bounded ranges within one chapter; coverage for other interval forms remains dependent on source scan completeness and cannot be inferred from verse counts.",
-        "The chosen Bible must be selected again and text reloaded after reopening; unavailable source formats are reported rather than fabricated."
-      ]
+        "Canonical sorting and display do not convert between versification systems. Text depends on a supported, available source edition.",
+        "Finite same-chapter unions can identify missing addresses without a canonical verse-count table. Closed cross-chapter intervals, mixed edition requirements or incomplete source scans retain available text with unverified coverage; no unknown chapter lengths or missing text are invented.",
+        "General VoiceOver, ten-language and older-platform acceptance remains in F253/F254/F257 rather than being inferred from this focused native review."
+      ],
+      "completionReview": {
+        "date": "2026-10-29",
+        "basis": "Reordenación, orden canónico, tres presentaciones, edición persistente y apertura de fuente verificada cubiertas por pruebas y revisión nativa después de reiniciar.",
+        "releaseAcceptance": "La aceptación general de accesibilidad, idiomas, plataformas y el resto del inventario sigue abierta."
+      }
     },
     {
       "id": "F177",

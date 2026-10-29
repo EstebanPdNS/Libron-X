@@ -33,9 +33,6 @@ struct WorkspaceDocumentsView: View {
     @RebuildViewState private var showsPreviousDocuments = false
     @RebuildViewState private var sermonEditing: StudyDocument?
     @RebuildViewState private var selectedVerse: UUID?
-    @RebuildViewState private var verseReference = ""
-    @RebuildViewState private var verseBibleID = ""
-    @RebuildViewState private var verseText = VerseListTextController()
     @FocusState private var noteBodyFocused: Bool
     private var documentIndex: Int? { personal.documents.firstIndex { $0.id == personal.selectedDocumentID } }
     var body: some View {
@@ -86,7 +83,11 @@ struct WorkspaceDocumentsView: View {
                     }
                 }
                 if personal.documents[index].kind.usesNotes { notebook(index) }
-                else { verseList(index) }
+                else {
+                    WorkspaceVerseListView(workspace: workspace, document: $personal.documents[index], selectedVerse: $selectedVerse) {
+                        extractionRequest = .init(id: personal.documents[index].id)
+                    }.id(personal.documents[index].id)
+                }
             } else {
                 Spacer(); Text(L("Crea o abre un documento de estudio.")).foregroundStyle(.secondary); Spacer()
             }
@@ -97,10 +98,7 @@ struct WorkspaceDocumentsView: View {
                 selectPendingNote()
                 applySearchNavigation()
             }
-            .onChange(of: personal.documents) { workspace.personalSearchDestination = nil; verseText.invalidate(); personal.scheduleSave() }
-            .onChange(of: verseBibleID) { verseText.invalidate() }
-            .onChange(of: workspace.availableResources) { verseText.invalidate() }
-            .onDisappear { verseText.invalidate() }
+            .onChange(of: personal.documents) { workspace.personalSearchDestination = nil; personal.scheduleSave() }
             .onChange(of: personal.selectedDocumentID) {
                 let available = documentIndex.map { Set(personal.documents[$0].notes.map(\.id)) } ?? []
                 selectedNotes.formIntersection(available); selectedVerse = nil; applySearchNavigation()
@@ -282,130 +280,5 @@ struct WorkspaceDocumentsView: View {
         guard !valid.isEmpty else { return }
         operationDocumentID = personal.documents[index].id
         deletionIDs = valid; showsDelete = true
-    }
-    private func verseList(_ index: Int) -> some View {
-        VStack {
-            HStack {
-                TextField(L("Referencia bíblica"), text: $verseReference).macInputStyle()
-                Button(L("Agregar")) {
-                    guard !verseReference.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
-                    personal.documents[index].verses.append(.init(reference: verseReference)); verseReference = ""
-                }
-                Button(L("Extraer referencias…")) { extractionRequest = .init(id: personal.documents[index].id) }
-            }
-            HStack {
-                Picker(L("Presentación"), selection: $personal.documents[index].presentation) {
-                    Text(L("Referencias")).tag("ReferencesOnly")
-                    Text(L("Solo texto")).tag("TextOnly")
-                    Text(L("Referencias y texto")).tag("BothTwoColumns")
-                    if !["ReferencesOnly", "TextOnly", "BothTwoColumns"].contains(personal.documents[index].presentation) {
-                        Text(personal.documents[index].presentation).tag(personal.documents[index].presentation)
-                    }
-                }.fixedSize()
-                if ["TextOnly", "BothTwoColumns"].contains(personal.documents[index].presentation) {
-                    Picker(L("Biblia"), selection: $verseBibleID) {
-                        Text(L("Selecciona un recurso")).tag("")
-                        ForEach(workspace.resourcePriorities.ordered(workspace.availableResources, in: .init(kind: .bible))) { resource in
-                            Text(resource.title).tag(resource.id)
-                        }
-                    }
-                    if verseText.isLoading { Button(L("Cancelar")) { verseText.invalidate() } }
-                    else {
-                        Button(L("Cargar textos")) {
-                            if let resource = workspace.availableResources.first(where: { $0.id == verseBibleID && KeyLinkKind.bible.supports($0) }) {
-                                verseText.load(document: personal.documents[index], resource: resource)
-                            }
-                        }.disabled(verseBibleID.isEmpty || personal.documents[index].verses.isEmpty)
-                    }
-                }
-            }
-            if ["TextOnly", "BothTwoColumns"].contains(personal.documents[index].presentation) {
-                if verseText.isLoading { ProgressView().controlSize(.small) }
-                if verseText.report == nil && !verseText.isLoading && verseText.error == nil && !personal.documents[index].verses.isEmpty {
-                    Text(L("Selecciona una Biblia y carga los textos.")).font(.caption).foregroundStyle(.secondary)
-                }
-                if let error = verseText.error { Text(L(error)).font(.caption).foregroundStyle(.red).textSelection(.enabled) }
-                if let edition = verseText.report?.edition, !edition.complete {
-                    Text(L("Cobertura parcial: no se puede confirmar la ausencia de versículos.")).font(.caption).foregroundStyle(.secondary)
-                    if let failure = edition.failure { Text(failure).font(.caption).foregroundStyle(.secondary).textSelection(.enabled) }
-                }
-            }
-            ScrollViewReader { scroll in
-            List(personal.documents[index].verses, selection: $selectedVerse) { verse in
-                HStack(alignment: .top) {
-                    VStack(alignment: .leading, spacing: 4) {
-                        if personal.documents[index].presentation != "TextOnly" || ![.available, .partial].contains(verseText.rowsByID[verse.id]?.state) {
-                            Text(verse.reference).textSelection(.enabled)
-                        }
-                        if ["TextOnly", "BothTwoColumns"].contains(personal.documents[index].presentation) {
-                            verseTextContent(verse.id)
-                        }
-                    }
-                    Spacer()
-                    Button(L("Abrir")) { openVerse(verse) }
-                        .disabled(verseText.report == nil ? workspace.activeReader == nil : verseText.rowsByID[verse.id]?.verses.isEmpty != false)
-                    Button { personal.documents[index].verses.removeAll { $0.id == verse.id } } label: { MacToolbarLabel(L("Eliminar versículo"), "trash") }
-                }.tag(verse.id).id(verse.id)
-            }
-            .onAppear { if let selectedVerse { scroll.scrollTo(selectedVerse, anchor: .center) } }
-            .onChange(of: selectedVerse) { if let selectedVerse { scroll.scrollTo(selectedVerse, anchor: .center) } }
-            }
-            MacReaderToolbarSurface {
-                HStack {
-                    MacReaderControlGroup {
-                        Button(L("Ordenar referencias")) {
-                            do { try StudyVerseOrganization.sortCanonically(&personal.documents[index]) }
-                            catch { workspace.error = L("No se pueden ordenar todas las referencias. Revisa las referencias desconocidas o ambiguas.") }
-                        }.disabled(personal.documents[index].verses.count < 2)
-                    }
-                    Spacer(minLength: 12)
-                    MacReaderControlGroup {
-                        MacToolbarButton("Subir", "chevron.up") { moveVerse(-1, index: index) }
-                            .disabled(!canMoveVerse(-1, index: index))
-                        MacToolbarButton("Bajar", "chevron.down") { moveVerse(1, index: index) }
-                            .disabled(!canMoveVerse(1, index: index))
-                    }
-                }
-            }.padding(.horizontal, 12).padding(.bottom, 8)
-        }
-    }
-    private func openVerse(_ entry: StudyVerseEntry) {
-        if let report = verseText.report {
-            guard let edition = report.edition, let verse = verseText.rowsByID[entry.id]?.verses.first,
-                  workspace.availableResources.contains(edition.resource) else { return }
-            do {
-                try LibrarySearchFileStamp.verify(edition.sourceStamps)
-                let reader = workspace.open(edition.resource, startReading: false)
-                reader.load(.init(ordinal: verse.sectionOrdinal), selection: verse.sourceRange.nsRange,
-                            expectedFingerprint: verse.sourceFingerprint, expectedSourceStamps: edition.sourceStamps)
-                workspace.activeTool = nil
-            } catch { workspace.error = error.localizedDescription }
-        } else if let reader = workspace.activeReader {
-            reader.locator = entry.reference; reader.changeLocatorMode(false)
-            reader.locator = entry.reference; reader.goToReference(); workspace.activeTool = nil
-        }
-    }
-    @ViewBuilder private func verseTextContent(_ id: UUID) -> some View {
-        if let row = verseText.rowsByID[id] {
-            switch row.state {
-            case .available, .partial:
-                ForEach(Array(row.verses.enumerated()), id: \.offset) { _, verse in
-                    Text(verse.text).textSelection(.enabled)
-                }
-                if row.state == .partial { Text(L("Algunos versículos del rango no aparecen en esta edición.")).font(.caption).foregroundStyle(.secondary) }
-            case .missing: Text(L("Versículo ausente en esta edición.")).foregroundStyle(.secondary)
-            case .unverified: Text(L("Versículo sin verificar en esta edición.")).foregroundStyle(.secondary)
-            case .invalid: Text(L("Referencia no reconocida.")).foregroundStyle(.secondary)
-            }
-        }
-    }
-    private func canMoveVerse(_ offset: Int, index: Int) -> Bool {
-        guard let selectedVerse, let position = personal.documents[index].verses.firstIndex(where: { $0.id == selectedVerse }) else { return false }
-        return personal.documents[index].verses.indices.contains(position + offset)
-    }
-    private func moveVerse(_ offset: Int, index: Int) {
-        guard let selectedVerse else { return }
-        do { try StudyVerseOrganization.move(selectedVerse, by: offset, in: &personal.documents[index]) }
-        catch { workspace.error = error.localizedDescription }
     }
 }

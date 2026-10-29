@@ -55,6 +55,16 @@ public struct StudyVerseEntry: Identifiable, Codable, Equatable, Sendable {
 
 /// Editing operations preserve entry identities, source metadata and destinations.
 public enum StudyVerseOrganization {
+    /// An edited reference retains entry identity but cannot retain the old physical destination.
+    public static func changeReference(_ original: StudyVerseEntry, to reference: String, in document: inout StudyDocument) throws {
+        guard document.kind == .verseList, let index = document.verses.firstIndex(of: original) else {
+            throw PersonalStateError.concurrentChange
+        }
+        let value = reference.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !value.isEmpty, value.utf8.count <= 4096 else { throw BibleSearchRangeError.invalidExpression }
+        guard value != original.reference else { return }
+        document.verses[index].reference = value; document.verses[index].location = nil
+    }
     /// Move one entry by one position. Boundary moves leave the list unchanged.
     public static func move(_ id: UUID, by offset: Int, in document: inout StudyDocument) throws {
         guard document.kind == .verseList, [-1, 1].contains(offset),
@@ -99,16 +109,21 @@ public struct StudyDocument: Identifiable, Codable, Equatable, Sendable {
     public var sourceXML: XMLNode?
     public var sourceSHA256: String?
     public var presentation: String
+    public var verseListEdition: StudyVerseListEdition?
     public var sermon: SermonMetadata?
     public init(title: String, kind: StudyDocumentKind) {
         self.title = title; self.kind = kind; presentation = kind == .verseList ? "ReferencesOnly" : "Notes"
         if kind == .sermon { schemaVersion = 3; sermon = SermonMetadata() }
     }
     public func validate() throws {
-        guard (1...3).contains(schemaVersion) else { throw PersonalStateError.futureVersion }
+        guard (1...4).contains(schemaVersion) else { throw PersonalStateError.futureVersion }
         guard kind == .sermon ? (schemaVersion == 3 && sermon != nil) : sermon == nil else {
             throw PersonalStateError.invalid("El tipo y los datos del sermón no coinciden con la versión del documento.")
         }
+        guard verseListEdition == nil || (kind == .verseList && schemaVersion >= 4) else {
+            throw PersonalStateError.invalid("La edición de la lista requiere la versión 4 de un documento de versículos.")
+        }
+        try verseListEdition?.validate()
         try sermon?.validate()
         // Version 2 prevents older applications from loading and then silently
         // dropping hierarchy, properties or move/copy provenance on save.

@@ -47,6 +47,47 @@ import Testing
         let encoded = try JSONEncoder().encode(doc)
         #expect(try JSONDecoder().decode(StudyDocument.self, from: encoded) == doc)
     }
+    @Test func verseEditionSurvivesRoundTripWithoutRewritingImportedProvenance() throws {
+        let resource = LibraryResource(location: URL(fileURLWithPath: "/owned/edition.LSF"), title: "Owned edition", byteCount: 0,
+            format: .legacyLSF, support: .metadataOnly, provenance: .fileName, legacyIdentifier: "owned-id")
+        var document = try StudyDocument.importingLegacyXML(Data("<lbx-verse-list name='Owned'><refs style='BothTwoColumns' type1='preserve'><ref>John 3:16</ref></refs></lbx-verse-list>".utf8))
+        let original = document
+        document.verseListEdition = StudyVerseListEdition(resource)
+        #expect(throws: PersonalStateError.self) { try document.validate() }
+        document.schemaVersion = 4; try document.validate()
+        let reopened = try JSONDecoder().decode(StudyDocument.self, from: JSONEncoder().encode(document))
+        try reopened.validate()
+        #expect(reopened == document && reopened.verseListEdition?.title == "Owned edition")
+        #expect(reopened.sourceXML == original.sourceXML && reopened.referenceAttributes == original.referenceAttributes)
+        #expect(reopened.verseListEdition?.resolve(in: [resource]) == resource)
+        let replacement = LibraryResource(location: resource.location, title: resource.title, byteCount: 0,
+            format: resource.format, support: resource.support, provenance: resource.provenance, legacyIdentifier: "different-id")
+        let wrongFormat = LibraryResource(location: resource.location, title: resource.title, byteCount: 0,
+            format: .eSwordSQLite, support: resource.support, provenance: resource.provenance, legacyIdentifier: resource.legacyIdentifier)
+        #expect(reopened.verseListEdition?.resolve(in: [replacement, wrongFormat]) == nil)
+        let old = try JSONDecoder().decode(StudyDocument.self, from: JSONEncoder().encode(original))
+        #expect(old.verseListEdition == nil && old.presentation == "BothTwoColumns")
+        var future = document; future.schemaVersion = 5
+        #expect(throws: PersonalStateError.self) { try future.validate() }
+        var wrongKind = document; wrongKind.kind = .notebook; wrongKind.verses = []
+        #expect(throws: PersonalStateError.self) { try wrongKind.validate() }
+    }
+    @Test func editingAVersePreservesItsIdentityAndClearsOnlyAnObsoleteDestination() throws {
+        var document = StudyDocument(title: "Owned list", kind: .verseList)
+        let location = ReaderLocation(resourceID: "owned", format: .legacyLSF, sectionOrdinal: 0, reference: "Ge1:1")
+        let entry = StudyVerseEntry(reference: "Ge1:1", location: location)
+        document.verses = [entry]; document.referenceAttributes = ["original": "preserve"]
+        try StudyVerseOrganization.changeReference(entry, to: " Ge1:1 ", in: &document)
+        #expect(document.verses == [entry])
+        try StudyVerseOrganization.changeReference(entry, to: "Ge1:2", in: &document)
+        #expect(document.verses[0].id == entry.id && document.verses[0].location == nil && document.verses[0].reference == "Ge1:2")
+        let before = document
+        #expect(throws: PersonalStateError.self) { try StudyVerseOrganization.changeReference(entry, to: "Ge1:3", in: &document) }
+        #expect(document == before && document.referenceAttributes == ["original": "preserve"])
+        #expect(throws: BibleSearchRangeError.invalidExpression) {
+            try StudyVerseOrganization.changeReference(document.verses[0], to: " ", in: &document)
+        }
+    }
     @Test func inertRichTextProjectionKeepsNestedFormattingLinksAndUnicodeEntities() {
         let spans = NoteHTMLProjection.spans(#"<P align=left><STRONG>Alpha <SPAN lbxrt:xref="bible.64.1.1"><I>John &amp; &#x1F989;</I></SPAN></STRONG><BR>שלום&nbsp;λόγος</P>"#)
         #expect(spans.map(\.text).joined() == "Alpha John & 🦉\nשלום\u{a0}λόγος\n")

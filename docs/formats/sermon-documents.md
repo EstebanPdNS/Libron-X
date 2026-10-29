@@ -1,8 +1,11 @@
 # Sermon documents
 
 A sermon is a `StudyDocument` with `kind: "sermon"` and document schema 3.
-It uses the existing note hierarchy and rich-text editor. Notebooks and verse
-lists keep their existing schemas and representations. Older applications reject
+It uses the existing note hierarchy and rich-text editor. Notebooks retain their
+existing schemas. Verse lists use schema 4 when an owned edition preference is
+edited; the optional identity remains separate from original XML attributes and
+is re-resolved exactly when reopening. Older list documents retain their schema
+until that preference is edited. Older applications reject
 the new kind instead of rewriting it as a different document type.
 
 ## Metadata

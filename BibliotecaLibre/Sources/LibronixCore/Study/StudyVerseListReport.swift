@@ -88,14 +88,26 @@ public actor StudyVerseListReportService {
             let hasExplicitEdition = entryRange.intervals.keys.contains { !$0.isEmpty }
             let state: StudyVerseListRow.State
             if verses.isEmpty { state = edition.complete && !hasExplicitEdition ? .missing : .unverified }
-            else if edition.complete && !hasExplicitEdition,
-                    let requested = try? BibleCopyPassage.parse(entry.reference), !requested.wholeChapter,
-                    requested.start.bookKey == requested.end.bookKey,
-                    requested.start.chapter == requested.end.chapter,
-                    requested.end.verse - requested.start.verse <= 10_000,
-                    verses.count < requested.end.verse - requested.start.verse + 1 {
-                state = .partial
-            } else { state = .available }
+            else if !edition.complete { state = .unverified }
+            else {
+                let spans = entryRange.intervals.values.flatMap { $0 }
+                var requested = Set<BibleReferenceAddress>()
+                var bounded = !hasExplicitEdition || entryRange.intervals.count == 1
+                for span in spans {
+                    guard bounded, span.lower.book == span.upper.book, span.lower.chapter == span.upper.chapter,
+                          span.upper.verse < 65535, span.upper.verse - span.lower.verse <= 10_000 else { bounded = false; break }
+                    for number in span.lower.verse...span.upper.verse {
+                        try Task.checkCancellation()
+                        requested.insert(.init(book: span.lower.book, chapter: span.lower.chapter, verse: number))
+                    }
+                    if requested.count > 10_000 { bounded = false; break }
+                }
+                if bounded { state = verses.count < requested.count ? .partial : .available }
+                // An open chapter/book means all observed verses in that scope.
+                // Closed cross-chapter intervals cannot imply unknown chapter lengths.
+                else if !hasExplicitEdition && spans.allSatisfy({ $0.upper.verse == 65535 }) { state = .available }
+                else { state = .unverified }
+            }
             return .init(entryID: entry.id, reference: entry.reference, verses: verses, state: state)
         }
         return .init(documentID: document.id, edition: edition, rows: rows)

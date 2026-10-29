@@ -17086,5 +17086,29 @@
     "bn": "কপি প্রস্তুতির সীমা অতিক্রম করেছে। অনুচ্ছেদ বা টেমপ্লেট ছোট করুন।",
     "id": "Salinan melebihi batas penyiapan. Persingkat bagian teks atau templat.",
     "ur": "نقل تیاری کی حدود سے تجاوز کرتی ہے۔ اقتباس یا سانچہ مختصر کریں۔"
+  },
+  "Editar referencia": {
+    "en": "Edit Reference",
+    "es": "Editar referencia",
+    "pt": "Editar referência",
+    "fr": "Modifier la référence",
+    "zh-Hans": "编辑经文引用",
+    "hi": "संदर्भ संपादित करें",
+    "ar": "تحرير المرجع",
+    "bn": "উল্লেখ সম্পাদনা করুন",
+    "id": "Edit Referensi",
+    "ur": "حوالہ میں ترمیم کریں"
+  },
+  "Edición guardada no disponible: {edition}. Vuelve a añadirla a la biblioteca o elige otra.": {
+    "en": "Saved edition unavailable: {edition}. Add it back to the library or choose another.",
+    "es": "Edición guardada no disponible: {edition}. Vuelve a añadirla a la biblioteca o elige otra.",
+    "pt": "Edição guardada indisponível: {edition}. Adicione-a novamente à biblioteca ou escolha outra.",
+    "fr": "Édition enregistrée indisponible : {edition}. Ajoutez-la à nouveau à la bibliothèque ou choisissez-en une autre.",
+    "zh-Hans": "保存的版本不可用：{edition}。请将其重新添加到书库或选择其他版本。",
+    "hi": "सहेजा गया संस्करण उपलब्ध नहीं है: {edition}। उसे लाइब्रेरी में फिर जोड़ें या दूसरा चुनें।",
+    "ar": "الطبعة المحفوظة غير متاحة: {edition}. أعد إضافتها إلى المكتبة أو اختر طبعة أخرى.",
+    "bn": "সংরক্ষিত সংস্করণটি পাওয়া যাচ্ছে না: {edition}। সেটি লাইব্রেরিতে আবার যোগ করুন বা অন্যটি বেছে নিন।",
+    "id": "Edisi tersimpan tidak tersedia: {edition}. Tambahkan kembali ke pustaka atau pilih edisi lain.",
+    "ur": "محفوظ ایڈیشن دستیاب نہیں: {edition}۔ اسے دوبارہ لائبریری میں شامل کریں یا دوسرا منتخب کریں۔"
   }
 }

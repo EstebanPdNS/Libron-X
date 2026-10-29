@@ -11,15 +11,32 @@ import Observation
     @ObservationIgnored private let service: StudyVerseListReportService
     @ObservationIgnored private var task: Task<Void, Never>?
     @ObservationIgnored private var generation = 0
+    @ObservationIgnored private var request: Request?
+    private struct Request: Equatable {
+        let documentID: UUID
+        let verses: [StudyVerseEntry]
+        let resource: LibraryResource
+    }
     init(provider: any LibrarySearchContentProvider = WorkspaceSearchReader()) {
         service = .init(provider: provider)
     }
+    func synchronize(document: StudyDocument?, resources: [LibraryResource]) {
+        guard let document, document.kind == .verseList, !document.verses.isEmpty,
+              let resource = document.verseListEdition?.resolve(in: resources) else { invalidate(); return }
+        let next = Request(documentID: document.id, verses: document.verses, resource: resource)
+        guard request != next else { return }
+        load(document: document, resource: resource)
+    }
     func invalidate() {
+        cancel(); request = nil
+    }
+    func cancel() {
         generation += 1; task?.cancel(); task = nil
         report = nil; rowsByID = [:]; error = nil; isLoading = false
     }
     func load(document: StudyDocument, resource: LibraryResource) {
         invalidate()
+        request = Request(documentID: document.id, verses: document.verses, resource: resource)
         let token = generation, service = service
         isLoading = true
         task = Task { [weak self] in

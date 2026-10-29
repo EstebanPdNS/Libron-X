@@ -79,6 +79,17 @@ struct BiblePassageReportTests {
         #expect(report.rows.map(\.state) == [.available, .unverified])
         #expect(report.rows[0].verses.first?.reference == "bible+esv.64.3.16")
     }
+    @Test func listCoverageDoesNotTreatPartialScansOrUnknownChapterLengthsAsComplete() async throws {
+        let decoded = try article([("Ge1:1", "First"), ("Ge1:3", "Third"), ("Ge2:1", "Following")])
+        var document = StudyDocument(title: "Own coverage", kind: .verseList)
+        document.verses = [.init(reference: "Ge1:1; Ge1:3"), .init(reference: "Ge1:1-3"), .init(reference: "Ge1:1-2:1")]
+        let complete = try await StudyVerseListReportService(provider: Source([decoded])).read(document, resource: resource())
+        #expect(complete.rows.map(\.state) == [.available, .partial, .unverified])
+        #expect(complete.rows[2].verses.map(\.text) == ["First", "Third", "Following"])
+        let limited = LibrarySearchDecodedArticle(text: decoded.text, warnings: ["Owned incomplete projection"], bibleVerses: decoded.bibleVerses)
+        let partial = try await StudyVerseListReportService(provider: Source([limited])).read(document, resource: resource())
+        #expect(partial.rows.allSatisfy { $0.state == .unverified && !$0.verses.isEmpty })
+    }
     @Test func sourceFieldsExcludeEditorialTextAndExportPreservesQuotesAndUnicode() async throws {
         let decoded = try article([("Ge1:1", "=formula,\"owned\" 😀\nnote")])
         let verse = decoded.bibleVerses[0], range = SearchTextRange(location: verse.range.location, length: verse.range.length - 4)
