@@ -2,7 +2,7 @@ import Foundation
 import LibronixCore
 
 struct LibraryHealthIssue: Identifiable, Equatable, Sendable {
-    enum Kind: String, Sendable { case missingResource, invalidResource, opaqueResource, resourceWarning, missingAnnotationSource, unresolvedAnnotation, conversionIssue, unresolvedLink, damagedIndex, indexUnavailable }
+    enum Kind: String, Sendable { case missingResource, invalidResource, opaqueResource, resourceWarning, missingAnnotationSource, unresolvedAnnotation, conversionIssue, conversionUnavailable, unresolvedLink, damagedIndex, indexUnavailable }
     let id: String
     let kind: Kind
     let title: String
@@ -69,12 +69,12 @@ struct LibraryHealthReport: Equatable, Sendable {
                             case .damaged, .absent:
                                 add(.init(id: "conversion:\(resourceIndex):" + resource.id, kind: .conversionIssue, title: resource.title, detail: databaseURL.path))
                             case .unavailable:
-                                add(.init(id: "conversion-check:\(resourceIndex):" + resource.id, kind: .indexUnavailable, title: resource.title, detail: databaseURL.path))
+                                add(.init(id: "conversion-check:\(resourceIndex):" + resource.id, kind: .conversionUnavailable, title: resource.title, detail: databaseURL.path))
                             case .healthy: break
                             }
                         } else if !reportedIndexTimeout {
                             reportedIndexTimeout = true
-                            add(.init(id: "index-budget", kind: .indexUnavailable, title: resource.title, detail: ""))
+                            add(.init(id: "index-budget", kind: .conversionUnavailable, title: resource.title, detail: databaseURL.path))
                         }
                     }
                 } else if exists(databaseURL) {

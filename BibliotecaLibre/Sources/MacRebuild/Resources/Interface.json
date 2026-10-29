@@ -1,4 +1,7 @@
 {
+  "Conversión sin verificar": {
+    "ar": "تعذر التحقق من التحويل", "bn": "রূপান্তর যাচাই করা যায়নি", "en": "Conversion Could Not Be Checked", "es": "Conversión sin verificar", "fr": "Conversion non vérifiée", "hi": "रूपांतरण की जाँच नहीं हुई", "id": "Konversi belum diperiksa", "pt": "Conversão não verificada", "ur": "تبدیلی کی جانچ نہیں ہو سکی", "zh-Hans": "无法检查转换"
+  },
   "Todavía no hay favoritos": {
     "ar": "لا توجد مفضلات بعد", "bn": "এখনও কোনো পছন্দ নেই", "en": "No Favorites Yet", "es": "Todavía no hay favoritos", "fr": "Aucun favori pour le moment", "hi": "अभी कोई पसंदीदा नहीं है", "id": "Belum ada favorit", "pt": "Ainda não há favoritos", "ur": "ابھی کوئی پسندیدہ نہیں", "zh-Hans": "暂无收藏"
   },

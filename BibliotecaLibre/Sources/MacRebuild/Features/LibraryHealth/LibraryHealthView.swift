@@ -47,6 +47,7 @@ struct LibraryHealthView: View {
         case .missingAnnotationSource: "Origen de anotación ausente"
         case .unresolvedAnnotation: "Anotación sin resolver"
         case .conversionIssue: "Estado de conversión"
+        case .conversionUnavailable: "Conversión sin verificar"
         case .unresolvedLink: "Destino"
         case .damagedIndex: "Índice de búsqueda dañado"
         case .indexUnavailable: "Índice de búsqueda sin verificar"
